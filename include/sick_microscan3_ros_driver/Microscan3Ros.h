@@ -25,6 +25,9 @@
 //Package
 #include <sick_microscan3_ros_driver/Microscan3.h>
 
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
+
 namespace sick {
 
 /*!
@@ -84,6 +87,8 @@ class Microscan3Ros
 
   //! ROS service client.
   ros::ServiceClient m_service_client;
+
+  boost::shared_ptr<sick::Microscan3> m_device;
 
 };
 

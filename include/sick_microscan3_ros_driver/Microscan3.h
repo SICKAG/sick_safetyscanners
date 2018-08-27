@@ -14,6 +14,8 @@
 #pragma once
 
 #include <boost/function.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <boost/thread.hpp>
 
 #include <iostream>
 
@@ -43,10 +45,18 @@ class Microscan3
    */
   virtual ~Microscan3();
 
+    bool run();
+
  private:
   PaketReceivedCallbackFunction m_newPaketReceivedCallbackFunction;
 
+  boost::shared_ptr<boost::asio::io_service> m_io_service_ptr;
+  boost::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
+  boost::shared_ptr<sick::communication::AsyncUDPClient> m_async_udp_client;
+  boost::scoped_ptr<boost::thread> m_udp_client_thread_ptr;
+
   void processUDPPaket();
+  bool UDPClientThread();
 };
 
 } /* namespace */

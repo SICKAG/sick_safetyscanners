@@ -21,12 +21,41 @@ Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFun
   : m_newPaketReceivedCallbackFunction(newPaketReceivedCallbackFunction)
 {
   std::cout << "starting microscan" << std::endl;
-  sick::communication::AsyncUDPClient async_udp_client(std::bind(&Microscan3::processUDPPaket, this), "192.168.1.10",2122, 6060);
+  m_io_service_ptr = boost::make_shared<boost::asio::io_service>();
+  m_async_udp_client = boost::make_shared<sick::communication::AsyncUDPClient>(std::bind(&Microscan3::processUDPPaket, this), boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
+  std::cout << "started Microscan" << std::endl;
 }
 
 Microscan3::~Microscan3()
 {
+  m_udp_client_thread_ptr.reset();
+  
 }
+
+bool Microscan3::run()
+{
+  std::cout << "enter run" << std::endl;
+
+  m_udp_client_thread_ptr.reset(new boost::thread(boost::bind(&Microscan3::UDPClientThread, this)));
+
+  m_async_udp_client->run_service();
+
+}
+
+bool Microscan3::UDPClientThread()
+{
+   std::cout << "enter thread" << std::endl;
+
+
+   m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(*m_io_service_ptr));
+
+   m_io_service_ptr->run();
+   std::cout << "exit thread" << std::endl;
+}
+
+
+
+
 
 void Microscan3::processUDPPaket()
 {

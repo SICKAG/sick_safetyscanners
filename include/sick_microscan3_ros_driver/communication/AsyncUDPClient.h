@@ -20,8 +20,10 @@ namespace communication{
 
                 typedef boost::function<void()> PacketHandler;
 
-                AsyncUDPClient(PacketHandler packet_handler, std::string host, unsigned short server_port, unsigned short local_port = 0);
+                AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, std::string host, unsigned short server_port, unsigned short local_port = 0);
 		virtual ~AsyncUDPClient();
+
+                void run_service();
 
 	private:
 
@@ -31,14 +33,14 @@ namespace communication{
 
                 boost::shared_ptr<boost::asio::io_service::work> m_ioWorkPtr;
 		// Network send/receive stuff
-                boost::asio::io_service io_service;
-                boost::asio::ip::udp::socket socket;
+                boost::asio::io_service& m_io_service;
+                boost::shared_ptr<boost::asio::ip::udp::socket> socket;
                 boost::asio::ip::udp::endpoint remote_endpoint;
                 std::thread service_thread;
 
 		void start_receive();
 		void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
-		void run_service();
+
 
 		AsyncUDPClient(AsyncUDPClient&); // block default copy constructor
 

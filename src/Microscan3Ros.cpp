@@ -25,7 +25,9 @@ Microscan3Ros::Microscan3Ros()
     ros::requestShutdown();
   }
 
-   sick::Microscan3 device(std::bind(&Microscan3Ros::receivedUDPPaket, this));
+
+   m_device = boost::make_shared<sick::Microscan3>(std::bind(&Microscan3Ros::receivedUDPPaket, this));
+   m_device->run();
 /*  m_subscriber = m_nh.subscribe(m_subscriber_topic, 1,
                                       &RosPackageTemplate::topicCallback, this);
   m_publisher = m_private_nh.advertise<sensor_msgs::JointState>(m_publisher_topic,100);
