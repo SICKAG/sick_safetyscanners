@@ -8,6 +8,7 @@ namespace communication {
                 m_io_service(io_service),
                 m_packet_handler(packet_handler)
 	{
+          // Keep io_service busy so that call to io_service-> run does not return imediatly
           m_ioWorkPtr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
           try
           {
@@ -40,15 +41,14 @@ namespace communication {
 
 	void AsyncUDPClient::handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred)
 	{
-          std::cout << "handle receive" << std::endl;
+    std::cout << "handle receive" << std::endl;
 		if (!error)
 		{
-                     m_packet_handler();
-//			std::string message(recv_buffer.data(), recv_buffer.data() + bytes_transferred);
+      m_packet_handler();
 		}
 		else
 		{
-                  std::cout << "error in handle receive" << std::endl;
+      std::cout << "error in handle receive" << std::endl;
 		}
 
     start_receive();

@@ -57,6 +57,8 @@ include_directories(
 add_library(${PROJECT_NAME}_core
   src/Microscan3.cpp
   src/communication/AsyncUDPClient.cpp
+  src/datastructure/PaketBuffer.cpp
+  src/datastructure/DataTypes.cpp
 )
 
 ## Declare cpp executables
