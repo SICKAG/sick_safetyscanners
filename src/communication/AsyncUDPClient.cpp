@@ -15,7 +15,7 @@ namespace communication {
 
             // open the socket and bind it to the port specified by m_portToReceiveAt
             // boost::ref must be used to be able to pass io_service by reference
-            socket = boost::make_shared<boost::asio::ip::udp::socket>(boost::ref(m_io_service),
+            m_socket = boost::make_shared<boost::asio::ip::udp::socket>(boost::ref(m_io_service),
                     boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(),
                         local_port));
           }
@@ -35,7 +35,7 @@ namespace communication {
 	{
           std::cout << "start receive" << std::endl;
 
-          socket->async_receive_from(boost::asio::buffer(recv_buffer), remote_endpoint,
+          m_socket->async_receive_from(boost::asio::buffer(m_recv_buffer), m_remote_endpoint,
 			[this](boost::system::error_code ec, std::size_t bytes_recvd){ this->handle_receive(ec, bytes_recvd); });
 	}
 
@@ -44,7 +44,11 @@ namespace communication {
     std::cout << "handle receive" << std::endl;
 		if (!error)
 		{
-      m_packet_handler();
+      sick::datastructure::PaketBuffer paket_buffer(m_recv_buffer, m_recv_buffer.size());
+      //std::cout << m_recv_buffer.size() << std::endl;
+      //int paket_buffer = 3;
+      //std::cout << "Client: " <<paket_buffer.getLength() << std::endl;
+      m_packet_handler(paket_buffer);
 		}
 		else
 		{

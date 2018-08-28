@@ -22,7 +22,10 @@ Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFun
 {
   std::cout << "starting microscan" << std::endl;
   m_io_service_ptr = boost::make_shared<boost::asio::io_service>();
-  m_async_udp_client = boost::make_shared<sick::communication::AsyncUDPClient>(std::bind(&Microscan3::processUDPPaket, this), boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
+  m_async_udp_client = boost::make_shared<sick::communication::AsyncUDPClient>(boost::bind(&Microscan3::processUDPPaket, this, _1),
+                                                                               boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
+
+  m_paket_merger = boost::make_shared<sick::data_processing::UDPPaketMerger>();
   std::cout << "started Microscan" << std::endl;
 }
 
@@ -57,10 +60,14 @@ bool Microscan3::UDPClientThread()
 
 
 
-void Microscan3::processUDPPaket()
+void Microscan3::processUDPPaket(const sick::datastructure::PaketBuffer& buffer)
 {
-  std::cout << "process UDP Paket" << std::endl;
-  m_newPaketReceivedCallbackFunction();
+  //std::cout << "process UDP Paket" << buffer.getBuffer().at(4) <<  std::endl;
+  //std::cout << "Client: " <<buffer.getLength() << std::endl;
+  if(m_paket_merger->addUDPPaket(buffer)) {
+
+    m_newPaketReceivedCallbackFunction();
+  }
 }
 
 } /* namespace */

@@ -59,6 +59,9 @@ add_library(${PROJECT_NAME}_core
   src/communication/AsyncUDPClient.cpp
   src/datastructure/PaketBuffer.cpp
   src/datastructure/DataTypes.cpp
+  src/datastructure/DatagramHeader.cpp
+  src/data_processing/UDPPaketMerger.cpp
+  src/data_processing/ParseDatagramHeader.cpp
 )
 
 ## Declare cpp executables
