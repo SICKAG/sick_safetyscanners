@@ -60,11 +60,14 @@ bool Microscan3::UDPClientThread()
 
 
 
-void Microscan3::processUDPPaket(const sick::datastructure::PaketBuffer& buffer)
+void Microscan3::processUDPPaket(const sick::datastructure::PacketBuffer& buffer)
 {
   //std::cout << "process UDP Paket" << buffer.getBuffer().at(4) <<  std::endl;
   //std::cout << "Client: " <<buffer.getLength() << std::endl;
   if(m_paket_merger->addUDPPaket(buffer)) {
+
+    sick::datastructure::PacketBuffer deployedBuffer =  m_paket_merger->getDeployedPacketBuffer();
+    std::cout << "buffer to parse: " << deployedBuffer.getLength() << std::endl;
 
     m_newPaketReceivedCallbackFunction();
   }

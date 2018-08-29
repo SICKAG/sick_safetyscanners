@@ -10,7 +10,7 @@
 #include <thread>
 #include <functional>
 
-#include <sick_microscan3_ros_driver/datastructure/PaketBuffer.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 
 
@@ -19,7 +19,7 @@ namespace communication{
 	class AsyncUDPClient {
 	public:
                 //typedef boost::function<void(datastructure::PaketBuffer)> PacketHandler;
-                typedef boost::function<void(const sick::datastructure::PaketBuffer&)> PacketHandler;
+                typedef boost::function<void(const sick::datastructure::PacketBuffer&)> PacketHandler;
 
                 AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, std::string host,
                                unsigned short server_port, unsigned short local_port = 0);
@@ -29,7 +29,7 @@ namespace communication{
 
 	private:
 
-                datastructure::PaketBuffer::ArrayBuffer m_recv_buffer;
+                datastructure::PacketBuffer::ArrayBuffer m_recv_buffer;
 
                 PacketHandler m_packet_handler;
 

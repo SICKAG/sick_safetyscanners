@@ -3,7 +3,7 @@
 namespace sick {
 namespace data_processing {
 
-bool sick::data_processing::AbstractParseUDPSequence::parseUDPSequence(sick::datastructure::PaketBuffer buffer)
+bool sick::data_processing::AbstractParseUDPSequence::parseUDPSequence(sick::datastructure::PacketBuffer buffer)
 {
 }
 

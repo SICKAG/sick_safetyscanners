@@ -3,7 +3,7 @@
 namespace sick {
 namespace data_processing {
 
-bool ParseDatagramHeader::parseUDPSequence(datastructure::PaketBuffer buffer, datastructure::DatagramHeader &header)
+bool ParseDatagramHeader::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::DatagramHeader &header)
 {
   std::cout << "Beginn Parsing Header" << std::endl;
 

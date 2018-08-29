@@ -20,8 +20,8 @@
 #include <iostream>
 
 #include <sick_microscan3_ros_driver/communication/AsyncUDPClient.h>
-#include <sick_microscan3_ros_driver/data_processing/UDPPaketMerger.h>
-#include <sick_microscan3_ros_driver/datastructure/PaketBuffer.h>
+#include <sick_microscan3_ros_driver/data_processing/UDPPacketMerger.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 namespace sick {
 
@@ -59,7 +59,7 @@ class Microscan3
 
   boost::shared_ptr<sick::data_processing::UDPPaketMerger> m_paket_merger;
 
-  void processUDPPaket(const datastructure::PaketBuffer &buffer);
+  void processUDPPaket(const datastructure::PacketBuffer &buffer);
   bool UDPClientThread();
 };
 

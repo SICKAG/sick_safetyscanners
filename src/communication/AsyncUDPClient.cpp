@@ -44,7 +44,7 @@ namespace communication {
     std::cout << "handle receive" << std::endl;
 		if (!error)
 		{
-      sick::datastructure::PaketBuffer paket_buffer(m_recv_buffer, m_recv_buffer.size());
+      sick::datastructure::PacketBuffer paket_buffer(m_recv_buffer, bytes_transferred);
       //std::cout << m_recv_buffer.size() << std::endl;
       //int paket_buffer = 3;
       //std::cout << "Client: " <<paket_buffer.getLength() << std::endl;

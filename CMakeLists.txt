@@ -57,10 +57,10 @@ include_directories(
 add_library(${PROJECT_NAME}_core
   src/Microscan3.cpp
   src/communication/AsyncUDPClient.cpp
-  src/datastructure/PaketBuffer.cpp
+  src/datastructure/PacketBuffer.cpp
   src/datastructure/DataTypes.cpp
   src/datastructure/DatagramHeader.cpp
-  src/data_processing/UDPPaketMerger.cpp
+  src/data_processing/UDPPacketMerger.cpp
   src/data_processing/ParseDatagramHeader.cpp
   src/data_processing/ReadWriteHelper.cpp
 )

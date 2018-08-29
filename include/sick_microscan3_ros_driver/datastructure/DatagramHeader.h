@@ -5,9 +5,13 @@
 namespace sick {
 namespace datastructure {
 
+
+
 class DatagramHeader
 {
 public:
+  static const UINT32 HEADER_SIZE = 24;
+
   DatagramHeader();
 
   UINT32 getDatagramMarker() const;
