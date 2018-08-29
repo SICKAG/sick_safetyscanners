@@ -22,6 +22,8 @@ bool UDPPaketMerger::addUDPPaket(sick::datastructure::PaketBuffer buffer)
   // parse Custom Header
   sick::data_processing::ParseDatagramHeader::parseUDPSequence(buffer, datagram_header);
 
+  std::cout << "Identifikation: " << datagram_header.getIdentification() << std::endl;
+
   //add to map
 
   //check if complete

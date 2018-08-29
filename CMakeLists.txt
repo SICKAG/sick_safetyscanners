@@ -62,6 +62,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/DatagramHeader.cpp
   src/data_processing/UDPPaketMerger.cpp
   src/data_processing/ParseDatagramHeader.cpp
+  src/data_processing/ReadWriteHelper.cpp
 )
 
 ## Declare cpp executables
