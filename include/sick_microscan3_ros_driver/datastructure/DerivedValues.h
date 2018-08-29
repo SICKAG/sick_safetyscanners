@@ -1,0 +1,46 @@
+#pragma once
+
+#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+
+namespace sick {
+namespace datastructure {
+
+class DerivedValues
+{
+public:
+  DerivedValues();
+
+  UINT16 getMultiplicationFactor() const;
+  void setMultiplicationFactor(const UINT16 &multiplication_factor);
+
+  UINT16 getNumberOfBeams() const;
+  void setNumberOfBeams(const UINT16 &number_of_beams);
+
+  UINT16 getScanTime() const;
+  void setScanTime(const UINT16 &scan_time);
+
+  UINT32 getUnsigned_test_start_angle() const;
+  void setUnsigned_test_start_angle(const UINT32 &value);
+
+  INT32 getStartAngle() const;
+  void setStartAngle(const INT32 &start_angle);
+
+  INT32 getAngularBeamResolution() const;
+  void setAngularBeamResolution(const INT32 &angular_beam_resolution);
+
+  UINT32 getInterbeamPeriod() const;
+  void setInterbeamPeriod(const UINT32 &interbeam_period);
+
+private:
+  UINT16 m_multiplication_factor;
+  UINT16 m_number_of_beams;
+  UINT16 m_scan_time; //ms
+  //2 BYte reserved
+  UINT32 unsigned_test_start_angle;
+  INT32 m_start_angle;
+  INT32 m_angular_beam_resolution;
+  UINT32 m_interbeam_period; //usecs
+};
+
+}
+}

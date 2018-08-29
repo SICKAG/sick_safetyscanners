@@ -60,6 +60,14 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/PacketBuffer.cpp
   src/datastructure/DataTypes.cpp
   src/datastructure/DatagramHeader.cpp
+  src/datastructure/Data.cpp
+  src/datastructure/DataHeader.cpp
+  src/datastructure/GeneralSystemState.cpp
+  src/datastructure/DerivedValues.cpp
+  src/datastructure/MeasurementData.cpp
+  src/datastructure/IntrusionData.cpp
+  src/datastructure/ApplicationInputs.cpp
+  src/datastructure/ApplicationOutputs.cpp
   src/data_processing/UDPPacketMerger.cpp
   src/data_processing/ParseDatagramHeader.cpp
   src/data_processing/ReadWriteHelper.cpp
