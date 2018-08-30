@@ -22,6 +22,7 @@
 #include <sick_microscan3_ros_driver/communication/AsyncUDPClient.h>
 #include <sick_microscan3_ros_driver/data_processing/UDPPacketMerger.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseData.h>
 
 namespace sick {
 

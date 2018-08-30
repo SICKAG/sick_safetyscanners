@@ -69,6 +69,9 @@ void Microscan3::processUDPPaket(const sick::datastructure::PacketBuffer& buffer
     sick::datastructure::PacketBuffer deployedBuffer =  m_paket_merger->getDeployedPacketBuffer();
     std::cout << "buffer to parse: " << deployedBuffer.getLength() << std::endl;
 
+    sick::datastructure::Data data;
+    sick::data_processing::ParseData::parseUDPSequence(deployedBuffer,data);
+
     m_newPaketReceivedCallbackFunction();
   }
 }

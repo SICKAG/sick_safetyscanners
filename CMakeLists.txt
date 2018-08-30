@@ -70,6 +70,10 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/ApplicationOutputs.cpp
   src/data_processing/UDPPacketMerger.cpp
   src/data_processing/ParseDatagramHeader.cpp
+  src/data_processing/ParseData.cpp
+  src/data_processing/ParseDataHeader.cpp
+  src/data_processing/ParseDerivedValues.cpp
+  src/data_processing/ParseMeasurementData.cpp
   src/data_processing/ReadWriteHelper.cpp
 )
 
