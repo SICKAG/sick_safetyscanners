@@ -10,7 +10,7 @@ namespace data_processing {
 class ParseDerivedValues : public AbstractParseUDPSequence
 {
 public:
-  static bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::DerivedValues &data);
+  static datastructure::DerivedValues parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
 
 private:
   ParseDerivedValues();

@@ -9,7 +9,7 @@ class ScanPoint
 {
 public:
   ScanPoint();
-  ScanPoint(float angle, UINT16 &distance, UINT8 &reflectivity, bool &valid_bit, bool &infinite_bit, bool &glare_bit, bool &reflector_bit, bool &contamination_bit, bool &contamination_warning_bit);
+  ScanPoint(float angle, INT16 &distance, UINT8 &reflectivity, bool &valid_bit, bool &infinite_bit, bool &glare_bit, bool &reflector_bit, bool &contamination_bit, bool &contamination_warning_bit);
 
   float getAngle() const;
 

@@ -22,10 +22,10 @@ public:
   UINT32 getUnsigned_test_start_angle() const;
   void setUnsigned_test_start_angle(const UINT32 &value);
 
-  INT32 getStartAngle() const;
+  float getStartAngle() const;
   void setStartAngle(const INT32 &start_angle);
 
-  INT32 getAngularBeamResolution() const;
+  float getAngularBeamResolution() const;
   void setAngularBeamResolution(const INT32 &angular_beam_resolution);
 
   UINT32 getInterbeamPeriod() const;
@@ -37,8 +37,8 @@ private:
   UINT16 m_scan_time; //ms
   //2 BYte reserved
   UINT32 unsigned_test_start_angle;
-  INT32 m_start_angle;
-  INT32 m_angular_beam_resolution;
+  float m_start_angle;
+  float m_angular_beam_resolution;
   UINT32 m_interbeam_period; //usecs
 };
 

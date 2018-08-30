@@ -9,11 +9,16 @@ bool ParseData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructu
 
   const BYTE* dataPtr(buffer.getBuffer().data());
 
-  sick::datastructure::DataHeader data_header;
-  ParseDataHeader::parseUDPSequence(buffer, data_header);
+  sick::datastructure::DataHeader data_header = ParseDataHeader::parseUDPSequence(buffer, data);
   data.setDataHeaderPtr(boost::make_shared<sick::datastructure::DataHeader>(data_header));
 
   std::cout << "DATA: scanNumber:  " << data.getDataHeaderPtr()->getScanNumber() << std::endl;
+
+  sick::datastructure::DerivedValues derived_values = ParseDerivedValues::parseUDPSequence(buffer,data);
+  data.setDerivedValuesPtr(boost::make_shared<sick::datastructure::DerivedValues>(derived_values));
+
+  sick::datastructure::MeasurementData measurement_data = ParseMeasurementData::parseUDPSequence(buffer, data);
+  data.setMeasurementDataPtr(boost::make_shared<sick::datastructure::MeasurementData>(measurement_data));
 
 
 

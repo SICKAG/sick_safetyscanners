@@ -23,10 +23,25 @@ UINT16 ReadWriteHelper::readUINT16LE(const BYTE *&buf)
 }
 
 
+INT16 ReadWriteHelper::readINT16LE(const BYTE *&buf)
+{
+  INT16 value = (buf[1] << 8) + buf[0];
+  buf += sizeof(INT16);
+  return value;
+}
+
+
 UINT32 ReadWriteHelper::readUINT32LE(const BYTE *&buf)
 {
   UINT32 value = (buf[3] << 24) + (buf[2] << 16) + (buf[1] << 8) + buf[0];
   buf += sizeof(UINT32);
+  return value;
+}
+
+INT32 ReadWriteHelper::readINT32LE(const BYTE *&buf)
+{
+  INT32 value = (buf[3] << 24) + (buf[2] << 16) + (buf[1] << 8) + buf[0];
+  buf += sizeof(INT32);
   return value;
 }
 

@@ -45,27 +45,27 @@ UINT32 DerivedValues::getUnsigned_test_start_angle() const
 
 void DerivedValues::setUnsigned_test_start_angle(const UINT32 &value)
 {
-  unsigned_test_start_angle = value;
+  unsigned_test_start_angle = value ;
 }
 
-INT32 DerivedValues::getStartAngle() const
+float DerivedValues::getStartAngle() const
 {
   return m_start_angle;
 }
 
 void DerivedValues::setStartAngle(const INT32 &start_angle)
 {
-  m_start_angle = start_angle;
+  m_start_angle = (float) start_angle / 4194304.0;
 }
 
-INT32 DerivedValues::getAngularBeamResolution() const
+float DerivedValues::getAngularBeamResolution() const
 {
   return m_angular_beam_resolution;
 }
 
 void DerivedValues::setAngularBeamResolution(const INT32 &angular_beam_resolution)
 {
-  m_angular_beam_resolution = angular_beam_resolution;
+  m_angular_beam_resolution = (float) angular_beam_resolution / 4194304.0;
 }
 
 UINT32 DerivedValues::getInterbeamPeriod() const

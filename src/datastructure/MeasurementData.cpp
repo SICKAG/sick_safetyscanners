@@ -5,9 +5,10 @@ namespace datastructure {
 
 
 
-ScanPoint::ScanPoint(float angle, UINT16 &distance, UINT8 &reflectivity, bool &valid_bit, bool &infinite_bit,
+ScanPoint::ScanPoint(float angle, INT16 &distance, UINT8 &reflectivity, bool &valid_bit, bool &infinite_bit,
                      bool &glare_bit, bool &reflector_bit, bool &contamination_bit, bool &contamination_warning_bit)
-  :m_distance(distance)
+  : m_angle(angle)
+  ,m_distance(distance)
   ,m_reflectivity(reflectivity)
   ,m_valid_bit(valid_bit)
   ,m_infinite_bit(infinite_bit)
@@ -92,7 +93,7 @@ std::vector<ScanPoint> MeasurementData::getScanPoints() const
 
 void MeasurementData::addScanPoint(ScanPoint scan_point)
 {
-  m_scan_points.push_back((scan_point));
+  m_scan_points.push_back(scan_point);
 }
 
 

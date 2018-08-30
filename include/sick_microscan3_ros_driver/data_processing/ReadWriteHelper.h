@@ -29,6 +29,9 @@ public:
   static UINT16 readUINT16BE(const BYTE*& buf);
   static UINT32 readUINT32BE(const BYTE*& buf);
   static UINT64 readUINT64BE(const BYTE*& buf);
+
+  static INT32 readINT32LE(const BYTE *&buf);
+  static INT16 readINT16LE(const BYTE *&buf);
 };
 
 }

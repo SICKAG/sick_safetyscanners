@@ -4,9 +4,9 @@
 
 #include <sick_microscan3_ros_driver/data_processing/AbstractParseUDPSequence.h>
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/DataHeader.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseDataHeader.h>
-
+#include <sick_microscan3_ros_driver/data_processing/ParseDerivedValues.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseMeasurementData.h>
 
 namespace sick {
 namespace data_processing {

@@ -10,7 +10,7 @@ namespace data_processing {
 class ParseMeasurementData : public AbstractParseUDPSequence
 {
 public:
-  static bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::MeasurementData& header);
+  static datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &header);
 
 private:
   ParseMeasurementData();
