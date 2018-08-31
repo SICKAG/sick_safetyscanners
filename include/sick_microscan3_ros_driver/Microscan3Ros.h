@@ -17,6 +17,7 @@
 // ROS
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
+#include <sensor_msgs/LaserScan.h>
 #include <std_srvs/Trigger.h>
 
 //STD
@@ -28,7 +29,13 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 
+
+#include <cmath>
+
 namespace sick {
+
+inline float degToRad(float deg) { return deg * M_PI / 180.0f; }
+inline float radToDeg(float rad) { return rad * 180.0f / M_PI; }
 
 /*!
  * Main class for the node to handle the ROS interfacing.
@@ -53,7 +60,7 @@ class Microscan3Ros
    */
   bool readParameters();
 
-  void receivedUDPPaket();
+  void receivedUDPPaket(const datastructure::Data &data);
 
   /*!
    * ROS service server callback.

@@ -37,7 +37,7 @@ class Microscan3
     *  Typedef for function which has to be passed to this class. This enables the use of
     *  functions from the calling class. In this case a ROS publisher for the data.
     */
-    typedef boost::function<void ()> PaketReceivedCallbackFunction;
+    typedef boost::function<void (const sick::datastructure::Data&)> PaketReceivedCallbackFunction;
    /*!
    * Constructor.
    */

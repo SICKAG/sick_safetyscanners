@@ -72,7 +72,7 @@ void Microscan3::processUDPPaket(const sick::datastructure::PacketBuffer& buffer
     sick::datastructure::Data data;
     sick::data_processing::ParseData::parseUDPSequence(deployedBuffer,data);
 
-    m_newPaketReceivedCallbackFunction();
+    m_newPaketReceivedCallbackFunction(data);
   }
 }
 
