@@ -8,6 +8,158 @@ GeneralSystemState::GeneralSystemState()
 
 }
 
+bool GeneralSystemState::getRunModeActive() const
+{
+  return m_run_mode_active;
+}
+
+void GeneralSystemState::setRunModeActive(bool run_mode_active)
+{
+  m_run_mode_active = run_mode_active;
+}
+
+bool GeneralSystemState::getStandbyModeActive() const
+{
+  return m_standby_mode_active;
+}
+
+void GeneralSystemState::setStandbyModeActive(bool standby_mode_active)
+{
+  m_standby_mode_active = standby_mode_active;
+}
+
+bool GeneralSystemState::getContaminationWarning() const
+{
+  return m_contamination_warning;
+}
+
+void GeneralSystemState::setContaminationWarning(bool contamination_warning)
+{
+  m_contamination_warning = contamination_warning;
+}
+
+bool GeneralSystemState::getContaminationError() const
+{
+  return m_contamination_error;
+}
+
+void GeneralSystemState::setContaminationError(bool contamination_error)
+{
+  m_contamination_error = contamination_error;
+}
+
+bool GeneralSystemState::getReferenceContourStatus() const
+{
+  return m_reference_contour_status;
+}
+
+void GeneralSystemState::setReferenceContourStatus(bool reference_contour_status)
+{
+  m_reference_contour_status = reference_contour_status;
+}
+
+bool GeneralSystemState::getManipulationStatus() const
+{
+  return m_manipulation_status;
+}
+
+void GeneralSystemState::setManipulationStatus(bool manipulation_status)
+{
+  m_manipulation_status = manipulation_status;
+}
+
+std::vector<bool> GeneralSystemState::getSafeCutOffPath() const
+{
+  return m_safe_cut_off_path;
+}
+
+void GeneralSystemState::setSafeCutOffPath(const std::vector<bool> &safe_cut_off_path)
+{
+  m_safe_cut_off_path = safe_cut_off_path;
+}
+
+std::vector<bool> GeneralSystemState::getNonSafeCutOffPath() const
+{
+  return m_non_safe_cut_off_path;
+}
+
+void GeneralSystemState::setNonSafeCutOffPath(const std::vector<bool> &non_safe_cut_off_path)
+{
+  m_non_safe_cut_off_path = non_safe_cut_off_path;
+}
+
+std::vector<bool> GeneralSystemState::getResetRequiredCutOffPath() const
+{
+  return m_reset_required_cut_off_path;
+}
+
+void GeneralSystemState::setResetRequiredCutOffPath(const std::vector<bool> &reset_required_cut_off_path)
+{
+  m_reset_required_cut_off_path = reset_required_cut_off_path;
+}
+
+BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_1() const
+{
+  return m_current_monitoring_case_no_table_1;
+}
+
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_1(const BYTE &current_monitoring_case_no_table_1)
+{
+  m_current_monitoring_case_no_table_1 = current_monitoring_case_no_table_1;
+}
+
+BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_2() const
+{
+  return m_current_monitoring_case_no_table_2;
+}
+
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_2(const BYTE &current_monitoring_case_no_table_2)
+{
+  m_current_monitoring_case_no_table_2 = current_monitoring_case_no_table_2;
+}
+
+BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_3() const
+{
+  return m_current_monitoring_case_no_table_3;
+}
+
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_3(const BYTE &current_monitoring_case_no_table_3)
+{
+  m_current_monitoring_case_no_table_3 = current_monitoring_case_no_table_3;
+}
+
+BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_4() const
+{
+  return m_current_monitoring_case_no_table_4;
+}
+
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_4(const BYTE &current_monitoring_case_no_table_4)
+{
+  m_current_monitoring_case_no_table_4 = current_monitoring_case_no_table_4;
+}
+
+bool GeneralSystemState::getApplicationError() const
+{
+  return m_application_error;
+}
+
+void GeneralSystemState::setApplicationError(bool application_error)
+{
+  m_application_error = application_error;
+}
+
+bool GeneralSystemState::getDeviceError() const
+{
+  return m_device_error;
+}
+
+void GeneralSystemState::setDeviceError(bool device_error)
+{
+  m_device_error = device_error;
+}
+
+
+
 }
 }
 

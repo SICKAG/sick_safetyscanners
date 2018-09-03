@@ -66,6 +66,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/DerivedValues.cpp
   src/datastructure/MeasurementData.cpp
   src/datastructure/IntrusionData.cpp
+  src/datastructure/ApplicationData.cpp
   src/datastructure/ApplicationInputs.cpp
   src/datastructure/ApplicationOutputs.cpp
   src/data_processing/UDPPacketMerger.cpp
@@ -74,6 +75,9 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseDataHeader.cpp
   src/data_processing/ParseDerivedValues.cpp
   src/data_processing/ParseMeasurementData.cpp
+  src/data_processing/ParseGeneralSystemState.cpp
+  src/data_processing/ParseIntrusionData.cpp
+  src/data_processing/ParseApplicationData.cpp
   src/data_processing/ReadWriteHelper.cpp
 )
 

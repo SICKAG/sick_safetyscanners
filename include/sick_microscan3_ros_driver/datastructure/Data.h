@@ -7,6 +7,7 @@
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
 #include <sick_microscan3_ros_driver/datastructure/MeasurementData.h>
 #include <sick_microscan3_ros_driver/datastructure/IntrusionData.h>
+#include <sick_microscan3_ros_driver/datastructure/ApplicationData.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationInputs.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationOutputs.h>
 
@@ -33,11 +34,8 @@ public:
   boost::shared_ptr<IntrusionData> getIntrusionDataPtr() const;
   void setIntrusionDataPtr(const boost::shared_ptr<IntrusionData> &intrusion_data_ptr);
 
-  boost::shared_ptr<ApplicationInputs> getApplicationInputsPtr() const;
-  void setApplicationInputsPtr(const boost::shared_ptr<ApplicationInputs> &application_inputs_ptr);
-
-  boost::shared_ptr<ApplicationOutputs> getApplicationOutputsPtr() const;
-  void setApplicationOutputsPtr(const boost::shared_ptr<ApplicationOutputs> &application_outputs_ptr);
+  boost::shared_ptr<ApplicationData> getApplicationDataPtr() const;
+  void setApplicationDataPtr(const boost::shared_ptr<ApplicationData> &application_data_ptr);
 
 private:
   boost::shared_ptr<DataHeader> m_data_header_ptr;
@@ -45,8 +43,7 @@ private:
   boost::shared_ptr<DerivedValues> m_derived_values_ptr;
   boost::shared_ptr<MeasurementData> m_measurement_data_ptr;
   boost::shared_ptr<IntrusionData> m_intrusion_data_ptr;
-  boost::shared_ptr<ApplicationInputs> m_application_inputs_ptr;
-  boost::shared_ptr<ApplicationOutputs> m_application_outputs_ptr;
+  boost::shared_ptr<ApplicationData> m_application_data_ptr;
 };
 
 }

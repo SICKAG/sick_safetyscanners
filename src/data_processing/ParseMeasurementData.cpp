@@ -7,6 +7,11 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
 {
   std::cout << "Beginn Parsing Header" << std::endl;
 
+  //TODO sanity checks
+  if ( data.getDataHeaderPtr()->getMeasurementDataBlockOffset() == 0 && data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0) {
+    return datastructure::MeasurementData();
+  }
+
   const BYTE* dataPtr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
 
   datastructure::MeasurementData measurement_data;

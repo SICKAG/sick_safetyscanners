@@ -7,6 +7,9 @@
 #include <sick_microscan3_ros_driver/data_processing/ParseDataHeader.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseDerivedValues.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseMeasurementData.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseGeneralSystemState.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseIntrusionData.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseApplicationData.h>
 
 namespace sick {
 namespace data_processing {

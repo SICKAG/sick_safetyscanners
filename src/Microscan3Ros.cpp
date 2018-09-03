@@ -78,8 +78,8 @@ void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
   scan.time_increment = time_increment.total_microseconds() * 1e-6;
   boost::posix_time::milliseconds scan_time = boost::posix_time::milliseconds(data.getDerivedValuesPtr()->getScanTime());
   scan.scan_time = scan_time.total_microseconds() * 1e-6;
-  scan.range_min = 0.01; // TODO
-  scan.range_max = 50.0; // TODO
+  scan.range_min = 0.02; // TODO configurable, values taken from reichweite und benötigte remissionen für Warnfelder from SICK datasheet
+  scan.range_max = 40.0; // TODO
   scan.ranges.resize(num_scan_points);
   scan.intensities.resize(num_scan_points);
 

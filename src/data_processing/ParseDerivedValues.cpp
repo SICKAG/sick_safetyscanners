@@ -8,6 +8,9 @@ datastructure::DerivedValues ParseDerivedValues::parseUDPSequence(datastructure:
   std::cout << "Beginn Parsing DerivedValues" << std::endl;
 
   //TODO sanity checks and finalize the division for the angles
+  if ( data.getDataHeaderPtr()->getDerivedValuesBlockOffset() == 0 && data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0) {
+    return datastructure::DerivedValues();
+  }
 
   const BYTE* dataPtr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getDerivedValuesBlockOffset());
 

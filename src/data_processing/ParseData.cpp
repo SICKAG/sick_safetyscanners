@@ -20,6 +20,15 @@ bool ParseData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructu
   sick::datastructure::MeasurementData measurement_data = ParseMeasurementData::parseUDPSequence(buffer, data);
   data.setMeasurementDataPtr(boost::make_shared<sick::datastructure::MeasurementData>(measurement_data));
 
+  sick::datastructure::GeneralSystemState general_system_state = ParseGeneralSystemState::parseUDPSequence(buffer,data);
+  data.setGeneralSystemStatePtr(boost::make_shared<sick::datastructure::GeneralSystemState>(general_system_state));
+
+  sick::datastructure::IntrusionData intrusion_data = ParseIntrusionData::parseUDPSequence(buffer,data);
+  data.setIntrusionDataPtr(boost::make_shared<sick::datastructure::IntrusionData>(intrusion_data));
+
+  sick::datastructure::ApplicationData application_data = ParseApplicationData::parseUDPSequence(buffer,data);
+  data.setApplicationDataPtr(boost::make_shared<sick::datastructure::ApplicationData>(application_data));
+
 
 
   return true;

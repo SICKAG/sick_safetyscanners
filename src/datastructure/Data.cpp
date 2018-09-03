@@ -60,25 +60,16 @@ void Data::setIntrusionDataPtr(const boost::shared_ptr<IntrusionData> &intrusion
   m_intrusion_data_ptr = intrusion_data_ptr;
 }
 
-boost::shared_ptr<ApplicationInputs> Data::getApplicationInputsPtr() const
+boost::shared_ptr<ApplicationData> Data::getApplicationDataPtr() const
 {
-  return m_application_inputs_ptr;
+  return m_application_data_ptr;
 }
 
-void Data::setApplicationInputsPtr(const boost::shared_ptr<ApplicationInputs> &application_inputs_ptr)
+void Data::setApplicationDataPtr(const boost::shared_ptr<ApplicationData> &application_data_ptr)
 {
-  m_application_inputs_ptr = application_inputs_ptr;
+  m_application_data_ptr = application_data_ptr;
 }
 
-boost::shared_ptr<ApplicationOutputs> Data::getApplicationOutputsPtr() const
-{
-  return m_application_outputs_ptr;
-}
-
-void Data::setApplicationOutputsPtr(const boost::shared_ptr<ApplicationOutputs> &application_outputs_ptr)
-{
-  m_application_outputs_ptr = application_outputs_ptr;
-}
 
 }
 }
