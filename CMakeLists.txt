@@ -57,6 +57,7 @@ include_directories(
 add_library(${PROJECT_NAME}_core
   src/Microscan3.cpp
   src/communication/AsyncUDPClient.cpp
+  src/communication/AsyncTCPClient.cpp
   src/datastructure/PacketBuffer.cpp
   src/datastructure/DataTypes.cpp
   src/datastructure/DatagramHeader.cpp
@@ -79,6 +80,9 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseIntrusionData.cpp
   src/data_processing/ParseApplicationData.cpp
   src/data_processing/ReadWriteHelper.cpp
+  src/cola2/Cola2Session.cpp
+  src/cola2/Command.cpp
+  src/cola2/ChangeCommSettingsCommand.cpp
 )
 
 ## Declare cpp executables

@@ -36,7 +36,7 @@ namespace communication {
           std::cout << "start receive" << std::endl;
 
           m_socket->async_receive_from(boost::asio::buffer(m_recv_buffer), m_remote_endpoint,
-			[this](boost::system::error_code ec, std::size_t bytes_recvd){ this->handle_receive(ec, bytes_recvd); });
+      [this](boost::system::error_code ec, std::size_t bytes_recvd){ this->handle_receive(ec, bytes_recvd); });
 	}
 
 	void AsyncUDPClient::handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred)

@@ -22,7 +22,12 @@ Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFun
 {
   std::cout << "starting microscan" << std::endl;
   m_io_service_ptr = boost::make_shared<boost::asio::io_service>();
+
+  //TODO parameterize
   m_async_udp_client = boost::make_shared<sick::communication::AsyncUDPClient>(boost::bind(&Microscan3::processUDPPaket, this, _1),
+                                                                               boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
+
+  m_async_tcp_client = boost::make_shared<sick::communication::AsyncTCPClient>(boost::bind(&Microscan3::processUDPPaket, this, _1),
                                                                                boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
 
   m_paket_merger = boost::make_shared<sick::data_processing::UDPPaketMerger>();
@@ -41,7 +46,13 @@ bool Microscan3::run()
 
   m_udp_client_thread_ptr.reset(new boost::thread(boost::bind(&Microscan3::UDPClientThread, this)));
 
-  m_async_udp_client->run_service();
+
+  //TODO set at the right place
+  m_async_tcp_client->do_connect();
+
+
+  //TODO for udp receiving necessary, uncommented for tcp testing
+  //m_async_udp_client->run_service();
 
 }
 
