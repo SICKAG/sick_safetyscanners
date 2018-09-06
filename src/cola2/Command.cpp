@@ -1,5 +1,8 @@
 #include <sick_microscan3_ros_driver/cola2/Command.h>
 
+#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
+
+
 namespace sick {
 namespace cola2 {
 
@@ -8,12 +11,13 @@ Command::Command(Cola2Session &session, UINT16 commandType, UINT16 commandMode)
   , m_command_mode(commandMode)
   , m_command_type(commandType)
 {
-
+  m_sessionID = m_session.getSessionID();
+  m_requestID = m_session.getNextRequestID();
 }
 
 void Command::lockExecutionMutex()
 {
-  m_executionMutex.lock();
+  //m_executionMutex.lock();
 }
 
 void Command::constructTelegram(datastructure::PacketBuffer::VectorBuffer &telegram) const
@@ -25,16 +29,16 @@ void Command::constructTelegram(datastructure::PacketBuffer::VectorBuffer &teleg
 void Command::processReplyBase(const datastructure::PacketBuffer::VectorBuffer &packet)
 {
   //Parse first
-
+  std::cout << "process reply of tcp" << std::endl;
 
   m_wasSuccessful = processReply();
 
-  m_executionMutex.unlock();
+ // m_executionMutex.unlock();
 }
 
 void Command::waitForCompletion()
 {
-   boost::mutex::scoped_lock(m_executionMutex);
+  // boost::mutex::scoped_lock(m_executionMutex);
 
 }
 
@@ -84,7 +88,7 @@ void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &teleg
 {
 
   datastructure::PacketBuffer::VectorBuffer header;
-  UINT32 cola2_STx =0x0000; //= m_parser->getDefaultSTx();
+  UINT32 cola2_STx =0x02020202; //= m_parser->getDefaultSTx();
   UINT8 cola2_HubCntr = 0x00; // See Application Note Using Cola2.x, 3.2
   UINT8 cola2_NoC = 0x00; // See Application Note Using Cola2.x, 3.2
   UINT32 sessionID = getSessionID();
@@ -103,8 +107,14 @@ void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &teleg
               + length;
   header.resize(telegramSize - telegram.size());
 
+  std::cout << "header_size" << header.size() << std::endl;
+  std::cout << "data_size" << telegram.size() << std::endl;
+
   BYTE* dataPtr = header.data();
+
+
   sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr, cola2_STx);
+//  sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr, 0x00000000);
   sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr, length);
   sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, cola2_HubCntr);
   sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, cola2_NoC);
@@ -114,6 +124,7 @@ void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &teleg
   sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, commandMode);
   telegram.insert(telegram.begin(), header.begin(), header.end());
 
+  std::cout << "tele: " << telegram.size() << std::endl;
 }
 
 }

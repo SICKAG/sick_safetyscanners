@@ -30,11 +30,14 @@ namespace communication {
   AsyncTCPClient::~AsyncTCPClient()
 	{
      m_socket->close();
-     m_io_service.stop();
   }
 
   void AsyncTCPClient::do_connect(){
+
+    //async connect takes some time, TODO set mutex to wait for connection
     m_socket->async_connect(m_remote_endpoint, [this](boost::system::error_code ec)
+
+
     {
       std::cout << "TCP error code" << ec.value() << std::endl;
       if (!ec)
@@ -46,6 +49,9 @@ namespace communication {
 
   void AsyncTCPClient::doSendAndReceive(const sick::datastructure::PacketBuffer::VectorBuffer& sendBuffer)
   {
+
+    //TODO remove when connect is mutexed and only return on connection
+    sleep(1);
 
     if (!m_socket)
     {
@@ -69,10 +75,16 @@ namespace communication {
                 [this](boost::system::error_code ec, std::size_t bytes_recvd){ this->handle_receive(ec, bytes_recvd); });
 
   }
-
-  void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error,
-                       std::size_t bytes_transferred)
+  
+  void AsyncTCPClient::setPacketHandler(const PacketHandler &packet_handler)
   {
+      m_packet_handler = packet_handler;
+  }
+  
+  void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error,
+                                            std::size_t bytes_transferred)
+  {
+    std::cout << "handle send and receive" << bytes_transferred << std::endl;
     // Check for errors
     if (!error || error == boost::asio::error::message_size)
     {
@@ -80,6 +92,8 @@ namespace communication {
     }
     else
     {
+      std::cout << "error in handle receive" << std::endl;
+
     }
   }
 
@@ -92,8 +106,19 @@ namespace communication {
 
   void AsyncTCPClient::handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred)
 	{
-    std::cout << "handle receive" << std::endl;
-
+    std::cout << "handle receive tcp" << std::endl;
+    if (!error)
+    {
+      sick::datastructure::PacketBuffer paket_buffer(m_recv_buffer, bytes_transferred);
+      //std::cout << m_recv_buffer.size() << std::endl;
+      //int paket_buffer = 3;
+      //std::cout << "Client: " <<paket_buffer.getLength() << std::endl;
+      m_packet_handler(paket_buffer);
+    }
+    else
+    {
+      std::cout << "error in handle receive tcp" << error <<  std::endl;
+    }
 	}
 
 

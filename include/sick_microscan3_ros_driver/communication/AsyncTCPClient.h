@@ -30,6 +30,8 @@ namespace communication{
                 void do_connect();
                 void doSendAndReceive(const  sick::datastructure::PacketBuffer::VectorBuffer &sendBuffer);
                 void initiateReceive();
+                void setPacketHandler(const PacketHandler &packet_handler);
+
         private:
 
                 datastructure::PacketBuffer::ArrayBuffer m_recv_buffer;

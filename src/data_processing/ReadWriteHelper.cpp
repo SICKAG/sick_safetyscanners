@@ -90,42 +90,48 @@ UINT64 ReadWriteHelper::readUINT64BE (const BYTE *&buf)
 }
 
 
-void ReadWriteHelper::writeUINT8BE (BYTE* buf, UINT8 v)
+void ReadWriteHelper::writeUINT8BE (BYTE* &buf, UINT8 v)
 {
   buf[0] = v;
+  buf += sizeof(UINT8);
 }
 
-void ReadWriteHelper::writeUINT16BE (BYTE* buf, UINT16 v)
+void ReadWriteHelper::writeUINT16BE (BYTE* &buf, UINT16 v)
 {
   buf[0] = (v & 0xff00) >> 8;
   buf[1] = v & 0xff;
+  buf += sizeof(UINT16);
 }
 
-void ReadWriteHelper::writeUINT32BE (BYTE* buf, UINT32 v)
+void ReadWriteHelper::writeUINT32BE (BYTE* &buf, UINT32 v)
 {
   buf[0] = (v & 0xff000000) >> 24;
   buf[1] = (v & 0xff0000) >> 16;
   buf[2] = (v & 0xff00) >> 8;
   buf[3] = v & 0xff;
+  buf += sizeof(UINT32);
 }
 
-void ReadWriteHelper::writeUINT8LE (BYTE* buf, UINT8 v)
+void ReadWriteHelper::writeUINT8LE (BYTE* &buf, UINT8 v)
 {
   buf[0] = v;
+  buf += sizeof(UINT8);
 }
 
-void ReadWriteHelper::writeUINT16LE (BYTE* buf, UINT16 v)
+void ReadWriteHelper::writeUINT16LE (BYTE* &buf, UINT16 v)
 {
   buf[1] = (v & 0xff00) >> 8;
   buf[0] = v & 0xff;
+  buf += sizeof(UINT16);
 }
 
-void ReadWriteHelper::writeUINT32LE (BYTE* buf, UINT32 v)
+void ReadWriteHelper::writeUINT32LE (BYTE* &buf, UINT32 v)
 {
   buf[3] = (v & 0xff000000) >> 24;
   buf[2] = (v & 0xff0000) >> 16;
   buf[1] = (v & 0xff00) >> 8;
   buf[0] = v & 0xff;
+  buf += sizeof(UINT32);
 }
 
 }

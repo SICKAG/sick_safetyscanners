@@ -82,6 +82,8 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ReadWriteHelper.cpp
   src/cola2/Cola2Session.cpp
   src/cola2/Command.cpp
+  src/cola2/CreateSession.cpp
+  src/cola2/CloseSession.cpp
   src/cola2/ChangeCommSettingsCommand.cpp
 )
 

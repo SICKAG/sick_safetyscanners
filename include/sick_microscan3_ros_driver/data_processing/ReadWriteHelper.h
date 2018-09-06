@@ -32,12 +32,12 @@ public:
 
   static INT32 readINT32LE(const BYTE *&buf);
   static INT16 readINT16LE(const BYTE *&buf);
-  static void writeUINT8BE(BYTE *buf, UINT8 v);
-  static void writeUINT16BE(BYTE *buf, UINT16 v);
-  static void writeUINT32BE(BYTE *buf, UINT32 v);
-  static void writeUINT8LE(BYTE *buf, UINT8 v);
-  static void writeUINT16LE(BYTE *buf, UINT16 v);
-  static void writeUINT32LE(BYTE *buf, UINT32 v);
+  static void writeUINT8BE(BYTE*& buf, UINT8 v);
+  static void writeUINT16BE(BYTE*& buf, UINT16 v);
+  static void writeUINT32BE(BYTE*& buf, UINT32 v);
+  static void writeUINT8LE(BYTE*& buf, UINT8 v);
+  static void writeUINT16LE(BYTE*& buf, UINT16 v);
+  static void writeUINT32LE(BYTE*& buf, UINT32 v);
 };
 
 }

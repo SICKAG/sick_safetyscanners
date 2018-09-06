@@ -1,7 +1,7 @@
 #pragma once
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -42,6 +42,9 @@ public:
   UINT16 getRequestID() const;
   void setRequestID(const UINT16 &requestID);
 
+protected:
+    sick::cola2::Cola2Session& m_session;
+
 private:
   virtual bool processReply() = 0;
 
@@ -54,7 +57,7 @@ private:
   bool m_wasSuccessful;
 
 
-  sick::cola2::Cola2Session& m_session;
+
 
 
   UINT8 m_command_type;

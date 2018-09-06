@@ -99,6 +99,8 @@ bool Microscan3Ros::serviceCallback(std_srvs::Trigger::Request& request,
       std_srvs::Trigger::Response& response)
 {
   ROS_INFO("Received Service Call");
+
+  m_device->serviceTCP();
   response.success = true;
   return true;
 }

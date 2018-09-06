@@ -25,6 +25,8 @@
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseData.h>
 
+#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
+
 namespace sick {
 
 /*!
@@ -51,7 +53,8 @@ class Microscan3
 
     bool run();
 
- private:
+    void serviceTCP();
+private:
   PaketReceivedCallbackFunction m_newPaketReceivedCallbackFunction;
 
   boost::shared_ptr<boost::asio::io_service> m_io_service_ptr;
@@ -60,10 +63,13 @@ class Microscan3
   boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client;
   boost::scoped_ptr<boost::thread> m_udp_client_thread_ptr;
 
+  boost::shared_ptr<sick::cola2::Cola2Session> m_sessionPtr;
+
   boost::shared_ptr<sick::data_processing::UDPPaketMerger> m_paket_merger;
 
   void processUDPPaket(const datastructure::PacketBuffer &buffer);
   bool UDPClientThread();
+  void processTCPPaket(const sick::datastructure::PacketBuffer &buffer);
 };
 
 } /* namespace */
