@@ -35,6 +35,8 @@ bool CreateSession::processReply()
   std::cout << "Opening Session processin" << std::endl;
   // Packet is already parsed by base class at this point
 
+  std::cout << "Command: " << getCommandType() <<  "," << getCommandMode() << std::endl;
+
   if (getCommandType() == 'O' && getCommandMode() == 'A')
   {
     m_session.setSessionID(getSessionID());

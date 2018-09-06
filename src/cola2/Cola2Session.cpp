@@ -67,7 +67,7 @@ void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 
   if (m_packetMerger->isEmpty() || m_packetMerger->isComplete())
   {
-
+    std::cout << "target size: " << sick::data_processing::ParseTCPPacket::getExpectedPacketLength(packet) << std::endl;
     m_packetMerger->setTargetSize(sick::data_processing::ParseTCPPacket::getExpectedPacketLength(packet));
 
   }
@@ -87,7 +87,7 @@ void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 
 
 
-  UINT16 requestID = sick::data_processing::ParseTCPPacket::readRequestID(deployedPacket);
+  UINT16 requestID = sick::data_processing::ParseTCPPacket::getRequestID(deployedPacket);
   CommandPtr pendingCommand;
   if (findCommand(requestID, pendingCommand))
   {

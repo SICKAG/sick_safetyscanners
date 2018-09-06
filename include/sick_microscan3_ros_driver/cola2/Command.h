@@ -42,8 +42,11 @@ public:
   UINT16 getRequestID() const;
   void setRequestID(const UINT16 &requestID);
 
+  std::vector<BYTE> getData() const;
+  void setData(const std::vector<BYTE> &data);
+
 protected:
-    sick::cola2::Cola2Session& m_session;
+  sick::cola2::Cola2Session& m_session;
 
 private:
   virtual bool processReply() = 0;
@@ -64,6 +67,8 @@ private:
   UINT8 m_command_mode;
   UINT32 m_sessionID;
   UINT16 m_requestID;
+
+  std::vector<BYTE> m_data;
 };
 
 

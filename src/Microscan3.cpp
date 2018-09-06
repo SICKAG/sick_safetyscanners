@@ -90,6 +90,11 @@ void Microscan3::serviceTCP(){
 
    m_sessionPtr = boost::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 
+   //TODO wait for all packets to receive
+   sleep(5);
+
+   std::cout << "SessionID: " << m_sessionPtr->getSessionID() << std::endl;
+
    m_sessionPtr->close();
 
    //TODO test if mutex necessary and then remove

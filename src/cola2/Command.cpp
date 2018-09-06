@@ -30,6 +30,7 @@ void Command::processReplyBase(const datastructure::PacketBuffer::VectorBuffer &
 {
   //Parse first
   std::cout << "process reply of tcp" << std::endl;
+  sick::data_processing::ParseTCPPacket::parseTCPSequence(packet, *this);
 
   m_wasSuccessful = processReply();
 
@@ -125,6 +126,16 @@ void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &teleg
   telegram.insert(telegram.begin(), header.begin(), header.end());
 
   std::cout << "tele: " << telegram.size() << std::endl;
+}
+
+std::vector<BYTE> Command::getData() const
+{
+  return m_data;
+}
+
+void Command::setData(const std::vector<BYTE> &data)
+{
+  m_data = data;
 }
 
 }

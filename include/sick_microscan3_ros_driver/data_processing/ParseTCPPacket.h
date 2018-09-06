@@ -14,11 +14,22 @@ public:
   static datastructure::IntrusionData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
 
   static bool parseTCPSequence(datastructure::PacketBuffer buffer, cola2::Command &command);
-  static int getExpectedPacketLength(sick::datastructure::PacketBuffer buffer);
-  static UINT32 readLength(datastructure::PacketBuffer buffer);
-  static UINT16 readRequestID(datastructure::PacketBuffer buffer);
+  static int getExpectedPacketLength(datastructure::PacketBuffer buffer);
+
+  static UINT16 getRequestID(datastructure::PacketBuffer buffer);
+
 private:
   ParseTCPPacket();
+  static UINT32 readSTx(datastructure::PacketBuffer &buffer);
+  static UINT32 readLength(datastructure::PacketBuffer &buffer);
+  static UINT16 readRequestID(datastructure::PacketBuffer &buffer);
+  static UINT8 readHubCntr(datastructure::PacketBuffer &buffer);
+  static UINT8 readNoC(datastructure::PacketBuffer &buffer);
+  static UINT32 readSessionID(datastructure::PacketBuffer &buffer);
+  static UINT8 readCommandType(datastructure::PacketBuffer &buffer);
+  static UINT8 readCommandMode(datastructure::PacketBuffer &buffer);
+  static UINT16 readErrorCode(datastructure::PacketBuffer &buffer);
+  static void readData(datastructure::PacketBuffer &buffer, std::vector<BYTE> &byteVector);
 };
 
 }
