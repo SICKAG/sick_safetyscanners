@@ -10,7 +10,7 @@ namespace data_processing {
 class AbstractParseUDPSequence
 {
 public:
-  //TODO add Tempalte second argument or something similar
+  //TODO add Template second argument or something similar
   static bool parseUDPSequence(sick::datastructure::PacketBuffer buffer);
 
 private:

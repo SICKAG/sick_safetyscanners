@@ -11,6 +11,8 @@ Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient
 
   m_async_tcp_client->setPacketHandler(boost::bind(&Cola2Session::processPacket, this, _1));
 
+  m_packetMerger = boost::make_shared<sick::data_processing::TCPPaketMerger>();
+
   open();
 }
 
@@ -61,6 +63,37 @@ void Cola2Session::setSessionID(const UINT32 &sessionID)
 void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 {
   std::cout << "Processing TCP packet in Session" << std::endl;
+
+
+  if (m_packetMerger->isEmpty() || m_packetMerger->isComplete())
+  {
+
+    m_packetMerger->setTargetSize(sick::data_processing::ParseTCPPacket::getExpectedPacketLength(packet));
+
+  }
+  m_packetMerger->addTCPPacket(packet);
+
+  if (!m_packetMerger->isComplete())
+  {
+    std::cout << "Packet is not complete yet. Trying to receive more data." << std::endl;
+    m_async_tcp_client->initiateReceive();
+    return;
+  }
+
+  std::cout << "Packet is complete now" << std::endl;
+
+  // Now get the merged packet
+  sick::datastructure::PacketBuffer deployedPacket = m_packetMerger->getDeployedPacketBuffer();
+
+
+
+  UINT16 requestID = sick::data_processing::ParseTCPPacket::readRequestID(deployedPacket);
+  CommandPtr pendingCommand;
+  if (findCommand(requestID, pendingCommand))
+  {
+    pendingCommand->processReplyBase(deployedPacket.getBuffer());
+    removeCommand(requestID);
+  }
 
 
 }

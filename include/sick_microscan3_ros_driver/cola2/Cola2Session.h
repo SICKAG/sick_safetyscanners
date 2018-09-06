@@ -9,6 +9,9 @@
 #include <sick_microscan3_ros_driver/cola2/CreateSession.h>
 #include <sick_microscan3_ros_driver/cola2/CloseSession.h>
 
+#include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>
+#include <sick_microscan3_ros_driver/data_processing/TCPPacketMerger.h>
+
 #include <boost/bind.hpp>
 
 namespace sick {
@@ -41,6 +44,8 @@ private:
 
 
   boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client;
+  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser;
+  boost::shared_ptr<sick::data_processing::TCPPaketMerger> m_packetMerger;
 
   std::map<UINT16, CommandPtr> m_pending_commands;
 

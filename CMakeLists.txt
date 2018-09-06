@@ -80,6 +80,8 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseIntrusionData.cpp
   src/data_processing/ParseApplicationData.cpp
   src/data_processing/ReadWriteHelper.cpp
+  src/data_processing/TCPPacketMerger.cpp
+  src/data_processing/ParseTCPPacket.cpp
   src/cola2/Cola2Session.cpp
   src/cola2/Command.cpp
   src/cola2/CreateSession.cpp

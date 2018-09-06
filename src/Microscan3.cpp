@@ -92,6 +92,8 @@ void Microscan3::serviceTCP(){
 
    m_sessionPtr->close();
 
+   //TODO test if mutex necessary and then remove
+   //Need to wait for last response to shutdown
    sleep(2);
 
    m_sessionPtr.reset();
