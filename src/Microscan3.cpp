@@ -94,7 +94,7 @@ void Microscan3::serviceTCP(){
    sleep(5);
 
    sick::cola2::Cola2Session::CommandPtr commandPtr =
-           boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_sessionPtr));
+           boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_sessionPtr), boost::asio::ip::address_v4::from_string("192.168.1.9"));
    m_sessionPtr->executeCommand(commandPtr);
    //TODO wait for all packets to receive
    sleep(5);

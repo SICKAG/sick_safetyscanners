@@ -18,7 +18,7 @@ void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuf
   UINT16 prevSize = telegram.size();
   telegram.resize(prevSize + 2);
   BYTE* dataPtr = telegram.data() + prevSize;
-  sick::data_processing::ReadWriteHelper::writeUINT16BE(dataPtr, m_method_index);
+  sick::data_processing::ReadWriteHelper::writeUINT16LE(dataPtr, m_method_index);
 
 }
 
