@@ -26,6 +26,7 @@
 #include <sick_microscan3_ros_driver/data_processing/ParseData.h>
 
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
+#include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
 
 namespace sick {
 

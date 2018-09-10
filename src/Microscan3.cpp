@@ -93,6 +93,12 @@ void Microscan3::serviceTCP(){
    //TODO wait for all packets to receive
    sleep(5);
 
+   sick::cola2::Cola2Session::CommandPtr commandPtr =
+           boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_sessionPtr));
+   m_sessionPtr->executeCommand(commandPtr);
+   //TODO wait for all packets to receive
+   sleep(5);
+
    std::cout << "SessionID: " << m_sessionPtr->getSessionID() << std::endl;
 
    m_sessionPtr->close();

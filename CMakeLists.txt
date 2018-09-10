@@ -86,6 +86,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/Command.cpp
   src/cola2/CreateSession.cpp
   src/cola2/CloseSession.cpp
+  src/cola2/MethodCommand.cpp
   src/cola2/ChangeCommSettingsCommand.cpp
 )
 
