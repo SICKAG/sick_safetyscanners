@@ -60,11 +60,6 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
   }
 
   std::cout  << "measurement data size: " << measurement_data.getScanPointsVector().size() << std::endl;
-
-//  std::cout  << "measurement data at 10: " << measurement_data.getScanPoints().at(714).getDistance() << std::endl;
-//  std::cout  << "measurement data at 10: " << measurement_data.getScanPoints().at(714).getAngle() << std::endl;
-//  std::cout  << "measurement data at 10: " << measurement_data.getScanPoints().at(714).getValidBit() << std::endl;
-
   return measurement_data;
 }
 

@@ -25,21 +25,23 @@ UINT16 ParseTCPPacket::getRequestID(datastructure::PacketBuffer buffer)
 
 bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer, sick::cola2::Command &command)
 {
-  //TODO
-
   std::cout << "Beginn Parsing TCP Sequence Data" << std::endl;
 
-
-  command.setSessionID(readSessionID(buffer));
-  command.setRequestID(readRequestID(buffer));
-  command.setCommandType(readCommandType(buffer));
-  command.setCommandMode(readCommandMode(buffer));
+  setCommandValuesFromPacket(buffer, command);
 
   std::vector<BYTE> byteVector;
   readData(buffer, byteVector);
   command.setDataVector(byteVector);
 
   return true;
+}
+
+bool ParseTCPPacket::setCommandValuesFromPacket(sick::datastructure::PacketBuffer &buffer,  sick::cola2::Command &command)
+{
+  command.setSessionID(readSessionID(buffer));
+  command.setRequestID(readRequestID(buffer));
+  command.setCommandType(readCommandType(buffer));
+  command.setCommandMode(readCommandMode(buffer));
 }
 
 UINT32 ParseTCPPacket::readSTx(datastructure::PacketBuffer &buffer)

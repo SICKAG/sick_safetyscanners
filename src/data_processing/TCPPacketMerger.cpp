@@ -34,11 +34,7 @@ bool TCPPaketMerger::addTCPPacket(sick::datastructure::PacketBuffer buffer)
   }
 
   addToMap(buffer);
-  //add to map
-
-  //check if complete
   deployPacketIfComplete();
-
   return isComplete();
 
 
@@ -60,6 +56,7 @@ bool TCPPaketMerger::addToMap(sick::datastructure::PacketBuffer newPacket)
 
 bool TCPPaketMerger::deployPacketIfComplete()
 {
+  //TODO
   if(isComplete()) {
 
 
@@ -78,14 +75,8 @@ bool TCPPaketMerger::deployPacketIfComplete()
     m_deployed_paket_buffer.setBuffer(headerless_packet_buffer);
     m_buffer_vector.clear();
 
-
-
-
-
     return true;
-
   }
-
   return false;
 
 }
@@ -111,8 +102,6 @@ UINT32 TCPPaketMerger::getCurrentSize() const
   }
   return static_cast<UINT32>(sum);
 }
-
-
 
 }
 }

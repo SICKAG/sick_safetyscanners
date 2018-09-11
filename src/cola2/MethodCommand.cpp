@@ -36,6 +36,7 @@ bool MethodCommand::processReply()
   }
   else
   {
+    std::cout << "Command Method Not Accepted " << std::endl;
     return false;
   }
 }
