@@ -21,6 +21,17 @@ private:
 
   boost::asio::ip::address m_ip_address;
 
+  BYTE *getDataPtr(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  bool writeDataToDataPtr(BYTE *&data_ptr) const;
+  bool writeChannelToDataPtr(BYTE *&data_ptr) const;
+  bool writeEnabledToDataPtr(BYTE *&data_ptr) const;
+  bool writeEInterfaceTypeToDataPtr(BYTE *&data_ptr) const;
+  bool writeIPAdresstoDataPtr(BYTE *&data_ptr) const;
+  bool writePortToDataPtr(BYTE *&data_ptr) const;
+  bool writeFrequencyToDataPtr(BYTE *&data_ptr) const;
+  bool writeStartAngleToDataPtr(BYTE *&data_ptr) const;
+  bool writeEndAngleToDataPtr(BYTE *&data_ptr) const;
+  bool writeFeaturesToDataPtr(BYTE *&data_ptr) const;
 };
 
 }
