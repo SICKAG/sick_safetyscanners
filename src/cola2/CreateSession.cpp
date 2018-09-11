@@ -20,10 +20,10 @@ void CreateSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuf
   telegram.resize(prevSize + 5);
   BYTE* data_ptr = telegram.data() + prevSize;
   UINT8 heartBeatTimeoutSeconds = 60;
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, heartBeatTimeoutSeconds);
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, heartBeatTimeoutSeconds, 0);
   //  memwrite<UINT8>(data_ptr, heartBeatTimeoutSeconds);
   UINT32 clientID = 12345; // some random number
-  m_writer_ptr->writeUINT32BigEndian(data_ptr,clientID);
+  m_writer_ptr->writeUINT32BigEndian(data_ptr,clientID,1);
 //  memwrite<UINT32>(data_ptr, clientID);
 }
 

@@ -22,7 +22,7 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
 
   datastructure::MeasurementData measurement_data;
 
-  measurement_data.setNumberOfBeams(m_reader_ptr->readUINT32LittleEndian(data_ptr));
+  measurement_data.setNumberOfBeams(m_reader_ptr->readUINT32LittleEndian(data_ptr,0));
   std::cout << "NumberOfBeams: " << measurement_data.getNumberOfBeams() << std::endl;
 
   float angle = data.getDerivedValuesPtr()->getStartAngle();
@@ -31,11 +31,11 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
 
   for (int i = 0; i < measurement_data.getNumberOfBeams(); i++)
   {
-    INT16 distance = m_reader_ptr->readUINT16LittleEndian(data_ptr);
+    INT16 distance = m_reader_ptr->readUINT16LittleEndian(data_ptr, (4 + i * 4));
 
-    UINT8 reflectivity = m_reader_ptr->readUINT8LittleEndian(data_ptr);
+    UINT8 reflectivity = m_reader_ptr->readUINT8LittleEndian(data_ptr, (6 + i *4) );
 
-    UINT8 status = m_reader_ptr->readUINT8LittleEndian(data_ptr);
+    UINT8 status = m_reader_ptr->readUINT8LittleEndian(data_ptr, (7+i*4));
 
 
     //TODO

@@ -24,19 +24,19 @@ void ChangeCommSettingsCommand::addTelegramData(sick::datastructure::PacketBuffe
   UINT16 prevSize = telegram.size();
   telegram.resize(prevSize + 28);
   BYTE* data_ptr = telegram.data() + prevSize;
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x00); //Channel
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x00); //reserved
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x0000); //reserved
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x01); //enabled
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x00); //eInterfaceType
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x0000); //reserved
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_ip_address.to_v4().to_ulong());
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 6060); //port
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 1); //frequency
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, 0x0000); //start angle 0 for all
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, 0x0000); //end_angle 0 for all
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x001F); //Features
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x0000); //reserved
+  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x00, 0); //Channel
+  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x00, 1); //reserved
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x0000, 2); //reserved
+  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x01,4); //enabled
+  m_writer_ptr->writeUINT8LittleEndian(data_ptr, 0x00,5); //eInterfaceType
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x0000,6); //reserved
+  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_ip_address.to_v4().to_ulong(),8);
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 6060,12); //port
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 1,14); //frequency
+  m_writer_ptr->writeUINT32LittleEndian(data_ptr, 0x0000,16); //start angle 0 for all
+  m_writer_ptr->writeUINT32LittleEndian(data_ptr, 0x0000,20); //end_angle 0 for all
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x001F,24); //Features
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, 0x0000,26); //reserved
 }
 
 bool ChangeCommSettingsCommand::canBeExecutedWithoutSessionID() const

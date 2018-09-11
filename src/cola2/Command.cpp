@@ -118,15 +118,15 @@ void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &teleg
   BYTE* data_ptr = header.data();
 
 
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, cola2_STx);
+  m_writer_ptr->writeUINT32BigEndian(data_ptr, cola2_STx, 0);
 //  m_writer_ptr->writeUINT32BE(data_ptr, 0x00000000);
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, length);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_HubCntr);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_NoC);
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, sessionID);
-  m_writer_ptr->writeUINT16BigEndian(data_ptr, requestID);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, commandType);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, commandMode);
+  m_writer_ptr->writeUINT32BigEndian(data_ptr, length, 4);
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_HubCntr, 8);
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_NoC, 9);
+  m_writer_ptr->writeUINT32BigEndian(data_ptr, sessionID,  10);
+  m_writer_ptr->writeUINT16BigEndian(data_ptr, requestID,14);
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, commandType,16);
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, commandMode,17);
   telegram.insert(telegram.begin(), header.begin(), header.end());
 
   std::cout << "tele: " << telegram.size() << std::endl;
