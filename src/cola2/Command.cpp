@@ -13,7 +13,6 @@ Command::Command(Cola2Session &session, UINT16 command_type, UINT16 command_mode
 {
   m_session_id = m_session.getSessionID();
   m_request_id = m_session.getNextRequestID();
-
   m_tcp_parser_ptr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
   m_writer_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 
@@ -32,12 +31,8 @@ void Command::constructTelegram(datastructure::PacketBuffer::VectorBuffer &teleg
 
 void Command::processReplyBase(const datastructure::PacketBuffer::VectorBuffer &packet)
 {
-  //Parse first
-  std::cout << "process reply of tcp" << std::endl;
   m_tcp_parser_ptr->parseTCPSequence(packet, *this);
-
   m_was_successful = processReply();
-
   m_execution_mutex.unlock();
 }
 
@@ -90,46 +85,17 @@ void Command::setRequestID(const UINT16 &request_id)
 
 void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &telegram) const
 {
-  //TODO
-
-  datastructure::PacketBuffer::VectorBuffer header;
-  UINT32 cola2_STx =0x02020202; //= m_parser->getDefaultSTx();
-  UINT8 cola2_HubCntr = 0x00; // See Application Note Using Cola2.x, 3.2
-  UINT8 cola2_NoC = 0x00; // See Application Note Using Cola2.x, 3.2
-  UINT32 sessionID = getSessionID();
-  UINT16 requestID = getRequestID();
-  UINT8 commandType = getCommandType();
-  UINT8 commandMode = getCommandMode();
-  UINT32 length = sizeof(cola2_HubCntr)
-          + sizeof(cola2_NoC)
-          + sizeof(sessionID)
-          + sizeof(requestID)
-          + sizeof(commandType)
-          + sizeof(commandMode)
-          + telegram.size();
-  UINT32 telegramSize = sizeof(cola2_STx)
-              + sizeof(length)
-              + length;
-  header.resize(telegramSize - telegram.size());
-
-  std::cout << "header_size" << header.size() << std::endl;
-  std::cout << "data_size" << telegram.size() << std::endl;
-
+  datastructure::PacketBuffer::VectorBuffer header = prepareHeader();
   BYTE* data_ptr = header.data();
-
-
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, cola2_STx, 0);
-//  m_writer_ptr->writeUINT32BE(data_ptr, 0x00000000);
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, length, 4);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_HubCntr, 8);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_NoC, 9);
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, sessionID,  10);
-  m_writer_ptr->writeUINT16BigEndian(data_ptr, requestID,14);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, commandType,16);
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, commandMode,17);
+  writeDataToDataPtr(data_ptr, telegram);
   telegram.insert(telegram.begin(), header.begin(), header.end());
+}
 
-  std::cout << "tele: " << telegram.size() << std::endl;
+sick::datastructure::PacketBuffer::VectorBuffer Command::prepareHeader()  const
+{
+  datastructure::PacketBuffer::VectorBuffer header;
+  header.resize(18);
+  return header;
 }
 
 std::vector<BYTE> Command::getDataVector() const
@@ -140,6 +106,62 @@ std::vector<BYTE> Command::getDataVector() const
 void Command::setDataVector(const std::vector<BYTE> &data)
 {
   m_data_vector = data;
+}
+
+bool Command::writeDataToDataPtr(BYTE*& data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const
+{
+  writeCola2StxToDataPtr(data_ptr);
+  writeLengthToDataPtr(data_ptr, telegram);
+  writeCola2HubCntrToDataPtr(data_ptr);
+  writeCola2NoCToDataPtr(data_ptr);
+  writeSessionIdToDataPtr(data_ptr);
+  writeRequestIdToDataPtr(data_ptr);
+  writeCommandTypeToDataPtr(data_ptr);
+  writeCommandModeToDataPtr(data_ptr);
+}
+
+bool Command::writeCola2StxToDataPtr(BYTE*& data_ptr) const
+{
+  UINT32 cola2_stx = 0x02020202;
+  m_writer_ptr->writeUINT32BigEndian(data_ptr, cola2_stx, 0);
+}
+
+bool Command::writeLengthToDataPtr(BYTE*& data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const
+{
+  UINT32 length = 10 + telegram.size();
+  m_writer_ptr->writeUINT32BigEndian(data_ptr, length, 4);
+}
+
+bool Command::writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const
+{
+  UINT8 cola2_hub_cntr = 0x00;
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_hub_cntr, 8);
+}
+
+bool Command::writeCola2NoCToDataPtr(BYTE*& data_ptr) const
+{
+  UINT8 cola2_noc = 0x00;
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_noc, 9);
+}
+
+bool Command::writeSessionIdToDataPtr(BYTE*& data_ptr) const
+{
+  m_writer_ptr->writeUINT32BigEndian(data_ptr, getSessionID(),  10);
+}
+
+bool Command::writeRequestIdToDataPtr(BYTE*& data_ptr) const
+{
+  m_writer_ptr->writeUINT16BigEndian(data_ptr, getRequestID(),14);
+}
+
+bool Command::writeCommandTypeToDataPtr(BYTE*& data_ptr) const
+{
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandType(),16);
+}
+
+bool Command::writeCommandModeToDataPtr(BYTE*& data_ptr) const
+{
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandMode(),17);
 }
 
 }

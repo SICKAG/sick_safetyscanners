@@ -74,6 +74,16 @@ private:
   UINT16 m_request_id;
 
   std::vector<BYTE> m_data_vector;
+  sick::datastructure::PacketBuffer::VectorBuffer prepareHeader() const;
+  bool writeCola2StxToDataPtr(BYTE *&data_ptr) const;
+  bool writeLengthToDataPtr(BYTE *&data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  bool writeCola2HubCntrToDataPtr(BYTE *&data_ptr) const;
+  bool writeCola2NoCToDataPtr(BYTE *&data_ptr) const;
+  bool writeSessionIdToDataPtr(BYTE *&data_ptr) const;
+  bool writeRequestIdToDataPtr(BYTE *&data_ptr) const;
+  bool writeCommandTypeToDataPtr(BYTE *&data_ptr) const;
+  bool writeCommandModeToDataPtr(BYTE *&data_ptr) const;
+  bool writeDataToDataPtr(BYTE *&data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const;
 };
 
 

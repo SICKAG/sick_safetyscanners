@@ -11,6 +11,8 @@ ParseApplicationData::ParseApplicationData()
 //TODO class with both in and outputs
 datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
+
+  //TODO
   std::cout << "Beginn Parsing ParseApplicationData" << std::endl;
 
   //TODO sanity checks

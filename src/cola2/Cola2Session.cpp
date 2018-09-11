@@ -10,9 +10,7 @@ Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient
 {
 
   m_async_tcp_client_ptr->setPacketHandler(boost::bind(&Cola2Session::processPacket, this, _1));
-
   m_packet_merger_ptr = boost::make_shared<sick::data_processing::TCPPaketMerger>();
-
   m_tcp_parser_ptr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
 
 }
@@ -34,23 +32,19 @@ bool Cola2Session::close()
 bool Cola2Session::executeCommand(CommandPtr command)
 {
   //TODO sanitize
-
   std::cout << "execute command" << std::endl;
-
   addCommand(command->getRequestID(), command);
+  sendTelegramAndListenForAnswer(command);
+  return true;
+}
 
-  // Lock the mutex here, unlock the mutex after processing the received packet
-  command->lockExecutionMutex();
+bool Cola2Session::sendTelegramAndListenForAnswer(CommandPtr command)
+{
+  command->lockExecutionMutex(); //lock
   sick::datastructure::PacketBuffer::VectorBuffer telegram;
   command->constructTelegram(telegram);
-  std::cout << telegram.size() << std::endl;
   m_async_tcp_client_ptr->doSendAndReceive(telegram);
-  command->waitForCompletion();
-
-
-
-
-  return true;
+  command->waitForCompletion(); //scooped locked to wait, unlocked on data processing
 }
 
 
@@ -68,39 +62,44 @@ void Cola2Session::setSessionID(const UINT32 &session_id)
 void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 {
   std::cout << "Processing TCP packet in Session" << std::endl;
+  addPacketToMerger(packet);
+  if (!checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()) return;
+  sick::datastructure::PacketBuffer deployedPacket = m_packet_merger_ptr->getDeployedPacketBuffer();
+  startProcessingAndRemovePendingCommandAfterwards(deployedPacket);
 
+}
 
+bool Cola2Session::addPacketToMerger(const sick::datastructure::PacketBuffer &packet)
+{
   if (m_packet_merger_ptr->isEmpty() || m_packet_merger_ptr->isComplete())
   {
     std::cout << "target size: " << m_tcp_parser_ptr->getExpectedPacketLength(packet) << std::endl;
     m_packet_merger_ptr->setTargetSize(m_tcp_parser_ptr->getExpectedPacketLength(packet));
-
   }
   m_packet_merger_ptr->addTCPPacket(packet);
+  return true;
+}
 
+bool Cola2Session::checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()
+{
   if (!m_packet_merger_ptr->isComplete())
   {
-    std::cout << "Packet is not complete yet. Trying to receive more data." << std::endl;
     m_async_tcp_client_ptr->initiateReceive();
-    return;
+    return false;
   }
-
-  std::cout << "Packet is complete now" << std::endl;
-
-  // Now get the merged packet
-  sick::datastructure::PacketBuffer deployedPacket = m_packet_merger_ptr->getDeployedPacketBuffer();
+  return true;
+}
 
 
-
-  UINT16 requestID = m_tcp_parser_ptr->getRequestID(deployedPacket);
+bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(sick::datastructure::PacketBuffer &packet)
+{
+  UINT16 requestID = m_tcp_parser_ptr->getRequestID(packet);
   CommandPtr pendingCommand;
   if (findCommand(requestID, pendingCommand))
   {
-    pendingCommand->processReplyBase(deployedPacket.getBuffer());
+    pendingCommand->processReplyBase(packet.getBuffer());
     removeCommand(requestID);
   }
-
-
 }
 
 bool Cola2Session::addCommand(UINT16 request_id, CommandPtr command)
@@ -133,7 +132,6 @@ bool Cola2Session::removeCommand(UINT16 request_id)
   }
   m_pending_commands_map.erase(it);
   return true;
-
 }
 
 UINT16 Cola2Session::getNextRequestID()
@@ -142,7 +140,6 @@ UINT16 Cola2Session::getNextRequestID()
   {
     m_last_request_id = 0;
   }
-
   return ++m_last_request_id;
 }
 

@@ -58,6 +58,10 @@ private:
   UINT32 m_session_id;
   UINT16 m_last_request_id;
 
+  bool startProcessingAndRemovePendingCommandAfterwards(sick::datastructure::PacketBuffer &packet);
+  bool addPacketToMerger(const sick::datastructure::PacketBuffer &packet);
+  bool checkIfPacketIsCompleteAndOtherwiseListenForMorePackets();
+  bool sendTelegramAndListenForAnswer(CommandPtr command);
 };
 
 

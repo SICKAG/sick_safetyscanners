@@ -16,7 +16,7 @@
 
 namespace sick {
 
-
+//TODO publish PointCLoud2 as well?
 
 Microscan3Ros::Microscan3Ros()
     : m_nh()
@@ -27,6 +27,7 @@ Microscan3Ros::Microscan3Ros()
     ros::requestShutdown();
   }
 
+  //TODO
 
    m_device = boost::make_shared<sick::Microscan3>(boost::bind(&Microscan3Ros::receivedUDPPaket, this, _1));
    m_device->run();
@@ -63,6 +64,7 @@ bool Microscan3Ros::readParameters()
 
 void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
 {
+  //TODO
   ROS_INFO("Received UDP Paket");
 
   sensor_msgs::LaserScan scan;

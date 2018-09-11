@@ -24,6 +24,7 @@ sick::datastructure::PacketBuffer UDPPaketMerger::getDeployedPacketBuffer()
 
 bool UDPPaketMerger::addUDPPaket(sick::datastructure::PacketBuffer buffer)
 {
+  //TODO
   if(isComplete()) {
       m_is_complete = false;
   }
@@ -47,6 +48,8 @@ bool UDPPaketMerger::addUDPPaket(sick::datastructure::PacketBuffer buffer)
 
 bool UDPPaketMerger::addToMap(sick::datastructure::PacketBuffer buffer, sick::datastructure::DatagramHeader header)
 {
+
+  //TODO
   sick::datastructure::ParsedPacketBuffer parsed_packet_buffer(buffer,header);
 
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
@@ -65,6 +68,7 @@ bool UDPPaketMerger::addToMap(sick::datastructure::PacketBuffer buffer, sick::da
 
 bool UDPPaketMerger::deployPacketIfComplete(sick::datastructure::DatagramHeader header)
 {
+  //TODO
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
 
   if (it != m_parsed_packet_buffer_map.end()) {

@@ -8,6 +8,8 @@ namespace communication {
                 m_io_service(io_service),
                 m_packet_handler(packet_handler)
 	{
+
+    //TODO
           // Keep io_service busy so that call to io_service-> run does not return imediatly
           m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
           try

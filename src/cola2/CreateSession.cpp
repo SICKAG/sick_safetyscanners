@@ -57,7 +57,7 @@ bool CreateSession::writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const
 
 bool CreateSession::writeClientIdToDataPtr(BYTE*& data_ptr) const
 {
-  UINT32 clientID = 12345; // some random number
+  UINT32 clientID = 1; // some random number
   m_writer_ptr->writeUINT32BigEndian(data_ptr,clientID,1);
 }
 

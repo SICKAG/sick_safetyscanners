@@ -29,11 +29,6 @@ bool MethodCommand::canBeExecutedWithoutSessionID() const
 
 bool MethodCommand::processReply()
 {
-  std::cout << "Process Command Method processin" << std::endl;
-  // Packet is already parsed by base class at this point
-
-  std::cout << "Command: " << getCommandType() <<  "," << getCommandMode() << std::endl;
-
   if (getCommandType() == 'A' && getCommandMode() == 'I') // should return MA? But does return AI
   {
     std::cout << "Command Method Acknowledged" << std::endl;

@@ -46,7 +46,7 @@ float DerivedValues::getStartAngle() const
 
 void DerivedValues::setStartAngle(const INT32 &start_angle)
 {
-  m_start_angle = (float) start_angle / 4194304.0;
+  m_start_angle = (float) start_angle / 4194304.0; //TODO
 }
 
 float DerivedValues::getAngularBeamResolution() const
@@ -56,7 +56,7 @@ float DerivedValues::getAngularBeamResolution() const
 
 void DerivedValues::setAngularBeamResolution(const INT32 &angular_beam_resolution)
 {
-  m_angular_beam_resolution = (float) angular_beam_resolution / 4194304.0;
+  m_angular_beam_resolution = (float) angular_beam_resolution / 4194304.0; //TODO
 }
 
 UINT32 DerivedValues::getInterbeamPeriod() const

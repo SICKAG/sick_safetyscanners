@@ -11,6 +11,8 @@ ParseMeasurementData::ParseMeasurementData()
 
 datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
+  //TODO
+
   std::cout << "Beginn Parsing Header" << std::endl;
 
   //TODO sanity checks

@@ -11,6 +11,8 @@ ParseGeneralSystemState::ParseGeneralSystemState()
 
 datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
+  //TODO
+
   std::cout << "Beginn Parsing General System State" << std::endl;
 
   //TODO sanity checks and finalize the division for the angles
