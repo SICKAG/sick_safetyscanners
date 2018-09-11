@@ -21,7 +21,7 @@ private:
 
   boost::asio::ip::address m_ip_address;
 
-  BYTE *getDataPtr(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  BYTE *prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
   bool writeDataToDataPtr(BYTE *&data_ptr) const;
   bool writeChannelToDataPtr(BYTE *&data_ptr) const;
   bool writeEnabledToDataPtr(BYTE *&data_ptr) const;

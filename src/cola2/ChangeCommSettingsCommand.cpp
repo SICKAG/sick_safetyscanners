@@ -18,13 +18,13 @@ void ChangeCommSettingsCommand::addTelegramData(sick::datastructure::PacketBuffe
 {
   base_class::addTelegramData(telegram);
 
-  BYTE* data_ptr = getDataPtr(telegram);
+  BYTE* data_ptr = prepareTelegramAndGetDataPtr(telegram);
 
   writeDataToDataPtr(data_ptr);
 
 }
 
-BYTE* ChangeCommSettingsCommand::getDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram)  const
+BYTE* ChangeCommSettingsCommand::prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram)  const
 {
   UINT16 prevSize = telegram.size();
   telegram.resize(prevSize + 28);

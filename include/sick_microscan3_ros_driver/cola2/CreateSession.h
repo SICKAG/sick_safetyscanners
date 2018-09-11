@@ -17,6 +17,9 @@ public:
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
+  BYTE *prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  bool writeHeartbeatTimeoutToDataPtr(BYTE *&data_ptr) const;
+  bool writeClientIdToDataPtr(BYTE *&data_ptr) const;
 };
 
 }

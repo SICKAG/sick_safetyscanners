@@ -23,11 +23,6 @@ bool CloseSession::canBeExecutedWithoutSessionID() const
 
 bool CloseSession::processReply()
 {
-  std::cout << "Closing Session processin" << std::endl;
-  // Packet is already parsed by base class at this point
-
-  std::cout << "Command: " << getCommandType() << "," << getCommandMode() << std::endl;
-
   if (getCommandType() == 'C' && getCommandMode() == 'A')
   {
     m_session.setSessionID(getSessionID());
@@ -37,6 +32,8 @@ bool CloseSession::processReply()
   }
   else
   {
+    std::cout << "Could not close Cola2 session with sessionID: "
+            << std::hex << m_session.getSessionID() << std::endl;
     return false;
   }
 }

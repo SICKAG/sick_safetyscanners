@@ -16,15 +16,16 @@ CreateSession::CreateSession(Cola2Session &session)
 
 void CreateSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
+  BYTE* data_ptr = prepareTelegramAndGetDataPtr(telegram);
+  writeHeartbeatTimeoutToDataPtr(data_ptr);
+  writeClientIdToDataPtr(data_ptr);
+}
+
+BYTE* CreateSession::prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram)  const
+{
   UINT16 prevSize = telegram.size();
   telegram.resize(prevSize + 5);
-  BYTE* data_ptr = telegram.data() + prevSize;
-  UINT8 heartBeatTimeoutSeconds = 60;
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, heartBeatTimeoutSeconds, 0);
-  //  memwrite<UINT8>(data_ptr, heartBeatTimeoutSeconds);
-  UINT32 clientID = 12345; // some random number
-  m_writer_ptr->writeUINT32BigEndian(data_ptr,clientID,1);
-//  memwrite<UINT32>(data_ptr, clientID);
+  return telegram.data() + prevSize;
 }
 
 bool CreateSession::canBeExecutedWithoutSessionID() const
@@ -34,11 +35,6 @@ bool CreateSession::canBeExecutedWithoutSessionID() const
 
 bool CreateSession::processReply()
 {
-  std::cout << "Opening Session processin" << std::endl;
-  // Packet is already parsed by base class at this point
-
-  std::cout << "Command: " << getCommandType() <<  "," << getCommandMode() << std::endl;
-
   if (getCommandType() == 'O' && getCommandMode() == 'A')
   {
     m_session.setSessionID(getSessionID());
@@ -48,8 +44,21 @@ bool CreateSession::processReply()
   }
   else
   {
+    std::cout << "Could not open Cola2 session"<< std::endl;
     return false;
   }
+}
+
+bool CreateSession::writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const
+{
+  UINT8 heartBeatTimeoutSeconds = 60;
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, heartBeatTimeoutSeconds, 0);
+}
+
+bool CreateSession::writeClientIdToDataPtr(BYTE*& data_ptr) const
+{
+  UINT32 clientID = 12345; // some random number
+  m_writer_ptr->writeUINT32BigEndian(data_ptr,clientID,1);
 }
 
 }

@@ -86,22 +86,16 @@ void Microscan3::serviceTCP(){
 
    m_session_ptr = boost::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 
-   //TODO wait for all packets to receive
-   sleep(5);
+   m_session_ptr->open();
 
    sick::cola2::Cola2Session::CommandPtr command_ptr =
            boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr), boost::asio::ip::address_v4::from_string("192.168.1.9"));
    m_session_ptr->executeCommand(command_ptr);
-   //TODO wait for all packets to receive
-   sleep(5);
+
 
    std::cout << "SessionID: " << m_session_ptr->getSessionID() << std::endl;
 
    m_session_ptr->close();
-
-   //TODO test if mutex necessary and then remove
-   //Need to wait for last response to shutdown
-   sleep(2);
 
    m_session_ptr.reset();
 }

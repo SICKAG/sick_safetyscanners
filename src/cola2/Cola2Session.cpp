@@ -15,7 +15,6 @@ Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient
 
   m_tcp_parser_ptr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
 
-  open();
 }
 
 bool Cola2Session::open()
@@ -49,8 +48,12 @@ bool Cola2Session::executeCommand(CommandPtr command)
   command->waitForCompletion();
 
 
+
+
   return true;
 }
+
+
 
 UINT32 Cola2Session::getSessionID() const
 {
@@ -128,7 +131,6 @@ bool Cola2Session::removeCommand(UINT16 request_id)
   {
     return false;
   }
-
   m_pending_commands_map.erase(it);
   return true;
 

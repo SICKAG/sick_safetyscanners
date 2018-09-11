@@ -35,6 +35,8 @@ public:
   UINT16 getNextRequestID();
 
   bool close();
+  bool open();
+  void waitForCompletion();
 private:
   void processPacket(const sick::datastructure::PacketBuffer& packet);
 
@@ -50,9 +52,12 @@ private:
 
   std::map<UINT16, CommandPtr> m_pending_commands_map;
 
+  boost::mutex m_execution_mutex;
+
+
   UINT32 m_session_id;
   UINT16 m_last_request_id;
-  bool open();
+
 };
 
 

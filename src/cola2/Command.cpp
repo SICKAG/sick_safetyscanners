@@ -21,7 +21,7 @@ Command::Command(Cola2Session &session, UINT16 command_type, UINT16 command_mode
 
 void Command::lockExecutionMutex()
 {
-  //m_executionMutex.lock();
+  m_execution_mutex.lock();
 }
 
 void Command::constructTelegram(datastructure::PacketBuffer::VectorBuffer &telegram) const
@@ -38,13 +38,12 @@ void Command::processReplyBase(const datastructure::PacketBuffer::VectorBuffer &
 
   m_was_successful = processReply();
 
- // m_executionMutex.unlock();
+  m_execution_mutex.unlock();
 }
 
 void Command::waitForCompletion()
 {
-  // boost::mutex::scoped_lock(m_executionMutex);
-
+  boost::mutex::scoped_lock lock(m_execution_mutex);
 }
 
 bool Command::wasSuccessful() const {return m_was_successful;}
@@ -91,6 +90,7 @@ void Command::setRequestID(const UINT16 &request_id)
 
 void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &telegram) const
 {
+  //TODO
 
   datastructure::PacketBuffer::VectorBuffer header;
   UINT32 cola2_STx =0x02020202; //= m_parser->getDefaultSTx();
