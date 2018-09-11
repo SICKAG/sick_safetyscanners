@@ -22,7 +22,7 @@ public:
   bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::Data& data);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 };
 
 }

@@ -7,7 +7,7 @@ namespace data_processing {
 
 ParseTCPPacket::ParseTCPPacket()
 {
-  m_readerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 
 }
 
@@ -35,59 +35,59 @@ bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer, sick::
 
   std::vector<BYTE> byteVector;
   readData(buffer, byteVector);
-  command.setData(byteVector);
+  command.setDataVector(byteVector);
 
   return true;
 }
 
 UINT32 ParseTCPPacket::readSTx(datastructure::PacketBuffer &buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data());
-  return m_readerPtr->readUINT32BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readUINT32BigEndian(data_ptr);
 }
 
 UINT32 ParseTCPPacket::readLength(datastructure::PacketBuffer &buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 4);
-  return m_readerPtr->readUINT32BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 4);
+  return m_reader_ptr->readUINT32BigEndian(data_ptr);
 }
 
 UINT8 ParseTCPPacket::readHubCntr(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 8);
-  return m_readerPtr->readUINT8BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 8);
+  return m_reader_ptr->readUINT8BigEndian(data_ptr);
 }
 UINT8 ParseTCPPacket::readNoC(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 9);
-  return m_readerPtr->readUINT8BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 9);
+  return m_reader_ptr->readUINT8BigEndian(data_ptr);
 }
 UINT32 ParseTCPPacket::readSessionID(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 10);
-  return m_readerPtr->readUINT32BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 10);
+  return m_reader_ptr->readUINT32BigEndian(data_ptr);
 }
 
 UINT16 ParseTCPPacket::readRequestID(datastructure::PacketBuffer &buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 14);
-  return m_readerPtr->readUINT16BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 14);
+  return m_reader_ptr->readUINT16BigEndian(data_ptr);
 }
 
 UINT8 ParseTCPPacket::readCommandType(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 16);
-  return m_readerPtr->readUINT8BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 16);
+  return m_reader_ptr->readUINT8BigEndian(data_ptr);
 }
 UINT8 ParseTCPPacket::readCommandMode(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 17);
-  return m_readerPtr->readUINT8BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 17);
+  return m_reader_ptr->readUINT8BigEndian(data_ptr);
 }
 UINT16 ParseTCPPacket::readErrorCode(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* dataPtr(buffer.getBuffer().data() + 18);
-  return m_readerPtr->readUINT16BE(dataPtr);
+  const BYTE* data_ptr(buffer.getBuffer().data() + 18);
+  return m_reader_ptr->readUINT16BigEndian(data_ptr);
 }
 
 void ParseTCPPacket::readData(datastructure::PacketBuffer& buffer, std::vector<BYTE>& byteVector)

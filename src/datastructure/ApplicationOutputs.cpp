@@ -8,54 +8,54 @@ ApplicationOutputs::ApplicationOutputs()
 
 }
 
-std::vector<bool> ApplicationOutputs::getEvalOut() const
+std::vector<bool> ApplicationOutputs::getEvalOutVector() const
 {
-  return m_eval_out;
+  return m_eval_out_vector;
 }
 
-void ApplicationOutputs::setEvalOut(const std::vector<bool> &eval_out)
+void ApplicationOutputs::setEvalOutVector(const std::vector<bool> &eval_out_vector)
 {
-  m_eval_out = eval_out;
+  m_eval_out_vector = eval_out_vector;
 }
 
-std::vector<bool> ApplicationOutputs::getEvalOutIsSafe() const
+std::vector<bool> ApplicationOutputs::getEvalOutIsSafeVector() const
 {
-  return m_eval_out_is_safe;
+  return m_eval_out_is_safe_vector;
 }
 
-void ApplicationOutputs::setEvalOutIsSafe(const std::vector<bool> &eval_out_is_safe)
+void ApplicationOutputs::setEvalOutIsSafeVector(const std::vector<bool> &eval_out_is_safe_vector)
 {
-  m_eval_out_is_safe = eval_out_is_safe;
+  m_eval_out_is_safe_vector = eval_out_is_safe_vector;
 }
 
-std::vector<bool> ApplicationOutputs::getEvalOutIsValid() const
+std::vector<bool> ApplicationOutputs::getEvalOutIsValidVector() const
 {
-  return m_eval_out_is_valid;
+  return m_eval_out_is_valid_vector;
 }
 
-void ApplicationOutputs::setEvalOutIsValid(const std::vector<bool> &eval_out_is_valid)
+void ApplicationOutputs::setEvalOutIsValidVector(const std::vector<bool> &eval_out_is_valid_vector)
 {
-  m_eval_out_is_valid = eval_out_is_valid;
+  m_eval_out_is_valid_vector = eval_out_is_valid_vector;
 }
 
-std::vector<UINT16> ApplicationOutputs::getMonitoringCase() const
+std::vector<UINT16> ApplicationOutputs::getMonitoringCaseVector() const
 {
-  return m_monitoring_case;
+  return m_monitoring_case_vector;
 }
 
-void ApplicationOutputs::setMonitoringCase(const std::vector<UINT16> &monitoring_case)
+void ApplicationOutputs::setMonitoringCaseVector(const std::vector<UINT16> &monitoring_case_vector)
 {
-  m_monitoring_case = monitoring_case;
+  m_monitoring_case_vector = monitoring_case_vector;
 }
 
-std::vector<bool> ApplicationOutputs::getMonitoringCaseFlags() const
+std::vector<bool> ApplicationOutputs::getMonitoringCaseFlagsVector() const
 {
-  return m_monitoring_case_flags;
+  return m_monitoring_case_flags_vector;
 }
 
-void ApplicationOutputs::setMonitoringCaseFlags(const std::vector<bool> &monitoring_case_flags)
+void ApplicationOutputs::setMonitoringCaseFlagsVector(const std::vector<bool> &monitoring_case_flags_vector)
 {
-  m_monitoring_case_flags = monitoring_case_flags;
+  m_monitoring_case_flags_vector = monitoring_case_flags_vector;
 }
 
 INT8 ApplicationOutputs::getSleepModeOutput() const
@@ -188,24 +188,24 @@ void ApplicationOutputs::setVelocity1TransmittedSafely(bool velocity_1_transmitt
   m_velocity_1_transmitted_safely = velocity_1_transmitted_safely;
 }
 
-std::vector<INT16> ApplicationOutputs::getResultingVelocity() const
+std::vector<INT16> ApplicationOutputs::getResultingVelocityVector() const
 {
-  return m_resulting_velocity;
+  return m_resulting_velocity_vector;
 }
 
-void ApplicationOutputs::setResultingVelocity(const std::vector<INT16> &resulting_velocity)
+void ApplicationOutputs::setResultingVelocityVector(const std::vector<INT16> &resulting_velocity_vector)
 {
-  m_resulting_velocity = resulting_velocity;
+  m_resulting_velocity_vector = resulting_velocity_vector;
 }
 
-std::vector<bool> ApplicationOutputs::getResultingVelocityIsValid() const
+std::vector<bool> ApplicationOutputs::getResultingVelocityIsValidVector() const
 {
-  return m_resulting_velocity_is_valid;
+  return m_resulting_velocity_is_valid_vector;
 }
 
-void ApplicationOutputs::setResultingVelocityIsValid(const std::vector<bool> &resulting_velocity_is_valid)
+void ApplicationOutputs::setResultingVelocityIsValidVector(const std::vector<bool> &resulting_velocity_is_valid_vector)
 {
-  m_resulting_velocity_is_valid = resulting_velocity_is_valid;
+  m_resulting_velocity_is_valid_vector = resulting_velocity_is_valid_vector;
 }
 
 bool ApplicationOutputs::getFlagsSleepModeOutputIsValid() const

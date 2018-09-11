@@ -5,7 +5,7 @@ namespace data_processing {
 
 ParseMeasurementData::ParseMeasurementData()
 {
-  m_readerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 
 }
 
@@ -18,11 +18,11 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
     return datastructure::MeasurementData();
   }
 
-  const BYTE* dataPtr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
+  const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
 
   datastructure::MeasurementData measurement_data;
 
-  measurement_data.setNumberOfBeams(m_readerPtr->readUINT32LE(dataPtr));
+  measurement_data.setNumberOfBeams(m_reader_ptr->readUINT32LittleEndian(data_ptr));
   std::cout << "NumberOfBeams: " << measurement_data.getNumberOfBeams() << std::endl;
 
   float angle = data.getDerivedValuesPtr()->getStartAngle();
@@ -31,11 +31,11 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
 
   for (int i = 0; i < measurement_data.getNumberOfBeams(); i++)
   {
-    INT16 distance = m_readerPtr->readUINT16LE(dataPtr);
+    INT16 distance = m_reader_ptr->readUINT16LittleEndian(data_ptr);
 
-    UINT8 reflectivity = m_readerPtr->readUINT8LE(dataPtr);
+    UINT8 reflectivity = m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
-    UINT8 status = m_readerPtr->readUINT8LE(dataPtr);
+    UINT8 status = m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
 
     //TODO
@@ -57,7 +57,7 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
 
   }
 
-  std::cout  << "measurement data size: " << measurement_data.getScanPoints().size() << std::endl;
+  std::cout  << "measurement data size: " << measurement_data.getScanPointsVector().size() << std::endl;
 
 //  std::cout  << "measurement data at 10: " << measurement_data.getScanPoints().at(714).getDistance() << std::endl;
 //  std::cout  << "measurement data at 10: " << measurement_data.getScanPoints().at(714).getAngle() << std::endl;

@@ -33,10 +33,10 @@ namespace communication{
 
                 PacketHandler m_packet_handler;
 
-                boost::shared_ptr<boost::asio::io_service::work> m_ioWorkPtr;
+                boost::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
 		// Network send/receive stuff
                 boost::asio::io_service& m_io_service;
-                boost::shared_ptr<boost::asio::ip::udp::socket> m_socket;
+                boost::shared_ptr<boost::asio::ip::udp::socket> m_socket_ptr;
                 boost::asio::ip::udp::endpoint m_remote_endpoint;
                 std::thread m_service_thread;
 

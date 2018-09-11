@@ -10,15 +10,15 @@ MethodCommand::MethodCommand(Cola2Session &session, UINT16 method_index)
   :Command(session,0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
   , m_method_index(method_index)
 {
-  m_writerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_writer_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   UINT16 prevSize = telegram.size();
   telegram.resize(prevSize + 2);
-  BYTE* dataPtr = telegram.data() + prevSize;
-  m_writerPtr->writeUINT16LE(dataPtr, m_method_index);
+  BYTE* data_ptr = telegram.data() + prevSize;
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_method_index);
 
 }
 

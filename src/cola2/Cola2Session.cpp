@@ -4,16 +4,16 @@ namespace sick {
 namespace cola2 {
 
 Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client)
-  : m_async_tcp_client(async_tcp_client)
-  , m_sessionID(0)
-  , m_lastRequestID(0)
+  : m_async_tcp_client_ptr(async_tcp_client)
+  , m_session_id(0)
+  , m_last_request_id(0)
 {
 
-  m_async_tcp_client->setPacketHandler(boost::bind(&Cola2Session::processPacket, this, _1));
+  m_async_tcp_client_ptr->setPacketHandler(boost::bind(&Cola2Session::processPacket, this, _1));
 
-  m_packetMerger = boost::make_shared<sick::data_processing::TCPPaketMerger>();
+  m_packet_merger_ptr = boost::make_shared<sick::data_processing::TCPPaketMerger>();
 
-  m_tcp_parserPtr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
+  m_tcp_parser_ptr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
 
   open();
 }
@@ -21,15 +21,15 @@ Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient
 bool Cola2Session::open()
 {
   std::cout << "open" << std::endl;
-  CommandPtr commandPtr = boost::make_shared<CreateSession>(boost::ref(*this));
-  return executeCommand(commandPtr);
+  CommandPtr command_ptr = boost::make_shared<CreateSession>(boost::ref(*this));
+  return executeCommand(command_ptr);
 }
 
 bool Cola2Session::close()
 {
   std::cout << "close" << std::endl;
-  CommandPtr commandPtr = boost::make_shared<CloseSession>(boost::ref(*this));
-  return executeCommand(commandPtr);
+  CommandPtr command_ptr = boost::make_shared<CloseSession>(boost::ref(*this));
+  return executeCommand(command_ptr);
 }
 
 bool Cola2Session::executeCommand(CommandPtr command)
@@ -45,7 +45,7 @@ bool Cola2Session::executeCommand(CommandPtr command)
   sick::datastructure::PacketBuffer::VectorBuffer telegram;
   command->constructTelegram(telegram);
   std::cout << telegram.size() << std::endl;
-  m_async_tcp_client->doSendAndReceive(telegram);
+  m_async_tcp_client_ptr->doSendAndReceive(telegram);
   command->waitForCompletion();
 
 
@@ -54,12 +54,12 @@ bool Cola2Session::executeCommand(CommandPtr command)
 
 UINT32 Cola2Session::getSessionID() const
 {
-  return m_sessionID;
+  return m_session_id;
 }
 
-void Cola2Session::setSessionID(const UINT32 &sessionID)
+void Cola2Session::setSessionID(const UINT32 &session_id)
 {
-  m_sessionID = sessionID;
+  m_session_id = session_id;
 }
 
 void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
@@ -67,29 +67,29 @@ void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
   std::cout << "Processing TCP packet in Session" << std::endl;
 
 
-  if (m_packetMerger->isEmpty() || m_packetMerger->isComplete())
+  if (m_packet_merger_ptr->isEmpty() || m_packet_merger_ptr->isComplete())
   {
-    std::cout << "target size: " << m_tcp_parserPtr->getExpectedPacketLength(packet) << std::endl;
-    m_packetMerger->setTargetSize(m_tcp_parserPtr->getExpectedPacketLength(packet));
+    std::cout << "target size: " << m_tcp_parser_ptr->getExpectedPacketLength(packet) << std::endl;
+    m_packet_merger_ptr->setTargetSize(m_tcp_parser_ptr->getExpectedPacketLength(packet));
 
   }
-  m_packetMerger->addTCPPacket(packet);
+  m_packet_merger_ptr->addTCPPacket(packet);
 
-  if (!m_packetMerger->isComplete())
+  if (!m_packet_merger_ptr->isComplete())
   {
     std::cout << "Packet is not complete yet. Trying to receive more data." << std::endl;
-    m_async_tcp_client->initiateReceive();
+    m_async_tcp_client_ptr->initiateReceive();
     return;
   }
 
   std::cout << "Packet is complete now" << std::endl;
 
   // Now get the merged packet
-  sick::datastructure::PacketBuffer deployedPacket = m_packetMerger->getDeployedPacketBuffer();
+  sick::datastructure::PacketBuffer deployedPacket = m_packet_merger_ptr->getDeployedPacketBuffer();
 
 
 
-  UINT16 requestID = m_tcp_parserPtr->getRequestID(deployedPacket);
+  UINT16 requestID = m_tcp_parser_ptr->getRequestID(deployedPacket);
   CommandPtr pendingCommand;
   if (findCommand(requestID, pendingCommand))
   {
@@ -102,46 +102,46 @@ void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 
 bool Cola2Session::addCommand(UINT16 request_id, CommandPtr command)
 {
-  if(m_pending_commands.find(request_id) != m_pending_commands.end())
+  if(m_pending_commands_map.find(request_id) != m_pending_commands_map.end())
   {
     return false;
   }
-  m_pending_commands[request_id] = command;
+  m_pending_commands_map[request_id] = command;
   return true;
 
 }
 
 bool Cola2Session::findCommand(UINT16 request_id, CommandPtr &command)
 {
-  if (m_pending_commands.find(request_id) == m_pending_commands.end())
+  if (m_pending_commands_map.find(request_id) == m_pending_commands_map.end())
   {
     return false;
   }
-  command = m_pending_commands[request_id];
+  command = m_pending_commands_map[request_id];
   return true;
 }
 
 bool Cola2Session::removeCommand(UINT16 request_id)
 {
-  auto it = m_pending_commands.find(request_id);
-  if(it == m_pending_commands.end())
+  auto it = m_pending_commands_map.find(request_id);
+  if(it == m_pending_commands_map.end())
   {
     return false;
   }
 
-  m_pending_commands.erase(it);
+  m_pending_commands_map.erase(it);
   return true;
 
 }
 
 UINT16 Cola2Session::getNextRequestID()
 {
-  if (m_lastRequestID == std::numeric_limits<UINT16>::max())
+  if (m_last_request_id == std::numeric_limits<UINT16>::max())
   {
-    m_lastRequestID = 0;
+    m_last_request_id = 0;
   }
 
-  return ++m_lastRequestID;
+  return ++m_last_request_id;
 }
 
 }

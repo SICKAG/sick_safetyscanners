@@ -12,12 +12,12 @@ public:
   INT32 getSize() const;
   void setSize(const INT32 &size);
 
-  std::vector<bool> getFlags() const;
-  void setFlags(const std::vector<bool> &flags);
+  std::vector<bool> getFlagsVector() const;
+  void setFlagsVector(const std::vector<bool> &flags_vector);
 
 private:
   INT32 m_size;
-  std::vector<bool> m_flags;
+  std::vector<bool> m_flags_vector;
 };
 
 }

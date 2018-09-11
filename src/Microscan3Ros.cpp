@@ -70,9 +70,9 @@ void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
   scan.header.stamp = ros::Time::now();
   int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
 
-  scan.angle_min = sick::degToRad(data.getMeasurementDataPtr()->getScanPoints().at(0).getAngle());
+  scan.angle_min = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(0).getAngle());
   std::cout << "data ros: " << data.getDerivedValuesPtr()->getAngularBeamResolution();
-  scan.angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPoints().at(data.getMeasurementDataPtr()->getScanPoints().size()-1).getAngle());
+  scan.angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(data.getMeasurementDataPtr()->getScanPointsVector().size()-1).getAngle());
   scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
   boost::posix_time::microseconds time_increment = boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
   scan.time_increment = time_increment.total_microseconds() * 1e-6;
@@ -84,7 +84,7 @@ void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
   scan.intensities.resize(num_scan_points);
 
 
-  std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPoints();
+  std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPointsVector();
   for (int i = 0; i < num_scan_points; ++i)
   {
       const sick::datastructure::ScanPoint scan_point = scan_points.at(i);

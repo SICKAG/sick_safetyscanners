@@ -4,18 +4,18 @@ namespace sick {
 namespace communication {
   AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, std::string host, unsigned short server_port, unsigned short local_port) :
     //socket(boost::ref(io_service), boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port)),
-                m_ioWorkPtr(),
+                m_io_work_ptr(),
                 m_io_service(io_service),
                 m_packet_handler(packet_handler)
 	{
           // Keep io_service busy so that call to io_service-> run does not return imediatly
-          m_ioWorkPtr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
+          m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
           try
           {
 
             // open the socket and bind it to the port specified by m_portToReceiveAt
             // boost::ref must be used to be able to pass io_service by reference
-            m_socket = boost::make_shared<boost::asio::ip::udp::socket>(boost::ref(m_io_service),
+            m_socket_ptr = boost::make_shared<boost::asio::ip::udp::socket>(boost::ref(m_io_service),
                     boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(),
                         local_port));
           }
@@ -35,7 +35,7 @@ namespace communication {
 	{
           std::cout << "start receive" << std::endl;
 
-          m_socket->async_receive_from(boost::asio::buffer(m_recv_buffer), m_remote_endpoint,
+          m_socket_ptr->async_receive_from(boost::asio::buffer(m_recv_buffer), m_remote_endpoint,
       [this](boost::system::error_code ec, std::size_t bytes_recvd){ this->handle_receive(ec, bytes_recvd); });
 	}
 

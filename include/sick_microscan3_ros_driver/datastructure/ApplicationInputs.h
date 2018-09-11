@@ -10,17 +10,17 @@ class ApplicationInputs
 public:
   ApplicationInputs();
 
-  std::vector<bool> getUnsafeInputsInputSources() const;
-  void setUnsafeInputsInputSources(const std::vector<bool> &unsafe_inputs_input_sources);
+  std::vector<bool> getUnsafeInputsInputSourcesVector() const;
+  void setUnsafeInputsInputSourcesVector(const std::vector<bool> &unsafe_inputs_input_sources_vector);
 
-  std::vector<bool> getUnsafeInputsFlags() const;
-  void setUnsafeInputsFlags(const std::vector<bool> &unsafe_inputs_flags);
+  std::vector<bool> getUnsafeInputsFlagsVector() const;
+  void setUnsafeInputsFlagsVector(const std::vector<bool> &unsafe_inputs_flags_vector);
 
-  std::vector<UINT16> getMonitoringCase() const;
-  void setMonitoringCase(const std::vector<UINT16> &monitoring_case);
+  std::vector<UINT16> getMonitoringCasevector() const;
+  void setMonitoringCaseVector(const std::vector<UINT16> &monitoring_case_vector);
 
-  std::vector<bool> getMonitoringCaseFlags() const;
-  void setMonitoringCaseFlags(const std::vector<bool> &monitoring_case_flags);
+  std::vector<bool> getMonitoringCaseFlagsVector() const;
+  void setMonitoringCaseFlagsVector(const std::vector<bool> &monitoring_case_flags_vector);
 
   INT16 getVelocity0() const;
   void setVelocity0(const INT16 &velocity_0);
@@ -44,11 +44,11 @@ public:
   void setSleepModeInput(const INT8 &sleep_mode_input);
 
 private:
-  std::vector<bool> m_unsafe_inputs_input_sources; //TODO in struct??? with next
-  std::vector<bool> m_unsafe_inputs_flags;
+  std::vector<bool> m_unsafe_inputs_input_sources_vector; //TODO in struct??? with next
+  std::vector<bool> m_unsafe_inputs_flags_vector;
 
-  std::vector<UINT16> m_monitoring_case; //TODO 20 cases why 32 bit flags?
-  std::vector<bool> m_monitoring_case_flags;
+  std::vector<UINT16> m_monitoring_case_vector; //TODO 20 cases why 32 bit flags?
+  std::vector<bool> m_monitoring_case_flags_vector;
 
   INT16 m_velocity_0;
   INT16 m_velocity_1;

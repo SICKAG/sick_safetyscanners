@@ -20,14 +20,14 @@ void IntrusionDatum::setSize(const INT32 &size)
   m_size = size;
 }
 
-std::vector<bool> IntrusionDatum::getFlags() const
+std::vector<bool> IntrusionDatum::getFlagsVector() const
 {
-  return m_flags;
+  return m_flags_vector;
 }
 
-void IntrusionDatum::setFlags(const std::vector<bool> &flags)
+void IntrusionDatum::setFlagsVector(const std::vector<bool> &flags_vector)
 {
-  m_flags = flags;
+  m_flags_vector = flags_vector;
 }
 
 }

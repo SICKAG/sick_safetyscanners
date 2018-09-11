@@ -5,7 +5,7 @@ namespace data_processing {
 
 ParseIntrusionData::ParseIntrusionData()
 {
-  m_readerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 
 }
 
@@ -18,7 +18,7 @@ datastructure::IntrusionData ParseIntrusionData::parseUDPSequence(datastructure:
     return datastructure::IntrusionData();
   }
 
-  const BYTE* dataPtr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getIntrusionDataBlockOffset());
+  const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getIntrusionDataBlockOffset());
 
   datastructure::IntrusionData intrusion_data;
 
@@ -30,7 +30,7 @@ datastructure::IntrusionData ParseIntrusionData::parseUDPSequence(datastructure:
   //Repeats for 24 CutOffPaths
   for (int i_set = 0; i_set < 24; ++i_set)
   {
-    UINT32 numBytesToRead = m_readerPtr->readUINT32LE(dataPtr);
+    UINT32 numBytesToRead = m_reader_ptr->readUINT32LittleEndian(data_ptr);
 
     //TODO sanity check
     sick::datastructure::IntrusionDatum datum;
@@ -43,7 +43,7 @@ datastructure::IntrusionData ParseIntrusionData::parseUDPSequence(datastructure:
     std::vector<bool> flags;
     for (numReadBytes = 0; (numReadBytes < numBytesToRead) && (numReadFlags < numScanPoints); ++numReadBytes)
     {
-      UINT8 bitset = m_readerPtr->readUINT8LE(dataPtr);
+      UINT8 bitset = m_reader_ptr->readUINT8LittleEndian(data_ptr);
       for (UINT32 i_bit = 0; i_bit < 8; ++i_bit)
       {
         flags.push_back(static_cast<bool>(bitset & (0x01 << i_bit)));
@@ -52,17 +52,17 @@ datastructure::IntrusionData ParseIntrusionData::parseUDPSequence(datastructure:
         if (numReadFlags >= numScanPoints) { break; }
       }
     }
-    datum.setFlags(flags);
+    datum.setFlagsVector(flags);
     intrusion_datums.push_back(datum);
 
     //TODO necessary?
     while (numReadBytes < numBytesToRead)
     {
-      m_readerPtr->readUINT8LE(dataPtr);
+      m_reader_ptr->readUINT8LittleEndian(data_ptr);
     }
   }
 
-  intrusion_data.setIntrusionData(intrusion_datums);
+  intrusion_data.setIntrusionDataVector(intrusion_datums);
 
   return intrusion_data;
 }

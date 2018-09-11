@@ -8,14 +8,14 @@ IntrusionData::IntrusionData()
 
 }
 
-std::vector<IntrusionDatum> IntrusionData::getIntrusionData() const
+std::vector<IntrusionDatum> IntrusionData::getIntrusionDataVector() const
 {
-  return m_intrusion_data;
+  return m_intrusion_data_vector;
 }
 
-void IntrusionData::setIntrusionData(const std::vector<IntrusionDatum> &intrusion_data)
+void IntrusionData::setIntrusionDataVector(const std::vector<IntrusionDatum> &intrusion_data_vector)
 {
-  m_intrusion_data = intrusion_data;
+  m_intrusion_data_vector = intrusion_data_vector;
 }
 
 

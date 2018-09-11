@@ -15,12 +15,12 @@ public:
   UINT32 getNumberOfBeams() const;
   void setNumberOfBeams(const UINT32 &number_of_beams);
 
-  std::vector<ScanPoint> getScanPoints() const;
+  std::vector<ScanPoint> getScanPointsVector() const;
   void addScanPoint(ScanPoint scan_point);
 
 private:
   UINT32 m_number_of_beams;
-  std::vector<ScanPoint> m_scan_points;
+  std::vector<ScanPoint> m_scan_points_vector;
 
 };
 

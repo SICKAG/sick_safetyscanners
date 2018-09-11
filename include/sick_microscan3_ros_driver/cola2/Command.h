@@ -16,7 +16,7 @@ class Cola2Session;
 class Command
 {
 public:
-  Command(sick::cola2::Cola2Session& session, UINT16 commandType, UINT16 commandMode);
+  Command(sick::cola2::Cola2Session& session, UINT16 command_type, UINT16 command_mode);
 
 
   void lockExecutionMutex();
@@ -28,7 +28,7 @@ public:
   void waitForCompletion();
 
   UINT32 getSessionID() const;
-  void setSessionID(const UINT32 &sessionID);
+  void setSessionID(const UINT32 &session_id);
 
 
   bool wasSuccessful() const;
@@ -41,17 +41,17 @@ public:
   void setCommandMode(const UINT8 &command_mode);
 
   UINT16 getRequestID() const;
-  void setRequestID(const UINT16 &requestID);
+  void setRequestID(const UINT16 &request_id);
 
-  std::vector<BYTE> getData() const;
-  void setData(const std::vector<BYTE> &data);
+  std::vector<BYTE> getDataVector() const;
+  void setDataVector(const std::vector<BYTE> &data);
 
 protected:
   sick::cola2::Cola2Session& m_session;
 
 private:
-  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parserPtr;
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writerPtr;
+  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
 
   virtual bool processReply() = 0;
@@ -60,9 +60,9 @@ private:
   virtual void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const = 0;
 
 
-  boost::mutex m_executionMutex;
+  boost::mutex m_execution_mutex;
 
-  bool m_wasSuccessful;
+  bool m_was_successful;
 
 
 
@@ -70,10 +70,10 @@ private:
 
   UINT8 m_command_type;
   UINT8 m_command_mode;
-  UINT32 m_sessionID;
-  UINT16 m_requestID;
+  UINT32 m_session_id;
+  UINT16 m_request_id;
 
-  std::vector<BYTE> m_data;
+  std::vector<BYTE> m_data_vector;
 };
 
 

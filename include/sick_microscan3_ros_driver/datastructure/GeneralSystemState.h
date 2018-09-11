@@ -28,14 +28,14 @@ public:
   bool getManipulationStatus() const;
   void setManipulationStatus(bool manipulation_status);
 
-  std::vector<bool> getSafeCutOffPath() const;
-  void setSafeCutOffPath(const std::vector<bool> &safe_cut_off_path);
+  std::vector<bool> getSafeCutOffPathVector() const;
+  void setSafeCutOffPathvector(const std::vector<bool> &safe_cut_off_path_vector);
 
-  std::vector<bool> getNonSafeCutOffPath() const;
-  void setNonSafeCutOffPath(const std::vector<bool> &non_safe_cut_off_path);
+  std::vector<bool> getNonSafeCutOffPathvector() const;
+  void setNonSafeCutOffPathVector(const std::vector<bool> &non_safe_cut_off_path_vector);
 
-  std::vector<bool> getResetRequiredCutOffPath() const;
-  void setResetRequiredCutOffPath(const std::vector<bool> &reset_required_cut_off_path);
+  std::vector<bool> getResetRequiredCutOffPathVector() const;
+  void setResetRequiredCutOffPathVector(const std::vector<bool> &reset_required_cut_off_path_vector);
 
   BYTE getCurrentMonitoringCaseNoTable_1() const;
   void setCurrentMonitoringCaseNoTable_1(const BYTE &current_monitoring_case_no_table_1);
@@ -65,9 +65,9 @@ private:
   bool m_reference_contour_status;
   bool m_manipulation_status;
 
-  std::vector<bool> m_safe_cut_off_path;
-  std::vector<bool> m_non_safe_cut_off_path;
-  std::vector<bool> m_reset_required_cut_off_path;
+  std::vector<bool> m_safe_cut_off_path_vector;
+  std::vector<bool> m_non_safe_cut_off_path_vector;
+  std::vector<bool> m_reset_required_cut_off_path_vector;
 
   BYTE m_current_monitoring_case_no_table_1;
   BYTE m_current_monitoring_case_no_table_2;

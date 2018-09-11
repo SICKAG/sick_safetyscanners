@@ -5,7 +5,7 @@ namespace data_processing {
 
 ParseGeneralSystemState::ParseGeneralSystemState()
 {
-  m_readerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 
 }
 
@@ -18,11 +18,11 @@ datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(data
     return datastructure::GeneralSystemState();
   }
 
-  const BYTE* dataPtr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset());
+  const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset());
 
   datastructure::GeneralSystemState general_system_state;
 
-  UINT8 byte = m_readerPtr->readUINT8LE(dataPtr);
+  UINT8 byte = m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
   general_system_state.setRunModeActive(static_cast<bool>(byte & (0x01 << 0)));
   general_system_state.setStandbyModeActive(static_cast<bool>(byte & (0x01 << 1)));
@@ -35,7 +35,7 @@ datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(data
   std::vector<bool> safe_cut_off_path;
 
   for (int i = 0; i < 3; i++) {
-    byte = m_readerPtr->readUINT8LE(dataPtr);
+    byte = m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
     for (int j = 0; j < 8; j++) {
       //as long as there are only 20 instead of 24 cut off paths
@@ -45,13 +45,13 @@ datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(data
       safe_cut_off_path.push_back(static_cast<bool>(byte & (0x01 << j)));
     }
   }
-  general_system_state.setSafeCutOffPath(safe_cut_off_path);
+  general_system_state.setSafeCutOffPathvector(safe_cut_off_path);
   std::cout << "cutoffsize" << safe_cut_off_path.size() << std::endl;
 
   std::vector<bool> non_safe_cut_off_path;
 
   for (int i = 0; i < 3; i++) {
-    byte = m_readerPtr->readUINT8LE(dataPtr);
+    byte = m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
     for (int j = 0; j < 8; j++) {
       //as long as there are only 20 instead of 24 cut off paths
@@ -61,12 +61,12 @@ datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(data
       non_safe_cut_off_path.push_back(static_cast<bool>(byte & (0x01 << j)));
     }
   }
-  general_system_state.setNonSafeCutOffPath(non_safe_cut_off_path);
+  general_system_state.setNonSafeCutOffPathVector(non_safe_cut_off_path);
 
   std::vector<bool> reset_required_cutoff_path;
 
   for (int i = 0; i < 3; i++) {
-    byte = m_readerPtr->readUINT8LE(dataPtr);
+    byte = m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
     for (int j = 0; j < 8; j++) {
       //as long as there are only 20 instead of 24 cut off paths
@@ -76,17 +76,17 @@ datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(data
       reset_required_cutoff_path.push_back(static_cast<bool>(byte & (0x01 << j)));
     }
   }
-  general_system_state.setResetRequiredCutOffPath(reset_required_cutoff_path);
+  general_system_state.setResetRequiredCutOffPathVector(reset_required_cutoff_path);
 
-  general_system_state.setCurrentMonitoringCaseNoTable_1(m_readerPtr->readUINT8LE(dataPtr));
-  general_system_state.setCurrentMonitoringCaseNoTable_2(m_readerPtr->readUINT8LE(dataPtr));
-  general_system_state.setCurrentMonitoringCaseNoTable_3(m_readerPtr->readUINT8LE(dataPtr));
-  general_system_state.setCurrentMonitoringCaseNoTable_4(m_readerPtr->readUINT8LE(dataPtr));
+  general_system_state.setCurrentMonitoringCaseNoTable_1(m_reader_ptr->readUINT8LittleEndian(data_ptr));
+  general_system_state.setCurrentMonitoringCaseNoTable_2(m_reader_ptr->readUINT8LittleEndian(data_ptr));
+  general_system_state.setCurrentMonitoringCaseNoTable_3(m_reader_ptr->readUINT8LittleEndian(data_ptr));
+  general_system_state.setCurrentMonitoringCaseNoTable_4(m_reader_ptr->readUINT8LittleEndian(data_ptr));
 
   //reserved byte
-  m_readerPtr->readUINT8LE(dataPtr);
+  m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
-  byte = m_readerPtr->readUINT8LE(dataPtr);
+  byte = m_reader_ptr->readUINT8LittleEndian(data_ptr);
   general_system_state.setApplicationError(static_cast<bool>(byte & (0x01 << 0)));
   general_system_state.setDeviceError(static_cast<bool>(byte & (0x01 << 1)));
   //bit 2-7 are reserved

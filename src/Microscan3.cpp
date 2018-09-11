@@ -24,10 +24,10 @@ Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFun
   m_io_service_ptr = boost::make_shared<boost::asio::io_service>();
 
   //TODO parameterize
-  m_async_udp_client = boost::make_shared<sick::communication::AsyncUDPClient>(boost::bind(&Microscan3::processUDPPaket, this, _1),
+  m_async_udp_client_ptr = boost::make_shared<sick::communication::AsyncUDPClient>(boost::bind(&Microscan3::processUDPPaket, this, _1),
                                                                                boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
 
-  m_paket_merger = boost::make_shared<sick::data_processing::UDPPaketMerger>();
+  m_paket_merger_ptr = boost::make_shared<sick::data_processing::UDPPaketMerger>();
   std::cout << "started Microscan" << std::endl;
 }
 
@@ -44,7 +44,7 @@ bool Microscan3::run()
   m_udp_client_thread_ptr.reset(new boost::thread(boost::bind(&Microscan3::UDPClientThread, this)));
 
 
-  m_async_udp_client->run_service();
+  m_async_udp_client_ptr->run_service();
 
 }
 
@@ -84,26 +84,26 @@ void Microscan3::serviceTCP(){
    async_tcp_client->do_connect();
 
 
-   m_sessionPtr = boost::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
+   m_session_ptr = boost::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 
    //TODO wait for all packets to receive
    sleep(5);
 
-   sick::cola2::Cola2Session::CommandPtr commandPtr =
-           boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_sessionPtr), boost::asio::ip::address_v4::from_string("192.168.1.9"));
-   m_sessionPtr->executeCommand(commandPtr);
+   sick::cola2::Cola2Session::CommandPtr command_ptr =
+           boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr), boost::asio::ip::address_v4::from_string("192.168.1.9"));
+   m_session_ptr->executeCommand(command_ptr);
    //TODO wait for all packets to receive
    sleep(5);
 
-   std::cout << "SessionID: " << m_sessionPtr->getSessionID() << std::endl;
+   std::cout << "SessionID: " << m_session_ptr->getSessionID() << std::endl;
 
-   m_sessionPtr->close();
+   m_session_ptr->close();
 
    //TODO test if mutex necessary and then remove
    //Need to wait for last response to shutdown
    sleep(2);
 
-   m_sessionPtr.reset();
+   m_session_ptr.reset();
 }
 
 
@@ -111,9 +111,9 @@ void Microscan3::processUDPPaket(const sick::datastructure::PacketBuffer& buffer
 {
   //std::cout << "process UDP Paket" << buffer.getBuffer().at(4) <<  std::endl;
   //std::cout << "Client: " <<buffer.getLength() << std::endl;
-  if(m_paket_merger->addUDPPaket(buffer)) {
+  if(m_paket_merger_ptr->addUDPPaket(buffer)) {
 
-    sick::datastructure::PacketBuffer deployedBuffer =  m_paket_merger->getDeployedPacketBuffer();
+    sick::datastructure::PacketBuffer deployedBuffer =  m_paket_merger_ptr->getDeployedPacketBuffer();
     std::cout << "buffer to parse: " << deployedBuffer.getLength() << std::endl;
 
     sick::datastructure::Data data;

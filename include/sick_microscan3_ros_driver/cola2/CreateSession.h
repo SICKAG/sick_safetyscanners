@@ -15,7 +15,7 @@ public:
   bool processReply();
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writerPtr;
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
 };
 

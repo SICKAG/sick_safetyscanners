@@ -30,7 +30,7 @@ public:
   bool executeCommand(CommandPtr command);
 
   UINT32 getSessionID() const;
-  void setSessionID(const UINT32 &sessionID);
+  void setSessionID(const UINT32 &session_id);
 
   UINT16 getNextRequestID();
 
@@ -43,15 +43,15 @@ private:
   bool removeCommand(UINT16 request_id);
 
 
-  boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client;
-  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser;
-  boost::shared_ptr<sick::data_processing::TCPPaketMerger> m_packetMerger;
-  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parserPtr;
+  boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
+  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser_ptr;
+  boost::shared_ptr<sick::data_processing::TCPPaketMerger> m_packet_merger_ptr;
+  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
 
-  std::map<UINT16, CommandPtr> m_pending_commands;
+  std::map<UINT16, CommandPtr> m_pending_commands_map;
 
-  UINT32 m_sessionID;
-  UINT16 m_lastRequestID;
+  UINT32 m_session_id;
+  UINT16 m_last_request_id;
   bool open();
 };
 

@@ -15,7 +15,7 @@ public:
   datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &header);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 };
 
 }

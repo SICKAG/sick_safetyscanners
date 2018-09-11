@@ -28,7 +28,7 @@ public:
   UINT16 getRequestID(datastructure::PacketBuffer buffer);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   UINT32 readSTx(datastructure::PacketBuffer &buffer);
   UINT32 readLength(datastructure::PacketBuffer &buffer);
   UINT16 readRequestID(datastructure::PacketBuffer &buffer);

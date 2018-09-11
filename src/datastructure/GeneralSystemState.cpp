@@ -68,34 +68,34 @@ void GeneralSystemState::setManipulationStatus(bool manipulation_status)
   m_manipulation_status = manipulation_status;
 }
 
-std::vector<bool> GeneralSystemState::getSafeCutOffPath() const
+std::vector<bool> GeneralSystemState::getSafeCutOffPathVector() const
 {
-  return m_safe_cut_off_path;
+  return m_safe_cut_off_path_vector;
 }
 
-void GeneralSystemState::setSafeCutOffPath(const std::vector<bool> &safe_cut_off_path)
+void GeneralSystemState::setSafeCutOffPathvector(const std::vector<bool> &safe_cut_off_path_vector)
 {
-  m_safe_cut_off_path = safe_cut_off_path;
+  m_safe_cut_off_path_vector = safe_cut_off_path_vector;
 }
 
-std::vector<bool> GeneralSystemState::getNonSafeCutOffPath() const
+std::vector<bool> GeneralSystemState::getNonSafeCutOffPathvector() const
 {
-  return m_non_safe_cut_off_path;
+  return m_non_safe_cut_off_path_vector;
 }
 
-void GeneralSystemState::setNonSafeCutOffPath(const std::vector<bool> &non_safe_cut_off_path)
+void GeneralSystemState::setNonSafeCutOffPathVector(const std::vector<bool> &non_safe_cut_off_path_vector)
 {
-  m_non_safe_cut_off_path = non_safe_cut_off_path;
+  m_non_safe_cut_off_path_vector = non_safe_cut_off_path_vector;
 }
 
-std::vector<bool> GeneralSystemState::getResetRequiredCutOffPath() const
+std::vector<bool> GeneralSystemState::getResetRequiredCutOffPathVector() const
 {
-  return m_reset_required_cut_off_path;
+  return m_reset_required_cut_off_path_vector;
 }
 
-void GeneralSystemState::setResetRequiredCutOffPath(const std::vector<bool> &reset_required_cut_off_path)
+void GeneralSystemState::setResetRequiredCutOffPathVector(const std::vector<bool> &reset_required_cut_off_path_vector)
 {
-  m_reset_required_cut_off_path = reset_required_cut_off_path;
+  m_reset_required_cut_off_path_vector = reset_required_cut_off_path_vector;
 }
 
 BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_1() const

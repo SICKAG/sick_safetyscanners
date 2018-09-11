@@ -8,44 +8,44 @@ ApplicationInputs::ApplicationInputs()
 
 }
 
-std::vector<bool> ApplicationInputs::getUnsafeInputsInputSources() const
+std::vector<bool> ApplicationInputs::getUnsafeInputsInputSourcesVector() const
 {
-  return m_unsafe_inputs_input_sources;
+  return m_unsafe_inputs_input_sources_vector;
 }
 
-void ApplicationInputs::setUnsafeInputsInputSources(const std::vector<bool> &unsafe_inputs_input_sources)
+void ApplicationInputs::setUnsafeInputsInputSourcesVector(const std::vector<bool> &unsafe_inputs_input_sources_vector)
 {
-  m_unsafe_inputs_input_sources = unsafe_inputs_input_sources;
+  m_unsafe_inputs_input_sources_vector = unsafe_inputs_input_sources_vector;
 }
 
-std::vector<bool> ApplicationInputs::getUnsafeInputsFlags() const
+std::vector<bool> ApplicationInputs::getUnsafeInputsFlagsVector() const
 {
-  return m_unsafe_inputs_flags;
+  return m_unsafe_inputs_flags_vector;
 }
 
-void ApplicationInputs::setUnsafeInputsFlags(const std::vector<bool> &unsafe_inputs_flags)
+void ApplicationInputs::setUnsafeInputsFlagsVector(const std::vector<bool> &unsafe_inputs_flags_vector)
 {
-  m_unsafe_inputs_flags = unsafe_inputs_flags;
+  m_unsafe_inputs_flags_vector = unsafe_inputs_flags_vector;
 }
 
-std::vector<UINT16> ApplicationInputs::getMonitoringCase() const
+std::vector<UINT16> ApplicationInputs::getMonitoringCasevector() const
 {
-  return m_monitoring_case;
+  return m_monitoring_case_vector;
 }
 
-void ApplicationInputs::setMonitoringCase(const std::vector<UINT16> &monitoring_case)
+void ApplicationInputs::setMonitoringCaseVector(const std::vector<UINT16> &monitoring_case_vector)
 {
-  m_monitoring_case = monitoring_case;
+  m_monitoring_case_vector = monitoring_case_vector;
 }
 
-std::vector<bool> ApplicationInputs::getMonitoringCaseFlags() const
+std::vector<bool> ApplicationInputs::getMonitoringCaseFlagsVector() const
 {
-  return m_monitoring_case_flags;
+  return m_monitoring_case_flags_vector;
 }
 
-void ApplicationInputs::setMonitoringCaseFlags(const std::vector<bool> &monitoring_case_flags)
+void ApplicationInputs::setMonitoringCaseFlagsVector(const std::vector<bool> &monitoring_case_flags_vector)
 {
-  m_monitoring_case_flags = monitoring_case_flags;
+  m_monitoring_case_flags_vector = monitoring_case_flags_vector;
 }
 
 INT16 ApplicationInputs::getVelocity0() const

@@ -11,11 +11,11 @@ class IntrusionData
 {
 public:
   IntrusionData();
-  std::vector<IntrusionDatum> getIntrusionData() const;
-  void setIntrusionData(const std::vector<IntrusionDatum> &intrusion_data);
+  std::vector<IntrusionDatum> getIntrusionDataVector() const;
+  void setIntrusionDataVector(const std::vector<IntrusionDatum> &intrusion_data_vector);
 
 private:
-  std::vector<IntrusionDatum> m_intrusion_data;
+  std::vector<IntrusionDatum> m_intrusion_data_vector;
 };
 
 }

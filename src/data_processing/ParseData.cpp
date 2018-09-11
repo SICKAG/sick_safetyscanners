@@ -5,7 +5,7 @@ namespace data_processing {
 
 ParseData::ParseData()
 {
-  m_readerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 
 }
 

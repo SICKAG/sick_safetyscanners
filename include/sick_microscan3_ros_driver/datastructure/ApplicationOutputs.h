@@ -10,20 +10,20 @@ class ApplicationOutputs
 public:
   ApplicationOutputs();
 
-  std::vector<bool> getEvalOut() const;
-  void setEvalOut(const std::vector<bool> &eval_out);
+  std::vector<bool> getEvalOutVector() const;
+  void setEvalOutVector(const std::vector<bool> &eval_out_vector);
 
-  std::vector<bool> getEvalOutIsSafe() const;
-  void setEvalOutIsSafe(const std::vector<bool> &eval_out_is_safe);
+  std::vector<bool> getEvalOutIsSafeVector() const;
+  void setEvalOutIsSafeVector(const std::vector<bool> &eval_out_is_safe_vector);
 
-  std::vector<bool> getEvalOutIsValid() const;
-  void setEvalOutIsValid(const std::vector<bool> &eval_out_is_valid);
+  std::vector<bool> getEvalOutIsValidVector() const;
+  void setEvalOutIsValidVector(const std::vector<bool> &eval_out_is_valid_vector);
 
-  std::vector<UINT16> getMonitoringCase() const;
-  void setMonitoringCase(const std::vector<UINT16> &monitoring_case);
+  std::vector<UINT16> getMonitoringCaseVector() const;
+  void setMonitoringCaseVector(const std::vector<UINT16> &monitoring_case_vector);
 
-  std::vector<bool> getMonitoringCaseFlags() const;
-  void setMonitoringCaseFlags(const std::vector<bool> &monitoring_case_flags);
+  std::vector<bool> getMonitoringCaseFlagsVector() const;
+  void setMonitoringCaseFlagsVector(const std::vector<bool> &monitoring_case_flags_vector);
 
   INT8 getSleepModeOutput() const;
   void setSleepModeOutput(const INT8 &sleep_mode_output);
@@ -64,11 +64,11 @@ public:
   bool getVelocity1TransmittedSafely() const;
   void setVelocity1TransmittedSafely(bool velocity_1_transmitted_safely);
 
-  std::vector<INT16> getResultingVelocity() const;
-  void setResultingVelocity(const std::vector<INT16> &resulting_velocity);
+  std::vector<INT16> getResultingVelocityVector() const;
+  void setResultingVelocityVector(const std::vector<INT16> &resulting_velocity_vector);
 
-  std::vector<bool> getResultingVelocityIsValid() const;
-  void setResultingVelocityIsValid(const std::vector<bool> &resulting_velocity_is_valid);
+  std::vector<bool> getResultingVelocityIsValidVector() const;
+  void setResultingVelocityIsValidVector(const std::vector<bool> &resulting_velocity_is_valid_vector);
 
   bool getFlagsSleepModeOutputIsValid() const;
   void setFlagsSleepModeOutputIsValid(bool flags_sleep_mode_output_is_valid);
@@ -77,12 +77,12 @@ public:
   void setFlagsHostErrorFlagsAreValid(bool flags_host_error_flags_are_valid);
 
 private:
-  std::vector<bool> m_eval_out;
-  std::vector<bool> m_eval_out_is_safe;
-  std::vector<bool> m_eval_out_is_valid;
+  std::vector<bool> m_eval_out_vector;
+  std::vector<bool> m_eval_out_is_safe_vector;
+  std::vector<bool> m_eval_out_is_valid_vector;
 
-  std::vector<UINT16> m_monitoring_case;
-  std::vector<bool> m_monitoring_case_flags;
+  std::vector<UINT16> m_monitoring_case_vector;
+  std::vector<bool> m_monitoring_case_flags_vector;
 
   INT8 m_sleep_mode_output; //TODO ENUM8
 
@@ -101,8 +101,8 @@ private:
   bool m_velocity_0_transmitted_safely;
   bool m_velocity_1_transmitted_safely;
 
-  std::vector<INT16> m_resulting_velocity;
-  std::vector<bool> m_resulting_velocity_is_valid;
+  std::vector<INT16> m_resulting_velocity_vector;
+  std::vector<bool> m_resulting_velocity_is_valid_vector;
 
   bool m_flags_sleep_mode_output_is_valid;
   bool m_flags_host_error_flags_are_valid;
