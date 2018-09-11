@@ -17,6 +17,8 @@ public:
 
 
 private:
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writerPtr;
+
   boost::asio::ip::address m_ipAddress;
 
 };

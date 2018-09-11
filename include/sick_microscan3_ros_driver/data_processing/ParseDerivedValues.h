@@ -10,10 +10,12 @@ namespace data_processing {
 class ParseDerivedValues : public AbstractParseUDPSequence
 {
 public:
-  static datastructure::DerivedValues parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
+  ParseDerivedValues();
+
+  datastructure::DerivedValues parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
 
 private:
-  ParseDerivedValues();
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
 };
 
 }

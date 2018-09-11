@@ -9,6 +9,8 @@ namespace cola2 {
 CreateSession::CreateSession(Cola2Session &session)
   :Command(session, 0x4F, 0x58) //see cola2 manual 0x4F = O, 0x58 = X
 {
+  m_writerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+
 
 }
 
@@ -18,10 +20,10 @@ void CreateSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuf
   telegram.resize(prevSize + 5);
   BYTE* dataPtr = telegram.data() + prevSize;
   UINT8 heartBeatTimeoutSeconds = 60;
-  sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, heartBeatTimeoutSeconds);
+  m_writerPtr->writeUINT8BE(dataPtr, heartBeatTimeoutSeconds);
   //  memwrite<UINT8>(dataPtr, heartBeatTimeoutSeconds);
   UINT32 clientID = 12345; // some random number
-  sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr,clientID);
+  m_writerPtr->writeUINT32BE(dataPtr,clientID);
 //  memwrite<UINT32>(dataPtr, clientID);
 }
 

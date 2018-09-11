@@ -13,6 +13,8 @@ Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient
 
   m_packetMerger = boost::make_shared<sick::data_processing::TCPPaketMerger>();
 
+  m_tcp_parserPtr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
+
   open();
 }
 
@@ -67,8 +69,8 @@ void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 
   if (m_packetMerger->isEmpty() || m_packetMerger->isComplete())
   {
-    std::cout << "target size: " << sick::data_processing::ParseTCPPacket::getExpectedPacketLength(packet) << std::endl;
-    m_packetMerger->setTargetSize(sick::data_processing::ParseTCPPacket::getExpectedPacketLength(packet));
+    std::cout << "target size: " << m_tcp_parserPtr->getExpectedPacketLength(packet) << std::endl;
+    m_packetMerger->setTargetSize(m_tcp_parserPtr->getExpectedPacketLength(packet));
 
   }
   m_packetMerger->addTCPPacket(packet);
@@ -87,7 +89,7 @@ void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 
 
 
-  UINT16 requestID = sick::data_processing::ParseTCPPacket::getRequestID(deployedPacket);
+  UINT16 requestID = m_tcp_parserPtr->getRequestID(deployedPacket);
   CommandPtr pendingCommand;
   if (findCommand(requestID, pendingCommand))
   {

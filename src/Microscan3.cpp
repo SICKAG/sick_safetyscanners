@@ -44,11 +44,7 @@ bool Microscan3::run()
   m_udp_client_thread_ptr.reset(new boost::thread(boost::bind(&Microscan3::UDPClientThread, this)));
 
 
-
-//  sick::cola2::Cola2Session session(m_async_tcp_client);
-
-  //TODO for udp receiving necessary, uncommented for tcp testing
-  //m_async_udp_client->run_service();
+  m_async_udp_client->run_service();
 
 }
 
@@ -121,7 +117,8 @@ void Microscan3::processUDPPaket(const sick::datastructure::PacketBuffer& buffer
     std::cout << "buffer to parse: " << deployedBuffer.getLength() << std::endl;
 
     sick::datastructure::Data data;
-    sick::data_processing::ParseData::parseUDPSequence(deployedBuffer,data);
+    sick::data_processing::ParseData data_parser;
+    data_parser.parseUDPSequence(deployedBuffer,data);
 
     m_newPaketReceivedCallbackFunction(data);
   }

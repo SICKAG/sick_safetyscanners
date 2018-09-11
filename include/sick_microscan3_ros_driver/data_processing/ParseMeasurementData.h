@@ -10,10 +10,12 @@ namespace data_processing {
 class ParseMeasurementData : public AbstractParseUDPSequence
 {
 public:
-  static datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &header);
+  ParseMeasurementData();
+
+  datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &header);
 
 private:
-  ParseMeasurementData();
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
 };
 
 }

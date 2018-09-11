@@ -17,10 +17,12 @@ namespace data_processing {
 class ParseData : public AbstractParseUDPSequence
 {
 public:
-  static bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::Data& data);
+  ParseData();
+
+  bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::Data& data);
 
 private:
-  ParseData();
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
 };
 
 }

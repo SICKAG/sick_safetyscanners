@@ -4,6 +4,7 @@
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>
 
 #include <boost/thread/mutex.hpp>
 
@@ -49,6 +50,10 @@ protected:
   sick::cola2::Cola2Session& m_session;
 
 private:
+  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parserPtr;
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writerPtr;
+
+
   virtual bool processReply() = 0;
 
   void addTelegramHeader(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;

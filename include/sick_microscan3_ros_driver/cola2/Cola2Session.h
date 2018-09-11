@@ -46,6 +46,7 @@ private:
   boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client;
   boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser;
   boost::shared_ptr<sick::data_processing::TCPPaketMerger> m_packetMerger;
+  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parserPtr;
 
   std::map<UINT16, CommandPtr> m_pending_commands;
 

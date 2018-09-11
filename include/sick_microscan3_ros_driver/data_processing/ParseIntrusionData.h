@@ -10,10 +10,12 @@ namespace data_processing {
 class ParseIntrusionData : public AbstractParseUDPSequence
 {
 public:
-  static datastructure::IntrusionData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
+  ParseIntrusionData();
+
+  datastructure::IntrusionData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
 
 private:
-  ParseIntrusionData();
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
 };
 
 }

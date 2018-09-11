@@ -10,10 +10,12 @@ namespace data_processing {
 class ParseGeneralSystemState : public AbstractParseUDPSequence
 {
 public:
-  static datastructure::GeneralSystemState parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
+  ParseGeneralSystemState();
+
+  datastructure::GeneralSystemState parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
 
 private:
-  ParseGeneralSystemState();
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
 };
 
 }

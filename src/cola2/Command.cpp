@@ -13,6 +13,10 @@ Command::Command(Cola2Session &session, UINT16 commandType, UINT16 commandMode)
 {
   m_sessionID = m_session.getSessionID();
   m_requestID = m_session.getNextRequestID();
+
+  m_tcp_parserPtr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
+  m_writerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+
 }
 
 void Command::lockExecutionMutex()
@@ -30,7 +34,7 @@ void Command::processReplyBase(const datastructure::PacketBuffer::VectorBuffer &
 {
   //Parse first
   std::cout << "process reply of tcp" << std::endl;
-  sick::data_processing::ParseTCPPacket::parseTCPSequence(packet, *this);
+  m_tcp_parserPtr->parseTCPSequence(packet, *this);
 
   m_wasSuccessful = processReply();
 
@@ -114,15 +118,15 @@ void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &teleg
   BYTE* dataPtr = header.data();
 
 
-  sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr, cola2_STx);
-//  sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr, 0x00000000);
-  sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr, length);
-  sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, cola2_HubCntr);
-  sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, cola2_NoC);
-  sick::data_processing::ReadWriteHelper::writeUINT32BE(dataPtr, sessionID);
-  sick::data_processing::ReadWriteHelper::writeUINT16BE(dataPtr, requestID);
-  sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, commandType);
-  sick::data_processing::ReadWriteHelper::writeUINT8BE(dataPtr, commandMode);
+  m_writerPtr->writeUINT32BE(dataPtr, cola2_STx);
+//  m_writerPtr->writeUINT32BE(dataPtr, 0x00000000);
+  m_writerPtr->writeUINT32BE(dataPtr, length);
+  m_writerPtr->writeUINT8BE(dataPtr, cola2_HubCntr);
+  m_writerPtr->writeUINT8BE(dataPtr, cola2_NoC);
+  m_writerPtr->writeUINT32BE(dataPtr, sessionID);
+  m_writerPtr->writeUINT16BE(dataPtr, requestID);
+  m_writerPtr->writeUINT8BE(dataPtr, commandType);
+  m_writerPtr->writeUINT8BE(dataPtr, commandMode);
   telegram.insert(telegram.begin(), header.begin(), header.end());
 
   std::cout << "tele: " << telegram.size() << std::endl;

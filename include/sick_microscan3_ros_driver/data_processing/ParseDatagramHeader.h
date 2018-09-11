@@ -10,10 +10,12 @@ namespace data_processing {
 class ParseDatagramHeader : public AbstractParseUDPSequence
 {
 public:
-  static bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::DatagramHeader& header);
+  ParseDatagramHeader();
+  bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::DatagramHeader& header);
 
 private:
-  ParseDatagramHeader();
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
+
 };
 
 }

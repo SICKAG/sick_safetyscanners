@@ -3,6 +3,11 @@
 namespace sick {
 namespace data_processing {
 
+ParseApplicationData::ParseApplicationData()
+{
+  m_readerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+}
+
 //TODO class with both in and outputs
 datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
@@ -19,7 +24,7 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
 
   datastructure::ApplicationInputs inputs;
 
-  UINT32 word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  UINT32 word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> input_sources;
   // TODO 32 dependend on word?
@@ -29,7 +34,7 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   }
   inputs.setUnsafeInputsInputSources(input_sources);
 
-  word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> input_flags;
   // TODO 32 dependend on word?
@@ -40,20 +45,20 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   inputs.setUnsafeInputsFlags(input_flags);
 
   //Reserved 4 Byte
-  UINT8 word8 = ReadWriteHelper::readUINT8LE(dataPtr);
-  word8 = ReadWriteHelper::readUINT8LE(dataPtr);
-  word8 = ReadWriteHelper::readUINT8LE(dataPtr);
-  word8 = ReadWriteHelper::readUINT8LE(dataPtr);
+  UINT8 word8 = m_readerPtr->readUINT8LE(dataPtr);
+  word8 = m_readerPtr->readUINT8LE(dataPtr);
+  word8 = m_readerPtr->readUINT8LE(dataPtr);
+  word8 = m_readerPtr->readUINT8LE(dataPtr);
 
   std::vector<UINT16> monitoring_cases;
 
   UINT16 word16;
   for (int i = 0 ; i < 20; i++) {
-    monitoring_cases.push_back(ReadWriteHelper::readUINT16LE(dataPtr));
+    monitoring_cases.push_back(m_readerPtr->readUINT16LE(dataPtr));
   }
   inputs.setMonitoringCase(monitoring_cases);
 
-  word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> monitoring_flags;
   // 20 for each case one
@@ -63,10 +68,10 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   }
   inputs.setMonitoringCaseFlags(monitoring_flags);
 
-  inputs.setVelocity0(ReadWriteHelper::readUINT16LE(dataPtr));
-  inputs.setVelocity1(ReadWriteHelper::readUINT16LE(dataPtr));
+  inputs.setVelocity0(m_readerPtr->readUINT16LE(dataPtr));
+  inputs.setVelocity1(m_readerPtr->readUINT16LE(dataPtr));
 
-  word8 = ReadWriteHelper::readUINT8LE(dataPtr);
+  word8 = m_readerPtr->readUINT8LE(dataPtr);
 
   inputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   inputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
@@ -76,25 +81,25 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   //reserved bits 6,7
 
   //reserved 1 Byte for linear velocities
-  ReadWriteHelper::readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
 
   //reserved 2 Byte
-  ReadWriteHelper::readUINT8LE(dataPtr);
-  ReadWriteHelper::readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
 
   //reserved 10 Byte
   for (int i = 0; i < 10; i++) {
-    ReadWriteHelper::readUINT8LE(dataPtr);
+    m_readerPtr->readUINT8LE(dataPtr);
   }
 
-  inputs.setSleepModeInput(ReadWriteHelper::readUINT8LE(dataPtr));
+  inputs.setSleepModeInput(m_readerPtr->readUINT8LE(dataPtr));
 
   //Reserved 1 Byte
-  ReadWriteHelper::readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
 
   //reserved 64 Byte
   for (int i = 0; i < 64; i++) {
-    ReadWriteHelper::readUINT8LE(dataPtr);
+    m_readerPtr->readUINT8LE(dataPtr);
   }
 
   application_data.setInputs(inputs);
@@ -103,7 +108,7 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
 
   datastructure::ApplicationOutputs outputs;
 
-  word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> eval_out;
   for (int i = 0; i < 20 ; i++) {
@@ -111,7 +116,7 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   }
   outputs.setEvalOut(eval_out);
 
-  word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> eval_out_is_safe;
   for (int i = 0; i < 20 ; i++) {
@@ -119,7 +124,7 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   }
   outputs.setEvalOutIsSafe(eval_out_is_safe);
 
-  word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> eval_out_is_valid;
   for (int i = 0; i < 20 ; i++) {
@@ -130,11 +135,11 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   std::vector<UINT16> output_monitoring_cases;
 
   for (int i = 0 ; i < 20; i++) {
-    output_monitoring_cases.push_back(ReadWriteHelper::readUINT16LE(dataPtr));
+    output_monitoring_cases.push_back(m_readerPtr->readUINT16LE(dataPtr));
   }
   outputs.setMonitoringCase(output_monitoring_cases);
 
-  word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> output_monitoring_flags;
   // 20 for each case one
@@ -144,9 +149,9 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   }
   outputs.setMonitoringCaseFlags(output_monitoring_flags);
 
-  outputs.setSleepModeOutput(ReadWriteHelper::readUINT8LE(dataPtr));
+  outputs.setSleepModeOutput(m_readerPtr->readUINT8LE(dataPtr));
 
-  word8 = ReadWriteHelper::readUINT8LE(dataPtr);
+  word8 = m_readerPtr->readUINT8LE(dataPtr);
 
   outputs.setHostErrorFlagContaminationWarning(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setHostErrorFlagContaminationError(static_cast<bool>(word8 & (0x01 << 1)));
@@ -157,19 +162,19 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   //bit 6,7 reserved
 
   //4Byte for error flags reserved
-  ReadWriteHelper::readUINT8LE(dataPtr);
-  ReadWriteHelper::readUINT8LE(dataPtr);
-  ReadWriteHelper::readUINT8LE(dataPtr);
-  ReadWriteHelper::readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
 
   //2Byte reserved
-  ReadWriteHelper::readUINT8LE(dataPtr);
-  ReadWriteHelper::readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
 
-  outputs.setVelocity0(ReadWriteHelper::readUINT16LE(dataPtr));
-  outputs.setVelocity1(ReadWriteHelper::readUINT16LE(dataPtr));
+  outputs.setVelocity0(m_readerPtr->readUINT16LE(dataPtr));
+  outputs.setVelocity1(m_readerPtr->readUINT16LE(dataPtr));
 
-  word8 = ReadWriteHelper::readUINT8LE(dataPtr);
+  word8 = m_readerPtr->readUINT8LE(dataPtr);
 
   outputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
@@ -179,19 +184,19 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   //reserved bits 6,7
 
   //1Byte reserved for velocities
-  ReadWriteHelper::readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
 
   //2 Byte reserved
-  ReadWriteHelper::readUINT8LE(dataPtr);
-  ReadWriteHelper::readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
+  m_readerPtr->readUINT8LE(dataPtr);
 
   std::vector<INT16> resulting_velocities;
   for (int i = 0 ; i < 20; i++) {
-    resulting_velocities.push_back(ReadWriteHelper::readINT16LE(dataPtr));
+    resulting_velocities.push_back(m_readerPtr->readINT16LE(dataPtr));
   }
   outputs.setResultingVelocity(resulting_velocities);
 
-  word32 = ReadWriteHelper::readUINT32LE(dataPtr);
+  word32 = m_readerPtr->readUINT32LE(dataPtr);
 
   std::vector<bool> resulting_velocities_flags;
   // 20 for each case one
@@ -204,10 +209,10 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
 
   //reserved 7 Byte
   for (int i = 0; i < 7; i++) {
-    ReadWriteHelper::readUINT8LE(dataPtr);
+    m_readerPtr->readUINT8LE(dataPtr);
   }
 
-  word8 = ReadWriteHelper::readUINT8LE(dataPtr);
+  word8 = m_readerPtr->readUINT8LE(dataPtr);
 
   outputs.setFlagsSleepModeOutputIsValid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setFlagsHostErrorFlagsAreValid(static_cast<bool>(word8 & (0x01 << 1)));
@@ -217,6 +222,8 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
 
   return application_data;
 }
+
+
 
 }
 }

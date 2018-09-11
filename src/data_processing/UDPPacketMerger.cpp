@@ -30,7 +30,9 @@ bool UDPPaketMerger::addUDPPaket(sick::datastructure::PacketBuffer buffer)
 
   sick::datastructure::DatagramHeader datagram_header;
   // parse Custom Header
-  sick::data_processing::ParseDatagramHeader::parseUDPSequence(buffer, datagram_header);
+  sick::data_processing::ParseDatagramHeader datagram_header_parser;
+  datagram_header_parser.parseUDPSequence(buffer, datagram_header);
+//  sick::data_processing::ParseDatagramHeader::parseUDPSequence(buffer, datagram_header);
 
   std::cout << "Identifikation: " << datagram_header.getIdentification() << std::endl;
 

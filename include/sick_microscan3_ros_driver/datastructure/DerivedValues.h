@@ -19,9 +19,6 @@ public:
   UINT16 getScanTime() const;
   void setScanTime(const UINT16 &scan_time);
 
-  UINT32 getUnsigned_test_start_angle() const;
-  void setUnsigned_test_start_angle(const UINT32 &value);
-
   float getStartAngle() const;
   void setStartAngle(const INT32 &start_angle);
 

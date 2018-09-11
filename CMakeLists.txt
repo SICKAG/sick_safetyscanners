@@ -66,7 +66,9 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/GeneralSystemState.cpp
   src/datastructure/DerivedValues.cpp
   src/datastructure/MeasurementData.cpp
+  src/datastructure/ScanPoint.cpp
   src/datastructure/IntrusionData.cpp
+  src/datastructure/IntrusionDatum.cpp
   src/datastructure/ApplicationData.cpp
   src/datastructure/ApplicationInputs.cpp
   src/datastructure/ApplicationOutputs.cpp

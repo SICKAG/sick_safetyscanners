@@ -15,10 +15,20 @@ UINT8 ReadWriteHelper::readUINT8LE(const BYTE *&buf)
   return value;
 }
 
+UINT8 ReadWriteHelper::readUINT8LE(const BYTE *&buf, UINT16 offset) {
+  UINT8 value = buf[offset];
+  return value;
+}
+
 UINT16 ReadWriteHelper::readUINT16LE(const BYTE *&buf)
 {
   UINT16 value = (buf[1] << 8) + buf[0];
   buf += sizeof(UINT16);
+  return value;
+}
+
+UINT16 ReadWriteHelper::readUINT16LE(const BYTE *&buf, UINT16 offset) {
+  UINT16 value = (buf[offset + 1] << 8) + buf[offset];
   return value;
 }
 
@@ -38,10 +48,20 @@ UINT32 ReadWriteHelper::readUINT32LE(const BYTE *&buf)
   return value;
 }
 
+UINT32 ReadWriteHelper::readUINT32LE(const BYTE *&buf, UINT16 offset) {
+  UINT32 value = (buf[offset + 3] << 24) + (buf[offset + 2] << 16) + (buf[offset + 1] << 8) + buf[offset];
+  return value;
+}
+
 INT32 ReadWriteHelper::readINT32LE(const BYTE *&buf)
 {
   INT32 value = (buf[3] << 24) + (buf[2] << 16) + (buf[1] << 8) + buf[0];
   buf += sizeof(INT32);
+  return value;
+}
+
+INT32 ReadWriteHelper::readINT32LE(const BYTE *&buf, UINT16 offset) {
+  INT32 value = (buf[offset + 3] << 24) + (buf[offset + 2] << 16) + (buf[offset + 1] << 8) + buf[offset];
   return value;
 }
 

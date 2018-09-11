@@ -10,10 +10,11 @@ namespace data_processing {
 class ParseApplicationData : public AbstractParseUDPSequence
 {
 public:
-  static datastructure::ApplicationData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
+  ParseApplicationData();
+  datastructure::ApplicationData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
 
 private:
-  ParseApplicationData();
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_readerPtr;
 };
 
 }

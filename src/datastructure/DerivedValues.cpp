@@ -38,16 +38,6 @@ void DerivedValues::setScanTime(const UINT16 &scan_time)
   m_scan_time = scan_time;
 }
 
-//TODO
-UINT32 DerivedValues::getUnsigned_test_start_angle() const
-{
-  return unsigned_test_start_angle;
-}
-
-void DerivedValues::setUnsigned_test_start_angle(const UINT32 &value)
-{
-  unsigned_test_start_angle = value ;
-}
 
 float DerivedValues::getStartAngle() const
 {

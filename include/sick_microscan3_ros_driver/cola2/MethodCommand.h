@@ -19,6 +19,8 @@ public:
 
 private:
   UINT16 m_method_index;
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writerPtr;
+
 };
 
 }

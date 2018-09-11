@@ -3,6 +3,12 @@
 namespace sick {
 namespace data_processing {
 
+ParseMeasurementData::ParseMeasurementData()
+{
+  m_readerPtr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+
+}
+
 datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
   std::cout << "Beginn Parsing Header" << std::endl;
@@ -16,7 +22,7 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
 
   datastructure::MeasurementData measurement_data;
 
-  measurement_data.setNumberOfBeams(ReadWriteHelper::readUINT32LE(dataPtr));
+  measurement_data.setNumberOfBeams(m_readerPtr->readUINT32LE(dataPtr));
   std::cout << "NumberOfBeams: " << measurement_data.getNumberOfBeams() << std::endl;
 
   float angle = data.getDerivedValuesPtr()->getStartAngle();
@@ -25,11 +31,11 @@ datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastruct
 
   for (int i = 0; i < measurement_data.getNumberOfBeams(); i++)
   {
-    INT16 distance = ReadWriteHelper::readUINT16LE(dataPtr);
+    INT16 distance = m_readerPtr->readUINT16LE(dataPtr);
 
-    UINT8 reflectivity = ReadWriteHelper::readUINT8LE(dataPtr);
+    UINT8 reflectivity = m_readerPtr->readUINT8LE(dataPtr);
 
-    UINT8 status = ReadWriteHelper::readUINT8LE(dataPtr);
+    UINT8 status = m_readerPtr->readUINT8LE(dataPtr);
 
 
     //TODO

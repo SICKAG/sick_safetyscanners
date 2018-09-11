@@ -13,6 +13,10 @@ public:
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
+
+private:
+  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writerPtr;
+
 };
 
 }
