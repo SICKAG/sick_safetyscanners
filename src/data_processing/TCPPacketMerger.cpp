@@ -56,28 +56,26 @@ bool TCPPaketMerger::addToMap(sick::datastructure::PacketBuffer newPacket)
 
 bool TCPPaketMerger::deployPacketIfComplete()
 {
-  //TODO
   if(isComplete()) {
-
-
-    sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
-    for (auto &parsed_packet_buffer : m_buffer_vector) {
-
-      sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.getBuffer();
-
-      headerless_packet_buffer.insert(headerless_packet_buffer.end(),
-                                      packet_buffer.getBuffer().begin(),
-                                      packet_buffer.getBuffer().end());
-      std::cout << "headerless " << headerless_packet_buffer.size() << std::endl;
-    }
-
-    //m_is_complete = true;
-    m_deployed_paket_buffer.setBuffer(headerless_packet_buffer);
-    m_buffer_vector.clear();
-
+    deployPacket();
     return true;
   }
   return false;
+}
+
+bool TCPPaketMerger::deployPacket()
+{
+  sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
+  for (auto &parsed_packet_buffer : m_buffer_vector) {
+
+    sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.getBuffer();
+
+    headerless_packet_buffer.insert(headerless_packet_buffer.end(),
+                                    packet_buffer.getBuffer().begin(),
+                                    packet_buffer.getBuffer().end());
+  }
+  m_deployed_paket_buffer.setBuffer(headerless_packet_buffer);
+  m_buffer_vector.clear();
 
 }
 

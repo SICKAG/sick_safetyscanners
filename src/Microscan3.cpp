@@ -43,6 +43,8 @@ bool Microscan3::run()
   std::cout << "enter run" << std::endl;
 
   m_udp_client_thread_ptr.reset(new boost::thread(boost::bind(&Microscan3::UDPClientThread, this)));
+
+  m_async_udp_client_ptr->run_service();
 }
 
 bool Microscan3::UDPClientThread()
