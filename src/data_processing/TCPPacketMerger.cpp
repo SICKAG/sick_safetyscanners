@@ -36,8 +36,6 @@ bool TCPPaketMerger::addTCPPacket(sick::datastructure::PacketBuffer buffer)
   addToMap(buffer);
   deployPacketIfComplete();
   return isComplete();
-
-
 }
 
 bool TCPPaketMerger::addToMap(sick::datastructure::PacketBuffer newPacket)

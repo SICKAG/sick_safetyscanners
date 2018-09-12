@@ -30,6 +30,7 @@ private:
 
   UINT32 m_targetSize;
   UINT32 getCurrentSize() const;
+  bool deployPacket();
 };
 
 }

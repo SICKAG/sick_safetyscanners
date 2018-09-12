@@ -8,7 +8,6 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler, boost::asio::io_ser
   , m_io_service(io_service)
   , m_packet_handler(packet_handler)
 {
-//TODO
   // Keep io_service busy
   m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
   try
@@ -19,9 +18,7 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler, boost::asio::io_ser
   {
     std::cout << "Exception while creating socket: " << e.what() << std::endl;
   }
-
   m_remote_endpoint = boost::asio::ip::tcp::endpoint(boost::asio::ip::address_v4::from_string(host), server_port);
-
   std::cout << "setup tcpclient" << std::endl;
 }
 

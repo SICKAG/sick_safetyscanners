@@ -8,7 +8,6 @@ AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_ser
               m_io_service(io_service),
               m_packet_handler(packet_handler)
 {
-  //TODO
   // Keep io_service busy
   m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
   try
