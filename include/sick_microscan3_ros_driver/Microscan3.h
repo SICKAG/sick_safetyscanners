@@ -71,6 +71,9 @@ private:
   void processUDPPaket(const datastructure::PacketBuffer &buffer);
   bool UDPClientThread();
   void processTCPPaket(const sick::datastructure::PacketBuffer &buffer);
+  void startTCPConnection();
+  void changeCommSettingsinColaSession();
+  void stopTCPConnection();
 };
 
 } /* namespace */
