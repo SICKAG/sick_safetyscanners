@@ -8,11 +8,8 @@ ParseApplicationData::ParseApplicationData()
   m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
-//TODO class with both in and outputs
 datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-
-  //TODO
   std::cout << "Beginn Parsing ParseApplicationData" << std::endl;
 
   //TODO sanity checks
@@ -23,45 +20,97 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getApplicationDataBlockOffset());
 
   datastructure::ApplicationData application_data;
+  setDataInApplicationData(data_ptr, application_data);
+  return application_data;
+}
 
+bool ParseApplicationData::setDataInApplicationData(const BYTE* data_ptr, datastructure::ApplicationData &application_data)
+{
+  setApplicationInputsInApplicationData(data_ptr,application_data);
+  setApplicationOutputsInApplicationData(data_ptr,application_data);
+}
+
+bool ParseApplicationData::setApplicationInputsInApplicationData(const BYTE* data_ptr, datastructure::ApplicationData &application_data)
+{
   datastructure::ApplicationInputs inputs;
+  setDataInApplicationInputs(data_ptr,inputs);
+  application_data.setInputs(inputs);
+}
 
+bool ParseApplicationData::setApplicationOutputsInApplicationData(const BYTE* data_ptr, datastructure::ApplicationData &application_data)
+{
+  datastructure::ApplicationOutputs outputs;
+  setDataInApplicationOutputs(data_ptr, outputs);
+  application_data.setOutputs(outputs);
+}
+
+bool ParseApplicationData::setDataInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
+  setUnsafeInputsInApplicationInputs(data_ptr,inputs);
+  setMonitoringCaseInputsInApplicationInputs(data_ptr, inputs);
+  setLinearVelocityInputsInApplicationInputs(data_ptr, inputs);
+  setSleepModeInputInApplicationInputs(data_ptr, inputs);
+}
+
+bool ParseApplicationData::setDataInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  setEvalutaionPathsOutputsInApplicationOutputs(data_ptr,outputs);
+  setMonitoringCaseOutputsInApplicationOutputs(data_ptr, outputs);
+  setSleepModeOutputInApplicationOutputs(data_ptr, outputs);
+  setErrorFlagsInApplicationOutputs(data_ptr, outputs);
+  setLinearVelocityOutoutsInApplicationOutputs(data_ptr, outputs);
+  setResultingVelocityOutputsInApplicationOutputs(data_ptr, outputs);
+  setOutputFlagsinApplicationOutput(data_ptr, outputs);
+}
+
+bool ParseApplicationData::setUnsafeInputsInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
+  setUnsafeInputsSourcesInApplicationInputs(data_ptr,inputs);
+  setUnsafeInputsFlagsInApplicationInputs(data_ptr, inputs);
+}
+
+bool ParseApplicationData::setUnsafeInputsSourcesInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
   UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr, 0);
-
   std::vector<bool> input_sources;
-  // TODO 32 dependend on word?
   for (int i = 0; i < 32; i++)
   {
      input_sources.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   inputs.setUnsafeInputsInputSourcesVector(input_sources);
 
-  word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,4);
+}
 
+bool ParseApplicationData::setUnsafeInputsFlagsInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
+  UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,4);
   std::vector<bool> input_flags;
-  // TODO 32 dependend on word?
   for (int i = 0; i < 32; i++)
   {
      input_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   inputs.setUnsafeInputsFlagsVector(input_flags);
+}
 
-//  //Reserved 4 Byte
-//  UINT8 word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,8);
-//  word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,9);
-//  word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,10);
-//  word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,11);
+bool ParseApplicationData::setMonitoringCaseInputsInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
+  setMonitoringCaseNumbersInApplicationInputs(data_ptr,inputs);
+  setMonitoringCaseFlagsInApplicationInputs(data_ptr, inputs);
+}
 
+bool ParseApplicationData::setMonitoringCaseNumbersInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
   std::vector<UINT16> monitoring_cases;
-
-  UINT16 word16;
   for (int i = 0 ; i < 20; i++) {
     monitoring_cases.push_back(m_reader_ptr->readUINT16LittleEndian(data_ptr, 12 + i * 2));
   }
   inputs.setMonitoringCaseVector(monitoring_cases);
+}
 
-  word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr, 52);
 
+bool ParseApplicationData::setMonitoringCaseFlagsInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
+  UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr, 52);
   std::vector<bool> monitoring_flags;
   // 20 for each case one
   for (int i = 0; i < 20; i++)
@@ -69,10 +118,28 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
      monitoring_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   inputs.setMonitoringCaseFlagsVector(monitoring_flags);
+}
 
+bool ParseApplicationData::setLinearVelocityInputsInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
+  setLinearVelocity0InApplicationInputs(data_ptr,inputs);
+  setLinearVelocity1InApplicationInputs(data_ptr, inputs);
+  setLinearVelocityFlagsInApplicationInputs(data_ptr, inputs);
+}
+
+bool ParseApplicationData::setLinearVelocity0InApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
   inputs.setVelocity0(m_reader_ptr->readUINT16LittleEndian(data_ptr,56));
-  inputs.setVelocity1(m_reader_ptr->readUINT16LittleEndian(data_ptr,58));
 
+}
+
+bool ParseApplicationData::setLinearVelocity1InApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
+  inputs.setVelocity1(m_reader_ptr->readUINT16LittleEndian(data_ptr,58));
+}
+
+bool ParseApplicationData::setLinearVelocityFlagsInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
   UINT8 word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,60);
 
   inputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
@@ -80,37 +147,25 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   //reserved bits 2,3
   inputs.setVelocity0TransmittedSafely(static_cast<bool>(word8 & (0x01 << 4)));
   inputs.setVelocity1TransmittedSafely(static_cast<bool>(word8 & (0x01 << 5)));
-  //reserved bits 6,7
+}
 
-  //reserved 1 Byte for linear velocities
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr,61);
-
-//  //reserved 2 Byte
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr,62);
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr,63);
-
-  //reserved 10 Byte
-//  for (int i = 0; i < 10; i++) {
-//    m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  }
-
+bool ParseApplicationData::setSleepModeInputInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs &inputs)
+{
   inputs.setSleepModeInput(m_reader_ptr->readUINT8LittleEndian(data_ptr,74));
+}
 
-//  //Reserved 1 Byte
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
 
-//  //reserved 64 Byte
-//  for (int i = 0; i < 64; i++) {
-//    m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  }
+bool ParseApplicationData::setEvalutaionPathsOutputsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  setEvaluationPathsOutputsEvalOutInApplicationOutputs(data_ptr,outputs);
+  setEvaluationPathsOutputsIsSafeInApplicationOutputs(data_ptr, outputs);
+  setEvaluationPathsOutputsValidFlagsInApplicationOutputs(data_ptr, outputs);
+}
 
-  application_data.setInputs(inputs);
+bool ParseApplicationData::setEvaluationPathsOutputsEvalOutInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
 
-  //############## Outputs ############
-
-  datastructure::ApplicationOutputs outputs;
-
-  word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr, 140);
+  UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr, 140);
 
   std::vector<bool> eval_out;
   for (int i = 0; i < 20 ; i++) {
@@ -118,7 +173,12 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   }
   outputs.setEvalOutVector(eval_out);
 
-  word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,144);
+
+}
+
+bool ParseApplicationData::setEvaluationPathsOutputsIsSafeInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,144);
 
   std::vector<bool> eval_out_is_safe;
   for (int i = 0; i < 20 ; i++) {
@@ -126,22 +186,41 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   }
   outputs.setEvalOutIsSafeVector(eval_out_is_safe);
 
-  word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,148);
+
+}
+
+
+bool ParseApplicationData::setEvaluationPathsOutputsValidFlagsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,148);
 
   std::vector<bool> eval_out_is_valid;
   for (int i = 0; i < 20 ; i++) {
     eval_out_is_valid.push_back(word32 & (0x01 << i));
   }
   outputs.setEvalOutIsValidVector(eval_out_is_valid);
+}
 
+bool ParseApplicationData::setMonitoringCaseOutputsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  setMonitoringCaseNumbersInApplicationOutputs(data_ptr,outputs);
+  setMonitoringCaseFlagsInApplicationOutputs(data_ptr, outputs);
+}
+
+bool ParseApplicationData::setMonitoringCaseNumbersInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
   std::vector<UINT16> output_monitoring_cases;
 
   for (int i = 0 ; i < 20; i++) {
     output_monitoring_cases.push_back(m_reader_ptr->readUINT16LittleEndian(data_ptr, 152 + i*2));
   }
   outputs.setMonitoringCaseVector(output_monitoring_cases);
+}
 
-  word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,192);
+
+bool ParseApplicationData::setMonitoringCaseFlagsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr,192);
 
   std::vector<bool> output_monitoring_flags;
   // 20 for each case one
@@ -150,10 +229,16 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
      output_monitoring_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   outputs.setMonitoringCaseFlagsVector(output_monitoring_flags);
+}
 
+bool ParseApplicationData::setSleepModeOutputInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
   outputs.setSleepModeOutput(m_reader_ptr->readUINT8LittleEndian(data_ptr,193));
+}
 
-  word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,194);
+bool ParseApplicationData::setErrorFlagsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  UINT8 word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,194);
 
   outputs.setHostErrorFlagContaminationWarning(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setHostErrorFlagContaminationError(static_cast<bool>(word8 & (0x01 << 1)));
@@ -161,22 +246,31 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   outputs.setHostErrorFlagGlare(static_cast<bool>(word8 & (0x01 << 3)));
   outputs.setHostErrorFlagReferenceContourIntruded(static_cast<bool>(word8 & (0x01 << 4)));
   outputs.setHostErrorFlagCriticalError(static_cast<bool>(word8 & (0x01 << 5)));
-  //bit 6,7 reserved
+}
 
-  //4Byte for error flags reserved
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
+bool ParseApplicationData::setLinearVelocityOutoutsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  setLinearVelocity0InApplicationOutputs(data_ptr,outputs);
+  setLinearVelocity1InApplicationOutputs(data_ptr, outputs);
+  setLinearVelocityFlagsInApplicationOutputs(data_ptr, outputs);
+}
 
-  //2Byte reserved
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
-
+bool ParseApplicationData::setLinearVelocity0InApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
   outputs.setVelocity0(m_reader_ptr->readUINT16LittleEndian(data_ptr,200));
+
+
+}
+
+bool ParseApplicationData::setLinearVelocity1InApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
   outputs.setVelocity1(m_reader_ptr->readUINT16LittleEndian(data_ptr,202));
 
-  word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,204);
+}
+
+bool ParseApplicationData::setLinearVelocityFlagsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  UINT8 word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,204);
 
   outputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
@@ -184,21 +278,28 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
   outputs.setVelocity0TransmittedSafely(static_cast<bool>(word8 & (0x01 << 4)));
   outputs.setVelocity1TransmittedSafely(static_cast<bool>(word8 & (0x01 << 5)));
   //reserved bits 6,7
+}
 
-  //1Byte reserved for velocities
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
+bool ParseApplicationData::setResultingVelocityOutputsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  setResultingVelocityInApplicationOutputs(data_ptr,outputs);
+  setResultingVelocityFlagsInApplicationOutputs(data_ptr, outputs);
 
-//  //2 Byte reserved
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  m_reader_ptr->readUINT8LittleEndian(data_ptr);
+}
 
+bool ParseApplicationData::setResultingVelocityInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
   std::vector<INT16> resulting_velocities;
   for (int i = 0 ; i < 20; i++) {
     resulting_velocities.push_back(m_reader_ptr->readINT16LittleEndian(data_ptr,208 + i * 2));
   }
   outputs.setResultingVelocityVector(resulting_velocities);
 
-  word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr, 248);
+}
+
+bool ParseApplicationData::setResultingVelocityFlagsInApplicationOutputs(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  UINT32 word32 = m_reader_ptr->readUINT32LittleEndian(data_ptr, 248);
 
   std::vector<bool> resulting_velocities_flags;
   // 20 for each case one
@@ -207,23 +308,17 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
      resulting_velocities_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   outputs.setResultingVelocityIsValidVector(resulting_velocities_flags);
+}
 
-
-  //reserved 7 Byte
-//  for (int i = 0; i < 7; i++) {
-//    m_reader_ptr->readUINT8LittleEndian(data_ptr);
-//  }
-
-  word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,259);
+bool ParseApplicationData::setOutputFlagsinApplicationOutput(const BYTE* data_ptr, datastructure::ApplicationOutputs &outputs)
+{
+  UINT8 word8 = m_reader_ptr->readUINT8LittleEndian(data_ptr,259);
 
   outputs.setFlagsSleepModeOutputIsValid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setFlagsHostErrorFlagsAreValid(static_cast<bool>(word8 & (0x01 << 1)));
-  //bit 2-7 are reserved
 
-  application_data.setOutputs(outputs);
-
-  return application_data;
 }
+
 
 
 

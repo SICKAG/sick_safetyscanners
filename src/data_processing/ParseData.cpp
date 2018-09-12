@@ -43,8 +43,6 @@ bool ParseData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructu
   sick::datastructure::ApplicationData application_data = application_data_parser.parseUDPSequence(buffer,data);
   data.setApplicationDataPtr(boost::make_shared<sick::datastructure::ApplicationData>(application_data));
 
-
-
   return true;
 }
 
