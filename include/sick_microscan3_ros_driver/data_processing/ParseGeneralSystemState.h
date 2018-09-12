@@ -16,6 +16,13 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  bool setDataInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
+  bool setStatusBitsInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
+  bool setSafeCutOffPathInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
+  bool setNonSafeCutOffPathInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
+  bool setResetRequiredCutOffPathInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
+  bool setCurrentMonitoringCasesInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
+  bool setErrorsInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
 };
 
 }
