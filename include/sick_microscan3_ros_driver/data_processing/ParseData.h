@@ -23,6 +23,22 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+
+  boost::shared_ptr<sick::data_processing::ParseDataHeader> m_data_header_parser_ptr;
+  boost::shared_ptr<sick::data_processing::ParseDerivedValues> m_derived_values_parser_ptr;
+  boost::shared_ptr<sick::data_processing::ParseMeasurementData> m_measurement_data_parser_ptr;
+  boost::shared_ptr<sick::data_processing::ParseGeneralSystemState> m_general_system_state_parser_ptr;
+  boost::shared_ptr<sick::data_processing::ParseIntrusionData> m_intrusion_data_parser_ptr;
+  boost::shared_ptr<sick::data_processing::ParseApplicationData> m_application_data_parser_ptr;
+
+
+  bool setDataBlocksInData(datastructure::PacketBuffer &buffer, datastructure::Data &data);
+  bool setDataHeaderInData(datastructure::PacketBuffer &buffer, datastructure::Data &data);
+  bool setDerivedValuesInData(datastructure::PacketBuffer &buffer, datastructure::Data &data);
+  bool setMeasurementDataInData(datastructure::PacketBuffer &buffer, datastructure::Data &data);
+  bool setGeneralSystemStateInData(datastructure::PacketBuffer &buffer, datastructure::Data &data);
+  bool setIntrusionDataInData(datastructure::PacketBuffer &buffer, datastructure::Data &data);
+  bool setApplicationDataInData(datastructure::PacketBuffer &buffer, datastructure::Data &data);
 };
 
 }
