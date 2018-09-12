@@ -16,6 +16,13 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  bool setDataInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
+  bool setMultiplicationFactorInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
+  bool setNumberOfBeamsInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
+  bool setScanTimeInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
+  bool setStartAngleInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
+  bool setAngularBeamResolutionInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
+  bool setInterbeamPeriodInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
 };
 
 }
