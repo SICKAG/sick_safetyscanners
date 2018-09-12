@@ -15,7 +15,14 @@ public:
   datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &header);
 
 private:
+  float m_angle;
+  float m_angle_delta;
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  bool setDataInMeasurementData(const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
+  bool setNumberOfBeamsInMeasurementData(const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
+  bool setStartAngleAndDelta(datastructure::Data &data);
+  bool setScanPointsInMeasurementData(const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
+  bool addScanPointToMeasurementData(UINT16 offset, const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
 };
 
 }
