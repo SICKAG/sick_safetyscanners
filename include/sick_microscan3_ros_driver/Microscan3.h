@@ -24,6 +24,7 @@
 #include <sick_microscan3_ros_driver/data_processing/UDPPacketMerger.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseData.h>
+#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 #include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
@@ -45,7 +46,7 @@ class Microscan3
    /*!
    * Constructor.
    */
-  Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction);
+  Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction, sick::datastructure::CommSettings settings);
 
   /*!
    * Destructor.
@@ -54,7 +55,7 @@ class Microscan3
 
     bool run();
 
-    void serviceTCP();
+    void serviceTCP(sick::datastructure::CommSettings settings);
 private:
   PaketReceivedCallbackFunction m_newPaketReceivedCallbackFunction;
 
@@ -71,8 +72,8 @@ private:
   void processUDPPaket(const datastructure::PacketBuffer &buffer);
   bool UDPClientThread();
   void processTCPPaket(const sick::datastructure::PacketBuffer &buffer);
-  void startTCPConnection();
-  void changeCommSettingsinColaSession();
+  void startTCPConnection(sick::datastructure::CommSettings settings);
+  void changeCommSettingsinColaSession(datastructure::CommSettings settings);
   void stopTCPConnection();
 };
 

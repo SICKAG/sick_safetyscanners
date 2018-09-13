@@ -12,11 +12,16 @@ find_package(catkin REQUIRED
   COMPONENTS
     roscpp
     sensor_msgs
+    dynamic_reconfigure
 )
 
 ## Find system libraries
 #find_package(Eigen3 REQUIRED)
 find_package(Boost REQUIRED)
+
+generate_dynamic_reconfigure_options(
+  config/Microscan3Configuration.cfg
+)
 
 ###################################
 ## catkin specific configuration ##
@@ -36,6 +41,7 @@ catkin_package(
   CATKIN_DEPENDS
     roscpp
     sensor_msgs
+    dynamic_reconfigure
   DEPENDS
     Boost
 )
@@ -43,6 +49,8 @@ catkin_package(
 ###########
 ## Build ##
 ###########
+
+
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
@@ -72,6 +80,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/ApplicationData.cpp
   src/datastructure/ApplicationInputs.cpp
   src/datastructure/ApplicationOutputs.cpp
+  src/datastructure/CommSettings.cpp
   src/data_processing/UDPPacketMerger.cpp
   src/data_processing/ParseDatagramHeader.cpp
   src/data_processing/ParseData.cpp

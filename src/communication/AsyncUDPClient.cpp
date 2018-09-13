@@ -2,7 +2,7 @@
 
 namespace sick {
 namespace communication {
-AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, std::string host, unsigned short server_port, unsigned short local_port) :
+AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, unsigned short local_port) :
   //socket(boost::ref(io_service), boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port)),
               m_io_work_ptr(),
               m_io_service(io_service),

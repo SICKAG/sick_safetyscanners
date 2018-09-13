@@ -5,6 +5,8 @@
 namespace sick {
 namespace datastructure {
 
+const double ANGLE_RESOLUTION = 4194304.0;
+
 class DerivedValues
 {
 public:

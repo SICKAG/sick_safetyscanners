@@ -17,14 +17,13 @@
 
 namespace sick {
 
-Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction)
+Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction, sick::datastructure::CommSettings settings)
   : m_newPaketReceivedCallbackFunction(newPaketReceivedCallbackFunction)
 {
   std::cout << "starting microscan" << std::endl;
   m_io_service_ptr = boost::make_shared<boost::asio::io_service>();
-  //TODO parameterize
   m_async_udp_client_ptr = boost::make_shared<sick::communication::AsyncUDPClient>(boost::bind(&Microscan3::processUDPPaket, this, _1),
-                                                                               boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
+                                                                               boost::ref(*m_io_service_ptr), settings.getHostUdpPort());
   m_paket_merger_ptr = boost::make_shared<sick::data_processing::UDPPaketMerger>();
   std::cout << "started Microscan" << std::endl;
 }
@@ -56,36 +55,35 @@ void Microscan3::processTCPPaket(const sick::datastructure::PacketBuffer& buffer
   std::cout << "process tcp in microscan" << std::endl;
 }
 
-void Microscan3::serviceTCP(){
+//TODO rename
+void Microscan3::serviceTCP(sick::datastructure::CommSettings settings){
 
-   startTCPConnection();
+   startTCPConnection(settings);
 
-   changeCommSettingsinColaSession();
+   changeCommSettingsinColaSession(settings);
 
    stopTCPConnection();
 }
 
-void Microscan3::startTCPConnection()
+void Microscan3::startTCPConnection(sick::datastructure::CommSettings settings)
 {
   //TODO parameterize
 
   boost::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client
    = boost::make_shared<sick::communication::AsyncTCPClient>(boost::bind(&Microscan3::processTCPPaket, this, _1),
-                                                                               boost::ref(*m_io_service_ptr), "192.168.1.10",2122, 6060);
+                                                                               boost::ref(*m_io_service_ptr), settings.getSensorIp(),
+                                                                               settings.getSensorTcpPort());
    async_tcp_client->do_connect();
    m_session_ptr = boost::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 }
 
-void Microscan3::changeCommSettingsinColaSession()
+void Microscan3::changeCommSettingsinColaSession(sick::datastructure::CommSettings settings)
 {
   m_session_ptr->open();
-
   sick::cola2::Cola2Session::CommandPtr command_ptr =
-          boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr), boost::asio::ip::address_v4::from_string("192.168.1.9"));
+          boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr), settings);
   m_session_ptr->executeCommand(command_ptr);
-
   std::cout << "SessionID: " << m_session_ptr->getSessionID() << std::endl;
-
   m_session_ptr->close();
 
 }

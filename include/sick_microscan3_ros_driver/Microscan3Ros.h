@@ -25,9 +25,13 @@
 
 //Package
 #include <sick_microscan3_ros_driver/Microscan3.h>
+#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
+
+#include <dynamic_reconfigure/server.h>
+#include <sick_microscan3_ros_driver/Microscan3ConfigurationConfig.h>
 
 
 #include <cmath>
@@ -71,6 +75,11 @@ class Microscan3Ros
   bool serviceCallback(std_srvs::Trigger::Request& request,
                        std_srvs::Trigger::Response& response);
 
+  void callback(sick_microscan3_ros_driver::Microscan3ConfigurationConfig &config, uint32_t level);
+
+  bool isInitialised();
+
+  bool m_initialised;
   //! ROS node handle.
   ros::NodeHandle m_nh;
 
@@ -96,6 +105,10 @@ class Microscan3Ros
   ros::ServiceClient m_service_client;
 
   boost::shared_ptr<sick::Microscan3> m_device;
+
+  sick::datastructure::CommSettings m_communication_settings;
+
+ dynamic_reconfigure::Server<sick_microscan3_ros_driver::Microscan3ConfigurationConfig> srvs;
 
 };
 

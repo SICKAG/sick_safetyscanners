@@ -21,8 +21,8 @@ namespace communication{
                 //typedef boost::function<void(datastructure::PaketBuffer)> PacketHandler;
                 typedef boost::function<void(const sick::datastructure::PacketBuffer&)> PacketHandler;
 
-                AsyncTCPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, std::string host,
-                               unsigned short server_port, unsigned short local_port = 0);
+                AsyncTCPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, boost::asio::ip::address_v4 host,
+                               unsigned short server_port);
                 virtual ~AsyncTCPClient();
 
                 void run_service();

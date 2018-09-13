@@ -21,8 +21,7 @@ namespace communication{
                 //typedef boost::function<void(datastructure::PaketBuffer)> PacketHandler;
                 typedef boost::function<void(const sick::datastructure::PacketBuffer&)> PacketHandler;
 
-                AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, std::string host,
-                               unsigned short server_port, unsigned short local_port = 0);
+                AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, unsigned short local_port = 0);
 		virtual ~AsyncUDPClient();
 
                 void run_service();
