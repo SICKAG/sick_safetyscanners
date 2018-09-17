@@ -55,7 +55,7 @@ class Microscan3
 
     bool run();
 
-    void serviceTCP(sick::datastructure::CommSettings settings);
+    void changeSensorSettings(sick::datastructure::CommSettings settings);
 private:
   PaketReceivedCallbackFunction m_newPaketReceivedCallbackFunction;
 

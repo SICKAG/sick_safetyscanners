@@ -51,12 +51,10 @@ bool Microscan3::UDPClientThread()
 
 void Microscan3::processTCPPaket(const sick::datastructure::PacketBuffer& buffer)
 {
-  //TODO?? Do I expect a return to process? Maybe for different Methdos
-  std::cout << "process tcp in microscan" << std::endl;
+  //Not needed for current functionality, inplace for possible future developments
 }
 
-//TODO rename
-void Microscan3::serviceTCP(sick::datastructure::CommSettings settings){
+void Microscan3::changeSensorSettings(sick::datastructure::CommSettings settings){
 
    startTCPConnection(settings);
 
@@ -67,8 +65,6 @@ void Microscan3::serviceTCP(sick::datastructure::CommSettings settings){
 
 void Microscan3::startTCPConnection(sick::datastructure::CommSettings settings)
 {
-  //TODO parameterize
-
   boost::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client
    = boost::make_shared<sick::communication::AsyncTCPClient>(boost::bind(&Microscan3::processTCPPaket, this, _1),
                                                                                boost::ref(*m_io_service_ptr), settings.getSensorIp(),

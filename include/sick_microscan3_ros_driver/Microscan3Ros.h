@@ -86,29 +86,16 @@ class Microscan3Ros
   //! ROS private node handle
   ros::NodeHandle m_private_nh;
 
-  //! ROS topic subscriber.
-  ros::Subscriber m_subscriber;
-
   //! ROS topic publisher
-  ros::Publisher m_publisher;
-
-  //! ROS topic and service names.
-  std::string m_subscriber_topic;
-  std::string m_publisher_topic;
-  std::string m_service_server_name;
-  std::string m_service_client_name;
-
-  //! ROS service server.
-  ros::ServiceServer m_service_server;
-
-  //! ROS service client.
-  ros::ServiceClient m_service_client;
+  ros::Publisher m_laser_scan_publisher;
 
   boost::shared_ptr<sick::Microscan3> m_device;
 
   sick::datastructure::CommSettings m_communication_settings;
 
- dynamic_reconfigure::Server<sick_microscan3_ros_driver::Microscan3ConfigurationConfig> srvs;
+ dynamic_reconfigure::Server<sick_microscan3_ros_driver::Microscan3ConfigurationConfig> m_dynamic_reconfiguration_server;
+
+ std::string m_laser_scan_frame_name;
 
 };
 
