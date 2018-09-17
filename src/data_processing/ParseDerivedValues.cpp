@@ -11,7 +11,6 @@ ParseDerivedValues::ParseDerivedValues()
 
 datastructure::DerivedValues ParseDerivedValues::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing DerivedValues" << std::endl;
   datastructure::DerivedValues derived_values;
 
 
@@ -19,8 +18,6 @@ datastructure::DerivedValues ParseDerivedValues::parseUDPSequence(datastructure:
     derived_values.setIsEmpty(true);
     return derived_values;
   }
-  std::cout << "Beginn Parsing DerivedValues Conditions Met" << std::endl;
-
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getDerivedValuesBlockOffset());
   setDataInDerivedValues(data_ptr, derived_values);
   return derived_values;

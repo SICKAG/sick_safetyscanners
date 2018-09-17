@@ -37,7 +37,6 @@ void PacketBuffer::setBuffer(const PacketBuffer::ArrayBuffer &buffer, size_t len
 
 size_t PacketBuffer::getLength() const
 {
-  std::cout << "buffer: " << m_buffer.size() << std::endl;
   return m_buffer.size();
 }
 

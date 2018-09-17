@@ -11,16 +11,11 @@ ParseMeasurementData::ParseMeasurementData()
 
 datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing Measrurement Data" << std::endl;
-
   datastructure::MeasurementData measurement_data;
   if (!checkIfPreconditionsAreMet(data)) {
     measurement_data.setIsEmpty(true);
     return measurement_data;
   }
-  std::cout << "Beginn Parsing Measurement Data Conditions Met" << std::endl;
-
-
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
 
   setStartAngleAndDelta(data);
@@ -65,10 +60,7 @@ bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(datastructure::
 bool ParseMeasurementData::setDataInMeasurementData(const BYTE* data_ptr, datastructure::MeasurementData &measurement_data)
 {
   setNumberOfBeamsInMeasurementData(data_ptr, measurement_data);
-  std::cout << "NumberOfBeams: " << measurement_data.getNumberOfBeams() << std::endl;
   setScanPointsInMeasurementData(data_ptr, measurement_data);
-  std::cout  << "measurement data size: " << measurement_data.getScanPointsVector().size() << std::endl;
-
 }
 
 bool ParseMeasurementData::setNumberOfBeamsInMeasurementData(const BYTE* data_ptr, datastructure::MeasurementData &measurement_data)
@@ -79,7 +71,6 @@ bool ParseMeasurementData::setNumberOfBeamsInMeasurementData(const BYTE* data_pt
 bool ParseMeasurementData::setStartAngleAndDelta(datastructure::Data &data)
 {
   m_angle = data.getDerivedValuesPtr()->getStartAngle();
-  std::cout << m_angle << std::endl;
   m_angle_delta = data.getDerivedValuesPtr()->getAngularBeamResolution();
 }
 

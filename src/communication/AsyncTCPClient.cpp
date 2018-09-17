@@ -19,7 +19,7 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler, boost::asio::io_ser
     std::cout << "Exception while creating socket: " << e.what() << std::endl;
   }
   m_remote_endpoint = boost::asio::ip::tcp::endpoint(server_ip, server_port);
-  std::cout << "setup tcpclient" << std::endl;
+  std::cout << "TCP client setup" << std::endl;
 }
 
 AsyncTCPClient::~AsyncTCPClient()
@@ -31,7 +31,7 @@ void AsyncTCPClient::do_connect(){
   //async connect takes some time, TODO set mutex to wait for connection
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec)
   {
-    std::cout << "TCP error code" << ec.value() << std::endl;
+    std::cout << "TCP error code: " << ec.value() << std::endl;
   });
 }
 
@@ -74,7 +74,6 @@ void AsyncTCPClient::setPacketHandler(const PacketHandler &packet_handler)
 void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error,
                                           std::size_t bytes_transferred)
 {
-  std::cout << "handle send and receive" << bytes_transferred << std::endl;
   // Check for errors
   if (!error || error == boost::asio::error::message_size)
   {
@@ -82,19 +81,17 @@ void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error
   }
   else
   {
-    std::cout << "error in handle receive" << std::endl;
+    std::cout << "Error in tcp handle send and receive: " << error.value() << std::endl;
   }
 }
 
 
 void AsyncTCPClient::start_receive()
 {
-  std::cout << "start receive" << std::endl;
 }
 
 void AsyncTCPClient::handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred)
 {
-  std::cout << "handle receive tcp" << std::endl;
   if (!error)
   {
     sick::datastructure::PacketBuffer paket_buffer(m_recv_buffer, bytes_transferred);
@@ -102,15 +99,13 @@ void AsyncTCPClient::handle_receive(const boost::system::error_code& error, std:
   }
   else
   {
-    std::cout << "error in handle receive tcp" << error <<  std::endl;
+    std::cout << "Error in tcp handle receive: " << error.value() <<  std::endl;
   }
 }
 
 
 void AsyncTCPClient::run_service()
 {
-  std::cout << "runservice" << std::endl;
-
 }
 
 }

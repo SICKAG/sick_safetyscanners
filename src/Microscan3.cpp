@@ -20,12 +20,12 @@ namespace sick {
 Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction, sick::datastructure::CommSettings settings)
   : m_newPaketReceivedCallbackFunction(newPaketReceivedCallbackFunction)
 {
-  std::cout << "starting microscan" << std::endl;
+  std::cout << "starting MicroScan3" << std::endl;
   m_io_service_ptr = boost::make_shared<boost::asio::io_service>();
   m_async_udp_client_ptr = boost::make_shared<sick::communication::AsyncUDPClient>(boost::bind(&Microscan3::processUDPPaket, this, _1),
                                                                                boost::ref(*m_io_service_ptr), settings.getHostUdpPort());
   m_paket_merger_ptr = boost::make_shared<sick::data_processing::UDPPaketMerger>();
-  std::cout << "started Microscan" << std::endl;
+  std::cout << "started MicroScan3" << std::endl;
 }
 
 Microscan3::~Microscan3()
@@ -42,10 +42,10 @@ bool Microscan3::run()
 
 bool Microscan3::UDPClientThread()
 {
-   std::cout << "enter thread" << std::endl;
+   std::cout << "Enter io thread" << std::endl;
    m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(*m_io_service_ptr));
    m_io_service_ptr->run();
-   std::cout << "exit thread" << std::endl;
+   std::cout << "Exit io thread" << std::endl;
 }
 
 
@@ -79,7 +79,6 @@ void Microscan3::changeCommSettingsinColaSession(sick::datastructure::CommSettin
   sick::cola2::Cola2Session::CommandPtr command_ptr =
           boost::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr), settings);
   m_session_ptr->executeCommand(command_ptr);
-  std::cout << "SessionID: " << m_session_ptr->getSessionID() << std::endl;
   m_session_ptr->close();
 
 }
@@ -96,8 +95,6 @@ void Microscan3::processUDPPaket(const sick::datastructure::PacketBuffer& buffer
   if(m_paket_merger_ptr->addUDPPaket(buffer)) {
 
     sick::datastructure::PacketBuffer deployedBuffer =  m_paket_merger_ptr->getDeployedPacketBuffer();
-    std::cout << "buffer to parse: " << deployedBuffer.getLength() << std::endl;
-
     sick::datastructure::Data data;
     sick::data_processing::ParseData data_parser;
     data_parser.parseUDPSequence(deployedBuffer,data);

@@ -11,7 +11,6 @@ ParseDataHeader::ParseDataHeader()
 
 datastructure::DataHeader ParseDataHeader::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing Data Header" << std::endl;
   const BYTE* data_ptr(buffer.getBuffer().data());
   datastructure::DataHeader data_header;
   setDataInDataHeader(data_ptr, data_header);

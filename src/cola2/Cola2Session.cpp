@@ -17,14 +17,12 @@ Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient
 
 bool Cola2Session::open()
 {
-  std::cout << "open" << std::endl;
   CommandPtr command_ptr = boost::make_shared<CreateSession>(boost::ref(*this));
   return executeCommand(command_ptr);
 }
 
 bool Cola2Session::close()
 {
-  std::cout << "close" << std::endl;
   CommandPtr command_ptr = boost::make_shared<CloseSession>(boost::ref(*this));
   return executeCommand(command_ptr);
 }
@@ -32,7 +30,6 @@ bool Cola2Session::close()
 bool Cola2Session::executeCommand(CommandPtr command)
 {
   //TODO sanitize
-  std::cout << "execute command" << std::endl;
   addCommand(command->getRequestID(), command);
   sendTelegramAndListenForAnswer(command);
   return true;
@@ -61,7 +58,6 @@ void Cola2Session::setSessionID(const UINT32 &session_id)
 
 void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
 {
-  std::cout << "Processing TCP packet in Session" << std::endl;
   addPacketToMerger(packet);
   if (!checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()) return;
   sick::datastructure::PacketBuffer deployedPacket = m_packet_merger_ptr->getDeployedPacketBuffer();
@@ -73,7 +69,6 @@ bool Cola2Session::addPacketToMerger(const sick::datastructure::PacketBuffer &pa
 {
   if (m_packet_merger_ptr->isEmpty() || m_packet_merger_ptr->isComplete())
   {
-    std::cout << "target size: " << m_tcp_parser_ptr->getExpectedPacketLength(packet) << std::endl;
     m_packet_merger_ptr->setTargetSize(m_tcp_parser_ptr->getExpectedPacketLength(packet));
   }
   m_packet_merger_ptr->addTCPPacket(packet);

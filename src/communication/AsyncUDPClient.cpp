@@ -20,7 +20,7 @@ AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_ser
   {
     std::cout << "Exception while creating socket: " << e.what() << std::endl;
   }
-  std::cout << "setup udpclient" << std::endl;
+  std::cout << "UDP client setup" << std::endl;
 }
 
 AsyncUDPClient::~AsyncUDPClient()
@@ -30,8 +30,6 @@ AsyncUDPClient::~AsyncUDPClient()
 
 void AsyncUDPClient::start_receive()
 {
-  std::cout << "start receive" << std::endl;
-
   m_socket_ptr->async_receive_from(boost::asio::buffer(m_recv_buffer), m_remote_endpoint,
     [this](boost::system::error_code ec, std::size_t bytes_recvd)
   {
@@ -41,7 +39,6 @@ void AsyncUDPClient::start_receive()
 
 void AsyncUDPClient::handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred)
 {
-  std::cout << "handle receive" << std::endl;
   if (!error)
   {
     sick::datastructure::PacketBuffer paket_buffer(m_recv_buffer, bytes_transferred);
@@ -49,7 +46,7 @@ void AsyncUDPClient::handle_receive(const boost::system::error_code& error, std:
   }
   else
   {
-    std::cout << "error in handle receive" << std::endl;
+    std::cout << "Error in UDP handle receive: " << error.value() << std::endl;
   }
   start_receive();
 }
@@ -57,7 +54,6 @@ void AsyncUDPClient::handle_receive(const boost::system::error_code& error, std:
 
 void AsyncUDPClient::run_service()
 {
-  std::cout << "runservice" << std::endl;
   start_receive();
 }
 

@@ -24,22 +24,15 @@ Microscan3Ros::Microscan3Ros()
 {
   dynamic_reconfigure::Server<sick_microscan3_ros_driver::Microscan3ConfigurationConfig>::CallbackType reconf_callback = boost::bind(&Microscan3Ros::callback, this,_1, _2);
   m_dynamic_reconfiguration_server.setCallback(reconf_callback);
-
   if (!readParameters()) {
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
-
-
   m_device = boost::make_shared<sick::Microscan3>(boost::bind(&Microscan3Ros::receivedUDPPaket, this, _1), m_communication_settings);
   m_device->run();
-
   m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan",100);
-
-  m_device->serviceTCP(m_communication_settings);
-
+  m_device->changeSensorSettings(m_communication_settings);
   m_initialised = true;
-
   ROS_INFO("Successfully launched node.");
 }
 
@@ -59,7 +52,7 @@ void Microscan3Ros::callback(sick_microscan3_ros_driver::Microscan3Configuration
                                          config.measurement_data,
                                          config.intrusion_data,
                                          config.application_io_data);
-    m_device->serviceTCP(m_communication_settings);
+    m_device->changeSensorSettings(m_communication_settings);
 
     m_laser_scan_frame_name = config.laser_scan_frame_name;
   }
@@ -152,7 +145,6 @@ bool Microscan3Ros::readParameters()
 void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
 {
   //TODO send complex message, for each data packet one?
-  ROS_INFO("Received UDP Paket");
   if(!data.getMeasurementDataPtr()->isEmpty())
   {
 

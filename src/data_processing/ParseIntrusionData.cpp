@@ -11,16 +11,12 @@ ParseIntrusionData::ParseIntrusionData()
 
 datastructure::IntrusionData ParseIntrusionData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing Intrusion Data" << std::endl;
-
   datastructure::IntrusionData intrusion_data;
   if (!checkIfPreconditionsAreMet(data))
   {
     intrusion_data.setIsEmpty(true);
     return intrusion_data;
   }
-  std::cout << "Beginn Parsing IntrusionData Conditions Met" << std::endl;
-
 
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getIntrusionDataBlockOffset());
   setNumScanPoints(data.getDerivedValuesPtr()->getNumberOfBeams());

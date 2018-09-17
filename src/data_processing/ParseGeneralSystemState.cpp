@@ -11,15 +11,11 @@ ParseGeneralSystemState::ParseGeneralSystemState()
 
 datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing General System State" << std::endl;
   datastructure::GeneralSystemState general_system_state;
   if (!checkIfPreconditionsAreMet(data)) {
     general_system_state.setIsEmpty(true);
     return general_system_state;
   }
-  std::cout << "Beginn Parsing GeneralSystemState Conditions Met" << std::endl;
-
-
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset());
 
   setDataInGeneralSystemState(data_ptr, general_system_state);

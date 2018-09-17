@@ -71,7 +71,6 @@ UINT16 CommSettings::getPublishingFequency() const
 void CommSettings::setPublishingFequency(const UINT16 &publishing_fequency)
 {
   m_publishing_fequency = publishing_fequency;
-    std::cout << "frequency: " << m_publishing_fequency << std::endl;
 }
 
 UINT32 CommSettings::getStartAngle() const
@@ -112,8 +111,6 @@ void CommSettings::setFeatures(const bool general_system_state, const bool deriv
   m_features += measurement_data << 2;
   m_features += intrusion_data << 3;
   m_features += application_data << 4;
-
-  std::cout << "features: " << m_features << std::endl;
 }
 
 boost::asio::ip::address_v4 CommSettings::getSensorIp() const

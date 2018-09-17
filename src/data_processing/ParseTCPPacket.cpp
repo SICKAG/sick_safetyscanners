@@ -25,8 +25,6 @@ UINT16 ParseTCPPacket::getRequestID(datastructure::PacketBuffer buffer)
 
 bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer, sick::cola2::Command &command)
 {
-  std::cout << "Beginn Parsing TCP Sequence Data" << std::endl;
-
   setCommandValuesFromPacket(buffer, command);
 
   std::vector<BYTE> byteVector;
@@ -98,8 +96,6 @@ void ParseTCPPacket::readData(datastructure::PacketBuffer& buffer, std::vector<B
 {
   if (buffer.getLength() == 18)
   {
-      // no additional data available
-      std::cout << "no additional data" << std::endl;
       return;
   }
   else

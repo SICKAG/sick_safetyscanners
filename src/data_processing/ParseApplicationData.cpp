@@ -10,17 +10,12 @@ ParseApplicationData::ParseApplicationData()
 
 datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing ParseApplicationData" << std::endl;
-
   datastructure::ApplicationData application_data;
 
   if (!checkIfPreconditionsAreMet(data)) {
     application_data.setIsEmpty(true);
     return application_data;
   }
-  std::cout << "Beginn Parsing Application Data Conditions Met" << std::endl;
-
-
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getApplicationDataBlockOffset());
 
   setDataInApplicationData(data_ptr, application_data);

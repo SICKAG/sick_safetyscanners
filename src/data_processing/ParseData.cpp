@@ -17,8 +17,6 @@ ParseData::ParseData()
 
 bool ParseData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing Data Header" << std::endl;
-
   setDataBlocksInData(buffer, data);
 
   return true;
