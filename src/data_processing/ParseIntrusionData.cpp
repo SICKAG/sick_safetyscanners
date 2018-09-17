@@ -13,16 +13,52 @@ datastructure::IntrusionData ParseIntrusionData::parseUDPSequence(datastructure:
 {
   std::cout << "Beginn Parsing Intrusion Data" << std::endl;
 
-  //TODO sanity checks and finalize the division for the angles check if derived values exist
-  if ( data.getDataHeaderPtr()->getIntrusionDataBlockOffset() == 0 && data.getDataHeaderPtr()->getIntrusionDataBlockSize() == 0) {
-    return datastructure::IntrusionData();
+  datastructure::IntrusionData intrusion_data;
+  if (!checkIfPreconditionsAreMet(data))
+  {
+    intrusion_data.setIsEmpty(true);
+    return intrusion_data;
   }
+  std::cout << "Beginn Parsing IntrusionData Conditions Met" << std::endl;
+
 
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getIntrusionDataBlockOffset());
   setNumScanPoints(data.getDerivedValuesPtr()->getNumberOfBeams());
-  datastructure::IntrusionData intrusion_data;
   setDataInIntrusionData(data_ptr, intrusion_data);
   return intrusion_data;
+}
+
+bool ParseIntrusionData::checkIfPreconditionsAreMet(datastructure::Data &data)
+{
+  if (!checkIfIntrusionDataIsPublished(data))
+  {
+    return false;
+  }
+  if (!checkIfDataContainsNeededParsedBlocks(data))
+  {
+    return false;
+  }
+  return true;
+}
+
+bool ParseIntrusionData::checkIfIntrusionDataIsPublished(datastructure::Data &data)
+{
+  if ( data.getDataHeaderPtr()->getIntrusionDataBlockOffset() == 0 && data.getDataHeaderPtr()->getIntrusionDataBlockSize() == 0)
+  {
+    return false;
+  }
+  return true;
+}
+
+bool ParseIntrusionData::checkIfDataContainsNeededParsedBlocks(datastructure::Data &data)
+{
+  if (data.getDataHeaderPtr()->isEmpty()){
+    return false;
+  }
+  if (data.getDerivedValuesPtr()->isEmpty()){
+    return false;
+  }
+  return true;
 }
 
 UINT16 ParseIntrusionData::getNumScanPoints() const

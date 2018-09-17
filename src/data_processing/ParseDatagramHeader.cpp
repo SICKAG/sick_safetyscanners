@@ -11,7 +11,7 @@ ParseDatagramHeader::ParseDatagramHeader()
 
 bool ParseDatagramHeader::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::DatagramHeader &header)
 {
-  std::cout << "Beginn Parsing Header" << std::endl;
+  std::cout << "Beginn Parsing Datagram Header" << std::endl;
   const BYTE* data_ptr(buffer.getBuffer().data());
   setDataInHeader(data_ptr,header);
   return true;

@@ -73,7 +73,12 @@ public:
   UINT16 getApplicationDataBlockSize() const;
   void setApplicationDataBlockSize(const UINT16 &application_data_block_size);
 
+  bool isEmpty() const;
+  void setIsEmpty(bool is_empty);
+
 private:
+  bool m_is_empty;
+
   UINT8 m_version_indicator;
   UINT8 m_version_major_version;
   UINT8 m_version_minor_version;

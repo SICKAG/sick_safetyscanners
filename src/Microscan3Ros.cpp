@@ -195,35 +195,37 @@ void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
 {
   //TODO
   ROS_INFO("Received UDP Paket");
-
-  sensor_msgs::LaserScan scan;
-  scan.header.frame_id = "laser_scan"; //TODO
-  scan.header.stamp = ros::Time::now();
-  int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
-
-  scan.angle_min = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(0).getAngle());
-  std::cout << "data ros: " << data.getDerivedValuesPtr()->getAngularBeamResolution();
-  scan.angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(data.getMeasurementDataPtr()->getScanPointsVector().size()-1).getAngle());
-  scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
-  boost::posix_time::microseconds time_increment = boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
-  scan.time_increment = time_increment.total_microseconds() * 1e-6;
-  boost::posix_time::milliseconds scan_time = boost::posix_time::milliseconds(data.getDerivedValuesPtr()->getScanTime());
-  scan.scan_time = scan_time.total_microseconds() * 1e-6;
-  scan.range_min = 0.02; // TODO configurable, values taken from reichweite und benötigte remissionen für Warnfelder from SICK datasheet
-  scan.range_max = 40.0; // TODO
-  scan.ranges.resize(num_scan_points);
-  scan.intensities.resize(num_scan_points);
-
-
-  std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPointsVector();
-  for (int i = 0; i < num_scan_points; ++i)
+  if(!data.getMeasurementDataPtr()->isEmpty())
   {
-      const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
-      scan.ranges[i] = static_cast<float>(scan_point.getDistance()) * 1e-3; // mm -> m
-      scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
-//              / std::numeric_limits<microscan3::ScanPointData::remission_type>::max();
+
+    sensor_msgs::LaserScan scan;
+    scan.header.frame_id = "laser_scan"; //TODO
+    scan.header.stamp = ros::Time::now();
+    int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
+
+    scan.angle_min = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(0).getAngle());
+    scan.angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(data.getMeasurementDataPtr()->getScanPointsVector().size()-1).getAngle());
+    scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
+    boost::posix_time::microseconds time_increment = boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
+    scan.time_increment = time_increment.total_microseconds() * 1e-6;
+    boost::posix_time::milliseconds scan_time = boost::posix_time::milliseconds(data.getDerivedValuesPtr()->getScanTime());
+    scan.scan_time = scan_time.total_microseconds() * 1e-6;
+    scan.range_min = 0.02; // TODO configurable, values taken from reichweite und benötigte remissionen für Warnfelder from SICK datasheet
+    scan.range_max = 40.0; // TODO
+    scan.ranges.resize(num_scan_points);
+    scan.intensities.resize(num_scan_points);
+
+
+    std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPointsVector();
+    for (int i = 0; i < num_scan_points; ++i)
+    {
+        const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
+        scan.ranges[i] = static_cast<float>(scan_point.getDistance()) * 1e-3; // mm -> m
+        scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
+  //              / std::numeric_limits<microscan3::ScanPointData::remission_type>::max();
+    }
+    m_publisher.publish(scan);
   }
-  m_publisher.publish(scan);
 }
 
 bool Microscan3Ros::serviceCallback(std_srvs::Trigger::Request& request,

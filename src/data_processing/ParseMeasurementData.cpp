@@ -11,20 +11,56 @@ ParseMeasurementData::ParseMeasurementData()
 
 datastructure::MeasurementData ParseMeasurementData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
-  std::cout << "Beginn Parsing Header" << std::endl;
+  std::cout << "Beginn Parsing Measrurement Data" << std::endl;
 
-  //TODO sanity checks
-  if ( data.getDataHeaderPtr()->getMeasurementDataBlockOffset() == 0 && data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0) {
-    return datastructure::MeasurementData();
+  datastructure::MeasurementData measurement_data;
+  if (!checkIfPreconditionsAreMet(data)) {
+    measurement_data.setIsEmpty(true);
+    return measurement_data;
   }
+  std::cout << "Beginn Parsing Measurement Data Conditions Met" << std::endl;
+
 
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
 
-  datastructure::MeasurementData measurement_data;
   setStartAngleAndDelta(data);
   setDataInMeasurementData(data_ptr, measurement_data);
   return measurement_data;
 }
+
+bool ParseMeasurementData::checkIfPreconditionsAreMet(datastructure::Data &data)
+{
+  if (!checkIfMeasurementDataIsPublished(data))
+  {
+    return false;
+  }
+  if (!checkIfDataContainsNeededParsedBlocks(data))
+  {
+    return false;
+  }
+  return true;
+}
+
+bool ParseMeasurementData::checkIfMeasurementDataIsPublished(datastructure::Data &data)
+{
+  if ( data.getDataHeaderPtr()->getMeasurementDataBlockOffset() == 0 && data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0)
+  {
+    return false;
+  }
+  return true;
+}
+
+bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(datastructure::Data &data)
+{
+  if (data.getDataHeaderPtr()->isEmpty()){
+    return false;
+  }
+  if (data.getDerivedValuesPtr()->isEmpty()){
+    return false;
+  }
+  return true;
+}
+
 
 bool ParseMeasurementData::setDataInMeasurementData(const BYTE* data_ptr, datastructure::MeasurementData &measurement_data)
 {

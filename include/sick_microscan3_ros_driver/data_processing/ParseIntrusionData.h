@@ -26,6 +26,9 @@ private:
   UINT16 setDataInIntrusionDatum(UINT16 offset, const BYTE *data_ptr, sick::datastructure::IntrusionDatum &datum);
   UINT16 setSizeInIntrusionDatum(UINT16 offset, const BYTE *data_ptr, sick::datastructure::IntrusionDatum &datum);
   UINT16 setFlagsInIntrusionDatum(UINT16 offset, const BYTE *data_ptr, sick::datastructure::IntrusionDatum &datum);
+  bool checkIfPreconditionsAreMet(datastructure::Data &data);
+  bool checkIfIntrusionDataIsPublished(datastructure::Data &data);
+  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data &data);
 };
 
 }

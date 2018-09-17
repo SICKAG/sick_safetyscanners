@@ -5,6 +5,7 @@ namespace datastructure {
 
 
 MeasurementData::MeasurementData()
+  : m_is_empty(false)
 {
 
 }
@@ -27,6 +28,16 @@ std::vector<ScanPoint> MeasurementData::getScanPointsVector() const
 void MeasurementData::addScanPoint(ScanPoint scan_point)
 {
   m_scan_points_vector.push_back(scan_point);
+}
+
+bool MeasurementData::isEmpty() const
+{
+  return m_is_empty;
+}
+
+void MeasurementData::setIsEmpty(bool is_empty)
+{
+  m_is_empty = is_empty;
 }
 
 

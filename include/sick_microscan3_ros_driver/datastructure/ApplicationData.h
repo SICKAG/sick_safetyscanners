@@ -18,7 +18,12 @@ public:
   ApplicationOutputs getOutputs() const;
   void setOutputs(const ApplicationOutputs &outputs);
 
+  bool isEmpty() const;
+  void setIsEmpty(bool is_empty);
+
 private:
+  bool m_is_empty;
+
   ApplicationInputs m_inputs;
   ApplicationOutputs m_outputs;
 

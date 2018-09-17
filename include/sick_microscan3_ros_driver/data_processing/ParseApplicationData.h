@@ -48,6 +48,9 @@ private:
   bool setResultingVelocityInApplicationOutputs(const BYTE *data_ptr, datastructure::ApplicationOutputs &outputs);
   bool setResultingVelocityFlagsInApplicationOutputs(const BYTE *data_ptr, datastructure::ApplicationOutputs &outputs);
   bool setOutputFlagsinApplicationOutput(const BYTE *data_ptr, datastructure::ApplicationOutputs &outputs);
+  bool checkIfPreconditionsAreMet(datastructure::Data &data);
+  bool checkIfApplicationDataIsPublished(datastructure::Data &data);
+  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data &data);
 };
 
 }

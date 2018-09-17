@@ -18,7 +18,12 @@ public:
   std::vector<ScanPoint> getScanPointsVector() const;
   void addScanPoint(ScanPoint scan_point);
 
+  bool isEmpty() const;
+  void setIsEmpty(bool is_empty);
+
 private:
+  bool m_is_empty;
+
   UINT32 m_number_of_beams;
   std::vector<ScanPoint> m_scan_points_vector;
 

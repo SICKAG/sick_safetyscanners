@@ -4,6 +4,7 @@ namespace sick {
 namespace datastructure {
 
 GeneralSystemState::GeneralSystemState()
+  :m_is_empty(false)
 {
 
 }
@@ -156,6 +157,16 @@ bool GeneralSystemState::getDeviceError() const
 void GeneralSystemState::setDeviceError(bool device_error)
 {
   m_device_error = device_error;
+}
+
+bool GeneralSystemState::isEmpty() const
+{
+    return m_is_empty;
+}
+
+void GeneralSystemState::setIsEmpty(bool is_empty)
+{
+  m_is_empty = is_empty;
 }
 
 

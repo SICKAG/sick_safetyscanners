@@ -23,6 +23,9 @@ private:
   bool setResetRequiredCutOffPathInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
   bool setCurrentMonitoringCasesInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
   bool setErrorsInGeneralSystemState(const BYTE *data_ptr, datastructure::GeneralSystemState &general_System_state);
+  bool checkIfPreconditionsAreMet(datastructure::Data &data);
+  bool checkIfGeneralSystemStateIsPublished(datastructure::Data &data);
+  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data &data);
 };
 
 }

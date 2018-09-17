@@ -12,16 +12,52 @@ ParseDerivedValues::ParseDerivedValues()
 datastructure::DerivedValues ParseDerivedValues::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
   std::cout << "Beginn Parsing DerivedValues" << std::endl;
+  datastructure::DerivedValues derived_values;
 
-  //TODO sanity checks and finalize the division for the angles
-  if ( data.getDataHeaderPtr()->getDerivedValuesBlockOffset() == 0 && data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0) {
-    return datastructure::DerivedValues();
+
+  if (!checkIfPreconditionsAreMet(data)) {
+    derived_values.setIsEmpty(true);
+    return derived_values;
   }
+  std::cout << "Beginn Parsing DerivedValues Conditions Met" << std::endl;
 
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getDerivedValuesBlockOffset());
-  datastructure::DerivedValues derived_values;
   setDataInDerivedValues(data_ptr, derived_values);
   return derived_values;
+}
+
+bool ParseDerivedValues::checkIfPreconditionsAreMet(datastructure::Data &data)
+{
+  if (!checkIfDerivedValuesIsPublished(data))
+  {
+    return false;
+  }
+  if (!checkIfDataContainsNeededParsedBlocks(data))
+  {
+    return false;
+  }
+
+  return true;
+
+}
+
+bool ParseDerivedValues::checkIfDerivedValuesIsPublished(datastructure::Data &data)
+{
+  if (data.getDataHeaderPtr()->getDerivedValuesBlockOffset() == 0 && data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0)
+  {
+    return false;
+  }
+  return true;
+
+}
+
+bool ParseDerivedValues::checkIfDataContainsNeededParsedBlocks(datastructure::Data &data)
+{
+  if (data.getDataHeaderPtr()->isEmpty()){
+    return false;
+  }
+  return true;
+
 }
 
 bool ParseDerivedValues::setDataInDerivedValues(const BYTE* data_ptr, datastructure::DerivedValues &derived_values)

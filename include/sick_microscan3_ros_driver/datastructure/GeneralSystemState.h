@@ -57,7 +57,11 @@ public:
 
 
 
+  bool isEmpty() const;
+  void setIsEmpty(bool is_empty);
+
 private:
+  bool m_is_empty;
   bool m_run_mode_active;
   bool m_standby_mode_active;
   bool m_contamination_warning;

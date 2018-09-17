@@ -12,16 +12,54 @@ ParseGeneralSystemState::ParseGeneralSystemState()
 datastructure::GeneralSystemState ParseGeneralSystemState::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data &data)
 {
   std::cout << "Beginn Parsing General System State" << std::endl;
-
-  //TODO sanity checks and finalize the division for the angles
-  if ( data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset() == 0 && data.getDataHeaderPtr()->getGeneralSystemStateBlockSize() == 0) {
-    return datastructure::GeneralSystemState();
-  }
-  const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset());
   datastructure::GeneralSystemState general_system_state;
+  if (!checkIfPreconditionsAreMet(data)) {
+    general_system_state.setIsEmpty(true);
+    return general_system_state;
+  }
+  std::cout << "Beginn Parsing GeneralSystemState Conditions Met" << std::endl;
+
+
+  const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset());
+
   setDataInGeneralSystemState(data_ptr, general_system_state);
   return general_system_state;
 }
+
+bool ParseGeneralSystemState::checkIfPreconditionsAreMet(datastructure::Data &data)
+{
+  if (!checkIfGeneralSystemStateIsPublished(data))
+  {
+    return false;
+  }
+  if (!checkIfDataContainsNeededParsedBlocks(data))
+  {
+    return false;
+  }
+
+  return true;
+
+}
+
+bool ParseGeneralSystemState::checkIfGeneralSystemStateIsPublished(datastructure::Data &data)
+{
+  if ( data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset() == 0 && data.getDataHeaderPtr()->getGeneralSystemStateBlockSize() == 0)
+  {
+    return false;
+  }
+  return true;
+
+}
+
+bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(datastructure::Data &data)
+{
+  if (data.getDataHeaderPtr()->isEmpty()){
+    return false;
+  }
+  return true;
+
+}
+
 
 bool ParseGeneralSystemState::setDataInGeneralSystemState(const BYTE* data_ptr, datastructure::GeneralSystemState &general_system_state)
 {

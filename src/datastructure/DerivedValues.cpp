@@ -4,6 +4,7 @@ namespace sick {
 namespace datastructure {
 
 DerivedValues::DerivedValues()
+ : m_is_empty(false)
 {
 
 }
@@ -67,6 +68,16 @@ UINT32 DerivedValues::getInterbeamPeriod() const
 void DerivedValues::setInterbeamPeriod(const UINT32 &interbeam_period)
 {
   m_interbeam_period = interbeam_period;
+}
+
+bool DerivedValues::isEmpty() const
+{
+  return m_is_empty;
+}
+
+void DerivedValues::setIsEmpty(bool is_empty)
+{
+  m_is_empty = is_empty;
 }
 
 }

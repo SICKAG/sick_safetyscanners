@@ -4,6 +4,7 @@ namespace sick {
 namespace datastructure {
 
 DataHeader::DataHeader()
+  : m_is_empty(false)
 {
 
 }
@@ -216,6 +217,16 @@ UINT16 DataHeader::getApplicationDataBlockSize() const
 void DataHeader::setApplicationDataBlockSize(const UINT16 &application_data_block_size)
 {
   m_application_data_block_size = application_data_block_size;
+}
+
+bool DataHeader::isEmpty() const
+{
+  return m_is_empty;
+}
+
+void DataHeader::setIsEmpty(bool is_empty)
+{
+  m_is_empty = is_empty;
 }
 
 }

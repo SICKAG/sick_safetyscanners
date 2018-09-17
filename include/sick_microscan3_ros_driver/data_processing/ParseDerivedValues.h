@@ -23,6 +23,9 @@ private:
   bool setStartAngleInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
   bool setAngularBeamResolutionInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
   bool setInterbeamPeriodInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
+  bool checkIfPreconditionsAreMet(datastructure::Data &data);
+  bool checkIfDerivedValuesIsPublished(datastructure::Data &data);
+  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data &data);
 };
 
 }

@@ -30,7 +30,12 @@ public:
   UINT32 getInterbeamPeriod() const;
   void setInterbeamPeriod(const UINT32 &interbeam_period);
 
+  bool isEmpty() const;
+  void setIsEmpty(bool is_empty);
+
 private:
+  bool m_is_empty;
+
   UINT16 m_multiplication_factor;
   UINT16 m_number_of_beams;
   UINT16 m_scan_time; //ms

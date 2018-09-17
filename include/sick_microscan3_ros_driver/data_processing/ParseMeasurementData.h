@@ -23,6 +23,9 @@ private:
   bool setStartAngleAndDelta(datastructure::Data &data);
   bool setScanPointsInMeasurementData(const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
   bool addScanPointToMeasurementData(UINT16 offset, const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
+  bool checkIfPreconditionsAreMet(datastructure::Data &data);
+  bool checkIfMeasurementDataIsPublished(datastructure::Data &data);
+  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data &data);
 };
 
 }

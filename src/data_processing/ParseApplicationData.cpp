@@ -12,16 +12,52 @@ datastructure::ApplicationData ParseApplicationData::parseUDPSequence(datastruct
 {
   std::cout << "Beginn Parsing ParseApplicationData" << std::endl;
 
-  //TODO sanity checks
-  if ( data.getDataHeaderPtr()->getApplicationDataBlockOffset() == 0 && data.getDataHeaderPtr()->getApplicationDataBlockSize() == 0) {
-    return datastructure::ApplicationData();
+  datastructure::ApplicationData application_data;
+
+  if (!checkIfPreconditionsAreMet(data)) {
+    application_data.setIsEmpty(true);
+    return application_data;
   }
+  std::cout << "Beginn Parsing Application Data Conditions Met" << std::endl;
+
 
   const BYTE* data_ptr(buffer.getBuffer().data() + data.getDataHeaderPtr()->getApplicationDataBlockOffset());
 
-  datastructure::ApplicationData application_data;
   setDataInApplicationData(data_ptr, application_data);
   return application_data;
+}
+
+bool ParseApplicationData::checkIfPreconditionsAreMet(datastructure::Data &data)
+{
+  if (!checkIfApplicationDataIsPublished(data))
+  {
+    return false;
+  }
+  if (!checkIfDataContainsNeededParsedBlocks(data))
+  {
+    return false;
+  }
+  return true;
+
+}
+
+bool ParseApplicationData::checkIfApplicationDataIsPublished(datastructure::Data &data)
+{
+  if ( data.getDataHeaderPtr()->getApplicationDataBlockOffset() == 0 && data.getDataHeaderPtr()->getApplicationDataBlockSize() == 0)
+  {
+    return false;
+  }
+  return true;
+
+}
+
+bool ParseApplicationData::checkIfDataContainsNeededParsedBlocks(datastructure::Data &data)
+{
+  if (data.getDataHeaderPtr()->isEmpty()){
+    return false;
+  }
+  return true;
+
 }
 
 bool ParseApplicationData::setDataInApplicationData(const BYTE* data_ptr, datastructure::ApplicationData &application_data)

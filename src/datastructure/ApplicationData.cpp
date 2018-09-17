@@ -4,6 +4,7 @@ namespace sick {
 namespace datastructure {
 
 ApplicationData::ApplicationData()
+  : m_is_empty(false)
 {
 
 }
@@ -26,6 +27,16 @@ ApplicationOutputs ApplicationData::getOutputs() const
 void ApplicationData::setOutputs(const ApplicationOutputs &outputs)
 {
   m_outputs = outputs;
+}
+
+bool ApplicationData::isEmpty() const
+{
+  return m_is_empty;
+}
+
+void ApplicationData::setIsEmpty(bool is_empty)
+{
+  m_is_empty = is_empty;
 }
 
 
