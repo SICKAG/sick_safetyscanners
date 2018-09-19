@@ -33,6 +33,9 @@
 #include <dynamic_reconfigure/server.h>
 #include <sick_microscan3_ros_driver/Microscan3ConfigurationConfig.h>
 
+#include <sick_microscan3_ros_driver/RawMicroScanDataMsg.h>
+#include <sick_microscan3_ros_driver/ExtendedLaserScanMsg.h>
+
 
 #include <cmath>
 
@@ -88,15 +91,30 @@ class Microscan3Ros
 
   //! ROS topic publisher
   ros::Publisher m_laser_scan_publisher;
+  ros::Publisher m_extended_laser_scan_publisher;
+  ros::Publisher m_raw_data_publisher;
 
   boost::shared_ptr<sick::Microscan3> m_device;
 
   sick::datastructure::CommSettings m_communication_settings;
 
- dynamic_reconfigure::Server<sick_microscan3_ros_driver::Microscan3ConfigurationConfig> m_dynamic_reconfiguration_server;
+  dynamic_reconfigure::Server<sick_microscan3_ros_driver::Microscan3ConfigurationConfig> m_dynamic_reconfiguration_server;
 
- std::string m_laser_scan_frame_name;
+  std::string m_laser_scan_frame_name;
 
+  sensor_msgs::LaserScan createLaserScanMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::ExtendedLaserScanMsg createExtendedLaserScanMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::RawMicroScanDataMsg createRawDataMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::DataHeaderMsg createDataHeaderMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::DerivedValuesMsg createDerivedValuesMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::GeneralSystemStateMsg createGeneralSystemStateMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::MeasurementDataMsg createMeasurementDataMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::ScanPointMsg createScanPointMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::IntrusionDataMsg createIntrusionDataMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::IntrusionDatumMsg createIntrusionDatumMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::ApplicationDataMsg createApplicationDataMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::ApplicationInputsMsg createApplicationInputsMessage(const sick::datastructure::Data &data);
+  sick_microscan3_ros_driver::ApplicationOutputsMsg createApplicationOutputsMessage(const sick::datastructure::Data &data);
 };
 
 } /* namespace */

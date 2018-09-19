@@ -1,0 +1,14 @@
+uint8 version_version
+uint8 version_major_version
+uint8 version_minor_version
+uint8 version_release
+
+uint32 serial_number_of_device
+uint32 serial_number_of_channel_plug
+uint8 channel_number
+
+uint32 sequence_number
+uint32 scan_number
+
+uint16 timestamp_date
+uint32 timestamp_time

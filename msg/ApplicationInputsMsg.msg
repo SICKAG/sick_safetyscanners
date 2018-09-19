@@ -1,0 +1,16 @@
+bool[] unsafe_inputs_input_sources
+bool[] unsafe_inputs_flags
+
+uint16[] monitoring_case_number_inputs
+bool[] monitoring_case_number_inputs_flags
+
+int16 linear_velocity_inputs_velocity_0
+bool linear_velocity_inputs_velocity_0_valid
+bool linear_velocity_inputs_velocity_0_transmitted_safely
+
+int16 linear_velocity_inputs_velocity_1
+bool linear_velocity_inputs_velocity_1_valid
+bool linear_velocity_inputs_velocity_1_transmitted_safely
+
+uint8 sleep_mode_input
+

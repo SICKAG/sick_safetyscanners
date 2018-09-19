@@ -31,6 +31,7 @@ Microscan3Ros::Microscan3Ros()
   m_device = boost::make_shared<sick::Microscan3>(boost::bind(&Microscan3Ros::receivedUDPPaket, this, _1), m_communication_settings);
   m_device->run();
   m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan",100);
+  m_extended_laser_scan_publisher = m_private_nh.advertise<sick_microscan3_ros_driver::ExtendedLaserScanMsg>("extended_laser_scan", 100);
   m_device->changeSensorSettings(m_communication_settings);
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
@@ -147,35 +148,120 @@ void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
   //TODO send complex message, for each data packet one?
   if(!data.getMeasurementDataPtr()->isEmpty())
   {
-
-    sensor_msgs::LaserScan scan;
-    scan.header.frame_id = m_laser_scan_frame_name;
-    scan.header.stamp = ros::Time::now();
-    int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
-
-    scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle());
-    scan.angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(data.getMeasurementDataPtr()->getScanPointsVector().size()-1).getAngle()); //TODO
-    scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
-    boost::posix_time::microseconds time_increment = boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
-    scan.time_increment = time_increment.total_microseconds() * 1e-6;
-    boost::posix_time::milliseconds scan_time = boost::posix_time::milliseconds(data.getDerivedValuesPtr()->getScanTime());
-    scan.scan_time = scan_time.total_microseconds() * 1e-6;
-    scan.range_min = 0.02; // TODO configurable, values taken from reichweite und benötigte remissionen für Warnfelder from SICK datasheet
-    scan.range_max = 40.0; // TODO
-    scan.ranges.resize(num_scan_points);
-    scan.intensities.resize(num_scan_points);
+    sensor_msgs::LaserScan scan = createLaserScanMessage(data);
 
 
-    std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPointsVector();
-    for (int i = 0; i < num_scan_points; ++i)
-    {
-        const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
-        scan.ranges[i] = static_cast<float>(scan_point.getDistance()) * data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
-        scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
-  //              / std::numeric_limits<microscan3::ScanPointData::remission_type>::max();
-    }
     m_laser_scan_publisher.publish(scan);
+
+    sick_microscan3_ros_driver::ExtendedLaserScanMsg extendedScan = createExtendedLaserScanMessage(data);
+
+    m_extended_laser_scan_publisher.publish(extendedScan);
   }
 }
+
+sick_microscan3_ros_driver::ExtendedLaserScanMsg Microscan3Ros::createExtendedLaserScanMessage(const sick::datastructure::Data &data)
+{
+  sensor_msgs::LaserScan scan = createLaserScanMessage(data);
+  sick_microscan3_ros_driver::ExtendedLaserScanMsg msg;
+  msg.laser_scan = scan;
+
+  int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
+  std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPointsVector();
+
+  for (int i = 0; i < num_scan_points; ++i)
+  {
+      const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
+      msg.reflektor_status[i] = scan_point.getReflectorBit();
+  }
+}
+
+sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastructure::Data &data)
+{
+  sensor_msgs::LaserScan scan;
+  scan.header.frame_id = m_laser_scan_frame_name;
+  scan.header.stamp = ros::Time::now();
+  int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
+
+  scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle());
+  scan.angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(data.getMeasurementDataPtr()->getScanPointsVector().size()-1).getAngle()); //TODO
+  scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
+  boost::posix_time::microseconds time_increment = boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
+  scan.time_increment = time_increment.total_microseconds() * 1e-6;
+  boost::posix_time::milliseconds scan_time = boost::posix_time::milliseconds(data.getDerivedValuesPtr()->getScanTime());
+  scan.scan_time = scan_time.total_microseconds() * 1e-6;
+  scan.range_min = 0.02; // TODO configurable, values taken from reichweite und benötigte remissionen für Warnfelder from SICK datasheet
+  scan.range_max = 40.0; // TODO
+  scan.ranges.resize(num_scan_points);
+  scan.intensities.resize(num_scan_points);
+
+
+  std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPointsVector();
+  for (int i = 0; i < num_scan_points; ++i)
+  {
+      const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
+      scan.ranges[i] = static_cast<float>(scan_point.getDistance()) * data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
+      scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
+//              / std::numeric_limits<microscan3::ScanPointData::remission_type>::max();
+  }
+
+  return scan;
+}
+
+sick_microscan3_ros_driver::RawMicroScanDataMsg Microscan3Ros::createRawDataMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::DataHeaderMsg Microscan3Ros::createDataHeaderMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::DerivedValuesMsg Microscan3Ros::createDerivedValuesMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::GeneralSystemStateMsg Microscan3Ros::createGeneralSystemStateMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::MeasurementDataMsg Microscan3Ros::createMeasurementDataMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::ScanPointMsg Microscan3Ros::createScanPointMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::IntrusionDataMsg Microscan3Ros::createIntrusionDataMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::IntrusionDatumMsg Microscan3Ros::createIntrusionDatumMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::ApplicationDataMsg Microscan3Ros::createApplicationDataMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::ApplicationInputsMsg Microscan3Ros::createApplicationInputsMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+sick_microscan3_ros_driver::ApplicationOutputsMsg Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data &data)
+{
+
+}
+
+
 
 } /* namespace */

@@ -1,0 +1,31 @@
+bool[] evaluation_path_outputs_eval_out
+bool[] evaluation_path_outputs_is_safe
+bool[] evaluation_path_outputs_is_valid
+
+uint16[] monitoring_case_number_outputs 
+bool[] monitoring_case_number_outputs_flags
+
+uint8 sleep_mode_output
+bool sleep_mode_output_valid
+
+bool error_flag_contamination_warning
+bool error_flag_contamination_error
+bool error_flag_manipulation_error
+bool error_flag_glare
+bool error_flag_reference_contour_intruded
+bool error_flag_critical_error
+bool error_flags_are_valid
+
+
+int16 linear_velocity_outputs_velocity_0
+bool linear_velocity_outputs_velocity_0_valid
+bool linear_velocity_outputs_velocity_0_transmitted_safely
+
+int16 linear_velocity_outputs_velocity_1
+bool linear_velocity_outputs_velocity_1_valid
+bool linear_velocity_outputs_velocity_1_transmitted_safely
+
+int16[] resulting_velocity
+bool[] resulting_velocity_flags
+
+ 

@@ -13,6 +13,7 @@ find_package(catkin REQUIRED
     roscpp
     sensor_msgs
     dynamic_reconfigure
+    message_generation
 )
 
 ## Find system libraries
@@ -21,6 +22,29 @@ find_package(Boost REQUIRED)
 
 generate_dynamic_reconfigure_options(
   config/Microscan3Configuration.cfg
+)
+
+
+add_message_files(
+  FILES
+  ExtendedLaserScanMsg.msg
+  RawMicroScanDataMsg.msg
+  DataHeaderMsg.msg
+  DerivedValuesMsg.msg
+  GeneralSystemStateMsg.msg
+  IntrusionDataMsg.msg
+  IntrusionDatumMsg.msg
+  MeasurementDataMsg.msg
+  ScanPointMsg.msg
+  ApplicationDataMsg.msg
+  ApplicationInputsMsg.msg
+  ApplicationOutputsMsg.msg
+)
+
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+  sensor_msgs
 )
 
 ###################################
@@ -42,9 +66,12 @@ catkin_package(
     roscpp
     sensor_msgs
     dynamic_reconfigure
+    message_runtime
   DEPENDS
     Boost
 )
+
+
 
 ###########
 ## Build ##

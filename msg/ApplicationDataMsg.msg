@@ -1,0 +1,2 @@
+ApplicationInputsMsg inputs
+ApplicationOutputsMsg outputs

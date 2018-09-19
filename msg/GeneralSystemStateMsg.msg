@@ -1,0 +1,18 @@
+bool run_mode_active
+bool standby_mode_active
+bool contamination_warning
+bool contamination_error
+bool reference_contour_status
+bool manipulation_status
+
+bool[] safe_cut_off_path
+bool[] non_safe_cut_off_path
+bool[] reset_required_cut_off_path
+
+uint8 current_monitoring_case_no_table_1
+uint8 current_monitoring_case_no_table_2
+uint8 current_monitoring_case_no_table_3
+uint8 current_monitoring_case_no_table_4
+
+bool application_error
+bool device_error
