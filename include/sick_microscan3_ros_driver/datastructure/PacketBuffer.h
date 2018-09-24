@@ -38,7 +38,6 @@
 #include <string>
 #include <vector>
 
-
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
 
