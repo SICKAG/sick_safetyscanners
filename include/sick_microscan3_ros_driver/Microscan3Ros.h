@@ -47,15 +47,15 @@
 //Package
 #include <sick_microscan3_ros_driver/Microscan3.h>
 #include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
+#include <sick_microscan3_ros_driver/Microscan3ConfigurationConfig.h>
+#include <sick_microscan3_ros_driver/RawMicroScanDataMsg.h>
+#include <sick_microscan3_ros_driver/ExtendedLaserScanMsg.h>
 
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
 
 #include <dynamic_reconfigure/server.h>
-#include <sick_microscan3_ros_driver/Microscan3ConfigurationConfig.h>
 
-#include <sick_microscan3_ros_driver/RawMicroScanDataMsg.h>
-#include <sick_microscan3_ros_driver/ExtendedLaserScanMsg.h>
 
 
 #include <cmath>

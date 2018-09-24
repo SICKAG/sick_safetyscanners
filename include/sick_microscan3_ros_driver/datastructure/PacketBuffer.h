@@ -36,10 +36,11 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
+
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
-#include <vector>
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>

@@ -97,6 +97,7 @@ bool Microscan3Ros::readParameters()
     sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
     ROS_WARN("Using default sensor IP: %s", sensor_ip_adress.c_str());
   }
+  ROS_INFO("Using sensor IP: %s", sensor_ip_adress.c_str());
   m_communication_settings.setSensorIp(sensor_ip_adress);
 
   std::string sensor_tcp_port;
@@ -115,6 +116,7 @@ bool Microscan3Ros::readParameters()
 
   int host_udp_port;
   m_private_nh.getParam("host_udp_port", host_udp_port);
+  ROS_INFO("Using host UDP Port: %i", host_udp_port);
   m_communication_settings.setHostUdpPort(host_udp_port);
 
   int channel;
@@ -173,9 +175,9 @@ void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
 
     m_laser_scan_publisher.publish(scan);
 
-    sick_microscan3_ros_driver::ExtendedLaserScanMsg extendedScan = createExtendedLaserScanMessage(data);
+//    sick_microscan3_ros_driver::ExtendedLaserScanMsg extendedScan = createExtendedLaserScanMessage(data);
 
-    m_extended_laser_scan_publisher.publish(extendedScan);
+//    m_extended_laser_scan_publisher.publish(extendedScan);
   }
 }
 

@@ -34,8 +34,9 @@
 
 #pragma once
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <iostream>
+
+#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 
 namespace sick {
 namespace datastructure {

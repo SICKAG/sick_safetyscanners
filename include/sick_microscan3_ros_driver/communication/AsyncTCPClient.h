@@ -34,15 +34,17 @@
 
 #pragma once
 
-#include <boost/asio.hpp>
 #include <iostream>
+#include <thread>
+#include <functional>
+
+#include <boost/asio.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/function.hpp>
 #include <boost/array.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
-#include <thread>
-#include <functional>
+
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
