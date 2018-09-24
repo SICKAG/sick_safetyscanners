@@ -17,7 +17,10 @@ To get the ROS driver ready, one has to include the package in the project works
 ### Installing
 
 Include the sick_microscan3_ros_driver package in the catkin workspace.
-Run catkin-make in the catkin_ws to build the driver.
+in the catkin_ws run:
+```
+catkin-make
+``` 
 This should create all necessary binaries to start the driver.
 
 ### Starting
