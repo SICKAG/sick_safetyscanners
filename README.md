@@ -19,14 +19,14 @@ To get the ROS driver ready, one has to include the package in the project works
 Include the sick_microscan3_ros_driver package in the catkin workspace.
 in the catkin_ws run:
 ```
-catkin-make
+catkin_make
 ``` 
 This should create all necessary binaries to start the driver.
 
 ### Starting
 
-To start the driver adapt the launch file in the folder catkin_ws/src/sick_microscan3_ros_driver/launch with the correct ros parameters.
-Most importantly the sensor IP, Sensor TCP port and the Host UDP port have to be defined, else the default values will be used which might lead to no connection being established.
+To start the driver adapt the launch file catkin_ws/src/sick_microscan3_ros_driver/launch/sick_microscan3_ros_driver.launch with the correct ros parameters.
+Most importantly the sensor IP, sensor TCP port, host IP and the Host UDP port have to be defined, else the default values will be used which might lead to no connection being established.
 For all ROS Parameters see Section ROS Parameters.
 Once the launch file is adapted run:
 
@@ -64,7 +64,7 @@ In the future there will be an extended message with more data available, but th
 | Parameter Name  | Type | Information |
 | ------------- | ------------- | ------------- |
 | sensor_ip | String  | Sensor IP Adress, only set at startup  |
-| sensor_tcp_port  | String  | Sensor TCP Port, set at startup  |
+| sensor_tcp_port  | Integer  | Sensor TCP Port, set at startup  |
 | host_ip  | String  | IP of the host, which should receive the data  |
 | host_udp_port  | Integer  | UDP Port on which the data is received on the host  |
 | laser_scan_frame_name  | String  | The frame name of the sensor message  |

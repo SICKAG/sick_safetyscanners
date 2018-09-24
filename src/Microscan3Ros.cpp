@@ -100,13 +100,13 @@ bool Microscan3Ros::readParameters()
   ROS_INFO("Using sensor IP: %s", sensor_ip_adress.c_str());
   m_communication_settings.setSensorIp(sensor_ip_adress);
 
-  std::string sensor_tcp_port;
+  int sensor_tcp_port;
   if (!m_private_nh.getParam("sensor_tcp_port", sensor_tcp_port))
   {
     sensor_tcp_port = sick_microscan3_ros_driver::Microscan3Configuration_sensor_tcp_port;
-    ROS_WARN("Using default sensor TCP port: %s", sensor_tcp_port.c_str());
+    ROS_WARN("Using default sensor TCP port: %i", sensor_tcp_port);
   }
-  m_communication_settings.setSensorTcpPort(std::stoi(sensor_tcp_port));
+  m_communication_settings.setSensorTcpPort(sensor_tcp_port);
 
   ROS_WARN("If not further specified the default values for the dynamic reconfigurable parameters will be loaded.");
 
