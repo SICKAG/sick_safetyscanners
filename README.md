@@ -27,17 +27,17 @@ Most importantly the sensor IP, Sensor TCP port and the Host UDP port have to be
 For all ROS Parameters see Section ROS Parameters.
 Once the launch file is adapted run:
 
-'''
+```
 roslaunch sick_microscan3_ros_driver sick_microscan3_ros_driver.launch 
-'''
+```
 
 This will start the driver and the dynamic reconfigure node. In this you can set different parameters on runtime, especially the angles and the data the sensor should publish.
 
 To visualize the data start rviz
 
-'''
+```
 rosrun rviz rviz -d <arg> 
-'''
+```
 Where arg is the path to the rviz configuration.
 In the project there is a default configuration, under catkin_ws/src/sick_microscan3_ros_driver/config/rviz/default.rviz
 
@@ -50,9 +50,9 @@ In the project there is a default configuration, under catkin_ws/src/sick_micros
 
 Currently only a sensor_msgs/LaserScan.msg is published.
 
-'''
+```
 /sick_microscan3_ros_driver/laser_scan
-'''
+```
 
 In the future there will be an extended message with more data available, but this is still in progress.
 
