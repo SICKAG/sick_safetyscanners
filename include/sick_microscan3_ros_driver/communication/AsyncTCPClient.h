@@ -44,6 +44,8 @@
 #include <boost/array.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/make_shared.hpp>
+#include <boost/thread/mutex.hpp>
+#include <boost/thread/condition.hpp>
 
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
@@ -79,6 +81,11 @@ namespace communication{
                 boost::shared_ptr<boost::asio::ip::tcp::socket> m_socket_ptr;
                 boost::asio::ip::tcp::endpoint m_remote_endpoint;
                 std::thread m_service_thread;
+
+                boost::condition m_connect_condition;
+                boost::mutex m_connect_mutex;
+
+
 
 		void start_receive();
 		void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);

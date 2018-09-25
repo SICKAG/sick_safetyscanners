@@ -62,18 +62,20 @@ AsyncTCPClient::~AsyncTCPClient()
 }
 
 void AsyncTCPClient::do_connect(){
-  //async connect takes some time, TODO set mutex to wait for connection
+
+  boost::mutex::scoped_lock lock(m_connect_mutex);
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec)
   {
     std::cout << "TCP error code: " << ec.value() << std::endl;
+    m_connect_condition.notify_all();
   });
+
+  m_connect_condition.wait(lock);
 }
+
 
 void AsyncTCPClient::doSendAndReceive(const sick::datastructure::PacketBuffer::VectorBuffer& sendBuffer)
 {
-  //TODO remove when connect is mutexed and only return on connection
-  sleep(1);
-
   if (!m_socket_ptr)
   {
     return;
