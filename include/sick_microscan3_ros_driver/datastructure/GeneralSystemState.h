@@ -65,7 +65,7 @@ public:
   std::vector<bool> getSafeCutOffPathVector() const;
   void setSafeCutOffPathvector(const std::vector<bool> &safe_cut_off_path_vector);
 
-  std::vector<bool> getNonSafeCutOffPathvector() const;
+  std::vector<bool> getNonSafeCutOffPathVector() const;
   void setNonSafeCutOffPathVector(const std::vector<bool> &non_safe_cut_off_path_vector);
 
   std::vector<bool> getResetRequiredCutOffPathVector() const;

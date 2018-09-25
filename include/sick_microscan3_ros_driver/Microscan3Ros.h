@@ -122,6 +122,8 @@ class Microscan3Ros
   dynamic_reconfigure::Server<sick_microscan3_ros_driver::Microscan3ConfigurationConfig> m_dynamic_reconfiguration_server;
 
   std::string m_laser_scan_frame_name;
+  double m_range_min;
+  double m_range_max;
 
   sensor_msgs::LaserScan createLaserScanMessage(const sick::datastructure::Data &data);
   sick_microscan3_ros_driver::ExtendedLaserScanMsg createExtendedLaserScanMessage(const sick::datastructure::Data &data);

@@ -113,7 +113,7 @@ void GeneralSystemState::setSafeCutOffPathvector(const std::vector<bool> &safe_c
   m_safe_cut_off_path_vector = safe_cut_off_path_vector;
 }
 
-std::vector<bool> GeneralSystemState::getNonSafeCutOffPathvector() const
+std::vector<bool> GeneralSystemState::getNonSafeCutOffPathVector() const
 {
   return m_non_safe_cut_off_path_vector;
 }

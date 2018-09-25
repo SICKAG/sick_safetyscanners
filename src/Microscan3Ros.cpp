@@ -52,6 +52,7 @@ Microscan3Ros::Microscan3Ros()
   m_device->run();
   m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan",100);
   m_extended_laser_scan_publisher = m_private_nh.advertise<sick_microscan3_ros_driver::ExtendedLaserScanMsg>("extended_laser_scan", 100);
+  m_raw_data_publisher = m_private_nh.advertise<sick_microscan3_ros_driver::RawMicroScanDataMsg>("raw_data", 100);
   m_device->changeSensorSettings(m_communication_settings);
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
@@ -76,6 +77,8 @@ void Microscan3Ros::callback(sick_microscan3_ros_driver::Microscan3Configuration
     m_device->changeSensorSettings(m_communication_settings);
 
     m_laser_scan_frame_name = config.laser_scan_frame_name;
+    m_range_min = config.range_min;
+    m_range_max = config.range_max;
   }
 }
 
@@ -170,23 +173,35 @@ bool Microscan3Ros::readParameters()
 
   m_private_nh.getParam("laser_scan_frame_name",m_laser_scan_frame_name);
 
+  m_private_nh.getParam("range_min",m_range_min);
+
+  m_private_nh.getParam("range_max",m_range_max);
+
   return true;
 }
 
 void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data &data)
 {
-  //TODO send complex message, for each data packet one?
-  if(!data.getMeasurementDataPtr()->isEmpty())
+  if(!data.getMeasurementDataPtr()->isEmpty() && !data.getDerivedValuesPtr()->isEmpty())
   {
     sensor_msgs::LaserScan scan = createLaserScanMessage(data);
 
 
     m_laser_scan_publisher.publish(scan);
-
-//    sick_microscan3_ros_driver::ExtendedLaserScanMsg extendedScan = createExtendedLaserScanMessage(data);
-
-//    m_extended_laser_scan_publisher.publish(extendedScan);
   }
+
+
+  if(!data.getMeasurementDataPtr()->isEmpty() && !data.getDerivedValuesPtr()->isEmpty())
+  {
+    sick_microscan3_ros_driver::ExtendedLaserScanMsg extended_scan = createExtendedLaserScanMessage(data);
+
+    m_extended_laser_scan_publisher.publish(extended_scan);
+  }
+
+  sick_microscan3_ros_driver::RawMicroScanDataMsg raw_data = createRawDataMessage(data);
+
+  m_raw_data_publisher.publish(raw_data);
+
 }
 
 sick_microscan3_ros_driver::ExtendedLaserScanMsg Microscan3Ros::createExtendedLaserScanMessage(const sick::datastructure::Data &data)
@@ -198,11 +213,13 @@ sick_microscan3_ros_driver::ExtendedLaserScanMsg Microscan3Ros::createExtendedLa
   int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
   std::vector<sick::datastructure::ScanPoint> scan_points = data.getMeasurementDataPtr()->getScanPointsVector();
 
+  msg.reflektor_status.resize(num_scan_points);
   for (int i = 0; i < num_scan_points; ++i)
   {
       const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
       msg.reflektor_status[i] = scan_point.getReflectorBit();
   }
+  return msg;
 }
 
 sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastructure::Data &data)
@@ -213,14 +230,15 @@ sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastr
   int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle());
-  scan.angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(data.getMeasurementDataPtr()->getScanPointsVector().size()-1).getAngle()); //TODO
+  double angle_max = sick::degToRad(data.getMeasurementDataPtr()->getScanPointsVector().at(data.getMeasurementDataPtr()->getScanPointsVector().size()-1).getAngle());
+  scan.angle_max = angle_max;
   scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
   boost::posix_time::microseconds time_increment = boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
   scan.time_increment = time_increment.total_microseconds() * 1e-6;
   boost::posix_time::milliseconds scan_time = boost::posix_time::milliseconds(data.getDerivedValuesPtr()->getScanTime());
   scan.scan_time = scan_time.total_microseconds() * 1e-6;
-  scan.range_min = 0.02; // TODO configurable, values taken from reichweite und benötigte remissionen für Warnfelder from SICK datasheet
-  scan.range_max = 40.0; // TODO
+  scan.range_min = m_range_min;
+  scan.range_max = m_range_max;
   scan.ranges.resize(num_scan_points);
   scan.intensities.resize(num_scan_points);
 
@@ -231,7 +249,6 @@ sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastr
       const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
       scan.ranges[i] = static_cast<float>(scan_point.getDistance()) * data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
       scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
-//              / std::numeric_limits<microscan3::ScanPointData::remission_type>::max();
   }
 
   return scan;
@@ -239,36 +256,145 @@ sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastr
 
 sick_microscan3_ros_driver::RawMicroScanDataMsg Microscan3Ros::createRawDataMessage(const sick::datastructure::Data &data)
 {
+  sick_microscan3_ros_driver::RawMicroScanDataMsg msg;
+
+  msg.header = createDataHeaderMessage(data);
+  msg.derived_values = createDerivedValuesMessage(data);
+  msg.general_system_state = createGeneralSystemStateMessage(data);
+  msg.measurement_data = createMeasurementDataMessage(data);
+  msg.intrusion_data = createIntrusionDataMessage(data);
+  msg.application_data = createApplicationDataMessage(data);
+
+  return msg;
 
 }
 
 sick_microscan3_ros_driver::DataHeaderMsg Microscan3Ros::createDataHeaderMessage(const sick::datastructure::Data &data)
 {
+  sick_microscan3_ros_driver::DataHeaderMsg msg;
+
+  if(!data.getDataHeaderPtr()->isEmpty())
+  {
+
+    boost::shared_ptr<sick::datastructure::DataHeader> data_header = data.getDataHeaderPtr();
+
+    msg.version_version = data_header->getVersionIndicator();
+    msg.version_release = data_header->getVersionRelease();
+    msg.version_major_version = data_header->getVersionMajorVersion();
+    msg.version_minor_version = data_header->getVersionMinorVersion();
+
+    msg.scan_number = data_header->getScanNumber();
+    msg.sequence_number = data_header->getSequenceNumber();
+
+    msg.serial_number_of_device = data_header->getSerialNumberOfDevice();
+    msg.serial_number_of_channel_plug = data_header->getSerialNumberOfSystemPlug();
+
+    msg.channel_number = data_header->getChannelNumber();
+
+    msg.timestamp_date = data_header->getTimestampDate();
+    msg.timestamp_time = data_header->getTimestampTime();
+  }
+  return msg;
 
 }
 
 sick_microscan3_ros_driver::DerivedValuesMsg Microscan3Ros::createDerivedValuesMessage(const sick::datastructure::Data &data)
 {
+  sick_microscan3_ros_driver::DerivedValuesMsg msg;
+
+  if(!data.getDerivedValuesPtr()->isEmpty())
+  {
+    boost::shared_ptr<sick::datastructure::DerivedValues> derived_values = data.getDerivedValuesPtr();
+
+    msg.multiplication_factor = derived_values->getMultiplicationFactor();
+    msg.scan_time = derived_values->getScanTime();
+    msg.interbeam_period = derived_values->getInterbeamPeriod();
+    msg.number_of_beams = derived_values->getNumberOfBeams();
+    msg.start_angle = derived_values->getStartAngle();
+    msg.angular_beam_resolution = derived_values->getAngularBeamResolution();
+
+  }
+  return msg;
 
 }
 
 sick_microscan3_ros_driver::GeneralSystemStateMsg Microscan3Ros::createGeneralSystemStateMessage(const sick::datastructure::Data &data)
 {
+  sick_microscan3_ros_driver::GeneralSystemStateMsg msg;
+
+  if(!data.getGeneralSystemStatePtr()->isEmpty())
+  {
+    boost::shared_ptr<sick::datastructure::GeneralSystemState> general_system_state = data.getGeneralSystemStatePtr();
+
+    msg.run_mode_active = general_system_state->getRunModeActive();
+    msg.standby_mode_active = general_system_state->getStandbyModeActive();
+    msg.contamination_warning = general_system_state->getContaminationWarning();
+    msg.contamination_error = general_system_state->getContaminationError();
+    msg.reference_contour_status = general_system_state->getReferenceContourStatus();
+    msg.manipulation_status = general_system_state->getManipulationStatus();
+
+    std::vector<bool> safe_cut_off_path = general_system_state->getSafeCutOffPathVector();
+    for (int i = 0; i < safe_cut_off_path.size(); i++)
+    {
+      msg.safe_cut_off_path.push_back(safe_cut_off_path.at(i));
+    }
+
+    std::vector<bool> non_safe_cut_off_path = general_system_state->getNonSafeCutOffPathVector();
+    for (int i = 0; i < non_safe_cut_off_path.size(); i++)
+    {
+      msg.non_safe_cut_off_path.push_back(non_safe_cut_off_path.at(i));
+    }
+
+    std::vector<bool> reset_required_cut_off_path = general_system_state->getResetRequiredCutOffPathVector();
+    for (int i = 0; i < reset_required_cut_off_path.size(); i++)
+    {
+      msg.reset_required_cut_off_path.push_back(reset_required_cut_off_path.at(i));
+    }
+
+    msg.current_monitoring_case_no_table_1 = general_system_state->getCurrentMonitoringCaseNoTable_1();
+    msg.current_monitoring_case_no_table_2 = general_system_state->getCurrentMonitoringCaseNoTable_2();
+    msg.current_monitoring_case_no_table_3 = general_system_state->getCurrentMonitoringCaseNoTable_3();
+    msg.current_monitoring_case_no_table_4 = general_system_state->getCurrentMonitoringCaseNoTable_4();
+
+    msg.application_error = general_system_state->getApplicationError();
+    msg.device_error = general_system_state->getDeviceError();
+
+  }
+  return msg;
 
 }
 
 sick_microscan3_ros_driver::MeasurementDataMsg Microscan3Ros::createMeasurementDataMessage(const sick::datastructure::Data &data)
 {
+  sick_microscan3_ros_driver::MeasurementDataMsg msg;
+
+  if(!data.getMeasurementDataPtr()->isEmpty())
+  {
+
+  }
+  return msg;
 
 }
 
 sick_microscan3_ros_driver::ScanPointMsg Microscan3Ros::createScanPointMessage(const sick::datastructure::Data &data)
 {
 
+
+
 }
 
 sick_microscan3_ros_driver::IntrusionDataMsg Microscan3Ros::createIntrusionDataMessage(const sick::datastructure::Data &data)
 {
+
+  sick_microscan3_ros_driver::IntrusionDataMsg msg;
+
+  if(!data.getIntrusionDataPtr()->isEmpty())
+  {
+
+
+
+  }
+  return msg;
 
 }
 
@@ -279,6 +405,15 @@ sick_microscan3_ros_driver::IntrusionDatumMsg Microscan3Ros::createIntrusionDatu
 
 sick_microscan3_ros_driver::ApplicationDataMsg Microscan3Ros::createApplicationDataMessage(const sick::datastructure::Data &data)
 {
+
+  sick_microscan3_ros_driver::ApplicationDataMsg msg;
+
+  if(!data.getApplicationDataPtr()->isEmpty())
+  {
+
+
+  }
+  return msg;
 
 }
 
