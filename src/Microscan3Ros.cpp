@@ -60,8 +60,8 @@ Microscan3Ros::Microscan3Ros()
 void Microscan3Ros::callback(sick_microscan3_ros_driver::Microscan3ConfigurationConfig &config, uint32_t level)
 {
   if (isInitialised()) {
-    m_communication_settings.setHostIp(config.host_ip);
-    m_communication_settings.setHostUdpPort(config.host_udp_port);
+//    m_communication_settings.setHostIp(config.host_ip);
+//    m_communication_settings.setHostUdpPort(config.host_udp_port);
     m_communication_settings.setChannel(config.channel);
     m_communication_settings.setEnabled(config.channel_enabled);
     m_communication_settings.setEInterfaceType(config.e_interface_type);
@@ -94,10 +94,9 @@ bool Microscan3Ros::readParameters()
   std::string sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
   if (!m_private_nh.getParam("sensor_ip", sensor_ip_adress))
   {
-    sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
+//    sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
     ROS_WARN("Using default sensor IP: %s", sensor_ip_adress.c_str());
   }
-  ROS_INFO("Using sensor IP: %s", sensor_ip_adress.c_str());
   m_communication_settings.setSensorIp(sensor_ip_adress);
 
   int sensor_tcp_port;
@@ -108,16 +107,25 @@ bool Microscan3Ros::readParameters()
   }
   m_communication_settings.setSensorTcpPort(sensor_tcp_port);
 
-  ROS_WARN("If not further specified the default values for the dynamic reconfigurable parameters will be loaded.");
 
-  std::string host_ip_adress;
-  m_private_nh.getParam("host_ip", host_ip_adress);
+  std::string host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
+  if(!m_private_nh.getParam("host_ip", host_ip_adress))
+  {
+//    host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
+    ROS_WARN("Using default host IP: %s", host_ip_adress.c_str());
+  }
   m_communication_settings.setHostIp(host_ip_adress);
 
   int host_udp_port;
-  m_private_nh.getParam("host_udp_port", host_udp_port);
-  ROS_INFO("Using host UDP Port: %i", host_udp_port);
+  if(!m_private_nh.getParam("host_udp_port", host_udp_port))
+  {
+    host_udp_port = sick_microscan3_ros_driver::Microscan3Configuration_host_udp_port;
+    ROS_WARN("Using default host UDP Port: %i", host_udp_port);
+  }
   m_communication_settings.setHostUdpPort(host_udp_port);
+
+  ROS_WARN("If not further specified the default values for the dynamic reconfigurable parameters will be loaded.");
+
 
   int channel;
   m_private_nh.getParam("channel", channel);
