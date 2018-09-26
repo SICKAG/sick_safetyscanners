@@ -132,9 +132,9 @@ class Microscan3Ros
   sick_microscan3_ros_driver::DerivedValuesMsg createDerivedValuesMessage(const sick::datastructure::Data &data);
   sick_microscan3_ros_driver::GeneralSystemStateMsg createGeneralSystemStateMessage(const sick::datastructure::Data &data);
   sick_microscan3_ros_driver::MeasurementDataMsg createMeasurementDataMessage(const sick::datastructure::Data &data);
-  sick_microscan3_ros_driver::ScanPointMsg createScanPointMessage(const sick::datastructure::Data &data);
+  std::vector<sick_microscan3_ros_driver::ScanPointMsg> createScanPointMessageVector(const sick::datastructure::Data &data);
   sick_microscan3_ros_driver::IntrusionDataMsg createIntrusionDataMessage(const sick::datastructure::Data &data);
-  sick_microscan3_ros_driver::IntrusionDatumMsg createIntrusionDatumMessage(const sick::datastructure::Data &data);
+  std::vector<sick_microscan3_ros_driver::IntrusionDatumMsg> createIntrusionDatumMessageVector(const sick::datastructure::Data &data);
   sick_microscan3_ros_driver::ApplicationDataMsg createApplicationDataMessage(const sick::datastructure::Data &data);
   sick_microscan3_ros_driver::ApplicationInputsMsg createApplicationInputsMessage(const sick::datastructure::Data &data);
   sick_microscan3_ros_driver::ApplicationOutputsMsg createApplicationOutputsMessage(const sick::datastructure::Data &data);
