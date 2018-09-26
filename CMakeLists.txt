@@ -136,10 +136,12 @@ add_executable(${PROJECT_NAME}
 
 ## Add dependencies to exported targets, like ROS msgs or srvs
 add_dependencies(${PROJECT_NAME}_core
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
 )
 
 add_dependencies(${PROJECT_NAME}
+  ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
 )
 
