@@ -92,6 +92,7 @@ typedef std::vector<ParsedPacketBuffer> ParsedPacketBufferVector;
 
 static bool sortForIncreasingOffset(const ParsedPacketBuffer& ppb1, const ParsedPacketBuffer& ppb2)
 {
+  (void)sortForIncreasingOffset; //function pointer to function to surpress warning of it being an unused function
   return ppb1.m_datagram_header.getFragmentOffset() < ppb2.m_datagram_header.getFragmentOffset();
 }
 
