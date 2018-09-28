@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file Microscan3.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file Microscan3.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -40,15 +40,15 @@
 
 #include <iostream>
 
-#include <sick_microscan3_ros_driver/communication/AsyncUDPClient.h>
 #include <sick_microscan3_ros_driver/communication/AsyncTCPClient.h>
-#include <sick_microscan3_ros_driver/data_processing/UDPPacketMerger.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
+#include <sick_microscan3_ros_driver/communication/AsyncUDPClient.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseData.h>
+#include <sick_microscan3_ros_driver/data_processing/UDPPacketMerger.h>
 #include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 #include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
+#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 
 namespace sick {
 
@@ -57,26 +57,27 @@ namespace sick {
  */
 class Microscan3
 {
- public:
-
-   /*
-    *  Typedef for function which has to be passed to this class. This enables the use of
-    *  functions from the calling class. In this case a ROS publisher for the data.
-    */
-    typedef boost::function<void (const sick::datastructure::Data&)> PaketReceivedCallbackFunction;
-   /*!
+public:
+  /*
+   *  Typedef for function which has to be passed to this class. This enables the use of
+   *  functions from the calling class. In this case a ROS publisher for the data.
+   */
+  typedef boost::function<void(const sick::datastructure::Data&)> PaketReceivedCallbackFunction;
+  /*!
    * Constructor.
    */
-  Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction, sick::datastructure::CommSettings settings);
+  Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction,
+             sick::datastructure::CommSettings settings);
 
   /*!
    * Destructor.
    */
   virtual ~Microscan3();
 
-    bool run();
+  bool run();
 
-    void changeSensorSettings(sick::datastructure::CommSettings settings);
+  void changeSensorSettings(sick::datastructure::CommSettings settings);
+
 private:
   PaketReceivedCallbackFunction m_newPaketReceivedCallbackFunction;
 
@@ -90,12 +91,12 @@ private:
 
   boost::shared_ptr<sick::data_processing::UDPPaketMerger> m_paket_merger_ptr;
 
-  void processUDPPaket(const datastructure::PacketBuffer &buffer);
+  void processUDPPaket(const datastructure::PacketBuffer& buffer);
   bool UDPClientThread();
-  void processTCPPaket(const sick::datastructure::PacketBuffer &buffer);
+  void processTCPPaket(const sick::datastructure::PacketBuffer& buffer);
   void startTCPConnection(sick::datastructure::CommSettings settings);
   void changeCommSettingsinColaSession(datastructure::CommSettings settings);
   void stopTCPConnection();
 };
 
-} /* namespace */
+} // namespace sick

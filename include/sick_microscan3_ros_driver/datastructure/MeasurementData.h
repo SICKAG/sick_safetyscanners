@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file MeasurementData.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file MeasurementData.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -47,7 +47,7 @@ public:
   MeasurementData();
 
   UINT32 getNumberOfBeams() const;
-  void setNumberOfBeams(const UINT32 &number_of_beams);
+  void setNumberOfBeams(const UINT32& number_of_beams);
 
   std::vector<ScanPoint> getScanPointsVector() const;
   void addScanPoint(ScanPoint scan_point);
@@ -60,8 +60,7 @@ private:
 
   UINT32 m_number_of_beams;
   std::vector<ScanPoint> m_scan_points_vector;
-
 };
 
-}
-}
+} // namespace datastructure
+} // namespace sick

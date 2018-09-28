@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file Cola2Session.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file Cola2Session.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -39,9 +39,9 @@
 
 #include <sick_microscan3_ros_driver/communication/AsyncTCPClient.h>
 
+#include <sick_microscan3_ros_driver/cola2/CloseSession.h>
 #include <sick_microscan3_ros_driver/cola2/Command.h>
 #include <sick_microscan3_ros_driver/cola2/CreateSession.h>
-#include <sick_microscan3_ros_driver/cola2/CloseSession.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>
 #include <sick_microscan3_ros_driver/data_processing/TCPPacketMerger.h>
@@ -64,13 +64,14 @@ public:
   bool executeCommand(CommandPtr command);
 
   UINT32 getSessionID() const;
-  void setSessionID(const UINT32 &session_id);
+  void setSessionID(const UINT32& session_id);
 
   UINT16 getNextRequestID();
 
   bool close();
   bool open();
   void waitForCompletion();
+
 private:
   void processPacket(const sick::datastructure::PacketBuffer& packet);
 
@@ -92,12 +93,12 @@ private:
   UINT32 m_session_id;
   UINT16 m_last_request_id;
 
-  bool startProcessingAndRemovePendingCommandAfterwards(sick::datastructure::PacketBuffer &packet);
-  bool addPacketToMerger(const sick::datastructure::PacketBuffer &packet);
+  bool startProcessingAndRemovePendingCommandAfterwards(sick::datastructure::PacketBuffer& packet);
+  bool addPacketToMerger(const sick::datastructure::PacketBuffer& packet);
   bool checkIfPacketIsCompleteAndOtherwiseListenForMorePackets();
   bool sendTelegramAndListenForAnswer(CommandPtr command);
 };
 
 
-}
-}
+} // namespace cola2
+} // namespace sick

@@ -8,19 +8,19 @@ namespace cola2 {
 class CreateSession : public Command
 {
 public:
-
   CreateSession(Cola2Session& session);
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
-  BYTE *prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
-  bool writeHeartbeatTimeoutToDataPtr(BYTE *&data_ptr) const;
-  bool writeClientIdToDataPtr(BYTE *&data_ptr) const;
+  BYTE*
+  prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  bool writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const;
+  bool writeClientIdToDataPtr(BYTE*& data_ptr) const;
 };
 
-}
-}
+} // namespace cola2
+} // namespace sick

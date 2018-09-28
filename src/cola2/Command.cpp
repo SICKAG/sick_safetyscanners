@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file Command.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file Command.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/cola2/Command.h>
@@ -40,16 +40,15 @@
 namespace sick {
 namespace cola2 {
 
-Command::Command(Cola2Session &session, UINT16 command_type, UINT16 command_mode)
+Command::Command(Cola2Session& session, UINT16 command_type, UINT16 command_mode)
   : m_session(session)
   , m_command_mode(command_mode)
   , m_command_type(command_type)
 {
-  m_session_id = m_session.getSessionID();
-  m_request_id = m_session.getNextRequestID();
+  m_session_id     = m_session.getSessionID();
+  m_request_id     = m_session.getNextRequestID();
   m_tcp_parser_ptr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
-  m_writer_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
-
+  m_writer_ptr     = boost::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void Command::lockExecutionMutex()
@@ -57,13 +56,13 @@ void Command::lockExecutionMutex()
   m_execution_mutex.lock();
 }
 
-void Command::constructTelegram(datastructure::PacketBuffer::VectorBuffer &telegram) const
+void Command::constructTelegram(datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   addTelegramData(telegram);
   addTelegramHeader(telegram);
 }
 
-void Command::processReplyBase(const datastructure::PacketBuffer::VectorBuffer &packet)
+void Command::processReplyBase(const datastructure::PacketBuffer::VectorBuffer& packet)
 {
   m_tcp_parser_ptr->parseTCPSequence(packet, *this);
   m_was_successful = processReply();
@@ -75,14 +74,17 @@ void Command::waitForCompletion()
   boost::mutex::scoped_lock lock(m_execution_mutex);
 }
 
-bool Command::wasSuccessful() const {return m_was_successful;}
+bool Command::wasSuccessful() const
+{
+  return m_was_successful;
+}
 
 UINT8 Command::getCommandType() const
 {
   return m_command_type;
 }
 
-void Command::setCommandType(const UINT8 &command_type)
+void Command::setCommandType(const UINT8& command_type)
 {
   m_command_type = command_type;
 }
@@ -92,7 +94,7 @@ UINT8 Command::getCommandMode() const
   return m_command_mode;
 }
 
-void Command::setCommandMode(const UINT8 &command_mode)
+void Command::setCommandMode(const UINT8& command_mode)
 {
   m_command_mode = command_mode;
 }
@@ -102,7 +104,7 @@ UINT32 Command::getSessionID() const
   return m_session_id;
 }
 
-void Command::setSessionID(const UINT32 &session_id)
+void Command::setSessionID(const UINT32& session_id)
 {
   m_session_id = session_id;
 }
@@ -112,20 +114,20 @@ UINT16 Command::getRequestID() const
   return m_request_id;
 }
 
-void Command::setRequestID(const UINT16 &request_id)
+void Command::setRequestID(const UINT16& request_id)
 {
   m_request_id = request_id;
 }
 
-void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer &telegram) const
+void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   datastructure::PacketBuffer::VectorBuffer header = prepareHeader();
-  BYTE* data_ptr = header.data();
+  BYTE* data_ptr                                   = header.data();
   writeDataToDataPtr(data_ptr, telegram);
   telegram.insert(telegram.begin(), header.begin(), header.end());
 }
 
-sick::datastructure::PacketBuffer::VectorBuffer Command::prepareHeader()  const
+sick::datastructure::PacketBuffer::VectorBuffer Command::prepareHeader() const
 {
   datastructure::PacketBuffer::VectorBuffer header;
   header.resize(18);
@@ -137,12 +139,13 @@ std::vector<BYTE> Command::getDataVector() const
   return m_data_vector;
 }
 
-void Command::setDataVector(const std::vector<BYTE> &data)
+void Command::setDataVector(const std::vector<BYTE>& data)
 {
   m_data_vector = data;
 }
 
-bool Command::writeDataToDataPtr(BYTE*& data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const
+bool Command::writeDataToDataPtr(BYTE*& data_ptr,
+                                 datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   writeCola2StxToDataPtr(data_ptr);
   writeLengthToDataPtr(data_ptr, telegram);
@@ -160,7 +163,8 @@ bool Command::writeCola2StxToDataPtr(BYTE*& data_ptr) const
   m_writer_ptr->writeUINT32BigEndian(data_ptr, cola2_stx, 0);
 }
 
-bool Command::writeLengthToDataPtr(BYTE*& data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const
+bool Command::writeLengthToDataPtr(BYTE*& data_ptr,
+                                   datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   UINT32 length = 10 + telegram.size();
   m_writer_ptr->writeUINT32BigEndian(data_ptr, length, 4);
@@ -180,24 +184,23 @@ bool Command::writeCola2NoCToDataPtr(BYTE*& data_ptr) const
 
 bool Command::writeSessionIdToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, getSessionID(),  10);
+  m_writer_ptr->writeUINT32BigEndian(data_ptr, getSessionID(), 10);
 }
 
 bool Command::writeRequestIdToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16BigEndian(data_ptr, getRequestID(),14);
+  m_writer_ptr->writeUINT16BigEndian(data_ptr, getRequestID(), 14);
 }
 
 bool Command::writeCommandTypeToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandType(),16);
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandType(), 16);
 }
 
 bool Command::writeCommandModeToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandMode(),17);
+  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandMode(), 17);
 }
 
-}
-}
-
+} // namespace cola2
+} // namespace sick

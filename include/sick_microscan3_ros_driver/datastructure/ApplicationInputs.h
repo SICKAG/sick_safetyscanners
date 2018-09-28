@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ApplicationInputs.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ApplicationInputs.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -45,22 +45,23 @@ public:
   ApplicationInputs();
 
   std::vector<bool> getUnsafeInputsInputSourcesVector() const;
-  void setUnsafeInputsInputSourcesVector(const std::vector<bool> &unsafe_inputs_input_sources_vector);
+  void
+  setUnsafeInputsInputSourcesVector(const std::vector<bool>& unsafe_inputs_input_sources_vector);
 
   std::vector<bool> getUnsafeInputsFlagsVector() const;
-  void setUnsafeInputsFlagsVector(const std::vector<bool> &unsafe_inputs_flags_vector);
+  void setUnsafeInputsFlagsVector(const std::vector<bool>& unsafe_inputs_flags_vector);
 
   std::vector<UINT16> getMonitoringCasevector() const;
-  void setMonitoringCaseVector(const std::vector<UINT16> &monitoring_case_vector);
+  void setMonitoringCaseVector(const std::vector<UINT16>& monitoring_case_vector);
 
   std::vector<bool> getMonitoringCaseFlagsVector() const;
-  void setMonitoringCaseFlagsVector(const std::vector<bool> &monitoring_case_flags_vector);
+  void setMonitoringCaseFlagsVector(const std::vector<bool>& monitoring_case_flags_vector);
 
   INT16 getVelocity0() const;
-  void setVelocity0(const INT16 &velocity_0);
+  void setVelocity0(const INT16& velocity_0);
 
   INT16 getVelocity1() const;
-  void setVelocity1(const INT16 &velocity_1);
+  void setVelocity1(const INT16& velocity_1);
 
   bool getVelocity0Valid() const;
   void setVelocity0Valid(bool velocity_0_valid);
@@ -75,13 +76,13 @@ public:
   void setVelocity1TransmittedSafely(bool velocity_1_transmitted_safely);
 
   INT8 getSleepModeInput() const;
-  void setSleepModeInput(const INT8 &sleep_mode_input);
+  void setSleepModeInput(const INT8& sleep_mode_input);
 
 private:
-  std::vector<bool> m_unsafe_inputs_input_sources_vector; //TODO in struct??? with next
+  std::vector<bool> m_unsafe_inputs_input_sources_vector; // TODO in struct??? with next
   std::vector<bool> m_unsafe_inputs_flags_vector;
 
-  std::vector<UINT16> m_monitoring_case_vector; //TODO 20 cases why 32 bit flags?
+  std::vector<UINT16> m_monitoring_case_vector; // TODO 20 cases why 32 bit flags?
   std::vector<bool> m_monitoring_case_flags_vector;
 
   INT16 m_velocity_0;
@@ -92,8 +93,8 @@ private:
   bool m_velocity_0_transmitted_safely;
   bool m_velocity_1_transmitted_safely;
 
-  INT8 m_sleep_mode_input; //TODO enum8
+  INT8 m_sleep_mode_input; // TODO enum8
 };
 
-}
-}
+} // namespace datastructure
+} // namespace sick

@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file DatagramHeader.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file DatagramHeader.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -40,7 +40,6 @@ namespace sick {
 namespace datastructure {
 
 
-
 class DatagramHeader
 {
 public:
@@ -49,25 +48,25 @@ public:
   DatagramHeader();
 
   UINT32 getDatagramMarker() const;
-  void setDatagramMarker(const UINT32 &value);
+  void setDatagramMarker(const UINT32& value);
 
   UINT16 getProtocol() const;
-  void setProtocol(const UINT16 &value);
+  void setProtocol(const UINT16& value);
 
   UINT8 getMajorVersion() const;
-  void setMajorVersion(const UINT8 &value);
+  void setMajorVersion(const UINT8& value);
 
   UINT8 getMinorVersion() const;
-  void setMinorVersion(const UINT8 &value);
+  void setMinorVersion(const UINT8& value);
 
   UINT32 getTotalLength() const;
-  void setTotalLength(const UINT32 &value);
+  void setTotalLength(const UINT32& value);
 
   UINT32 getIdentification() const;
-  void setIdentification(const UINT32 &value);
+  void setIdentification(const UINT32& value);
 
   UINT32 getFragmentOffset() const;
-  void setFragmentOffset(const UINT32 &value);
+  void setFragmentOffset(const UINT32& value);
 
 private:
   UINT32 m_datagram_marker;
@@ -79,5 +78,5 @@ private:
   UINT32 m_fragment_offset;
 };
 
-}
-}
+} // namespace datastructure
+} // namespace sick

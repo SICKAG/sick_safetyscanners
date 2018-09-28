@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file parseMeasurementData.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file parseMeasurementData.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -47,23 +47,27 @@ class ParseMeasurementData : public AbstractParseUDPSequence
 public:
   ParseMeasurementData();
 
-  datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &header);
+  datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer,
+                                                  datastructure::Data& header);
 
 private:
   float m_angle;
   float m_angle_delta;
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  bool setDataInMeasurementData(const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
-  bool setNumberOfBeamsInMeasurementData(const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
-  bool setStartAngleAndDelta(datastructure::Data &data);
-  bool setScanPointsInMeasurementData(const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
-  bool addScanPointToMeasurementData(UINT16 offset, const BYTE *data_ptr, datastructure::MeasurementData &measurement_data);
-  bool checkIfPreconditionsAreMet(datastructure::Data &data);
-  bool checkIfMeasurementDataIsPublished(datastructure::Data &data);
-  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data &data);
+  bool setDataInMeasurementData(const BYTE* data_ptr,
+                                datastructure::MeasurementData& measurement_data);
+  bool setNumberOfBeamsInMeasurementData(const BYTE* data_ptr,
+                                         datastructure::MeasurementData& measurement_data);
+  bool setStartAngleAndDelta(datastructure::Data& data);
+  bool setScanPointsInMeasurementData(const BYTE* data_ptr,
+                                      datastructure::MeasurementData& measurement_data);
+  bool addScanPointToMeasurementData(UINT16 offset,
+                                     const BYTE* data_ptr,
+                                     datastructure::MeasurementData& measurement_data);
+  bool checkIfPreconditionsAreMet(datastructure::Data& data);
+  bool checkIfMeasurementDataIsPublished(datastructure::Data& data);
+  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data& data);
 };
 
-}
-}
-
-
+} // namespace data_processing
+} // namespace sick

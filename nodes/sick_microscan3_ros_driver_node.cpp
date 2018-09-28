@@ -25,15 +25,15 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file sick_micro_scan_ros_driver_node.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file sick_micro_scan_ros_driver_node.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
-#include <ros/ros.h>
 #include "sick_microscan3_ros_driver/Microscan3Ros.h"
+#include <ros/ros.h>
 
 /**
  * @brief main The Main node to start the Ros Driver, this method is executed via launch file
@@ -43,10 +43,10 @@
  */
 int main(int argc, char** argv)
 {
-   ros::init(argc, argv, "sick_microscan3_ros_driver");
+  ros::init(argc, argv, "sick_microscan3_ros_driver");
 
-   sick::Microscan3Ros microscan3_ros;
+  sick::Microscan3Ros microscan3_ros;
 
-   ros::spin();
-   return 0;
+  ros::spin();
+  return 0;
 }

@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file TCPPacketMerger.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file TCPPacketMerger.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -52,7 +52,7 @@ public:
   bool addTCPPacket(sick::datastructure::PacketBuffer buffer);
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
   UINT32 getTargetSize() const;
-  void setTargetSize(const UINT32 &targetSize);
+  void setTargetSize(const UINT32& targetSize);
 
 private:
   bool m_is_complete;
@@ -68,7 +68,5 @@ private:
   bool deployPacket();
 };
 
-}
-}
-
-
+} // namespace data_processing
+} // namespace sick

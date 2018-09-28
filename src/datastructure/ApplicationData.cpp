@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ApplicationData.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ApplicationData.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/datastructure/ApplicationData.h>
@@ -40,7 +40,6 @@ namespace datastructure {
 ApplicationData::ApplicationData()
   : m_is_empty(false)
 {
-
 }
 
 ApplicationInputs ApplicationData::getInputs() const
@@ -48,7 +47,7 @@ ApplicationInputs ApplicationData::getInputs() const
   return m_inputs;
 }
 
-void ApplicationData::setInputs(const ApplicationInputs &inputs)
+void ApplicationData::setInputs(const ApplicationInputs& inputs)
 {
   m_inputs = inputs;
 }
@@ -58,7 +57,7 @@ ApplicationOutputs ApplicationData::getOutputs() const
   return m_outputs;
 }
 
-void ApplicationData::setOutputs(const ApplicationOutputs &outputs)
+void ApplicationData::setOutputs(const ApplicationOutputs& outputs)
 {
   m_outputs = outputs;
 }
@@ -74,7 +73,5 @@ void ApplicationData::setIsEmpty(bool is_empty)
 }
 
 
-
-}
-}
-
+} // namespace datastructure
+} // namespace sick

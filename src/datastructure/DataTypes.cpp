@@ -25,20 +25,16 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file DataTypes.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file DataTypes.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include "sick_microscan3_ros_driver/datastructure/DataTypes.h"
 
 namespace sick {
 namespace datastructure {
-
-
-
 }
-}
-
+} // namespace sick

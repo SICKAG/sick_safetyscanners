@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ParseTCPPacket.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ParseTCPPacket.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>
@@ -42,12 +42,11 @@ namespace data_processing {
 ParseTCPPacket::ParseTCPPacket()
 {
   m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
-
 }
 
 int ParseTCPPacket::getExpectedPacketLength(datastructure::PacketBuffer buffer)
 {
-  return readLength(buffer) + 8; //for STX and Length which is not included in length datafield
+  return readLength(buffer) + 8; // for STX and Length which is not included in length datafield
 }
 
 UINT16 ParseTCPPacket::getRequestID(datastructure::PacketBuffer buffer)
@@ -56,8 +55,8 @@ UINT16 ParseTCPPacket::getRequestID(datastructure::PacketBuffer buffer)
 }
 
 
-
-bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer, sick::cola2::Command &command)
+bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer,
+                                      sick::cola2::Command& command)
 {
   setCommandValuesFromPacket(buffer, command);
 
@@ -68,7 +67,8 @@ bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer, sick::
   return true;
 }
 
-bool ParseTCPPacket::setCommandValuesFromPacket(sick::datastructure::PacketBuffer &buffer,  sick::cola2::Command &command)
+bool ParseTCPPacket::setCommandValuesFromPacket(sick::datastructure::PacketBuffer& buffer,
+                                                sick::cola2::Command& command)
 {
   command.setSessionID(readSessionID(buffer));
   command.setRequestID(readRequestID(buffer));
@@ -76,13 +76,13 @@ bool ParseTCPPacket::setCommandValuesFromPacket(sick::datastructure::PacketBuffe
   command.setCommandMode(readCommandMode(buffer));
 }
 
-UINT32 ParseTCPPacket::readSTx(datastructure::PacketBuffer &buffer)
+UINT32 ParseTCPPacket::readSTx(datastructure::PacketBuffer& buffer)
 {
   const BYTE* data_ptr(buffer.getBuffer().data());
   return m_reader_ptr->readUINT32BigEndian(data_ptr, 0);
 }
 
-UINT32 ParseTCPPacket::readLength(datastructure::PacketBuffer &buffer)
+UINT32 ParseTCPPacket::readLength(datastructure::PacketBuffer& buffer)
 {
   const BYTE* data_ptr(buffer.getBuffer().data());
   return m_reader_ptr->readUINT32BigEndian(data_ptr, 4);
@@ -101,36 +101,36 @@ UINT8 ParseTCPPacket::readNoC(datastructure::PacketBuffer& buffer)
 UINT32 ParseTCPPacket::readSessionID(datastructure::PacketBuffer& buffer)
 {
   const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT32BigEndian(data_ptr,10);
+  return m_reader_ptr->readUINT32BigEndian(data_ptr, 10);
 }
 
-UINT16 ParseTCPPacket::readRequestID(datastructure::PacketBuffer &buffer)
+UINT16 ParseTCPPacket::readRequestID(datastructure::PacketBuffer& buffer)
 {
   const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT16BigEndian(data_ptr,14);
+  return m_reader_ptr->readUINT16BigEndian(data_ptr, 14);
 }
 
 UINT8 ParseTCPPacket::readCommandType(datastructure::PacketBuffer& buffer)
 {
   const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT8BigEndian(data_ptr,16);
+  return m_reader_ptr->readUINT8BigEndian(data_ptr, 16);
 }
 UINT8 ParseTCPPacket::readCommandMode(datastructure::PacketBuffer& buffer)
 {
   const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT8BigEndian(data_ptr,17);
+  return m_reader_ptr->readUINT8BigEndian(data_ptr, 17);
 }
 UINT16 ParseTCPPacket::readErrorCode(datastructure::PacketBuffer& buffer)
 {
   const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT16BigEndian(data_ptr,18);
+  return m_reader_ptr->readUINT16BigEndian(data_ptr, 18);
 }
 
 void ParseTCPPacket::readData(datastructure::PacketBuffer& buffer, std::vector<BYTE>& byteVector)
 {
   if (buffer.getLength() == 18)
   {
-      return;
+    return;
   }
   else
   {
@@ -138,6 +138,5 @@ void ParseTCPPacket::readData(datastructure::PacketBuffer& buffer, std::vector<B
   }
 }
 
-}
-}
-
+} // namespace data_processing
+} // namespace sick

@@ -25,18 +25,18 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ApplicationData.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ApplicationData.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationInputs.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationOutputs.h>
+#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 
 namespace sick {
 namespace datastructure {
@@ -47,10 +47,10 @@ public:
   ApplicationData();
 
   ApplicationInputs getInputs() const;
-  void setInputs(const ApplicationInputs &inputs);
+  void setInputs(const ApplicationInputs& inputs);
 
   ApplicationOutputs getOutputs() const;
-  void setOutputs(const ApplicationOutputs &outputs);
+  void setOutputs(const ApplicationOutputs& outputs);
 
   bool isEmpty() const;
   void setIsEmpty(bool is_empty);
@@ -60,9 +60,8 @@ private:
 
   ApplicationInputs m_inputs;
   ApplicationOutputs m_outputs;
-
 };
 
 
-}
-}
+} // namespace datastructure
+} // namespace sick

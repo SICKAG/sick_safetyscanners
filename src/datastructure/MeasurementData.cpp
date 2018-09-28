@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file MeasurementData.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file MeasurementData.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/datastructure/MeasurementData.h>
@@ -41,7 +41,6 @@ namespace datastructure {
 MeasurementData::MeasurementData()
   : m_is_empty(false)
 {
-
 }
 
 UINT32 MeasurementData::getNumberOfBeams() const
@@ -49,7 +48,7 @@ UINT32 MeasurementData::getNumberOfBeams() const
   return m_number_of_beams;
 }
 
-void MeasurementData::setNumberOfBeams(const UINT32 &number_of_beams)
+void MeasurementData::setNumberOfBeams(const UINT32& number_of_beams)
 {
   m_number_of_beams = number_of_beams;
 }
@@ -75,7 +74,5 @@ void MeasurementData::setIsEmpty(bool is_empty)
 }
 
 
-
-}
-}
-
+} // namespace datastructure
+} // namespace sick

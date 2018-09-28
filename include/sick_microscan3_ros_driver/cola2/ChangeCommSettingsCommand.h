@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ChangeCommSettingsCommand.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ChangeCommSettingsCommand.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -46,7 +46,7 @@ public:
   typedef sick::cola2::MethodCommand base_class;
 
   ChangeCommSettingsCommand(Cola2Session& session, sick::datastructure::CommSettings settings);
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
 
@@ -56,18 +56,19 @@ private:
 
   sick::datastructure::CommSettings m_settings;
 
-  BYTE *prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
-  bool writeDataToDataPtr(BYTE *&data_ptr) const;
-  bool writeChannelToDataPtr(BYTE *&data_ptr) const;
-  bool writeEnabledToDataPtr(BYTE *&data_ptr) const;
-  bool writeEInterfaceTypeToDataPtr(BYTE *&data_ptr) const;
-  bool writeIPAdresstoDataPtr(BYTE *&data_ptr) const;
-  bool writePortToDataPtr(BYTE *&data_ptr) const;
-  bool writeFrequencyToDataPtr(BYTE *&data_ptr) const;
-  bool writeStartAngleToDataPtr(BYTE *&data_ptr) const;
-  bool writeEndAngleToDataPtr(BYTE *&data_ptr) const;
-  bool writeFeaturesToDataPtr(BYTE *&data_ptr) const;
+  BYTE*
+  prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  bool writeDataToDataPtr(BYTE*& data_ptr) const;
+  bool writeChannelToDataPtr(BYTE*& data_ptr) const;
+  bool writeEnabledToDataPtr(BYTE*& data_ptr) const;
+  bool writeEInterfaceTypeToDataPtr(BYTE*& data_ptr) const;
+  bool writeIPAdresstoDataPtr(BYTE*& data_ptr) const;
+  bool writePortToDataPtr(BYTE*& data_ptr) const;
+  bool writeFrequencyToDataPtr(BYTE*& data_ptr) const;
+  bool writeStartAngleToDataPtr(BYTE*& data_ptr) const;
+  bool writeEndAngleToDataPtr(BYTE*& data_ptr) const;
+  bool writeFeaturesToDataPtr(BYTE*& data_ptr) const;
 };
 
-}
-}
+} // namespace cola2
+} // namespace sick

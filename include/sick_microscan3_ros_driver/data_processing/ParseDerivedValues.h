@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ParseDerivedValues.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ParseDerivedValues.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -47,23 +47,28 @@ class ParseDerivedValues : public AbstractParseUDPSequence
 public:
   ParseDerivedValues();
 
-  datastructure::DerivedValues parseUDPSequence(sick::datastructure::PacketBuffer buffer, datastructure::Data &data);
+  datastructure::DerivedValues parseUDPSequence(sick::datastructure::PacketBuffer buffer,
+                                                datastructure::Data& data);
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  bool setDataInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
-  bool setMultiplicationFactorInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
-  bool setNumberOfBeamsInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
-  bool setScanTimeInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
-  bool setStartAngleInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
-  bool setAngularBeamResolutionInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
-  bool setInterbeamPeriodInDerivedValues(const BYTE *data_ptr, datastructure::DerivedValues &derived_values);
-  bool checkIfPreconditionsAreMet(datastructure::Data &data);
-  bool checkIfDerivedValuesIsPublished(datastructure::Data &data);
-  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data &data);
+  bool setDataInDerivedValues(const BYTE* data_ptr, datastructure::DerivedValues& derived_values);
+  bool setMultiplicationFactorInDerivedValues(const BYTE* data_ptr,
+                                              datastructure::DerivedValues& derived_values);
+  bool setNumberOfBeamsInDerivedValues(const BYTE* data_ptr,
+                                       datastructure::DerivedValues& derived_values);
+  bool setScanTimeInDerivedValues(const BYTE* data_ptr,
+                                  datastructure::DerivedValues& derived_values);
+  bool setStartAngleInDerivedValues(const BYTE* data_ptr,
+                                    datastructure::DerivedValues& derived_values);
+  bool setAngularBeamResolutionInDerivedValues(const BYTE* data_ptr,
+                                               datastructure::DerivedValues& derived_values);
+  bool setInterbeamPeriodInDerivedValues(const BYTE* data_ptr,
+                                         datastructure::DerivedValues& derived_values);
+  bool checkIfPreconditionsAreMet(datastructure::Data& data);
+  bool checkIfDerivedValuesIsPublished(datastructure::Data& data);
+  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data& data);
 };
 
-}
-}
-
-
+} // namespace data_processing
+} // namespace sick

@@ -25,18 +25,20 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file AsyncUDPClient.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file AsyncUDPClient.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/communication/AsyncUDPClient.h>
 
 namespace sick {
 namespace communication {
-AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_service& io_service, unsigned short local_port)
+AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler,
+                               boost::asio::io_service& io_service,
+                               unsigned short local_port)
   : m_io_work_ptr()
   , m_io_service(io_service)
   , m_packet_handler(packet_handler)
@@ -45,9 +47,9 @@ AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler, boost::asio::io_ser
   m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
   try
   {
-    m_socket_ptr = boost::make_shared<boost::asio::ip::udp::socket>(boost::ref(m_io_service),
-            boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(),
-                local_port));
+    m_socket_ptr = boost::make_shared<boost::asio::ip::udp::socket>(
+      boost::ref(m_io_service),
+      boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port));
   }
   catch (std::exception& e)
   {
@@ -63,14 +65,15 @@ AsyncUDPClient::~AsyncUDPClient()
 
 void AsyncUDPClient::start_receive()
 {
-  m_socket_ptr->async_receive_from(boost::asio::buffer(m_recv_buffer), m_remote_endpoint,
-    [this](boost::system::error_code ec, std::size_t bytes_recvd)
-  {
-    this->handle_receive(ec, bytes_recvd);
-  });
+  m_socket_ptr->async_receive_from(boost::asio::buffer(m_recv_buffer),
+                                   m_remote_endpoint,
+                                   [this](boost::system::error_code ec, std::size_t bytes_recvd) {
+                                     this->handle_receive(ec, bytes_recvd);
+                                   });
 }
 
-void AsyncUDPClient::handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred)
+void AsyncUDPClient::handle_receive(const boost::system::error_code& error,
+                                    std::size_t bytes_transferred)
 {
   if (!error)
   {
@@ -90,5 +93,5 @@ void AsyncUDPClient::run_service()
   start_receive();
 }
 
-}
-}
+} // namespace communication
+} // namespace sick

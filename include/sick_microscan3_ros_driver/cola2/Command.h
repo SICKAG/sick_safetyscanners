@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file Command.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file Command.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -37,8 +37,8 @@
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
-#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>
+#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
 #include <boost/thread/mutex.hpp>
 
@@ -62,23 +62,23 @@ public:
   void waitForCompletion();
 
   UINT32 getSessionID() const;
-  void setSessionID(const UINT32 &session_id);
+  void setSessionID(const UINT32& session_id);
 
 
   bool wasSuccessful() const;
 
 
   UINT8 getCommandType() const;
-  void setCommandType(const UINT8 &command_type);
+  void setCommandType(const UINT8& command_type);
 
   UINT8 getCommandMode() const;
-  void setCommandMode(const UINT8 &command_mode);
+  void setCommandMode(const UINT8& command_mode);
 
   UINT16 getRequestID() const;
-  void setRequestID(const UINT16 &request_id);
+  void setRequestID(const UINT16& request_id);
 
   std::vector<BYTE> getDataVector() const;
-  void setDataVector(const std::vector<BYTE> &data);
+  void setDataVector(const std::vector<BYTE>& data);
 
 protected:
   sick::cola2::Cola2Session& m_session;
@@ -99,9 +99,6 @@ private:
   bool m_was_successful;
 
 
-
-
-
   UINT8 m_command_type;
   UINT8 m_command_mode;
   UINT32 m_session_id;
@@ -109,18 +106,19 @@ private:
 
   std::vector<BYTE> m_data_vector;
   sick::datastructure::PacketBuffer::VectorBuffer prepareHeader() const;
-  bool writeCola2StxToDataPtr(BYTE *&data_ptr) const;
-  bool writeLengthToDataPtr(BYTE *&data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const;
-  bool writeCola2HubCntrToDataPtr(BYTE *&data_ptr) const;
-  bool writeCola2NoCToDataPtr(BYTE *&data_ptr) const;
-  bool writeSessionIdToDataPtr(BYTE *&data_ptr) const;
-  bool writeRequestIdToDataPtr(BYTE *&data_ptr) const;
-  bool writeCommandTypeToDataPtr(BYTE *&data_ptr) const;
-  bool writeCommandModeToDataPtr(BYTE *&data_ptr) const;
-  bool writeDataToDataPtr(BYTE *&data_ptr, datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  bool writeCola2StxToDataPtr(BYTE*& data_ptr) const;
+  bool writeLengthToDataPtr(BYTE*& data_ptr,
+                            datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  bool writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const;
+  bool writeCola2NoCToDataPtr(BYTE*& data_ptr) const;
+  bool writeSessionIdToDataPtr(BYTE*& data_ptr) const;
+  bool writeRequestIdToDataPtr(BYTE*& data_ptr) const;
+  bool writeCommandTypeToDataPtr(BYTE*& data_ptr) const;
+  bool writeCommandModeToDataPtr(BYTE*& data_ptr) const;
+  bool writeDataToDataPtr(BYTE*& data_ptr,
+                          datastructure::PacketBuffer::VectorBuffer& telegram) const;
 };
 
 
-}
-}
-
+} // namespace cola2
+} // namespace sick

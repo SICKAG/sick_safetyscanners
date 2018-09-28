@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ScanPoint.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ScanPoint.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -43,7 +43,15 @@ class ScanPoint
 {
 public:
   ScanPoint();
-  ScanPoint(float angle, INT16 &distance, UINT8 &reflectivity, bool &valid_bit, bool &infinite_bit, bool &glare_bit, bool &reflector_bit, bool &contamination_bit, bool &contamination_warning_bit);
+  ScanPoint(float angle,
+            INT16& distance,
+            UINT8& reflectivity,
+            bool& valid_bit,
+            bool& infinite_bit,
+            bool& glare_bit,
+            bool& reflector_bit,
+            bool& contamination_bit,
+            bool& contamination_warning_bit);
 
   float getAngle() const;
 
@@ -64,7 +72,6 @@ public:
   bool getContaminationWarningBit() const;
 
 
-
 private:
   float m_angle;
   INT16 m_distance;
@@ -78,5 +85,5 @@ private:
 };
 
 
-}
-}
+} // namespace datastructure
+} // namespace sick

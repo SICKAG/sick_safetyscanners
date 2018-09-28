@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file GeneralSystemState.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file GeneralSystemState.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -63,32 +63,32 @@ public:
   void setManipulationStatus(bool manipulation_status);
 
   std::vector<bool> getSafeCutOffPathVector() const;
-  void setSafeCutOffPathvector(const std::vector<bool> &safe_cut_off_path_vector);
+  void setSafeCutOffPathvector(const std::vector<bool>& safe_cut_off_path_vector);
 
   std::vector<bool> getNonSafeCutOffPathVector() const;
-  void setNonSafeCutOffPathVector(const std::vector<bool> &non_safe_cut_off_path_vector);
+  void setNonSafeCutOffPathVector(const std::vector<bool>& non_safe_cut_off_path_vector);
 
   std::vector<bool> getResetRequiredCutOffPathVector() const;
-  void setResetRequiredCutOffPathVector(const std::vector<bool> &reset_required_cut_off_path_vector);
+  void
+  setResetRequiredCutOffPathVector(const std::vector<bool>& reset_required_cut_off_path_vector);
 
   BYTE getCurrentMonitoringCaseNoTable_1() const;
-  void setCurrentMonitoringCaseNoTable_1(const BYTE &current_monitoring_case_no_table_1);
+  void setCurrentMonitoringCaseNoTable_1(const BYTE& current_monitoring_case_no_table_1);
 
   BYTE getCurrentMonitoringCaseNoTable_2() const;
-  void setCurrentMonitoringCaseNoTable_2(const BYTE &current_monitoring_case_no_table_2);
+  void setCurrentMonitoringCaseNoTable_2(const BYTE& current_monitoring_case_no_table_2);
 
   BYTE getCurrentMonitoringCaseNoTable_3() const;
-  void setCurrentMonitoringCaseNoTable_3(const BYTE &current_monitoring_case_no_table_3);
+  void setCurrentMonitoringCaseNoTable_3(const BYTE& current_monitoring_case_no_table_3);
 
   BYTE getCurrentMonitoringCaseNoTable_4() const;
-  void setCurrentMonitoringCaseNoTable_4(const BYTE &current_monitoring_case_no_table_4);
+  void setCurrentMonitoringCaseNoTable_4(const BYTE& current_monitoring_case_no_table_4);
 
   bool getApplicationError() const;
   void setApplicationError(bool application_error);
 
   bool getDeviceError() const;
   void setDeviceError(bool device_error);
-
 
 
   bool isEmpty() const;
@@ -114,8 +114,7 @@ private:
 
   bool m_application_error;
   bool m_device_error;
-
 };
 
-}
-}
+} // namespace datastructure
+} // namespace sick

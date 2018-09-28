@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file MethodCommand.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file MethodCommand.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -42,20 +42,18 @@ namespace cola2 {
 class MethodCommand : public Command
 {
 public:
-
   MethodCommand(Cola2Session& session, UINT16 method_index);
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
 
   UINT16 getMethodIndex() const;
-  void setMethodIndex(const UINT16 &method_index);
+  void setMethodIndex(const UINT16& method_index);
 
 private:
   UINT16 m_method_index;
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
-
 };
 
-}
-}
+} // namespace cola2
+} // namespace sick

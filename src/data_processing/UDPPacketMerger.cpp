@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file UDPPacketMerger.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file UDPPacketMerger.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/data_processing/UDPPacketMerger.h>
@@ -41,13 +41,12 @@ UDPPaketMerger::UDPPaketMerger()
   : m_is_complete(false)
   , m_deployed_paket_buffer()
 {
-
 }
 
 
 bool UDPPaketMerger::isComplete()
 {
-   return m_is_complete;
+  return m_is_complete;
 }
 
 sick::datastructure::PacketBuffer UDPPaketMerger::getDeployedPacketBuffer()
@@ -58,8 +57,9 @@ sick::datastructure::PacketBuffer UDPPaketMerger::getDeployedPacketBuffer()
 
 bool UDPPaketMerger::addUDPPaket(sick::datastructure::PacketBuffer buffer)
 {
-  if(isComplete()) {
-      m_is_complete = false;
+  if (isComplete())
+  {
+    m_is_complete = false;
   }
   sick::datastructure::DatagramHeader datagram_header;
   sick::data_processing::ParseDatagramHeader datagram_header_parser;
@@ -70,11 +70,13 @@ bool UDPPaketMerger::addUDPPaket(sick::datastructure::PacketBuffer buffer)
   return isComplete();
 }
 
-bool UDPPaketMerger::addToMap(sick::datastructure::PacketBuffer buffer, sick::datastructure::DatagramHeader header)
+bool UDPPaketMerger::addToMap(sick::datastructure::PacketBuffer buffer,
+                              sick::datastructure::DatagramHeader header)
 {
-  sick::datastructure::ParsedPacketBuffer parsed_packet_buffer(buffer,header);
+  sick::datastructure::ParsedPacketBuffer parsed_packet_buffer(buffer, header);
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
-  if(it != m_parsed_packet_buffer_map.end()) {
+  if (it != m_parsed_packet_buffer_map.end())
+  {
     it->second.push_back(parsed_packet_buffer);
   }
   else
@@ -83,7 +85,6 @@ bool UDPPaketMerger::addToMap(sick::datastructure::PacketBuffer buffer, sick::da
     vec.push_back(parsed_packet_buffer);
     m_parsed_packet_buffer_map[header.getIdentification()] = vec;
   }
-
 }
 
 bool UDPPaketMerger::deployPacketIfComplete(sick::datastructure::DatagramHeader header)
@@ -94,40 +95,47 @@ bool UDPPaketMerger::deployPacketIfComplete(sick::datastructure::DatagramHeader 
   {
     return false;
   }
-  if(!checkIfComplete(header)) return false;
+  if (!checkIfComplete(header))
+    return false;
 
-  sick::datastructure::ParsedPacketBufferVector vec = getSortedParsedPacketBufferForIdentification(header);
-  sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer = removeHeaderFromParsedPacketBuffer(vec);
+  sick::datastructure::ParsedPacketBufferVector vec =
+    getSortedParsedPacketBufferForIdentification(header);
+  sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer =
+    removeHeaderFromParsedPacketBuffer(vec);
   m_deployed_paket_buffer.setBuffer(headerless_packet_buffer);
   return true;
-
 }
 
-bool UDPPaketMerger::checkIfComplete(sick::datastructure::DatagramHeader &header)
+bool UDPPaketMerger::checkIfComplete(sick::datastructure::DatagramHeader& header)
 {
   UINT32 total_length = header.getTotalLength();
-  sick::datastructure::ParsedPacketBufferVector vec = getSortedParsedPacketBufferForIdentification(header);
+  sick::datastructure::ParsedPacketBufferVector vec =
+    getSortedParsedPacketBufferForIdentification(header);
   UINT32 cur_length = calcualteCurrentLengthOfParsedPacketBuffer(vec);
-  if (cur_length != total_length) {
+  if (cur_length != total_length)
+  {
     return false;
   }
   m_is_complete = true;
   return true;
 }
 
-UINT32 UDPPaketMerger::calcualteCurrentLengthOfParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector &vec)
+UINT32 UDPPaketMerger::calcualteCurrentLengthOfParsedPacketBuffer(
+  sick::datastructure::ParsedPacketBufferVector& vec)
 {
   UINT32 cur_length = 0;
 
-  for (auto &parsed_packet_buffer : vec)
+  for (auto& parsed_packet_buffer : vec)
   {
     sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.m_packet_buffer;
-    cur_length += (packet_buffer.getLength()  - sick::datastructure::DatagramHeader::HEADER_SIZE);
+    cur_length += (packet_buffer.getLength() - sick::datastructure::DatagramHeader::HEADER_SIZE);
   }
   return cur_length;
 }
 
-sick::datastructure::ParsedPacketBufferVector UDPPaketMerger::getSortedParsedPacketBufferForIdentification(sick::datastructure::DatagramHeader &header)
+sick::datastructure::ParsedPacketBufferVector
+UDPPaketMerger::getSortedParsedPacketBufferForIdentification(
+  sick::datastructure::DatagramHeader& header)
 {
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
   sick::datastructure::ParsedPacketBufferVector vec = it->second;
@@ -135,20 +143,22 @@ sick::datastructure::ParsedPacketBufferVector UDPPaketMerger::getSortedParsedPac
   return vec;
 }
 
-sick::datastructure::PacketBuffer::VectorBuffer UDPPaketMerger::removeHeaderFromParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector &vec)
+sick::datastructure::PacketBuffer::VectorBuffer UDPPaketMerger::removeHeaderFromParsedPacketBuffer(
+  sick::datastructure::ParsedPacketBufferVector& vec)
 {
   sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
-  for (auto &parsed_packet_buffer : vec) {
-
+  for (auto& parsed_packet_buffer : vec)
+  {
     sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.m_packet_buffer;
 
     headerless_packet_buffer.insert(headerless_packet_buffer.end(),
-                                    packet_buffer.getBuffer().begin() + sick::datastructure::DatagramHeader::HEADER_SIZE,
+                                    packet_buffer.getBuffer().begin() +
+                                      sick::datastructure::DatagramHeader::HEADER_SIZE,
                                     packet_buffer.getBuffer().end());
   }
   return headerless_packet_buffer;
 }
 
 
-}
-}
+} // namespace data_processing
+} // namespace sick

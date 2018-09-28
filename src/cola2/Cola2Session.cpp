@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file Cola2Session.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file Cola2Session.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
@@ -42,11 +42,9 @@ Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient
   , m_session_id(0)
   , m_last_request_id(0)
 {
-
   m_async_tcp_client_ptr->setPacketHandler(boost::bind(&Cola2Session::processPacket, this, _1));
   m_packet_merger_ptr = boost::make_shared<sick::data_processing::TCPPaketMerger>();
-  m_tcp_parser_ptr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
-
+  m_tcp_parser_ptr    = boost::make_shared<sick::data_processing::ParseTCPPacket>();
 }
 
 bool Cola2Session::open()
@@ -63,7 +61,7 @@ bool Cola2Session::close()
 
 bool Cola2Session::executeCommand(CommandPtr command)
 {
-  //TODO sanitize
+  // TODO sanitize
   addCommand(command->getRequestID(), command);
   sendTelegramAndListenForAnswer(command);
   return true;
@@ -71,13 +69,12 @@ bool Cola2Session::executeCommand(CommandPtr command)
 
 bool Cola2Session::sendTelegramAndListenForAnswer(CommandPtr command)
 {
-  command->lockExecutionMutex(); //lock
+  command->lockExecutionMutex(); // lock
   sick::datastructure::PacketBuffer::VectorBuffer telegram;
   command->constructTelegram(telegram);
   m_async_tcp_client_ptr->doSendAndReceive(telegram);
-  command->waitForCompletion(); //scooped locked to wait, unlocked on data processing
+  command->waitForCompletion(); // scooped locked to wait, unlocked on data processing
 }
-
 
 
 UINT32 Cola2Session::getSessionID() const
@@ -85,21 +82,21 @@ UINT32 Cola2Session::getSessionID() const
   return m_session_id;
 }
 
-void Cola2Session::setSessionID(const UINT32 &session_id)
+void Cola2Session::setSessionID(const UINT32& session_id)
 {
   m_session_id = session_id;
 }
 
-void Cola2Session::processPacket(const datastructure::PacketBuffer &packet)
+void Cola2Session::processPacket(const datastructure::PacketBuffer& packet)
 {
   addPacketToMerger(packet);
-  if (!checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()) return;
+  if (!checkIfPacketIsCompleteAndOtherwiseListenForMorePackets())
+    return;
   sick::datastructure::PacketBuffer deployedPacket = m_packet_merger_ptr->getDeployedPacketBuffer();
   startProcessingAndRemovePendingCommandAfterwards(deployedPacket);
-
 }
 
-bool Cola2Session::addPacketToMerger(const sick::datastructure::PacketBuffer &packet)
+bool Cola2Session::addPacketToMerger(const sick::datastructure::PacketBuffer& packet)
 {
   if (m_packet_merger_ptr->isEmpty() || m_packet_merger_ptr->isComplete())
   {
@@ -120,7 +117,8 @@ bool Cola2Session::checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()
 }
 
 
-bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(sick::datastructure::PacketBuffer &packet)
+bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
+  sick::datastructure::PacketBuffer& packet)
 {
   UINT16 requestID = m_tcp_parser_ptr->getRequestID(packet);
   CommandPtr pendingCommand;
@@ -133,16 +131,15 @@ bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(sick::datast
 
 bool Cola2Session::addCommand(UINT16 request_id, CommandPtr command)
 {
-  if(m_pending_commands_map.find(request_id) != m_pending_commands_map.end())
+  if (m_pending_commands_map.find(request_id) != m_pending_commands_map.end())
   {
     return false;
   }
   m_pending_commands_map[request_id] = command;
   return true;
-
 }
 
-bool Cola2Session::findCommand(UINT16 request_id, CommandPtr &command)
+bool Cola2Session::findCommand(UINT16 request_id, CommandPtr& command)
 {
   if (m_pending_commands_map.find(request_id) == m_pending_commands_map.end())
   {
@@ -155,7 +152,7 @@ bool Cola2Session::findCommand(UINT16 request_id, CommandPtr &command)
 bool Cola2Session::removeCommand(UINT16 request_id)
 {
   auto it = m_pending_commands_map.find(request_id);
-  if(it == m_pending_commands_map.end())
+  if (it == m_pending_commands_map.end())
   {
     return false;
   }
@@ -172,5 +169,5 @@ UINT16 Cola2Session::getNextRequestID()
   return ++m_last_request_id;
 }
 
-}
-}
+} // namespace cola2
+} // namespace sick

@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file IntrusionData.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file IntrusionData.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -46,7 +46,7 @@ class IntrusionData
 public:
   IntrusionData();
   std::vector<IntrusionDatum> getIntrusionDataVector() const;
-  void setIntrusionDataVector(const std::vector<IntrusionDatum> &intrusion_data_vector);
+  void setIntrusionDataVector(const std::vector<IntrusionDatum>& intrusion_data_vector);
 
   bool isEmpty() const;
   void setIsEmpty(bool is_empty);
@@ -56,5 +56,5 @@ private:
   std::vector<IntrusionDatum> m_intrusion_data_vector;
 };
 
-}
-}
+} // namespace datastructure
+} // namespace sick

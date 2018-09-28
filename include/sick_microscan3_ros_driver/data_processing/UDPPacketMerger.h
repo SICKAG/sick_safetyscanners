@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file UDPPAcketMerger.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file UDPPAcketMerger.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -50,21 +50,24 @@ public:
 
   bool addUDPPaket(sick::datastructure::PacketBuffer buffer);
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
+
 private:
   bool m_is_complete;
   sick::datastructure::PacketBuffer m_deployed_paket_buffer;
 
   std::map<UINT32, sick::datastructure::ParsedPacketBufferVector> m_parsed_packet_buffer_map;
 
-  bool addToMap(sick::datastructure::PacketBuffer buffer, sick::datastructure::DatagramHeader header);
+  bool addToMap(sick::datastructure::PacketBuffer buffer,
+                sick::datastructure::DatagramHeader header);
   bool deployPacketIfComplete(datastructure::DatagramHeader header);
-  bool checkIfComplete(sick::datastructure::DatagramHeader &header);
-  UINT32 calcualteCurrentLengthOfParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector &vec);
-  sick::datastructure::ParsedPacketBufferVector getSortedParsedPacketBufferForIdentification(sick::datastructure::DatagramHeader &header);
-  sick::datastructure::PacketBuffer::VectorBuffer removeHeaderFromParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector &vec);
+  bool checkIfComplete(sick::datastructure::DatagramHeader& header);
+  UINT32
+  calcualteCurrentLengthOfParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector& vec);
+  sick::datastructure::ParsedPacketBufferVector
+  getSortedParsedPacketBufferForIdentification(sick::datastructure::DatagramHeader& header);
+  sick::datastructure::PacketBuffer::VectorBuffer
+  removeHeaderFromParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector& vec);
 };
 
-}
-}
-
-
+} // namespace data_processing
+} // namespace sick

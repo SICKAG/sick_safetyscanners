@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file GeneralSystemState.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file GeneralSystemState.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/datastructure/GeneralSystemState.h>
@@ -38,9 +38,8 @@ namespace sick {
 namespace datastructure {
 
 GeneralSystemState::GeneralSystemState()
-  :m_is_empty(false)
+  : m_is_empty(false)
 {
-
 }
 
 bool GeneralSystemState::getRunModeActive() const
@@ -108,7 +107,7 @@ std::vector<bool> GeneralSystemState::getSafeCutOffPathVector() const
   return m_safe_cut_off_path_vector;
 }
 
-void GeneralSystemState::setSafeCutOffPathvector(const std::vector<bool> &safe_cut_off_path_vector)
+void GeneralSystemState::setSafeCutOffPathvector(const std::vector<bool>& safe_cut_off_path_vector)
 {
   m_safe_cut_off_path_vector = safe_cut_off_path_vector;
 }
@@ -118,7 +117,8 @@ std::vector<bool> GeneralSystemState::getNonSafeCutOffPathVector() const
   return m_non_safe_cut_off_path_vector;
 }
 
-void GeneralSystemState::setNonSafeCutOffPathVector(const std::vector<bool> &non_safe_cut_off_path_vector)
+void GeneralSystemState::setNonSafeCutOffPathVector(
+  const std::vector<bool>& non_safe_cut_off_path_vector)
 {
   m_non_safe_cut_off_path_vector = non_safe_cut_off_path_vector;
 }
@@ -128,7 +128,8 @@ std::vector<bool> GeneralSystemState::getResetRequiredCutOffPathVector() const
   return m_reset_required_cut_off_path_vector;
 }
 
-void GeneralSystemState::setResetRequiredCutOffPathVector(const std::vector<bool> &reset_required_cut_off_path_vector)
+void GeneralSystemState::setResetRequiredCutOffPathVector(
+  const std::vector<bool>& reset_required_cut_off_path_vector)
 {
   m_reset_required_cut_off_path_vector = reset_required_cut_off_path_vector;
 }
@@ -138,7 +139,8 @@ BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_1() const
   return m_current_monitoring_case_no_table_1;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_1(const BYTE &current_monitoring_case_no_table_1)
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_1(
+  const BYTE& current_monitoring_case_no_table_1)
 {
   m_current_monitoring_case_no_table_1 = current_monitoring_case_no_table_1;
 }
@@ -148,7 +150,8 @@ BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_2() const
   return m_current_monitoring_case_no_table_2;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_2(const BYTE &current_monitoring_case_no_table_2)
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_2(
+  const BYTE& current_monitoring_case_no_table_2)
 {
   m_current_monitoring_case_no_table_2 = current_monitoring_case_no_table_2;
 }
@@ -158,7 +161,8 @@ BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_3() const
   return m_current_monitoring_case_no_table_3;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_3(const BYTE &current_monitoring_case_no_table_3)
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_3(
+  const BYTE& current_monitoring_case_no_table_3)
 {
   m_current_monitoring_case_no_table_3 = current_monitoring_case_no_table_3;
 }
@@ -168,7 +172,8 @@ BYTE GeneralSystemState::getCurrentMonitoringCaseNoTable_4() const
   return m_current_monitoring_case_no_table_4;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_4(const BYTE &current_monitoring_case_no_table_4)
+void GeneralSystemState::setCurrentMonitoringCaseNoTable_4(
+  const BYTE& current_monitoring_case_no_table_4)
 {
   m_current_monitoring_case_no_table_4 = current_monitoring_case_no_table_4;
 }
@@ -195,7 +200,7 @@ void GeneralSystemState::setDeviceError(bool device_error)
 
 bool GeneralSystemState::isEmpty() const
 {
-    return m_is_empty;
+  return m_is_empty;
 }
 
 void GeneralSystemState::setIsEmpty(bool is_empty)
@@ -204,7 +209,5 @@ void GeneralSystemState::setIsEmpty(bool is_empty)
 }
 
 
-
-}
-}
-
+} // namespace datastructure
+} // namespace sick

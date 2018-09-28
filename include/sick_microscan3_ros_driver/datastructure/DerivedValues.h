@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file DerivedValues.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file DerivedValues.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -47,22 +47,22 @@ public:
   DerivedValues();
 
   UINT16 getMultiplicationFactor() const;
-  void setMultiplicationFactor(const UINT16 &multiplication_factor);
+  void setMultiplicationFactor(const UINT16& multiplication_factor);
 
   UINT16 getNumberOfBeams() const;
-  void setNumberOfBeams(const UINT16 &number_of_beams);
+  void setNumberOfBeams(const UINT16& number_of_beams);
 
   UINT16 getScanTime() const;
-  void setScanTime(const UINT16 &scan_time);
+  void setScanTime(const UINT16& scan_time);
 
   float getStartAngle() const;
-  void setStartAngle(const INT32 &start_angle);
+  void setStartAngle(const INT32& start_angle);
 
   float getAngularBeamResolution() const;
-  void setAngularBeamResolution(const INT32 &angular_beam_resolution);
+  void setAngularBeamResolution(const INT32& angular_beam_resolution);
 
   UINT32 getInterbeamPeriod() const;
-  void setInterbeamPeriod(const UINT32 &interbeam_period);
+  void setInterbeamPeriod(const UINT32& interbeam_period);
 
   bool isEmpty() const;
   void setIsEmpty(bool is_empty);
@@ -72,12 +72,12 @@ private:
 
   UINT16 m_multiplication_factor;
   UINT16 m_number_of_beams;
-  UINT16 m_scan_time; //ms
+  UINT16 m_scan_time; // ms
   UINT32 unsigned_test_start_angle;
   float m_start_angle;
   float m_angular_beam_resolution;
-  UINT32 m_interbeam_period; //usecs
+  UINT32 m_interbeam_period; // usecs
 };
 
-}
-}
+} // namespace datastructure
+} // namespace sick

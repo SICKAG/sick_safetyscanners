@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file CloseSession.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file CloseSession.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/cola2/CloseSession.h>
@@ -40,10 +40,9 @@
 namespace sick {
 namespace cola2 {
 
-CloseSession::CloseSession(Cola2Session &session)
-  :Command(session, 0x43, 0x58) //see cola2 manual 0x4F = O, 0x58 = X
+CloseSession::CloseSession(Cola2Session& session)
+  : Command(session, 0x43, 0x58) // see cola2 manual 0x4F = O, 0x58 = X
 {
-
 }
 
 void CloseSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
@@ -60,18 +59,17 @@ bool CloseSession::processReply()
   if (getCommandType() == 'C' && getCommandMode() == 'A')
   {
     m_session.setSessionID(getSessionID());
-    std::cout << "Successfully closed Cola2 session with sessionID: "
-            << std::hex << m_session.getSessionID() << std::endl;
+    std::cout << "Successfully closed Cola2 session with sessionID: " << std::hex
+              << m_session.getSessionID() << std::endl;
     return true;
   }
   else
   {
-    std::cout << "Could not close Cola2 session with sessionID: "
-            << std::hex << m_session.getSessionID() << std::endl;
+    std::cout << "Could not close Cola2 session with sessionID: " << std::hex
+              << m_session.getSessionID() << std::endl;
     return false;
   }
 }
 
-}
-}
-
+} // namespace cola2
+} // namespace sick

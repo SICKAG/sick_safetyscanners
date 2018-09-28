@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ChangeCommSettingsCommand.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ChangeCommSettingsCommand.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
@@ -40,25 +40,26 @@
 namespace sick {
 namespace cola2 {
 
-ChangeCommSettingsCommand::ChangeCommSettingsCommand(Cola2Session &session, sick::datastructure::CommSettings settings)
-  :MethodCommand(session, 0x00b0)
-  ,m_settings(settings)
+ChangeCommSettingsCommand::ChangeCommSettingsCommand(Cola2Session& session,
+                                                     sick::datastructure::CommSettings settings)
+  : MethodCommand(session, 0x00b0)
+  , m_settings(settings)
 {
   m_writer_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
-
 }
 
-void ChangeCommSettingsCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
+void ChangeCommSettingsCommand::addTelegramData(
+  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   base_class::addTelegramData(telegram);
 
   BYTE* data_ptr = prepareTelegramAndGetDataPtr(telegram);
 
   writeDataToDataPtr(data_ptr);
-
 }
 
-BYTE* ChangeCommSettingsCommand::prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram)  const
+BYTE* ChangeCommSettingsCommand::prepareTelegramAndGetDataPtr(
+  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   UINT16 prevSize = telegram.size();
   telegram.resize(prevSize + 28);
@@ -99,46 +100,44 @@ bool ChangeCommSettingsCommand::writeChannelToDataPtr(BYTE*& data_ptr) const
 
 bool ChangeCommSettingsCommand::writeEnabledToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEnabled(),4);
+  m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEnabled(), 4);
 }
 
 bool ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEInterfaceType(),5);
+  m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEInterfaceType(), 5);
 }
 
 bool ChangeCommSettingsCommand::writeIPAdresstoDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getHostIp().to_ulong(),8);
+  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getHostIp().to_ulong(), 8);
 }
 
 bool ChangeCommSettingsCommand::writePortToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getHostUdpPort(),12);
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getHostUdpPort(), 12);
 }
 
 bool ChangeCommSettingsCommand::writeFrequencyToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getPublishingFequency(),14);
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getPublishingFequency(), 14);
 }
 
 bool ChangeCommSettingsCommand::writeStartAngleToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getStartAngle(),16);
+  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getStartAngle(), 16);
 }
 
 bool ChangeCommSettingsCommand::writeEndAngleToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getEndAngle(),20);
+  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getEndAngle(), 20);
 }
 
 bool ChangeCommSettingsCommand::writeFeaturesToDataPtr(BYTE*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getFeatures(),24);
+  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getFeatures(), 24);
 }
 
 
-
-}
-}
-
+} // namespace cola2
+} // namespace sick

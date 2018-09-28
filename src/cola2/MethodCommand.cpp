@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file MethodCommand.cpp
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file MethodCommand.cpp
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #include <sick_microscan3_ros_driver/cola2/MethodCommand.h>
@@ -40,8 +40,8 @@
 namespace sick {
 namespace cola2 {
 
-MethodCommand::MethodCommand(Cola2Session &session, UINT16 method_index)
-  :Command(session,0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
+MethodCommand::MethodCommand(Cola2Session& session, UINT16 method_index)
+  : Command(session, 0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
   , m_method_index(method_index)
 {
   m_writer_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
@@ -53,7 +53,6 @@ void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuf
   telegram.resize(prevSize + 2);
   BYTE* data_ptr = telegram.data() + prevSize;
   m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_method_index, 0);
-
 }
 
 bool MethodCommand::canBeExecutedWithoutSessionID() const
@@ -80,11 +79,10 @@ UINT16 MethodCommand::getMethodIndex() const
   return m_method_index;
 }
 
-void MethodCommand::setMethodIndex(const UINT16 &method_index)
+void MethodCommand::setMethodIndex(const UINT16& method_index)
 {
   m_method_index = method_index;
 }
 
-}
-}
-
+} // namespace cola2
+} // namespace sick

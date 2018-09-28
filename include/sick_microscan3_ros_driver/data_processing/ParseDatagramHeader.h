@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file ParseDatagramHeader.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file ParseDatagramHeader.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -46,24 +46,22 @@ class ParseDatagramHeader : public AbstractParseUDPSequence
 {
 public:
   ParseDatagramHeader();
-  bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::DatagramHeader& header);
+  bool parseUDPSequence(sick::datastructure::PacketBuffer buffer,
+                        sick::datastructure::DatagramHeader& header);
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  bool setDataInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
+  bool setDataInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
 
-  bool setDatagramMarkerInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
-  bool setProtocolInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
-  bool setMajorVersionInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
-  bool setMinorVersionInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
-  bool setTotalLengthInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
-  bool setIdentificationInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
-  bool setFragmentOffsetInHeader(const BYTE *data_ptr, datastructure::DatagramHeader &header);
-
+  bool setDatagramMarkerInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  bool setProtocolInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  bool setMajorVersionInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  bool setMinorVersionInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  bool setTotalLengthInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  bool setIdentificationInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  bool setFragmentOffsetInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
 };
 
-}
-}
-
-
+} // namespace data_processing
+} // namespace sick

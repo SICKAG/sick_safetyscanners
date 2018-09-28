@@ -25,11 +25,11 @@
 
 //----------------------------------------------------------------------
 /*!
-* \file CloseSession.h
-*
-* \author  Lennart Puck <puck@fzi.de>
-* \date    2018-09-24
-*/
+ * \file CloseSession.h
+ *
+ * \author  Lennart Puck <puck@fzi.de>
+ * \date    2018-09-24
+ */
 //----------------------------------------------------------------------
 
 #pragma once
@@ -42,12 +42,11 @@ namespace cola2 {
 class CloseSession : public Command
 {
 public:
-
   CloseSession(Cola2Session& session);
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer &telegram) const;
+  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
 };
 
-}
-}
+} // namespace cola2
+} // namespace sick
