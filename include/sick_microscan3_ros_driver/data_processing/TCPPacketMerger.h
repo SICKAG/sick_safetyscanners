@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef TCPPACKETMERGER_H
+#define TCPPACKETMERGER_H
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -70,3 +71,5 @@ private:
 
 } // namespace data_processing
 } // namespace sick
+
+#endif

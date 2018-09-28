@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef COMMSETTINGS_H
+#define COMMSETTINGS_H
 
 #include <iostream>
 
@@ -103,3 +104,5 @@ private:
 
 } // namespace datastructure
 } // namespace sick
+
+#endif

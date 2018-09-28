@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef UDPPACKETMERGER_H
+#define UDPPACKETMERGER_H
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -71,3 +72,5 @@ private:
 
 } // namespace data_processing
 } // namespace sick
+
+#endif

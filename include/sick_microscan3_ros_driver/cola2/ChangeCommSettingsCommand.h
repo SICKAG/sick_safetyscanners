@@ -32,7 +32,9 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef CHANGECOMMSETTINGSCOMMAND_H
+#define CHANGECOMMSETTINGSCOMMAND_H
+
 
 #include <sick_microscan3_ros_driver/cola2/MethodCommand.h>
 #include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
@@ -72,3 +74,5 @@ private:
 
 } // namespace cola2
 } // namespace sick
+
+#endif

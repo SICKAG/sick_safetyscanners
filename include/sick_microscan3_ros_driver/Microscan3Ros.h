@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef MICROSCAN3ROS_H
+#define MICROSCAN3ROS_H
 
 
 // ROS
@@ -160,3 +161,5 @@ private:
 };
 
 } // namespace sick
+
+#endif

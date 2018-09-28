@@ -95,3 +95,4 @@ void AsyncUDPClient::run_service()
 
 } // namespace communication
 } // namespace sick
+

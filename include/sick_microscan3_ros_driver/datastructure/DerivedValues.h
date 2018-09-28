@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef DERIVEDVALUES_H
+#define DERIVEDVALUES_H
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 
@@ -81,3 +82,5 @@ private:
 
 } // namespace datastructure
 } // namespace sick
+
+#endif

@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef MICROSCAN3_H
+#define MICROSCAN3_H
 
 #include <boost/function.hpp>
 #include <boost/scoped_ptr.hpp>
@@ -100,3 +101,5 @@ private:
 };
 
 } // namespace sick
+
+#endif

@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef ASYNCTCPCLIENT_H
+#define ASYNCTCPCLIENT_H
 
 #include <functional>
 #include <iostream>
@@ -51,7 +52,6 @@
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
-// TODO refactor
 namespace sick {
 namespace communication {
 class AsyncTCPClient
@@ -78,7 +78,6 @@ private:
   PacketHandler m_packet_handler;
 
   boost::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
-  // Network send/receive stuff
   boost::asio::io_service& m_io_service;
   boost::shared_ptr<boost::asio::ip::tcp::socket> m_socket_ptr;
   boost::asio::ip::tcp::endpoint m_remote_endpoint;
@@ -98,3 +97,5 @@ private:
 };
 } // namespace communication
 } // namespace sick
+
+#endif

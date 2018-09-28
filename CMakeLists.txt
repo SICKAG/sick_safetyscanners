@@ -177,7 +177,7 @@ install(
 
 # Mark other files for installation
 install(
-  DIRECTORY doc
+  DIRECTORY docs
   DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
 )
 

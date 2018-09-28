@@ -32,7 +32,9 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef COMMAND_H
+#define COMMAND_H
+
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
@@ -122,3 +124,6 @@ private:
 
 } // namespace cola2
 } // namespace sick
+
+
+#endif

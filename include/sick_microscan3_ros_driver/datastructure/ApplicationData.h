@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef APPLICATIONDATA_H
+#define APPLICATIONDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/ApplicationInputs.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationOutputs.h>
@@ -65,3 +66,5 @@ private:
 
 } // namespace datastructure
 } // namespace sick
+
+#endif

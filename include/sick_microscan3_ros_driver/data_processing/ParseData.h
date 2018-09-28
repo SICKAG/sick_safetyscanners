@@ -32,13 +32,15 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef PARSEDATA_H
+#define PARSEDATA_H
 
 #include <boost/make_shared.hpp>
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
-#include <sick_microscan3_ros_driver/data_processing/AbstractParseUDPSequence.h>
+#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseApplicationData.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseDataHeader.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseDerivedValues.h>
@@ -46,10 +48,13 @@
 #include <sick_microscan3_ros_driver/data_processing/ParseIntrusionData.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseMeasurementData.h>
 
+
+
+
 namespace sick {
 namespace data_processing {
 
-class ParseData : public AbstractParseUDPSequence
+class ParseData
 {
 public:
   ParseData();
@@ -79,3 +84,5 @@ private:
 
 } // namespace data_processing
 } // namespace sick
+
+#endif

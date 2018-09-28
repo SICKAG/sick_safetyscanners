@@ -32,7 +32,9 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef CLOSESESSION_H
+#define CLOSESESSION_H
+
 
 #include <sick_microscan3_ros_driver/cola2/Command.h>
 
@@ -50,3 +52,5 @@ public:
 
 } // namespace cola2
 } // namespace sick
+
+#endif

@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef ASYNCUDPCLIENT_H
+#define ASYNCUDPCLIENT_H
 
 #include <functional>
 #include <iostream>
@@ -82,3 +83,5 @@ private:
 };
 } // namespace communication
 } // namespace sick
+
+#endif

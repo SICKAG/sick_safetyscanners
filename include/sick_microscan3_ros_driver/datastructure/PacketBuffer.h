@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef PACKETBUFFER_H
+#define PACKETBUFFER_H
 
 #include <iostream>
 #include <string>
@@ -96,3 +97,5 @@ static bool sortForIncreasingOffset(const ParsedPacketBuffer& ppb1, const Parsed
 
 } // namespace datastructure
 } // namespace sick
+
+#endif

@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef DATAGRAMHEADER_H
+#define DATAGRAMHEADER_H
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 
@@ -80,3 +81,5 @@ private:
 
 } // namespace datastructure
 } // namespace sick
+
+#endif

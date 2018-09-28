@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef MEASUREMENTDATA_H
+#define MEASUREMENTDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/ScanPoint.h>
@@ -64,3 +65,5 @@ private:
 
 } // namespace datastructure
 } // namespace sick
+
+#endif

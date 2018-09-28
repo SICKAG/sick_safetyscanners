@@ -32,12 +32,16 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef PARSETCPPACKET_H
+#define PARSETCPPACKET_H
 
-#include <sick_microscan3_ros_driver/data_processing/AbstractParseUDPSequence.h>
+#include <boost/make_shared.hpp>
 
+#include <sick_microscan3_ros_driver/datastructure/Data.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
 
+#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
 namespace sick {
 
@@ -48,7 +52,7 @@ class Command;
 namespace data_processing {
 
 
-class ParseTCPPacket : public AbstractParseUDPSequence
+class ParseTCPPacket
 {
 public:
   ParseTCPPacket();
@@ -79,3 +83,5 @@ private:
 
 } // namespace data_processing
 } // namespace sick
+
+#endif

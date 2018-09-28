@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef INTRUSIONDATA_H
+#define INTRUSIONDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/IntrusionDatum.h>
@@ -58,3 +59,5 @@ private:
 
 } // namespace datastructure
 } // namespace sick
+
+#endif

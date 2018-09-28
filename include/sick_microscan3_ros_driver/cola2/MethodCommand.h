@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef METHODCOMMAND_H
+#define METHODCOMMAND_H
 
 #include <sick_microscan3_ros_driver/cola2/Command.h>
 
@@ -57,3 +58,5 @@ private:
 
 } // namespace cola2
 } // namespace sick
+
+#endif

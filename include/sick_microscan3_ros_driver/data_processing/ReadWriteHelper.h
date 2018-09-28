@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef READWRITEHELPER_H
+#define READWRITEHELPER_H
 
 #include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 
@@ -72,3 +73,5 @@ public:
 
 } // namespace data_processing
 } // namespace sick
+
+#endif
