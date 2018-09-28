@@ -35,8 +35,6 @@
 #ifndef PARSEINTRUSIONDATA_H
 #define PARSEINTRUSIONDATA_H
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
@@ -60,7 +58,7 @@ public:
 private:
   uint16_t m_num_scan_points;
 
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setDataInIntrusionData(const uint8_t* data_ptr, datastructure::IntrusionData& intrusion_data);
   void setDataInIntrusionDatums(const uint8_t* data_ptr,
                                 std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums);

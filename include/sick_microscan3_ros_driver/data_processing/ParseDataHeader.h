@@ -36,8 +36,6 @@
 #define PARSEDATAHEADER_H
 
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DataHeader.h>
@@ -56,7 +54,7 @@ public:
                                              datastructure::Data& data);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setVersionIndicatorInDataHeader(const uint8_t* data_ptr,
                                        datastructure::DataHeader& data_header);
   void setMajorVersionInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);

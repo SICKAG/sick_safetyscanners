@@ -53,7 +53,7 @@ public:
 
 private:
   uint16_t m_method_index;
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 };
 
 } // namespace cola2

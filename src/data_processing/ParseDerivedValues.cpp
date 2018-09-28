@@ -39,7 +39,7 @@ namespace data_processing {
 
 ParseDerivedValues::ParseDerivedValues()
 {
-  m_reader_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 datastructure::DerivedValues

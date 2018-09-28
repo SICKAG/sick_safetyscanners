@@ -43,8 +43,6 @@
 #include <boost/asio.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/function.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -68,9 +66,9 @@ private:
 
   PacketHandler m_packet_handler;
 
-  boost::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
+  std::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
   boost::asio::io_service& m_io_service;
-  boost::shared_ptr<boost::asio::ip::udp::socket> m_socket_ptr;
+  std::shared_ptr<boost::asio::ip::udp::socket> m_socket_ptr;
   boost::asio::ip::udp::endpoint m_remote_endpoint;
   std::thread m_service_thread;
 

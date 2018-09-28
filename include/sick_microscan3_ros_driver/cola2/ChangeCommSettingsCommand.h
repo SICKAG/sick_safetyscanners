@@ -54,7 +54,7 @@ public:
 
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
   sick::datastructure::CommSettings m_settings;
 

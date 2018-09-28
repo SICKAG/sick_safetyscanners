@@ -57,9 +57,9 @@ class CreateSession;
 class Cola2Session
 {
 public:
-  typedef boost::shared_ptr<sick::cola2::Command> CommandPtr;
+  typedef std::shared_ptr<sick::cola2::Command> CommandPtr;
 
-  Cola2Session(boost::shared_ptr<communication::AsyncTCPClient> async_tcp_client);
+  Cola2Session(std::shared_ptr<communication::AsyncTCPClient> async_tcp_client);
 
   bool executeCommand(CommandPtr command);
 
@@ -80,10 +80,10 @@ private:
   bool removeCommand(uint16_t request_id);
 
 
-  boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
-  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser_ptr;
-  boost::shared_ptr<sick::data_processing::TCPPaketMerger> m_packet_merger_ptr;
-  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
+  std::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
+  std::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser_ptr;
+  std::shared_ptr<sick::data_processing::TCPPaketMerger> m_packet_merger_ptr;
+  std::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
 
   std::map<uint16_t, CommandPtr> m_pending_commands_map;
 

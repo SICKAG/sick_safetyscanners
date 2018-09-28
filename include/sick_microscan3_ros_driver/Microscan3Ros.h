@@ -52,11 +52,7 @@
 #include <sick_microscan3_ros_driver/RawMicroScanDataMsg.h>
 #include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
-
 #include <dynamic_reconfigure/server.h>
-
 
 #include <cmath>
 
@@ -122,7 +118,7 @@ private:
 
   bool m_initialised;
 
-  boost::shared_ptr<sick::Microscan3> m_device;
+  std::shared_ptr<sick::Microscan3> m_device;
 
   sick::datastructure::CommSettings m_communication_settings;
 

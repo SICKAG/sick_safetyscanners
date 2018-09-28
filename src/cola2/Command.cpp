@@ -47,8 +47,8 @@ Command::Command(Cola2Session& session, uint16_t command_type, uint16_t command_
 {
   m_session_id     = m_session.getSessionID();
   m_request_id     = m_session.getNextRequestID();
-  m_tcp_parser_ptr = boost::make_shared<sick::data_processing::ParseTCPPacket>();
-  m_writer_ptr     = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_tcp_parser_ptr = std::make_shared<sick::data_processing::ParseTCPPacket>();
+  m_writer_ptr     = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void Command::lockExecutionMutex()

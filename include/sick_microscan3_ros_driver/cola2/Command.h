@@ -84,8 +84,8 @@ protected:
   sick::cola2::Cola2Session& m_session;
 
 private:
-  boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
+  std::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
 
   virtual bool processReply() = 0;

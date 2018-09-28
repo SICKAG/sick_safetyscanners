@@ -51,7 +51,7 @@ Microscan3Ros::Microscan3Ros()
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
-  m_device = boost::make_shared<sick::Microscan3>(
+  m_device = std::make_shared<sick::Microscan3>(
     boost::bind(&Microscan3Ros::receivedUDPPaket, this, _1), m_communication_settings);
   m_device->run();
   m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 100);
@@ -293,7 +293,7 @@ Microscan3Ros::createDataHeaderMessage(const sick::datastructure::Data& data)
 
   if (!data.getDataHeaderPtr()->isEmpty())
   {
-    boost::shared_ptr<sick::datastructure::DataHeader> data_header = data.getDataHeaderPtr();
+    std::shared_ptr<sick::datastructure::DataHeader> data_header = data.getDataHeaderPtr();
 
     msg.version_version       = data_header->getVersionIndicator();
     msg.version_release       = data_header->getVersionRelease();
@@ -321,7 +321,7 @@ Microscan3Ros::createDerivedValuesMessage(const sick::datastructure::Data& data)
 
   if (!data.getDerivedValuesPtr()->isEmpty())
   {
-    boost::shared_ptr<sick::datastructure::DerivedValues> derived_values =
+    std::shared_ptr<sick::datastructure::DerivedValues> derived_values =
       data.getDerivedValuesPtr();
 
     msg.multiplication_factor   = derived_values->getMultiplicationFactor();
@@ -341,7 +341,7 @@ Microscan3Ros::createGeneralSystemStateMessage(const sick::datastructure::Data& 
 
   if (!data.getGeneralSystemStatePtr()->isEmpty())
   {
-    boost::shared_ptr<sick::datastructure::GeneralSystemState> general_system_state =
+    std::shared_ptr<sick::datastructure::GeneralSystemState> general_system_state =
       data.getGeneralSystemStatePtr();
 
     msg.run_mode_active          = general_system_state->getRunModeActive();
@@ -403,7 +403,7 @@ Microscan3Ros::createScanPointMessageVector(const sick::datastructure::Data& dat
 {
   std::vector<sick_microscan3_ros_driver::ScanPointMsg> msg_vector;
 
-  boost::shared_ptr<sick::datastructure::MeasurementData> measurement_data =
+  std::shared_ptr<sick::datastructure::MeasurementData> measurement_data =
     data.getMeasurementDataPtr();
   std::vector<sick::datastructure::ScanPoint> scan_points = measurement_data->getScanPointsVector();
   int num_points                                          = measurement_data->getNumberOfBeams();
@@ -443,7 +443,7 @@ Microscan3Ros::createIntrusionDatumMessageVector(const sick::datastructure::Data
 {
   std::vector<sick_microscan3_ros_driver::IntrusionDatumMsg> msg_vector;
 
-  boost::shared_ptr<sick::datastructure::IntrusionData> intrusion_data = data.getIntrusionDataPtr();
+  std::shared_ptr<sick::datastructure::IntrusionData> intrusion_data = data.getIntrusionDataPtr();
   std::vector<sick::datastructure::IntrusionDatum> intrusion_datums =
     intrusion_data->getIntrusionDataVector();
 
@@ -480,7 +480,7 @@ Microscan3Ros::createApplicationInputsMessage(const sick::datastructure::Data& d
 {
   sick_microscan3_ros_driver::ApplicationInputsMsg msg;
 
-  boost::shared_ptr<sick::datastructure::ApplicationData> app_data = data.getApplicationDataPtr();
+  std::shared_ptr<sick::datastructure::ApplicationData> app_data = data.getApplicationDataPtr();
   sick::datastructure::ApplicationInputs inputs                    = app_data->getInputs();
   std::vector<bool> unsafe_inputs       = inputs.getUnsafeInputsInputSourcesVector();
   std::vector<bool> unsafe_inputs_flags = inputs.getUnsafeInputsFlagsVector();
@@ -513,7 +513,7 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
 {
   sick_microscan3_ros_driver::ApplicationOutputsMsg msg;
 
-  boost::shared_ptr<sick::datastructure::ApplicationData> app_data = data.getApplicationDataPtr();
+  std::shared_ptr<sick::datastructure::ApplicationData> app_data = data.getApplicationDataPtr();
   sick::datastructure::ApplicationOutputs outputs                  = app_data->getOutputs();
 
   std::vector<bool> eval_out         = outputs.getEvalOutVector();

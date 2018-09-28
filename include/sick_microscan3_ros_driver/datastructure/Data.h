@@ -35,7 +35,7 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include <boost/shared_ptr.hpp>
+#include <memory>
 
 #include <sick_microscan3_ros_driver/datastructure/ApplicationData.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationInputs.h>
@@ -54,32 +54,32 @@ class Data
 public:
   Data();
 
-  boost::shared_ptr<DataHeader> getDataHeaderPtr() const;
-  void setDataHeaderPtr(const boost::shared_ptr<DataHeader>& data_header_ptr);
+  std::shared_ptr<DataHeader> getDataHeaderPtr() const;
+  void setDataHeaderPtr(const std::shared_ptr<DataHeader>& data_header_ptr);
 
-  boost::shared_ptr<GeneralSystemState> getGeneralSystemStatePtr() const;
+  std::shared_ptr<GeneralSystemState> getGeneralSystemStatePtr() const;
   void
-  setGeneralSystemStatePtr(const boost::shared_ptr<GeneralSystemState>& general_system_state_ptr);
+  setGeneralSystemStatePtr(const std::shared_ptr<GeneralSystemState>& general_system_state_ptr);
 
-  boost::shared_ptr<DerivedValues> getDerivedValuesPtr() const;
-  void setDerivedValuesPtr(const boost::shared_ptr<DerivedValues>& derived_values_ptr);
+  std::shared_ptr<DerivedValues> getDerivedValuesPtr() const;
+  void setDerivedValuesPtr(const std::shared_ptr<DerivedValues>& derived_values_ptr);
 
-  boost::shared_ptr<MeasurementData> getMeasurementDataPtr() const;
-  void setMeasurementDataPtr(const boost::shared_ptr<MeasurementData>& measurement_data_ptr);
+  std::shared_ptr<MeasurementData> getMeasurementDataPtr() const;
+  void setMeasurementDataPtr(const std::shared_ptr<MeasurementData>& measurement_data_ptr);
 
-  boost::shared_ptr<IntrusionData> getIntrusionDataPtr() const;
-  void setIntrusionDataPtr(const boost::shared_ptr<IntrusionData>& intrusion_data_ptr);
+  std::shared_ptr<IntrusionData> getIntrusionDataPtr() const;
+  void setIntrusionDataPtr(const std::shared_ptr<IntrusionData>& intrusion_data_ptr);
 
-  boost::shared_ptr<ApplicationData> getApplicationDataPtr() const;
-  void setApplicationDataPtr(const boost::shared_ptr<ApplicationData>& application_data_ptr);
+  std::shared_ptr<ApplicationData> getApplicationDataPtr() const;
+  void setApplicationDataPtr(const std::shared_ptr<ApplicationData>& application_data_ptr);
 
 private:
-  boost::shared_ptr<DataHeader> m_data_header_ptr;
-  boost::shared_ptr<GeneralSystemState> m_general_system_state_ptr;
-  boost::shared_ptr<DerivedValues> m_derived_values_ptr;
-  boost::shared_ptr<MeasurementData> m_measurement_data_ptr;
-  boost::shared_ptr<IntrusionData> m_intrusion_data_ptr;
-  boost::shared_ptr<ApplicationData> m_application_data_ptr;
+  std::shared_ptr<DataHeader> m_data_header_ptr;
+  std::shared_ptr<GeneralSystemState> m_general_system_state_ptr;
+  std::shared_ptr<DerivedValues> m_derived_values_ptr;
+  std::shared_ptr<MeasurementData> m_measurement_data_ptr;
+  std::shared_ptr<IntrusionData> m_intrusion_data_ptr;
+  std::shared_ptr<ApplicationData> m_application_data_ptr;
 };
 
 } // namespace datastructure

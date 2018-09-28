@@ -82,15 +82,15 @@ public:
 private:
   PaketReceivedCallbackFunction m_newPaketReceivedCallbackFunction;
 
-  boost::shared_ptr<boost::asio::io_service> m_io_service_ptr;
-  boost::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
-  boost::shared_ptr<sick::communication::AsyncUDPClient> m_async_udp_client_ptr;
-  boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
+  std::shared_ptr<boost::asio::io_service> m_io_service_ptr;
+  std::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
+  std::shared_ptr<sick::communication::AsyncUDPClient> m_async_udp_client_ptr;
+  std::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
   boost::scoped_ptr<boost::thread> m_udp_client_thread_ptr;
 
-  boost::shared_ptr<sick::cola2::Cola2Session> m_session_ptr;
+  std::shared_ptr<sick::cola2::Cola2Session> m_session_ptr;
 
-  boost::shared_ptr<sick::data_processing::UDPPaketMerger> m_paket_merger_ptr;
+  std::shared_ptr<sick::data_processing::UDPPaketMerger> m_paket_merger_ptr;
 
   void processUDPPaket(const datastructure::PacketBuffer& buffer);
   bool UDPClientThread();

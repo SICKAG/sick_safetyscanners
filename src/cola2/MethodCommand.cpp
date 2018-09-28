@@ -44,7 +44,7 @@ MethodCommand::MethodCommand(Cola2Session& session, uint16_t method_index)
   : Command(session, 0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
   , m_method_index(method_index)
 {
-  m_writer_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const

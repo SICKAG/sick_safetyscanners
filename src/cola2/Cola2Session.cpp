@@ -37,25 +37,25 @@
 namespace sick {
 namespace cola2 {
 
-Cola2Session::Cola2Session(boost::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client)
+Cola2Session::Cola2Session(std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client)
   : m_async_tcp_client_ptr(async_tcp_client)
   , m_session_id(0)
   , m_last_request_id(0)
 {
   m_async_tcp_client_ptr->setPacketHandler(boost::bind(&Cola2Session::processPacket, this, _1));
-  m_packet_merger_ptr = boost::make_shared<sick::data_processing::TCPPaketMerger>();
-  m_tcp_parser_ptr    = boost::make_shared<sick::data_processing::ParseTCPPacket>();
+  m_packet_merger_ptr = std::make_shared<sick::data_processing::TCPPaketMerger>();
+  m_tcp_parser_ptr    = std::make_shared<sick::data_processing::ParseTCPPacket>();
 }
 
 bool Cola2Session::open()
 {
-  CommandPtr command_ptr = boost::make_shared<CreateSession>(boost::ref(*this));
+  CommandPtr command_ptr = std::make_shared<CreateSession>(boost::ref(*this));
   return executeCommand(command_ptr);
 }
 
 bool Cola2Session::close()
 {
-  CommandPtr command_ptr = boost::make_shared<CloseSession>(boost::ref(*this));
+  CommandPtr command_ptr = std::make_shared<CloseSession>(boost::ref(*this));
   return executeCommand(command_ptr);
 }
 

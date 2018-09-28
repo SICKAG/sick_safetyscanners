@@ -35,8 +35,6 @@
 #ifndef PARSEAPPLICATIONDATA_H
 #define PARSEAPPLICATIONDATA_H
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
@@ -56,7 +54,7 @@ public:
                                                   datastructure::Data& data);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setDataInApplicationData(const uint8_t* data_ptr,
                                 datastructure::ApplicationData& application_data);
   void setApplicationInputsInApplicationData(const uint8_t* data_ptr,

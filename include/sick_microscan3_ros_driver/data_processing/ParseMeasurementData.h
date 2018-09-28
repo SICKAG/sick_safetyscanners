@@ -35,8 +35,6 @@
 #ifndef PARSEMEASUREMENTDATA_H
 #define PARSEMEASUREMENTDATA_H
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/MeasurementData.h>
@@ -57,7 +55,7 @@ public:
 private:
   float m_angle;
   float m_angle_delta;
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setDataInMeasurementData(const uint8_t* data_ptr,
                                 datastructure::MeasurementData& measurement_data);
   void setNumberOfBeamsInMeasurementData(const uint8_t* data_ptr,

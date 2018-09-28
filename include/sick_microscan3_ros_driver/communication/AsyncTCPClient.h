@@ -43,8 +43,6 @@
 #include <boost/asio.hpp>
 #include <boost/cstdint.hpp>
 #include <boost/function.hpp>
-#include <boost/make_shared.hpp>
-#include <boost/shared_ptr.hpp>
 #include <boost/thread/condition.hpp>
 #include <boost/thread/mutex.hpp>
 
@@ -75,9 +73,9 @@ private:
 
   PacketHandler m_packet_handler;
 
-  boost::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
+  std::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
   boost::asio::io_service& m_io_service;
-  boost::shared_ptr<boost::asio::ip::tcp::socket> m_socket_ptr;
+  std::shared_ptr<boost::asio::ip::tcp::socket> m_socket_ptr;
   boost::asio::ip::tcp::endpoint m_remote_endpoint;
   std::thread m_service_thread;
 

@@ -35,8 +35,6 @@
 #ifndef PARSEDATA_H
 #define PARSEDATA_H
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -62,15 +60,15 @@ public:
   bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::Data& data);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  boost::shared_ptr<sick::data_processing::ParseDataHeader> m_data_header_parser_ptr;
-  boost::shared_ptr<sick::data_processing::ParseDerivedValues> m_derived_values_parser_ptr;
-  boost::shared_ptr<sick::data_processing::ParseMeasurementData> m_measurement_data_parser_ptr;
-  boost::shared_ptr<sick::data_processing::ParseGeneralSystemState>
+  std::shared_ptr<sick::data_processing::ParseDataHeader> m_data_header_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseDerivedValues> m_derived_values_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseMeasurementData> m_measurement_data_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseGeneralSystemState>
     m_general_system_state_parser_ptr;
-  boost::shared_ptr<sick::data_processing::ParseIntrusionData> m_intrusion_data_parser_ptr;
-  boost::shared_ptr<sick::data_processing::ParseApplicationData> m_application_data_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseIntrusionData> m_intrusion_data_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseApplicationData> m_application_data_parser_ptr;
 
 
   void setDataBlocksInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);

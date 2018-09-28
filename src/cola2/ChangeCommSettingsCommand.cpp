@@ -45,7 +45,7 @@ ChangeCommSettingsCommand::ChangeCommSettingsCommand(Cola2Session& session,
   : MethodCommand(session, 0x00b0)
   , m_settings(settings)
 {
-  m_writer_ptr = boost::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void ChangeCommSettingsCommand::addTelegramData(

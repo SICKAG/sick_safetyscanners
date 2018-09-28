@@ -39,14 +39,14 @@ namespace data_processing {
 
 ParseData::ParseData()
 {
-  m_reader_ptr                  = boost::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_data_header_parser_ptr      = boost::make_shared<sick::data_processing::ParseDataHeader>();
-  m_derived_values_parser_ptr   = boost::make_shared<sick::data_processing::ParseDerivedValues>();
-  m_measurement_data_parser_ptr = boost::make_shared<sick::data_processing::ParseMeasurementData>();
+  m_reader_ptr                  = std::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_data_header_parser_ptr      = std::make_shared<sick::data_processing::ParseDataHeader>();
+  m_derived_values_parser_ptr   = std::make_shared<sick::data_processing::ParseDerivedValues>();
+  m_measurement_data_parser_ptr = std::make_shared<sick::data_processing::ParseMeasurementData>();
   m_general_system_state_parser_ptr =
-    boost::make_shared<sick::data_processing::ParseGeneralSystemState>();
-  m_intrusion_data_parser_ptr   = boost::make_shared<sick::data_processing::ParseIntrusionData>();
-  m_application_data_parser_ptr = boost::make_shared<sick::data_processing::ParseApplicationData>();
+    std::make_shared<sick::data_processing::ParseGeneralSystemState>();
+  m_intrusion_data_parser_ptr   = std::make_shared<sick::data_processing::ParseIntrusionData>();
+  m_application_data_parser_ptr = std::make_shared<sick::data_processing::ParseApplicationData>();
 }
 
 bool ParseData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data& data)
@@ -69,7 +69,7 @@ void ParseData::setDataHeaderInData(datastructure::PacketBuffer& buffer, datastr
 {
   sick::datastructure::DataHeader data_header =
     m_data_header_parser_ptr->parseUDPSequence(buffer, data);
-  data.setDataHeaderPtr(boost::make_shared<sick::datastructure::DataHeader>(data_header));
+  data.setDataHeaderPtr(std::make_shared<sick::datastructure::DataHeader>(data_header));
 }
 
 void ParseData::setDerivedValuesInData(datastructure::PacketBuffer& buffer,
@@ -77,7 +77,7 @@ void ParseData::setDerivedValuesInData(datastructure::PacketBuffer& buffer,
 {
   sick::datastructure::DerivedValues derived_values =
     m_derived_values_parser_ptr->parseUDPSequence(buffer, data);
-  data.setDerivedValuesPtr(boost::make_shared<sick::datastructure::DerivedValues>(derived_values));
+  data.setDerivedValuesPtr(std::make_shared<sick::datastructure::DerivedValues>(derived_values));
 }
 
 void ParseData::setMeasurementDataInData(datastructure::PacketBuffer& buffer,
@@ -86,7 +86,7 @@ void ParseData::setMeasurementDataInData(datastructure::PacketBuffer& buffer,
   sick::datastructure::MeasurementData measurement_data =
     m_measurement_data_parser_ptr->parseUDPSequence(buffer, data);
   data.setMeasurementDataPtr(
-    boost::make_shared<sick::datastructure::MeasurementData>(measurement_data));
+    std::make_shared<sick::datastructure::MeasurementData>(measurement_data));
 }
 
 void ParseData::setGeneralSystemStateInData(datastructure::PacketBuffer& buffer,
@@ -95,7 +95,7 @@ void ParseData::setGeneralSystemStateInData(datastructure::PacketBuffer& buffer,
   sick::datastructure::GeneralSystemState general_system_state =
     m_general_system_state_parser_ptr->parseUDPSequence(buffer, data);
   data.setGeneralSystemStatePtr(
-    boost::make_shared<sick::datastructure::GeneralSystemState>(general_system_state));
+    std::make_shared<sick::datastructure::GeneralSystemState>(general_system_state));
 }
 
 void ParseData::setIntrusionDataInData(datastructure::PacketBuffer& buffer,
@@ -103,7 +103,7 @@ void ParseData::setIntrusionDataInData(datastructure::PacketBuffer& buffer,
 {
   sick::datastructure::IntrusionData intrusion_data =
     m_intrusion_data_parser_ptr->parseUDPSequence(buffer, data);
-  data.setIntrusionDataPtr(boost::make_shared<sick::datastructure::IntrusionData>(intrusion_data));
+  data.setIntrusionDataPtr(std::make_shared<sick::datastructure::IntrusionData>(intrusion_data));
 }
 
 void ParseData::setApplicationDataInData(datastructure::PacketBuffer& buffer,
@@ -112,7 +112,7 @@ void ParseData::setApplicationDataInData(datastructure::PacketBuffer& buffer,
   sick::datastructure::ApplicationData application_data =
     m_application_data_parser_ptr->parseUDPSequence(buffer, data);
   data.setApplicationDataPtr(
-    boost::make_shared<sick::datastructure::ApplicationData>(application_data));
+    std::make_shared<sick::datastructure::ApplicationData>(application_data));
 }
 
 } // namespace data_processing

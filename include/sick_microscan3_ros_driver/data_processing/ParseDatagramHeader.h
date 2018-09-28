@@ -35,8 +35,6 @@
 #ifndef PARSEDATAGRAMHEADER_H
 #define PARSEDATAGRAMHEADER_H
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DatagramHeader.h>
@@ -54,7 +52,7 @@ public:
                         sick::datastructure::DatagramHeader& header);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
   void setDataInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
 

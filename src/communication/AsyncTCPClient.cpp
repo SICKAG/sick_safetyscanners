@@ -46,10 +46,10 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
 
 {
   // Keep io_service busy
-  m_io_work_ptr = boost::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
+  m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
   try
   {
-    m_socket_ptr = boost::make_shared<boost::asio::ip::tcp::socket>(boost::ref(m_io_service));
+    m_socket_ptr = std::make_shared<boost::asio::ip::tcp::socket>(boost::ref(m_io_service));
   }
   catch (std::exception& e)
   {

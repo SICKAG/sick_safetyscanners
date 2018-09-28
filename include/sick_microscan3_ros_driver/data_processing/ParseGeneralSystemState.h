@@ -34,8 +34,6 @@
 
 #pragma once
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
@@ -54,7 +52,7 @@ public:
                                                      datastructure::Data& data);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setDataInGeneralSystemState(const uint8_t* data_ptr,
                                    datastructure::GeneralSystemState& general_System_state);
   void setStatusBitsInGeneralSystemState(const uint8_t* data_ptr,

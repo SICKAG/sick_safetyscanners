@@ -50,7 +50,7 @@ public:
   bool processReply();
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
   uint8_t*
   prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;

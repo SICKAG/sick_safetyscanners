@@ -35,8 +35,6 @@
 #ifndef PARSETCPPACKET_H
 #define PARSETCPPACKET_H
 
-#include <boost/make_shared.hpp>
-
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
@@ -66,7 +64,7 @@ public:
   uint16_t getRequestID(datastructure::PacketBuffer buffer);
 
 private:
-  boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   uint32_t readSTx(datastructure::PacketBuffer& buffer);
   uint32_t readLength(datastructure::PacketBuffer& buffer);
   uint16_t readRequestID(datastructure::PacketBuffer& buffer);
