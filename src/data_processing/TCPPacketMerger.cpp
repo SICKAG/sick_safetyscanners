@@ -108,6 +108,7 @@ bool TCPPaketMerger::deployPacket()
   }
   m_deployed_paket_buffer.setBuffer(headerless_packet_buffer);
   m_buffer_vector.clear();
+  return true;
 }
 
 UINT32 TCPPaketMerger::getTargetSize() const

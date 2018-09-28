@@ -82,13 +82,13 @@ bool CreateSession::processReply()
   }
 }
 
-bool CreateSession::writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const
+void CreateSession::writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const
 {
   UINT8 heartBeatTimeoutSeconds = 60;
   m_writer_ptr->writeUINT8BigEndian(data_ptr, heartBeatTimeoutSeconds, 0);
 }
 
-bool CreateSession::writeClientIdToDataPtr(BYTE*& data_ptr) const
+void CreateSession::writeClientIdToDataPtr(BYTE*& data_ptr) const
 {
   UINT32 clientID = 1; // can be any random number
   m_writer_ptr->writeUINT32BigEndian(data_ptr, clientID, 1);

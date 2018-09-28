@@ -105,7 +105,7 @@ void ParseIntrusionData::setNumScanPoints(const UINT16& num_scan_points)
   m_num_scan_points = num_scan_points;
 }
 
-bool ParseIntrusionData::setDataInIntrusionData(const BYTE* data_ptr,
+void ParseIntrusionData::setDataInIntrusionData(const BYTE* data_ptr,
                                                 datastructure::IntrusionData& intrusion_data)
 {
   std::vector<sick::datastructure::IntrusionDatum> intrusion_datums;
@@ -113,7 +113,7 @@ bool ParseIntrusionData::setDataInIntrusionData(const BYTE* data_ptr,
   intrusion_data.setIntrusionDataVector(intrusion_datums);
 }
 
-bool ParseIntrusionData::setDataInIntrusionDatums(
+void ParseIntrusionData::setDataInIntrusionDatums(
   const BYTE* data_ptr, std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums)
 {
   UINT16 offset = 0;

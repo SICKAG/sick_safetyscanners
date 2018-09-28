@@ -57,8 +57,8 @@ private:
   UINT16 m_num_scan_points;
 
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  bool setDataInIntrusionData(const BYTE* data_ptr, datastructure::IntrusionData& intrusion_data);
-  bool setDataInIntrusionDatums(const BYTE* data_ptr,
+  void setDataInIntrusionData(const BYTE* data_ptr, datastructure::IntrusionData& intrusion_data);
+  void setDataInIntrusionDatums(const BYTE* data_ptr,
                                 std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums);
   UINT16 setDataInIntrusionDatum(UINT16 offset,
                                  const BYTE* data_ptr,

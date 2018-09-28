@@ -2,9 +2,10 @@ cmake_minimum_required(VERSION 2.8.3)
 project(sick_microscan3_ros_driver)
 
 ## Use C++11
-add_definitions(-std=c++11)
+#add_definitions(-std=c++11)
 ## By adding -Wall and -Werror, the compiler does not ignore warnings anymore,
 ## enforcing cleaner code.
+add_definitions(-std=c++11 -Wall)
 #add_definitions(-std=c++11 -Wall -Werror)
 
 ## Find catkin macros and libraries
@@ -160,25 +161,25 @@ target_link_libraries(${PROJECT_NAME}
 #############
 
 # Mark executables and/or libraries for installation
-#install(
-#  TARGETS ${PROJECT_NAME}
-#  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
-#  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-#)
+install(
+  TARGETS ${PROJECT_NAME}
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 # Mark cpp header files for installation
-#install(
-#  DIRECTORY include/${PROJECT_NAME}/
-#  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
-#  FILES_MATCHING PATTERN "*.h"
-#)
+install(
+  DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION}
+  FILES_MATCHING PATTERN "*.h"
+)
 
 # Mark other files for installation
-#install(
-#  DIRECTORY doc
-#  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
-#)
+install(
+  DIRECTORY doc
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}
+)
 
 #############
 ## Testing ##

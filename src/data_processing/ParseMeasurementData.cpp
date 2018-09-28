@@ -97,36 +97,36 @@ bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(datastructure::
 }
 
 
-bool ParseMeasurementData::setDataInMeasurementData(
+void ParseMeasurementData::setDataInMeasurementData(
   const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
 {
   setNumberOfBeamsInMeasurementData(data_ptr, measurement_data);
   setScanPointsInMeasurementData(data_ptr, measurement_data);
 }
 
-bool ParseMeasurementData::setNumberOfBeamsInMeasurementData(
+void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
   const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
 {
   measurement_data.setNumberOfBeams(m_reader_ptr->readUINT32LittleEndian(data_ptr, 0));
 }
 
-bool ParseMeasurementData::setStartAngleAndDelta(datastructure::Data& data)
+void ParseMeasurementData::setStartAngleAndDelta(datastructure::Data& data)
 {
   m_angle       = data.getDerivedValuesPtr()->getStartAngle();
   m_angle_delta = data.getDerivedValuesPtr()->getAngularBeamResolution();
 }
 
-bool ParseMeasurementData::setScanPointsInMeasurementData(
+void ParseMeasurementData::setScanPointsInMeasurementData(
   const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
 {
-  for (int i = 0; i < measurement_data.getNumberOfBeams(); i++)
+  for (size_t i = 0; i < measurement_data.getNumberOfBeams(); i++)
   {
     addScanPointToMeasurementData(i, data_ptr, measurement_data);
     m_angle += m_angle_delta;
   }
 }
 
-bool ParseMeasurementData::addScanPointToMeasurementData(
+void ParseMeasurementData::addScanPointToMeasurementData(
   UINT16 offset, const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
 {
   INT16 distance             = m_reader_ptr->readUINT16LittleEndian(data_ptr, (4 + offset * 4));

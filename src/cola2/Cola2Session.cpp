@@ -74,6 +74,7 @@ bool Cola2Session::sendTelegramAndListenForAnswer(CommandPtr command)
   command->constructTelegram(telegram);
   m_async_tcp_client_ptr->doSendAndReceive(telegram);
   command->waitForCompletion(); // scooped locked to wait, unlocked on data processing
+  return true;
 }
 
 
@@ -127,6 +128,7 @@ bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
     pendingCommand->processReplyBase(packet.getBuffer());
     removeCommand(requestID);
   }
+  return true;
 }
 
 bool Cola2Session::addCommand(UINT16 request_id, CommandPtr command)

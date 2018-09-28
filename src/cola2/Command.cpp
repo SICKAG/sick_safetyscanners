@@ -144,7 +144,7 @@ void Command::setDataVector(const std::vector<BYTE>& data)
   m_data_vector = data;
 }
 
-bool Command::writeDataToDataPtr(BYTE*& data_ptr,
+void Command::writeDataToDataPtr(BYTE*& data_ptr,
                                  datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   writeCola2StxToDataPtr(data_ptr);
@@ -157,47 +157,47 @@ bool Command::writeDataToDataPtr(BYTE*& data_ptr,
   writeCommandModeToDataPtr(data_ptr);
 }
 
-bool Command::writeCola2StxToDataPtr(BYTE*& data_ptr) const
+void Command::writeCola2StxToDataPtr(BYTE*& data_ptr) const
 {
   UINT32 cola2_stx = 0x02020202;
   m_writer_ptr->writeUINT32BigEndian(data_ptr, cola2_stx, 0);
 }
 
-bool Command::writeLengthToDataPtr(BYTE*& data_ptr,
+void Command::writeLengthToDataPtr(BYTE*& data_ptr,
                                    datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   UINT32 length = 10 + telegram.size();
   m_writer_ptr->writeUINT32BigEndian(data_ptr, length, 4);
 }
 
-bool Command::writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const
+void Command::writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const
 {
   UINT8 cola2_hub_cntr = 0x00;
   m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_hub_cntr, 8);
 }
 
-bool Command::writeCola2NoCToDataPtr(BYTE*& data_ptr) const
+void Command::writeCola2NoCToDataPtr(BYTE*& data_ptr) const
 {
   UINT8 cola2_noc = 0x00;
   m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_noc, 9);
 }
 
-bool Command::writeSessionIdToDataPtr(BYTE*& data_ptr) const
+void Command::writeSessionIdToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT32BigEndian(data_ptr, getSessionID(), 10);
 }
 
-bool Command::writeRequestIdToDataPtr(BYTE*& data_ptr) const
+void Command::writeRequestIdToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT16BigEndian(data_ptr, getRequestID(), 14);
 }
 
-bool Command::writeCommandTypeToDataPtr(BYTE*& data_ptr) const
+void Command::writeCommandTypeToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandType(), 16);
 }
 
-bool Command::writeCommandModeToDataPtr(BYTE*& data_ptr) const
+void Command::writeCommandModeToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandMode(), 17);
 }

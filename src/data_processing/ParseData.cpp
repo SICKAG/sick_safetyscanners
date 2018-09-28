@@ -52,11 +52,10 @@ ParseData::ParseData()
 bool ParseData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data& data)
 {
   setDataBlocksInData(buffer, data);
-
   return true;
 }
 
-bool ParseData::setDataBlocksInData(datastructure::PacketBuffer& buffer, datastructure::Data& data)
+void ParseData::setDataBlocksInData(datastructure::PacketBuffer& buffer, datastructure::Data& data)
 {
   setDataHeaderInData(buffer, data);
   setDerivedValuesInData(buffer, data);
@@ -66,14 +65,14 @@ bool ParseData::setDataBlocksInData(datastructure::PacketBuffer& buffer, datastr
   setApplicationDataInData(buffer, data);
 }
 
-bool ParseData::setDataHeaderInData(datastructure::PacketBuffer& buffer, datastructure::Data& data)
+void ParseData::setDataHeaderInData(datastructure::PacketBuffer& buffer, datastructure::Data& data)
 {
   sick::datastructure::DataHeader data_header =
     m_data_header_parser_ptr->parseUDPSequence(buffer, data);
   data.setDataHeaderPtr(boost::make_shared<sick::datastructure::DataHeader>(data_header));
 }
 
-bool ParseData::setDerivedValuesInData(datastructure::PacketBuffer& buffer,
+void ParseData::setDerivedValuesInData(datastructure::PacketBuffer& buffer,
                                        datastructure::Data& data)
 {
   sick::datastructure::DerivedValues derived_values =
@@ -81,7 +80,7 @@ bool ParseData::setDerivedValuesInData(datastructure::PacketBuffer& buffer,
   data.setDerivedValuesPtr(boost::make_shared<sick::datastructure::DerivedValues>(derived_values));
 }
 
-bool ParseData::setMeasurementDataInData(datastructure::PacketBuffer& buffer,
+void ParseData::setMeasurementDataInData(datastructure::PacketBuffer& buffer,
                                          datastructure::Data& data)
 {
   sick::datastructure::MeasurementData measurement_data =
@@ -90,7 +89,7 @@ bool ParseData::setMeasurementDataInData(datastructure::PacketBuffer& buffer,
     boost::make_shared<sick::datastructure::MeasurementData>(measurement_data));
 }
 
-bool ParseData::setGeneralSystemStateInData(datastructure::PacketBuffer& buffer,
+void ParseData::setGeneralSystemStateInData(datastructure::PacketBuffer& buffer,
                                             datastructure::Data& data)
 {
   sick::datastructure::GeneralSystemState general_system_state =
@@ -99,7 +98,7 @@ bool ParseData::setGeneralSystemStateInData(datastructure::PacketBuffer& buffer,
     boost::make_shared<sick::datastructure::GeneralSystemState>(general_system_state));
 }
 
-bool ParseData::setIntrusionDataInData(datastructure::PacketBuffer& buffer,
+void ParseData::setIntrusionDataInData(datastructure::PacketBuffer& buffer,
                                        datastructure::Data& data)
 {
   sick::datastructure::IntrusionData intrusion_data =
@@ -107,7 +106,7 @@ bool ParseData::setIntrusionDataInData(datastructure::PacketBuffer& buffer,
   data.setIntrusionDataPtr(boost::make_shared<sick::datastructure::IntrusionData>(intrusion_data));
 }
 
-bool ParseData::setApplicationDataInData(datastructure::PacketBuffer& buffer,
+void ParseData::setApplicationDataInData(datastructure::PacketBuffer& buffer,
                                          datastructure::Data& data)
 {
   sick::datastructure::ApplicationData application_data =

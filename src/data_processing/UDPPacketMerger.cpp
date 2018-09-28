@@ -85,6 +85,7 @@ bool UDPPaketMerger::addToMap(sick::datastructure::PacketBuffer buffer,
     vec.push_back(parsed_packet_buffer);
     m_parsed_packet_buffer_map[header.getIdentification()] = vec;
   }
+  return true;
 }
 
 bool UDPPaketMerger::deployPacketIfComplete(sick::datastructure::DatagramHeader header)

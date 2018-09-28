@@ -352,20 +352,20 @@ Microscan3Ros::createGeneralSystemStateMessage(const sick::datastructure::Data& 
     msg.manipulation_status      = general_system_state->getManipulationStatus();
 
     std::vector<bool> safe_cut_off_path = general_system_state->getSafeCutOffPathVector();
-    for (int i = 0; i < safe_cut_off_path.size(); i++)
+    for (size_t i = 0; i < safe_cut_off_path.size(); i++)
     {
       msg.safe_cut_off_path.push_back(safe_cut_off_path.at(i));
     }
 
     std::vector<bool> non_safe_cut_off_path = general_system_state->getNonSafeCutOffPathVector();
-    for (int i = 0; i < non_safe_cut_off_path.size(); i++)
+    for (size_t i = 0; i < non_safe_cut_off_path.size(); i++)
     {
       msg.non_safe_cut_off_path.push_back(non_safe_cut_off_path.at(i));
     }
 
     std::vector<bool> reset_required_cut_off_path =
       general_system_state->getResetRequiredCutOffPathVector();
-    for (int i = 0; i < reset_required_cut_off_path.size(); i++)
+    for (size_t i = 0; i < reset_required_cut_off_path.size(); i++)
     {
       msg.reset_required_cut_off_path.push_back(reset_required_cut_off_path.at(i));
     }
@@ -447,13 +447,13 @@ Microscan3Ros::createIntrusionDatumMessageVector(const sick::datastructure::Data
   std::vector<sick::datastructure::IntrusionDatum> intrusion_datums =
     intrusion_data->getIntrusionDataVector();
 
-  for (int i = 0; i < intrusion_datums.size(); i++)
+  for (size_t i = 0; i < intrusion_datums.size(); i++)
   {
     sick_microscan3_ros_driver::IntrusionDatumMsg msg;
     sick::datastructure::IntrusionDatum intrusion_datum = intrusion_datums.at(i);
     msg.size                                            = intrusion_datum.getSize();
     std::vector<bool> flags                             = intrusion_datum.getFlagsVector();
-    for (int j = 0; j < flags.size(); j++)
+    for (size_t j = 0; j < flags.size(); j++)
     {
       msg.flags.push_back(flags.at(j));
     }
@@ -484,14 +484,14 @@ Microscan3Ros::createApplicationInputsMessage(const sick::datastructure::Data& d
   sick::datastructure::ApplicationInputs inputs                    = app_data->getInputs();
   std::vector<bool> unsafe_inputs       = inputs.getUnsafeInputsInputSourcesVector();
   std::vector<bool> unsafe_inputs_flags = inputs.getUnsafeInputsFlagsVector();
-  for (int i = 0; i < unsafe_inputs.size(); i++)
+  for (size_t i = 0; i < unsafe_inputs.size(); i++)
   {
     msg.unsafe_inputs_input_sources.push_back(unsafe_inputs.at(i));
     msg.unsafe_inputs_flags.push_back(unsafe_inputs_flags.at(i));
   }
   std::vector<UINT16> monitoring_case     = inputs.getMonitoringCasevector();
   std::vector<bool> monitoring_case_flags = inputs.getMonitoringCaseFlagsVector();
-  for (int i = 0; i < monitoring_case.size(); i++)
+  for (size_t i = 0; i < monitoring_case.size(); i++)
   {
     msg.monitoring_case_number_inputs.push_back(monitoring_case.at(i));
     msg.monitoring_case_number_inputs_flags.push_back(monitoring_case_flags.at(i));
@@ -519,7 +519,7 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
   std::vector<bool> eval_out         = outputs.getEvalOutVector();
   std::vector<bool> eval_out_is_safe = outputs.getEvalOutIsSafeVector();
   std::vector<bool> eval_out_valid   = outputs.getEvalOutIsValidVector();
-  for (int i = 0; i < eval_out.size(); i++)
+  for (size_t i = 0; i < eval_out.size(); i++)
   {
     msg.evaluation_path_outputs_eval_out.push_back(eval_out.at(i));
     msg.evaluation_path_outputs_is_safe.push_back(eval_out_is_safe.at(i));
@@ -528,7 +528,7 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
 
   std::vector<UINT16> monitoring_case     = outputs.getMonitoringCaseVector();
   std::vector<bool> monitoring_case_flags = outputs.getMonitoringCaseFlagsVector();
-  for (int i = 0; i < monitoring_case.size(); i++)
+  for (size_t i = 0; i < monitoring_case.size(); i++)
   {
     msg.monitoring_case_number_outputs.push_back(monitoring_case.at(i));
     msg.monitoring_case_number_outputs_flags.push_back(monitoring_case_flags.at(i));
@@ -557,7 +557,7 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
   std::vector<INT16> resulting_velocities      = outputs.getResultingVelocityVector();
   std::vector<bool> resulting_velocities_flags = outputs.getResultingVelocityIsValidVector();
 
-  for (int i = 0; i < resulting_velocities.size(); i++)
+  for (size_t i = 0; i < resulting_velocities.size(); i++)
   {
     msg.resulting_velocity.push_back(resulting_velocities.at(i));
     msg.resulting_velocity_flags.push_back(resulting_velocities_flags.at(i));

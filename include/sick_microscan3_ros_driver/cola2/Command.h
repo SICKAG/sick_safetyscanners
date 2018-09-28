@@ -98,24 +98,24 @@ private:
 
   bool m_was_successful;
 
-
-  UINT8 m_command_type;
   UINT8 m_command_mode;
+  UINT8 m_command_type;
+
   UINT32 m_session_id;
   UINT16 m_request_id;
 
   std::vector<BYTE> m_data_vector;
   sick::datastructure::PacketBuffer::VectorBuffer prepareHeader() const;
-  bool writeCola2StxToDataPtr(BYTE*& data_ptr) const;
-  bool writeLengthToDataPtr(BYTE*& data_ptr,
+  void writeCola2StxToDataPtr(BYTE*& data_ptr) const;
+  void writeLengthToDataPtr(BYTE*& data_ptr,
                             datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  bool writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const;
-  bool writeCola2NoCToDataPtr(BYTE*& data_ptr) const;
-  bool writeSessionIdToDataPtr(BYTE*& data_ptr) const;
-  bool writeRequestIdToDataPtr(BYTE*& data_ptr) const;
-  bool writeCommandTypeToDataPtr(BYTE*& data_ptr) const;
-  bool writeCommandModeToDataPtr(BYTE*& data_ptr) const;
-  bool writeDataToDataPtr(BYTE*& data_ptr,
+  void writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const;
+  void writeCola2NoCToDataPtr(BYTE*& data_ptr) const;
+  void writeSessionIdToDataPtr(BYTE*& data_ptr) const;
+  void writeRequestIdToDataPtr(BYTE*& data_ptr) const;
+  void writeCommandTypeToDataPtr(BYTE*& data_ptr) const;
+  void writeCommandModeToDataPtr(BYTE*& data_ptr) const;
+  void writeDataToDataPtr(BYTE*& data_ptr,
                           datastructure::PacketBuffer::VectorBuffer& telegram) const;
 };
 

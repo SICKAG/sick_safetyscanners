@@ -93,7 +93,7 @@ bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(datastructur
 }
 
 
-bool ParseGeneralSystemState::setDataInGeneralSystemState(
+void ParseGeneralSystemState::setDataInGeneralSystemState(
   const BYTE* data_ptr, datastructure::GeneralSystemState& general_system_state)
 {
   setStatusBitsInGeneralSystemState(data_ptr, general_system_state);
@@ -104,7 +104,7 @@ bool ParseGeneralSystemState::setDataInGeneralSystemState(
   setErrorsInGeneralSystemState(data_ptr, general_system_state);
 }
 
-bool ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
+void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
   const BYTE* data_ptr, datastructure::GeneralSystemState& general_system_state)
 {
   UINT8 byte = m_reader_ptr->readUINT8LittleEndian(data_ptr, 0);
@@ -118,7 +118,7 @@ bool ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
   // bit 6 and 7 reserved
 }
 
-bool ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
+void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
   const BYTE* data_ptr, datastructure::GeneralSystemState& general_system_state)
 {
   std::vector<bool> safe_cut_off_path;
@@ -140,7 +140,7 @@ bool ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
   general_system_state.setSafeCutOffPathvector(safe_cut_off_path);
 }
 
-bool ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
+void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
   const BYTE* data_ptr, datastructure::GeneralSystemState& general_system_state)
 {
   std::vector<bool> non_safe_cut_off_path;
@@ -162,7 +162,7 @@ bool ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
   general_system_state.setNonSafeCutOffPathVector(non_safe_cut_off_path);
 }
 
-bool ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
+void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
   const BYTE* data_ptr, datastructure::GeneralSystemState& general_system_state)
 {
   std::vector<bool> reset_required_cutoff_path;
@@ -184,7 +184,7 @@ bool ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
   general_system_state.setResetRequiredCutOffPathVector(reset_required_cutoff_path);
 }
 
-bool ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
+void ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
   const BYTE* data_ptr, datastructure::GeneralSystemState& general_system_state)
 {
   general_system_state.setCurrentMonitoringCaseNoTable_1(
@@ -197,7 +197,7 @@ bool ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
     m_reader_ptr->readUINT8LittleEndian(data_ptr, 13));
 }
 
-bool ParseGeneralSystemState::setErrorsInGeneralSystemState(
+void ParseGeneralSystemState::setErrorsInGeneralSystemState(
   const BYTE* data_ptr, datastructure::GeneralSystemState& general_system_state)
 {
   UINT8 byte = m_reader_ptr->readUINT8LittleEndian(data_ptr, 15);

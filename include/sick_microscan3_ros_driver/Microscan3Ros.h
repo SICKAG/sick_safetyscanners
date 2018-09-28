@@ -107,7 +107,7 @@ private:
 
   bool isInitialised();
 
-  bool m_initialised;
+
   //! ROS node handle.
   ros::NodeHandle m_nh;
 
@@ -118,6 +118,8 @@ private:
   ros::Publisher m_laser_scan_publisher;
   ros::Publisher m_extended_laser_scan_publisher;
   ros::Publisher m_raw_data_publisher;
+
+  bool m_initialised;
 
   boost::shared_ptr<sick::Microscan3> m_device;
 

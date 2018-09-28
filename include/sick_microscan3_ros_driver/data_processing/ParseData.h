@@ -68,13 +68,13 @@ private:
   boost::shared_ptr<sick::data_processing::ParseApplicationData> m_application_data_parser_ptr;
 
 
-  bool setDataBlocksInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  bool setDataHeaderInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  bool setDerivedValuesInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  bool setMeasurementDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  bool setGeneralSystemStateInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  bool setIntrusionDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  bool setApplicationDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setDataBlocksInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setDataHeaderInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setDerivedValuesInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setMeasurementDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setGeneralSystemStateInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setIntrusionDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setApplicationDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
 };
 
 } // namespace data_processing

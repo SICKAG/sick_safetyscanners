@@ -66,7 +66,7 @@ BYTE* ChangeCommSettingsCommand::prepareTelegramAndGetDataPtr(
   return telegram.data() + prevSize;
 }
 
-bool ChangeCommSettingsCommand::writeDataToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeDataToDataPtr(BYTE*& data_ptr) const
 {
   writeChannelToDataPtr(data_ptr);
   writeEnabledToDataPtr(data_ptr);
@@ -93,47 +93,47 @@ bool ChangeCommSettingsCommand::processReply()
   return true;
 }
 
-bool ChangeCommSettingsCommand::writeChannelToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeChannelToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getChannel(), 0);
 }
 
-bool ChangeCommSettingsCommand::writeEnabledToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeEnabledToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEnabled(), 4);
 }
 
-bool ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEInterfaceType(), 5);
 }
 
-bool ChangeCommSettingsCommand::writeIPAdresstoDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeIPAdresstoDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getHostIp().to_ulong(), 8);
 }
 
-bool ChangeCommSettingsCommand::writePortToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writePortToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getHostUdpPort(), 12);
 }
 
-bool ChangeCommSettingsCommand::writeFrequencyToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeFrequencyToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getPublishingFequency(), 14);
 }
 
-bool ChangeCommSettingsCommand::writeStartAngleToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeStartAngleToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getStartAngle(), 16);
 }
 
-bool ChangeCommSettingsCommand::writeEndAngleToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeEndAngleToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getEndAngle(), 20);
 }
 
-bool ChangeCommSettingsCommand::writeFeaturesToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeFeaturesToDataPtr(BYTE*& data_ptr) const
 {
   m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getFeatures(), 24);
 }

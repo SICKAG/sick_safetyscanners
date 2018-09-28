@@ -52,21 +52,21 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  bool setDataInGeneralSystemState(const BYTE* data_ptr,
+  void setDataInGeneralSystemState(const BYTE* data_ptr,
                                    datastructure::GeneralSystemState& general_System_state);
-  bool setStatusBitsInGeneralSystemState(const BYTE* data_ptr,
+  void setStatusBitsInGeneralSystemState(const BYTE* data_ptr,
                                          datastructure::GeneralSystemState& general_System_state);
-  bool
+  void
   setSafeCutOffPathInGeneralSystemState(const BYTE* data_ptr,
                                         datastructure::GeneralSystemState& general_System_state);
-  bool
+  void
   setNonSafeCutOffPathInGeneralSystemState(const BYTE* data_ptr,
                                            datastructure::GeneralSystemState& general_System_state);
-  bool setResetRequiredCutOffPathInGeneralSystemState(
+  void setResetRequiredCutOffPathInGeneralSystemState(
     const BYTE* data_ptr, datastructure::GeneralSystemState& general_System_state);
-  bool setCurrentMonitoringCasesInGeneralSystemState(
+  void setCurrentMonitoringCasesInGeneralSystemState(
     const BYTE* data_ptr, datastructure::GeneralSystemState& general_System_state);
-  bool setErrorsInGeneralSystemState(const BYTE* data_ptr,
+  void setErrorsInGeneralSystemState(const BYTE* data_ptr,
                                      datastructure::GeneralSystemState& general_System_state);
   bool checkIfPreconditionsAreMet(datastructure::Data& data);
   bool checkIfGeneralSystemStateIsPublished(datastructure::Data& data);

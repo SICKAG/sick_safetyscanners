@@ -67,7 +67,7 @@ bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer,
   return true;
 }
 
-bool ParseTCPPacket::setCommandValuesFromPacket(sick::datastructure::PacketBuffer& buffer,
+void ParseTCPPacket::setCommandValuesFromPacket(sick::datastructure::PacketBuffer& buffer,
                                                 sick::cola2::Command& command)
 {
   command.setSessionID(readSessionID(buffer));

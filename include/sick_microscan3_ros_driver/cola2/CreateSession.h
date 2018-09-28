@@ -18,8 +18,8 @@ private:
 
   BYTE*
   prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  bool writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const;
-  bool writeClientIdToDataPtr(BYTE*& data_ptr) const;
+  void writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const;
+  void writeClientIdToDataPtr(BYTE*& data_ptr) const;
 };
 
 } // namespace cola2

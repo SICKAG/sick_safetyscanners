@@ -73,7 +73,7 @@ private:
   UINT8 readCommandMode(datastructure::PacketBuffer& buffer);
   UINT16 readErrorCode(datastructure::PacketBuffer& buffer);
   void readData(datastructure::PacketBuffer& buffer, std::vector<BYTE>& byteVector);
-  bool setCommandValuesFromPacket(sick::datastructure::PacketBuffer& buffer,
+  void setCommandValuesFromPacket(sick::datastructure::PacketBuffer& buffer,
                                   sick::cola2::Command& command);
 };
 

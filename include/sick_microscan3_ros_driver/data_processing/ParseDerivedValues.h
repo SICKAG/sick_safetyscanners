@@ -52,18 +52,18 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  bool setDataInDerivedValues(const BYTE* data_ptr, datastructure::DerivedValues& derived_values);
-  bool setMultiplicationFactorInDerivedValues(const BYTE* data_ptr,
+  void setDataInDerivedValues(const BYTE* data_ptr, datastructure::DerivedValues& derived_values);
+  void setMultiplicationFactorInDerivedValues(const BYTE* data_ptr,
                                               datastructure::DerivedValues& derived_values);
-  bool setNumberOfBeamsInDerivedValues(const BYTE* data_ptr,
+  void setNumberOfBeamsInDerivedValues(const BYTE* data_ptr,
                                        datastructure::DerivedValues& derived_values);
-  bool setScanTimeInDerivedValues(const BYTE* data_ptr,
+  void setScanTimeInDerivedValues(const BYTE* data_ptr,
                                   datastructure::DerivedValues& derived_values);
-  bool setStartAngleInDerivedValues(const BYTE* data_ptr,
+  void setStartAngleInDerivedValues(const BYTE* data_ptr,
                                     datastructure::DerivedValues& derived_values);
-  bool setAngularBeamResolutionInDerivedValues(const BYTE* data_ptr,
+  void setAngularBeamResolutionInDerivedValues(const BYTE* data_ptr,
                                                datastructure::DerivedValues& derived_values);
-  bool setInterbeamPeriodInDerivedValues(const BYTE* data_ptr,
+  void setInterbeamPeriodInDerivedValues(const BYTE* data_ptr,
                                          datastructure::DerivedValues& derived_values);
   bool checkIfPreconditionsAreMet(datastructure::Data& data);
   bool checkIfDerivedValuesIsPublished(datastructure::Data& data);
