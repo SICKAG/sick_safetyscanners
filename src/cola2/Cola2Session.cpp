@@ -61,7 +61,6 @@ bool Cola2Session::close()
 
 bool Cola2Session::executeCommand(CommandPtr command)
 {
-  // TODO sanitize
   addCommand(command->getRequestID(), command);
   sendTelegramAndListenForAnswer(command);
   return true;

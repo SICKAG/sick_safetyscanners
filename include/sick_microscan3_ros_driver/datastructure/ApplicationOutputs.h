@@ -122,7 +122,7 @@ private:
   std::vector<uint16_t> m_monitoring_case_vector;
   std::vector<bool> m_monitoring_case_flags_vector;
 
-  int8_t m_sleep_mode_output; // TODO ENUM8
+  int8_t m_sleep_mode_output;
 
   bool m_host_error_flag_contamination_warning;
   bool m_host_error_flag_contamination_error;

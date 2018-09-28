@@ -81,10 +81,10 @@ public:
   void setSleepModeInput(const int8_t& sleep_mode_input);
 
 private:
-  std::vector<bool> m_unsafe_inputs_input_sources_vector; // TODO in struct??? with next
+  std::vector<bool> m_unsafe_inputs_input_sources_vector;
   std::vector<bool> m_unsafe_inputs_flags_vector;
 
-  std::vector<uint16_t> m_monitoring_case_vector; // TODO 20 cases why 32 bit flags?
+  std::vector<uint16_t> m_monitoring_case_vector;
   std::vector<bool> m_monitoring_case_flags_vector;
 
   int16_t m_velocity_0;
@@ -95,7 +95,7 @@ private:
   bool m_velocity_0_transmitted_safely;
   bool m_velocity_1_transmitted_safely;
 
-  int8_t m_sleep_mode_input; // TODO enum8
+  int8_t m_sleep_mode_input;
 };
 
 } // namespace datastructure
