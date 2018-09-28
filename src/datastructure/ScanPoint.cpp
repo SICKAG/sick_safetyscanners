@@ -39,8 +39,8 @@ namespace datastructure {
 
 
 ScanPoint::ScanPoint(float angle,
-                     INT16& distance,
-                     UINT8& reflectivity,
+                     int16_t& distance,
+                     uint8_t& reflectivity,
                      bool& valid_bit,
                      bool& infinite_bit,
                      bool& glare_bit,
@@ -64,12 +64,12 @@ float ScanPoint::getAngle() const
   return m_angle;
 }
 
-UINT16 ScanPoint::getDistance() const
+uint16_t ScanPoint::getDistance() const
 {
   return m_distance;
 }
 
-UINT8 ScanPoint::getReflectivity() const
+uint8_t ScanPoint::getReflectivity() const
 {
   return m_reflectivity;
 }

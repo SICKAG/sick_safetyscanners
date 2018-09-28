@@ -42,32 +42,32 @@ DerivedValues::DerivedValues()
 {
 }
 
-UINT16 DerivedValues::getMultiplicationFactor() const
+uint16_t DerivedValues::getMultiplicationFactor() const
 {
   return m_multiplication_factor;
 }
 
-void DerivedValues::setMultiplicationFactor(const UINT16& multiplication_factor)
+void DerivedValues::setMultiplicationFactor(const uint16_t& multiplication_factor)
 {
   m_multiplication_factor = multiplication_factor;
 }
 
-UINT16 DerivedValues::getNumberOfBeams() const
+uint16_t DerivedValues::getNumberOfBeams() const
 {
   return m_number_of_beams;
 }
 
-void DerivedValues::setNumberOfBeams(const UINT16& number_of_beams)
+void DerivedValues::setNumberOfBeams(const uint16_t& number_of_beams)
 {
   m_number_of_beams = number_of_beams;
 }
 
-UINT16 DerivedValues::getScanTime() const
+uint16_t DerivedValues::getScanTime() const
 {
   return m_scan_time;
 }
 
-void DerivedValues::setScanTime(const UINT16& scan_time)
+void DerivedValues::setScanTime(const uint16_t& scan_time)
 {
   m_scan_time = scan_time;
 }
@@ -78,7 +78,7 @@ float DerivedValues::getStartAngle() const
   return m_start_angle;
 }
 
-void DerivedValues::setStartAngle(const INT32& start_angle)
+void DerivedValues::setStartAngle(const int32_t& start_angle)
 {
   m_start_angle = (float)start_angle / ANGLE_RESOLUTION;
 }
@@ -88,17 +88,17 @@ float DerivedValues::getAngularBeamResolution() const
   return m_angular_beam_resolution;
 }
 
-void DerivedValues::setAngularBeamResolution(const INT32& angular_beam_resolution)
+void DerivedValues::setAngularBeamResolution(const int32_t& angular_beam_resolution)
 {
   m_angular_beam_resolution = (float)angular_beam_resolution / ANGLE_RESOLUTION;
 }
 
-UINT32 DerivedValues::getInterbeamPeriod() const
+uint32_t DerivedValues::getInterbeamPeriod() const
 {
   return m_interbeam_period;
 }
 
-void DerivedValues::setInterbeamPeriod(const UINT32& interbeam_period)
+void DerivedValues::setInterbeamPeriod(const uint32_t& interbeam_period)
 {
   m_interbeam_period = interbeam_period;
 }

@@ -52,7 +52,7 @@ ParseIntrusionData::parseUDPSequence(datastructure::PacketBuffer buffer, datastr
     return intrusion_data;
   }
 
-  const BYTE* data_ptr(buffer.getBuffer().data() +
+  const uint8_t* data_ptr(buffer.getBuffer().data() +
                        data.getDataHeaderPtr()->getIntrusionDataBlockOffset());
   setNumScanPoints(data.getDerivedValuesPtr()->getNumberOfBeams());
   setDataInIntrusionData(data_ptr, intrusion_data);
@@ -95,17 +95,17 @@ bool ParseIntrusionData::checkIfDataContainsNeededParsedBlocks(datastructure::Da
   return true;
 }
 
-UINT16 ParseIntrusionData::getNumScanPoints() const
+uint16_t ParseIntrusionData::getNumScanPoints() const
 {
   return m_num_scan_points;
 }
 
-void ParseIntrusionData::setNumScanPoints(const UINT16& num_scan_points)
+void ParseIntrusionData::setNumScanPoints(const uint16_t& num_scan_points)
 {
   m_num_scan_points = num_scan_points;
 }
 
-void ParseIntrusionData::setDataInIntrusionData(const BYTE* data_ptr,
+void ParseIntrusionData::setDataInIntrusionData(const uint8_t* data_ptr,
                                                 datastructure::IntrusionData& intrusion_data)
 {
   std::vector<sick::datastructure::IntrusionDatum> intrusion_datums;
@@ -114,9 +114,9 @@ void ParseIntrusionData::setDataInIntrusionData(const BYTE* data_ptr,
 }
 
 void ParseIntrusionData::setDataInIntrusionDatums(
-  const BYTE* data_ptr, std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums)
+  const uint8_t* data_ptr, std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums)
 {
-  UINT16 offset = 0;
+  uint16_t offset = 0;
   // Repeats for 24 CutOffPaths
   for (int i_set = 0; i_set < 24; ++i_set)
   {
@@ -126,8 +126,8 @@ void ParseIntrusionData::setDataInIntrusionDatums(
   }
 }
 
-UINT16 ParseIntrusionData::setDataInIntrusionDatum(UINT16 offset,
-                                                   const BYTE* data_ptr,
+uint16_t ParseIntrusionData::setDataInIntrusionDatum(uint16_t offset,
+                                                   const uint8_t* data_ptr,
                                                    sick::datastructure::IntrusionDatum& datum)
 {
   offset = setSizeInIntrusionDatum(offset, data_ptr, datum);
@@ -135,28 +135,28 @@ UINT16 ParseIntrusionData::setDataInIntrusionDatum(UINT16 offset,
   return offset;
 }
 
-UINT16 ParseIntrusionData::setSizeInIntrusionDatum(UINT16 offset,
-                                                   const BYTE* data_ptr,
+uint16_t ParseIntrusionData::setSizeInIntrusionDatum(uint16_t offset,
+                                                   const uint8_t* data_ptr,
                                                    sick::datastructure::IntrusionDatum& datum)
 {
-  UINT32 numBytesToRead = m_reader_ptr->readUINT32LittleEndian(data_ptr, offset);
+  uint32_t numBytesToRead = m_reader_ptr->readuint32_tLittleEndian(data_ptr, offset);
   offset += 4;
   datum.setSize(numBytesToRead);
   return offset;
 }
 
-UINT16 ParseIntrusionData::setFlagsInIntrusionDatum(UINT16 offset,
-                                                    const BYTE* data_ptr,
+uint16_t ParseIntrusionData::setFlagsInIntrusionDatum(uint16_t offset,
+                                                    const uint8_t* data_ptr,
                                                     sick::datastructure::IntrusionDatum& datum)
 {
-  UINT32 num_read_flags = 0;
+  uint32_t num_read_flags = 0;
   std::vector<bool> flags;
-  for (UINT16 num_read_bytes = 0;
+  for (uint16_t num_read_bytes = 0;
        (num_read_bytes < datum.getSize()) && (num_read_flags < m_num_scan_points);
        num_read_bytes++)
   {
-    UINT8 bitset = m_reader_ptr->readUINT8LittleEndian(data_ptr, offset + num_read_bytes);
-    for (UINT32 i_bit = 0; (i_bit < 8) && (num_read_flags < m_num_scan_points);
+    uint8_t bitset = m_reader_ptr->readuint8_tLittleEndian(data_ptr, offset + num_read_bytes);
+    for (uint32_t i_bit = 0; (i_bit < 8) && (num_read_flags < m_num_scan_points);
          i_bit++, num_read_flags++)
     {
       flags.push_back(static_cast<bool>(bitset & (0x01 << i_bit)));

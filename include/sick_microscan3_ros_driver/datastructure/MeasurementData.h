@@ -35,7 +35,9 @@
 #ifndef MEASUREMENTDATA_H
 #define MEASUREMENTDATA_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <stdint.h>
+#include <vector>
+
 #include <sick_microscan3_ros_driver/datastructure/ScanPoint.h>
 
 namespace sick {
@@ -47,8 +49,8 @@ class MeasurementData
 public:
   MeasurementData();
 
-  UINT32 getNumberOfBeams() const;
-  void setNumberOfBeams(const UINT32& number_of_beams);
+  uint32_t getNumberOfBeams() const;
+  void setNumberOfBeams(const uint32_t& number_of_beams);
 
   std::vector<ScanPoint> getScanPointsVector() const;
   void addScanPoint(ScanPoint scan_point);
@@ -59,7 +61,7 @@ public:
 private:
   bool m_is_empty;
 
-  UINT32 m_number_of_beams;
+  uint32_t m_number_of_beams;
   std::vector<ScanPoint> m_scan_points_vector;
 };
 

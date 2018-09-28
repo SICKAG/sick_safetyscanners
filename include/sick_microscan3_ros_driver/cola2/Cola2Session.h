@@ -35,8 +35,6 @@
 #ifndef COLA2SESSION_H
 #define COLA2SESSION_H
 
-
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/communication/AsyncTCPClient.h>
@@ -65,10 +63,10 @@ public:
 
   bool executeCommand(CommandPtr command);
 
-  UINT32 getSessionID() const;
-  void setSessionID(const UINT32& session_id);
+  uint32_t getSessionID() const;
+  void setSessionID(const uint32_t& session_id);
 
-  UINT16 getNextRequestID();
+  uint16_t getNextRequestID();
 
   bool close();
   bool open();
@@ -77,9 +75,9 @@ public:
 private:
   void processPacket(const sick::datastructure::PacketBuffer& packet);
 
-  bool addCommand(UINT16 request_id, CommandPtr command);
-  bool findCommand(UINT16 request_id, CommandPtr& command);
-  bool removeCommand(UINT16 request_id);
+  bool addCommand(uint16_t request_id, CommandPtr command);
+  bool findCommand(uint16_t request_id, CommandPtr& command);
+  bool removeCommand(uint16_t request_id);
 
 
   boost::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
@@ -87,13 +85,13 @@ private:
   boost::shared_ptr<sick::data_processing::TCPPaketMerger> m_packet_merger_ptr;
   boost::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
 
-  std::map<UINT16, CommandPtr> m_pending_commands_map;
+  std::map<uint16_t, CommandPtr> m_pending_commands_map;
 
   boost::mutex m_execution_mutex;
 
 
-  UINT32 m_session_id;
-  UINT16 m_last_request_id;
+  uint32_t m_session_id;
+  uint16_t m_last_request_id;
 
   bool startProcessingAndRemovePendingCommandAfterwards(sick::datastructure::PacketBuffer& packet);
   bool addPacketToMerger(const sick::datastructure::PacketBuffer& packet);

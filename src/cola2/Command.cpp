@@ -40,7 +40,7 @@
 namespace sick {
 namespace cola2 {
 
-Command::Command(Cola2Session& session, UINT16 command_type, UINT16 command_mode)
+Command::Command(Cola2Session& session, uint16_t command_type, uint16_t command_mode)
   : m_session(session)
   , m_command_mode(command_mode)
   , m_command_type(command_type)
@@ -79,42 +79,42 @@ bool Command::wasSuccessful() const
   return m_was_successful;
 }
 
-UINT8 Command::getCommandType() const
+uint8_t Command::getCommandType() const
 {
   return m_command_type;
 }
 
-void Command::setCommandType(const UINT8& command_type)
+void Command::setCommandType(const uint8_t& command_type)
 {
   m_command_type = command_type;
 }
 
-UINT8 Command::getCommandMode() const
+uint8_t Command::getCommandMode() const
 {
   return m_command_mode;
 }
 
-void Command::setCommandMode(const UINT8& command_mode)
+void Command::setCommandMode(const uint8_t& command_mode)
 {
   m_command_mode = command_mode;
 }
 
-UINT32 Command::getSessionID() const
+uint32_t Command::getSessionID() const
 {
   return m_session_id;
 }
 
-void Command::setSessionID(const UINT32& session_id)
+void Command::setSessionID(const uint32_t& session_id)
 {
   m_session_id = session_id;
 }
 
-UINT16 Command::getRequestID() const
+uint16_t Command::getRequestID() const
 {
   return m_request_id;
 }
 
-void Command::setRequestID(const UINT16& request_id)
+void Command::setRequestID(const uint16_t& request_id)
 {
   m_request_id = request_id;
 }
@@ -122,7 +122,7 @@ void Command::setRequestID(const UINT16& request_id)
 void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   datastructure::PacketBuffer::VectorBuffer header = prepareHeader();
-  BYTE* data_ptr                                   = header.data();
+  uint8_t* data_ptr                                   = header.data();
   writeDataToDataPtr(data_ptr, telegram);
   telegram.insert(telegram.begin(), header.begin(), header.end());
 }
@@ -134,17 +134,17 @@ sick::datastructure::PacketBuffer::VectorBuffer Command::prepareHeader() const
   return header;
 }
 
-std::vector<BYTE> Command::getDataVector() const
+std::vector<uint8_t> Command::getDataVector() const
 {
   return m_data_vector;
 }
 
-void Command::setDataVector(const std::vector<BYTE>& data)
+void Command::setDataVector(const std::vector<uint8_t>& data)
 {
   m_data_vector = data;
 }
 
-void Command::writeDataToDataPtr(BYTE*& data_ptr,
+void Command::writeDataToDataPtr(uint8_t*& data_ptr,
                                  datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   writeCola2StxToDataPtr(data_ptr);
@@ -157,49 +157,49 @@ void Command::writeDataToDataPtr(BYTE*& data_ptr,
   writeCommandModeToDataPtr(data_ptr);
 }
 
-void Command::writeCola2StxToDataPtr(BYTE*& data_ptr) const
+void Command::writeCola2StxToDataPtr(uint8_t*& data_ptr) const
 {
-  UINT32 cola2_stx = 0x02020202;
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, cola2_stx, 0);
+  uint32_t cola2_stx = 0x02020202;
+  m_writer_ptr->writeuint32_tBigEndian(data_ptr, cola2_stx, 0);
 }
 
-void Command::writeLengthToDataPtr(BYTE*& data_ptr,
+void Command::writeLengthToDataPtr(uint8_t*& data_ptr,
                                    datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
-  UINT32 length = 10 + telegram.size();
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, length, 4);
+  uint32_t length = 10 + telegram.size();
+  m_writer_ptr->writeuint32_tBigEndian(data_ptr, length, 4);
 }
 
-void Command::writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const
+void Command::writeCola2HubCntrToDataPtr(uint8_t*& data_ptr) const
 {
-  UINT8 cola2_hub_cntr = 0x00;
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_hub_cntr, 8);
+  uint8_t cola2_hub_cntr = 0x00;
+  m_writer_ptr->writeuint8_tBigEndian(data_ptr, cola2_hub_cntr, 8);
 }
 
-void Command::writeCola2NoCToDataPtr(BYTE*& data_ptr) const
+void Command::writeCola2NoCToDataPtr(uint8_t*& data_ptr) const
 {
-  UINT8 cola2_noc = 0x00;
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, cola2_noc, 9);
+  uint8_t cola2_noc = 0x00;
+  m_writer_ptr->writeuint8_tBigEndian(data_ptr, cola2_noc, 9);
 }
 
-void Command::writeSessionIdToDataPtr(BYTE*& data_ptr) const
+void Command::writeSessionIdToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32BigEndian(data_ptr, getSessionID(), 10);
+  m_writer_ptr->writeuint32_tBigEndian(data_ptr, getSessionID(), 10);
 }
 
-void Command::writeRequestIdToDataPtr(BYTE*& data_ptr) const
+void Command::writeRequestIdToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16BigEndian(data_ptr, getRequestID(), 14);
+  m_writer_ptr->writeuint16_tBigEndian(data_ptr, getRequestID(), 14);
 }
 
-void Command::writeCommandTypeToDataPtr(BYTE*& data_ptr) const
+void Command::writeCommandTypeToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandType(), 16);
+  m_writer_ptr->writeuint8_tBigEndian(data_ptr, getCommandType(), 16);
 }
 
-void Command::writeCommandModeToDataPtr(BYTE*& data_ptr) const
+void Command::writeCommandModeToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8BigEndian(data_ptr, getCommandMode(), 17);
+  m_writer_ptr->writeuint8_tBigEndian(data_ptr, getCommandMode(), 17);
 }
 
 } // namespace cola2

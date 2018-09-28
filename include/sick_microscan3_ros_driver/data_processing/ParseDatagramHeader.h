@@ -56,15 +56,15 @@ public:
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  void setDataInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  void setDataInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
 
-  void setDatagramMarkerInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
-  void setProtocolInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
-  void setMajorVersionInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
-  void setMinorVersionInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
-  void setTotalLengthInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
-  void setIdentificationInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
-  void setFragmentOffsetInHeader(const BYTE* data_ptr, datastructure::DatagramHeader& header);
+  void setDatagramMarkerInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setProtocolInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setMajorVersionInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setMinorVersionInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setTotalLengthInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setIdentificationInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setFragmentOffsetInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
 };
 
 } // namespace data_processing

@@ -52,10 +52,10 @@ public:
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
-  BYTE*
+  uint8_t*
   prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  void writeHeartbeatTimeoutToDataPtr(BYTE*& data_ptr) const;
-  void writeClientIdToDataPtr(BYTE*& data_ptr) const;
+  void writeHeartbeatTimeoutToDataPtr(uint8_t*& data_ptr) const;
+  void writeClientIdToDataPtr(uint8_t*& data_ptr) const;
 };
 
 } // namespace cola2

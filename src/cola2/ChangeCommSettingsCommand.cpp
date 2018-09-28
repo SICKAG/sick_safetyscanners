@@ -53,20 +53,20 @@ void ChangeCommSettingsCommand::addTelegramData(
 {
   base_class::addTelegramData(telegram);
 
-  BYTE* data_ptr = prepareTelegramAndGetDataPtr(telegram);
+  uint8_t* data_ptr = prepareTelegramAndGetDataPtr(telegram);
 
   writeDataToDataPtr(data_ptr);
 }
 
-BYTE* ChangeCommSettingsCommand::prepareTelegramAndGetDataPtr(
+uint8_t* ChangeCommSettingsCommand::prepareTelegramAndGetDataPtr(
   sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
-  UINT16 prevSize = telegram.size();
+  uint16_t prevSize = telegram.size();
   telegram.resize(prevSize + 28);
   return telegram.data() + prevSize;
 }
 
-void ChangeCommSettingsCommand::writeDataToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeDataToDataPtr(uint8_t*& data_ptr) const
 {
   writeChannelToDataPtr(data_ptr);
   writeEnabledToDataPtr(data_ptr);
@@ -93,49 +93,49 @@ bool ChangeCommSettingsCommand::processReply()
   return true;
 }
 
-void ChangeCommSettingsCommand::writeChannelToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeChannelToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getChannel(), 0);
+  m_writer_ptr->writeuint8_tLittleEndian(data_ptr, m_settings.getChannel(), 0);
 }
 
-void ChangeCommSettingsCommand::writeEnabledToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeEnabledToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEnabled(), 4);
+  m_writer_ptr->writeuint8_tLittleEndian(data_ptr, m_settings.getEnabled(), 4);
 }
 
-void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT8LittleEndian(data_ptr, m_settings.getEInterfaceType(), 5);
+  m_writer_ptr->writeuint8_tLittleEndian(data_ptr, m_settings.getEInterfaceType(), 5);
 }
 
-void ChangeCommSettingsCommand::writeIPAdresstoDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeIPAdresstoDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getHostIp().to_ulong(), 8);
+  m_writer_ptr->writeuint32_tLittleEndian(data_ptr, m_settings.getHostIp().to_ulong(), 8);
 }
 
-void ChangeCommSettingsCommand::writePortToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writePortToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getHostUdpPort(), 12);
+  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getHostUdpPort(), 12);
 }
 
-void ChangeCommSettingsCommand::writeFrequencyToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeFrequencyToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getPublishingFequency(), 14);
+  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getPublishingFequency(), 14);
 }
 
-void ChangeCommSettingsCommand::writeStartAngleToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeStartAngleToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getStartAngle(), 16);
+  m_writer_ptr->writeuint32_tLittleEndian(data_ptr, m_settings.getStartAngle(), 16);
 }
 
-void ChangeCommSettingsCommand::writeEndAngleToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeEndAngleToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT32LittleEndian(data_ptr, m_settings.getEndAngle(), 20);
+  m_writer_ptr->writeuint32_tLittleEndian(data_ptr, m_settings.getEndAngle(), 20);
 }
 
-void ChangeCommSettingsCommand::writeFeaturesToDataPtr(BYTE*& data_ptr) const
+void ChangeCommSettingsCommand::writeFeaturesToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_settings.getFeatures(), 24);
+  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getFeatures(), 24);
 }
 
 

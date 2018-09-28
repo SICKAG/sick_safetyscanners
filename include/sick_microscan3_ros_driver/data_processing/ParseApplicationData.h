@@ -57,72 +57,72 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInApplicationData(const BYTE* data_ptr,
+  void setDataInApplicationData(const uint8_t* data_ptr,
                                 datastructure::ApplicationData& application_data);
-  void setApplicationInputsInApplicationData(const BYTE* data_ptr,
+  void setApplicationInputsInApplicationData(const uint8_t* data_ptr,
                                              datastructure::ApplicationData& application_data);
-  void setApplicationOutputsInApplicationData(const BYTE* data_ptr,
+  void setApplicationOutputsInApplicationData(const uint8_t* data_ptr,
                                               datastructure::ApplicationData& application_data);
-  void setDataInApplicationInputs(const BYTE* data_ptr, datastructure::ApplicationInputs& inputs);
-  void setDataInApplicationOutputs(const BYTE* data_ptr,
+  void setDataInApplicationInputs(const uint8_t* data_ptr, datastructure::ApplicationInputs& inputs);
+  void setDataInApplicationOutputs(const uint8_t* data_ptr,
                                    datastructure::ApplicationOutputs& outputs);
-  void setUnsafeInputsInApplicationInputs(const BYTE* data_ptr,
+  void setUnsafeInputsInApplicationInputs(const uint8_t* data_ptr,
                                           datastructure::ApplicationInputs& inputs);
-  void setUnsafeInputsSourcesInApplicationInputs(const BYTE* data_ptr,
+  void setUnsafeInputsSourcesInApplicationInputs(const uint8_t* data_ptr,
                                                  datastructure::ApplicationInputs& inputs);
-  void setUnsafeInputsFlagsInApplicationInputs(const BYTE* data_ptr,
+  void setUnsafeInputsFlagsInApplicationInputs(const uint8_t* data_ptr,
                                                datastructure::ApplicationInputs& inputs);
-  void setMonitoringCaseInputsInApplicationInputs(const BYTE* data_ptr,
+  void setMonitoringCaseInputsInApplicationInputs(const uint8_t* data_ptr,
                                                   datastructure::ApplicationInputs& inputs);
-  void setMonitoringCaseNumbersInApplicationInputs(const BYTE* data_ptr,
+  void setMonitoringCaseNumbersInApplicationInputs(const uint8_t* data_ptr,
                                                    datastructure::ApplicationInputs& inputs);
-  void setMonitoringCaseFlagsInApplicationInputs(const BYTE* data_ptr,
+  void setMonitoringCaseFlagsInApplicationInputs(const uint8_t* data_ptr,
                                                  datastructure::ApplicationInputs& inputs);
-  void setLinearVelocityInputsInApplicationInputs(const BYTE* data_ptr,
+  void setLinearVelocityInputsInApplicationInputs(const uint8_t* data_ptr,
                                                   datastructure::ApplicationInputs& inputs);
-  void setLinearVelocity0InApplicationInputs(const BYTE* data_ptr,
+  void setLinearVelocity0InApplicationInputs(const uint8_t* data_ptr,
                                              datastructure::ApplicationInputs& inputs);
-  void setLinearVelocity1InApplicationInputs(const BYTE* data_ptr,
+  void setLinearVelocity1InApplicationInputs(const uint8_t* data_ptr,
                                              datastructure::ApplicationInputs& inputs);
-  void setLinearVelocityFlagsInApplicationInputs(const BYTE* data_ptr,
+  void setLinearVelocityFlagsInApplicationInputs(const uint8_t* data_ptr,
                                                  datastructure::ApplicationInputs& inputs);
-  void setSleepModeInputInApplicationInputs(const BYTE* data_ptr,
+  void setSleepModeInputInApplicationInputs(const uint8_t* data_ptr,
                                             datastructure::ApplicationInputs& inputs);
-  void setEvalutaionPathsOutputsInApplicationOutputs(const BYTE* data_ptr,
+  void setEvalutaionPathsOutputsInApplicationOutputs(const uint8_t* data_ptr,
                                                      datastructure::ApplicationOutputs& outputs);
   void
-  setEvaluationPathsOutputsEvalOutInApplicationOutputs(const BYTE* data_ptr,
+  setEvaluationPathsOutputsEvalOutInApplicationOutputs(const uint8_t* data_ptr,
                                                        datastructure::ApplicationOutputs& outputs);
   void
-  setEvaluationPathsOutputsIsSafeInApplicationOutputs(const BYTE* data_ptr,
+  setEvaluationPathsOutputsIsSafeInApplicationOutputs(const uint8_t* data_ptr,
                                                       datastructure::ApplicationOutputs& outputs);
   void setEvaluationPathsOutputsValidFlagsInApplicationOutputs(
-    const BYTE* data_ptr, datastructure::ApplicationOutputs& outputs);
-  void setMonitoringCaseOutputsInApplicationOutputs(const BYTE* data_ptr,
+    const uint8_t* data_ptr, datastructure::ApplicationOutputs& outputs);
+  void setMonitoringCaseOutputsInApplicationOutputs(const uint8_t* data_ptr,
                                                     datastructure::ApplicationOutputs& outputs);
-  void setMonitoringCaseNumbersInApplicationOutputs(const BYTE* data_ptr,
+  void setMonitoringCaseNumbersInApplicationOutputs(const uint8_t* data_ptr,
                                                     datastructure::ApplicationOutputs& outputs);
-  void setMonitoringCaseFlagsInApplicationOutputs(const BYTE* data_ptr,
+  void setMonitoringCaseFlagsInApplicationOutputs(const uint8_t* data_ptr,
                                                   datastructure::ApplicationOutputs& outputs);
-  void setSleepModeOutputInApplicationOutputs(const BYTE* data_ptr,
+  void setSleepModeOutputInApplicationOutputs(const uint8_t* data_ptr,
                                               datastructure::ApplicationOutputs& outputs);
-  void setErrorFlagsInApplicationOutputs(const BYTE* data_ptr,
+  void setErrorFlagsInApplicationOutputs(const uint8_t* data_ptr,
                                          datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocityOutoutsInApplicationOutputs(const BYTE* data_ptr,
+  void setLinearVelocityOutoutsInApplicationOutputs(const uint8_t* data_ptr,
                                                     datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocity0InApplicationOutputs(const BYTE* data_ptr,
+  void setLinearVelocity0InApplicationOutputs(const uint8_t* data_ptr,
                                               datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocity1InApplicationOutputs(const BYTE* data_ptr,
+  void setLinearVelocity1InApplicationOutputs(const uint8_t* data_ptr,
                                               datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocityFlagsInApplicationOutputs(const BYTE* data_ptr,
+  void setLinearVelocityFlagsInApplicationOutputs(const uint8_t* data_ptr,
                                                   datastructure::ApplicationOutputs& outputs);
-  void setResultingVelocityOutputsInApplicationOutputs(const BYTE* data_ptr,
+  void setResultingVelocityOutputsInApplicationOutputs(const uint8_t* data_ptr,
                                                        datastructure::ApplicationOutputs& outputs);
-  void setResultingVelocityInApplicationOutputs(const BYTE* data_ptr,
+  void setResultingVelocityInApplicationOutputs(const uint8_t* data_ptr,
                                                 datastructure::ApplicationOutputs& outputs);
-  void setResultingVelocityFlagsInApplicationOutputs(const BYTE* data_ptr,
+  void setResultingVelocityFlagsInApplicationOutputs(const uint8_t* data_ptr,
                                                      datastructure::ApplicationOutputs& outputs);
-  void setOutputFlagsinApplicationOutput(const BYTE* data_ptr,
+  void setOutputFlagsinApplicationOutput(const uint8_t* data_ptr,
                                          datastructure::ApplicationOutputs& outputs);
   bool checkIfPreconditionsAreMet(datastructure::Data& data);
   bool checkIfApplicationDataIsPublished(datastructure::Data& data);

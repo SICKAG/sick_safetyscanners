@@ -37,7 +37,6 @@
 
 #include <sick_microscan3_ros_driver/datastructure/ApplicationInputs.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationOutputs.h>
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 
 namespace sick {
 namespace datastructure {

@@ -55,21 +55,21 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInGeneralSystemState(const BYTE* data_ptr,
+  void setDataInGeneralSystemState(const uint8_t* data_ptr,
                                    datastructure::GeneralSystemState& general_System_state);
-  void setStatusBitsInGeneralSystemState(const BYTE* data_ptr,
+  void setStatusBitsInGeneralSystemState(const uint8_t* data_ptr,
                                          datastructure::GeneralSystemState& general_System_state);
   void
-  setSafeCutOffPathInGeneralSystemState(const BYTE* data_ptr,
+  setSafeCutOffPathInGeneralSystemState(const uint8_t* data_ptr,
                                         datastructure::GeneralSystemState& general_System_state);
   void
-  setNonSafeCutOffPathInGeneralSystemState(const BYTE* data_ptr,
+  setNonSafeCutOffPathInGeneralSystemState(const uint8_t* data_ptr,
                                            datastructure::GeneralSystemState& general_System_state);
   void setResetRequiredCutOffPathInGeneralSystemState(
-    const BYTE* data_ptr, datastructure::GeneralSystemState& general_System_state);
+    const uint8_t* data_ptr, datastructure::GeneralSystemState& general_System_state);
   void setCurrentMonitoringCasesInGeneralSystemState(
-    const BYTE* data_ptr, datastructure::GeneralSystemState& general_System_state);
-  void setErrorsInGeneralSystemState(const BYTE* data_ptr,
+    const uint8_t* data_ptr, datastructure::GeneralSystemState& general_System_state);
+  void setErrorsInGeneralSystemState(const uint8_t* data_ptr,
                                      datastructure::GeneralSystemState& general_System_state);
   bool checkIfPreconditionsAreMet(datastructure::Data& data);
   bool checkIfGeneralSystemStateIsPublished(datastructure::Data& data);

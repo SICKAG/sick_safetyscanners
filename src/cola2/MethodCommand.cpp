@@ -40,7 +40,7 @@
 namespace sick {
 namespace cola2 {
 
-MethodCommand::MethodCommand(Cola2Session& session, UINT16 method_index)
+MethodCommand::MethodCommand(Cola2Session& session, uint16_t method_index)
   : Command(session, 0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
   , m_method_index(method_index)
 {
@@ -49,10 +49,10 @@ MethodCommand::MethodCommand(Cola2Session& session, UINT16 method_index)
 
 void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
-  UINT16 prevSize = telegram.size();
+  uint16_t prevSize = telegram.size();
   telegram.resize(prevSize + 2);
-  BYTE* data_ptr = telegram.data() + prevSize;
-  m_writer_ptr->writeUINT16LittleEndian(data_ptr, m_method_index, 0);
+  uint8_t* data_ptr = telegram.data() + prevSize;
+  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_method_index, 0);
 }
 
 bool MethodCommand::canBeExecutedWithoutSessionID() const
@@ -74,12 +74,12 @@ bool MethodCommand::processReply()
   }
 }
 
-UINT16 MethodCommand::getMethodIndex() const
+uint16_t MethodCommand::getMethodIndex() const
 {
   return m_method_index;
 }
 
-void MethodCommand::setMethodIndex(const UINT16& method_index)
+void MethodCommand::setMethodIndex(const uint16_t& method_index)
 {
   m_method_index = method_index;
 }

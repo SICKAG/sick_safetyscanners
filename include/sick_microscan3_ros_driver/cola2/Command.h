@@ -35,8 +35,6 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
-
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>
@@ -52,7 +50,7 @@ class Cola2Session;
 class Command
 {
 public:
-  Command(sick::cola2::Cola2Session& session, UINT16 command_type, UINT16 command_mode);
+  Command(sick::cola2::Cola2Session& session, uint16_t command_type, uint16_t command_mode);
 
 
   void lockExecutionMutex();
@@ -63,24 +61,24 @@ public:
 
   void waitForCompletion();
 
-  UINT32 getSessionID() const;
-  void setSessionID(const UINT32& session_id);
+  uint32_t getSessionID() const;
+  void setSessionID(const uint32_t& session_id);
 
 
   bool wasSuccessful() const;
 
 
-  UINT8 getCommandType() const;
-  void setCommandType(const UINT8& command_type);
+  uint8_t getCommandType() const;
+  void setCommandType(const uint8_t& command_type);
 
-  UINT8 getCommandMode() const;
-  void setCommandMode(const UINT8& command_mode);
+  uint8_t getCommandMode() const;
+  void setCommandMode(const uint8_t& command_mode);
 
-  UINT16 getRequestID() const;
-  void setRequestID(const UINT16& request_id);
+  uint16_t getRequestID() const;
+  void setRequestID(const uint16_t& request_id);
 
-  std::vector<BYTE> getDataVector() const;
-  void setDataVector(const std::vector<BYTE>& data);
+  std::vector<uint8_t> getDataVector() const;
+  void setDataVector(const std::vector<uint8_t>& data);
 
 protected:
   sick::cola2::Cola2Session& m_session;
@@ -100,24 +98,24 @@ private:
 
   bool m_was_successful;
 
-  UINT8 m_command_mode;
-  UINT8 m_command_type;
+  uint8_t m_command_mode;
+  uint8_t m_command_type;
 
-  UINT32 m_session_id;
-  UINT16 m_request_id;
+  uint32_t m_session_id;
+  uint16_t m_request_id;
 
-  std::vector<BYTE> m_data_vector;
+  std::vector<uint8_t> m_data_vector;
   sick::datastructure::PacketBuffer::VectorBuffer prepareHeader() const;
-  void writeCola2StxToDataPtr(BYTE*& data_ptr) const;
-  void writeLengthToDataPtr(BYTE*& data_ptr,
+  void writeCola2StxToDataPtr(uint8_t*& data_ptr) const;
+  void writeLengthToDataPtr(uint8_t*& data_ptr,
                             datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  void writeCola2HubCntrToDataPtr(BYTE*& data_ptr) const;
-  void writeCola2NoCToDataPtr(BYTE*& data_ptr) const;
-  void writeSessionIdToDataPtr(BYTE*& data_ptr) const;
-  void writeRequestIdToDataPtr(BYTE*& data_ptr) const;
-  void writeCommandTypeToDataPtr(BYTE*& data_ptr) const;
-  void writeCommandModeToDataPtr(BYTE*& data_ptr) const;
-  void writeDataToDataPtr(BYTE*& data_ptr,
+  void writeCola2HubCntrToDataPtr(uint8_t*& data_ptr) const;
+  void writeCola2NoCToDataPtr(uint8_t*& data_ptr) const;
+  void writeSessionIdToDataPtr(uint8_t*& data_ptr) const;
+  void writeRequestIdToDataPtr(uint8_t*& data_ptr) const;
+  void writeCommandTypeToDataPtr(uint8_t*& data_ptr) const;
+  void writeCommandModeToDataPtr(uint8_t*& data_ptr) const;
+  void writeDataToDataPtr(uint8_t*& data_ptr,
                           datastructure::PacketBuffer::VectorBuffer& telegram) const;
 };
 

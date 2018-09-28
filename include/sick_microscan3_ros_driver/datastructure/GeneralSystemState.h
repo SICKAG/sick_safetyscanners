@@ -35,7 +35,8 @@
 #ifndef GENERALSYSTEMSTATE_H
 #define GENERALSYSTEMSTATE_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <vector>
+#include <stdint.h>
 
 namespace sick {
 namespace datastructure {
@@ -73,17 +74,17 @@ public:
   void
   setResetRequiredCutOffPathVector(const std::vector<bool>& reset_required_cut_off_path_vector);
 
-  BYTE getCurrentMonitoringCaseNoTable_1() const;
-  void setCurrentMonitoringCaseNoTable_1(const BYTE& current_monitoring_case_no_table_1);
+  uint8_t getCurrentMonitoringCaseNoTable_1() const;
+  void setCurrentMonitoringCaseNoTable_1(const uint8_t& current_monitoring_case_no_table_1);
 
-  BYTE getCurrentMonitoringCaseNoTable_2() const;
-  void setCurrentMonitoringCaseNoTable_2(const BYTE& current_monitoring_case_no_table_2);
+  uint8_t getCurrentMonitoringCaseNoTable_2() const;
+  void setCurrentMonitoringCaseNoTable_2(const uint8_t& current_monitoring_case_no_table_2);
 
-  BYTE getCurrentMonitoringCaseNoTable_3() const;
-  void setCurrentMonitoringCaseNoTable_3(const BYTE& current_monitoring_case_no_table_3);
+  uint8_t getCurrentMonitoringCaseNoTable_3() const;
+  void setCurrentMonitoringCaseNoTable_3(const uint8_t& current_monitoring_case_no_table_3);
 
-  BYTE getCurrentMonitoringCaseNoTable_4() const;
-  void setCurrentMonitoringCaseNoTable_4(const BYTE& current_monitoring_case_no_table_4);
+  uint8_t getCurrentMonitoringCaseNoTable_4() const;
+  void setCurrentMonitoringCaseNoTable_4(const uint8_t& current_monitoring_case_no_table_4);
 
   bool getApplicationError() const;
   void setApplicationError(bool application_error);
@@ -108,10 +109,10 @@ private:
   std::vector<bool> m_non_safe_cut_off_path_vector;
   std::vector<bool> m_reset_required_cut_off_path_vector;
 
-  BYTE m_current_monitoring_case_no_table_1;
-  BYTE m_current_monitoring_case_no_table_2;
-  BYTE m_current_monitoring_case_no_table_3;
-  BYTE m_current_monitoring_case_no_table_4;
+  uint8_t m_current_monitoring_case_no_table_1;
+  uint8_t m_current_monitoring_case_no_table_2;
+  uint8_t m_current_monitoring_case_no_table_3;
+  uint8_t m_current_monitoring_case_no_table_4;
 
   bool m_application_error;
   bool m_device_error;

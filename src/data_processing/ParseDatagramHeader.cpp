@@ -45,12 +45,12 @@ ParseDatagramHeader::ParseDatagramHeader()
 bool ParseDatagramHeader::parseUDPSequence(datastructure::PacketBuffer buffer,
                                            datastructure::DatagramHeader& header)
 {
-  const BYTE* data_ptr(buffer.getBuffer().data());
+  const uint8_t* data_ptr(buffer.getBuffer().data());
   setDataInHeader(data_ptr, header);
   return true;
 }
 
-void ParseDatagramHeader::setDataInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setDataInHeader(const uint8_t* data_ptr,
                                           datastructure::DatagramHeader& header)
 {
   setDatagramMarkerInHeader(data_ptr, header);
@@ -62,46 +62,46 @@ void ParseDatagramHeader::setDataInHeader(const BYTE* data_ptr,
   setFragmentOffsetInHeader(data_ptr, header);
 }
 
-void ParseDatagramHeader::setDatagramMarkerInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setDatagramMarkerInHeader(const uint8_t* data_ptr,
                                                     datastructure::DatagramHeader& header)
 {
-  header.setDatagramMarker(m_reader_ptr->readUINT32BigEndian(data_ptr, 0));
+  header.setDatagramMarker(m_reader_ptr->readuint32_tBigEndian(data_ptr, 0));
 }
 
-void ParseDatagramHeader::setProtocolInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setProtocolInHeader(const uint8_t* data_ptr,
                                               datastructure::DatagramHeader& header)
 {
-  header.setProtocol(m_reader_ptr->readUINT16BigEndian(data_ptr, 4));
+  header.setProtocol(m_reader_ptr->readuint16_tBigEndian(data_ptr, 4));
 }
 
-void ParseDatagramHeader::setMajorVersionInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setMajorVersionInHeader(const uint8_t* data_ptr,
                                                   datastructure::DatagramHeader& header)
 {
-  header.setMajorVersion(m_reader_ptr->readUINT8LittleEndian(data_ptr, 6));
+  header.setMajorVersion(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 6));
 }
 
-void ParseDatagramHeader::setMinorVersionInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setMinorVersionInHeader(const uint8_t* data_ptr,
                                                   datastructure::DatagramHeader& header)
 {
-  header.setMinorVersion(m_reader_ptr->readUINT8LittleEndian(data_ptr, 7));
+  header.setMinorVersion(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 7));
 }
 
-void ParseDatagramHeader::setTotalLengthInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setTotalLengthInHeader(const uint8_t* data_ptr,
                                                  datastructure::DatagramHeader& header)
 {
-  header.setTotalLength(m_reader_ptr->readUINT32LittleEndian(data_ptr, 8));
+  header.setTotalLength(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 8));
 }
 
-void ParseDatagramHeader::setIdentificationInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setIdentificationInHeader(const uint8_t* data_ptr,
                                                     datastructure::DatagramHeader& header)
 {
-  header.setIdentification(m_reader_ptr->readUINT32LittleEndian(data_ptr, 12));
+  header.setIdentification(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 12));
 }
 
-void ParseDatagramHeader::setFragmentOffsetInHeader(const BYTE* data_ptr,
+void ParseDatagramHeader::setFragmentOffsetInHeader(const uint8_t* data_ptr,
                                                     datastructure::DatagramHeader& header)
 {
-  header.setFragmentOffset(m_reader_ptr->readUINT32LittleEndian(data_ptr, 16));
+  header.setFragmentOffset(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16));
 }
 
 } // namespace data_processing

@@ -35,7 +35,7 @@
 #ifndef SCANPOINT_H
 #define SCANPOINT_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <stdint.h>
 
 namespace sick {
 namespace datastructure {
@@ -45,8 +45,8 @@ class ScanPoint
 public:
   ScanPoint();
   ScanPoint(float angle,
-            INT16& distance,
-            UINT8& reflectivity,
+            int16_t& distance,
+            uint8_t& reflectivity,
             bool& valid_bit,
             bool& infinite_bit,
             bool& glare_bit,
@@ -56,9 +56,9 @@ public:
 
   float getAngle() const;
 
-  UINT16 getDistance() const;
+  uint16_t getDistance() const;
 
-  UINT8 getReflectivity() const;
+  uint8_t getReflectivity() const;
 
   bool getValidBit() const;
 
@@ -75,8 +75,8 @@ public:
 
 private:
   float m_angle;
-  INT16 m_distance;
-  UINT8 m_reflectivity;
+  int16_t m_distance;
+  uint8_t m_reflectivity;
   bool m_valid_bit;
   bool m_infinite_bit;
   bool m_glare_bit;

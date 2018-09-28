@@ -52,8 +52,8 @@ public:
 
   bool addTCPPacket(sick::datastructure::PacketBuffer buffer);
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
-  UINT32 getTargetSize() const;
-  void setTargetSize(const UINT32& targetSize);
+  uint32_t getTargetSize() const;
+  void setTargetSize(const uint32_t& targetSize);
 
 private:
   bool m_is_complete;
@@ -64,8 +64,8 @@ private:
   bool addToMap(sick::datastructure::PacketBuffer newPacket);
   bool deployPacketIfComplete();
 
-  UINT32 m_targetSize;
-  UINT32 getCurrentSize() const;
+  uint32_t m_targetSize;
+  uint32_t getCurrentSize() const;
   bool deployPacket();
 };
 

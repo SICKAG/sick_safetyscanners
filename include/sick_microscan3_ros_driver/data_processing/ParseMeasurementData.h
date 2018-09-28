@@ -58,15 +58,15 @@ private:
   float m_angle;
   float m_angle_delta;
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInMeasurementData(const BYTE* data_ptr,
+  void setDataInMeasurementData(const uint8_t* data_ptr,
                                 datastructure::MeasurementData& measurement_data);
-  void setNumberOfBeamsInMeasurementData(const BYTE* data_ptr,
+  void setNumberOfBeamsInMeasurementData(const uint8_t* data_ptr,
                                          datastructure::MeasurementData& measurement_data);
   void setStartAngleAndDelta(datastructure::Data& data);
-  void setScanPointsInMeasurementData(const BYTE* data_ptr,
+  void setScanPointsInMeasurementData(const uint8_t* data_ptr,
                                       datastructure::MeasurementData& measurement_data);
-  void addScanPointToMeasurementData(UINT16 offset,
-                                     const BYTE* data_ptr,
+  void addScanPointToMeasurementData(uint16_t offset,
+                                     const uint8_t* data_ptr,
                                      datastructure::MeasurementData& measurement_data);
   bool checkIfPreconditionsAreMet(datastructure::Data& data);
   bool checkIfMeasurementDataIsPublished(datastructure::Data& data);

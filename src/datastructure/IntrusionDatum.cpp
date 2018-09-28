@@ -40,12 +40,12 @@ namespace datastructure {
 
 IntrusionDatum::IntrusionDatum() {}
 
-INT32 IntrusionDatum::getSize() const
+int32_t IntrusionDatum::getSize() const
 {
   return m_size;
 }
 
-void IntrusionDatum::setSize(const INT32& size)
+void IntrusionDatum::setSize(const int32_t& size)
 {
   m_size = size;
 }

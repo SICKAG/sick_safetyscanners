@@ -35,7 +35,7 @@
 #ifndef DATAHEADER_H
 #define DATAHEADER_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <stdint.h>
 
 namespace sick {
 namespace datastructure {
@@ -45,68 +45,68 @@ class DataHeader
 public:
   DataHeader();
 
-  UINT8 getVersionIndicator() const;
-  void setVersionIndicator(const UINT8& version_indicator);
+  uint8_t getVersionIndicator() const;
+  void setVersionIndicator(const uint8_t& version_indicator);
 
-  UINT8 getVersionMajorVersion() const;
-  void setVersionMajorVersion(const UINT8& version_major_version);
+  uint8_t getVersionMajorVersion() const;
+  void setVersionMajorVersion(const uint8_t& version_major_version);
 
-  UINT8 getVersionMinorVersion() const;
-  void setVersionMinorVersion(const UINT8& version_minor_version);
+  uint8_t getVersionMinorVersion() const;
+  void setVersionMinorVersion(const uint8_t& version_minor_version);
 
-  UINT8 getVersionRelease() const;
-  void setVersionRelease(const UINT8& version_release);
+  uint8_t getVersionRelease() const;
+  void setVersionRelease(const uint8_t& version_release);
 
-  UINT32 getSerialNumberOfDevice() const;
-  void setSerialNumberOfDevice(const UINT32& serial_number_of_device);
+  uint32_t getSerialNumberOfDevice() const;
+  void setSerialNumberOfDevice(const uint32_t& serial_number_of_device);
 
-  UINT32 getSerialNumberOfSystemPlug() const;
-  void setSerialNumberOfSystemPlug(const UINT32& serial_number_of_system_plug);
+  uint32_t getSerialNumberOfSystemPlug() const;
+  void setSerialNumberOfSystemPlug(const uint32_t& serial_number_of_system_plug);
 
-  UINT8 getChannelNumber() const;
-  void setChannelNumber(const UINT8& channel_number);
+  uint8_t getChannelNumber() const;
+  void setChannelNumber(const uint8_t& channel_number);
 
-  UINT32 getSequenceNumber() const;
-  void setSequenceNumber(const UINT32& sequence_number);
+  uint32_t getSequenceNumber() const;
+  void setSequenceNumber(const uint32_t& sequence_number);
 
-  UINT32 getScanNumber() const;
-  void setScanNumber(const UINT32& scan_number);
+  uint32_t getScanNumber() const;
+  void setScanNumber(const uint32_t& scan_number);
 
-  UINT16 getTimestampDate() const;
-  void setTimestampDate(const UINT16& timestamp_date);
+  uint16_t getTimestampDate() const;
+  void setTimestampDate(const uint16_t& timestamp_date);
 
-  UINT32 getTimestampTime() const;
-  void setTimestampTime(const UINT32& timestamp_time);
+  uint32_t getTimestampTime() const;
+  void setTimestampTime(const uint32_t& timestamp_time);
 
-  UINT16 getGeneralSystemStateBlockOffset() const;
-  void setGeneralSystemStateBlockOffset(const UINT16& general_system_state_block_offset);
+  uint16_t getGeneralSystemStateBlockOffset() const;
+  void setGeneralSystemStateBlockOffset(const uint16_t& general_system_state_block_offset);
 
-  UINT16 getGeneralSystemStateBlockSize() const;
-  void setGeneralSystemStateBlockSize(const UINT16& general_system_state_block_size);
+  uint16_t getGeneralSystemStateBlockSize() const;
+  void setGeneralSystemStateBlockSize(const uint16_t& general_system_state_block_size);
 
-  UINT16 getDerivedValuesBlockOffset() const;
-  void setDerivedValuesBlockOffset(const UINT16& derived_values_block_offset);
+  uint16_t getDerivedValuesBlockOffset() const;
+  void setDerivedValuesBlockOffset(const uint16_t& derived_values_block_offset);
 
-  UINT16 getDerivedValuesBlockSize() const;
-  void setDerivedValuesBlockSize(const UINT16& derived_values_block_size);
+  uint16_t getDerivedValuesBlockSize() const;
+  void setDerivedValuesBlockSize(const uint16_t& derived_values_block_size);
 
-  UINT16 getMeasurementDataBlockOffset() const;
-  void setMeasurementDataBlockOffset(const UINT16& measurement_data_block_offset);
+  uint16_t getMeasurementDataBlockOffset() const;
+  void setMeasurementDataBlockOffset(const uint16_t& measurement_data_block_offset);
 
-  UINT16 getMeasurementDataBlockSize() const;
-  void setMeasurementDataBlockSize(const UINT16& measurement_data_block_size);
+  uint16_t getMeasurementDataBlockSize() const;
+  void setMeasurementDataBlockSize(const uint16_t& measurement_data_block_size);
 
-  UINT16 getIntrusionDataBlockOffset() const;
-  void setIntrusionDataBlockOffset(const UINT16& intrusion_data_block_offset);
+  uint16_t getIntrusionDataBlockOffset() const;
+  void setIntrusionDataBlockOffset(const uint16_t& intrusion_data_block_offset);
 
-  UINT16 getIntrusionDataBlockSize() const;
-  void setIntrusionDataBlockSize(const UINT16& intrusion_data_block_size);
+  uint16_t getIntrusionDataBlockSize() const;
+  void setIntrusionDataBlockSize(const uint16_t& intrusion_data_block_size);
 
-  UINT16 getApplicationDataBlockOffset() const;
-  void setApplicationDataBlockOffset(const UINT16& application_data_block_offset);
+  uint16_t getApplicationDataBlockOffset() const;
+  void setApplicationDataBlockOffset(const uint16_t& application_data_block_offset);
 
-  UINT16 getApplicationDataBlockSize() const;
-  void setApplicationDataBlockSize(const UINT16& application_data_block_size);
+  uint16_t getApplicationDataBlockSize() const;
+  void setApplicationDataBlockSize(const uint16_t& application_data_block_size);
 
   bool isEmpty() const;
   void setIsEmpty(bool is_empty);
@@ -114,27 +114,27 @@ public:
 private:
   bool m_is_empty;
 
-  UINT8 m_version_indicator;
-  UINT8 m_version_major_version;
-  UINT8 m_version_minor_version;
-  UINT8 m_version_release;
-  UINT32 m_serial_number_of_device;
-  UINT32 m_serial_number_of_system_plug;
-  UINT8 m_channel_number;
-  UINT32 m_sequence_number;
-  UINT32 m_scan_number;
-  UINT16 m_timestamp_date;
-  UINT32 m_timestamp_time;
-  UINT16 m_general_system_state_block_offset;
-  UINT16 m_general_system_state_block_size;
-  UINT16 m_derived_values_block_offset;
-  UINT16 m_derived_values_block_size;
-  UINT16 m_measurement_data_block_offset;
-  UINT16 m_measurement_data_block_size;
-  UINT16 m_intrusion_data_block_offset;
-  UINT16 m_intrusion_data_block_size;
-  UINT16 m_application_data_block_offset;
-  UINT16 m_application_data_block_size;
+  uint8_t m_version_indicator;
+  uint8_t m_version_major_version;
+  uint8_t m_version_minor_version;
+  uint8_t m_version_release;
+  uint32_t m_serial_number_of_device;
+  uint32_t m_serial_number_of_system_plug;
+  uint8_t m_channel_number;
+  uint32_t m_sequence_number;
+  uint32_t m_scan_number;
+  uint16_t m_timestamp_date;
+  uint32_t m_timestamp_time;
+  uint16_t m_general_system_state_block_offset;
+  uint16_t m_general_system_state_block_size;
+  uint16_t m_derived_values_block_offset;
+  uint16_t m_derived_values_block_size;
+  uint16_t m_measurement_data_block_offset;
+  uint16_t m_measurement_data_block_size;
+  uint16_t m_intrusion_data_block_offset;
+  uint16_t m_intrusion_data_block_size;
+  uint16_t m_application_data_block_offset;
+  uint16_t m_application_data_block_size;
 };
 
 } // namespace datastructure

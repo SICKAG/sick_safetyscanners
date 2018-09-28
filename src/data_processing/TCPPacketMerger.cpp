@@ -74,8 +74,8 @@ bool TCPPaketMerger::addTCPPacket(sick::datastructure::PacketBuffer buffer)
 
 bool TCPPaketMerger::addToMap(sick::datastructure::PacketBuffer newPacket)
 {
-  UINT32 currentSize   = getCurrentSize();
-  UINT32 remainingSize = m_targetSize - currentSize;
+  uint32_t currentSize   = getCurrentSize();
+  uint32_t remainingSize = m_targetSize - currentSize;
   m_buffer_vector.push_back(newPacket);
   if (remainingSize == newPacket.getLength())
   {
@@ -111,17 +111,17 @@ bool TCPPaketMerger::deployPacket()
   return true;
 }
 
-UINT32 TCPPaketMerger::getTargetSize() const
+uint32_t TCPPaketMerger::getTargetSize() const
 {
   return m_targetSize;
 }
 
-void TCPPaketMerger::setTargetSize(const UINT32& targetSize)
+void TCPPaketMerger::setTargetSize(const uint32_t& targetSize)
 {
   m_targetSize = targetSize;
 }
 
-UINT32 TCPPaketMerger::getCurrentSize() const
+uint32_t TCPPaketMerger::getCurrentSize() const
 {
   size_t sum = 0;
   for (auto it_packet = m_buffer_vector.begin(); it_packet != m_buffer_vector.end(); ++it_packet)
@@ -129,7 +129,7 @@ UINT32 TCPPaketMerger::getCurrentSize() const
     const auto& packet = *it_packet;
     sum += packet.getLength();
   }
-  return static_cast<UINT32>(sum);
+  return static_cast<uint32_t>(sum);
 }
 
 } // namespace data_processing

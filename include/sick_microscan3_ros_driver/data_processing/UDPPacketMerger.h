@@ -56,13 +56,13 @@ private:
   bool m_is_complete;
   sick::datastructure::PacketBuffer m_deployed_paket_buffer;
 
-  std::map<UINT32, sick::datastructure::ParsedPacketBufferVector> m_parsed_packet_buffer_map;
+  std::map<uint32_t, sick::datastructure::ParsedPacketBufferVector> m_parsed_packet_buffer_map;
 
   bool addToMap(sick::datastructure::PacketBuffer buffer,
                 sick::datastructure::DatagramHeader header);
   bool deployPacketIfComplete(datastructure::DatagramHeader header);
   bool checkIfComplete(sick::datastructure::DatagramHeader& header);
-  UINT32
+  uint32_t
   calcualteCurrentLengthOfParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector& vec);
   sick::datastructure::ParsedPacketBufferVector
   getSortedParsedPacketBufferForIdentification(sick::datastructure::DatagramHeader& header);

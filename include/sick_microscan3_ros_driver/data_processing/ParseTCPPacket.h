@@ -63,20 +63,20 @@ public:
   bool parseTCPSequence(datastructure::PacketBuffer buffer, sick::cola2::Command& command);
   int getExpectedPacketLength(datastructure::PacketBuffer buffer);
 
-  UINT16 getRequestID(datastructure::PacketBuffer buffer);
+  uint16_t getRequestID(datastructure::PacketBuffer buffer);
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  UINT32 readSTx(datastructure::PacketBuffer& buffer);
-  UINT32 readLength(datastructure::PacketBuffer& buffer);
-  UINT16 readRequestID(datastructure::PacketBuffer& buffer);
-  UINT8 readHubCntr(datastructure::PacketBuffer& buffer);
-  UINT8 readNoC(datastructure::PacketBuffer& buffer);
-  UINT32 readSessionID(datastructure::PacketBuffer& buffer);
-  UINT8 readCommandType(datastructure::PacketBuffer& buffer);
-  UINT8 readCommandMode(datastructure::PacketBuffer& buffer);
-  UINT16 readErrorCode(datastructure::PacketBuffer& buffer);
-  void readData(datastructure::PacketBuffer& buffer, std::vector<BYTE>& byteVector);
+  uint32_t readSTx(datastructure::PacketBuffer& buffer);
+  uint32_t readLength(datastructure::PacketBuffer& buffer);
+  uint16_t readRequestID(datastructure::PacketBuffer& buffer);
+  uint8_t readHubCntr(datastructure::PacketBuffer& buffer);
+  uint8_t readNoC(datastructure::PacketBuffer& buffer);
+  uint32_t readSessionID(datastructure::PacketBuffer& buffer);
+  uint8_t readCommandType(datastructure::PacketBuffer& buffer);
+  uint8_t readCommandMode(datastructure::PacketBuffer& buffer);
+  uint16_t readErrorCode(datastructure::PacketBuffer& buffer);
+  void readData(datastructure::PacketBuffer& buffer, std::vector<uint8_t>& byteVector);
   void setCommandValuesFromPacket(sick::datastructure::PacketBuffer& buffer,
                                   sick::cola2::Command& command);
 };

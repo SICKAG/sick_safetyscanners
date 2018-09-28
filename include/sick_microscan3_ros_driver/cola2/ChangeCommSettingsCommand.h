@@ -58,18 +58,18 @@ private:
 
   sick::datastructure::CommSettings m_settings;
 
-  BYTE*
+  uint8_t*
   prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  void writeDataToDataPtr(BYTE*& data_ptr) const;
-  void writeChannelToDataPtr(BYTE*& data_ptr) const;
-  void writeEnabledToDataPtr(BYTE*& data_ptr) const;
-  void writeEInterfaceTypeToDataPtr(BYTE*& data_ptr) const;
-  void writeIPAdresstoDataPtr(BYTE*& data_ptr) const;
-  void writePortToDataPtr(BYTE*& data_ptr) const;
-  void writeFrequencyToDataPtr(BYTE*& data_ptr) const;
-  void writeStartAngleToDataPtr(BYTE*& data_ptr) const;
-  void writeEndAngleToDataPtr(BYTE*& data_ptr) const;
-  void writeFeaturesToDataPtr(BYTE*& data_ptr) const;
+  void writeDataToDataPtr(uint8_t*& data_ptr) const;
+  void writeChannelToDataPtr(uint8_t*& data_ptr) const;
+  void writeEnabledToDataPtr(uint8_t*& data_ptr) const;
+  void writeEInterfaceTypeToDataPtr(uint8_t*& data_ptr) const;
+  void writeIPAdresstoDataPtr(uint8_t*& data_ptr) const;
+  void writePortToDataPtr(uint8_t*& data_ptr) const;
+  void writeFrequencyToDataPtr(uint8_t*& data_ptr) const;
+  void writeStartAngleToDataPtr(uint8_t*& data_ptr) const;
+  void writeEndAngleToDataPtr(uint8_t*& data_ptr) const;
+  void writeFeaturesToDataPtr(uint8_t*& data_ptr) const;
 };
 
 } // namespace cola2

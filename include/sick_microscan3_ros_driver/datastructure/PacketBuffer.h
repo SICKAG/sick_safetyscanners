@@ -38,11 +38,11 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdint.h>
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
 #include <sick_microscan3_ros_driver/datastructure/DatagramHeader.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -56,7 +56,7 @@ const int MAXSIZE = 10000;
 class PacketBuffer
 {
 public:
-  typedef BYTE array_type;
+  typedef uint8_t array_type;
   typedef boost::array<array_type, MAXSIZE> ArrayBuffer;
   typedef std::vector<array_type> VectorBuffer;
 
@@ -64,7 +64,7 @@ public:
   PacketBuffer(const VectorBuffer& buffer);
   PacketBuffer(const ArrayBuffer& buffer, size_t length);
 
-  static UINT32 getMaxSize() { return MAXSIZE; }
+  static uint32_t getMaxSize() { return MAXSIZE; }
 
   const VectorBuffer& getBuffer() const;
   void setBuffer(const VectorBuffer& buffer);

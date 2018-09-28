@@ -35,7 +35,7 @@
 #ifndef DERIVEDVALUES_H
 #define DERIVEDVALUES_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <stdint.h>
 
 namespace sick {
 namespace datastructure {
@@ -47,23 +47,23 @@ class DerivedValues
 public:
   DerivedValues();
 
-  UINT16 getMultiplicationFactor() const;
-  void setMultiplicationFactor(const UINT16& multiplication_factor);
+  uint16_t getMultiplicationFactor() const;
+  void setMultiplicationFactor(const uint16_t& multiplication_factor);
 
-  UINT16 getNumberOfBeams() const;
-  void setNumberOfBeams(const UINT16& number_of_beams);
+  uint16_t getNumberOfBeams() const;
+  void setNumberOfBeams(const uint16_t& number_of_beams);
 
-  UINT16 getScanTime() const;
-  void setScanTime(const UINT16& scan_time);
+  uint16_t getScanTime() const;
+  void setScanTime(const uint16_t& scan_time);
 
   float getStartAngle() const;
-  void setStartAngle(const INT32& start_angle);
+  void setStartAngle(const int32_t& start_angle);
 
   float getAngularBeamResolution() const;
-  void setAngularBeamResolution(const INT32& angular_beam_resolution);
+  void setAngularBeamResolution(const int32_t& angular_beam_resolution);
 
-  UINT32 getInterbeamPeriod() const;
-  void setInterbeamPeriod(const UINT32& interbeam_period);
+  uint32_t getInterbeamPeriod() const;
+  void setInterbeamPeriod(const uint32_t& interbeam_period);
 
   bool isEmpty() const;
   void setIsEmpty(bool is_empty);
@@ -71,13 +71,13 @@ public:
 private:
   bool m_is_empty;
 
-  UINT16 m_multiplication_factor;
-  UINT16 m_number_of_beams;
-  UINT16 m_scan_time; // ms
-  UINT32 unsigned_test_start_angle;
+  uint16_t m_multiplication_factor;
+  uint16_t m_number_of_beams;
+  uint16_t m_scan_time; // ms
+  uint32_t unsigned_test_start_angle;
   float m_start_angle;
   float m_angular_beam_resolution;
-  UINT32 m_interbeam_period; // usecs
+  uint32_t m_interbeam_period; // usecs
 };
 
 } // namespace datastructure

@@ -35,7 +35,8 @@
 #ifndef APPLICATIONINPUTS_H
 #define APPLICATIONINPUTS_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <vector>
+#include <stdint.h>
 
 namespace sick {
 namespace datastructure {
@@ -52,17 +53,17 @@ public:
   std::vector<bool> getUnsafeInputsFlagsVector() const;
   void setUnsafeInputsFlagsVector(const std::vector<bool>& unsafe_inputs_flags_vector);
 
-  std::vector<UINT16> getMonitoringCasevector() const;
-  void setMonitoringCaseVector(const std::vector<UINT16>& monitoring_case_vector);
+  std::vector<uint16_t> getMonitoringCasevector() const;
+  void setMonitoringCaseVector(const std::vector<uint16_t>& monitoring_case_vector);
 
   std::vector<bool> getMonitoringCaseFlagsVector() const;
   void setMonitoringCaseFlagsVector(const std::vector<bool>& monitoring_case_flags_vector);
 
-  INT16 getVelocity0() const;
-  void setVelocity0(const INT16& velocity_0);
+  int16_t getVelocity0() const;
+  void setVelocity0(const int16_t& velocity_0);
 
-  INT16 getVelocity1() const;
-  void setVelocity1(const INT16& velocity_1);
+  int16_t getVelocity1() const;
+  void setVelocity1(const int16_t& velocity_1);
 
   bool getVelocity0Valid() const;
   void setVelocity0Valid(bool velocity_0_valid);
@@ -76,25 +77,25 @@ public:
   bool getVelocity1TransmittedSafely() const;
   void setVelocity1TransmittedSafely(bool velocity_1_transmitted_safely);
 
-  INT8 getSleepModeInput() const;
-  void setSleepModeInput(const INT8& sleep_mode_input);
+  int8_t getSleepModeInput() const;
+  void setSleepModeInput(const int8_t& sleep_mode_input);
 
 private:
   std::vector<bool> m_unsafe_inputs_input_sources_vector; // TODO in struct??? with next
   std::vector<bool> m_unsafe_inputs_flags_vector;
 
-  std::vector<UINT16> m_monitoring_case_vector; // TODO 20 cases why 32 bit flags?
+  std::vector<uint16_t> m_monitoring_case_vector; // TODO 20 cases why 32 bit flags?
   std::vector<bool> m_monitoring_case_flags_vector;
 
-  INT16 m_velocity_0;
-  INT16 m_velocity_1;
+  int16_t m_velocity_0;
+  int16_t m_velocity_1;
 
   bool m_velocity_0_valid;
   bool m_velocity_1_valid;
   bool m_velocity_0_transmitted_safely;
   bool m_velocity_1_transmitted_safely;
 
-  INT8 m_sleep_mode_input; // TODO enum8
+  int8_t m_sleep_mode_input; // TODO enum8
 };
 
 } // namespace datastructure

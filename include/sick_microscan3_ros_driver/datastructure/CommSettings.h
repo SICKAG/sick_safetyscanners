@@ -36,8 +36,7 @@
 #define COMMSETTINGS_H
 
 #include <iostream>
-
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <boost/asio/ip/address_v4.hpp>
 
 namespace sick {
 namespace datastructure {
@@ -51,29 +50,29 @@ public:
   void setHostIp(const boost::asio::ip::address_v4& host_ip);
   void setHostIp(const std::string& host_ip);
 
-  UINT16 getHostUdpPort() const;
-  void setHostUdpPort(const UINT16& host_udp_port);
+  uint16_t getHostUdpPort() const;
+  void setHostUdpPort(const uint16_t& host_udp_port);
 
-  UINT8 getChannel() const;
-  void setChannel(const UINT8& channel);
+  uint8_t getChannel() const;
+  void setChannel(const uint8_t& channel);
 
   bool getEnabled() const;
   void setEnabled(bool enabled);
 
-  UINT8 getEInterfaceType() const;
-  void setEInterfaceType(const UINT8& e_interface_type);
+  uint8_t getEInterfaceType() const;
+  void setEInterfaceType(const uint8_t& e_interface_type);
 
-  UINT16 getPublishingFequency() const;
-  void setPublishingFequency(const UINT16& publishing_fequency);
+  uint16_t getPublishingFequency() const;
+  void setPublishingFequency(const uint16_t& publishing_fequency);
 
-  UINT32 getStartAngle() const;
-  void setStartAngle(const UINT32& start_angle);
+  uint32_t getStartAngle() const;
+  void setStartAngle(const uint32_t& start_angle);
 
-  UINT32 getEndAngle() const;
-  void setEndAngle(const UINT32& end_angle);
+  uint32_t getEndAngle() const;
+  void setEndAngle(const uint32_t& end_angle);
 
-  UINT16 getFeatures() const;
-  void setFeatures(const UINT16& features);
+  uint16_t getFeatures() const;
+  void setFeatures(const uint16_t& features);
   void setFeatures(const bool general_system_state,
                    const bool derived_settings,
                    const bool measurement_data,
@@ -83,22 +82,22 @@ public:
   boost::asio::ip::address_v4 getSensorIp() const;
   void setSensorIp(const boost::asio::ip::address_v4& sensor_ip);
 
-  UINT16 getSensorTcpPort() const;
-  void setSensorTcpPort(const UINT16& sensor_tcp_port);
+  uint16_t getSensorTcpPort() const;
+  void setSensorTcpPort(const uint16_t& sensor_tcp_port);
   void setSensorIp(const std::__cxx11::string& host_ip);
 
 private:
   boost::asio::ip::address_v4 m_sensor_ip;
-  UINT16 m_sensor_tcp_port;
+  uint16_t m_sensor_tcp_port;
   boost::asio::ip::address_v4 m_host_ip;
-  UINT16 m_host_udp_port;
-  UINT8 m_channel;
+  uint16_t m_host_udp_port;
+  uint8_t m_channel;
   bool m_enabled;
-  UINT8 m_e_interface_type;
-  UINT16 m_publishing_fequency;
-  UINT32 m_start_angle;
-  UINT32 m_end_angle;
-  UINT16 m_features;
+  uint8_t m_e_interface_type;
+  uint16_t m_publishing_fequency;
+  uint32_t m_start_angle;
+  uint32_t m_end_angle;
+  uint16_t m_features;
 };
 
 

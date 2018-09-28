@@ -69,12 +69,12 @@ void ApplicationOutputs::setEvalOutIsValidVector(const std::vector<bool>& eval_o
   m_eval_out_is_valid_vector = eval_out_is_valid_vector;
 }
 
-std::vector<UINT16> ApplicationOutputs::getMonitoringCaseVector() const
+std::vector<uint16_t> ApplicationOutputs::getMonitoringCaseVector() const
 {
   return m_monitoring_case_vector;
 }
 
-void ApplicationOutputs::setMonitoringCaseVector(const std::vector<UINT16>& monitoring_case_vector)
+void ApplicationOutputs::setMonitoringCaseVector(const std::vector<uint16_t>& monitoring_case_vector)
 {
   m_monitoring_case_vector = monitoring_case_vector;
 }
@@ -90,12 +90,12 @@ void ApplicationOutputs::setMonitoringCaseFlagsVector(
   m_monitoring_case_flags_vector = monitoring_case_flags_vector;
 }
 
-INT8 ApplicationOutputs::getSleepModeOutput() const
+int8_t ApplicationOutputs::getSleepModeOutput() const
 {
   return m_sleep_mode_output;
 }
 
-void ApplicationOutputs::setSleepModeOutput(const INT8& sleep_mode_output)
+void ApplicationOutputs::setSleepModeOutput(const int8_t& sleep_mode_output)
 {
   m_sleep_mode_output = sleep_mode_output;
 }
@@ -163,22 +163,22 @@ void ApplicationOutputs::setHostErrorFlagCriticalError(bool host_error_flag_crit
   m_host_error_flag_critical_error = host_error_flag_critical_error;
 }
 
-INT16 ApplicationOutputs::getVelocity0() const
+int16_t ApplicationOutputs::getVelocity0() const
 {
   return m_velocity_0;
 }
 
-void ApplicationOutputs::setVelocity0(const INT16& velocity_0)
+void ApplicationOutputs::setVelocity0(const int16_t& velocity_0)
 {
   m_velocity_0 = velocity_0;
 }
 
-INT16 ApplicationOutputs::getVelocity1() const
+int16_t ApplicationOutputs::getVelocity1() const
 {
   return m_velocity_1;
 }
 
-void ApplicationOutputs::setVelocity1(const INT16& velocity_1)
+void ApplicationOutputs::setVelocity1(const int16_t& velocity_1)
 {
   m_velocity_1 = velocity_1;
 }
@@ -223,13 +223,13 @@ void ApplicationOutputs::setVelocity1TransmittedSafely(bool velocity_1_transmitt
   m_velocity_1_transmitted_safely = velocity_1_transmitted_safely;
 }
 
-std::vector<INT16> ApplicationOutputs::getResultingVelocityVector() const
+std::vector<int16_t> ApplicationOutputs::getResultingVelocityVector() const
 {
   return m_resulting_velocity_vector;
 }
 
 void ApplicationOutputs::setResultingVelocityVector(
-  const std::vector<INT16>& resulting_velocity_vector)
+  const std::vector<int16_t>& resulting_velocity_vector)
 {
   m_resulting_velocity_vector = resulting_velocity_vector;
 }

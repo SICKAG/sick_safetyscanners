@@ -35,7 +35,7 @@
 #ifndef READWRITEHELPER_H
 #define READWRITEHELPER_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <stdint.h>
 
 namespace sick {
 namespace data_processing {
@@ -45,30 +45,30 @@ class ReadWriteHelper
 public:
   ReadWriteHelper();
 
-  void writeUINT8BigEndian(BYTE*& buf, UINT8 v, UINT16 offset);
-  void writeUINT16BigEndian(BYTE*& buf, UINT16 v, UINT16 offset);
-  void writeUINT32BigEndian(BYTE*& buf, UINT32 v, UINT16 offset);
-  void writeUINT8LittleEndian(BYTE*& buf, UINT8 v, UINT16 offset);
-  void writeUINT16LittleEndian(BYTE*& buf, UINT16 v, UINT16 offset);
-  void writeUINT32LittleEndian(BYTE*& buf, UINT32 v, UINT16 offset);
-  UINT8 readUINT8LittleEndian(const BYTE*& buf, UINT16 offset);
-  UINT16 readUINT16LittleEndian(const BYTE*& buf, UINT16 offset);
-  UINT32 readUINT32LittleEndian(const BYTE*& buf, UINT16 offset);
-  INT32 readINT32LittleEndian(const BYTE*& buf, UINT16 offset);
-  UINT8 readUINT8(const BYTE*& buffer, UINT16 offset);
-  UINT8 readUINT8BigEndian(const BYTE*& buf, UINT16 offset);
-  UINT16 readUINT16BigEndian(const BYTE*& buf, UINT16 offset);
-  UINT32 readUINT32BigEndian(const BYTE*& buf, UINT16 offset);
-  INT8 readINT8(const BYTE*& buffer, UINT16 offset);
-  INT8 readINT8LittleEndian(const BYTE*& buf, UINT16 offset);
-  INT8 readINT8BigEndian(const BYTE*& buf, UINT16 offset);
-  INT16 readINT16LittleEndian(const BYTE*& buf, UINT16 offset);
-  INT16 readINT16BigEndian(const BYTE*& buf, UINT16 offset);
-  INT32 readINT32BigEndian(const BYTE*& buf, UINT16 offset);
-  void writeUINT8(BYTE*& buf, UINT8 v, UINT16 offset);
-  void writeINT8(BYTE*& buf, UINT8 v, UINT16 offset);
-  void writeINT8BigEndian(BYTE*& buf, UINT8 v, UINT16 offset);
-  void writeINT8LittleEndian(BYTE*& buf, UINT8 v, UINT16 offset);
+  void writeuint8_tBigEndian(uint8_t*& buf, uint8_t v, uint16_t offset);
+  void writeuint16_tBigEndian(uint8_t*& buf, uint16_t v, uint16_t offset);
+  void writeuint32_tBigEndian(uint8_t*& buf, uint32_t v, uint16_t offset);
+  void writeuint8_tLittleEndian(uint8_t*& buf, uint8_t v, uint16_t offset);
+  void writeuint16_tLittleEndian(uint8_t*& buf, uint16_t v, uint16_t offset);
+  void writeuint32_tLittleEndian(uint8_t*& buf, uint32_t v, uint16_t offset);
+  uint8_t readuint8_tLittleEndian(const uint8_t*& buf, uint16_t offset);
+  uint16_t readuint16_tLittleEndian(const uint8_t*& buf, uint16_t offset);
+  uint32_t readuint32_tLittleEndian(const uint8_t*& buf, uint16_t offset);
+  int32_t readint32_tLittleEndian(const uint8_t*& buf, uint16_t offset);
+  uint8_t readuint8_t(const uint8_t*& buffer, uint16_t offset);
+  uint8_t readuint8_tBigEndian(const uint8_t*& buf, uint16_t offset);
+  uint16_t readuint16_tBigEndian(const uint8_t*& buf, uint16_t offset);
+  uint32_t readuint32_tBigEndian(const uint8_t*& buf, uint16_t offset);
+  int8_t readint8_t(const uint8_t*& buffer, uint16_t offset);
+  int8_t readint8_tLittleEndian(const uint8_t*& buf, uint16_t offset);
+  int8_t readint8_tBigEndian(const uint8_t*& buf, uint16_t offset);
+  int16_t readint16_tLittleEndian(const uint8_t*& buf, uint16_t offset);
+  int16_t readint16_tBigEndian(const uint8_t*& buf, uint16_t offset);
+  int32_t readint32_tBigEndian(const uint8_t*& buf, uint16_t offset);
+  void writeuint8_t(uint8_t*& buf, uint8_t v, uint16_t offset);
+  void writeint8_t(uint8_t*& buf, uint8_t v, uint16_t offset);
+  void writeint8_tBigEndian(uint8_t*& buf, uint8_t v, uint16_t offset);
+  void writeint8_tLittleEndian(uint8_t*& buf, uint8_t v, uint16_t offset);
 };
 
 } // namespace data_processing

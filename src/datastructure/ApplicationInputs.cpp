@@ -61,12 +61,12 @@ void ApplicationInputs::setUnsafeInputsFlagsVector(
   m_unsafe_inputs_flags_vector = unsafe_inputs_flags_vector;
 }
 
-std::vector<UINT16> ApplicationInputs::getMonitoringCasevector() const
+std::vector<uint16_t> ApplicationInputs::getMonitoringCasevector() const
 {
   return m_monitoring_case_vector;
 }
 
-void ApplicationInputs::setMonitoringCaseVector(const std::vector<UINT16>& monitoring_case_vector)
+void ApplicationInputs::setMonitoringCaseVector(const std::vector<uint16_t>& monitoring_case_vector)
 {
   m_monitoring_case_vector = monitoring_case_vector;
 }
@@ -82,22 +82,22 @@ void ApplicationInputs::setMonitoringCaseFlagsVector(
   m_monitoring_case_flags_vector = monitoring_case_flags_vector;
 }
 
-INT16 ApplicationInputs::getVelocity0() const
+int16_t ApplicationInputs::getVelocity0() const
 {
   return m_velocity_0;
 }
 
-void ApplicationInputs::setVelocity0(const INT16& velocity_0)
+void ApplicationInputs::setVelocity0(const int16_t& velocity_0)
 {
   m_velocity_0 = velocity_0;
 }
 
-INT16 ApplicationInputs::getVelocity1() const
+int16_t ApplicationInputs::getVelocity1() const
 {
   return m_velocity_1;
 }
 
-void ApplicationInputs::setVelocity1(const INT16& velocity_1)
+void ApplicationInputs::setVelocity1(const int16_t& velocity_1)
 {
   m_velocity_1 = velocity_1;
 }
@@ -142,12 +142,12 @@ void ApplicationInputs::setVelocity1TransmittedSafely(bool velocity_1_transmitte
   m_velocity_1_transmitted_safely = velocity_1_transmitted_safely;
 }
 
-INT8 ApplicationInputs::getSleepModeInput() const
+int8_t ApplicationInputs::getSleepModeInput() const
 {
   return m_sleep_mode_input;
 }
 
-void ApplicationInputs::setSleepModeInput(const INT8& sleep_mode_input)
+void ApplicationInputs::setSleepModeInput(const int8_t& sleep_mode_input)
 {
   m_sleep_mode_input = sleep_mode_input;
 }

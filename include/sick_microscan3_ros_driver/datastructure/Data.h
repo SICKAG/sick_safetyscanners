@@ -35,7 +35,7 @@
 #ifndef DATA_H
 #define DATA_H
 
-#include <sick_microscan3_ros_driver/datastructure/DataTypes.h>
+#include <boost/shared_ptr.hpp>
 
 #include <sick_microscan3_ros_driver/datastructure/ApplicationData.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationInputs.h>

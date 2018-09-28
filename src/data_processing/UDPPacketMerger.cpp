@@ -109,10 +109,10 @@ bool UDPPaketMerger::deployPacketIfComplete(sick::datastructure::DatagramHeader 
 
 bool UDPPaketMerger::checkIfComplete(sick::datastructure::DatagramHeader& header)
 {
-  UINT32 total_length = header.getTotalLength();
+  uint32_t total_length = header.getTotalLength();
   sick::datastructure::ParsedPacketBufferVector vec =
     getSortedParsedPacketBufferForIdentification(header);
-  UINT32 cur_length = calcualteCurrentLengthOfParsedPacketBuffer(vec);
+  uint32_t cur_length = calcualteCurrentLengthOfParsedPacketBuffer(vec);
   if (cur_length != total_length)
   {
     return false;
@@ -121,10 +121,10 @@ bool UDPPaketMerger::checkIfComplete(sick::datastructure::DatagramHeader& header
   return true;
 }
 
-UINT32 UDPPaketMerger::calcualteCurrentLengthOfParsedPacketBuffer(
+uint32_t UDPPaketMerger::calcualteCurrentLengthOfParsedPacketBuffer(
   sick::datastructure::ParsedPacketBufferVector& vec)
 {
-  UINT32 cur_length = 0;
+  uint32_t cur_length = 0;
 
   for (auto& parsed_packet_buffer : vec)
   {

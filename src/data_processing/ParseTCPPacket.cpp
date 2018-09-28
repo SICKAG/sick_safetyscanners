@@ -49,7 +49,7 @@ int ParseTCPPacket::getExpectedPacketLength(datastructure::PacketBuffer buffer)
   return readLength(buffer) + 8; // for STX and Length which is not included in length datafield
 }
 
-UINT16 ParseTCPPacket::getRequestID(datastructure::PacketBuffer buffer)
+uint16_t ParseTCPPacket::getRequestID(datastructure::PacketBuffer buffer)
 {
   return readRequestID(buffer);
 }
@@ -60,7 +60,7 @@ bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer,
 {
   setCommandValuesFromPacket(buffer, command);
 
-  std::vector<BYTE> byteVector;
+  std::vector<uint8_t> byteVector;
   readData(buffer, byteVector);
   command.setDataVector(byteVector);
 
@@ -76,57 +76,57 @@ void ParseTCPPacket::setCommandValuesFromPacket(sick::datastructure::PacketBuffe
   command.setCommandMode(readCommandMode(buffer));
 }
 
-UINT32 ParseTCPPacket::readSTx(datastructure::PacketBuffer& buffer)
+uint32_t ParseTCPPacket::readSTx(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT32BigEndian(data_ptr, 0);
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint32_tBigEndian(data_ptr, 0);
 }
 
-UINT32 ParseTCPPacket::readLength(datastructure::PacketBuffer& buffer)
+uint32_t ParseTCPPacket::readLength(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT32BigEndian(data_ptr, 4);
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint32_tBigEndian(data_ptr, 4);
 }
 
-UINT8 ParseTCPPacket::readHubCntr(datastructure::PacketBuffer& buffer)
+uint8_t ParseTCPPacket::readHubCntr(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT8BigEndian(data_ptr, 8);
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint8_tBigEndian(data_ptr, 8);
 }
-UINT8 ParseTCPPacket::readNoC(datastructure::PacketBuffer& buffer)
+uint8_t ParseTCPPacket::readNoC(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT8BigEndian(data_ptr, 9);
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint8_tBigEndian(data_ptr, 9);
 }
-UINT32 ParseTCPPacket::readSessionID(datastructure::PacketBuffer& buffer)
+uint32_t ParseTCPPacket::readSessionID(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT32BigEndian(data_ptr, 10);
-}
-
-UINT16 ParseTCPPacket::readRequestID(datastructure::PacketBuffer& buffer)
-{
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT16BigEndian(data_ptr, 14);
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint32_tBigEndian(data_ptr, 10);
 }
 
-UINT8 ParseTCPPacket::readCommandType(datastructure::PacketBuffer& buffer)
+uint16_t ParseTCPPacket::readRequestID(datastructure::PacketBuffer& buffer)
 {
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT8BigEndian(data_ptr, 16);
-}
-UINT8 ParseTCPPacket::readCommandMode(datastructure::PacketBuffer& buffer)
-{
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT8BigEndian(data_ptr, 17);
-}
-UINT16 ParseTCPPacket::readErrorCode(datastructure::PacketBuffer& buffer)
-{
-  const BYTE* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readUINT16BigEndian(data_ptr, 18);
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint16_tBigEndian(data_ptr, 14);
 }
 
-void ParseTCPPacket::readData(datastructure::PacketBuffer& buffer, std::vector<BYTE>& byteVector)
+uint8_t ParseTCPPacket::readCommandType(datastructure::PacketBuffer& buffer)
+{
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint8_tBigEndian(data_ptr, 16);
+}
+uint8_t ParseTCPPacket::readCommandMode(datastructure::PacketBuffer& buffer)
+{
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint8_tBigEndian(data_ptr, 17);
+}
+uint16_t ParseTCPPacket::readErrorCode(datastructure::PacketBuffer& buffer)
+{
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint16_tBigEndian(data_ptr, 18);
+}
+
+void ParseTCPPacket::readData(datastructure::PacketBuffer& buffer, std::vector<uint8_t>& byteVector)
 {
   if (buffer.getLength() == 18)
   {

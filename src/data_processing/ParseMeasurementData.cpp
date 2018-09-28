@@ -52,7 +52,7 @@ ParseMeasurementData::parseUDPSequence(datastructure::PacketBuffer buffer,
     measurement_data.setIsEmpty(true);
     return measurement_data;
   }
-  const BYTE* data_ptr(buffer.getBuffer().data() +
+  const uint8_t* data_ptr(buffer.getBuffer().data() +
                        data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
 
   setStartAngleAndDelta(data);
@@ -98,16 +98,16 @@ bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(datastructure::
 
 
 void ParseMeasurementData::setDataInMeasurementData(
-  const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
 {
   setNumberOfBeamsInMeasurementData(data_ptr, measurement_data);
   setScanPointsInMeasurementData(data_ptr, measurement_data);
 }
 
 void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
-  const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
 {
-  measurement_data.setNumberOfBeams(m_reader_ptr->readUINT32LittleEndian(data_ptr, 0));
+  measurement_data.setNumberOfBeams(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 0));
 }
 
 void ParseMeasurementData::setStartAngleAndDelta(datastructure::Data& data)
@@ -117,7 +117,7 @@ void ParseMeasurementData::setStartAngleAndDelta(datastructure::Data& data)
 }
 
 void ParseMeasurementData::setScanPointsInMeasurementData(
-  const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
 {
   for (size_t i = 0; i < measurement_data.getNumberOfBeams(); i++)
   {
@@ -127,11 +127,11 @@ void ParseMeasurementData::setScanPointsInMeasurementData(
 }
 
 void ParseMeasurementData::addScanPointToMeasurementData(
-  UINT16 offset, const BYTE* data_ptr, datastructure::MeasurementData& measurement_data)
+  uint16_t offset, const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
 {
-  INT16 distance             = m_reader_ptr->readUINT16LittleEndian(data_ptr, (4 + offset * 4));
-  UINT8 reflectivity         = m_reader_ptr->readUINT8LittleEndian(data_ptr, (6 + offset * 4));
-  UINT8 status               = m_reader_ptr->readUINT8LittleEndian(data_ptr, (7 + offset * 4));
+  int16_t distance             = m_reader_ptr->readuint16_tLittleEndian(data_ptr, (4 + offset * 4));
+  uint8_t reflectivity         = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (6 + offset * 4));
+  uint8_t status               = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (7 + offset * 4));
   bool valid                 = status & (0x01 << 0);
   bool infinite              = status & (0x01 << 1);
   bool glare                 = status & (0x01 << 2);

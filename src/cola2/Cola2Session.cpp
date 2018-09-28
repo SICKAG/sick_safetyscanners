@@ -78,12 +78,12 @@ bool Cola2Session::sendTelegramAndListenForAnswer(CommandPtr command)
 }
 
 
-UINT32 Cola2Session::getSessionID() const
+uint32_t Cola2Session::getSessionID() const
 {
   return m_session_id;
 }
 
-void Cola2Session::setSessionID(const UINT32& session_id)
+void Cola2Session::setSessionID(const uint32_t& session_id)
 {
   m_session_id = session_id;
 }
@@ -121,7 +121,7 @@ bool Cola2Session::checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()
 bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
   sick::datastructure::PacketBuffer& packet)
 {
-  UINT16 requestID = m_tcp_parser_ptr->getRequestID(packet);
+  uint16_t requestID = m_tcp_parser_ptr->getRequestID(packet);
   CommandPtr pendingCommand;
   if (findCommand(requestID, pendingCommand))
   {
@@ -131,7 +131,7 @@ bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
   return true;
 }
 
-bool Cola2Session::addCommand(UINT16 request_id, CommandPtr command)
+bool Cola2Session::addCommand(uint16_t request_id, CommandPtr command)
 {
   if (m_pending_commands_map.find(request_id) != m_pending_commands_map.end())
   {
@@ -141,7 +141,7 @@ bool Cola2Session::addCommand(UINT16 request_id, CommandPtr command)
   return true;
 }
 
-bool Cola2Session::findCommand(UINT16 request_id, CommandPtr& command)
+bool Cola2Session::findCommand(uint16_t request_id, CommandPtr& command)
 {
   if (m_pending_commands_map.find(request_id) == m_pending_commands_map.end())
   {
@@ -151,7 +151,7 @@ bool Cola2Session::findCommand(UINT16 request_id, CommandPtr& command)
   return true;
 }
 
-bool Cola2Session::removeCommand(UINT16 request_id)
+bool Cola2Session::removeCommand(uint16_t request_id)
 {
   auto it = m_pending_commands_map.find(request_id);
   if (it == m_pending_commands_map.end())
@@ -162,9 +162,9 @@ bool Cola2Session::removeCommand(UINT16 request_id)
   return true;
 }
 
-UINT16 Cola2Session::getNextRequestID()
+uint16_t Cola2Session::getNextRequestID()
 {
-  if (m_last_request_id == std::numeric_limits<UINT16>::max())
+  if (m_last_request_id == std::numeric_limits<uint16_t>::max())
   {
     m_last_request_id = 0;
   }

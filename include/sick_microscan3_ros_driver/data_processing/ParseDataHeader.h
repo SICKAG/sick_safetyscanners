@@ -57,44 +57,44 @@ public:
 
 private:
   boost::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setVersionIndicatorInDataHeader(const BYTE* data_ptr,
+  void setVersionIndicatorInDataHeader(const uint8_t* data_ptr,
                                        datastructure::DataHeader& data_header);
-  void setMajorVersionInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setMinorVersionInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setVersionReleaseInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setSerialNumberOfDeviceInDataHeader(const BYTE* data_ptr,
+  void setMajorVersionInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setMinorVersionInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setVersionReleaseInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setSerialNumberOfDeviceInDataHeader(const uint8_t* data_ptr,
                                            datastructure::DataHeader& data_header);
-  void setSerialNumberOfSystemPlugInDataHeader(const BYTE* data_ptr,
+  void setSerialNumberOfSystemPlugInDataHeader(const uint8_t* data_ptr,
                                                datastructure::DataHeader& data_header);
-  void setChannelNumberInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setSequenceNumberInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setScanNumberInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setTimestampDateInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setTimestampTimeInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setGeneralSystemStateBlockOffsetInDataHeader(const BYTE* data_ptr,
+  void setChannelNumberInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setSequenceNumberInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setScanNumberInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setTimestampDateInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setTimestampTimeInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setGeneralSystemStateBlockOffsetInDataHeader(const uint8_t* data_ptr,
                                                     datastructure::DataHeader& data_header);
-  void setGeneralSystemStateBlockSizeInDataHeader(const BYTE* data_ptr,
+  void setGeneralSystemStateBlockSizeInDataHeader(const uint8_t* data_ptr,
                                                   datastructure::DataHeader& data_header);
-  void setDerivedValuesBlockOffsetInDataHeader(const BYTE* data_ptr,
+  void setDerivedValuesBlockOffsetInDataHeader(const uint8_t* data_ptr,
                                                datastructure::DataHeader& data_header);
-  void setDerivedValuesBlockSizeInDataHeader(const BYTE* data_ptr,
+  void setDerivedValuesBlockSizeInDataHeader(const uint8_t* data_ptr,
                                              datastructure::DataHeader& data_header);
-  void setMeasurementDataBlockOffsetInDataHeader(const BYTE* data_ptr,
+  void setMeasurementDataBlockOffsetInDataHeader(const uint8_t* data_ptr,
                                                  datastructure::DataHeader& data_header);
-  void setMeasurementDataBlockSizeInDataHeader(const BYTE* data_ptr,
+  void setMeasurementDataBlockSizeInDataHeader(const uint8_t* data_ptr,
                                                datastructure::DataHeader& data_header);
-  void setIntrusionDataBlockOffsetInDataHeader(const BYTE* data_ptr,
+  void setIntrusionDataBlockOffsetInDataHeader(const uint8_t* data_ptr,
                                                datastructure::DataHeader& data_header);
-  void setIntrusionDataBlockSizeInDataHeader(const BYTE* data_ptr,
+  void setIntrusionDataBlockSizeInDataHeader(const uint8_t* data_ptr,
                                              datastructure::DataHeader& data_header);
-  void setApplicationDataBlockOffsetInDataHeader(const BYTE* data_ptr,
+  void setApplicationDataBlockOffsetInDataHeader(const uint8_t* data_ptr,
                                                  datastructure::DataHeader& data_header);
-  void setApplicationDataBlockSizeInDataHeader(const BYTE* data_ptr,
+  void setApplicationDataBlockSizeInDataHeader(const uint8_t* data_ptr,
                                                datastructure::DataHeader& data_header);
-  void setDataInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setVersionInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setScanHeaderInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
-  void setDataBlocksInDataHeader(const BYTE* data_ptr, datastructure::DataHeader& data_header);
+  void setDataInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setVersionInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setScanHeaderInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setDataBlocksInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
 };
 
 } // namespace data_processing

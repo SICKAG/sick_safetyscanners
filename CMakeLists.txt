@@ -95,7 +95,6 @@ add_library(${PROJECT_NAME}_core
   src/communication/AsyncUDPClient.cpp
   src/communication/AsyncTCPClient.cpp
   src/datastructure/PacketBuffer.cpp
-  src/datastructure/DataTypes.cpp
   src/datastructure/DatagramHeader.cpp
   src/datastructure/Data.cpp
   src/datastructure/DataHeader.cpp

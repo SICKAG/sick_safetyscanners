@@ -43,12 +43,12 @@ MeasurementData::MeasurementData()
 {
 }
 
-UINT32 MeasurementData::getNumberOfBeams() const
+uint32_t MeasurementData::getNumberOfBeams() const
 {
   return m_number_of_beams;
 }
 
-void MeasurementData::setNumberOfBeams(const UINT32& number_of_beams)
+void MeasurementData::setNumberOfBeams(const uint32_t& number_of_beams)
 {
   m_number_of_beams = number_of_beams;
 }
