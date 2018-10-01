@@ -35,6 +35,8 @@
 #ifndef ASYNCTCPCLIENT_H
 #define ASYNCTCPCLIENT_H
 
+#include <ros/ros.h>
+
 #include <functional>
 #include <iostream>
 #include <thread>

@@ -71,13 +71,13 @@ bool CreateSession::processReply()
   if (getCommandType() == 'O' && getCommandMode() == 'A')
   {
     m_session.setSessionID(getSessionID());
-    std::cout << "Successfully opened Cola2 session with sessionID: " << std::hex
-              << m_session.getSessionID() << std::endl;
+    ROS_INFO("Successfully opened Cola2 session with sessionID: %i",
+              m_session.getSessionID());
     return true;
   }
   else
   {
-    std::cout << "Could not open Cola2 session" << std::endl;
+    ROS_WARN("Could not open Cola2 session");
     return false;
   }
 }

@@ -35,6 +35,8 @@
 #ifndef MICROSCAN3_H
 #define MICROSCAN3_H
 
+#include <ros/ros.h>
+
 #include <boost/function.hpp>
 #include <boost/scoped_ptr.hpp>
 #include <boost/thread.hpp>

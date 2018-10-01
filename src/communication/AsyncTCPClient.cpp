@@ -53,10 +53,10 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
   }
   catch (std::exception& e)
   {
-    std::cout << "Exception while creating socket: " << e.what() << std::endl;
+    ROS_ERROR("Exception while creating socket: %s", e.what());
   }
   m_remote_endpoint = boost::asio::ip::tcp::endpoint(server_ip, server_port);
-  std::cout << "TCP client setup" << std::endl;
+  ROS_INFO("TCP client is setup");
 }
 
 AsyncTCPClient::~AsyncTCPClient()
@@ -68,7 +68,7 @@ void AsyncTCPClient::do_connect()
 {
   boost::mutex::scoped_lock lock(m_connect_mutex);
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec) {
-    std::cout << "TCP error code: " << ec.value() << std::endl;
+    ROS_ERROR( "TCP error code: %i", ec.value());
     m_connect_condition.notify_all();
   });
 
@@ -117,7 +117,7 @@ void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error
   }
   else
   {
-    std::cout << "Error in tcp handle send and receive: " << error.value() << std::endl;
+    ROS_ERROR("Error in tcp handle send and receive: %i", error.value());
   }
 }
 
@@ -134,7 +134,7 @@ void AsyncTCPClient::handle_receive(const boost::system::error_code& error,
   }
   else
   {
-    std::cout << "Error in tcp handle receive: " << error.value() << std::endl;
+    ROS_ERROR("Error in tcp handle receive: %i", error.value());
   }
 }
 

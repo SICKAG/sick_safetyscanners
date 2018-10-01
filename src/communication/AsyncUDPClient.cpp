@@ -53,9 +53,9 @@ AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler,
   }
   catch (std::exception& e)
   {
-    std::cout << "Exception while creating socket: " << e.what() << std::endl;
+    ROS_ERROR("Exception while creating socket: %s", e.what());
   }
-  std::cout << "UDP client setup" << std::endl;
+  ROS_INFO("UDP client is setup");
 }
 
 AsyncUDPClient::~AsyncUDPClient()
@@ -82,7 +82,7 @@ void AsyncUDPClient::handle_receive(const boost::system::error_code& error,
   }
   else
   {
-    std::cout << "Error in UDP handle receive: " << error.value() << std::endl;
+    ROS_ERROR("Error in UDP handle receive: %i", error.value());
   }
   start_receive();
 }

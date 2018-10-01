@@ -35,6 +35,8 @@
 #ifndef COMMAND_H
 #define COMMAND_H
 
+#include <ros/ros.h>
+
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>

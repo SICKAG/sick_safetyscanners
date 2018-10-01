@@ -41,14 +41,14 @@ Microscan3::Microscan3(packetReceivedCallbackFunction newPacketReceivedCallbackF
                        sick::datastructure::CommSettings settings)
   : m_newPacketReceivedCallbackFunction(newPacketReceivedCallbackFunction)
 {
-  std::cout << "starting MicroScan3" << std::endl;
+  ROS_INFO("Starting MicroScan3");
   m_io_service_ptr       = std::make_shared<boost::asio::io_service>();
   m_async_udp_client_ptr = std::make_shared<sick::communication::AsyncUDPClient>(
     boost::bind(&Microscan3::processUDPPacket, this, _1),
     boost::ref(*m_io_service_ptr),
     settings.getHostUdpPort());
   m_packet_merger_ptr = std::make_shared<sick::data_processing::UDPPacketMerger>();
-  std::cout << "started MicroScan3" << std::endl;
+  ROS_INFO("Started MicroScan3");
 }
 
 Microscan3::~Microscan3()
@@ -66,10 +66,10 @@ bool Microscan3::run()
 
 bool Microscan3::UDPClientThread()
 {
-  std::cout << "Enter io thread" << std::endl;
+  ROS_INFO("Enter io thread");
   m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(boost::ref(*m_io_service_ptr));
   m_io_service_ptr->run();
-  std::cout << "Exit io thread" << std::endl;
+  ROS_INFO("Exit io thread");
   return true;
 }
 

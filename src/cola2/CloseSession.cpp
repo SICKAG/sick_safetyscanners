@@ -59,14 +59,14 @@ bool CloseSession::processReply()
   if (getCommandType() == 'C' && getCommandMode() == 'A')
   {
     m_session.setSessionID(getSessionID());
-    std::cout << "Successfully closed Cola2 session with sessionID: " << std::hex
-              << m_session.getSessionID() << std::endl;
+    ROS_INFO("Successfully closed Cola2 session with sessionID: %i",
+             m_session.getSessionID());
     return true;
   }
   else
   {
-    std::cout << "Could not close Cola2 session with sessionID: " << std::hex
-              << m_session.getSessionID() << std::endl;
+    ROS_WARN("Could not close Cola2 session with sessionID: %i",
+              m_session.getSessionID());
     return false;
   }
 }

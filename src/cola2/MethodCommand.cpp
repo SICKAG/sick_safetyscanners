@@ -62,14 +62,14 @@ bool MethodCommand::canBeExecutedWithoutSessionID() const
 
 bool MethodCommand::processReply()
 {
-  if (getCommandType() == 'A' && getCommandMode() == 'I') // should return MA? But does return AI
+  if (getCommandType() == 'A' && getCommandMode() == 'I')
   {
-    std::cout << "Command Method Acknowledged" << std::endl;
+    ROS_INFO("Command Method Acknowledged.");
     return true;
   }
   else
   {
-    std::cout << "Command Method Not Accepted " << std::endl;
+    ROS_WARN("Command Method Not Accepted.");
     return false;
   }
 }
