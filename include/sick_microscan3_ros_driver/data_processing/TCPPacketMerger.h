@@ -42,10 +42,10 @@
 namespace sick {
 namespace data_processing {
 
-class TCPPaketMerger
+class TCPPacketMerger
 {
 public:
-  TCPPaketMerger();
+  TCPPacketMerger();
 
   bool isComplete();
   bool isEmpty();
@@ -57,7 +57,7 @@ public:
 
 private:
   bool m_is_complete;
-  sick::datastructure::PacketBuffer m_deployed_paket_buffer;
+  sick::datastructure::PacketBuffer m_deployed_packet_buffer;
 
   std::vector<sick::datastructure::PacketBuffer> m_buffer_vector;
 

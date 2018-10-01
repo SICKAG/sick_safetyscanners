@@ -82,7 +82,7 @@ private:
 
   std::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
   std::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser_ptr;
-  std::shared_ptr<sick::data_processing::TCPPaketMerger> m_packet_merger_ptr;
+  std::shared_ptr<sick::data_processing::TCPPacketMerger> m_packet_merger_ptr;
   std::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
 
   std::map<uint16_t, CommandPtr> m_pending_commands_map;

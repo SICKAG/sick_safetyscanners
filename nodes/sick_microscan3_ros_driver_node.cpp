@@ -35,11 +35,11 @@
 #include "sick_microscan3_ros_driver/Microscan3Ros.h"
 #include <ros/ros.h>
 
-/**
+/*!
  * @brief main The Main node to start the Ros Driver, this method is executed via launch file
  * @param argc number of arguments given
  * @param argv arguments
- * @return is succesful, will always return 0
+ * @return is successful, will always return 0
  */
 int main(int argc, char** argv)
 {

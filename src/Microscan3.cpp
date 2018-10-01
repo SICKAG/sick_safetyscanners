@@ -37,17 +37,17 @@
 
 namespace sick {
 
-Microscan3::Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction,
+Microscan3::Microscan3(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
                        sick::datastructure::CommSettings settings)
-  : m_newPaketReceivedCallbackFunction(newPaketReceivedCallbackFunction)
+  : m_newPacketReceivedCallbackFunction(newPacketReceivedCallbackFunction)
 {
   std::cout << "starting MicroScan3" << std::endl;
   m_io_service_ptr       = std::make_shared<boost::asio::io_service>();
   m_async_udp_client_ptr = std::make_shared<sick::communication::AsyncUDPClient>(
-    boost::bind(&Microscan3::processUDPPaket, this, _1),
+    boost::bind(&Microscan3::processUDPPacket, this, _1),
     boost::ref(*m_io_service_ptr),
     settings.getHostUdpPort());
-  m_paket_merger_ptr = std::make_shared<sick::data_processing::UDPPaketMerger>();
+  m_packet_merger_ptr = std::make_shared<sick::data_processing::UDPPacketMerger>();
   std::cout << "started MicroScan3" << std::endl;
 }
 
@@ -74,7 +74,7 @@ bool Microscan3::UDPClientThread()
 }
 
 
-void Microscan3::processTCPPaket(const sick::datastructure::PacketBuffer& buffer)
+void Microscan3::processTCPPacket(const sick::datastructure::PacketBuffer& buffer)
 {
   // Not needed for current functionality, inplace for possible future developments
 }
@@ -92,7 +92,7 @@ void Microscan3::startTCPConnection(sick::datastructure::CommSettings settings)
 {
   std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client =
     std::make_shared<sick::communication::AsyncTCPClient>(
-      boost::bind(&Microscan3::processTCPPaket, this, _1),
+      boost::bind(&Microscan3::processTCPPacket, this, _1),
       boost::ref(*m_io_service_ptr),
       settings.getSensorIp(),
       settings.getSensorTcpPort());
@@ -116,17 +116,17 @@ void Microscan3::stopTCPConnection()
 }
 
 
-void Microscan3::processUDPPaket(const sick::datastructure::PacketBuffer& buffer)
+void Microscan3::processUDPPacket(const sick::datastructure::PacketBuffer& buffer)
 {
-  if (m_paket_merger_ptr->addUDPPaket(buffer))
+  if (m_packet_merger_ptr->addUDPPacket(buffer))
   {
     sick::datastructure::PacketBuffer deployedBuffer =
-      m_paket_merger_ptr->getDeployedPacketBuffer();
+      m_packet_merger_ptr->getDeployedPacketBuffer();
     sick::datastructure::Data data;
     sick::data_processing::ParseData data_parser;
     data_parser.parseUDPSequence(deployedBuffer, data);
 
-    m_newPaketReceivedCallbackFunction(data);
+    m_newPacketReceivedCallbackFunction(data);
   }
 }
 

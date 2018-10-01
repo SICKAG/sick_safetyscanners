@@ -43,7 +43,7 @@ Cola2Session::Cola2Session(std::shared_ptr<sick::communication::AsyncTCPClient> 
   , m_last_request_id(0)
 {
   m_async_tcp_client_ptr->setPacketHandler(boost::bind(&Cola2Session::processPacket, this, _1));
-  m_packet_merger_ptr = std::make_shared<sick::data_processing::TCPPaketMerger>();
+  m_packet_merger_ptr = std::make_shared<sick::data_processing::TCPPacketMerger>();
   m_tcp_parser_ptr    = std::make_shared<sick::data_processing::ParseTCPPacket>();
 }
 

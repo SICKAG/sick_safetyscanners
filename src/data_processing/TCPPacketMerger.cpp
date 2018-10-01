@@ -37,30 +37,30 @@
 namespace sick {
 namespace data_processing {
 
-TCPPaketMerger::TCPPaketMerger()
+TCPPacketMerger::TCPPacketMerger()
   : m_is_complete(false)
-  , m_deployed_paket_buffer()
+  , m_deployed_packet_buffer()
 {
 }
 
 
-bool TCPPaketMerger::isComplete()
+bool TCPPacketMerger::isComplete()
 {
   return m_is_complete;
 }
 
-bool TCPPaketMerger::isEmpty()
+bool TCPPacketMerger::isEmpty()
 {
   return m_buffer_vector.empty();
 }
 
-sick::datastructure::PacketBuffer TCPPaketMerger::getDeployedPacketBuffer()
+sick::datastructure::PacketBuffer TCPPacketMerger::getDeployedPacketBuffer()
 {
   m_is_complete = false;
-  return m_deployed_paket_buffer;
+  return m_deployed_packet_buffer;
 }
 
-bool TCPPaketMerger::addTCPPacket(sick::datastructure::PacketBuffer buffer)
+bool TCPPacketMerger::addTCPPacket(sick::datastructure::PacketBuffer buffer)
 {
   if (isComplete())
   {
@@ -72,7 +72,7 @@ bool TCPPaketMerger::addTCPPacket(sick::datastructure::PacketBuffer buffer)
   return isComplete();
 }
 
-bool TCPPaketMerger::addToMap(sick::datastructure::PacketBuffer newPacket)
+bool TCPPacketMerger::addToMap(sick::datastructure::PacketBuffer newPacket)
 {
   uint32_t currentSize   = getCurrentSize();
   uint32_t remainingSize = m_targetSize - currentSize;
@@ -85,7 +85,7 @@ bool TCPPaketMerger::addToMap(sick::datastructure::PacketBuffer newPacket)
   return isComplete();
 }
 
-bool TCPPaketMerger::deployPacketIfComplete()
+bool TCPPacketMerger::deployPacketIfComplete()
 {
   if (isComplete())
   {
@@ -95,7 +95,7 @@ bool TCPPaketMerger::deployPacketIfComplete()
   return false;
 }
 
-bool TCPPaketMerger::deployPacket()
+bool TCPPacketMerger::deployPacket()
 {
   sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
   for (auto& parsed_packet_buffer : m_buffer_vector)
@@ -106,22 +106,22 @@ bool TCPPaketMerger::deployPacket()
                                     packet_buffer.getBuffer().begin(),
                                     packet_buffer.getBuffer().end());
   }
-  m_deployed_paket_buffer.setBuffer(headerless_packet_buffer);
+  m_deployed_packet_buffer.setBuffer(headerless_packet_buffer);
   m_buffer_vector.clear();
   return true;
 }
 
-uint32_t TCPPaketMerger::getTargetSize() const
+uint32_t TCPPacketMerger::getTargetSize() const
 {
   return m_targetSize;
 }
 
-void TCPPaketMerger::setTargetSize(const uint32_t& targetSize)
+void TCPPacketMerger::setTargetSize(const uint32_t& targetSize)
 {
   m_targetSize = targetSize;
 }
 
-uint32_t TCPPaketMerger::getCurrentSize() const
+uint32_t TCPPacketMerger::getCurrentSize() const
 {
   size_t sum = 0;
   for (auto it_packet = m_buffer_vector.begin(); it_packet != m_buffer_vector.end(); ++it_packet)

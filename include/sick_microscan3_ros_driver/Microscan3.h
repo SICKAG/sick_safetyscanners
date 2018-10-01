@@ -63,11 +63,11 @@ public:
    *  Typedef for function which has to be passed to this class. This enables the use of
    *  functions from the calling class. In this case a ROS publisher for the data.
    */
-  typedef boost::function<void(const sick::datastructure::Data&)> PaketReceivedCallbackFunction;
+  typedef boost::function<void(const sick::datastructure::Data&)> packetReceivedCallbackFunction;
   /*!
    * Constructor.
    */
-  Microscan3(PaketReceivedCallbackFunction newPaketReceivedCallbackFunction,
+  Microscan3(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
              sick::datastructure::CommSettings settings);
 
   /*!
@@ -80,7 +80,7 @@ public:
   void changeSensorSettings(sick::datastructure::CommSettings settings);
 
 private:
-  PaketReceivedCallbackFunction m_newPaketReceivedCallbackFunction;
+  packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 
   std::shared_ptr<boost::asio::io_service> m_io_service_ptr;
   std::shared_ptr<boost::asio::io_service::work> m_io_work_ptr;
@@ -90,11 +90,11 @@ private:
 
   std::shared_ptr<sick::cola2::Cola2Session> m_session_ptr;
 
-  std::shared_ptr<sick::data_processing::UDPPaketMerger> m_paket_merger_ptr;
+  std::shared_ptr<sick::data_processing::UDPPacketMerger> m_packet_merger_ptr;
 
-  void processUDPPaket(const datastructure::PacketBuffer& buffer);
+  void processUDPPacket(const datastructure::PacketBuffer& buffer);
   bool UDPClientThread();
-  void processTCPPaket(const sick::datastructure::PacketBuffer& buffer);
+  void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   void startTCPConnection(sick::datastructure::CommSettings settings);
   void changeCommSettingsinColaSession(datastructure::CommSettings settings);
   void stopTCPConnection();

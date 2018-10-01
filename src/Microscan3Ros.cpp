@@ -52,7 +52,7 @@ Microscan3Ros::Microscan3Ros()
     ros::requestShutdown();
   }
   m_device = std::make_shared<sick::Microscan3>(
-    boost::bind(&Microscan3Ros::receivedUDPPaket, this, _1), m_communication_settings);
+    boost::bind(&Microscan3Ros::receivedUDPPacket, this, _1), m_communication_settings);
   m_device->run();
   m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 100);
   m_extended_laser_scan_publisher =
@@ -187,7 +187,7 @@ bool Microscan3Ros::readParameters()
   return true;
 }
 
-void Microscan3Ros::receivedUDPPaket(const sick::datastructure::Data& data)
+void Microscan3Ros::receivedUDPPacket(const sick::datastructure::Data& data)
 {
   if (!data.getMeasurementDataPtr()->isEmpty() && !data.getDerivedValuesPtr()->isEmpty())
   {

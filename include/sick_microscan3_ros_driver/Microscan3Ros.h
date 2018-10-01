@@ -58,52 +58,50 @@
 
 namespace sick {
 
+/*!
+ * \brief Converts degrees to radians
+ * \param deg degrees to convert
+ * \return radians
+ */
 inline float degToRad(float deg)
 {
   return deg * M_PI / 180.0f;
 }
+
+/*!
+ * \brief Converts radians to degrees
+ * \param rad input radians to convert
+ * \return degrees
+ */
 inline float radToDeg(float rad)
 {
   return rad * 180.0f / M_PI;
 }
 
 /*!
+ * \brief The Microscan3Ros class
+ *
  * Main class for the node to handle the ROS interfacing.
  */
 class Microscan3Ros
 {
 public:
   /*!
-   * Constructor.
+   * \brief Constructor of the Microscan3Ros
+   *
+   * Constructor of the Microscan3Ros, loads all parameters from the parameter server, initialises
+   * the dynamic reconfiguration server. Furthermore initialises the ROS Publishers for the different
+   * Laserscan outputs.
    */
   Microscan3Ros();
 
   /*!
-   * Destructor.
+   * \brief ~Microscan3Ros
+   * Destructor if the Microscan3 ROS
    */
   virtual ~Microscan3Ros();
 
 private:
-  /*!
-   * Reads and verifies the ROS parameters.
-   * @return true if successful.
-   */
-  bool readParameters();
-
-  void receivedUDPPaket(const datastructure::Data& data);
-
-  /*!
-   * ROS service server callback.
-   * @param request the request of the service.
-   * @param response the provided response.
-   * @return true if successful, false otherwise.
-   */
-  bool serviceCallback(std_srvs::Trigger::Request& request, std_srvs::Trigger::Response& response);
-
-  void callback(sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config, uint32_t level);
-
-  bool isInitialised();
-
 
   //! ROS node handle.
   ros::NodeHandle m_nh;
@@ -128,6 +126,27 @@ private:
   std::string m_laser_scan_frame_name;
   double m_range_min;
   double m_range_max;
+
+  /*!
+   * @brief Reads and verifies the ROS parameters.
+   * @return true if successful.
+   */
+  bool readParameters();
+
+  /*!
+   * \brief Funtion which is called when a new complete UDP Packet is received
+   * \param data, the assortment of all data from the sensor
+   */
+  void receivedUDPPacket(const datastructure::Data& data);
+
+  /*!
+   * \brief Function which is triggered when a dynamic reconfiguration is performed
+   * \param config The new configuration to set
+   * \param level Level of the new configuration
+   */
+  void callback(sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config, uint32_t level);
+
+  bool isInitialised();
 
   sensor_msgs::LaserScan createLaserScanMessage(const sick::datastructure::Data& data);
   sick_microscan3_ros_driver::ExtendedLaserScanMsg

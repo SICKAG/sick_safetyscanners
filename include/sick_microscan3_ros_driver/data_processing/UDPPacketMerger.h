@@ -42,19 +42,19 @@
 namespace sick {
 namespace data_processing {
 
-class UDPPaketMerger
+class UDPPacketMerger
 {
 public:
-  UDPPaketMerger();
+  UDPPacketMerger();
 
   bool isComplete();
 
-  bool addUDPPaket(sick::datastructure::PacketBuffer buffer);
+  bool addUDPPacket(sick::datastructure::PacketBuffer buffer);
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
 
 private:
   bool m_is_complete;
-  sick::datastructure::PacketBuffer m_deployed_paket_buffer;
+  sick::datastructure::PacketBuffer m_deployed_packet_buffer;
 
   std::map<uint32_t, sick::datastructure::ParsedPacketBufferVector> m_parsed_packet_buffer_map;
 

@@ -129,8 +129,8 @@ void AsyncTCPClient::handle_receive(const boost::system::error_code& error,
 {
   if (!error)
   {
-    sick::datastructure::PacketBuffer paket_buffer(m_recv_buffer, bytes_transferred);
-    m_packet_handler(paket_buffer);
+    sick::datastructure::PacketBuffer packet_buffer(m_recv_buffer, bytes_transferred);
+    m_packet_handler(packet_buffer);
   }
   else
   {
