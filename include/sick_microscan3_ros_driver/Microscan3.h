@@ -56,29 +56,42 @@
 namespace sick {
 
 /*!
- * Class containing the algorithmic part of the package.
+ * @brief Class managing the algorithmic part of the package.
  */
 class Microscan3
 {
 public:
-  /*
+  /*!
    *  Typedef for function which has to be passed to this class. This enables the use of
-   *  functions from the calling class. In this case a ROS publisher for the data.
+   *  functions from the calling class.
    */
   typedef boost::function<void(const sick::datastructure::Data&)> packetReceivedCallbackFunction;
+
   /*!
-   * Constructor.
+   * \brief Constructor of the Microscan3 class
+   * \param newPacketReceivedCallbackFunction: Function from the calling class, which will be
+   * called when a new packet is received
+   * \param settings: Current settings for the sensor
    */
   Microscan3(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
              sick::datastructure::CommSettings settings);
 
   /*!
-   * Destructor.
+   * \brief Destructor
    */
   virtual ~Microscan3();
 
+  /*!
+   * \brief Start the connection to the sensor and enables output
+   * \return If the setup was correct
+   */
+
   bool run();
 
+  /*!
+   * \brief Changes the internal settings of the sensor
+   * \param settings: New set of settign to pass to the sensor
+   */
   void changeSensorSettings(sick::datastructure::CommSettings settings);
 
 private:

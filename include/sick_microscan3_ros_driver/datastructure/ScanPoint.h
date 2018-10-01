@@ -40,10 +40,25 @@
 namespace sick {
 namespace datastructure {
 
+/*!
+ * \brief Class containign the data of a single scan point.
+ */
 class ScanPoint
 {
 public:
-  ScanPoint();
+
+  /*!
+   * \brief Constructor of a scan point, takes all needed parameters.
+   * \param angle: Angle of the scanpoint in coordinates of the sensor.
+   * \param distance: Distance of the measured scanpoint.
+   * \param reflectivity: Value how strongly the scan point reflects.
+   * \param valid_bit: If the scanpoint is valid.
+   * \param infinite_bit: If the scanpoint is infinite.
+   * \param glare_bit: If there is glare in the scanpoint.
+   * \param reflector_bit: If the scanpoint detects a reflector.
+   * \param contamination_bit: If the scanpoint is contaminated.
+   * \param contamination_warning_bit: Warning if the scanpoint is contaminated.
+   */
   ScanPoint(float angle,
             int16_t& distance,
             uint8_t& reflectivity,
@@ -54,22 +69,58 @@ public:
             bool& contamination_bit,
             bool& contamination_warning_bit);
 
+  /*!
+   * \brief Getter for the angle in sensor coordinates.
+   * \return angle
+   */
   float getAngle() const;
 
+  /*!
+   * \brief Getter for the distance of the scanpoint.
+   * \return distance
+   */
   uint16_t getDistance() const;
 
+  /*!
+   * \brief Getter for the reflectivity value.
+   * \return reflectivity
+   */
   uint8_t getReflectivity() const;
 
+  /*!
+   * \brief Returns if the scanpoint is valid.
+   * \return If the scanpoint is valid.
+   */
   bool getValidBit() const;
 
+  /*!
+   * \brief Returns if the scanpoint is infinite.
+   * \return If the scanpoint is infinite.
+   */
   bool getInfiniteBit() const;
 
+  /*!
+   * \brief Returns if the scanpoint has glare.
+   * \return If the scanpoint has glare.
+   */
   bool getGlareBit() const;
 
+  /*!
+   * \brief Returns if the scanpoint detects a reflector.
+   * \return If the scanpoint is a reflector.
+   */
   bool getReflectorBit() const;
 
+  /*!
+   * \brief Returns if the scanpoint is contaminated.
+   * \return If the scanpoint is contaminated.
+   */
   bool getContaminationBit() const;
 
+  /*!
+   * \brief Returns if there is a contamination warning.
+   * \return If there is a contamination warning.
+   */
   bool getContaminationWarningBit() const;
 
 

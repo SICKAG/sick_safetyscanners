@@ -40,15 +40,40 @@
 namespace sick {
 namespace datastructure {
 
-
+/*!
+ * \brief Class containing all IntrusionDatums.
+ */
 class IntrusionData
 {
 public:
+
+  /*!
+   * \brief Constructor for an empty IntrusionData Object.
+   */
   IntrusionData();
+
+  /*!
+   * \brief Getter for all IntrusionDatums.
+   * \return Vector of IntrusionDatum.
+   */
   std::vector<IntrusionDatum> getIntrusionDataVector() const;
+
+  /*!
+   * \brief Setter for the vector of IntrusionDatums.
+   * \param intrusion_data_vector: Vector of IntrusionDatums.
+   */
   void setIntrusionDataVector(const std::vector<IntrusionDatum>& intrusion_data_vector);
 
+  /*!
+   * \brief Return if intrusion data has been enabled.
+   * \return If intrusion data has been enabled.
+   */
   bool isEmpty() const;
+
+  /*!
+   * \brief Set if intrusion data has been enabled.
+   * \param is_empty: If intrusion data has been enabled.
+   */
   void setIsEmpty(bool is_empty);
 
 private:

@@ -41,14 +41,39 @@
 namespace sick {
 namespace datastructure {
 
+/*!
+ * \brief Class containing a single IntrusionDatum.
+ */
 class IntrusionDatum
 {
 public:
+  /*!
+   * \brief Constructor of an empty IntrusionDatum.
+   */
   IntrusionDatum();
+
+  /*!
+   * \brief Returns size of flag vector.
+   * \return SIze of flag vector.
+   */
   int32_t getSize() const;
+
+  /*!
+   * \brief Setter of the size for the flag vector.
+   * \param size: Size of the falg vector.
+   */
   void setSize(const int32_t& size);
 
+  /*!
+   * \brief Getter for the flags vector.
+   * \return Boolean vector of all flags
+   */
   std::vector<bool> getFlagsVector() const;
+
+  /*!
+   * \brief Setter for the flag vector
+   * \param flags_vector: Bool vector for all flags.
+   */
   void setFlagsVector(const std::vector<bool>& flags_vector);
 
 private:

@@ -43,19 +43,51 @@
 namespace sick {
 namespace datastructure {
 
-
+/*!
+ * \brief Class containing all scanpoints of a single measurement.
+ */
 class MeasurementData
 {
 public:
+  /*!
+   * \brief Constructor of an empty measurement.
+   */
   MeasurementData();
 
+  /*!
+   * \brief Getter for the number of beams.
+   * \return Return number of beams.
+   */
   uint32_t getNumberOfBeams() const;
+
+  /*!
+   * \brief Setter for the number of beams.
+   * \param number_of_beams: Input number of beams.
+   */
   void setNumberOfBeams(const uint32_t& number_of_beams);
 
+  /*!
+   * \brief Getter for all contained scanpoints.
+   * \return Vector of scanpoints.
+   */
   std::vector<ScanPoint> getScanPointsVector() const;
+
+  /*!
+   * \brief Add a single scanpoint to the vecotr of scanpoints.
+   * \param scan_point: New scanpoint to add.
+   */
   void addScanPoint(ScanPoint scan_point);
 
+  /*!
+   * \brief Returns if measurement data has been enabled.
+   * \return If measurment data has been enabled.
+   */
   bool isEmpty() const;
+
+  /*!
+   * \brief Set if measurement data is enabled
+   * \param is_empty: set if measurement data is enabled.
+   */
   void setIsEmpty(bool is_empty);
 
 private:
