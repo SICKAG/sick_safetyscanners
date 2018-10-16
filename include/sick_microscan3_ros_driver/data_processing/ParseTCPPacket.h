@@ -55,9 +55,6 @@ class ParseTCPPacket
 public:
   ParseTCPPacket();
 
-  datastructure::IntrusionData parseUDPSequence(sick::datastructure::PacketBuffer buffer,
-                                                datastructure::Data& data);
-
   bool parseTCPSequence(datastructure::PacketBuffer buffer, sick::cola2::Command& command);
   int getExpectedPacketLength(datastructure::PacketBuffer buffer);
 

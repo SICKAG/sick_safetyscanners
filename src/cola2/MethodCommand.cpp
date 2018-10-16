@@ -57,7 +57,7 @@ void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuf
 
 bool MethodCommand::canBeExecutedWithoutSessionID() const
 {
-  return true;
+  return false;
 }
 
 bool MethodCommand::processReply()

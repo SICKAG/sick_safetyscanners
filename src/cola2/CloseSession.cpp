@@ -51,7 +51,7 @@ void CloseSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuff
 
 bool CloseSession::canBeExecutedWithoutSessionID() const
 {
-  return true;
+  return false;
 }
 
 bool CloseSession::processReply()
