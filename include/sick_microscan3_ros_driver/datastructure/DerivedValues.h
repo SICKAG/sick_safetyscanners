@@ -40,32 +40,107 @@
 namespace sick {
 namespace datastructure {
 
+/*!
+ * \brief Defined angle resolution to convert sensor input to the right frame
+ */
 const double ANGLE_RESOLUTION = 4194304.0;
 
+/*!
+ * \brief The DerivedValues class
+ * Includes the derived configuration of the measurement data channel.
+ */
 class DerivedValues
 {
 public:
+  /*!
+   * \brief Constructor of an empty DerivedValues instance
+   */
   DerivedValues();
 
+  /*!
+   * \brief Return the mulitplication factor.
+   *  Multiplication factor to be applied to the beam distance values to
+   *  get the distance in millimeter.
+   * \return The mulitplication factor.
+   */
   uint16_t getMultiplicationFactor() const;
+
+  /*!
+   * \brief Sets the mulitplication factor.
+   * \param multiplication_factor new multiplication factor.
+   */
   void setMultiplicationFactor(const uint16_t& multiplication_factor);
 
+  /*!
+   * \brief Returns the number of beams of the current scan.
+   * \return Number of beams.
+   */
   uint16_t getNumberOfBeams() const;
+
+  /*!
+   * \brief Sets the number of beams for the current scan
+   * \param number_of_beams Number of beams for the scan.
+   */
   void setNumberOfBeams(const uint16_t& number_of_beams);
 
+  /*!
+   * \brief Return the time of the scan.
+   * \return  Time of the scan.
+   */
   uint16_t getScanTime() const;
+
+  /*!
+   * \brief Sets the time of the scan
+   * \param scan_time Time of the scan.
+   */
   void setScanTime(const uint16_t& scan_time);
 
+  /*!
+   * \brief Get the start angle of the scan.
+   * \return Start angle of the scan.
+   */
   float getStartAngle() const;
+
+  /*!
+   * \brief Set the start angle of the scan.
+   * \param start_angle Start angle of the scan.
+   */
   void setStartAngle(const int32_t& start_angle);
 
+  /*!
+   * \brief Returns the angular resolution between the beams.
+   * \return Angular resolution between beams.
+   */
   float getAngularBeamResolution() const;
+
+  /*!
+   * \brief Set the angular resolution between beams.
+   * \param angular_beam_resolution The angualr resolution between two beams.
+   */
   void setAngularBeamResolution(const int32_t& angular_beam_resolution);
 
+  /*!
+   * \brief Return the time between consecutive beams.
+   * \return  Time between consecutive beams.
+   */
   uint32_t getInterbeamPeriod() const;
+
+  /*!
+   * \brief Set the time between two consecutive beams.
+   * \param interbeam_period Time between two consecutive beams.
+   */
   void setInterbeamPeriod(const uint32_t& interbeam_period);
 
+  /*!
+   * \brief Returns if derived values have been enabled.
+   * \return If derived values have been enabled.
+   */
   bool isEmpty() const;
+
+  /*!
+   * \brief Set if derived values are enabled
+   * \param is_empty set if derived values are enabled.
+   */
   void setIsEmpty(bool is_empty);
 
 private:

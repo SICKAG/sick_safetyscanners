@@ -78,14 +78,14 @@ public:
 
   /*!
    * \brief Constructor of PacketBuffer.
-   * \param buffer: Vectorbuffer to set for the PacketBuffer.
+   * \param buffer Vectorbuffer to set for the PacketBuffer.
    */
   PacketBuffer(const VectorBuffer& buffer);
 
   /*!
    * \brief Constructor of PacketBuffer.
-   * \param buffer: Arraybuffer to set for the PacketBuffer.
-   * \param length: Length of the array.
+   * \param buffer Arraybuffer to set for the PacketBuffer.
+   * \param length Length of the array.
    */
   PacketBuffer(const ArrayBuffer& buffer, size_t length);
 
@@ -103,14 +103,14 @@ public:
 
   /*!
    * \brief Setter for the PacketBuffer.
-   * \param buffer: Input VectorBuffer to save.
+   * \param buffer Input VectorBuffer to save.
    */
   void setBuffer(const VectorBuffer& buffer);
 
   /*!
    * \brief Setter for the PacketBuffer.
-   * \param buffer: Input ArrayBuffer to save.
-   * \param length: Length of input ArrayBuffer.
+   * \param buffer Input ArrayBuffer to save.
+   * \param length Length of input ArrayBuffer.
    */
   void setBuffer(const ArrayBuffer& buffer, size_t length);
 

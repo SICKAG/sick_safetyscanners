@@ -62,7 +62,7 @@ public:
 
   /*!
    * \brief Setter for the number of beams.
-   * \param number_of_beams: Input number of beams.
+   * \param number_of_beams Input number of beams.
    */
   void setNumberOfBeams(const uint32_t& number_of_beams);
 
@@ -74,7 +74,7 @@ public:
 
   /*!
    * \brief Add a single scanpoint to the vecotr of scanpoints.
-   * \param scan_point: New scanpoint to add.
+   * \param scan_point New scanpoint to add.
    */
   void addScanPoint(ScanPoint scan_point);
 
@@ -86,7 +86,7 @@ public:
 
   /*!
    * \brief Set if measurement data is enabled
-   * \param is_empty: set if measurement data is enabled.
+   * \param is_empty set if measurement data is enabled.
    */
   void setIsEmpty(bool is_empty);
 

@@ -54,13 +54,13 @@ public:
 
   /*!
    * \brief Returns size of flag vector.
-   * \return SIze of flag vector.
+   * \return Size of flag vector.
    */
   int32_t getSize() const;
 
   /*!
    * \brief Setter of the size for the flag vector.
-   * \param size: Size of the falg vector.
+   * \param size Size of the falg vector.
    */
   void setSize(const int32_t& size);
 
@@ -72,7 +72,7 @@ public:
 
   /*!
    * \brief Setter for the flag vector
-   * \param flags_vector: Bool vector for all flags.
+   * \param flags_vector Bool vector for all flags.
    */
   void setFlagsVector(const std::vector<bool>& flags_vector);
 

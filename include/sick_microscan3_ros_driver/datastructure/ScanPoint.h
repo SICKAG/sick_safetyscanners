@@ -49,15 +49,15 @@ public:
 
   /*!
    * \brief Constructor of a scan point, takes all needed parameters.
-   * \param angle: Angle of the scanpoint in coordinates of the sensor.
-   * \param distance: Distance of the measured scanpoint.
-   * \param reflectivity: Value how strongly the scan point reflects.
-   * \param valid_bit: If the scanpoint is valid.
-   * \param infinite_bit: If the scanpoint is infinite.
-   * \param glare_bit: If there is glare in the scanpoint.
-   * \param reflector_bit: If the scanpoint detects a reflector.
-   * \param contamination_bit: If the scanpoint is contaminated.
-   * \param contamination_warning_bit: Warning if the scanpoint is contaminated.
+   * \param angle Angle of the scanpoint in coordinates of the sensor.
+   * \param distance Distance of the measured scanpoint.
+   * \param reflectivity Value how strongly the scan point reflects.
+   * \param valid_bit If the scanpoint is valid.
+   * \param infinite_bit If the scanpoint is infinite.
+   * \param glare_bit If there is glare in the scanpoint.
+   * \param reflector_bit If the scanpoint detects a reflector.
+   * \param contamination_bit If the scanpoint is contaminated.
+   * \param contamination_warning_bit Warning if the scanpoint is contaminated.
    */
   ScanPoint(float angle,
             int16_t& distance,
@@ -71,19 +71,19 @@ public:
 
   /*!
    * \brief Getter for the angle in sensor coordinates.
-   * \return angle
+   * \return The angle of the sensor scanpoint.
    */
   float getAngle() const;
 
   /*!
    * \brief Getter for the distance of the scanpoint.
-   * \return distance
+   * \return The distance of the scanpoint.
    */
   uint16_t getDistance() const;
 
   /*!
    * \brief Getter for the reflectivity value.
-   * \return reflectivity
+   * \return The reflectivity value of the scanpoint.
    */
   uint8_t getReflectivity() const;
 

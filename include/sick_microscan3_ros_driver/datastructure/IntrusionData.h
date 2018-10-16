@@ -60,7 +60,7 @@ public:
 
   /*!
    * \brief Setter for the vector of IntrusionDatums.
-   * \param intrusion_data_vector: Vector of IntrusionDatums.
+   * \param intrusion_data_vector Vector of IntrusionDatums.
    */
   void setIntrusionDataVector(const std::vector<IntrusionDatum>& intrusion_data_vector);
 
@@ -72,7 +72,7 @@ public:
 
   /*!
    * \brief Set if intrusion data has been enabled.
-   * \param is_empty: If intrusion data has been enabled.
+   * \param is_empty If intrusion data has been enabled.
    */
   void setIsEmpty(bool is_empty);
 

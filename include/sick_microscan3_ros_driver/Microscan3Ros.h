@@ -59,9 +59,9 @@
 namespace sick {
 
 /*!
- * \brief Converts degrees to radians
- * \param deg degrees to convert
- * \return radians
+ * \brief Converts degrees to radians.
+ * \param deg Degrees to convert.
+ * \return To radians converted degrees.
  */
 inline float degToRad(float deg)
 {
@@ -69,9 +69,9 @@ inline float degToRad(float deg)
 }
 
 /*!
- * \brief Converts radians to degrees
- * \param rad input radians to convert
- * \return degrees
+ * \brief Converts radians to degrees.
+ * \param rad Input radians to convert
+ * \return To degrees converted radians
  */
 inline float radToDeg(float rad)
 {
@@ -129,7 +129,7 @@ private:
 
   /*!
    * @brief Reads and verifies the ROS parameters.
-   * @return true if successful.
+   * @return True if successful.
    */
   bool readParameters();
 
@@ -173,6 +173,7 @@ private:
   createApplicationInputsMessage(const sick::datastructure::Data& data);
   sick_microscan3_ros_driver::ApplicationOutputsMsg
   createApplicationOutputsMessage(const sick::datastructure::Data& data);
+  void readTypeCodeSettings();
 };
 
 } // namespace sick
