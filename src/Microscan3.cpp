@@ -88,6 +88,15 @@ void Microscan3::changeSensorSettings(sick::datastructure::CommSettings settings
   stopTCPConnection();
 }
 
+void Microscan3::requestTypeCode(sick::datastructure::CommSettings settings, sick::datastructure::TypeCode& type_code)
+{
+  startTCPConnection(settings);
+
+  requestTypeCodeinColaSession(type_code);
+
+  stopTCPConnection();
+}
+
 void Microscan3::startTCPConnection(sick::datastructure::CommSettings settings)
 {
   std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client =
@@ -108,6 +117,17 @@ void Microscan3::changeCommSettingsinColaSession(sick::datastructure::CommSettin
                                                                settings);
   m_session_ptr->executeCommand(command_ptr);
   m_session_ptr->close();
+}
+
+void Microscan3::requestTypeCodeinColaSession(sick::datastructure::TypeCode& type_code)
+{
+  m_session_ptr->open();
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::TypeCodeVariableCommand>(boost::ref(*m_session_ptr), type_code);
+  m_session_ptr->executeCommand(command_ptr);
+
+  m_session_ptr->close();
+
 }
 
 void Microscan3::stopTCPConnection()

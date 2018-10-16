@@ -60,9 +60,21 @@ Microscan3Ros::Microscan3Ros()
                                                                              100);
   m_raw_data_publisher =
     m_private_nh.advertise<sick_microscan3_ros_driver::RawMicroScanDataMsg>("raw_data", 100);
+
+  readTypeCodeSettings();
+
   m_device->changeSensorSettings(m_communication_settings);
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
+}
+
+void Microscan3Ros::readTypeCodeSettings()
+{
+  sick::datastructure::TypeCode type_code;
+  m_device->requestTypeCode(m_communication_settings, type_code);
+  m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
+  m_range_min = 0.1;
+  m_range_max = type_code.getMaxRange();
 }
 
 void Microscan3Ros::callback(sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config,
@@ -70,9 +82,7 @@ void Microscan3Ros::callback(sick_microscan3_ros_driver::Microscan3Configuration
 {
   if (isInitialised())
   {
-    m_communication_settings.setChannel(config.channel);
     m_communication_settings.setEnabled(config.channel_enabled);
-    m_communication_settings.setEInterfaceType(config.e_interface_type);
     m_communication_settings.setPublishingFequency(config.publish_frequency);
     m_communication_settings.setStartAngle(config.angle_start);
     m_communication_settings.setEndAngle(config.angle_end);
@@ -84,8 +94,6 @@ void Microscan3Ros::callback(sick_microscan3_ros_driver::Microscan3Configuration
     m_device->changeSensorSettings(m_communication_settings);
 
     m_laser_scan_frame_name = config.laser_scan_frame_name;
-    m_range_min             = config.range_min;
-    m_range_max             = config.range_max;
   }
 }
 
@@ -136,17 +144,13 @@ bool Microscan3Ros::readParameters()
            "will be loaded.");
 
 
-  int channel;
+  int channel = sick_microscan3_ros_driver::Microscan3Configuration_channel;
   m_private_nh.getParam("channel", channel);
   m_communication_settings.setChannel(channel);
 
   bool enabled;
   m_private_nh.getParam("channel_enabled", enabled);
   m_communication_settings.setEnabled(enabled);
-
-  int e_interface_type;
-  m_private_nh.getParam("e_interface_type", e_interface_type);
-  m_communication_settings.setEInterfaceType(e_interface_type);
 
   int publish_frequency;
   m_private_nh.getParam("publish_frequency", publish_frequency);
@@ -180,9 +184,6 @@ bool Microscan3Ros::readParameters()
 
   m_private_nh.getParam("laser_scan_frame_name", m_laser_scan_frame_name);
 
-  m_private_nh.getParam("range_min", m_range_min);
-
-  m_private_nh.getParam("range_max", m_range_max);
 
   return true;
 }

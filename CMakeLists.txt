@@ -108,6 +108,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/ApplicationInputs.cpp
   src/datastructure/ApplicationOutputs.cpp
   src/datastructure/CommSettings.cpp
+  src/datastructure/TypeCode.cpp
   src/data_processing/UDPPacketMerger.cpp
   src/data_processing/ParseDatagramHeader.cpp
   src/data_processing/ParseData.cpp
@@ -120,12 +121,15 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ReadWriteHelper.cpp
   src/data_processing/TCPPacketMerger.cpp
   src/data_processing/ParseTCPPacket.cpp
+  src/data_processing/ParseTypeCodeData.cpp
   src/cola2/Cola2Session.cpp
   src/cola2/Command.cpp
   src/cola2/CreateSession.cpp
   src/cola2/CloseSession.cpp
   src/cola2/MethodCommand.cpp
   src/cola2/ChangeCommSettingsCommand.cpp
+  src/cola2/VariableCommand.cpp
+  src/cola2/TypeCodeVariableCommand.cpp
 )
 
 ## Declare cpp executables

@@ -51,6 +51,7 @@
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
+#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 
 namespace sick {
@@ -69,9 +70,9 @@ public:
 
   /*!
    * \brief Constructor of the Microscan3 class
-   * \param newPacketReceivedCallbackFunction: Function from the calling class, which will be
+   * \param newPacketReceivedCallbackFunction Function from the calling class, which will be
    * called when a new packet is received
-   * \param settings: Current settings for the sensor
+   * \param settings Current settings for the sensor
    */
   Microscan3(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
              sick::datastructure::CommSettings settings);
@@ -90,10 +91,11 @@ public:
 
   /*!
    * \brief Changes the internal settings of the sensor
-   * \param settings: New set of settign to pass to the sensor
+   * \param settings New set of settign to pass to the sensor
    */
   void changeSensorSettings(sick::datastructure::CommSettings settings);
 
+  void requestTypeCode(sick::datastructure::CommSettings settings, sick::datastructure::TypeCode &type_code);
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 
@@ -113,6 +115,7 @@ private:
   void startTCPConnection(sick::datastructure::CommSettings settings);
   void changeCommSettingsinColaSession(datastructure::CommSettings settings);
   void stopTCPConnection();
+  void requestTypeCodeinColaSession(sick::datastructure::TypeCode &type_code);
 };
 
 } // namespace sick
