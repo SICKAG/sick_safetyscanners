@@ -25,14 +25,14 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCodeVariableCommand.cpp
+ * \file FieldHeaderVariableCommand.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2018-10-17
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/FieldHeaderVariableCommand.h>
 
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 #include <sick_microscan3_ros_driver/cola2/Command.h>
@@ -40,32 +40,33 @@
 namespace sick {
 namespace cola2 {
 
-TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
-  : VariableCommand(session, 0x000d)
-  , m_type_code(type_code)
+FieldHeaderVariableCommand::FieldHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index)
+  : VariableCommand(session, 0x2710 + index)
+  , m_field_data(field_data)
 {
   m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
+  m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
 }
 
-void TypeCodeVariableCommand::addTelegramData(
+void FieldHeaderVariableCommand::addTelegramData(
   sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   base_class::addTelegramData(telegram);
 }
 
-bool TypeCodeVariableCommand::canBeExecutedWithoutSessionID() const
+bool FieldHeaderVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;
 }
 
-bool TypeCodeVariableCommand::processReply()
+bool FieldHeaderVariableCommand::processReply()
 {
   if (!base_class::processReply())
   {
     return false;
   }
-  m_type_code_parser_ptr->parseTCPSequence(getDataVector(),m_type_code);
+
+  m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
   return true;
 }
 

@@ -25,51 +25,36 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCodeVariableCommand.cpp
+ * \file FieldData.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2018-10-16
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
+#ifndef FIELDDATA_H
+#define FIELDDATA_H
 
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
-#include <sick_microscan3_ros_driver/cola2/Command.h>
+#include <iostream>
+
+
 
 namespace sick {
-namespace cola2 {
+namespace datastructure {
 
-TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
-  : VariableCommand(session, 0x000d)
-  , m_type_code(type_code)
+
+class FieldData
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
-}
+public:
+  FieldData();
 
-void TypeCodeVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
-bool TypeCodeVariableCommand::canBeExecutedWithoutSessionID() const
-{
-  return true;
-}
-
-bool TypeCodeVariableCommand::processReply()
-{
-  if (!base_class::processReply())
-  {
-    return false;
-  }
-  m_type_code_parser_ptr->parseTCPSequence(getDataVector(),m_type_code);
-  return true;
-}
+private:
 
 
+};
 
-} // namespace cola2
+
+} // namespace datastructure
 } // namespace sick
+
+#endif

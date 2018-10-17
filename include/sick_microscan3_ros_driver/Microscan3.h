@@ -52,6 +52,8 @@
 
 #include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
 #include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/FieldHeaderVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/FieldGeometryVariableCommand.h>
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 
 namespace sick {

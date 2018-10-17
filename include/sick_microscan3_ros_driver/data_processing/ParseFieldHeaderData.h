@@ -25,51 +25,45 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCodeVariableCommand.cpp
+ * \file ParseFieldHeaderData.h
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2018-10-16
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
+#ifndef PARSEFIELDHEADERDATA_H
+#define PARSEFIELDHEADERDATA_H
 
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
-#include <sick_microscan3_ros_driver/cola2/Command.h>
+#include <sick_microscan3_ros_driver/datastructure/Data.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
+#include <sick_microscan3_ros_driver/datastructure/FieldData.h>
+
+#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
 namespace sick {
+
 namespace cola2 {
-
-TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
-  : VariableCommand(session, 0x000d)
-  , m_type_code(type_code)
-{
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
+class Command;
 }
 
-void TypeCodeVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
+namespace data_processing {
+
+
+class ParseFieldHeaderData
 {
-  base_class::addTelegramData(telegram);
-}
+public:
+  ParseFieldHeaderData();
 
-bool TypeCodeVariableCommand::canBeExecutedWithoutSessionID() const
-{
-  return true;
-}
+  bool parseTCPSequence(datastructure::PacketBuffer buffer, datastructure::FieldData &field_data);
 
-bool TypeCodeVariableCommand::processReply()
-{
-  if (!base_class::processReply())
-  {
-    return false;
-  }
-  m_type_code_parser_ptr->parseTCPSequence(getDataVector(),m_type_code);
-  return true;
-}
+private:
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
 
+};
 
-} // namespace cola2
+} // namespace data_processing
 } // namespace sick
+
+#endif

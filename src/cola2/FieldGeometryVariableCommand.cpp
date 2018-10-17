@@ -25,14 +25,14 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCodeVariableCommand.cpp
+ * \file FieldGeometryVariableCommand.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2018-09-24
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/FieldGeometryVariableCommand.h>
 
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 #include <sick_microscan3_ros_driver/cola2/Command.h>
@@ -40,26 +40,26 @@
 namespace sick {
 namespace cola2 {
 
-TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
-  : VariableCommand(session, 0x000d)
+FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
+  : VariableCommand(session, 0x2810)
   , m_type_code(type_code)
 {
   m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
 }
 
-void TypeCodeVariableCommand::addTelegramData(
+void FieldGeometryVariableCommand::addTelegramData(
   sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   base_class::addTelegramData(telegram);
 }
 
-bool TypeCodeVariableCommand::canBeExecutedWithoutSessionID() const
+bool FieldGeometryVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;
 }
 
-bool TypeCodeVariableCommand::processReply()
+bool FieldGeometryVariableCommand::processReply()
 {
   if (!base_class::processReply())
   {

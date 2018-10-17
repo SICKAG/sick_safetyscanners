@@ -116,6 +116,13 @@ void Microscan3::changeCommSettingsinColaSession(sick::datastructure::CommSettin
     std::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr),
                                                                settings);
   m_session_ptr->executeCommand(command_ptr);
+
+  sick::datastructure::FieldData field_data;
+  command_ptr =
+      std::make_shared<sick::cola2::FieldHeaderVariableCommand>(boost::ref(*m_session_ptr),
+                                                                 field_data, 1);
+    m_session_ptr->executeCommand(command_ptr);
+
   m_session_ptr->close();
 }
 

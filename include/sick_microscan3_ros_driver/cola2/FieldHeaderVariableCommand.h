@@ -25,51 +25,44 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCodeVariableCommand.cpp
+ * \file FieldHeaderVariableCommand.h
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2018-10-17
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
+#ifndef FIELDHEADERVARIABLECOMMAND_H
+#define FIELDHEADERVARIABLECOMMAND_H
 
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
-#include <sick_microscan3_ros_driver/cola2/Command.h>
+
+#include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
+#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseFieldHeaderData.h>
 
 namespace sick {
 namespace cola2 {
 
-TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
-  : VariableCommand(session, 0x000d)
-  , m_type_code(type_code)
+class FieldHeaderVariableCommand : public VariableCommand
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
-}
+public:
+  typedef sick::cola2::VariableCommand base_class;
 
-void TypeCodeVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
-bool TypeCodeVariableCommand::canBeExecutedWithoutSessionID() const
-{
-  return true;
-}
-
-bool TypeCodeVariableCommand::processReply()
-{
-  if (!base_class::processReply())
-  {
-    return false;
-  }
-  m_type_code_parser_ptr->parseTCPSequence(getDataVector(),m_type_code);
-  return true;
-}
+  FieldHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index);
+  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  bool canBeExecutedWithoutSessionID() const;
+  bool processReply();
 
 
+private:
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
+  std::shared_ptr<sick::data_processing::ParseFieldHeaderData> m_field_header_parser_ptr;
+
+  sick::datastructure::FieldData& m_field_data;
+
+};
 
 } // namespace cola2
 } // namespace sick
+
+#endif
