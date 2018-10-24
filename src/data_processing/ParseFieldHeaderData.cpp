@@ -77,13 +77,13 @@ void ParseFieldHeaderData::setFieldType(const datastructure::PacketBuffer buffer
 int ParseFieldHeaderData::readFieldType(const datastructure::PacketBuffer buffer)
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readuint8_t(data_ptr, 75);
+  return m_reader_ptr->readuint8_t(data_ptr, 73);
 }
 
 int ParseFieldHeaderData::readSetIndex(const datastructure::PacketBuffer buffer)
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 84);
+  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 82);
 }
 
 

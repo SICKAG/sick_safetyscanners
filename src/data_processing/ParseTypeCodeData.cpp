@@ -57,8 +57,8 @@ bool ParseTypeCodeData::parseTCPSequence(datastructure::PacketBuffer buffer,
 int ParseTypeCodeData::readInterfaceType(datastructure::PacketBuffer& buffer)
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 16);
-  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 17);
+  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 14);
+  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 15);
   
   int res = sick::datastructure::e_interface_type::E_EFIPRO;
 
@@ -87,8 +87,8 @@ int ParseTypeCodeData::readInterfaceType(datastructure::PacketBuffer& buffer)
 float ParseTypeCodeData::readMaxRange(datastructure::PacketBuffer& buffer)
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 14);
-  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 14);
+  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 12);
+  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 13);
   
   int res = sick::datastructure::e_ranges::E_NORMAL_RANGE;
 

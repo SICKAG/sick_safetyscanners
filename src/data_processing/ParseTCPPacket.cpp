@@ -130,13 +130,13 @@ uint16_t ParseTCPPacket::readErrorCode(datastructure::PacketBuffer& buffer)
 
 void ParseTCPPacket::readData(datastructure::PacketBuffer& buffer, std::vector<uint8_t>& byteVector)
 {
-  if (buffer.getLength() == 18)
+  if (buffer.getLength() < 20)
   {
     return;
   }
   else
   {
-    byteVector.insert(byteVector.end(), buffer.getBuffer().begin() + 18, buffer.getBuffer().end());
+    byteVector.insert(byteVector.end(), buffer.getBuffer().begin() + 20, buffer.getBuffer().end());
   }
 }
 

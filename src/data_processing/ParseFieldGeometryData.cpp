@@ -62,13 +62,13 @@ bool ParseFieldGeometryData::parseTCPSequence(datastructure::PacketBuffer buffer
 int ParseFieldGeometryData::readArrayLength(datastructure::PacketBuffer buffer)
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 6);
+  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 4);
 }
 
 int ParseFieldGeometryData::readArrayElement(datastructure::PacketBuffer buffer, int elem_number)
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 10 + elem_number * 2);
+  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 8 + elem_number * 2);
 }
 
 
