@@ -49,7 +49,7 @@ void CommSettings::setHostIp(const boost::asio::ip::address_v4& host_ip)
   m_host_ip = host_ip;
 }
 
-void CommSettings::setHostIp(const std::__cxx11::string& host_ip)
+void CommSettings::setHostIp(const std::string& host_ip)
 {
   m_host_ip = boost::asio::ip::address_v4::from_string(host_ip);
 }
@@ -158,7 +158,7 @@ void CommSettings::setSensorIp(const boost::asio::ip::address_v4& sensor_ip)
   m_sensor_ip = sensor_ip;
 }
 
-void CommSettings::setSensorIp(const std::__cxx11::string& host_ip)
+void CommSettings::setSensorIp(const std::string& host_ip)
 {
   m_sensor_ip = boost::asio::ip::address_v4::from_string(host_ip);
 }

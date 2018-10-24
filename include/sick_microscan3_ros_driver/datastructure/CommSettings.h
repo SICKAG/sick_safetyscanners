@@ -84,7 +84,7 @@ public:
 
   uint16_t getSensorTcpPort() const;
   void setSensorTcpPort(const uint16_t& sensor_tcp_port);
-  void setSensorIp(const std::__cxx11::string& host_ip);
+  void setSensorIp(const std::string& host_ip);
 
 private:
   boost::asio::ip::address_v4 m_sensor_ip;
