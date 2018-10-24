@@ -54,6 +54,8 @@
 #include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
 #include <sick_microscan3_ros_driver/cola2/FieldHeaderVariableCommand.h>
 #include <sick_microscan3_ros_driver/cola2/FieldGeometryVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/MonitoringCaseTableHeaderVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/DeviceNameVariableCommand.h>
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
 
 namespace sick {
@@ -97,6 +99,11 @@ public:
    */
   void changeSensorSettings(sick::datastructure::CommSettings settings);
 
+  /*!
+   * \brief Requests the typecode of the sensor.
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param type_code Returned typecode.
+   */
   void requestTypeCode(sick::datastructure::CommSettings settings, sick::datastructure::TypeCode &type_code);
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
@@ -110,6 +117,8 @@ private:
   std::shared_ptr<sick::cola2::Cola2Session> m_session_ptr;
 
   std::shared_ptr<sick::data_processing::UDPPacketMerger> m_packet_merger_ptr;
+
+  std::string m_device_name;
 
   void processUDPPacket(const datastructure::PacketBuffer& buffer);
   bool UDPClientThread();

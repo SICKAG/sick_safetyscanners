@@ -125,6 +125,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseTypeCodeData.cpp
   src/data_processing/ParseFieldHeaderData.cpp
   src/data_processing/ParseFieldGeometryData.cpp
+  src/data_processing/ParseDeviceName.cpp
   src/cola2/Cola2Session.cpp
   src/cola2/Command.cpp
   src/cola2/CreateSession.cpp
@@ -135,6 +136,8 @@ add_library(${PROJECT_NAME}_core
   src/cola2/TypeCodeVariableCommand.cpp
   src/cola2/FieldHeaderVariableCommand.cpp
   src/cola2/FieldGeometryVariableCommand.cpp
+  src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
+  src/cola2/DeviceNameVariableCommand.cpp
 )
 
 ## Declare cpp executables

@@ -121,7 +121,24 @@ void Microscan3::changeCommSettingsinColaSession(sick::datastructure::CommSettin
   command_ptr =
       std::make_shared<sick::cola2::FieldHeaderVariableCommand>(boost::ref(*m_session_ptr),
                                                                  field_data, 1);
-    m_session_ptr->executeCommand(command_ptr);
+  m_session_ptr->executeCommand(command_ptr);
+
+  command_ptr =
+    std::make_shared<sick::cola2::FieldGeometryVariableCommand>(boost::ref(*m_session_ptr),
+                                                               field_data, 1);
+  m_session_ptr->executeCommand(command_ptr);
+
+  command_ptr =
+    std::make_shared<sick::cola2::MonitoringCaseTableHeaderVariableCommand>(boost::ref(*m_session_ptr),
+                                                               field_data, 1);
+  m_session_ptr->executeCommand(command_ptr);
+
+  command_ptr =
+    std::make_shared<sick::cola2::DeviceNameVariableCommand>(boost::ref(*m_session_ptr),
+                                                               m_device_name);
+  m_session_ptr->executeCommand(command_ptr);
+
+  ROS_INFO("Device name: %s" , m_device_name.c_str());
 
   m_session_ptr->close();
 }
