@@ -2,8 +2,10 @@
 
   <!-- Launch Sick Microscan3 Ros Driver Node -->
   <node pkg="sick_microscan3_ros_driver" type="sick_microscan3_ros_driver" name="sick_microscan3_ros_driver" output="screen">
-     <param name="sensor_ip" type="string" value="192.168.1.10" /> 
-     <param name="host_udp_port" type="int" value="6060" /> 
+     <param name="sensor_ip" type="string" value="192.168.1.11" />
+     <param name="sensor_tcp_port" type="int" value="2122" />
+     <param name="host_ip" type="string" value="192.168.1.9" />
+     <param name="host_udp_port" type="int" value="6061" />
   </node>
 
 
