@@ -59,9 +59,8 @@ public:
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
-
-
+  int readArrayLength(datastructure::PacketBuffer buffer);
+  int readArrayElement(datastructure::PacketBuffer buffer, int elem_number);
 };
 
 } // namespace data_processing

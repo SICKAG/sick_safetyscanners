@@ -45,12 +45,47 @@ ParseFieldHeaderData::ParseFieldHeaderData()
 }
 
 
-bool ParseFieldHeaderData::parseTCPSequence(datastructure::PacketBuffer buffer,
+bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer buffer,
                                       datastructure::FieldData &field_data)
 {
-
+  setFieldType(buffer,field_data);
   return true;
 }
+
+void ParseFieldHeaderData::setFieldType(const datastructure::PacketBuffer buffer,
+                                      datastructure::FieldData &field_data)
+{
+  int field_type = readFieldType(buffer);
+  field_data.setIsWarningField(false);
+  field_data.setIsProtectiveField(false);
+  if(field_type == 4 || field_type == 14)
+  {
+    field_data.setIsProtectiveField(true);
+  }
+  else if(field_type == 5 || field_type == 15)
+  {
+    field_data.setIsWarningField(true);
+  }
+
+  std::cout << field_type << std::endl;
+  std::cout << readSetIndex(buffer) << std::endl;
+
+}
+
+
+
+int ParseFieldHeaderData::readFieldType(const datastructure::PacketBuffer buffer)
+{
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint8_t(data_ptr, 75);
+}
+
+int ParseFieldHeaderData::readSetIndex(const datastructure::PacketBuffer buffer)
+{
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 84);
+}
+
 
 
 

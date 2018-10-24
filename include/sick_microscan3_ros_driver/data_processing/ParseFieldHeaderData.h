@@ -60,7 +60,9 @@ public:
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-
+  void setFieldType(datastructure::PacketBuffer buffer, datastructure::FieldData &field_data);
+  int readFieldType(datastructure::PacketBuffer buffer);
+  int readSetIndex(const datastructure::PacketBuffer buffer);
 };
 
 } // namespace data_processing

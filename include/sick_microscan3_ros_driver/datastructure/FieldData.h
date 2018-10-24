@@ -36,6 +36,9 @@
 #define FIELDDATA_H
 
 #include <iostream>
+#include <vector>
+
+#include <sick_microscan3_ros_driver/datastructure/ScanPoint.h>
 
 
 
@@ -48,8 +51,28 @@ class FieldData
 public:
   FieldData();
 
+  int getFieldSetIndex() const;
+  void setFieldSetIndex(int field_set_index);
+
+  bool getIsWarningField() const;
+  void setIsWarningField(bool is_warning_field);
+
+  bool getIsProtectiveField() const;
+  void setIsProtectiveField(bool is_protective_field);
+
+  ScanPoint getFieldGeometry() const;
+  void setFieldGeometry(const ScanPoint &field_geometry);
+
+  std::vector<int> getBeamDistances() const;
+  void setBeamDistances(const std::vector<int> &beam_distances);
+
 private:
 
+  int m_field_set_index;
+  bool m_is_warning_field;
+  bool m_is_protective_field;
+  ScanPoint m_field_geometry;
+  std::vector<int> m_beam_distances;
 
 };
 

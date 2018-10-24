@@ -58,6 +58,8 @@ uint16_t ParseTCPPacket::getRequestID(datastructure::PacketBuffer buffer)
 bool ParseTCPPacket::parseTCPSequence(datastructure::PacketBuffer buffer,
                                       sick::cola2::Command& command)
 {
+
+  //TODO replace buffer with data ptr
   setCommandValuesFromPacket(buffer, command);
 
   std::vector<uint8_t> byteVector;

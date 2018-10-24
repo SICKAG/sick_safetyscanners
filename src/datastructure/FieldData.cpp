@@ -39,6 +39,56 @@ namespace datastructure {
 
 FieldData::FieldData() {}
 
+int FieldData::getFieldSetIndex() const
+{
+  return m_field_set_index;
+}
+
+void FieldData::setFieldSetIndex(int field_set_index)
+{
+  m_field_set_index = field_set_index;
+}
+
+bool FieldData::getIsWarningField() const
+{
+  return m_is_warning_field;
+}
+
+void FieldData::setIsWarningField(bool is_warning_field)
+{
+  m_is_warning_field = is_warning_field;
+}
+
+ScanPoint FieldData::getFieldGeometry() const
+{
+  return m_field_geometry;
+}
+
+void FieldData::setFieldGeometry(const ScanPoint &field_geometry)
+{
+  m_field_geometry = field_geometry;
+}
+
+bool FieldData::getIsProtectiveField() const
+{
+  return m_is_protective_field;
+}
+
+void FieldData::setIsProtectiveField(bool is_protective_field)
+{
+  m_is_protective_field = is_protective_field;
+}
+
+std::vector<int> FieldData::getBeamDistances() const
+{
+  return m_beam_distances;
+}
+
+void FieldData::setBeamDistances(const std::vector<int> &beam_distance)
+{
+  m_beam_distances = beam_distance;
+}
+
 
 } // namespace datastructure
 } // namespace sick

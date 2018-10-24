@@ -47,6 +47,8 @@ class ScanPoint
 {
 public:
 
+  ScanPoint();
+
   /*!
    * \brief Constructor of a scan point, takes all needed parameters.
    * \param angle Angle of the scanpoint in coordinates of the sensor.

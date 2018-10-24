@@ -48,7 +48,27 @@ ParseFieldGeometryData::ParseFieldGeometryData()
 bool ParseFieldGeometryData::parseTCPSequence(datastructure::PacketBuffer buffer,
                                       sick::datastructure::FieldData& field_data)
 {
+  int array_length = readArrayLength(buffer);
+  std::vector<int> geometry_distance_mm;
+  for (int i = 0 ; i < array_length; i++)
+  {
+    geometry_distance_mm.push_back(readArrayElement(buffer, i));
+  }
+  field_data.setBeamDistances(geometry_distance_mm);
+
   return true;
+}
+
+int ParseFieldGeometryData::readArrayLength(datastructure::PacketBuffer buffer)
+{
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 6);
+}
+
+int ParseFieldGeometryData::readArrayElement(datastructure::PacketBuffer buffer, int elem_number)
+{
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 10 + elem_number * 2);
 }
 
 

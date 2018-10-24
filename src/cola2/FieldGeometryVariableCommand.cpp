@@ -40,12 +40,12 @@
 namespace sick {
 namespace cola2 {
 
-FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
-  : VariableCommand(session, 0x2810)
-  , m_type_code(type_code)
+FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index)
+  : VariableCommand(session, 0x2810 + index)
+  , m_field_data(field_data)
 {
   m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
+  m_field_geometry_parser_ptr = std::make_shared<sick::data_processing::ParseFieldGeometryData>();
 }
 
 void FieldGeometryVariableCommand::addTelegramData(
@@ -65,7 +65,7 @@ bool FieldGeometryVariableCommand::processReply()
   {
     return false;
   }
-  m_type_code_parser_ptr->parseTCPSequence(getDataVector(),m_type_code);
+  m_field_geometry_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
   return true;
 }
 

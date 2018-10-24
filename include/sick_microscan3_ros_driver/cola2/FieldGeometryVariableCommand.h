@@ -38,7 +38,7 @@
 
 #include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
 #include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
-#include <sick_microscan3_ros_driver/data_processing/ParseTypeCodeData.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseFieldGeometryData.h>
 
 namespace sick {
 namespace cola2 {
@@ -48,7 +48,7 @@ class FieldGeometryVariableCommand : public VariableCommand
 public:
   typedef sick::cola2::VariableCommand base_class;
 
-  FieldGeometryVariableCommand(Cola2Session& session, datastructure::TypeCode &type_code);
+  FieldGeometryVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
@@ -56,9 +56,9 @@ public:
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
-  std::shared_ptr<sick::data_processing::ParseTypeCodeData> m_type_code_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseFieldGeometryData> m_field_geometry_parser_ptr;
 
-  sick::datastructure::TypeCode& m_type_code;
+  sick::datastructure::FieldData& m_field_data;
 
 };
 
