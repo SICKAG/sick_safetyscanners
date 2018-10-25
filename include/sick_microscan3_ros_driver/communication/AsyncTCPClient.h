@@ -59,8 +59,8 @@ public:
 
   AsyncTCPClient(PacketHandler packet_handler,
                  boost::asio::io_service& io_service,
-                 boost::asio::ip::address_v4 host,
-                 unsigned short server_port);
+                 const boost::asio::ip::address_v4& host,
+                 const uint16_t& server_port);
   virtual ~AsyncTCPClient();
 
   void run_service();
@@ -86,12 +86,12 @@ private:
 
 
   void start_receive();
-  void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
+  void handle_receive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
 
 
   AsyncTCPClient(AsyncTCPClient&); // block default copy constructor
 
-  void handleSendAndReceive(const boost::system::error_code& error, std::size_t);
+  void handleSendAndReceive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
 };
 } // namespace communication
 } // namespace sick

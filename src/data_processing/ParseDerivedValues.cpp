@@ -43,7 +43,7 @@ ParseDerivedValues::ParseDerivedValues()
 }
 
 datastructure::DerivedValues
-ParseDerivedValues::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data& data)
+ParseDerivedValues::parseUDPSequence(const datastructure::PacketBuffer &buffer, datastructure::Data& data) const
 {
   datastructure::DerivedValues derived_values;
 
@@ -59,7 +59,7 @@ ParseDerivedValues::parseUDPSequence(datastructure::PacketBuffer buffer, datastr
   return derived_values;
 }
 
-bool ParseDerivedValues::checkIfPreconditionsAreMet(datastructure::Data& data)
+bool ParseDerivedValues::checkIfPreconditionsAreMet(const datastructure::Data& data) const
 {
   if (!checkIfDerivedValuesIsPublished(data))
   {
@@ -73,7 +73,7 @@ bool ParseDerivedValues::checkIfPreconditionsAreMet(datastructure::Data& data)
   return true;
 }
 
-bool ParseDerivedValues::checkIfDerivedValuesIsPublished(datastructure::Data& data)
+bool ParseDerivedValues::checkIfDerivedValuesIsPublished(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->getDerivedValuesBlockOffset() == 0 &&
       data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0)
@@ -83,7 +83,7 @@ bool ParseDerivedValues::checkIfDerivedValuesIsPublished(datastructure::Data& da
   return true;
 }
 
-bool ParseDerivedValues::checkIfDataContainsNeededParsedBlocks(datastructure::Data& data)
+bool ParseDerivedValues::checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->isEmpty())
   {
@@ -92,8 +92,8 @@ bool ParseDerivedValues::checkIfDataContainsNeededParsedBlocks(datastructure::Da
   return true;
 }
 
-void ParseDerivedValues::setDataInDerivedValues(const uint8_t* data_ptr,
-                                                datastructure::DerivedValues& derived_values)
+void ParseDerivedValues::setDataInDerivedValues(const uint8_t* &data_ptr,
+                                                datastructure::DerivedValues& derived_values) const
 {
   setMultiplicationFactorInDerivedValues(data_ptr, derived_values);
   setNumberOfBeamsInDerivedValues(data_ptr, derived_values);
@@ -104,37 +104,35 @@ void ParseDerivedValues::setDataInDerivedValues(const uint8_t* data_ptr,
 }
 
 void ParseDerivedValues::setMultiplicationFactorInDerivedValues(
-  const uint8_t* data_ptr, datastructure::DerivedValues& derived_values)
+  const uint8_t* &data_ptr, datastructure::DerivedValues& derived_values) const
 {
   derived_values.setMultiplicationFactor(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 0));
 }
 
 void ParseDerivedValues::setNumberOfBeamsInDerivedValues(
-  const uint8_t* data_ptr, datastructure::DerivedValues& derived_values)
+  const uint8_t* &data_ptr, datastructure::DerivedValues& derived_values) const
 {
   derived_values.setNumberOfBeams(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 2));
 }
 
-void ParseDerivedValues::setScanTimeInDerivedValues(const uint8_t* data_ptr,
-                                                    datastructure::DerivedValues& derived_values)
+void ParseDerivedValues::setScanTimeInDerivedValues(const uint8_t *&data_ptr,
+                                                    datastructure::DerivedValues& derived_values) const
 {
   derived_values.setScanTime(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 4));
 }
 
-void ParseDerivedValues::setStartAngleInDerivedValues(const uint8_t* data_ptr,
-                                                      datastructure::DerivedValues& derived_values)
+void ParseDerivedValues::setStartAngleInDerivedValues(const uint8_t *&data_ptr,
+                                                      datastructure::DerivedValues& derived_values) const
 {
   derived_values.setStartAngle(m_reader_ptr->readint32_tLittleEndian(data_ptr, 8));
 }
 
-void ParseDerivedValues::setAngularBeamResolutionInDerivedValues(
-  const uint8_t* data_ptr, datastructure::DerivedValues& derived_values)
+void ParseDerivedValues::setAngularBeamResolutionInDerivedValues(const uint8_t *&data_ptr, datastructure::DerivedValues& derived_values) const
 {
   derived_values.setAngularBeamResolution(m_reader_ptr->readint32_tLittleEndian(data_ptr, 12));
 }
 
-void ParseDerivedValues::setInterbeamPeriodInDerivedValues(
-  const uint8_t* data_ptr, datastructure::DerivedValues& derived_values)
+void ParseDerivedValues::setInterbeamPeriodInDerivedValues(const uint8_t *&data_ptr, datastructure::DerivedValues& derived_values) const
 {
   derived_values.setInterbeamPeriod(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16));
 }

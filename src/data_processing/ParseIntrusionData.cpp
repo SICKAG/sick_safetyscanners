@@ -43,7 +43,7 @@ ParseIntrusionData::ParseIntrusionData()
 }
 
 datastructure::IntrusionData
-ParseIntrusionData::parseUDPSequence(datastructure::PacketBuffer buffer, datastructure::Data& data)
+ParseIntrusionData::parseUDPSequence(const datastructure::PacketBuffer &buffer, datastructure::Data& data)
 {
   datastructure::IntrusionData intrusion_data;
   if (!checkIfPreconditionsAreMet(data))
@@ -59,7 +59,7 @@ ParseIntrusionData::parseUDPSequence(datastructure::PacketBuffer buffer, datastr
   return intrusion_data;
 }
 
-bool ParseIntrusionData::checkIfPreconditionsAreMet(datastructure::Data& data)
+bool ParseIntrusionData::checkIfPreconditionsAreMet(const datastructure::Data& data) const
 {
   if (!checkIfIntrusionDataIsPublished(data))
   {
@@ -72,7 +72,7 @@ bool ParseIntrusionData::checkIfPreconditionsAreMet(datastructure::Data& data)
   return true;
 }
 
-bool ParseIntrusionData::checkIfIntrusionDataIsPublished(datastructure::Data& data)
+bool ParseIntrusionData::checkIfIntrusionDataIsPublished(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->getIntrusionDataBlockOffset() == 0 &&
       data.getDataHeaderPtr()->getIntrusionDataBlockSize() == 0)
@@ -82,7 +82,7 @@ bool ParseIntrusionData::checkIfIntrusionDataIsPublished(datastructure::Data& da
   return true;
 }
 
-bool ParseIntrusionData::checkIfDataContainsNeededParsedBlocks(datastructure::Data& data)
+bool ParseIntrusionData::checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->isEmpty())
   {
@@ -100,54 +100,47 @@ uint16_t ParseIntrusionData::getNumScanPoints() const
   return m_num_scan_points;
 }
 
-void ParseIntrusionData::setNumScanPoints(const uint16_t& num_scan_points)
+void ParseIntrusionData::setNumScanPoints(const uint16_t num_scan_points)
 {
   m_num_scan_points = num_scan_points;
 }
 
-void ParseIntrusionData::setDataInIntrusionData(const uint8_t* data_ptr,
-                                                datastructure::IntrusionData& intrusion_data)
+void ParseIntrusionData::setDataInIntrusionData(const uint8_t *&data_ptr,
+                                                datastructure::IntrusionData& intrusion_data) const
 {
   std::vector<sick::datastructure::IntrusionDatum> intrusion_datums;
   setDataInIntrusionDatums(data_ptr, intrusion_datums);
   intrusion_data.setIntrusionDataVector(intrusion_datums);
 }
 
-void ParseIntrusionData::setDataInIntrusionDatums(
-  const uint8_t* data_ptr, std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums)
+void ParseIntrusionData::setDataInIntrusionDatums(const uint8_t *&data_ptr, std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums) const
 {
   uint16_t offset = 0;
   // Repeats for 24 CutOffPaths
   for (int i_set = 0; i_set < 24; ++i_set)
   {
     sick::datastructure::IntrusionDatum datum;
-    offset = setDataInIntrusionDatum(offset, data_ptr, datum);
+    setSizeInIntrusionDatum(offset, data_ptr, datum);
+    offset += 4;
+    setFlagsInIntrusionDatum(offset, data_ptr, datum);
+    offset += datum.getSize();
     intrusion_datums.push_back(datum);
   }
 }
 
-uint16_t ParseIntrusionData::setDataInIntrusionDatum(uint16_t offset,
-                                                   const uint8_t* data_ptr,
-                                                   sick::datastructure::IntrusionDatum& datum)
-{
-  offset = setSizeInIntrusionDatum(offset, data_ptr, datum);
-  offset = setFlagsInIntrusionDatum(offset, data_ptr, datum);
-  return offset;
-}
 
-uint16_t ParseIntrusionData::setSizeInIntrusionDatum(uint16_t offset,
-                                                   const uint8_t* data_ptr,
-                                                   sick::datastructure::IntrusionDatum& datum)
+uint16_t ParseIntrusionData::setSizeInIntrusionDatum(const uint16_t offset,
+                                                   const uint8_t *&data_ptr,
+                                                   sick::datastructure::IntrusionDatum& datum) const
 {
   uint32_t numBytesToRead = m_reader_ptr->readuint32_tLittleEndian(data_ptr, offset);
-  offset += 4;
   datum.setSize(numBytesToRead);
   return offset;
 }
 
-uint16_t ParseIntrusionData::setFlagsInIntrusionDatum(uint16_t offset,
-                                                    const uint8_t* data_ptr,
-                                                    sick::datastructure::IntrusionDatum& datum)
+uint16_t ParseIntrusionData::setFlagsInIntrusionDatum(const uint16_t offset,
+                                                    const uint8_t *&data_ptr,
+                                                    sick::datastructure::IntrusionDatum& datum) const
 {
   uint32_t num_read_flags = 0;
   std::vector<bool> flags;
@@ -163,7 +156,6 @@ uint16_t ParseIntrusionData::setFlagsInIntrusionDatum(uint16_t offset,
     }
   }
   datum.setFlagsVector(flags);
-  offset += datum.getSize();
   return offset;
 }
 

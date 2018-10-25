@@ -44,7 +44,7 @@ UDPPacketMerger::UDPPacketMerger()
 }
 
 
-bool UDPPacketMerger::isComplete()
+bool UDPPacketMerger::isComplete() const
 {
   return m_is_complete;
 }
@@ -55,7 +55,7 @@ sick::datastructure::PacketBuffer UDPPacketMerger::getDeployedPacketBuffer()
   return m_deployed_packet_buffer;
 }
 
-bool UDPPacketMerger::addUDPPacket(sick::datastructure::PacketBuffer buffer)
+bool UDPPacketMerger::addUDPPacket(const datastructure::PacketBuffer &buffer)
 {
   if (isComplete())
   {
@@ -70,8 +70,8 @@ bool UDPPacketMerger::addUDPPacket(sick::datastructure::PacketBuffer buffer)
   return isComplete();
 }
 
-bool UDPPacketMerger::addToMap(sick::datastructure::PacketBuffer buffer,
-                              sick::datastructure::DatagramHeader header)
+bool UDPPacketMerger::addToMap(const datastructure::PacketBuffer &buffer,
+                              const datastructure::DatagramHeader &header)
 {
   sick::datastructure::ParsedPacketBuffer parsed_packet_buffer(buffer, header);
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
@@ -88,7 +88,7 @@ bool UDPPacketMerger::addToMap(sick::datastructure::PacketBuffer buffer,
   return true;
 }
 
-bool UDPPacketMerger::deployPacketIfComplete(sick::datastructure::DatagramHeader header)
+bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader &header)
 {
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
 
@@ -122,7 +122,7 @@ bool UDPPacketMerger::checkIfComplete(sick::datastructure::DatagramHeader& heade
 }
 
 uint32_t UDPPacketMerger::calcualteCurrentLengthOfParsedPacketBuffer(
-  sick::datastructure::ParsedPacketBufferVector& vec)
+  const sick::datastructure::ParsedPacketBufferVector& vec)
 {
   uint32_t cur_length = 0;
 
@@ -136,7 +136,7 @@ uint32_t UDPPacketMerger::calcualteCurrentLengthOfParsedPacketBuffer(
 
 sick::datastructure::ParsedPacketBufferVector
 UDPPacketMerger::getSortedParsedPacketBufferForIdentification(
-  sick::datastructure::DatagramHeader& header)
+  const sick::datastructure::DatagramHeader& header)
 {
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
   sick::datastructure::ParsedPacketBufferVector vec = it->second;
@@ -145,7 +145,7 @@ UDPPacketMerger::getSortedParsedPacketBufferForIdentification(
 }
 
 sick::datastructure::PacketBuffer::VectorBuffer UDPPacketMerger::removeHeaderFromParsedPacketBuffer(
-  sick::datastructure::ParsedPacketBufferVector& vec)
+  const sick::datastructure::ParsedPacketBufferVector& vec)
 {
   sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
   for (auto& parsed_packet_buffer : vec)

@@ -42,8 +42,8 @@ ParseDataHeader::ParseDataHeader()
   m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
-datastructure::DataHeader ParseDataHeader::parseUDPSequence(datastructure::PacketBuffer buffer,
-                                                            datastructure::Data& data)
+datastructure::DataHeader ParseDataHeader::parseUDPSequence(const datastructure::PacketBuffer &buffer,
+                                                            datastructure::Data& data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
   datastructure::DataHeader data_header;
@@ -51,8 +51,8 @@ datastructure::DataHeader ParseDataHeader::parseUDPSequence(datastructure::Packe
   return data_header;
 }
 
-void ParseDataHeader::setDataInDataHeader(const uint8_t* data_ptr,
-                                          datastructure::DataHeader& data_header)
+void ParseDataHeader::setDataInDataHeader(const uint8_t* &data_ptr,
+                                          datastructure::DataHeader& data_header) const
 {
   setVersionInDataHeader(data_ptr, data_header);
   setScanHeaderInDataHeader(data_ptr, data_header);
@@ -60,8 +60,8 @@ void ParseDataHeader::setDataInDataHeader(const uint8_t* data_ptr,
 }
 
 
-void ParseDataHeader::setVersionInDataHeader(const uint8_t* data_ptr,
-                                             datastructure::DataHeader& data_header)
+void ParseDataHeader::setVersionInDataHeader(const uint8_t* &data_ptr,
+                                             datastructure::DataHeader& data_header) const
 {
   setVersionIndicatorInDataHeader(data_ptr, data_header);
   setMajorVersionInDataHeader(data_ptr, data_header);
@@ -71,8 +71,8 @@ void ParseDataHeader::setVersionInDataHeader(const uint8_t* data_ptr,
   setSerialNumberOfSystemPlugInDataHeader(data_ptr, data_header);
 }
 
-void ParseDataHeader::setScanHeaderInDataHeader(const uint8_t* data_ptr,
-                                                datastructure::DataHeader& data_header)
+void ParseDataHeader::setScanHeaderInDataHeader(const uint8_t* &data_ptr,
+                                                datastructure::DataHeader& data_header) const
 {
   setChannelNumberInDataHeader(data_ptr, data_header);
   setSequenceNumberInDataHeader(data_ptr, data_header);
@@ -81,8 +81,8 @@ void ParseDataHeader::setScanHeaderInDataHeader(const uint8_t* data_ptr,
   setTimestampTimeInDataHeader(data_ptr, data_header);
 }
 
-void ParseDataHeader::setDataBlocksInDataHeader(const uint8_t* data_ptr,
-                                                datastructure::DataHeader& data_header)
+void ParseDataHeader::setDataBlocksInDataHeader(const uint8_t* &data_ptr,
+                                                datastructure::DataHeader& data_header) const
 {
   setGeneralSystemStateBlockOffsetInDataHeader(data_ptr, data_header);
   setGeneralSystemStateBlockSizeInDataHeader(data_ptr, data_header);
@@ -96,128 +96,128 @@ void ParseDataHeader::setDataBlocksInDataHeader(const uint8_t* data_ptr,
   setApplicationDataBlockSizeInDataHeader(data_ptr, data_header);
 }
 
-void ParseDataHeader::setVersionIndicatorInDataHeader(const uint8_t* data_ptr,
-                                                      datastructure::DataHeader& data_header)
+void ParseDataHeader::setVersionIndicatorInDataHeader(const uint8_t* &data_ptr,
+                                                      datastructure::DataHeader& data_header) const
 {
   data_header.setVersionIndicator(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 0));
 }
 
-void ParseDataHeader::setMajorVersionInDataHeader(const uint8_t* data_ptr,
-                                                  datastructure::DataHeader& data_header)
+void ParseDataHeader::setMajorVersionInDataHeader(const uint8_t* &data_ptr,
+                                                  datastructure::DataHeader& data_header) const
 {
   data_header.setVersionMajorVersion(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 1));
 }
 
-void ParseDataHeader::setMinorVersionInDataHeader(const uint8_t* data_ptr,
-                                                  datastructure::DataHeader& data_header)
+void ParseDataHeader::setMinorVersionInDataHeader(const uint8_t* &data_ptr,
+                                                  datastructure::DataHeader& data_header) const
 {
   data_header.setVersionMinorVersion(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 2));
 }
 
-void ParseDataHeader::setVersionReleaseInDataHeader(const uint8_t* data_ptr,
-                                                    datastructure::DataHeader& data_header)
+void ParseDataHeader::setVersionReleaseInDataHeader(const uint8_t* &data_ptr,
+                                                    datastructure::DataHeader& data_header) const
 {
   data_header.setVersionRelease(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 3));
 }
 
-void ParseDataHeader::setSerialNumberOfDeviceInDataHeader(const uint8_t* data_ptr,
-                                                          datastructure::DataHeader& data_header)
+void ParseDataHeader::setSerialNumberOfDeviceInDataHeader(const uint8_t* &data_ptr,
+                                                          datastructure::DataHeader& data_header) const
 {
   data_header.setSerialNumberOfDevice(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 4));
 }
 
 void ParseDataHeader::setSerialNumberOfSystemPlugInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setSerialNumberOfSystemPlug(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 8));
 }
 
-void ParseDataHeader::setChannelNumberInDataHeader(const uint8_t* data_ptr,
-                                                   datastructure::DataHeader& data_header)
+void ParseDataHeader::setChannelNumberInDataHeader(const uint8_t* &data_ptr,
+                                                   datastructure::DataHeader& data_header) const
 {
   data_header.setChannelNumber(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 12));
 }
 
-void ParseDataHeader::setSequenceNumberInDataHeader(const uint8_t* data_ptr,
-                                                    datastructure::DataHeader& data_header)
+void ParseDataHeader::setSequenceNumberInDataHeader(const uint8_t* &data_ptr,
+                                                    datastructure::DataHeader& data_header) const
 {
   data_header.setSequenceNumber(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16));
 }
 
-void ParseDataHeader::setScanNumberInDataHeader(const uint8_t* data_ptr,
-                                                datastructure::DataHeader& data_header)
+void ParseDataHeader::setScanNumberInDataHeader(const uint8_t* &data_ptr,
+                                                datastructure::DataHeader& data_header) const
 {
   data_header.setScanNumber(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 20));
 }
 
-void ParseDataHeader::setTimestampDateInDataHeader(const uint8_t* data_ptr,
-                                                   datastructure::DataHeader& data_header)
+void ParseDataHeader::setTimestampDateInDataHeader(const uint8_t* &data_ptr,
+                                                   datastructure::DataHeader& data_header) const
 {
   data_header.setTimestampDate(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 24));
 }
 
-void ParseDataHeader::setTimestampTimeInDataHeader(const uint8_t* data_ptr,
-                                                   datastructure::DataHeader& data_header)
+void ParseDataHeader::setTimestampTimeInDataHeader(const uint8_t* &data_ptr,
+                                                   datastructure::DataHeader& data_header) const
 {
   data_header.setTimestampTime(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 28));
 }
 
 void ParseDataHeader::setGeneralSystemStateBlockOffsetInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setGeneralSystemStateBlockOffset(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 32));
 }
 
 void ParseDataHeader::setGeneralSystemStateBlockSizeInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setGeneralSystemStateBlockSize(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 34));
 }
 
 void ParseDataHeader::setDerivedValuesBlockOffsetInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setDerivedValuesBlockOffset(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 36));
 }
 
-void ParseDataHeader::setDerivedValuesBlockSizeInDataHeader(const uint8_t* data_ptr,
-                                                            datastructure::DataHeader& data_header)
+void ParseDataHeader::setDerivedValuesBlockSizeInDataHeader(const uint8_t* &data_ptr,
+                                                            datastructure::DataHeader& data_header) const
 {
   data_header.setDerivedValuesBlockSize(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 38));
 }
 
 void ParseDataHeader::setMeasurementDataBlockOffsetInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setMeasurementDataBlockOffset(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 40));
 }
 
 void ParseDataHeader::setMeasurementDataBlockSizeInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setMeasurementDataBlockSize(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 42));
 }
 
 void ParseDataHeader::setIntrusionDataBlockOffsetInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setIntrusionDataBlockOffset(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 44));
 }
 
-void ParseDataHeader::setIntrusionDataBlockSizeInDataHeader(const uint8_t* data_ptr,
-                                                            datastructure::DataHeader& data_header)
+void ParseDataHeader::setIntrusionDataBlockSizeInDataHeader(const uint8_t* &data_ptr,
+                                                            datastructure::DataHeader& data_header) const
 {
   data_header.setIntrusionDataBlockSize(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 46));
 }
 
 void ParseDataHeader::setApplicationDataBlockOffsetInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setApplicationDataBlockOffset(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 48));
 }
 
 void ParseDataHeader::setApplicationDataBlockSizeInDataHeader(
-  const uint8_t* data_ptr, datastructure::DataHeader& data_header)
+  const uint8_t* &data_ptr, datastructure::DataHeader& data_header) const
 {
   data_header.setApplicationDataBlockSize(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 50));
 }

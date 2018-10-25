@@ -43,7 +43,7 @@ namespace cola2 {
 class MethodCommand : public Command
 {
 public:
-  MethodCommand(Cola2Session& session, uint16_t method_index);
+  MethodCommand(Cola2Session& session,const uint16_t &method_index);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();

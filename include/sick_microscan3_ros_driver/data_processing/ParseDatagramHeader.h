@@ -48,21 +48,21 @@ class ParseDatagramHeader
 {
 public:
   ParseDatagramHeader();
-  bool parseUDPSequence(sick::datastructure::PacketBuffer buffer,
-                        sick::datastructure::DatagramHeader& header);
+  bool parseUDPSequence(const datastructure::PacketBuffer &buffer,
+                        sick::datastructure::DatagramHeader& header) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  void setDataInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setDataInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
 
-  void setDatagramMarkerInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
-  void setProtocolInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
-  void setMajorVersionInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
-  void setMinorVersionInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
-  void setTotalLengthInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
-  void setIdentificationInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
-  void setFragmentOffsetInHeader(const uint8_t* data_ptr, datastructure::DatagramHeader& header);
+  void setDatagramMarkerInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setProtocolInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setMajorVersionInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setMinorVersionInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setTotalLengthInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setIdentificationInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setFragmentOffsetInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
 };
 
 } // namespace data_processing

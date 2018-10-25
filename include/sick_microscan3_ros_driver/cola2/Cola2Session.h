@@ -54,14 +54,15 @@ namespace cola2 {
 class Command;
 class CreateSession;
 
+
 class Cola2Session
 {
 public:
   typedef std::shared_ptr<sick::cola2::Command> CommandPtr;
 
-  Cola2Session(std::shared_ptr<communication::AsyncTCPClient> async_tcp_client);
+  Cola2Session(const std::shared_ptr<communication::AsyncTCPClient>& async_tcp_client);
 
-  bool executeCommand(CommandPtr command);
+  bool executeCommand(const CommandPtr& command);
 
   uint32_t getSessionID() const;
   void setSessionID(const uint32_t& session_id);
@@ -70,14 +71,11 @@ public:
 
   bool close();
   bool open();
+
   void waitForCompletion();
 
 private:
-  void processPacket(const sick::datastructure::PacketBuffer& packet);
 
-  bool addCommand(uint16_t request_id, CommandPtr command);
-  bool findCommand(uint16_t request_id, CommandPtr& command);
-  bool removeCommand(uint16_t request_id);
 
 
   std::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
@@ -89,14 +87,19 @@ private:
 
   boost::mutex m_execution_mutex;
 
-
   uint32_t m_session_id;
   uint16_t m_last_request_id;
 
-  bool startProcessingAndRemovePendingCommandAfterwards(sick::datastructure::PacketBuffer& packet);
+  void processPacket(const sick::datastructure::PacketBuffer& packet);
+
+  bool addCommand(const uint16_t& request_id, const CommandPtr& command);
+  bool findCommand(const uint16_t& request_id, CommandPtr& command);
+  bool removeCommand(const uint16_t& request_id);
+
+  bool startProcessingAndRemovePendingCommandAfterwards(const sick::datastructure::PacketBuffer& packet);
   bool addPacketToMerger(const sick::datastructure::PacketBuffer& packet);
   bool checkIfPacketIsCompleteAndOtherwiseListenForMorePackets();
-  bool sendTelegramAndListenForAnswer(CommandPtr command);
+  bool sendTelegramAndListenForAnswer(const CommandPtr& command);
 };
 
 

@@ -36,10 +36,10 @@
 #include <ros/ros.h>
 
 /*!
- * @brief main The Main node to start the Ros Driver, this method is executed via launch file
- * @param argc number of arguments given
- * @param argv arguments
- * @return is successful, will always return 0
+ * @brief main The Main node to start the ROS driver, this method is executed via launch file.
+ * @param argc Number of arguments given.
+ * @param argv Arguments which are given on startup of the main function.
+ * @return If it runs successful, will always return 0 for the ROS driver.
  */
 int main(int argc, char** argv)
 {

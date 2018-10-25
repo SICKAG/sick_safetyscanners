@@ -40,7 +40,9 @@
 namespace sick {
 namespace cola2 {
 
-MonitoringCaseTableHeaderVariableCommand::MonitoringCaseTableHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index)
+//TODO
+
+MonitoringCaseTableHeaderVariableCommand::MonitoringCaseTableHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data)
   : VariableCommand(session, 2100)
   , m_field_data(field_data)
 {

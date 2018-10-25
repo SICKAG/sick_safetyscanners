@@ -48,7 +48,7 @@ class MonitoringCaseTableHeaderVariableCommand : public VariableCommand
 public:
   typedef sick::cola2::VariableCommand base_class;
 
-  MonitoringCaseTableHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index);
+  MonitoringCaseTableHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();

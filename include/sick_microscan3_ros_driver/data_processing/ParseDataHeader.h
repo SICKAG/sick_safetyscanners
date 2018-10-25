@@ -50,49 +50,49 @@ class ParseDataHeader
 public:
   ParseDataHeader();
 
-  datastructure::DataHeader parseUDPSequence(sick::datastructure::PacketBuffer buffer,
-                                             datastructure::Data& data);
+  datastructure::DataHeader parseUDPSequence(const datastructure::PacketBuffer &buffer,
+                                             datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setVersionIndicatorInDataHeader(const uint8_t* data_ptr,
-                                       datastructure::DataHeader& data_header);
-  void setMajorVersionInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setMinorVersionInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setVersionReleaseInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setSerialNumberOfDeviceInDataHeader(const uint8_t* data_ptr,
-                                           datastructure::DataHeader& data_header);
-  void setSerialNumberOfSystemPlugInDataHeader(const uint8_t* data_ptr,
-                                               datastructure::DataHeader& data_header);
-  void setChannelNumberInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setSequenceNumberInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setScanNumberInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setTimestampDateInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setTimestampTimeInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setGeneralSystemStateBlockOffsetInDataHeader(const uint8_t* data_ptr,
-                                                    datastructure::DataHeader& data_header);
-  void setGeneralSystemStateBlockSizeInDataHeader(const uint8_t* data_ptr,
-                                                  datastructure::DataHeader& data_header);
-  void setDerivedValuesBlockOffsetInDataHeader(const uint8_t* data_ptr,
-                                               datastructure::DataHeader& data_header);
-  void setDerivedValuesBlockSizeInDataHeader(const uint8_t* data_ptr,
-                                             datastructure::DataHeader& data_header);
-  void setMeasurementDataBlockOffsetInDataHeader(const uint8_t* data_ptr,
-                                                 datastructure::DataHeader& data_header);
-  void setMeasurementDataBlockSizeInDataHeader(const uint8_t* data_ptr,
-                                               datastructure::DataHeader& data_header);
-  void setIntrusionDataBlockOffsetInDataHeader(const uint8_t* data_ptr,
-                                               datastructure::DataHeader& data_header);
-  void setIntrusionDataBlockSizeInDataHeader(const uint8_t* data_ptr,
-                                             datastructure::DataHeader& data_header);
-  void setApplicationDataBlockOffsetInDataHeader(const uint8_t* data_ptr,
-                                                 datastructure::DataHeader& data_header);
-  void setApplicationDataBlockSizeInDataHeader(const uint8_t* data_ptr,
-                                               datastructure::DataHeader& data_header);
-  void setDataInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setVersionInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setScanHeaderInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
-  void setDataBlocksInDataHeader(const uint8_t* data_ptr, datastructure::DataHeader& data_header);
+  void setVersionIndicatorInDataHeader(const uint8_t *&data_ptr,
+                                       datastructure::DataHeader& data_header) const;
+  void setMajorVersionInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setMinorVersionInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setVersionReleaseInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setSerialNumberOfDeviceInDataHeader(const uint8_t *&data_ptr,
+                                           datastructure::DataHeader& data_header) const;
+  void setSerialNumberOfSystemPlugInDataHeader(const uint8_t *&data_ptr,
+                                               datastructure::DataHeader& data_header) const;
+  void setChannelNumberInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setSequenceNumberInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setScanNumberInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setTimestampDateInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setTimestampTimeInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setGeneralSystemStateBlockOffsetInDataHeader(const uint8_t *&data_ptr,
+                                                    datastructure::DataHeader& data_header) const;
+  void setGeneralSystemStateBlockSizeInDataHeader(const uint8_t *&data_ptr,
+                                                  datastructure::DataHeader& data_header) const;
+  void setDerivedValuesBlockOffsetInDataHeader(const uint8_t *&data_ptr,
+                                               datastructure::DataHeader& data_header) const;
+  void setDerivedValuesBlockSizeInDataHeader(const uint8_t *&data_ptr,
+                                             datastructure::DataHeader& data_header) const;
+  void setMeasurementDataBlockOffsetInDataHeader(const uint8_t *&data_ptr,
+                                                 datastructure::DataHeader& data_header) const;
+  void setMeasurementDataBlockSizeInDataHeader(const uint8_t *&data_ptr,
+                                               datastructure::DataHeader& data_header) const;
+  void setIntrusionDataBlockOffsetInDataHeader(const uint8_t *&data_ptr,
+                                               datastructure::DataHeader& data_header) const;
+  void setIntrusionDataBlockSizeInDataHeader(const uint8_t *&data_ptr,
+                                             datastructure::DataHeader& data_header) const;
+  void setApplicationDataBlockOffsetInDataHeader(const uint8_t *&data_ptr,
+                                                 datastructure::DataHeader& data_header) const;
+  void setApplicationDataBlockSizeInDataHeader(const uint8_t *&data_ptr,
+                                               datastructure::DataHeader& data_header) const;
+  void setDataInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setVersionInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setScanHeaderInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
+  void setDataBlocksInDataHeader(const uint8_t *&data_ptr, datastructure::DataHeader& data_header) const;
 };
 
 } // namespace data_processing

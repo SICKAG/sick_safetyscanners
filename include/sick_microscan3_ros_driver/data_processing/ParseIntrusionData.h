@@ -49,31 +49,28 @@ class ParseIntrusionData
 public:
   ParseIntrusionData();
 
-  datastructure::IntrusionData parseUDPSequence(sick::datastructure::PacketBuffer buffer,
+  datastructure::IntrusionData parseUDPSequence(const datastructure::PacketBuffer &buffer,
                                                 datastructure::Data& data);
 
   uint16_t getNumScanPoints() const;
-  void setNumScanPoints(const uint16_t& num_scan_points);
+  void setNumScanPoints(const uint16_t num_scan_points);
 
 private:
   uint16_t m_num_scan_points;
 
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInIntrusionData(const uint8_t* data_ptr, datastructure::IntrusionData& intrusion_data);
-  void setDataInIntrusionDatums(const uint8_t* data_ptr,
-                                std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums);
-  uint16_t setDataInIntrusionDatum(uint16_t offset,
-                                 const uint8_t* data_ptr,
-                                 sick::datastructure::IntrusionDatum& datum);
-  uint16_t setSizeInIntrusionDatum(uint16_t offset,
-                                 const uint8_t* data_ptr,
-                                 sick::datastructure::IntrusionDatum& datum);
-  uint16_t setFlagsInIntrusionDatum(uint16_t offset,
-                                  const uint8_t* data_ptr,
-                                  sick::datastructure::IntrusionDatum& datum);
-  bool checkIfPreconditionsAreMet(datastructure::Data& data);
-  bool checkIfIntrusionDataIsPublished(datastructure::Data& data);
-  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data& data);
+  void setDataInIntrusionData(const uint8_t* &data_ptr, datastructure::IntrusionData& intrusion_data) const;
+  void setDataInIntrusionDatums(const uint8_t* &data_ptr,
+                                std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums) const;
+  uint16_t setSizeInIntrusionDatum(const uint16_t offset,
+                                 const uint8_t* &data_ptr,
+                                 sick::datastructure::IntrusionDatum& datum) const;
+  uint16_t setFlagsInIntrusionDatum(const uint16_t offset,
+                                  const uint8_t* &data_ptr,
+                                  sick::datastructure::IntrusionDatum& datum) const;
+  bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
+  bool checkIfIntrusionDataIsPublished(const datastructure::Data& data) const;
+  bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;
 };
 
 } // namespace data_processing

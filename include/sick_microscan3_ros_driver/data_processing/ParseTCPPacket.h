@@ -55,25 +55,24 @@ class ParseTCPPacket
 public:
   ParseTCPPacket();
 
-  bool parseTCPSequence(datastructure::PacketBuffer buffer, sick::cola2::Command& command);
-  int getExpectedPacketLength(datastructure::PacketBuffer buffer);
-
-  uint16_t getRequestID(datastructure::PacketBuffer buffer);
+  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, sick::cola2::Command& command) const;
+  uint32_t getExpectedPacketLength(const datastructure::PacketBuffer &buffer);
+  uint16_t getRequestID(const datastructure::PacketBuffer &buffer) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  uint32_t readSTx(datastructure::PacketBuffer& buffer);
-  uint32_t readLength(datastructure::PacketBuffer& buffer);
-  uint16_t readRequestID(datastructure::PacketBuffer& buffer);
-  uint8_t readHubCntr(datastructure::PacketBuffer& buffer);
-  uint8_t readNoC(datastructure::PacketBuffer& buffer);
-  uint32_t readSessionID(datastructure::PacketBuffer& buffer);
-  uint8_t readCommandType(datastructure::PacketBuffer& buffer);
-  uint8_t readCommandMode(datastructure::PacketBuffer& buffer);
-  uint16_t readErrorCode(datastructure::PacketBuffer& buffer);
-  void readData(datastructure::PacketBuffer& buffer, std::vector<uint8_t>& byteVector);
-  void setCommandValuesFromPacket(sick::datastructure::PacketBuffer& buffer,
-                                  sick::cola2::Command& command);
+  uint32_t readSTx(const uint8_t *&data_ptr) const;
+  uint32_t readLength(const uint8_t *&data_ptr) const;
+  uint16_t readRequestID(const uint8_t *&data_ptr) const;
+  uint8_t readHubCntr(const uint8_t *&data_ptr) const;
+  uint8_t readNoC(const uint8_t *&data_ptr) const;
+  uint32_t readSessionID(const uint8_t *&data_ptr) const;
+  uint8_t readCommandType(const uint8_t *&data_ptr) const;
+  uint8_t readCommandMode(const uint8_t *&data_ptr) const;
+  uint16_t readErrorCode(const uint8_t *&data_ptr) const;
+  void readData(const datastructure::PacketBuffer& buffer, std::vector<uint8_t>& byteVector) const;
+  void setCommandValuesFromPacket(const sick::datastructure::PacketBuffer& buffer,
+                                  sick::cola2::Command& command) const;
 };
 
 } // namespace data_processing

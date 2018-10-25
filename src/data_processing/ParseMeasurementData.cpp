@@ -43,7 +43,7 @@ ParseMeasurementData::ParseMeasurementData()
 }
 
 datastructure::MeasurementData
-ParseMeasurementData::parseUDPSequence(datastructure::PacketBuffer buffer,
+ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer &buffer,
                                        datastructure::Data& data)
 {
   datastructure::MeasurementData measurement_data;
@@ -60,7 +60,7 @@ ParseMeasurementData::parseUDPSequence(datastructure::PacketBuffer buffer,
   return measurement_data;
 }
 
-bool ParseMeasurementData::checkIfPreconditionsAreMet(datastructure::Data& data)
+bool ParseMeasurementData::checkIfPreconditionsAreMet(const datastructure::Data& data) const
 {
   if (!checkIfMeasurementDataIsPublished(data))
   {
@@ -73,7 +73,7 @@ bool ParseMeasurementData::checkIfPreconditionsAreMet(datastructure::Data& data)
   return true;
 }
 
-bool ParseMeasurementData::checkIfMeasurementDataIsPublished(datastructure::Data& data)
+bool ParseMeasurementData::checkIfMeasurementDataIsPublished(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->getMeasurementDataBlockOffset() == 0 &&
       data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0)
@@ -83,7 +83,7 @@ bool ParseMeasurementData::checkIfMeasurementDataIsPublished(datastructure::Data
   return true;
 }
 
-bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(datastructure::Data& data)
+bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->isEmpty())
   {
@@ -98,26 +98,26 @@ bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(datastructure::
 
 
 void ParseMeasurementData::setDataInMeasurementData(
-  const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data)
 {
   setNumberOfBeamsInMeasurementData(data_ptr, measurement_data);
   setScanPointsInMeasurementData(data_ptr, measurement_data);
 }
 
 void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
-  const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data) const
 {
   measurement_data.setNumberOfBeams(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 0));
 }
 
-void ParseMeasurementData::setStartAngleAndDelta(datastructure::Data& data)
+void ParseMeasurementData::setStartAngleAndDelta(const datastructure::Data& data)
 {
   m_angle       = data.getDerivedValuesPtr()->getStartAngle();
   m_angle_delta = data.getDerivedValuesPtr()->getAngularBeamResolution();
 }
 
 void ParseMeasurementData::setScanPointsInMeasurementData(
-  const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data)
 {
   for (size_t i = 0; i < measurement_data.getNumberOfBeams(); i++)
   {
@@ -127,7 +127,7 @@ void ParseMeasurementData::setScanPointsInMeasurementData(
 }
 
 void ParseMeasurementData::addScanPointToMeasurementData(
-  uint16_t offset, const uint8_t* data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint16_t offset, const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data) const
 {
   int16_t distance             = m_reader_ptr->readuint16_tLittleEndian(data_ptr, (4 + offset * 4));
   uint8_t reflectivity         = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (6 + offset * 4));

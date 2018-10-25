@@ -40,7 +40,7 @@
 namespace sick {
 namespace cola2 {
 
-FieldHeaderVariableCommand::FieldHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index)
+FieldHeaderVariableCommand::FieldHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, const uint16_t index)
   : VariableCommand(session, 0x2710 + index)
   , m_field_data(field_data)
 {

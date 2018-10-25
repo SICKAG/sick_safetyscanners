@@ -57,7 +57,7 @@ class ParseData
 public:
   ParseData();
 
-  bool parseUDPSequence(sick::datastructure::PacketBuffer buffer, sick::datastructure::Data& data);
+  bool parseUDPSequence(const sick::datastructure::PacketBuffer buffer, sick::datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
@@ -71,13 +71,13 @@ private:
   std::shared_ptr<sick::data_processing::ParseApplicationData> m_application_data_parser_ptr;
 
 
-  void setDataBlocksInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  void setDataHeaderInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  void setDerivedValuesInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  void setMeasurementDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  void setGeneralSystemStateInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  void setIntrusionDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
-  void setApplicationDataInData(datastructure::PacketBuffer& buffer, datastructure::Data& data);
+  void setDataBlocksInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
+  void setDataHeaderInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
+  void setDerivedValuesInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
+  void setMeasurementDataInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
+  void setGeneralSystemStateInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
+  void setIntrusionDataInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
+  void setApplicationDataInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
 };
 
 } // namespace data_processing

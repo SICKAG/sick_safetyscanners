@@ -37,7 +37,7 @@
 namespace sick {
 namespace cola2 {
 
-Cola2Session::Cola2Session(std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client)
+Cola2Session::Cola2Session(const std::shared_ptr<communication::AsyncTCPClient> &async_tcp_client)
   : m_async_tcp_client_ptr(async_tcp_client)
   , m_session_id(0)
   , m_last_request_id(0)
@@ -59,14 +59,14 @@ bool Cola2Session::close()
   return executeCommand(command_ptr);
 }
 
-bool Cola2Session::executeCommand(CommandPtr command)
+bool Cola2Session::executeCommand(const CommandPtr& command)
 {
   addCommand(command->getRequestID(), command);
   sendTelegramAndListenForAnswer(command);
   return true;
 }
 
-bool Cola2Session::sendTelegramAndListenForAnswer(CommandPtr command)
+bool Cola2Session::sendTelegramAndListenForAnswer(const CommandPtr& command)
 {
   command->lockExecutionMutex(); // lock
   sick::datastructure::PacketBuffer::VectorBuffer telegram;
@@ -118,7 +118,7 @@ bool Cola2Session::checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()
 
 
 bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
-  sick::datastructure::PacketBuffer& packet)
+  const sick::datastructure::PacketBuffer& packet)
 {
   uint16_t requestID = m_tcp_parser_ptr->getRequestID(packet);
   CommandPtr pendingCommand;
@@ -130,7 +130,7 @@ bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
   return true;
 }
 
-bool Cola2Session::addCommand(uint16_t request_id, CommandPtr command)
+bool Cola2Session::addCommand(const uint16_t &request_id, const CommandPtr &command)
 {
   if (m_pending_commands_map.find(request_id) != m_pending_commands_map.end())
   {
@@ -140,7 +140,7 @@ bool Cola2Session::addCommand(uint16_t request_id, CommandPtr command)
   return true;
 }
 
-bool Cola2Session::findCommand(uint16_t request_id, CommandPtr& command)
+bool Cola2Session::findCommand(const uint16_t &request_id, CommandPtr& command)
 {
   if (m_pending_commands_map.find(request_id) == m_pending_commands_map.end())
   {
@@ -150,7 +150,7 @@ bool Cola2Session::findCommand(uint16_t request_id, CommandPtr& command)
   return true;
 }
 
-bool Cola2Session::removeCommand(uint16_t request_id)
+bool Cola2Session::removeCommand(const uint16_t &request_id)
 {
   auto it = m_pending_commands_map.find(request_id);
   if (it == m_pending_commands_map.end())

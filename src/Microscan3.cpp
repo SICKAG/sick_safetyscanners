@@ -79,7 +79,7 @@ void Microscan3::processTCPPacket(const sick::datastructure::PacketBuffer& buffe
   // Not needed for current functionality, inplace for possible future developments
 }
 
-void Microscan3::changeSensorSettings(sick::datastructure::CommSettings settings)
+void Microscan3::changeSensorSettings(const datastructure::CommSettings &settings)
 {
   startTCPConnection(settings);
 
@@ -88,7 +88,7 @@ void Microscan3::changeSensorSettings(sick::datastructure::CommSettings settings
   stopTCPConnection();
 }
 
-void Microscan3::requestTypeCode(sick::datastructure::CommSettings settings, sick::datastructure::TypeCode& type_code)
+void Microscan3::requestTypeCode(const datastructure::CommSettings &settings, sick::datastructure::TypeCode& type_code)
 {
   startTCPConnection(settings);
 
@@ -97,7 +97,7 @@ void Microscan3::requestTypeCode(sick::datastructure::CommSettings settings, sic
   stopTCPConnection();
 }
 
-void Microscan3::startTCPConnection(sick::datastructure::CommSettings settings)
+void Microscan3::startTCPConnection(const sick::datastructure::CommSettings &settings)
 {
   std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client =
     std::make_shared<sick::communication::AsyncTCPClient>(
@@ -109,7 +109,7 @@ void Microscan3::startTCPConnection(sick::datastructure::CommSettings settings)
   m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 }
 
-void Microscan3::changeCommSettingsinColaSession(sick::datastructure::CommSettings settings)
+void Microscan3::changeCommSettingsinColaSession(const datastructure::CommSettings &settings)
 {
   m_session_ptr->open();
   sick::cola2::Cola2Session::CommandPtr command_ptr =
@@ -130,7 +130,7 @@ void Microscan3::changeCommSettingsinColaSession(sick::datastructure::CommSettin
 
   command_ptr =
     std::make_shared<sick::cola2::MonitoringCaseTableHeaderVariableCommand>(boost::ref(*m_session_ptr),
-                                                               field_data, 1);
+                                                               field_data);
   m_session_ptr->executeCommand(command_ptr);
 
   command_ptr =

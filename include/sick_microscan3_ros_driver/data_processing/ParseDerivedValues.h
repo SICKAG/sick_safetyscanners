@@ -49,27 +49,27 @@ class ParseDerivedValues
 public:
   ParseDerivedValues();
 
-  datastructure::DerivedValues parseUDPSequence(sick::datastructure::PacketBuffer buffer,
-                                                datastructure::Data& data);
+  datastructure::DerivedValues parseUDPSequence(const datastructure::PacketBuffer &buffer,
+                                                datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInDerivedValues(const uint8_t* data_ptr, datastructure::DerivedValues& derived_values);
-  void setMultiplicationFactorInDerivedValues(const uint8_t* data_ptr,
-                                              datastructure::DerivedValues& derived_values);
-  void setNumberOfBeamsInDerivedValues(const uint8_t* data_ptr,
-                                       datastructure::DerivedValues& derived_values);
-  void setScanTimeInDerivedValues(const uint8_t* data_ptr,
-                                  datastructure::DerivedValues& derived_values);
-  void setStartAngleInDerivedValues(const uint8_t* data_ptr,
-                                    datastructure::DerivedValues& derived_values);
-  void setAngularBeamResolutionInDerivedValues(const uint8_t* data_ptr,
-                                               datastructure::DerivedValues& derived_values);
-  void setInterbeamPeriodInDerivedValues(const uint8_t* data_ptr,
-                                         datastructure::DerivedValues& derived_values);
-  bool checkIfPreconditionsAreMet(datastructure::Data& data);
-  bool checkIfDerivedValuesIsPublished(datastructure::Data& data);
-  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data& data);
+  void setDataInDerivedValues(const uint8_t *&data_ptr, datastructure::DerivedValues& derived_values) const;
+  void setMultiplicationFactorInDerivedValues(const uint8_t *&data_ptr,
+                                              datastructure::DerivedValues& derived_values) const;
+  void setNumberOfBeamsInDerivedValues(const uint8_t *&data_ptr,
+                                       datastructure::DerivedValues& derived_values) const;
+  void setScanTimeInDerivedValues(const uint8_t* &data_ptr,
+                                  datastructure::DerivedValues& derived_values) const;
+  void setStartAngleInDerivedValues(const uint8_t* &data_ptr,
+                                    datastructure::DerivedValues& derived_values) const;
+  void setAngularBeamResolutionInDerivedValues(const uint8_t* &data_ptr,
+                                               datastructure::DerivedValues& derived_values) const;
+  void setInterbeamPeriodInDerivedValues(const uint8_t* &data_ptr,
+                                         datastructure::DerivedValues& derived_values) const;
+  bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
+  bool checkIfDerivedValuesIsPublished(const datastructure::Data& data) const;
+  bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;
 };
 
 } // namespace data_processing

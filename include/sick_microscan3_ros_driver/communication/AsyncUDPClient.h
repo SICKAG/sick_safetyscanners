@@ -58,7 +58,7 @@ public:
 
   AsyncUDPClient(PacketHandler packet_handler,
                  boost::asio::io_service& io_service,
-                 unsigned short local_port = 0);
+                 const uint16_t &local_port = 0);
   virtual ~AsyncUDPClient();
 
   void run_service();
@@ -75,7 +75,7 @@ private:
   std::thread m_service_thread;
 
   void start_receive();
-  void handle_receive(const boost::system::error_code& error, std::size_t bytes_transferred);
+  void handle_receive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
 
 
   AsyncUDPClient(AsyncUDPClient&); // block default copy constructor

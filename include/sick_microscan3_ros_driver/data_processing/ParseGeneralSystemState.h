@@ -32,7 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#pragma once
+#ifndef PARSEGENERALSYSTEMSTATE_H
+#define PARSEGENERALSYSTEMSTATE_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
@@ -48,31 +49,34 @@ class ParseGeneralSystemState
 public:
   ParseGeneralSystemState();
 
-  datastructure::GeneralSystemState parseUDPSequence(sick::datastructure::PacketBuffer buffer,
-                                                     datastructure::Data& data);
+  datastructure::GeneralSystemState parseUDPSequence(const sick::datastructure::PacketBuffer &buffer,
+                                                     datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInGeneralSystemState(const uint8_t* data_ptr,
-                                   datastructure::GeneralSystemState& general_System_state);
-  void setStatusBitsInGeneralSystemState(const uint8_t* data_ptr,
-                                         datastructure::GeneralSystemState& general_System_state);
+
+  void setDataInGeneralSystemState(const uint8_t* &data_ptr,
+                                   datastructure::GeneralSystemState& general_System_state) const;
+  void setStatusBitsInGeneralSystemState(const uint8_t* &data_ptr,
+                                         datastructure::GeneralSystemState& general_System_state) const;
   void
-  setSafeCutOffPathInGeneralSystemState(const uint8_t* data_ptr,
-                                        datastructure::GeneralSystemState& general_System_state);
+  setSafeCutOffPathInGeneralSystemState(const uint8_t* &data_ptr,
+                                        datastructure::GeneralSystemState& general_System_state) const;
   void
-  setNonSafeCutOffPathInGeneralSystemState(const uint8_t* data_ptr,
-                                           datastructure::GeneralSystemState& general_System_state);
+  setNonSafeCutOffPathInGeneralSystemState(const uint8_t* &data_ptr,
+                                           datastructure::GeneralSystemState& general_System_state) const;
   void setResetRequiredCutOffPathInGeneralSystemState(
-    const uint8_t* data_ptr, datastructure::GeneralSystemState& general_System_state);
+    const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_System_state) const;
   void setCurrentMonitoringCasesInGeneralSystemState(
-    const uint8_t* data_ptr, datastructure::GeneralSystemState& general_System_state);
-  void setErrorsInGeneralSystemState(const uint8_t* data_ptr,
-                                     datastructure::GeneralSystemState& general_System_state);
-  bool checkIfPreconditionsAreMet(datastructure::Data& data);
-  bool checkIfGeneralSystemStateIsPublished(datastructure::Data& data);
-  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data& data);
+    const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+  void setErrorsInGeneralSystemState(const uint8_t* &data_ptr,
+                                     datastructure::GeneralSystemState& general_System_state) const;
+  bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
+  bool checkIfGeneralSystemStateIsPublished(const datastructure::Data& data)const;
+  bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;
 };
 
 } // namespace data_processing
 } // namespace sick
+
+#endif

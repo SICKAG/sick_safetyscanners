@@ -43,8 +43,8 @@ ParseGeneralSystemState::ParseGeneralSystemState()
 }
 
 datastructure::GeneralSystemState
-ParseGeneralSystemState::parseUDPSequence(datastructure::PacketBuffer buffer,
-                                          datastructure::Data& data)
+ParseGeneralSystemState::parseUDPSequence(const datastructure::PacketBuffer &buffer,
+                                          datastructure::Data& data) const
 {
   datastructure::GeneralSystemState general_system_state;
   if (!checkIfPreconditionsAreMet(data))
@@ -59,7 +59,7 @@ ParseGeneralSystemState::parseUDPSequence(datastructure::PacketBuffer buffer,
   return general_system_state;
 }
 
-bool ParseGeneralSystemState::checkIfPreconditionsAreMet(datastructure::Data& data)
+bool ParseGeneralSystemState::checkIfPreconditionsAreMet(const datastructure::Data& data) const
 {
   if (!checkIfGeneralSystemStateIsPublished(data))
   {
@@ -73,7 +73,7 @@ bool ParseGeneralSystemState::checkIfPreconditionsAreMet(datastructure::Data& da
   return true;
 }
 
-bool ParseGeneralSystemState::checkIfGeneralSystemStateIsPublished(datastructure::Data& data)
+bool ParseGeneralSystemState::checkIfGeneralSystemStateIsPublished(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset() == 0 &&
       data.getDataHeaderPtr()->getGeneralSystemStateBlockSize() == 0)
@@ -83,7 +83,7 @@ bool ParseGeneralSystemState::checkIfGeneralSystemStateIsPublished(datastructure
   return true;
 }
 
-bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(datastructure::Data& data)
+bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->isEmpty())
   {
@@ -93,8 +93,7 @@ bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(datastructur
 }
 
 
-void ParseGeneralSystemState::setDataInGeneralSystemState(
-  const uint8_t* data_ptr, datastructure::GeneralSystemState& general_system_state)
+void ParseGeneralSystemState::setDataInGeneralSystemState(const uint8_t *&data_ptr, datastructure::GeneralSystemState& general_system_state) const
 {
   setStatusBitsInGeneralSystemState(data_ptr, general_system_state);
   setSafeCutOffPathInGeneralSystemState(data_ptr, general_system_state);
@@ -105,7 +104,7 @@ void ParseGeneralSystemState::setDataInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
-  const uint8_t* data_ptr, datastructure::GeneralSystemState& general_system_state)
+  const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_system_state) const
 {
   uint8_t byte = m_reader_ptr->readuint8_tLittleEndian(data_ptr, 0);
 
@@ -119,7 +118,7 @@ void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
-  const uint8_t* data_ptr, datastructure::GeneralSystemState& general_system_state)
+  const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_system_state) const
 {
   std::vector<bool> safe_cut_off_path;
 
@@ -141,7 +140,7 @@ void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
-  const uint8_t* data_ptr, datastructure::GeneralSystemState& general_system_state)
+  const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_system_state) const
 {
   std::vector<bool> non_safe_cut_off_path;
 
@@ -163,7 +162,7 @@ void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
-  const uint8_t* data_ptr, datastructure::GeneralSystemState& general_system_state)
+  const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_system_state) const
 {
   std::vector<bool> reset_required_cutoff_path;
 
@@ -185,7 +184,7 @@ void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
-  const uint8_t* data_ptr, datastructure::GeneralSystemState& general_system_state)
+  const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_system_state) const
 {
   general_system_state.setCurrentMonitoringCaseNoTable_1(
     m_reader_ptr->readuint8_tLittleEndian(data_ptr, 10));
@@ -198,7 +197,7 @@ void ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setErrorsInGeneralSystemState(
-  const uint8_t* data_ptr, datastructure::GeneralSystemState& general_system_state)
+  const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_system_state) const
 {
   uint8_t byte = m_reader_ptr->readuint8_tLittleEndian(data_ptr, 15);
   general_system_state.setApplicationError(static_cast<bool>(byte & (0x01 << 0)));

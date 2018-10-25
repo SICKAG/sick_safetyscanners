@@ -55,14 +55,14 @@ class ParseFieldHeaderData
 public:
   ParseFieldHeaderData();
 
-  bool parseTCPSequence(datastructure::PacketBuffer buffer, datastructure::FieldData &field_data);
+  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, datastructure::FieldData &field_data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  void setFieldType(datastructure::PacketBuffer buffer, datastructure::FieldData &field_data);
-  int readFieldType(datastructure::PacketBuffer buffer);
-  int readSetIndex(const datastructure::PacketBuffer buffer);
+  void setFieldType(const uint8_t *&data_ptr, datastructure::FieldData &field_data) const;
+  int readFieldType(const uint8_t *&data_ptr) const;
+  int readSetIndex(const uint8_t *&data_ptr) const;
 };
 
 } // namespace data_processing

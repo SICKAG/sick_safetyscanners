@@ -45,17 +45,17 @@ ParseDeviceName::ParseDeviceName()
 }
 
 
-bool ParseDeviceName::parseTCPSequence(datastructure::PacketBuffer buffer,
-                                      std::string &device_name)
+bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer &buffer,
+                                      std::string &device_name) const
 {
-  device_name = readDeviceName(buffer);
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  device_name = readDeviceName(data_ptr);
   return true;
 }
 
 
-std::string ParseDeviceName::readDeviceName(datastructure::PacketBuffer& buffer)
+std::string ParseDeviceName::readDeviceName(const uint8_t* &data_ptr) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
   uint16_t string_length = m_reader_ptr->readuint16_tLittleEndian(data_ptr, 0);
 
   std::string name;

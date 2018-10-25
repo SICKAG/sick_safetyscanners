@@ -55,12 +55,12 @@ class ParseFieldGeometryData
 public:
   ParseFieldGeometryData();
 
-  bool parseTCPSequence(datastructure::PacketBuffer buffer, datastructure::FieldData &field_data);
+  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, datastructure::FieldData &field_data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  int readArrayLength(datastructure::PacketBuffer buffer);
-  int readArrayElement(datastructure::PacketBuffer buffer, int elem_number);
+  uint32_t readArrayLength(const uint8_t *&data_ptr) const;
+  uint16_t readArrayElement(const uint8_t *&data_ptr, uint32_t elem_number) const;
 };
 
 } // namespace data_processing

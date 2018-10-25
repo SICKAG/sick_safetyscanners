@@ -97,14 +97,14 @@ public:
    * \brief Changes the internal settings of the sensor
    * \param settings New set of settign to pass to the sensor
    */
-  void changeSensorSettings(sick::datastructure::CommSettings settings);
+  void changeSensorSettings(const sick::datastructure::CommSettings &settings);
 
   /*!
    * \brief Requests the typecode of the sensor.
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param type_code Returned typecode.
    */
-  void requestTypeCode(sick::datastructure::CommSettings settings, sick::datastructure::TypeCode &type_code);
+  void requestTypeCode(const sick::datastructure::CommSettings &settings, sick::datastructure::TypeCode &type_code);
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 
@@ -123,10 +123,10 @@ private:
   void processUDPPacket(const datastructure::PacketBuffer& buffer);
   bool UDPClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
-  void startTCPConnection(sick::datastructure::CommSettings settings);
-  void changeCommSettingsinColaSession(datastructure::CommSettings settings);
+  void startTCPConnection(const sick::datastructure::CommSettings& settings);
+  void changeCommSettingsinColaSession(const datastructure::CommSettings& settings);
   void stopTCPConnection();
-  void requestTypeCodeinColaSession(sick::datastructure::TypeCode &type_code);
+  void requestTypeCodeinColaSession( sick::datastructure::TypeCode &type_code);
 };
 
 } // namespace sick

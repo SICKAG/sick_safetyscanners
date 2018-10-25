@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 ChangeCommSettingsCommand::ChangeCommSettingsCommand(Cola2Session& session,
-                                                     sick::datastructure::CommSettings settings)
+                                                     const sick::datastructure::CommSettings& settings)
   : MethodCommand(session, 0x00b0)
   , m_settings(settings)
 {

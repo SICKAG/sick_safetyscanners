@@ -42,16 +42,16 @@ ParseDatagramHeader::ParseDatagramHeader()
   m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
-bool ParseDatagramHeader::parseUDPSequence(datastructure::PacketBuffer buffer,
-                                           datastructure::DatagramHeader& header)
+bool ParseDatagramHeader::parseUDPSequence(const datastructure::PacketBuffer &buffer,
+                                           datastructure::DatagramHeader& header) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
   setDataInHeader(data_ptr, header);
   return true;
 }
 
-void ParseDatagramHeader::setDataInHeader(const uint8_t* data_ptr,
-                                          datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setDataInHeader(const uint8_t* &data_ptr,
+                                          datastructure::DatagramHeader& header) const
 {
   setDatagramMarkerInHeader(data_ptr, header);
   setProtocolInHeader(data_ptr, header);
@@ -62,44 +62,44 @@ void ParseDatagramHeader::setDataInHeader(const uint8_t* data_ptr,
   setFragmentOffsetInHeader(data_ptr, header);
 }
 
-void ParseDatagramHeader::setDatagramMarkerInHeader(const uint8_t* data_ptr,
-                                                    datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setDatagramMarkerInHeader(const uint8_t* &data_ptr,
+                                                    datastructure::DatagramHeader& header) const
 {
   header.setDatagramMarker(m_reader_ptr->readuint32_tBigEndian(data_ptr, 0));
 }
 
-void ParseDatagramHeader::setProtocolInHeader(const uint8_t* data_ptr,
-                                              datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setProtocolInHeader(const uint8_t* &data_ptr,
+                                              datastructure::DatagramHeader& header) const
 {
   header.setProtocol(m_reader_ptr->readuint16_tBigEndian(data_ptr, 4));
 }
 
-void ParseDatagramHeader::setMajorVersionInHeader(const uint8_t* data_ptr,
-                                                  datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setMajorVersionInHeader(const uint8_t* &data_ptr,
+                                                  datastructure::DatagramHeader& header) const
 {
   header.setMajorVersion(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 6));
 }
 
-void ParseDatagramHeader::setMinorVersionInHeader(const uint8_t* data_ptr,
-                                                  datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setMinorVersionInHeader(const uint8_t* &data_ptr,
+                                                  datastructure::DatagramHeader& header) const
 {
   header.setMinorVersion(m_reader_ptr->readuint8_tLittleEndian(data_ptr, 7));
 }
 
-void ParseDatagramHeader::setTotalLengthInHeader(const uint8_t* data_ptr,
-                                                 datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setTotalLengthInHeader(const uint8_t* &data_ptr,
+                                                 datastructure::DatagramHeader& header) const
 {
   header.setTotalLength(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 8));
 }
 
-void ParseDatagramHeader::setIdentificationInHeader(const uint8_t* data_ptr,
-                                                    datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setIdentificationInHeader(const uint8_t* &data_ptr,
+                                                    datastructure::DatagramHeader& header) const
 {
   header.setIdentification(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 12));
 }
 
-void ParseDatagramHeader::setFragmentOffsetInHeader(const uint8_t* data_ptr,
-                                                    datastructure::DatagramHeader& header)
+void ParseDatagramHeader::setFragmentOffsetInHeader(const uint8_t* &data_ptr,
+                                                    datastructure::DatagramHeader& header) const
 {
   header.setFragmentOffset(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16));
 }

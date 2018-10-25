@@ -47,10 +47,10 @@ class TCPPacketMerger
 public:
   TCPPacketMerger();
 
-  bool isComplete();
-  bool isEmpty();
+  bool isComplete() const;
+  bool isEmpty() const;
 
-  bool addTCPPacket(sick::datastructure::PacketBuffer buffer);
+  bool addTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
   uint32_t getTargetSize() const;
   void setTargetSize(const uint32_t& targetSize);
@@ -60,11 +60,11 @@ private:
   sick::datastructure::PacketBuffer m_deployed_packet_buffer;
 
   std::vector<sick::datastructure::PacketBuffer> m_buffer_vector;
+  uint32_t m_targetSize;
 
-  bool addToMap(sick::datastructure::PacketBuffer newPacket);
+  bool addToMap(const sick::datastructure::PacketBuffer &newPacket);
   bool deployPacketIfComplete();
 
-  uint32_t m_targetSize;
   uint32_t getCurrentSize() const;
   bool deployPacket();
 };

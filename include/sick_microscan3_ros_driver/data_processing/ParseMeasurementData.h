@@ -49,26 +49,26 @@ class ParseMeasurementData
 public:
   ParseMeasurementData();
 
-  datastructure::MeasurementData parseUDPSequence(sick::datastructure::PacketBuffer buffer,
+  datastructure::MeasurementData parseUDPSequence(const datastructure::PacketBuffer &buffer,
                                                   datastructure::Data& header);
 
 private:
   float m_angle;
   float m_angle_delta;
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInMeasurementData(const uint8_t* data_ptr,
+  void setDataInMeasurementData(const uint8_t *&data_ptr,
                                 datastructure::MeasurementData& measurement_data);
-  void setNumberOfBeamsInMeasurementData(const uint8_t* data_ptr,
-                                         datastructure::MeasurementData& measurement_data);
-  void setStartAngleAndDelta(datastructure::Data& data);
-  void setScanPointsInMeasurementData(const uint8_t* data_ptr,
+  void setNumberOfBeamsInMeasurementData(const uint8_t *&data_ptr,
+                                         datastructure::MeasurementData& measurement_data) const;
+  void setStartAngleAndDelta(const datastructure::Data& data);
+  void setScanPointsInMeasurementData(const uint8_t *&data_ptr,
                                       datastructure::MeasurementData& measurement_data);
   void addScanPointToMeasurementData(uint16_t offset,
-                                     const uint8_t* data_ptr,
-                                     datastructure::MeasurementData& measurement_data);
-  bool checkIfPreconditionsAreMet(datastructure::Data& data);
-  bool checkIfMeasurementDataIsPublished(datastructure::Data& data);
-  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data& data);
+                                     const uint8_t *&data_ptr,
+                                     datastructure::MeasurementData& measurement_data) const;
+  bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
+  bool checkIfMeasurementDataIsPublished(const datastructure::Data& data) const;
+  bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;
 };
 
 } // namespace data_processing

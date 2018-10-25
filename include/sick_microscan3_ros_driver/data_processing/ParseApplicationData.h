@@ -50,81 +50,81 @@ class ParseApplicationData
 {
 public:
   ParseApplicationData();
-  datastructure::ApplicationData parseUDPSequence(sick::datastructure::PacketBuffer buffer,
-                                                  datastructure::Data& data);
+  datastructure::ApplicationData parseUDPSequence(const sick::datastructure::PacketBuffer& buffer,
+                                                  datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInApplicationData(const uint8_t* data_ptr,
-                                datastructure::ApplicationData& application_data);
-  void setApplicationInputsInApplicationData(const uint8_t* data_ptr,
-                                             datastructure::ApplicationData& application_data);
-  void setApplicationOutputsInApplicationData(const uint8_t* data_ptr,
-                                              datastructure::ApplicationData& application_data);
-  void setDataInApplicationInputs(const uint8_t* data_ptr, datastructure::ApplicationInputs& inputs);
-  void setDataInApplicationOutputs(const uint8_t* data_ptr,
-                                   datastructure::ApplicationOutputs& outputs);
-  void setUnsafeInputsInApplicationInputs(const uint8_t* data_ptr,
-                                          datastructure::ApplicationInputs& inputs);
-  void setUnsafeInputsSourcesInApplicationInputs(const uint8_t* data_ptr,
-                                                 datastructure::ApplicationInputs& inputs);
-  void setUnsafeInputsFlagsInApplicationInputs(const uint8_t* data_ptr,
-                                               datastructure::ApplicationInputs& inputs);
-  void setMonitoringCaseInputsInApplicationInputs(const uint8_t* data_ptr,
-                                                  datastructure::ApplicationInputs& inputs);
-  void setMonitoringCaseNumbersInApplicationInputs(const uint8_t* data_ptr,
-                                                   datastructure::ApplicationInputs& inputs);
-  void setMonitoringCaseFlagsInApplicationInputs(const uint8_t* data_ptr,
-                                                 datastructure::ApplicationInputs& inputs);
-  void setLinearVelocityInputsInApplicationInputs(const uint8_t* data_ptr,
-                                                  datastructure::ApplicationInputs& inputs);
-  void setLinearVelocity0InApplicationInputs(const uint8_t* data_ptr,
-                                             datastructure::ApplicationInputs& inputs);
-  void setLinearVelocity1InApplicationInputs(const uint8_t* data_ptr,
-                                             datastructure::ApplicationInputs& inputs);
-  void setLinearVelocityFlagsInApplicationInputs(const uint8_t* data_ptr,
-                                                 datastructure::ApplicationInputs& inputs);
-  void setSleepModeInputInApplicationInputs(const uint8_t* data_ptr,
-                                            datastructure::ApplicationInputs& inputs);
-  void setEvalutaionPathsOutputsInApplicationOutputs(const uint8_t* data_ptr,
-                                                     datastructure::ApplicationOutputs& outputs);
+  void setDataInApplicationData(const uint8_t* &data_ptr,
+                                datastructure::ApplicationData& application_data) const;
+  void setApplicationInputsInApplicationData(const uint8_t* &data_ptr,
+                                             datastructure::ApplicationData& application_data)  const;
+  void setApplicationOutputsInApplicationData(const uint8_t* &data_ptr,
+                                              datastructure::ApplicationData& application_data)  const;
+  void setDataInApplicationInputs(const uint8_t* &data_ptr, datastructure::ApplicationInputs& inputs)  const;
+  void setDataInApplicationOutputs(const uint8_t* &data_ptr,
+                                   datastructure::ApplicationOutputs& outputs)  const;
+  void setUnsafeInputsInApplicationInputs(const uint8_t* &data_ptr,
+                                          datastructure::ApplicationInputs& inputs) const;
+  void setUnsafeInputsSourcesInApplicationInputs(const uint8_t* &data_ptr,
+                                                 datastructure::ApplicationInputs& inputs) const;
+  void setUnsafeInputsFlagsInApplicationInputs(const uint8_t* &data_ptr,
+                                               datastructure::ApplicationInputs& inputs) const;
+  void setMonitoringCaseInputsInApplicationInputs(const uint8_t* &data_ptr,
+                                                  datastructure::ApplicationInputs& inputs)  const;
+  void setMonitoringCaseNumbersInApplicationInputs(const uint8_t* &data_ptr,
+                                                   datastructure::ApplicationInputs& inputs) const;
+  void setMonitoringCaseFlagsInApplicationInputs(const uint8_t* &data_ptr,
+                                                 datastructure::ApplicationInputs& inputs) const;
+  void setLinearVelocityInputsInApplicationInputs(const uint8_t* &data_ptr,
+                                                  datastructure::ApplicationInputs& inputs) const;
+  void setLinearVelocity0InApplicationInputs(const uint8_t* &data_ptr,
+                                             datastructure::ApplicationInputs& inputs) const;
+  void setLinearVelocity1InApplicationInputs(const uint8_t* &data_ptr,
+                                             datastructure::ApplicationInputs& inputs) const;
+  void setLinearVelocityFlagsInApplicationInputs(const uint8_t* &data_ptr,
+                                                 datastructure::ApplicationInputs& inputs) const;
+  void setSleepModeInputInApplicationInputs(const uint8_t* &data_ptr,
+                                            datastructure::ApplicationInputs& inputs) const;
+  void setEvalutaionPathsOutputsInApplicationOutputs(const uint8_t* &data_ptr,
+                                                     datastructure::ApplicationOutputs& outputs) const;
   void
-  setEvaluationPathsOutputsEvalOutInApplicationOutputs(const uint8_t* data_ptr,
-                                                       datastructure::ApplicationOutputs& outputs);
+  setEvaluationPathsOutputsEvalOutInApplicationOutputs(const uint8_t* &data_ptr,
+                                                       datastructure::ApplicationOutputs& outputs) const;
   void
-  setEvaluationPathsOutputsIsSafeInApplicationOutputs(const uint8_t* data_ptr,
-                                                      datastructure::ApplicationOutputs& outputs);
+  setEvaluationPathsOutputsIsSafeInApplicationOutputs(const uint8_t* &data_ptr,
+                                                      datastructure::ApplicationOutputs& outputs) const;
   void setEvaluationPathsOutputsValidFlagsInApplicationOutputs(
-    const uint8_t* data_ptr, datastructure::ApplicationOutputs& outputs);
-  void setMonitoringCaseOutputsInApplicationOutputs(const uint8_t* data_ptr,
-                                                    datastructure::ApplicationOutputs& outputs);
-  void setMonitoringCaseNumbersInApplicationOutputs(const uint8_t* data_ptr,
-                                                    datastructure::ApplicationOutputs& outputs);
-  void setMonitoringCaseFlagsInApplicationOutputs(const uint8_t* data_ptr,
-                                                  datastructure::ApplicationOutputs& outputs);
-  void setSleepModeOutputInApplicationOutputs(const uint8_t* data_ptr,
-                                              datastructure::ApplicationOutputs& outputs);
-  void setErrorFlagsInApplicationOutputs(const uint8_t* data_ptr,
-                                         datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocityOutoutsInApplicationOutputs(const uint8_t* data_ptr,
-                                                    datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocity0InApplicationOutputs(const uint8_t* data_ptr,
-                                              datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocity1InApplicationOutputs(const uint8_t* data_ptr,
-                                              datastructure::ApplicationOutputs& outputs);
-  void setLinearVelocityFlagsInApplicationOutputs(const uint8_t* data_ptr,
-                                                  datastructure::ApplicationOutputs& outputs);
-  void setResultingVelocityOutputsInApplicationOutputs(const uint8_t* data_ptr,
-                                                       datastructure::ApplicationOutputs& outputs);
-  void setResultingVelocityInApplicationOutputs(const uint8_t* data_ptr,
-                                                datastructure::ApplicationOutputs& outputs);
-  void setResultingVelocityFlagsInApplicationOutputs(const uint8_t* data_ptr,
-                                                     datastructure::ApplicationOutputs& outputs);
-  void setOutputFlagsinApplicationOutput(const uint8_t* data_ptr,
-                                         datastructure::ApplicationOutputs& outputs);
-  bool checkIfPreconditionsAreMet(datastructure::Data& data);
-  bool checkIfApplicationDataIsPublished(datastructure::Data& data);
-  bool checkIfDataContainsNeededParsedBlocks(datastructure::Data& data);
+    const uint8_t* &data_ptr, datastructure::ApplicationOutputs& outputs) const;
+  void setMonitoringCaseOutputsInApplicationOutputs(const uint8_t* &data_ptr,
+                                                    datastructure::ApplicationOutputs& outputs) const;
+  void setMonitoringCaseNumbersInApplicationOutputs(const uint8_t* &data_ptr,
+                                                    datastructure::ApplicationOutputs& outputs)  const;
+  void setMonitoringCaseFlagsInApplicationOutputs(const uint8_t* &data_ptr,
+                                                  datastructure::ApplicationOutputs& outputs)  const;
+  void setSleepModeOutputInApplicationOutputs(const uint8_t* &data_ptr,
+                                              datastructure::ApplicationOutputs& outputs) const;
+  void setErrorFlagsInApplicationOutputs(const uint8_t* &data_ptr,
+                                         datastructure::ApplicationOutputs& outputs) const;
+  void setLinearVelocityOutoutsInApplicationOutputs(const uint8_t* &data_ptr,
+                                                    datastructure::ApplicationOutputs& outputs) const;
+  void setLinearVelocity0InApplicationOutputs(const uint8_t* &data_ptr,
+                                              datastructure::ApplicationOutputs& outputs) const;
+  void setLinearVelocity1InApplicationOutputs(const uint8_t* &data_ptr,
+                                              datastructure::ApplicationOutputs& outputs) const;
+  void setLinearVelocityFlagsInApplicationOutputs(const uint8_t* &data_ptr,
+                                                  datastructure::ApplicationOutputs& outputs) const;
+  void setResultingVelocityOutputsInApplicationOutputs(const uint8_t* &data_ptr,
+                                                       datastructure::ApplicationOutputs& outputs) const;
+  void setResultingVelocityInApplicationOutputs(const uint8_t* &data_ptr,
+                                                datastructure::ApplicationOutputs& outputs) const;
+  void setResultingVelocityFlagsInApplicationOutputs(const uint8_t* &data_ptr,
+                                                     datastructure::ApplicationOutputs& outputs) const;
+  void setOutputFlagsinApplicationOutput(const uint8_t* &data_ptr,
+                                         datastructure::ApplicationOutputs& outputs) const;
+  bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
+  bool checkIfApplicationDataIsPublished(const datastructure::Data& data) const;
+  bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;
 };
 
 } // namespace data_processing

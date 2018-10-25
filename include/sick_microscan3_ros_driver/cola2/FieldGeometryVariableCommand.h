@@ -48,7 +48,7 @@ class FieldGeometryVariableCommand : public VariableCommand
 public:
   typedef sick::cola2::VariableCommand base_class;
 
-  FieldGeometryVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index);
+  FieldGeometryVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, const uint16_t index);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();

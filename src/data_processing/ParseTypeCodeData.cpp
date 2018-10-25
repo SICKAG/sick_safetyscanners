@@ -45,18 +45,18 @@ ParseTypeCodeData::ParseTypeCodeData()
 }
 
 
-bool ParseTypeCodeData::parseTCPSequence(datastructure::PacketBuffer buffer,
-                                      sick::datastructure::TypeCode& type_code)
+bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer &buffer,
+                                      sick::datastructure::TypeCode& type_code) const
 {
-  type_code.setInterfaceType(readInterfaceType(buffer));
-  type_code.setMaxRange(readMaxRange(buffer));
+  const uint8_t* data_ptr(buffer.getBuffer().data());
+  type_code.setInterfaceType(readInterfaceType(data_ptr));
+  type_code.setMaxRange(readMaxRange(data_ptr));
   return true;
 }
 
 
-int ParseTypeCodeData::readInterfaceType(datastructure::PacketBuffer& buffer)
+int ParseTypeCodeData::readInterfaceType(const uint8_t* &data_ptr) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
   uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 14);
   uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 15);
   
@@ -84,9 +84,8 @@ int ParseTypeCodeData::readInterfaceType(datastructure::PacketBuffer& buffer)
   return res;
 }
 
-float ParseTypeCodeData::readMaxRange(datastructure::PacketBuffer& buffer)
+float ParseTypeCodeData::readMaxRange(const uint8_t* &data_ptr) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
   uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 12);
   uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 13);
   

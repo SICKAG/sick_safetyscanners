@@ -144,7 +144,7 @@ private:
    * \param config The new configuration to set
    * \param level Level of the new configuration
    */
-  void callback(sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config, uint32_t level);
+  void callback(const sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config, const uint32_t &level);
 
   bool isInitialised();
 

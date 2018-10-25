@@ -54,11 +54,11 @@ class ParseDeviceName
 public:
   ParseDeviceName();
 
-  bool parseTCPSequence(datastructure::PacketBuffer buffer, std::string &device_name);
+  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, std::string &device_name) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  std::string readDeviceName(datastructure::PacketBuffer& buffer);
+  std::string readDeviceName(const uint8_t *&data_ptr) const;
 
 
 

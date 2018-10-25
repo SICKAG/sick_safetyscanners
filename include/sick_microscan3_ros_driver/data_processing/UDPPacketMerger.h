@@ -47,9 +47,9 @@ class UDPPacketMerger
 public:
   UDPPacketMerger();
 
-  bool isComplete();
+  bool isComplete() const;
 
-  bool addUDPPacket(sick::datastructure::PacketBuffer buffer);
+  bool addUDPPacket(const sick::datastructure::PacketBuffer &buffer);
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
 
 private:
@@ -58,16 +58,16 @@ private:
 
   std::map<uint32_t, sick::datastructure::ParsedPacketBufferVector> m_parsed_packet_buffer_map;
 
-  bool addToMap(sick::datastructure::PacketBuffer buffer,
-                sick::datastructure::DatagramHeader header);
-  bool deployPacketIfComplete(datastructure::DatagramHeader header);
+  bool addToMap(const sick::datastructure::PacketBuffer &buffer,
+                const sick::datastructure::DatagramHeader &header);
+  bool deployPacketIfComplete(datastructure::DatagramHeader &header);
   bool checkIfComplete(sick::datastructure::DatagramHeader& header);
   uint32_t
-  calcualteCurrentLengthOfParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector& vec);
+  calcualteCurrentLengthOfParsedPacketBuffer(const sick::datastructure::ParsedPacketBufferVector& vec);
   sick::datastructure::ParsedPacketBufferVector
-  getSortedParsedPacketBufferForIdentification(sick::datastructure::DatagramHeader& header);
+  getSortedParsedPacketBufferForIdentification(const sick::datastructure::DatagramHeader& header);
   sick::datastructure::PacketBuffer::VectorBuffer
-  removeHeaderFromParsedPacketBuffer(sick::datastructure::ParsedPacketBufferVector& vec);
+  removeHeaderFromParsedPacketBuffer(const sick::datastructure::ParsedPacketBufferVector& vec);
 };
 
 } // namespace data_processing

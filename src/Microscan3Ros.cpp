@@ -77,8 +77,8 @@ void Microscan3Ros::readTypeCodeSettings()
   m_range_max = type_code.getMaxRange();
 }
 
-void Microscan3Ros::callback(sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config,
-                             uint32_t level)
+void Microscan3Ros::callback(const sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config,
+                             const uint32_t &level)
 {
   if (isInitialised())
   {

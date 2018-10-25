@@ -79,12 +79,12 @@ void FieldData::setIsProtectiveField(bool is_protective_field)
   m_is_protective_field = is_protective_field;
 }
 
-std::vector<int> FieldData::getBeamDistances() const
+std::vector<uint16_t> FieldData::getBeamDistances() const
 {
   return m_beam_distances;
 }
 
-void FieldData::setBeamDistances(const std::vector<int> &beam_distance)
+void FieldData::setBeamDistances(const std::vector<uint16_t> &beam_distance)
 {
   m_beam_distances = beam_distance;
 }

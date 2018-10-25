@@ -63,8 +63,8 @@ public:
   ScanPoint getFieldGeometry() const;
   void setFieldGeometry(const ScanPoint &field_geometry);
 
-  std::vector<int> getBeamDistances() const;
-  void setBeamDistances(const std::vector<int> &beam_distances);
+  std::vector<uint16_t> getBeamDistances() const;
+  void setBeamDistances(const std::vector<uint16_t> &beam_distances);
 
 private:
 
@@ -72,7 +72,7 @@ private:
   bool m_is_warning_field;
   bool m_is_protective_field;
   ScanPoint m_field_geometry;
-  std::vector<int> m_beam_distances;
+  std::vector<uint16_t> m_beam_distances;
 
 };
 

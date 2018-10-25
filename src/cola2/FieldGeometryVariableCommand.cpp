@@ -40,7 +40,7 @@
 namespace sick {
 namespace cola2 {
 
-FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, int index)
+FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session, datastructure::FieldData &field_data, const uint16_t index)
   : VariableCommand(session, 0x2810 + index)
   , m_field_data(field_data)
 {
