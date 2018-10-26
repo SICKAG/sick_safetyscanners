@@ -36,6 +36,7 @@
 #define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_UDPPACKETMERGER_H
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
+#include <sick_microscan3_ros_driver/datastructure/ParsedPacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ParseDatagramHeader.h>
 
@@ -58,18 +59,19 @@ private:
   bool m_is_complete;
   sick::datastructure::PacketBuffer m_deployed_packet_buffer;
 
-  std::map<uint32_t, sick::datastructure::ParsedPacketBufferVector> m_parsed_packet_buffer_map;
+  std::map<uint32_t, sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector>
+    m_parsed_packet_buffer_map;
 
   bool addToMap(const sick::datastructure::PacketBuffer& buffer,
                 const sick::datastructure::DatagramHeader& header);
   bool deployPacketIfComplete(datastructure::DatagramHeader& header);
   bool checkIfComplete(sick::datastructure::DatagramHeader& header);
   uint32_t calcualteCurrentLengthOfParsedPacketBuffer(
-    const sick::datastructure::ParsedPacketBufferVector& vec);
-  sick::datastructure::ParsedPacketBufferVector
+    const sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector& vec);
+  sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector
   getSortedParsedPacketBufferForIdentification(const sick::datastructure::DatagramHeader& header);
-  sick::datastructure::PacketBuffer::VectorBuffer
-  removeHeaderFromParsedPacketBuffer(const sick::datastructure::ParsedPacketBufferVector& vec);
+  sick::datastructure::PacketBuffer::VectorBuffer removeHeaderFromParsedPacketBuffer(
+    const sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector& vec);
 };
 
 } // namespace data_processing

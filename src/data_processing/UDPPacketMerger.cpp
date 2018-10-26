@@ -81,7 +81,7 @@ bool UDPPacketMerger::addToMap(const datastructure::PacketBuffer& buffer,
   }
   else
   {
-    sick::datastructure::ParsedPacketBufferVector vec;
+    sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector vec;
     vec.push_back(parsed_packet_buffer);
     m_parsed_packet_buffer_map[header.getIdentification()] = vec;
   }
@@ -99,7 +99,7 @@ bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader& head
   if (!checkIfComplete(header))
     return false;
 
-  sick::datastructure::ParsedPacketBufferVector vec =
+  sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector vec =
     getSortedParsedPacketBufferForIdentification(header);
   sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer =
     removeHeaderFromParsedPacketBuffer(vec);
@@ -110,7 +110,7 @@ bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader& head
 bool UDPPacketMerger::checkIfComplete(sick::datastructure::DatagramHeader& header)
 {
   uint32_t total_length = header.getTotalLength();
-  sick::datastructure::ParsedPacketBufferVector vec =
+  sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector vec =
     getSortedParsedPacketBufferForIdentification(header);
   uint32_t cur_length = calcualteCurrentLengthOfParsedPacketBuffer(vec);
   if (cur_length != total_length)
@@ -122,35 +122,36 @@ bool UDPPacketMerger::checkIfComplete(sick::datastructure::DatagramHeader& heade
 }
 
 uint32_t UDPPacketMerger::calcualteCurrentLengthOfParsedPacketBuffer(
-  const sick::datastructure::ParsedPacketBufferVector& vec)
+  const sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector& vec)
 {
   uint32_t cur_length = 0;
 
   for (auto& parsed_packet_buffer : vec)
   {
-    sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.m_packet_buffer;
+    sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.getPacketBuffer();
     cur_length += (packet_buffer.getLength() - sick::datastructure::DatagramHeader::HEADER_SIZE);
   }
   return cur_length;
 }
 
-sick::datastructure::ParsedPacketBufferVector
+sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector
 UDPPacketMerger::getSortedParsedPacketBufferForIdentification(
   const sick::datastructure::DatagramHeader& header)
 {
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
-  sick::datastructure::ParsedPacketBufferVector vec = it->second;
-  std::sort(vec.begin(), vec.end(), sick::datastructure::sortForIncreasingOffset);
+  sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector vec = it->second;
+  std::sort(
+    vec.begin(), vec.end(), sick::datastructure::ParsedPacketBuffer::sortForIncreasingOffset);
   return vec;
 }
 
 sick::datastructure::PacketBuffer::VectorBuffer UDPPacketMerger::removeHeaderFromParsedPacketBuffer(
-  const sick::datastructure::ParsedPacketBufferVector& vec)
+  const sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector& vec)
 {
   sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
   for (auto& parsed_packet_buffer : vec)
   {
-    sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.m_packet_buffer;
+    sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.getPacketBuffer();
 
     headerless_packet_buffer.insert(headerless_packet_buffer.end(),
                                     packet_buffer.getBuffer().begin() +

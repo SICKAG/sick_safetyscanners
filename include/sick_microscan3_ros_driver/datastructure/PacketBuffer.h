@@ -127,45 +127,6 @@ private:
   VectorBuffer m_buffer;
 };
 
-/*!
- * \brief Struct of a PacketBuffer with a parsed header
- */
-struct ParsedPacketBuffer
-{
-  /*!
-   * \brief Constructor of struct for ParsedPacketBuffer.
-   * \param packet_buffer: Input Packetbuffer
-   * \param datagram_header: Input parsed header of PacketBuffer.
-   */
-  ParsedPacketBuffer(const sick::datastructure::PacketBuffer& packet_buffer,
-                     sick::datastructure::DatagramHeader datagram_header)
-    : m_packet_buffer(packet_buffer)
-    , m_datagram_header(datagram_header)
-  {
-  }
-  /*!
-   * \brief PacketBuffer
-   */
-  sick::datastructure::PacketBuffer m_packet_buffer;
-
-  /*!
-   * \brief Parsed datagramheader
-   */
-  sick::datastructure::DatagramHeader m_datagram_header;
-};
-typedef std::vector<ParsedPacketBuffer> ParsedPacketBufferVector;
-
-/*!
- * \brief Static function to sort ParsedPacketBuffers.
- * \param ppb1 First ParsedPacketBuffer.
- * \param ppb2 Second ParsedPacketBuffer.
- * \return If first is smaller then second.
- */
-static bool sortForIncreasingOffset(const ParsedPacketBuffer& ppb1, const ParsedPacketBuffer& ppb2)
-{
-  return ppb1.m_datagram_header.getFragmentOffset() < ppb2.m_datagram_header.getFragmentOffset();
-}
-
 } // namespace datastructure
 } // namespace sick
 

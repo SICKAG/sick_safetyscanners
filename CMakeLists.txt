@@ -92,53 +92,54 @@ include_directories(
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME}_core
-src/Microscan3.cpp
-src/cola2/ChangeCommSettingsCommand.cpp
-src/cola2/CloseSession.cpp
-src/cola2/Cola2Session.cpp
-src/cola2/Command.cpp
-src/cola2/CreateSession.cpp
-src/cola2/DeviceNameVariableCommand.cpp
-src/cola2/FieldGeometryVariableCommand.cpp
-src/cola2/FieldHeaderVariableCommand.cpp
-src/cola2/MethodCommand.cpp
-src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
-src/cola2/TypeCodeVariableCommand.cpp
-src/cola2/VariableCommand.cpp
-src/communication/AsyncTCPClient.cpp
-src/communication/AsyncUDPClient.cpp
-src/data_processing/ParseApplicationData.cpp
-src/data_processing/ParseData.cpp
-src/data_processing/ParseDataHeader.cpp
-src/data_processing/ParseDatagramHeader.cpp
-src/data_processing/ParseDerivedValues.cpp
-src/data_processing/ParseDeviceName.cpp
-src/data_processing/ParseFieldGeometryData.cpp
-src/data_processing/ParseFieldHeaderData.cpp
-src/data_processing/ParseGeneralSystemState.cpp
-src/data_processing/ParseIntrusionData.cpp
-src/data_processing/ParseMeasurementData.cpp
-src/data_processing/ParseTCPPacket.cpp
-src/data_processing/ParseTypeCodeData.cpp
-src/data_processing/ReadWriteHelper.cpp
-src/data_processing/TCPPacketMerger.cpp
-src/data_processing/UDPPacketMerger.cpp
-src/datastructure/ApplicationData.cpp
-src/datastructure/ApplicationInputs.cpp
-src/datastructure/ApplicationOutputs.cpp
-src/datastructure/CommSettings.cpp
-src/datastructure/Data.cpp
-src/datastructure/DataHeader.cpp
-src/datastructure/DatagramHeader.cpp
-src/datastructure/DerivedValues.cpp
-src/datastructure/FieldData.cpp
-src/datastructure/GeneralSystemState.cpp
-src/datastructure/IntrusionData.cpp
-src/datastructure/IntrusionDatum.cpp
-src/datastructure/MeasurementData.cpp
-src/datastructure/PacketBuffer.cpp
-src/datastructure/ScanPoint.cpp
-src/datastructure/TypeCode.cpp
+  src/Microscan3.cpp
+  src/cola2/ChangeCommSettingsCommand.cpp
+  src/cola2/CloseSession.cpp
+  src/cola2/Cola2Session.cpp
+  src/cola2/Command.cpp
+  src/cola2/CreateSession.cpp
+  src/cola2/DeviceNameVariableCommand.cpp
+  src/cola2/FieldGeometryVariableCommand.cpp
+  src/cola2/FieldHeaderVariableCommand.cpp
+  src/cola2/MethodCommand.cpp
+  src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
+  src/cola2/TypeCodeVariableCommand.cpp
+  src/cola2/VariableCommand.cpp
+  src/communication/AsyncTCPClient.cpp
+  src/communication/AsyncUDPClient.cpp
+  src/data_processing/ParseApplicationData.cpp
+  src/data_processing/ParseData.cpp
+  src/data_processing/ParseDataHeader.cpp
+  src/data_processing/ParseDatagramHeader.cpp
+  src/data_processing/ParseDerivedValues.cpp
+  src/data_processing/ParseDeviceName.cpp
+  src/data_processing/ParseFieldGeometryData.cpp
+  src/data_processing/ParseFieldHeaderData.cpp
+  src/data_processing/ParseGeneralSystemState.cpp
+  src/data_processing/ParseIntrusionData.cpp
+  src/data_processing/ParseMeasurementData.cpp
+  src/data_processing/ParseTCPPacket.cpp
+  src/data_processing/ParseTypeCodeData.cpp
+  src/data_processing/ReadWriteHelper.cpp
+  src/data_processing/TCPPacketMerger.cpp
+  src/data_processing/UDPPacketMerger.cpp
+  src/datastructure/ApplicationData.cpp
+  src/datastructure/ApplicationInputs.cpp
+  src/datastructure/ApplicationOutputs.cpp
+  src/datastructure/CommSettings.cpp
+  src/datastructure/Data.cpp
+  src/datastructure/DataHeader.cpp
+  src/datastructure/DatagramHeader.cpp
+  src/datastructure/DerivedValues.cpp
+  src/datastructure/FieldData.cpp
+  src/datastructure/GeneralSystemState.cpp
+  src/datastructure/IntrusionData.cpp
+  src/datastructure/IntrusionDatum.cpp
+  src/datastructure/MeasurementData.cpp
+  src/datastructure/PacketBuffer.cpp
+  src/datastructure/ParsedPacketBuffer.cpp
+  src/datastructure/ScanPoint.cpp
+  src/datastructure/TypeCode.cpp
 )
 
 ## Declare cpp executables
