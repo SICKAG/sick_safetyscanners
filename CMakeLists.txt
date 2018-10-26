@@ -11,7 +11,9 @@ add_definitions(-std=c++11 -Wall)
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED
   COMPONENTS
+    roslint
     roscpp
+    std_msgs
     sensor_msgs
     dynamic_reconfigure
     message_generation
@@ -65,6 +67,7 @@ catkin_package(
     ${PROJECT_NAME}_core
   CATKIN_DEPENDS
     roscpp
+    std_msgs
     sensor_msgs
     dynamic_reconfigure
     message_runtime
@@ -78,7 +81,7 @@ catkin_package(
 ## Build ##
 ###########
 
-
+roslint_cpp()
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
@@ -172,6 +175,14 @@ target_link_libraries(${PROJECT_NAME}
 #############
 
 # Mark executables and/or libraries for installation
+
+install(
+  TARGETS ${PROJECT_NAME}_core
+  ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
+
 install(
   TARGETS ${PROJECT_NAME}
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
