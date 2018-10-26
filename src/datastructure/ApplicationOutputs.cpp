@@ -266,5 +266,5 @@ void ApplicationOutputs::setFlagsHostErrorFlagsAreValid(bool flags_host_error_fl
   m_flags_host_error_flags_are_valid = flags_host_error_flags_are_valid;
 }
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick

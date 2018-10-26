@@ -44,9 +44,7 @@ AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler,
   , m_io_work_ptr()
   , m_io_service(io_service)
 {
-
-
-   // Keep io_service busy
+  // Keep io_service busy
   m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
   try
   {
@@ -96,5 +94,5 @@ void AsyncUDPClient::run_service()
   start_receive();
 }
 
-}  // namespace communication
-}  // namespace sick
+} // namespace communication
+} // namespace sick

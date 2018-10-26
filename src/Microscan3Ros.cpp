@@ -111,7 +111,7 @@ bool Microscan3Ros::readParameters()
   std::string sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
   if (!m_private_nh.getParam("sensor_ip", sensor_ip_adress))
   {
-     //    sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
+    //    sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
     ROS_WARN("Using default sensor IP: %s", sensor_ip_adress.c_str());
   }
   m_communication_settings.setSensorIp(sensor_ip_adress);
@@ -128,7 +128,7 @@ bool Microscan3Ros::readParameters()
   std::string host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
   if (!m_private_nh.getParam("host_ip", host_ip_adress))
   {
-     //    host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
+    //    host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
     ROS_WARN("Using default host IP: %s", host_ip_adress.c_str());
   }
   m_communication_settings.setHostIp(host_ip_adress);
@@ -220,12 +220,12 @@ Microscan3Ros::createExtendedLaserScanMessage(const sick::datastructure::Data& d
   sick_microscan3_ros_driver::ExtendedLaserScanMsg msg;
   msg.laser_scan = scan;
 
-  int num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
+  uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
 
   msg.reflektor_status.resize(num_scan_points);
-  for (int i = 0; i < num_scan_points; ++i)
+  for (uint16_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     msg.reflektor_status[i]                         = scan_point.getReflectorBit();
@@ -236,9 +236,9 @@ Microscan3Ros::createExtendedLaserScanMessage(const sick::datastructure::Data& d
 sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastructure::Data& data)
 {
   sensor_msgs::LaserScan scan;
-  scan.header.frame_id = m_laser_scan_frame_name;
-  scan.header.stamp    = ros::Time::now();
-  int num_scan_points  = data.getDerivedValuesPtr()->getNumberOfBeams();
+  scan.header.frame_id     = m_laser_scan_frame_name;
+  scan.header.stamp        = ros::Time::now();
+  uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle());
   double angle_max =
@@ -262,11 +262,11 @@ sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastr
 
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
-  for (int i = 0; i < num_scan_points; ++i)
+  for (uint16_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     scan.ranges[i]                                  = static_cast<float>(scan_point.getDistance()) *
-                     data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3;  // mm -> m
+                     data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
     scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
   }
 
@@ -407,8 +407,8 @@ Microscan3Ros::createScanPointMessageVector(const sick::datastructure::Data& dat
   std::shared_ptr<sick::datastructure::MeasurementData> measurement_data =
     data.getMeasurementDataPtr();
   std::vector<sick::datastructure::ScanPoint> scan_points = measurement_data->getScanPointsVector();
-  int num_points                                          = measurement_data->getNumberOfBeams();
-  for (int i = 0; i < num_points; i++)
+  uint16_t num_points                                     = measurement_data->getNumberOfBeams();
+  for (uint16_t i = 0; i < num_points; i++)
   {
     sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     sick_microscan3_ros_driver::ScanPointMsg msg;
@@ -569,4 +569,4 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
 }
 
 
-}  // namespace sick
+} // namespace sick

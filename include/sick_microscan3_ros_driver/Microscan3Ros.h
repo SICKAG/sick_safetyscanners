@@ -40,10 +40,10 @@
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/LaserScan.h>
-#include <std_srvs/Trigger.h>
 
 // STD
 #include <string>
+#include <vector>
 
 // Package
 #include <sick_microscan3_ros_driver/ExtendedLaserScanMsg.h>
@@ -102,13 +102,13 @@ public:
   virtual ~Microscan3Ros();
 
 private:
-   //! ROS node handle.
+  //! ROS node handle.
   ros::NodeHandle m_nh;
 
-   //! ROS private node handle
+  //! ROS private node handle
   ros::NodeHandle m_private_nh;
 
-   //! ROS topic publisher
+  //! ROS topic publisher
   ros::Publisher m_laser_scan_publisher;
   ros::Publisher m_extended_laser_scan_publisher;
   ros::Publisher m_raw_data_publisher;
@@ -176,6 +176,6 @@ private:
   void readTypeCodeSettings();
 };
 
-}  // namespace sick
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_MICROSCAN3ROS_H

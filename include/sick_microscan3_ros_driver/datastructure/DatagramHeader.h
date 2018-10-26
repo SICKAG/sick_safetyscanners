@@ -79,7 +79,7 @@ private:
   uint32_t m_fragment_offset;
 };
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATAGRAMHEADER_H

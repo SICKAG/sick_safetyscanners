@@ -98,7 +98,7 @@ private:
   int8_t m_sleep_mode_input;
 };
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_APPLICATIONINPUTS_H

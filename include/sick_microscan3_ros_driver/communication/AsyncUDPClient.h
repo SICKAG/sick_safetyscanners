@@ -76,9 +76,9 @@ private:
   void handle_receive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
 
 
-  AsyncUDPClient(AsyncUDPClient&);   // block default copy constructor
+  AsyncUDPClient(AsyncUDPClient&); // block default copy constructor
 };
-}   // namespace communication
-}   // namespace sick
+} // namespace communication
+} // namespace sick
 
-#endif   // ASYNCUDPCLIENT_H
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COMMUNICATION_ASYNCUDPCLIENT_H

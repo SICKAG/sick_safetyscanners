@@ -82,7 +82,7 @@ private:
   std::shared_ptr<ApplicationData> m_application_data_ptr;
 };
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
 #endif

@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PARSETYPECODEDATA_H
-#define PARSETYPECODEDATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSETYPECODEDATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSETYPECODEDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
@@ -60,11 +60,11 @@ public:
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  int readInterfaceType(const uint8_t*& data_ptr) const;
+  uint8_t readInterfaceType(const uint8_t*& data_ptr) const;
   float readMaxRange(const uint8_t*& data_ptr) const;
 };
 
 } // namespace data_processing
 } // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSETYPECODEDATA_H

@@ -113,5 +113,5 @@ void DerivedValues::setIsEmpty(bool is_empty)
   m_is_empty = is_empty;
 }
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick

@@ -39,12 +39,12 @@ namespace datastructure {
 
 FieldData::FieldData() {}
 
-int FieldData::getFieldSetIndex() const
+uint16_t FieldData::getFieldSetIndex() const
 {
   return m_field_set_index;
 }
 
-void FieldData::setFieldSetIndex(int field_set_index)
+void FieldData::setFieldSetIndex(uint16_t& field_set_index)
 {
   m_field_set_index = field_set_index;
 }
@@ -90,5 +90,5 @@ void FieldData::setBeamDistances(const std::vector<uint16_t>& beam_distance)
 }
 
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick

@@ -45,7 +45,7 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
   , m_io_service(io_service)
 
 {
-   // Keep io_service busy
+  // Keep io_service busy
   m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
   try
   {
@@ -110,7 +110,7 @@ void AsyncTCPClient::setPacketHandler(const PacketHandler& packet_handler)
 void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error,
                                           const std::size_t& bytes_transferred)
 {
-   // Check for errors
+  // Check for errors
   if (!error || error == boost::asio::error::message_size)
   {
     initiateReceive();
@@ -141,5 +141,5 @@ void AsyncTCPClient::handle_receive(const boost::system::error_code& error,
 
 void AsyncTCPClient::run_service() {}
 
-}  // namespace communication
-}  // namespace sick
+} // namespace communication
+} // namespace sick

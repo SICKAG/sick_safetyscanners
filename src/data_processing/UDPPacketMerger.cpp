@@ -161,5 +161,5 @@ sick::datastructure::PacketBuffer::VectorBuffer UDPPacketMerger::removeHeaderFro
 }
 
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

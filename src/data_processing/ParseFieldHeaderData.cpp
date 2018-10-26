@@ -56,7 +56,7 @@ bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& b
 void ParseFieldHeaderData::setFieldType(const uint8_t*& data_ptr,
                                         datastructure::FieldData& field_data) const
 {
-  int field_type = readFieldType(data_ptr);
+  uint8_t field_type = readFieldType(data_ptr);
   field_data.setIsWarningField(false);
   field_data.setIsProtectiveField(false);
   if (field_type == 4 || field_type == 14)
@@ -67,22 +67,19 @@ void ParseFieldHeaderData::setFieldType(const uint8_t*& data_ptr,
   {
     field_data.setIsWarningField(true);
   }
-
-  std::cout << field_type << std::endl;
-  std::cout << readSetIndex(data_ptr) << std::endl;
 }
 
 
-int ParseFieldHeaderData::readFieldType(const uint8_t*& data_ptr) const
+uint8_t ParseFieldHeaderData::readFieldType(const uint8_t*& data_ptr) const
 {
   return m_reader_ptr->readuint8_t(data_ptr, 73);
 }
 
-int ParseFieldHeaderData::readSetIndex(const uint8_t*& data_ptr) const
+uint16_t ParseFieldHeaderData::readSetIndex(const uint8_t*& data_ptr) const
 {
   return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 82);
 }
 
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

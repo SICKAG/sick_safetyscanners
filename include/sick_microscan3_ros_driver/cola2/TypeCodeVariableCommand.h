@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef TYPECODEVARIABLECOMMAND_H
-#define TYPECODEVARIABLECOMMAND_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_TYPECODEVARIABLECOMMAND_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_TYPECODEVARIABLECOMMAND_H
 
 
 #include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
@@ -64,4 +64,4 @@ private:
 } // namespace cola2
 } // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_TYPECODEVARIABLECOMMAND_H

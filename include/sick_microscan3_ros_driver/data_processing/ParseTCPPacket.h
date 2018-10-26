@@ -76,7 +76,7 @@ private:
                                   sick::cola2::Command& command) const;
 };
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSETCPPACKET_H

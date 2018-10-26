@@ -42,6 +42,7 @@
 #include <boost/thread.hpp>
 
 #include <iostream>
+#include <string>
 
 #include <sick_microscan3_ros_driver/communication/AsyncTCPClient.h>
 #include <sick_microscan3_ros_driver/communication/AsyncUDPClient.h>
@@ -131,6 +132,6 @@ private:
   void requestTypeCodeinColaSession(sick::datastructure::TypeCode& type_code);
 };
 
-}  // namespace sick
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_MICROSCAN3_H

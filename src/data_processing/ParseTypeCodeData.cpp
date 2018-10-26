@@ -55,12 +55,12 @@ bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buff
 }
 
 
-int ParseTypeCodeData::readInterfaceType(const uint8_t*& data_ptr) const
+uint8_t ParseTypeCodeData::readInterfaceType(const uint8_t*& data_ptr) const
 {
   uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 14);
   uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 15);
 
-  int res = sick::datastructure::e_interface_type::E_EFIPRO;
+  uint8_t res = sick::datastructure::e_interface_type::E_EFIPRO;
 
   if ((type_code_interface_1 == 'Z' && type_code_interface_2 == 'A') ||
       (type_code_interface_1 == 'A' && type_code_interface_2 == 'A'))
@@ -106,5 +106,5 @@ float ParseTypeCodeData::readMaxRange(const uint8_t*& data_ptr) const
 }
 
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

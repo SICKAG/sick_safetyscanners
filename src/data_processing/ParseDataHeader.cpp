@@ -224,5 +224,5 @@ void ParseDataHeader::setApplicationDataBlockSizeInDataHeader(
   data_header.setApplicationDataBlockSize(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 50));
 }
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

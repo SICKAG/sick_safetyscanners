@@ -73,5 +73,5 @@ void ApplicationData::setIsEmpty(bool is_empty)
 }
 
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick

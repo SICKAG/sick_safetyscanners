@@ -44,14 +44,15 @@
 namespace sick {
 namespace datastructure {
 
+// TODO Doku
 
 class FieldData
 {
 public:
   FieldData();
 
-  int getFieldSetIndex() const;
-  void setFieldSetIndex(int field_set_index);
+  uint16_t getFieldSetIndex() const;
+  void setFieldSetIndex(uint16_t& field_set_index);
 
   bool getIsWarningField() const;
   void setIsWarningField(bool is_warning_field);
@@ -66,7 +67,7 @@ public:
   void setBeamDistances(const std::vector<uint16_t>& beam_distances);
 
 private:
-  int m_field_set_index;
+  uint16_t m_field_set_index;
   bool m_is_warning_field;
   bool m_is_protective_field;
   ScanPoint m_field_geometry;
@@ -74,7 +75,7 @@ private:
 };
 
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_FIELDDATA_H

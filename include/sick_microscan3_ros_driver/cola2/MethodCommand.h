@@ -56,7 +56,7 @@ private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 };
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_METHODCOMMAND_H

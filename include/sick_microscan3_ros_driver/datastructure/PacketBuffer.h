@@ -53,7 +53,7 @@ namespace datastructure {
 /*!
  * \brief MAXSIZE of the packetbuffer
  */
-const int MAXSIZE = 10000;
+const uint32_t MAXSIZE = 10000;
 
 /*!
  * \brief A packetbuffer for the raw data from the sensor.
@@ -77,6 +77,9 @@ public:
 
   /*!
    * \brief Constructor of PacketBuffer.
+   *
+   * No explicit tag used to allow implicit conversion from different inputs types.
+   *
    * \param buffer Vectorbuffer to set for the PacketBuffer.
    */
   PacketBuffer(const VectorBuffer& buffer);
@@ -163,7 +166,7 @@ static bool sortForIncreasingOffset(const ParsedPacketBuffer& ppb1, const Parsed
   return ppb1.m_datagram_header.getFragmentOffset() < ppb2.m_datagram_header.getFragmentOffset();
 }
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_PACKETBUFFER_H

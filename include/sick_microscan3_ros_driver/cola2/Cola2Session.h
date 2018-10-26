@@ -47,6 +47,8 @@
 #include <sick_microscan3_ros_driver/data_processing/TCPPacketMerger.h>
 
 #include <boost/bind.hpp>
+#include <limits>
+#include <map>
 
 namespace sick {
 namespace cola2 {
@@ -60,7 +62,7 @@ class Cola2Session
 public:
   typedef std::shared_ptr<sick::cola2::Command> CommandPtr;
 
-  Cola2Session(const std::shared_ptr<communication::AsyncTCPClient>& async_tcp_client);
+  explicit Cola2Session(const std::shared_ptr<communication::AsyncTCPClient>& async_tcp_client);
 
   bool executeCommand(const CommandPtr& command);
 
@@ -101,7 +103,7 @@ private:
 };
 
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_COLA2SESSION_H

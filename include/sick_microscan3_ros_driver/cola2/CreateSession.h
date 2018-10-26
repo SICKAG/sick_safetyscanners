@@ -44,7 +44,7 @@ namespace cola2 {
 class CreateSession : public Command
 {
 public:
-  CreateSession(Cola2Session& session);
+  explicit CreateSession(Cola2Session& session);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
@@ -58,7 +58,7 @@ private:
   void writeClientIdToDataPtr(uint8_t*& data_ptr) const;
 };
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_CREATESESSION_H

@@ -44,13 +44,13 @@ namespace cola2 {
 class CloseSession : public Command
 {
 public:
-  CloseSession(Cola2Session& session);
+  explicit CloseSession(Cola2Session& session);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
 };
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_CLOSESESSION_H

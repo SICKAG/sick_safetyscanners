@@ -72,7 +72,7 @@ private:
   void writeFeaturesToDataPtr(uint8_t*& data_ptr) const;
 };
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_CHANGECOMMSETTINGSCOMMAND_H

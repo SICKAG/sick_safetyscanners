@@ -120,8 +120,8 @@ void ParseIntrusionData::setDataInIntrusionDatums(
   std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums) const
 {
   uint16_t offset = 0;
-   // Repeats for 24 CutOffPaths
-  for (int i_set = 0; i_set < 24; ++i_set)
+  // Repeats for 24 CutOffPaths
+  for (uint8_t i_set = 0; i_set < 24; ++i_set)
   {
     sick::datastructure::IntrusionDatum datum;
     setSizeInIntrusionDatum(offset, data_ptr, datum);
@@ -161,5 +161,5 @@ uint16_t ParseIntrusionData::setFlagsInIntrusionDatum(
   return offset;
 }
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

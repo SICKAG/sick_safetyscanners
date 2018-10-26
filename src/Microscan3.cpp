@@ -76,7 +76,7 @@ bool Microscan3::UDPClientThread()
 
 void Microscan3::processTCPPacket(const sick::datastructure::PacketBuffer& buffer)
 {
-   // Not needed for current functionality, inplace for possible future developments
+  // Not needed for current functionality, inplace for possible future developments
 }
 
 void Microscan3::changeSensorSettings(const datastructure::CommSettings& settings)
@@ -169,4 +169,4 @@ void Microscan3::processUDPPacket(const sick::datastructure::PacketBuffer& buffe
   }
 }
 
-}  // namespace sick
+} // namespace sick

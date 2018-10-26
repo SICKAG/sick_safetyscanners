@@ -37,6 +37,8 @@
 
 #include <stdint.h>
 
+// TODO Doku
+
 namespace sick {
 namespace datastructure {
 
@@ -137,7 +139,7 @@ private:
   uint16_t m_application_data_block_size;
 };
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATAHEADER_H

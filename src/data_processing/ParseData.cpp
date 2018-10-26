@@ -118,5 +118,5 @@ void ParseData::setApplicationDataInData(const datastructure::PacketBuffer& buff
     std::make_shared<sick::datastructure::ApplicationData>(application_data));
 }
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

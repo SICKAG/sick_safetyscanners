@@ -140,5 +140,5 @@ void ChangeCommSettingsCommand::writeFeaturesToDataPtr(uint8_t*& data_ptr) const
 }
 
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick

@@ -106,7 +106,7 @@ private:
                                  datastructure::DataHeader& data_header) const;
 };
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEDATAHEADER_H

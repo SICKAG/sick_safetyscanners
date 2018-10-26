@@ -62,11 +62,11 @@ private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
   void setFieldType(const uint8_t*& data_ptr, datastructure::FieldData& field_data) const;
-  int readFieldType(const uint8_t*& data_ptr) const;
-  int readSetIndex(const uint8_t*& data_ptr) const;
+  uint8_t readFieldType(const uint8_t*& data_ptr) const;
+  uint16_t readSetIndex(const uint8_t*& data_ptr) const;
 };
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEFIELDHEADERDATA_H

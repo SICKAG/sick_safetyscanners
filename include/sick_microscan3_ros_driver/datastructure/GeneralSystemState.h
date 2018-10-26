@@ -269,7 +269,7 @@ private:
   bool m_device_error;
 };
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_GENERALSYSTEMSTATE_H

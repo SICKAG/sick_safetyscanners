@@ -60,19 +60,19 @@ class TypeCode
 {
 public:
   TypeCode();
-  int getInterfaceType() const;
-  void setInterfaceType(int interface_type);
+  uint8_t getInterfaceType() const;
+  void setInterfaceType(uint8_t interface_type);
 
   float getMaxRange() const;
   void setMaxRange(float max_distance);
 
 private:
-  int m_interface_type;
+  uint8_t m_interface_type;
   float m_max_range;
 };
 
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_TYPECODE_H

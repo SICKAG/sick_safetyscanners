@@ -208,5 +208,5 @@ int32_t ReadWriteHelper::readint32_tBigEndian(const uint8_t*& buf, const uint16_
 }
 
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

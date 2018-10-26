@@ -65,4 +65,4 @@ private:
 } // namespace cola2
 } // namespace sick
 
-#endif
+#endif // MONITORINGCASETABLEHEADERVARIABLECOMMAND_H

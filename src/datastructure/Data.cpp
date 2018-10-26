@@ -102,5 +102,5 @@ void Data::setApplicationDataPtr(const std::shared_ptr<ApplicationData>& applica
 }
 
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick

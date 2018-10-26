@@ -39,12 +39,12 @@ namespace datastructure {
 
 TypeCode::TypeCode() {}
 
-int TypeCode::getInterfaceType() const
+uint8_t TypeCode::getInterfaceType() const
 {
   return m_interface_type;
 }
 
-void TypeCode::setInterfaceType(int interface_type)
+void TypeCode::setInterfaceType(uint8_t interface_type)
 {
   m_interface_type = interface_type;
 }
@@ -60,5 +60,5 @@ void TypeCode::setMaxRange(float max_distance)
 }
 
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick

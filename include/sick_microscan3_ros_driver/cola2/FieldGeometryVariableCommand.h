@@ -63,7 +63,7 @@ private:
   sick::datastructure::FieldData& m_field_data;
 };
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_FIELDGEOMETRYVARIABLECOMMAND_H

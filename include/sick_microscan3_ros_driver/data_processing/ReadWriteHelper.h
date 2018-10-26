@@ -76,7 +76,7 @@ public:
   int32_t readint32_tLittleEndian(const uint8_t*& buf, const uint16_t offset) const;
 };
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_READWRITEHELPER_H

@@ -37,6 +37,8 @@
 
 #include <ros/ros.h>
 
+#include <vector>
+
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ParseTCPPacket.h>
@@ -122,8 +124,8 @@ private:
 };
 
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
 
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_COLA2_COMMAND_H

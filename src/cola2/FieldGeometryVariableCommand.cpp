@@ -72,5 +72,5 @@ bool FieldGeometryVariableCommand::processReply()
 }
 
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick

@@ -25,54 +25,44 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file MonitoringCaseTableHeaderVariableCommand.cpp
+ * \file MonitoringCaseTableHeaderVariableCommand.h
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2018-10-17
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/cola2/MonitoringCaseTableHeaderVariableCommand.h>
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_MONITORINGCASETABLEHEADERVARIABLECOMMAND_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_MONITORINGCASETABLEHEADERVARIABLECOMMAND_H
 
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
-#include <sick_microscan3_ros_driver/cola2/Command.h>
+
+#include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
+#include <sick_microscan3_ros_driver/data_processing/ParseFieldHeaderData.h>
+#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 
 namespace sick {
 namespace cola2 {
 
-// TODO
-
-MonitoringCaseTableHeaderVariableCommand::MonitoringCaseTableHeaderVariableCommand(
-  Cola2Session& session, datastructure::FieldData& field_data)
-  : VariableCommand(session, 2100)
-  , m_field_data(field_data)
+class MonitoringCaseTableHeaderVariableCommand : public VariableCommand
 {
-  m_writer_ptr              = std::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
-}
+public:
+  typedef sick::cola2::VariableCommand base_class;
 
-void MonitoringCaseTableHeaderVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
+  MonitoringCaseTableHeaderVariableCommand(Cola2Session& session,
+                                           datastructure::FieldData& field_data);
+  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  bool canBeExecutedWithoutSessionID() const;
+  bool processReply();
 
-bool MonitoringCaseTableHeaderVariableCommand::canBeExecutedWithoutSessionID() const
-{
-  return true;
-}
 
-bool MonitoringCaseTableHeaderVariableCommand::processReply()
-{
-  if (!base_class::processReply())
-  {
-    return false;
-  }
+private:
+  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
+  std::shared_ptr<sick::data_processing::ParseFieldHeaderData> m_field_header_parser_ptr;
 
-  // m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
-  return true;
-}
-
+  sick::datastructure::FieldData& m_field_data;
+};
 
 } // namespace cola2
 } // namespace sick
+
+#endif  // SICK_MICROSCAN3_ROS_DRIVER_COLA2_MONITORINGCASETABLEHEADERVARIABLECOMMAND_H

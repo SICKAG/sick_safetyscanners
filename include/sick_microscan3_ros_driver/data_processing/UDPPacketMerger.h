@@ -39,6 +39,8 @@
 
 #include <sick_microscan3_ros_driver/data_processing/ParseDatagramHeader.h>
 
+#include <algorithm>
+
 namespace sick {
 namespace data_processing {
 
@@ -70,7 +72,7 @@ private:
   removeHeaderFromParsedPacketBuffer(const sick::datastructure::ParsedPacketBufferVector& vec);
 };
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_UDPPACKETMERGER_H

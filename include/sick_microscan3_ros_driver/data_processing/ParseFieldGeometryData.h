@@ -41,6 +41,8 @@
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
+#include <vector>
+
 namespace sick {
 
 namespace cola2 {
@@ -64,7 +66,7 @@ private:
   uint16_t readArrayElement(const uint8_t*& data_ptr, uint32_t elem_number) const;
 };
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEFIELDGEOMETRYDATA_H

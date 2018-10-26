@@ -37,6 +37,7 @@
 
 #include <boost/asio/ip/address_v4.hpp>
 #include <iostream>
+#include <string>
 
 namespace sick {
 namespace datastructure {
@@ -101,7 +102,7 @@ private:
 };
 
 
-}  // namespace datastructure
-}  // namespace sick
+} // namespace datastructure
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_COMMSETTINGS_H

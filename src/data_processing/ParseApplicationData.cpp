@@ -149,7 +149,7 @@ void ParseApplicationData::setUnsafeInputsSourcesInApplicationInputs(
 {
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 0);
   std::vector<bool> input_sources;
-  for (int i = 0; i < 32; i++)
+  for (uint8_t i = 0; i < 32; i++)
   {
     input_sources.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
@@ -161,7 +161,7 @@ void ParseApplicationData::setUnsafeInputsFlagsInApplicationInputs(
 {
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 4);
   std::vector<bool> input_flags;
-  for (int i = 0; i < 32; i++)
+  for (uint8_t i = 0; i < 32; i++)
   {
     input_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
@@ -179,7 +179,7 @@ void ParseApplicationData::setMonitoringCaseNumbersInApplicationInputs(
   const uint8_t*& data_ptr, datastructure::ApplicationInputs& inputs) const
 {
   std::vector<uint16_t> monitoring_cases;
-  for (int i = 0; i < 20; i++)
+  for (uint8_t i = 0; i < 20; i++)
   {
     monitoring_cases.push_back(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 12 + i * 2));
   }
@@ -192,8 +192,8 @@ void ParseApplicationData::setMonitoringCaseFlagsInApplicationInputs(
 {
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 52);
   std::vector<bool> monitoring_flags;
-   // 20 for each case one
-  for (int i = 0; i < 20; i++)
+  // 20 for each case one
+  for (uint8_t i = 0; i < 20; i++)
   {
     monitoring_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
@@ -227,7 +227,7 @@ void ParseApplicationData::setLinearVelocityFlagsInApplicationInputs(
 
   inputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   inputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
-   // reserved bits 2,3
+  // reserved bits 2,3
   inputs.setVelocity0TransmittedSafely(static_cast<bool>(word8 & (0x01 << 4)));
   inputs.setVelocity1TransmittedSafely(static_cast<bool>(word8 & (0x01 << 5)));
 }
@@ -253,7 +253,7 @@ void ParseApplicationData::setEvaluationPathsOutputsEvalOutInApplicationOutputs(
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 140);
 
   std::vector<bool> eval_out;
-  for (int i = 0; i < 20; i++)
+  for (uint8_t i = 0; i < 20; i++)
   {
     eval_out.push_back(word32 & (0x01 << i));
   }
@@ -266,7 +266,7 @@ void ParseApplicationData::setEvaluationPathsOutputsIsSafeInApplicationOutputs(
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 144);
 
   std::vector<bool> eval_out_is_safe;
-  for (int i = 0; i < 20; i++)
+  for (uint8_t i = 0; i < 20; i++)
   {
     eval_out_is_safe.push_back(word32 & (0x01 << i));
   }
@@ -280,7 +280,7 @@ void ParseApplicationData::setEvaluationPathsOutputsValidFlagsInApplicationOutpu
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 148);
 
   std::vector<bool> eval_out_is_valid;
-  for (int i = 0; i < 20; i++)
+  for (uint8_t i = 0; i < 20; i++)
   {
     eval_out_is_valid.push_back(word32 & (0x01 << i));
   }
@@ -299,7 +299,7 @@ void ParseApplicationData::setMonitoringCaseNumbersInApplicationOutputs(
 {
   std::vector<uint16_t> output_monitoring_cases;
 
-  for (int i = 0; i < 20; i++)
+  for (uint8_t i = 0; i < 20; i++)
   {
     output_monitoring_cases.push_back(
       m_reader_ptr->readuint16_tLittleEndian(data_ptr, 152 + i * 2));
@@ -314,8 +314,8 @@ void ParseApplicationData::setMonitoringCaseFlagsInApplicationOutputs(
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 192);
 
   std::vector<bool> output_monitoring_flags;
-   // 20 for each case one
-  for (int i = 0; i < 20; i++)
+  // 20 for each case one
+  for (uint8_t i = 0; i < 20; i++)
   {
     output_monitoring_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
@@ -368,10 +368,10 @@ void ParseApplicationData::setLinearVelocityFlagsInApplicationOutputs(
 
   outputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
-   // reserved bits 2,3
+  // reserved bits 2,3
   outputs.setVelocity0TransmittedSafely(static_cast<bool>(word8 & (0x01 << 4)));
   outputs.setVelocity1TransmittedSafely(static_cast<bool>(word8 & (0x01 << 5)));
-   // reserved bits 6,7
+  // reserved bits 6,7
 }
 
 void ParseApplicationData::setResultingVelocityOutputsInApplicationOutputs(
@@ -385,7 +385,7 @@ void ParseApplicationData::setResultingVelocityInApplicationOutputs(
   const uint8_t*& data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
   std::vector<int16_t> resulting_velocities;
-  for (int i = 0; i < 20; i++)
+  for (uint8_t i = 0; i < 20; i++)
   {
     resulting_velocities.push_back(m_reader_ptr->readint16_tLittleEndian(data_ptr, 208 + i * 2));
   }
@@ -398,8 +398,8 @@ void ParseApplicationData::setResultingVelocityFlagsInApplicationOutputs(
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 248);
 
   std::vector<bool> resulting_velocities_flags;
-   // 20 for each case one
-  for (int i = 0; i < 20; i++)
+  // 20 for each case one
+  for (uint8_t i = 0; i < 20; i++)
   {
     resulting_velocities_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
@@ -416,5 +416,5 @@ void ParseApplicationData::setOutputFlagsinApplicationOutput(
 }
 
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

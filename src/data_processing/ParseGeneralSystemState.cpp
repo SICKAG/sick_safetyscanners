@@ -117,7 +117,7 @@ void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
   general_system_state.setContaminationError(static_cast<bool>(byte & (0x01 << 3)));
   general_system_state.setReferenceContourStatus(static_cast<bool>(byte & (0x01 << 4)));
   general_system_state.setManipulationStatus(static_cast<bool>(byte & (0x01 << 5)));
-   // bit 6 and 7 reserved
+  // bit 6 and 7 reserved
 }
 
 void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
@@ -125,13 +125,13 @@ void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
 {
   std::vector<bool> safe_cut_off_path;
 
-  for (int i = 0; i < 3; i++)
+  for (uint8_t i = 0; i < 3; i++)
   {
     uint8_t byte = m_reader_ptr->readuint8_tLittleEndian(data_ptr, 1 + i);
 
-    for (int j = 0; j < 8; j++)
+    for (uint8_t j = 0; j < 8; j++)
     {
-       // as long as there are only 20 instead of 24 cut off paths
+      // as long as there are only 20 instead of 24 cut off paths
       if (i == 2 && j > 3)
       {
         break;
@@ -147,13 +147,13 @@ void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
 {
   std::vector<bool> non_safe_cut_off_path;
 
-  for (int i = 0; i < 3; i++)
+  for (uint8_t i = 0; i < 3; i++)
   {
     uint8_t byte = m_reader_ptr->readuint8_tLittleEndian(data_ptr, 4 + i);
 
-    for (int j = 0; j < 8; j++)
+    for (uint8_t j = 0; j < 8; j++)
     {
-       // as long as there are only 20 instead of 24 cut off paths
+      // as long as there are only 20 instead of 24 cut off paths
       if (i == 2 && j > 3)
       {
         break;
@@ -169,13 +169,13 @@ void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
 {
   std::vector<bool> reset_required_cutoff_path;
 
-  for (int i = 0; i < 3; i++)
+  for (uint8_t i = 0; i < 3; i++)
   {
     uint8_t byte = m_reader_ptr->readuint8_tLittleEndian(data_ptr, 7 + i);
 
-    for (int j = 0; j < 8; j++)
+    for (uint8_t j = 0; j < 8; j++)
     {
-       // as long as there are only 20 instead of 24 cut off paths
+      // as long as there are only 20 instead of 24 cut off paths
       if (i == 2 && j > 3)
       {
         break;
@@ -207,5 +207,5 @@ void ParseGeneralSystemState::setErrorsInGeneralSystemState(
   general_system_state.setDeviceError(static_cast<bool>(byte & (0x01 << 1)));
 }
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick

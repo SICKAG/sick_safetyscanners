@@ -40,6 +40,8 @@
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
+#include <string>
+
 namespace sick {
 
 namespace cola2 {
@@ -61,7 +63,7 @@ private:
   std::string readDeviceName(const uint8_t*& data_ptr) const;
 };
 
-}  // namespace data_processing
-}  // namespace sick
+} // namespace data_processing
+} // namespace sick
 
-#endif
+#endif // SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEDEVICENAME_H
