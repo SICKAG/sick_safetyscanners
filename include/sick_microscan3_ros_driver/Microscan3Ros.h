@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef MICROSCAN3ROS_H
-#define MICROSCAN3ROS_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_MICROSCAN3ROS_H
+#define SICK_MICROSCAN3_ROS_DRIVER_MICROSCAN3ROS_H
 
 
 // ROS
@@ -102,13 +102,13 @@ public:
   virtual ~Microscan3Ros();
 
 private:
-  //! ROS node handle.
+   //! ROS node handle.
   ros::NodeHandle m_nh;
 
-  //! ROS private node handle
+   //! ROS private node handle
   ros::NodeHandle m_private_nh;
 
-  //! ROS topic publisher
+   //! ROS topic publisher
   ros::Publisher m_laser_scan_publisher;
   ros::Publisher m_extended_laser_scan_publisher;
   ros::Publisher m_raw_data_publisher;
@@ -176,6 +176,6 @@ private:
   void readTypeCodeSettings();
 };
 
-} // namespace sick
+}  // namespace sick
 
 #endif

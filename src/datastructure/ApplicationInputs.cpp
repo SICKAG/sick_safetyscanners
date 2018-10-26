@@ -152,5 +152,5 @@ void ApplicationInputs::setSleepModeInput(const int8_t& sleep_mode_input)
   m_sleep_mode_input = sleep_mode_input;
 }
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

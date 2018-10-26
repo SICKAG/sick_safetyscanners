@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PACKETBUFFER_H
-#define PACKETBUFFER_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_PACKETBUFFER_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_PACKETBUFFER_H
 
 #include <iostream>
 #include <stdint.h>
@@ -163,7 +163,7 @@ static bool sortForIncreasingOffset(const ParsedPacketBuffer& ppb1, const Parsed
   return ppb1.m_datagram_header.getFragmentOffset() < ppb2.m_datagram_header.getFragmentOffset();
 }
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

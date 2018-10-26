@@ -202,5 +202,5 @@ void Command::writeCommandModeToDataPtr(uint8_t*& data_ptr) const
   m_writer_ptr->writeuint8_tBigEndian(data_ptr, getCommandMode(), 17);
 }
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick

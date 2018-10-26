@@ -60,5 +60,5 @@ void TypeCode::setMaxRange(float max_distance)
 }
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

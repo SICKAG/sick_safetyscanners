@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PARSEFIELDHEADERDATA_H
-#define PARSEFIELDHEADERDATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEFIELDHEADERDATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEFIELDHEADERDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/FieldData.h>
@@ -66,7 +66,7 @@ private:
   int readSetIndex(const uint8_t*& data_ptr) const;
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

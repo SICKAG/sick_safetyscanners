@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef MEASUREMENTDATA_H
-#define MEASUREMENTDATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_MEASUREMENTDATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_MEASUREMENTDATA_H
 
 #include <stdint.h>
 #include <vector>
@@ -97,7 +97,7 @@ private:
   std::vector<ScanPoint> m_scan_points_vector;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

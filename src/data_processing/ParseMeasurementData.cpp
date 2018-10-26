@@ -152,5 +152,5 @@ void ParseMeasurementData::addScanPointToMeasurementData(
                                                                contamination_warning));
 }
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

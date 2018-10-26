@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef APPLICATIONINPUTS_H
-#define APPLICATIONINPUTS_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_APPLICATIONINPUTS_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_APPLICATIONINPUTS_H
 
 #include <stdint.h>
 #include <vector>
@@ -98,7 +98,7 @@ private:
   int8_t m_sleep_mode_input;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

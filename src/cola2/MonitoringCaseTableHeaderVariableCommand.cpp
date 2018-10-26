@@ -69,10 +69,10 @@ bool MonitoringCaseTableHeaderVariableCommand::processReply()
     return false;
   }
 
-  // m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
+   // m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
   return true;
 }
 
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick

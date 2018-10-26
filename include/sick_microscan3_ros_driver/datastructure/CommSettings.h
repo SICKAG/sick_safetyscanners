@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef COMMSETTINGS_H
-#define COMMSETTINGS_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_COMMSETTINGS_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_COMMSETTINGS_H
 
 #include <boost/asio/ip/address_v4.hpp>
 #include <iostream>
@@ -101,7 +101,7 @@ private:
 };
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

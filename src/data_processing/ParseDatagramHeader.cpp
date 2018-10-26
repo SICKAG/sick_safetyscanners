@@ -104,5 +104,5 @@ void ParseDatagramHeader::setFragmentOffsetInHeader(const uint8_t*& data_ptr,
   header.setFragmentOffset(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16));
 }
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

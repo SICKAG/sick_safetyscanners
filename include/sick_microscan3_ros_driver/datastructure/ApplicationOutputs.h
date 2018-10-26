@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef APPLICATIONOUTPUTS_H
-#define APPLICATIONOUTPUTS_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_APPLICATIONOUTPUTS_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_APPLICATIONOUTPUTS_H
 
 #include <stdint.h>
 #include <vector>
@@ -147,7 +147,7 @@ private:
 };
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

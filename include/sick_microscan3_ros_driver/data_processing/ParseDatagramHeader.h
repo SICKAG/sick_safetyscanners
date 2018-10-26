@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PARSEDATAGRAMHEADER_H
-#define PARSEDATAGRAMHEADER_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEDATAGRAMHEADER_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEDATAGRAMHEADER_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/DatagramHeader.h>
@@ -71,7 +71,7 @@ private:
                                  datastructure::DatagramHeader& header) const;
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

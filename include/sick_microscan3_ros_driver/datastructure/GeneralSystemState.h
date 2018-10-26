@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef GENERALSYSTEMSTATE_H
-#define GENERALSYSTEMSTATE_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_GENERALSYSTEMSTATE_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_GENERALSYSTEMSTATE_H
 
 #include <stdint.h>
 #include <vector>
@@ -269,7 +269,7 @@ private:
   bool m_device_error;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

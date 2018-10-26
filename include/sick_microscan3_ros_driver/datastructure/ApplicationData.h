@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef APPLICATIONDATA_H
-#define APPLICATIONDATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_APPLICATIONDATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_APPLICATIONDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/ApplicationInputs.h>
 #include <sick_microscan3_ros_driver/datastructure/ApplicationOutputs.h>
@@ -63,7 +63,7 @@ private:
 };
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

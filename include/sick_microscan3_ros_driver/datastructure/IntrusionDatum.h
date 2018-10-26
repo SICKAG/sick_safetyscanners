@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef INTRUSIONDATUM_H
-#define INTRUSIONDATUM_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_INTRUSIONDATUM_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_INTRUSIONDATUM_H
 
 #include <stdint.h>
 #include <vector>
@@ -81,7 +81,7 @@ private:
   std::vector<bool> m_flags_vector;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

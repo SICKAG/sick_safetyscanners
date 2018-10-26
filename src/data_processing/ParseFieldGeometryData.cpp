@@ -72,5 +72,5 @@ uint16_t ParseFieldGeometryData::readArrayElement(const uint8_t*& data_ptr,
 }
 
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PARSEFIELDGEOMETRYDATA_H
-#define PARSEFIELDGEOMETRYDATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEFIELDGEOMETRYDATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEFIELDGEOMETRYDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/FieldData.h>
@@ -64,7 +64,7 @@ private:
   uint16_t readArrayElement(const uint8_t*& data_ptr, uint32_t elem_number) const;
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

@@ -32,6 +32,7 @@
  */
 //----------------------------------------------------------------------
 
+
 #include <sick_microscan3_ros_driver/cola2/CloseSession.h>
 
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
@@ -41,7 +42,7 @@ namespace sick {
 namespace cola2 {
 
 CloseSession::CloseSession(Cola2Session& session)
-  : Command(session, 0x43, 0x58) // see cola2 manual 0x4F = O, 0x58 = X
+  : Command(session, 0x43, 0x58)  // see cola2 manual 0x4F = O, 0x58 = X
 {
 }
 
@@ -69,5 +70,5 @@ bool CloseSession::processReply()
   }
 }
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick

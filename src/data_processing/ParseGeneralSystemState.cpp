@@ -117,7 +117,7 @@ void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
   general_system_state.setContaminationError(static_cast<bool>(byte & (0x01 << 3)));
   general_system_state.setReferenceContourStatus(static_cast<bool>(byte & (0x01 << 4)));
   general_system_state.setManipulationStatus(static_cast<bool>(byte & (0x01 << 5)));
-  // bit 6 and 7 reserved
+   // bit 6 and 7 reserved
 }
 
 void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
@@ -131,7 +131,7 @@ void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
 
     for (int j = 0; j < 8; j++)
     {
-      // as long as there are only 20 instead of 24 cut off paths
+       // as long as there are only 20 instead of 24 cut off paths
       if (i == 2 && j > 3)
       {
         break;
@@ -153,7 +153,7 @@ void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
 
     for (int j = 0; j < 8; j++)
     {
-      // as long as there are only 20 instead of 24 cut off paths
+       // as long as there are only 20 instead of 24 cut off paths
       if (i == 2 && j > 3)
       {
         break;
@@ -175,7 +175,7 @@ void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
 
     for (int j = 0; j < 8; j++)
     {
-      // as long as there are only 20 instead of 24 cut off paths
+       // as long as there are only 20 instead of 24 cut off paths
       if (i == 2 && j > 3)
       {
         break;
@@ -207,5 +207,5 @@ void ParseGeneralSystemState::setErrorsInGeneralSystemState(
   general_system_state.setDeviceError(static_cast<bool>(byte & (0x01 << 1)));
 }
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

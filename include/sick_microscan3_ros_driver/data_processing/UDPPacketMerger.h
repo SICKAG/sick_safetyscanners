@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef UDPPACKETMERGER_H
-#define UDPPACKETMERGER_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_UDPPACKETMERGER_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_UDPPACKETMERGER_H
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -70,7 +70,7 @@ private:
   removeHeaderFromParsedPacketBuffer(const sick::datastructure::ParsedPacketBufferVector& vec);
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

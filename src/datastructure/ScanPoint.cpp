@@ -105,5 +105,5 @@ bool ScanPoint::getContaminationWarningBit() const
   return m_contamination_warning_bit;
 }
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

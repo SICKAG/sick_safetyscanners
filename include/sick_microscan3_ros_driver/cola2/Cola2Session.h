@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef COLA2SESSION_H
-#define COLA2SESSION_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_COLA2SESSION_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_COLA2SESSION_H
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -101,7 +101,7 @@ private:
 };
 
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 #endif

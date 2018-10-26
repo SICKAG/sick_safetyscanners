@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef CREATESESSION_H
-#define CREATESESSION_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_CREATESESSION_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_CREATESESSION_H
 
 
 #include <sick_microscan3_ros_driver/cola2/Command.h>
@@ -58,7 +58,7 @@ private:
   void writeClientIdToDataPtr(uint8_t*& data_ptr) const;
 };
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 #endif

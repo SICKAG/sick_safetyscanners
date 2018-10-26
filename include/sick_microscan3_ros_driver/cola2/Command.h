@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef COMMAND_H
-#define COMMAND_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_COMMAND_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_COMMAND_H
 
 #include <ros/ros.h>
 
@@ -122,8 +122,8 @@ private:
 };
 
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 
 #endif

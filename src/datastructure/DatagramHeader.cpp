@@ -109,5 +109,5 @@ void DatagramHeader::setFragmentOffset(const uint32_t& value)
   m_fragment_offset = value;
 }
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

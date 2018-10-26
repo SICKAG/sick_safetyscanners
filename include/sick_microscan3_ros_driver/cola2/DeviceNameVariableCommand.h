@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef DEVICENAMEVARIABLECOMMAND_H
-#define DEVICENAMEVARIABLECOMMAND_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_DEVICENAMEVARIABLECOMMAND_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_DEVICENAMEVARIABLECOMMAND_H
 
 
 #include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
@@ -61,7 +61,7 @@ private:
   std::string& m_device_name;
 };
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 #endif

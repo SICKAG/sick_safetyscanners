@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PARSEGENERALSYSTEMSTATE_H
-#define PARSEGENERALSYSTEMSTATE_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEGENERALSYSTEMSTATE_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEGENERALSYSTEMSTATE_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
@@ -76,7 +76,7 @@ private:
   bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

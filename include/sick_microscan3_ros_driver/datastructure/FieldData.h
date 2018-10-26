@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef FIELDDATA_H
-#define FIELDDATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_FIELDDATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_FIELDDATA_H
 
 #include <iostream>
 #include <vector>
@@ -74,7 +74,7 @@ private:
 };
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

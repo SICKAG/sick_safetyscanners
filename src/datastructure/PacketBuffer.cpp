@@ -72,5 +72,5 @@ size_t PacketBuffer::getLength() const
   return m_buffer.size();
 }
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

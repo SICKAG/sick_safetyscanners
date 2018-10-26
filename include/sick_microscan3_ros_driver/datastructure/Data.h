@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef DATA_H
-#define DATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATA_H
 
 #include <memory>
 
@@ -82,7 +82,7 @@ private:
   std::shared_ptr<ApplicationData> m_application_data_ptr;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

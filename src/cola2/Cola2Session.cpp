@@ -68,11 +68,11 @@ bool Cola2Session::executeCommand(const CommandPtr& command)
 
 bool Cola2Session::sendTelegramAndListenForAnswer(const CommandPtr& command)
 {
-  command->lockExecutionMutex(); // lock
+  command->lockExecutionMutex();  // lock
   sick::datastructure::PacketBuffer::VectorBuffer telegram;
   command->constructTelegram(telegram);
   m_async_tcp_client_ptr->doSendAndReceive(telegram);
-  command->waitForCompletion(); // scooped locked to wait, unlocked on data processing
+  command->waitForCompletion();  // scooped locked to wait, unlocked on data processing
   return true;
 }
 
@@ -170,5 +170,5 @@ uint16_t Cola2Session::getNextRequestID()
   return ++m_last_request_id;
 }
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick

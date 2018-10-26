@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef TCPPACKETMERGER_H
-#define TCPPACKETMERGER_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_TCPPACKETMERGER_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_TCPPACKETMERGER_H
 
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
@@ -69,7 +69,7 @@ private:
   bool deployPacket();
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

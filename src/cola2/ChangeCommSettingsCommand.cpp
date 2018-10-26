@@ -32,6 +32,7 @@
  */
 //----------------------------------------------------------------------
 
+
 #include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
 
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
@@ -139,5 +140,5 @@ void ChangeCommSettingsCommand::writeFeaturesToDataPtr(uint8_t*& data_ptr) const
 }
 
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick

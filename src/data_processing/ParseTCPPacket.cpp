@@ -47,7 +47,7 @@ ParseTCPPacket::ParseTCPPacket()
 uint32_t ParseTCPPacket::getExpectedPacketLength(const datastructure::PacketBuffer& buffer)
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  return readLength(data_ptr) + 8; // for STX and Length which is not included in length datafield
+  return readLength(data_ptr) + 8;  // for STX and Length which is not included in length datafield
 }
 
 uint16_t ParseTCPPacket::getRequestID(const datastructure::PacketBuffer& buffer) const
@@ -133,5 +133,5 @@ void ParseTCPPacket::readData(const datastructure::PacketBuffer& buffer,
   }
 }
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

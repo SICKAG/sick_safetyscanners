@@ -60,5 +60,5 @@ void IntrusionDatum::setFlagsVector(const std::vector<bool>& flags_vector)
   m_flags_vector = flags_vector;
 }
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

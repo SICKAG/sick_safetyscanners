@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef TYPECODE_H
-#define TYPECODE_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_TYPECODE_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_TYPECODE_H
 
 #include <iostream>
 
@@ -72,7 +72,7 @@ private:
 };
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

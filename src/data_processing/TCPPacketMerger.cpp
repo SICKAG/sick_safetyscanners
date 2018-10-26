@@ -132,5 +132,5 @@ uint32_t TCPPacketMerger::getCurrentSize() const
   return static_cast<uint32_t>(sum);
 }
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

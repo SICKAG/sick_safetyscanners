@@ -106,5 +106,5 @@ float ParseTypeCodeData::readMaxRange(const uint8_t*& data_ptr) const
 }
 
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

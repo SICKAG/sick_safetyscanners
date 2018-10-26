@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef FIELDGEOMETRYVARIABLECOMMAND_H
-#define FIELDGEOMETRYVARIABLECOMMAND_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_FIELDGEOMETRYVARIABLECOMMAND_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_FIELDGEOMETRYVARIABLECOMMAND_H
 
 
 #include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
@@ -63,7 +63,7 @@ private:
   sick::datastructure::FieldData& m_field_data;
 };
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 #endif

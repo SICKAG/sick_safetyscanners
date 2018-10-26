@@ -32,14 +32,13 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef ASYNCUDPCLIENT_H
-#define ASYNCUDPCLIENT_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COMMUNICATION_ASYNCUDPCLIENT_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COMMUNICATION_ASYNCUDPCLIENT_H
 
 #include <ros/ros.h>
 
 #include <functional>
 #include <iostream>
-#include <thread>
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
@@ -72,15 +71,14 @@ private:
   boost::asio::io_service& m_io_service;
   std::shared_ptr<boost::asio::ip::udp::socket> m_socket_ptr;
   boost::asio::ip::udp::endpoint m_remote_endpoint;
-  std::thread m_service_thread;
 
   void start_receive();
   void handle_receive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
 
 
-  AsyncUDPClient(AsyncUDPClient&); // block default copy constructor
+  AsyncUDPClient(AsyncUDPClient&);   // block default copy constructor
 };
-} // namespace communication
-} // namespace sick
+}   // namespace communication
+}   // namespace sick
 
-#endif
+#endif   // ASYNCUDPCLIENT_H

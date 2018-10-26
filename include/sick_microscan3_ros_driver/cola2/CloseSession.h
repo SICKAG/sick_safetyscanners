@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef CLOSESESSION_H
-#define CLOSESESSION_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_CLOSESESSION_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_CLOSESESSION_H
 
 
 #include <sick_microscan3_ros_driver/cola2/Command.h>
@@ -50,7 +50,7 @@ public:
   bool processReply();
 };
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 #endif

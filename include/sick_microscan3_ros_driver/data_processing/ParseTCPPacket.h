@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PARSETCPPACKET_H
-#define PARSETCPPACKET_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSETCPPACKET_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSETCPPACKET_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
@@ -76,7 +76,7 @@ private:
                                   sick::cola2::Command& command) const;
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

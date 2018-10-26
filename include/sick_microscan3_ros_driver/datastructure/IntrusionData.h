@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef INTRUSIONDATA_H
-#define INTRUSIONDATA_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_INTRUSIONDATA_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_INTRUSIONDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/IntrusionDatum.h>
 
@@ -80,7 +80,7 @@ private:
   std::vector<IntrusionDatum> m_intrusion_data_vector;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef MICROSCAN3_H
-#define MICROSCAN3_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_MICROSCAN3_H
+#define SICK_MICROSCAN3_ROS_DRIVER_MICROSCAN3_H
 
 #include <ros/ros.h>
 
@@ -131,6 +131,6 @@ private:
   void requestTypeCodeinColaSession(sick::datastructure::TypeCode& type_code);
 };
 
-} // namespace sick
+}  // namespace sick
 
 #endif

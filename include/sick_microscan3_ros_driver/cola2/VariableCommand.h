@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef VARIABLECOMMAND_H
-#define VARIABLECOMMAND_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_VARIABLECOMMAND_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_VARIABLECOMMAND_H
 
 #include <sick_microscan3_ros_driver/cola2/Command.h>
 
@@ -56,7 +56,7 @@ private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 };
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 #endif

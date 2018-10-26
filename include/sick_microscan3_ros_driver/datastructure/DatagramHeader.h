@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef DATAGRAMHEADER_H
-#define DATAGRAMHEADER_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATAGRAMHEADER_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATAGRAMHEADER_H
 
 #include <stdint.h>
 
@@ -79,7 +79,7 @@ private:
   uint32_t m_fragment_offset;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

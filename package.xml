@@ -2,7 +2,8 @@
 <package format="2">
   <name>sick_microscan3_ros_driver</name>
   <version>0.0.1</version>
-  <description>The sick_microscan3_ros_driver package</description>
+  <description>Provides an Interface to read the sensor output of a sick
+  safety laserscanner</description>
 
   <maintainer email="puck@fzi.de">Lennart Puck</maintainer>
 
@@ -12,7 +13,6 @@
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
   <depend>dynamic_reconfigure</depend>
-  <build_depend>roslint</build_depend>
   <build_depend>message_generation</build_depend>
   <exec_depend>message_runtime</exec_depend>
   <buildtool_depend>catkin</buildtool_depend>

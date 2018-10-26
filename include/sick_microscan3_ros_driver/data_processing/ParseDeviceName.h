@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef PARSEDEVICENAME_H
-#define PARSEDEVICENAME_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEDEVICENAME_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATA_PROCESSING_PARSEDEVICENAME_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
@@ -61,7 +61,7 @@ private:
   std::string readDeviceName(const uint8_t*& data_ptr) const;
 };
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick
 
 #endif

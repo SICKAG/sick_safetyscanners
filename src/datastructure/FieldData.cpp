@@ -90,5 +90,5 @@ void FieldData::setBeamDistances(const std::vector<uint16_t>& beam_distance)
 }
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef ASYNCTCPCLIENT_H
-#define ASYNCTCPCLIENT_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COMMUNICATION_ASYNCTCPCLIENT_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COMMUNICATION_ASYNCTCPCLIENT_H
 
 #include <ros/ros.h>
 
@@ -89,12 +89,12 @@ private:
   void handle_receive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
 
 
-  AsyncTCPClient(AsyncTCPClient&); // block default copy constructor
+  AsyncTCPClient(AsyncTCPClient&);  // block default copy constructor
 
   void handleSendAndReceive(const boost::system::error_code& error,
                             const std::size_t& bytes_transferred);
 };
-} // namespace communication
-} // namespace sick
+}  // namespace communication
+}  // namespace sick
 
 #endif

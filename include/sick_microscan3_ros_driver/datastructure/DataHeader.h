@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef DATAHEADER_H
-#define DATAHEADER_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATAHEADER_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_DATAHEADER_H
 
 #include <stdint.h>
 
@@ -137,7 +137,7 @@ private:
   uint16_t m_application_data_block_size;
 };
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif

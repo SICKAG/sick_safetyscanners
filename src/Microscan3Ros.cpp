@@ -32,6 +32,7 @@
  */
 //----------------------------------------------------------------------
 
+
 #include "sick_microscan3_ros_driver/Microscan3Ros.h"
 
 
@@ -110,7 +111,7 @@ bool Microscan3Ros::readParameters()
   std::string sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
   if (!m_private_nh.getParam("sensor_ip", sensor_ip_adress))
   {
-    //    sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
+     //    sensor_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_sensor_ip;
     ROS_WARN("Using default sensor IP: %s", sensor_ip_adress.c_str());
   }
   m_communication_settings.setSensorIp(sensor_ip_adress);
@@ -127,7 +128,7 @@ bool Microscan3Ros::readParameters()
   std::string host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
   if (!m_private_nh.getParam("host_ip", host_ip_adress))
   {
-    //    host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
+     //    host_ip_adress = sick_microscan3_ros_driver::Microscan3Configuration_host_ip;
     ROS_WARN("Using default host IP: %s", host_ip_adress.c_str());
   }
   m_communication_settings.setHostIp(host_ip_adress);
@@ -265,7 +266,7 @@ sensor_msgs::LaserScan Microscan3Ros::createLaserScanMessage(const sick::datastr
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     scan.ranges[i]                                  = static_cast<float>(scan_point.getDistance()) *
-                     data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
+                     data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3;  // mm -> m
     scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
   }
 
@@ -568,4 +569,4 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
 }
 
 
-} // namespace sick
+}  // namespace sick

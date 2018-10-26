@@ -192,7 +192,7 @@ void ParseApplicationData::setMonitoringCaseFlagsInApplicationInputs(
 {
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 52);
   std::vector<bool> monitoring_flags;
-  // 20 for each case one
+   // 20 for each case one
   for (int i = 0; i < 20; i++)
   {
     monitoring_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
@@ -227,7 +227,7 @@ void ParseApplicationData::setLinearVelocityFlagsInApplicationInputs(
 
   inputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   inputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
-  // reserved bits 2,3
+   // reserved bits 2,3
   inputs.setVelocity0TransmittedSafely(static_cast<bool>(word8 & (0x01 << 4)));
   inputs.setVelocity1TransmittedSafely(static_cast<bool>(word8 & (0x01 << 5)));
 }
@@ -314,7 +314,7 @@ void ParseApplicationData::setMonitoringCaseFlagsInApplicationOutputs(
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 192);
 
   std::vector<bool> output_monitoring_flags;
-  // 20 for each case one
+   // 20 for each case one
   for (int i = 0; i < 20; i++)
   {
     output_monitoring_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
@@ -368,10 +368,10 @@ void ParseApplicationData::setLinearVelocityFlagsInApplicationOutputs(
 
   outputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
-  // reserved bits 2,3
+   // reserved bits 2,3
   outputs.setVelocity0TransmittedSafely(static_cast<bool>(word8 & (0x01 << 4)));
   outputs.setVelocity1TransmittedSafely(static_cast<bool>(word8 & (0x01 << 5)));
-  // reserved bits 6,7
+   // reserved bits 6,7
 }
 
 void ParseApplicationData::setResultingVelocityOutputsInApplicationOutputs(
@@ -398,7 +398,7 @@ void ParseApplicationData::setResultingVelocityFlagsInApplicationOutputs(
   uint32_t word32 = m_reader_ptr->readuint32_tLittleEndian(data_ptr, 248);
 
   std::vector<bool> resulting_velocities_flags;
-  // 20 for each case one
+   // 20 for each case one
   for (int i = 0; i < 20; i++)
   {
     resulting_velocities_flags.push_back(static_cast<bool>(word32 & (0x01 << i)));
@@ -416,5 +416,5 @@ void ParseApplicationData::setOutputFlagsinApplicationOutput(
 }
 
 
-} // namespace data_processing
-} // namespace sick
+}  // namespace data_processing
+}  // namespace sick

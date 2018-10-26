@@ -174,5 +174,5 @@ void CommSettings::setSensorTcpPort(const uint16_t& sensor_tcp_port)
 }
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick

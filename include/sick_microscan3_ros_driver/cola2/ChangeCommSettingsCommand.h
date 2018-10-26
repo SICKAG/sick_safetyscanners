@@ -32,8 +32,9 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef CHANGECOMMSETTINGSCOMMAND_H
-#define CHANGECOMMSETTINGSCOMMAND_H
+
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_COLA2_CHANGECOMMSETTINGSCOMMAND_H
+#define SICK_MICROSCAN3_ROS_DRIVER_COLA2_CHANGECOMMSETTINGSCOMMAND_H
 
 
 #include <sick_microscan3_ros_driver/cola2/MethodCommand.h>
@@ -71,7 +72,7 @@ private:
   void writeFeaturesToDataPtr(uint8_t*& data_ptr) const;
 };
 
-} // namespace cola2
-} // namespace sick
+}  // namespace cola2
+}  // namespace sick
 
 #endif

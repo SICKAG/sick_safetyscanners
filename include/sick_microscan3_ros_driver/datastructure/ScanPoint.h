@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef SCANPOINT_H
-#define SCANPOINT_H
+#ifndef SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_SCANPOINT_H
+#define SICK_MICROSCAN3_ROS_DRIVER_DATASTRUCTURE_SCANPOINT_H
 
 #include <stdint.h>
 
@@ -138,7 +138,7 @@ private:
 };
 
 
-} // namespace datastructure
-} // namespace sick
+}  // namespace datastructure
+}  // namespace sick
 
 #endif
