@@ -36,9 +36,9 @@
 #define PACKETBUFFER_H
 
 #include <iostream>
+#include <stdint.h>
 #include <string>
 #include <vector>
-#include <stdint.h>
 
 #include <boost/array.hpp>
 #include <boost/asio.hpp>
@@ -61,7 +61,6 @@ const int MAXSIZE = 10000;
 class PacketBuffer
 {
 public:
-
   /*!
    * \brief Typedef for an arraybuffer which can be read from the sensor.
    */
@@ -87,7 +86,7 @@ public:
    * \param buffer Arraybuffer to set for the PacketBuffer.
    * \param length Length of the array.
    */
-  PacketBuffer(const ArrayBuffer& buffer, const size_t &length);
+  PacketBuffer(const ArrayBuffer& buffer, const size_t& length);
 
   /*!
    * \brief Returns defined maximum size of PacketBuffer.
@@ -112,7 +111,7 @@ public:
    * \param buffer Input ArrayBuffer to save.
    * \param length Length of input ArrayBuffer.
    */
-  void setBuffer(const ArrayBuffer& buffer, const size_t &length);
+  void setBuffer(const ArrayBuffer& buffer, const size_t& length);
 
   /*!
    * \brief Returns length of the current PacketBuffer.

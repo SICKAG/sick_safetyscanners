@@ -63,12 +63,16 @@ void ReadWriteHelper::writeuint8_t(uint8_t*& buf, const uint8_t v, const uint16_
   buf[offset] = v;
 }
 
-void ReadWriteHelper::writeuint8_tBigEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset) const
+void ReadWriteHelper::writeuint8_tBigEndian(uint8_t*& buf,
+                                            const uint8_t v,
+                                            const uint16_t offset) const
 {
   writeuint8_t(buf, v, offset);
 }
 
-void ReadWriteHelper::writeuint8_tLittleEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset) const
+void ReadWriteHelper::writeuint8_tLittleEndian(uint8_t*& buf,
+                                               const uint8_t v,
+                                               const uint16_t offset) const
 {
   writeuint8_t(buf, v, offset);
 }
@@ -98,12 +102,16 @@ void ReadWriteHelper::writeint8_t(uint8_t*& buf, const uint8_t v, const uint16_t
   writeuint8_t(buf, v, offset);
 }
 
-void ReadWriteHelper::writeint8_tBigEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset) const
+void ReadWriteHelper::writeint8_tBigEndian(uint8_t*& buf,
+                                           const uint8_t v,
+                                           const uint16_t offset) const
 {
   writeint8_t(buf, v, offset);
 }
 
-void ReadWriteHelper::writeint8_tLittleEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset) const
+void ReadWriteHelper::writeint8_tLittleEndian(uint8_t*& buf,
+                                              const uint8_t v,
+                                              const uint16_t offset) const
 {
   writeint8_t(buf, v, offset);
 }
@@ -121,13 +129,17 @@ uint16_t ReadWriteHelper::readuint16_tBigEndian(const uint8_t*& buf, const uint1
   return (buf[offset] << 8) + buf[offset + 1];
 }
 
-void ReadWriteHelper::writeuint16_tBigEndian(uint8_t*& buf, const uint16_t v, const uint16_t offset) const
+void ReadWriteHelper::writeuint16_tBigEndian(uint8_t*& buf,
+                                             const uint16_t v,
+                                             const uint16_t offset) const
 {
   buf[offset]     = (v & 0xff00) >> 8;
   buf[offset + 1] = v & 0xff;
 }
 
-void ReadWriteHelper::writeuint16_tLittleEndian(uint8_t*& buf, const uint16_t v, const uint16_t offset) const
+void ReadWriteHelper::writeuint16_tLittleEndian(uint8_t*& buf,
+                                                const uint16_t v,
+                                                const uint16_t offset) const
 {
   buf[offset + 1] = (v & 0xff00) >> 8;
   buf[offset]     = v & 0xff;
@@ -161,7 +173,9 @@ uint32_t ReadWriteHelper::readuint32_tBigEndian(const uint8_t*& buf, const uint1
   return (buf[offset] << 24) + (buf[offset + 1] << 16) + (buf[offset + 2] << 8) + buf[offset + 3];
 }
 
-void ReadWriteHelper::writeuint32_tLittleEndian(uint8_t*& buf, const uint32_t v, const uint16_t offset) const
+void ReadWriteHelper::writeuint32_tLittleEndian(uint8_t*& buf,
+                                                const uint32_t v,
+                                                const uint16_t offset) const
 {
   buf[offset + 3] = (v & 0xff000000) >> 24;
   buf[offset + 2] = (v & 0xff0000) >> 16;
@@ -169,7 +183,9 @@ void ReadWriteHelper::writeuint32_tLittleEndian(uint8_t*& buf, const uint32_t v,
   buf[offset]     = v & 0xff;
 }
 
-void ReadWriteHelper::writeuint32_tBigEndian(uint8_t*& buf, const uint32_t v, const uint16_t offset) const
+void ReadWriteHelper::writeuint32_tBigEndian(uint8_t*& buf,
+                                             const uint32_t v,
+                                             const uint16_t offset) const
 {
   buf[offset]     = (v & 0xff000000) >> 24;
   buf[offset + 1] = (v & 0xff0000) >> 16;

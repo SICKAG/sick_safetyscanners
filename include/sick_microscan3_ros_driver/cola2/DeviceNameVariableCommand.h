@@ -37,8 +37,8 @@
 
 
 #include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
-#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseDeviceName.h>
+#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 
 namespace sick {
 namespace cola2 {
@@ -48,7 +48,7 @@ class DeviceNameVariableCommand : public VariableCommand
 public:
   typedef sick::cola2::VariableCommand base_class;
 
-  DeviceNameVariableCommand(Cola2Session& session, std::string &device_name);
+  DeviceNameVariableCommand(Cola2Session& session, std::string& device_name);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
@@ -59,7 +59,6 @@ private:
   std::shared_ptr<sick::data_processing::ParseDeviceName> m_device_name_parser_ptr;
 
   std::string& m_device_name;
-
 };
 
 } // namespace cola2

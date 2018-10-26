@@ -40,13 +40,14 @@
 namespace sick {
 namespace cola2 {
 
-//TODO
+// TODO
 
-MonitoringCaseTableHeaderVariableCommand::MonitoringCaseTableHeaderVariableCommand(Cola2Session& session, datastructure::FieldData &field_data)
+MonitoringCaseTableHeaderVariableCommand::MonitoringCaseTableHeaderVariableCommand(
+  Cola2Session& session, datastructure::FieldData& field_data)
   : VariableCommand(session, 2100)
   , m_field_data(field_data)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_writer_ptr              = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
 }
 
@@ -68,10 +69,9 @@ bool MonitoringCaseTableHeaderVariableCommand::processReply()
     return false;
   }
 
- // m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
+  // m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
   return true;
 }
-
 
 
 } // namespace cola2

@@ -36,8 +36,8 @@
 #define PARSEGENERALSYSTEMSTATE_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -49,30 +49,30 @@ class ParseGeneralSystemState
 public:
   ParseGeneralSystemState();
 
-  datastructure::GeneralSystemState parseUDPSequence(const sick::datastructure::PacketBuffer &buffer,
-                                                     datastructure::Data& data) const;
+  datastructure::GeneralSystemState
+  parseUDPSequence(const sick::datastructure::PacketBuffer& buffer,
+                   datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  void setDataInGeneralSystemState(const uint8_t* &data_ptr,
+  void setDataInGeneralSystemState(const uint8_t*& data_ptr,
                                    datastructure::GeneralSystemState& general_System_state) const;
-  void setStatusBitsInGeneralSystemState(const uint8_t* &data_ptr,
-                                         datastructure::GeneralSystemState& general_System_state) const;
   void
-  setSafeCutOffPathInGeneralSystemState(const uint8_t* &data_ptr,
-                                        datastructure::GeneralSystemState& general_System_state) const;
-  void
-  setNonSafeCutOffPathInGeneralSystemState(const uint8_t* &data_ptr,
-                                           datastructure::GeneralSystemState& general_System_state) const;
+  setStatusBitsInGeneralSystemState(const uint8_t*& data_ptr,
+                                    datastructure::GeneralSystemState& general_System_state) const;
+  void setSafeCutOffPathInGeneralSystemState(
+    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+  void setNonSafeCutOffPathInGeneralSystemState(
+    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
   void setResetRequiredCutOffPathInGeneralSystemState(
-    const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
   void setCurrentMonitoringCasesInGeneralSystemState(
-    const uint8_t* &data_ptr, datastructure::GeneralSystemState& general_System_state) const;
-  void setErrorsInGeneralSystemState(const uint8_t* &data_ptr,
+    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+  void setErrorsInGeneralSystemState(const uint8_t*& data_ptr,
                                      datastructure::GeneralSystemState& general_System_state) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
-  bool checkIfGeneralSystemStateIsPublished(const datastructure::Data& data)const;
+  bool checkIfGeneralSystemStateIsPublished(const datastructure::Data& data) const;
   bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;
 };
 

@@ -41,7 +41,6 @@
 #include <sick_microscan3_ros_driver/datastructure/ScanPoint.h>
 
 
-
 namespace sick {
 namespace datastructure {
 
@@ -61,19 +60,17 @@ public:
   void setIsProtectiveField(bool is_protective_field);
 
   ScanPoint getFieldGeometry() const;
-  void setFieldGeometry(const ScanPoint &field_geometry);
+  void setFieldGeometry(const ScanPoint& field_geometry);
 
   std::vector<uint16_t> getBeamDistances() const;
-  void setBeamDistances(const std::vector<uint16_t> &beam_distances);
+  void setBeamDistances(const std::vector<uint16_t>& beam_distances);
 
 private:
-
   int m_field_set_index;
   bool m_is_warning_field;
   bool m_is_protective_field;
   ScanPoint m_field_geometry;
   std::vector<uint16_t> m_beam_distances;
-
 };
 
 

@@ -45,7 +45,7 @@ PacketBuffer::PacketBuffer(const PacketBuffer::VectorBuffer& buffer)
   setBuffer(buffer);
 }
 
-PacketBuffer::PacketBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t &length)
+PacketBuffer::PacketBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t& length)
 {
   setBuffer(buffer, length);
 }
@@ -61,7 +61,7 @@ void PacketBuffer::setBuffer(const PacketBuffer::VectorBuffer& buffer)
   m_buffer.insert(m_buffer.begin(), buffer.begin(), buffer.end());
 }
 
-void PacketBuffer::setBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t &length)
+void PacketBuffer::setBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t& length)
 {
   m_buffer.clear();
   m_buffer.insert(m_buffer.begin(), buffer.data(), buffer.data() + length);

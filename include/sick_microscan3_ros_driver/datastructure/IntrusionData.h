@@ -46,7 +46,6 @@ namespace datastructure {
 class IntrusionData
 {
 public:
-
   /*!
    * \brief Constructor for an empty IntrusionData Object.
    */

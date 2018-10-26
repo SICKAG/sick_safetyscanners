@@ -36,8 +36,8 @@
 #define PARSEFIELDGEOMETRYDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/FieldData.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -55,12 +55,13 @@ class ParseFieldGeometryData
 public:
   ParseFieldGeometryData();
 
-  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, datastructure::FieldData &field_data) const;
+  bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                        datastructure::FieldData& field_data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  uint32_t readArrayLength(const uint8_t *&data_ptr) const;
-  uint16_t readArrayElement(const uint8_t *&data_ptr, uint32_t elem_number) const;
+  uint32_t readArrayLength(const uint8_t*& data_ptr) const;
+  uint16_t readArrayElement(const uint8_t*& data_ptr, uint32_t elem_number) const;
 };
 
 } // namespace data_processing

@@ -36,8 +36,8 @@
 #define PARSEDERIVEDVALUES_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -49,23 +49,24 @@ class ParseDerivedValues
 public:
   ParseDerivedValues();
 
-  datastructure::DerivedValues parseUDPSequence(const datastructure::PacketBuffer &buffer,
+  datastructure::DerivedValues parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                                 datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInDerivedValues(const uint8_t *&data_ptr, datastructure::DerivedValues& derived_values) const;
-  void setMultiplicationFactorInDerivedValues(const uint8_t *&data_ptr,
+  void setDataInDerivedValues(const uint8_t*& data_ptr,
+                              datastructure::DerivedValues& derived_values) const;
+  void setMultiplicationFactorInDerivedValues(const uint8_t*& data_ptr,
                                               datastructure::DerivedValues& derived_values) const;
-  void setNumberOfBeamsInDerivedValues(const uint8_t *&data_ptr,
+  void setNumberOfBeamsInDerivedValues(const uint8_t*& data_ptr,
                                        datastructure::DerivedValues& derived_values) const;
-  void setScanTimeInDerivedValues(const uint8_t* &data_ptr,
+  void setScanTimeInDerivedValues(const uint8_t*& data_ptr,
                                   datastructure::DerivedValues& derived_values) const;
-  void setStartAngleInDerivedValues(const uint8_t* &data_ptr,
+  void setStartAngleInDerivedValues(const uint8_t*& data_ptr,
                                     datastructure::DerivedValues& derived_values) const;
-  void setAngularBeamResolutionInDerivedValues(const uint8_t* &data_ptr,
+  void setAngularBeamResolutionInDerivedValues(const uint8_t*& data_ptr,
                                                datastructure::DerivedValues& derived_values) const;
-  void setInterbeamPeriodInDerivedValues(const uint8_t* &data_ptr,
+  void setInterbeamPeriodInDerivedValues(const uint8_t*& data_ptr,
                                          datastructure::DerivedValues& derived_values) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfDerivedValuesIsPublished(const datastructure::Data& data) const;

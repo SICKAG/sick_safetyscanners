@@ -36,8 +36,8 @@
 #define PARSEFIELDHEADERDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/FieldData.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -55,14 +55,15 @@ class ParseFieldHeaderData
 public:
   ParseFieldHeaderData();
 
-  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, datastructure::FieldData &field_data) const;
+  bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                        datastructure::FieldData& field_data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  void setFieldType(const uint8_t *&data_ptr, datastructure::FieldData &field_data) const;
-  int readFieldType(const uint8_t *&data_ptr) const;
-  int readSetIndex(const uint8_t *&data_ptr) const;
+  void setFieldType(const uint8_t*& data_ptr, datastructure::FieldData& field_data) const;
+  int readFieldType(const uint8_t*& data_ptr) const;
+  int readSetIndex(const uint8_t*& data_ptr) const;
 };
 
 } // namespace data_processing

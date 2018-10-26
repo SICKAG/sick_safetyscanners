@@ -49,7 +49,7 @@ public:
 
   bool isComplete() const;
 
-  bool addUDPPacket(const sick::datastructure::PacketBuffer &buffer);
+  bool addUDPPacket(const sick::datastructure::PacketBuffer& buffer);
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
 
 private:
@@ -58,12 +58,12 @@ private:
 
   std::map<uint32_t, sick::datastructure::ParsedPacketBufferVector> m_parsed_packet_buffer_map;
 
-  bool addToMap(const sick::datastructure::PacketBuffer &buffer,
-                const sick::datastructure::DatagramHeader &header);
-  bool deployPacketIfComplete(datastructure::DatagramHeader &header);
+  bool addToMap(const sick::datastructure::PacketBuffer& buffer,
+                const sick::datastructure::DatagramHeader& header);
+  bool deployPacketIfComplete(datastructure::DatagramHeader& header);
   bool checkIfComplete(sick::datastructure::DatagramHeader& header);
-  uint32_t
-  calcualteCurrentLengthOfParsedPacketBuffer(const sick::datastructure::ParsedPacketBufferVector& vec);
+  uint32_t calcualteCurrentLengthOfParsedPacketBuffer(
+    const sick::datastructure::ParsedPacketBufferVector& vec);
   sick::datastructure::ParsedPacketBufferVector
   getSortedParsedPacketBufferForIdentification(const sick::datastructure::DatagramHeader& header);
   sick::datastructure::PacketBuffer::VectorBuffer

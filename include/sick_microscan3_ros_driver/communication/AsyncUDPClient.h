@@ -58,7 +58,7 @@ public:
 
   AsyncUDPClient(PacketHandler packet_handler,
                  boost::asio::io_service& io_service,
-                 const uint16_t &local_port = 0);
+                 const uint16_t& local_port = 0);
   virtual ~AsyncUDPClient();
 
   void run_service();

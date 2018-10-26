@@ -36,8 +36,8 @@
 #define PARSEDATAGRAMHEADER_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DatagramHeader.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -48,21 +48,27 @@ class ParseDatagramHeader
 {
 public:
   ParseDatagramHeader();
-  bool parseUDPSequence(const datastructure::PacketBuffer &buffer,
+  bool parseUDPSequence(const datastructure::PacketBuffer& buffer,
                         sick::datastructure::DatagramHeader& header) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  void setDataInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setDataInHeader(const uint8_t*& data_ptr, datastructure::DatagramHeader& header) const;
 
-  void setDatagramMarkerInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
-  void setProtocolInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
-  void setMajorVersionInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
-  void setMinorVersionInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
-  void setTotalLengthInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
-  void setIdentificationInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
-  void setFragmentOffsetInHeader(const uint8_t *&data_ptr, datastructure::DatagramHeader& header) const;
+  void setDatagramMarkerInHeader(const uint8_t*& data_ptr,
+                                 datastructure::DatagramHeader& header) const;
+  void setProtocolInHeader(const uint8_t*& data_ptr, datastructure::DatagramHeader& header) const;
+  void setMajorVersionInHeader(const uint8_t*& data_ptr,
+                               datastructure::DatagramHeader& header) const;
+  void setMinorVersionInHeader(const uint8_t*& data_ptr,
+                               datastructure::DatagramHeader& header) const;
+  void setTotalLengthInHeader(const uint8_t*& data_ptr,
+                              datastructure::DatagramHeader& header) const;
+  void setIdentificationInHeader(const uint8_t*& data_ptr,
+                                 datastructure::DatagramHeader& header) const;
+  void setFragmentOffsetInHeader(const uint8_t*& data_ptr,
+                                 datastructure::DatagramHeader& header) const;
 };
 
 } // namespace data_processing

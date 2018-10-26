@@ -38,9 +38,9 @@ namespace sick {
 namespace communication {
 AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler,
                                boost::asio::io_service& io_service,
-                               const uint16_t &local_port)
+                               const uint16_t& local_port)
   : m_packet_handler(packet_handler)
-  ,  m_io_work_ptr()
+  , m_io_work_ptr()
   , m_io_service(io_service)
 {
   // Keep io_service busy
@@ -73,7 +73,7 @@ void AsyncUDPClient::start_receive()
 }
 
 void AsyncUDPClient::handle_receive(const boost::system::error_code& error,
-                                    const std::size_t &bytes_transferred)
+                                    const std::size_t& bytes_transferred)
 {
   if (!error)
   {
@@ -95,4 +95,3 @@ void AsyncUDPClient::run_service()
 
 } // namespace communication
 } // namespace sick
-

@@ -74,7 +74,8 @@ std::vector<uint16_t> ApplicationOutputs::getMonitoringCaseVector() const
   return m_monitoring_case_vector;
 }
 
-void ApplicationOutputs::setMonitoringCaseVector(const std::vector<uint16_t>& monitoring_case_vector)
+void ApplicationOutputs::setMonitoringCaseVector(
+  const std::vector<uint16_t>& monitoring_case_vector)
 {
   m_monitoring_case_vector = monitoring_case_vector;
 }

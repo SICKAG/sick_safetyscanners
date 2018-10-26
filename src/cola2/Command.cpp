@@ -40,7 +40,7 @@
 namespace sick {
 namespace cola2 {
 
-Command::Command(Cola2Session& session, const uint16_t &command_type, const uint16_t &command_mode)
+Command::Command(Cola2Session& session, const uint16_t& command_type, const uint16_t& command_mode)
   : m_session(session)
   , m_command_mode(command_mode)
   , m_command_type(command_type)
@@ -104,7 +104,7 @@ uint32_t Command::getSessionID() const
   return m_session_id;
 }
 
-void Command::setSessionID(const uint32_t &session_id)
+void Command::setSessionID(const uint32_t& session_id)
 {
   m_session_id = session_id;
 }
@@ -122,7 +122,7 @@ void Command::setRequestID(const uint16_t& request_id)
 void Command::addTelegramHeader(datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   datastructure::PacketBuffer::VectorBuffer header = prepareHeader();
-  uint8_t* data_ptr                                   = header.data();
+  uint8_t* data_ptr                                = header.data();
   writeDataToDataPtr(data_ptr, telegram);
   telegram.insert(telegram.begin(), header.begin(), header.end());
 }

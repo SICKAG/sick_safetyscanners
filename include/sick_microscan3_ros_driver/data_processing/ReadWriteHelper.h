@@ -74,8 +74,6 @@ public:
   uint32_t readuint32_tLittleEndian(const uint8_t*& buf, const uint16_t offset) const;
   int32_t readint32_tBigEndian(const uint8_t*& buf, const uint16_t offset) const;
   int32_t readint32_tLittleEndian(const uint8_t*& buf, const uint16_t offset) const;
-
-
 };
 
 } // namespace data_processing

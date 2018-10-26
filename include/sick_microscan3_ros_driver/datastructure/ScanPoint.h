@@ -46,7 +46,6 @@ namespace datastructure {
 class ScanPoint
 {
 public:
-
   ScanPoint();
 
   /*!

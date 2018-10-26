@@ -90,8 +90,8 @@ public:
    * \brief Constructor of the Microscan3Ros
    *
    * Constructor of the Microscan3Ros, loads all parameters from the parameter server, initialises
-   * the dynamic reconfiguration server. Furthermore initialises the ROS Publishers for the different
-   * Laserscan outputs.
+   * the dynamic reconfiguration server. Furthermore initialises the ROS Publishers for the
+   * different Laserscan outputs.
    */
   Microscan3Ros();
 
@@ -102,7 +102,6 @@ public:
   virtual ~Microscan3Ros();
 
 private:
-
   //! ROS node handle.
   ros::NodeHandle m_nh;
 
@@ -144,7 +143,8 @@ private:
    * \param config The new configuration to set
    * \param level Level of the new configuration
    */
-  void callback(const sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config, const uint32_t &level);
+  void callback(const sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config,
+                const uint32_t& level);
 
   bool isInitialised();
 

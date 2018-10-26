@@ -51,12 +51,12 @@
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
-#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
-#include <sick_microscan3_ros_driver/cola2/FieldHeaderVariableCommand.h>
-#include <sick_microscan3_ros_driver/cola2/FieldGeometryVariableCommand.h>
-#include <sick_microscan3_ros_driver/cola2/MonitoringCaseTableHeaderVariableCommand.h>
-#include <sick_microscan3_ros_driver/cola2/DeviceNameVariableCommand.h>
 #include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
+#include <sick_microscan3_ros_driver/cola2/DeviceNameVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/FieldGeometryVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/FieldHeaderVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/MonitoringCaseTableHeaderVariableCommand.h>
+#include <sick_microscan3_ros_driver/cola2/TypeCodeVariableCommand.h>
 
 namespace sick {
 
@@ -97,14 +97,16 @@ public:
    * \brief Changes the internal settings of the sensor
    * \param settings New set of settign to pass to the sensor
    */
-  void changeSensorSettings(const sick::datastructure::CommSettings &settings);
+  void changeSensorSettings(const sick::datastructure::CommSettings& settings);
 
   /*!
    * \brief Requests the typecode of the sensor.
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param type_code Returned typecode.
    */
-  void requestTypeCode(const sick::datastructure::CommSettings &settings, sick::datastructure::TypeCode &type_code);
+  void requestTypeCode(const sick::datastructure::CommSettings& settings,
+                       sick::datastructure::TypeCode& type_code);
+
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 
@@ -126,7 +128,7 @@ private:
   void startTCPConnection(const sick::datastructure::CommSettings& settings);
   void changeCommSettingsinColaSession(const datastructure::CommSettings& settings);
   void stopTCPConnection();
-  void requestTypeCodeinColaSession( sick::datastructure::TypeCode &type_code);
+  void requestTypeCodeinColaSession(sick::datastructure::TypeCode& type_code);
 };
 
 } // namespace sick

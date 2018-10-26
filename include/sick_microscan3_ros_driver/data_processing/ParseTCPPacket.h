@@ -36,8 +36,8 @@
 #define PARSETCPPACKET_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -55,21 +55,22 @@ class ParseTCPPacket
 public:
   ParseTCPPacket();
 
-  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, sick::cola2::Command& command) const;
-  uint32_t getExpectedPacketLength(const datastructure::PacketBuffer &buffer);
-  uint16_t getRequestID(const datastructure::PacketBuffer &buffer) const;
+  bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                        sick::cola2::Command& command) const;
+  uint32_t getExpectedPacketLength(const datastructure::PacketBuffer& buffer);
+  uint16_t getRequestID(const datastructure::PacketBuffer& buffer) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  uint32_t readSTx(const uint8_t *&data_ptr) const;
-  uint32_t readLength(const uint8_t *&data_ptr) const;
-  uint16_t readRequestID(const uint8_t *&data_ptr) const;
-  uint8_t readHubCntr(const uint8_t *&data_ptr) const;
-  uint8_t readNoC(const uint8_t *&data_ptr) const;
-  uint32_t readSessionID(const uint8_t *&data_ptr) const;
-  uint8_t readCommandType(const uint8_t *&data_ptr) const;
-  uint8_t readCommandMode(const uint8_t *&data_ptr) const;
-  uint16_t readErrorCode(const uint8_t *&data_ptr) const;
+  uint32_t readSTx(const uint8_t*& data_ptr) const;
+  uint32_t readLength(const uint8_t*& data_ptr) const;
+  uint16_t readRequestID(const uint8_t*& data_ptr) const;
+  uint8_t readHubCntr(const uint8_t*& data_ptr) const;
+  uint8_t readNoC(const uint8_t*& data_ptr) const;
+  uint32_t readSessionID(const uint8_t*& data_ptr) const;
+  uint8_t readCommandType(const uint8_t*& data_ptr) const;
+  uint8_t readCommandMode(const uint8_t*& data_ptr) const;
+  uint16_t readErrorCode(const uint8_t*& data_ptr) const;
   void readData(const datastructure::PacketBuffer& buffer, std::vector<uint8_t>& byteVector) const;
   void setCommandValuesFromPacket(const sick::datastructure::PacketBuffer& buffer,
                                   sick::cola2::Command& command) const;

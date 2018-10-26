@@ -40,11 +40,12 @@
 namespace sick {
 namespace cola2 {
 
-TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session, sick::datastructure::TypeCode& type_code)
+TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session,
+                                                 sick::datastructure::TypeCode& type_code)
   : VariableCommand(session, 0x000d)
   , m_type_code(type_code)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_writer_ptr           = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
 }
 
@@ -65,10 +66,9 @@ bool TypeCodeVariableCommand::processReply()
   {
     return false;
   }
-  m_type_code_parser_ptr->parseTCPSequence(getDataVector(),m_type_code);
+  m_type_code_parser_ptr->parseTCPSequence(getDataVector(), m_type_code);
   return true;
 }
-
 
 
 } // namespace cola2

@@ -62,7 +62,7 @@ private:
   std::vector<sick::datastructure::PacketBuffer> m_buffer_vector;
   uint32_t m_targetSize;
 
-  bool addToMap(const sick::datastructure::PacketBuffer &newPacket);
+  bool addToMap(const sick::datastructure::PacketBuffer& newPacket);
   bool deployPacketIfComplete();
 
   uint32_t getCurrentSize() const;

@@ -45,13 +45,13 @@ ParseFieldGeometryData::ParseFieldGeometryData()
 }
 
 
-bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer &buffer,
-                                      sick::datastructure::FieldData& field_data) const
+bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                                              sick::datastructure::FieldData& field_data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
   uint32_t array_length = readArrayLength(data_ptr);
   std::vector<uint16_t> geometry_distance_mm;
-  for (uint32_t i = 0 ; i < array_length; i++)
+  for (uint32_t i = 0; i < array_length; i++)
   {
     geometry_distance_mm.push_back(readArrayElement(data_ptr, i));
   }
@@ -60,16 +60,16 @@ bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer 
   return true;
 }
 
-uint32_t ParseFieldGeometryData::readArrayLength(const uint8_t *&data_ptr) const
+uint32_t ParseFieldGeometryData::readArrayLength(const uint8_t*& data_ptr) const
 {
   return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 4);
 }
 
-uint16_t ParseFieldGeometryData::readArrayElement(const uint8_t *&data_ptr, uint32_t elem_number) const
+uint16_t ParseFieldGeometryData::readArrayElement(const uint8_t*& data_ptr,
+                                                  uint32_t elem_number) const
 {
   return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 8 + elem_number * 2);
 }
-
 
 
 } // namespace data_processing

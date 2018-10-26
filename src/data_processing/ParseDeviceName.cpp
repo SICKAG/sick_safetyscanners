@@ -45,8 +45,8 @@ ParseDeviceName::ParseDeviceName()
 }
 
 
-bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer &buffer,
-                                      std::string &device_name) const
+bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                                       std::string& device_name) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
   device_name = readDeviceName(data_ptr);
@@ -54,19 +54,17 @@ bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer &buffer
 }
 
 
-std::string ParseDeviceName::readDeviceName(const uint8_t* &data_ptr) const
+std::string ParseDeviceName::readDeviceName(const uint8_t*& data_ptr) const
 {
   uint16_t string_length = m_reader_ptr->readuint16_tLittleEndian(data_ptr, 0);
 
   std::string name;
   for (uint16_t i = 0; i < string_length; i++)
   {
-    name.push_back( m_reader_ptr->readuint16_tLittleEndian(data_ptr, 2 + i));
+    name.push_back(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 2 + i));
   }
   return name;
 }
-
-
 
 
 } // namespace data_processing

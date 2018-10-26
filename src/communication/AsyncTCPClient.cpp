@@ -38,8 +38,8 @@ namespace sick {
 namespace communication {
 AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
                                boost::asio::io_service& io_service,
-                               const boost::asio::ip::address_v4 &server_ip,
-                               const uint16_t &server_port)
+                               const boost::asio::ip::address_v4& server_ip,
+                               const uint16_t& server_port)
   : m_packet_handler(packet_handler)
   , m_io_work_ptr()
   , m_io_service(io_service)
@@ -68,7 +68,7 @@ void AsyncTCPClient::do_connect()
 {
   boost::mutex::scoped_lock lock(m_connect_mutex);
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec) {
-    ROS_ERROR( "TCP error code: %i", ec.value());
+    ROS_ERROR("TCP error code: %i", ec.value());
     m_connect_condition.notify_all();
   });
 
@@ -108,7 +108,7 @@ void AsyncTCPClient::setPacketHandler(const PacketHandler& packet_handler)
 }
 
 void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error,
-                                          const std::size_t &bytes_transferred)
+                                          const std::size_t& bytes_transferred)
 {
   // Check for errors
   if (!error || error == boost::asio::error::message_size)
@@ -125,7 +125,7 @@ void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error
 void AsyncTCPClient::start_receive() {}
 
 void AsyncTCPClient::handle_receive(const boost::system::error_code& error,
-                                    const std::size_t &bytes_transferred)
+                                    const std::size_t& bytes_transferred)
 {
   if (!error)
   {

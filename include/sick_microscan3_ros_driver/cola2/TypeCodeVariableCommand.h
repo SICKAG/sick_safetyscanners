@@ -37,8 +37,8 @@
 
 
 #include <sick_microscan3_ros_driver/cola2/VariableCommand.h>
-#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseTypeCodeData.h>
+#include <sick_microscan3_ros_driver/datastructure/CommSettings.h>
 
 namespace sick {
 namespace cola2 {
@@ -48,7 +48,7 @@ class TypeCodeVariableCommand : public VariableCommand
 public:
   typedef sick::cola2::VariableCommand base_class;
 
-  TypeCodeVariableCommand(Cola2Session& session, datastructure::TypeCode &type_code);
+  TypeCodeVariableCommand(Cola2Session& session, datastructure::TypeCode& type_code);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();
@@ -59,7 +59,6 @@ private:
   std::shared_ptr<sick::data_processing::ParseTypeCodeData> m_type_code_parser_ptr;
 
   sick::datastructure::TypeCode& m_type_code;
-
 };
 
 } // namespace cola2

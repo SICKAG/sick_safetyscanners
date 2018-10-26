@@ -35,8 +35,8 @@
 #ifndef APPLICATIONOUTPUTS_H
 #define APPLICATIONOUTPUTS_H
 
-#include <vector>
 #include <stdint.h>
+#include <vector>
 
 
 namespace sick {

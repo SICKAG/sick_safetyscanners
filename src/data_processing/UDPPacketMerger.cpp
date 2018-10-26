@@ -55,7 +55,7 @@ sick::datastructure::PacketBuffer UDPPacketMerger::getDeployedPacketBuffer()
   return m_deployed_packet_buffer;
 }
 
-bool UDPPacketMerger::addUDPPacket(const datastructure::PacketBuffer &buffer)
+bool UDPPacketMerger::addUDPPacket(const datastructure::PacketBuffer& buffer)
 {
   if (isComplete())
   {
@@ -70,8 +70,8 @@ bool UDPPacketMerger::addUDPPacket(const datastructure::PacketBuffer &buffer)
   return isComplete();
 }
 
-bool UDPPacketMerger::addToMap(const datastructure::PacketBuffer &buffer,
-                              const datastructure::DatagramHeader &header)
+bool UDPPacketMerger::addToMap(const datastructure::PacketBuffer& buffer,
+                               const datastructure::DatagramHeader& header)
 {
   sick::datastructure::ParsedPacketBuffer parsed_packet_buffer(buffer, header);
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
@@ -88,7 +88,7 @@ bool UDPPacketMerger::addToMap(const datastructure::PacketBuffer &buffer,
   return true;
 }
 
-bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader &header)
+bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader& header)
 {
   auto it = m_parsed_packet_buffer_map.find(header.getIdentification());
 

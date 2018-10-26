@@ -36,8 +36,8 @@
 #define PARSEINTRUSIONDATA_H
 
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
-#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 #include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
+#include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
 #include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
@@ -49,7 +49,7 @@ class ParseIntrusionData
 public:
   ParseIntrusionData();
 
-  datastructure::IntrusionData parseUDPSequence(const datastructure::PacketBuffer &buffer,
+  datastructure::IntrusionData parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                                 datastructure::Data& data);
 
   uint16_t getNumScanPoints() const;
@@ -59,15 +59,17 @@ private:
   uint16_t m_num_scan_points;
 
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInIntrusionData(const uint8_t* &data_ptr, datastructure::IntrusionData& intrusion_data) const;
-  void setDataInIntrusionDatums(const uint8_t* &data_ptr,
-                                std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums) const;
+  void setDataInIntrusionData(const uint8_t*& data_ptr,
+                              datastructure::IntrusionData& intrusion_data) const;
+  void setDataInIntrusionDatums(
+    const uint8_t*& data_ptr,
+    std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums) const;
   uint16_t setSizeInIntrusionDatum(const uint16_t offset,
-                                 const uint8_t* &data_ptr,
-                                 sick::datastructure::IntrusionDatum& datum) const;
+                                   const uint8_t*& data_ptr,
+                                   sick::datastructure::IntrusionDatum& datum) const;
   uint16_t setFlagsInIntrusionDatum(const uint16_t offset,
-                                  const uint8_t* &data_ptr,
-                                  sick::datastructure::IntrusionDatum& datum) const;
+                                    const uint8_t*& data_ptr,
+                                    sick::datastructure::IntrusionDatum& datum) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfIntrusionDataIsPublished(const datastructure::Data& data) const;
   bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;

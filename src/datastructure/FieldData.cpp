@@ -64,7 +64,7 @@ ScanPoint FieldData::getFieldGeometry() const
   return m_field_geometry;
 }
 
-void FieldData::setFieldGeometry(const ScanPoint &field_geometry)
+void FieldData::setFieldGeometry(const ScanPoint& field_geometry)
 {
   m_field_geometry = field_geometry;
 }
@@ -84,7 +84,7 @@ std::vector<uint16_t> FieldData::getBeamDistances() const
   return m_beam_distances;
 }
 
-void FieldData::setBeamDistances(const std::vector<uint16_t> &beam_distance)
+void FieldData::setBeamDistances(const std::vector<uint16_t>& beam_distance)
 {
   m_beam_distances = beam_distance;
 }

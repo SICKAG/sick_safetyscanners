@@ -55,14 +55,13 @@ class ParseTypeCodeData
 public:
   ParseTypeCodeData();
 
-  bool parseTCPSequence(const datastructure::PacketBuffer &buffer, datastructure::TypeCode &type_code) const;
+  bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                        datastructure::TypeCode& type_code) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  int readInterfaceType(const uint8_t *&data_ptr) const;
-  float readMaxRange(const uint8_t *&data_ptr) const;
-
-
+  int readInterfaceType(const uint8_t*& data_ptr) const;
+  float readMaxRange(const uint8_t*& data_ptr) const;
 };
 
 } // namespace data_processing

@@ -47,7 +47,7 @@ class ChangeCommSettingsCommand : public MethodCommand
 public:
   typedef sick::cola2::MethodCommand base_class;
 
-  ChangeCommSettingsCommand(Cola2Session& session, const datastructure::CommSettings &settings);
+  ChangeCommSettingsCommand(Cola2Session& session, const datastructure::CommSettings& settings);
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
   bool canBeExecutedWithoutSessionID() const;
   bool processReply();

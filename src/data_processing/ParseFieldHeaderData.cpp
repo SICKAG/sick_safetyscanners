@@ -45,50 +45,43 @@ ParseFieldHeaderData::ParseFieldHeaderData()
 }
 
 
-bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer &buffer,
-                                      datastructure::FieldData &field_data) const
+bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                                            datastructure::FieldData& field_data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  setFieldType(data_ptr,field_data);
+  setFieldType(data_ptr, field_data);
   return true;
 }
 
-void ParseFieldHeaderData::setFieldType(const uint8_t* &data_ptr,
-                                      datastructure::FieldData &field_data) const
+void ParseFieldHeaderData::setFieldType(const uint8_t*& data_ptr,
+                                        datastructure::FieldData& field_data) const
 {
   int field_type = readFieldType(data_ptr);
   field_data.setIsWarningField(false);
   field_data.setIsProtectiveField(false);
-  if(field_type == 4 || field_type == 14)
+  if (field_type == 4 || field_type == 14)
   {
     field_data.setIsProtectiveField(true);
   }
-  else if(field_type == 5 || field_type == 15)
+  else if (field_type == 5 || field_type == 15)
   {
     field_data.setIsWarningField(true);
   }
 
   std::cout << field_type << std::endl;
   std::cout << readSetIndex(data_ptr) << std::endl;
-
 }
 
 
-
-int ParseFieldHeaderData::readFieldType(const uint8_t* &data_ptr) const
-{ 
+int ParseFieldHeaderData::readFieldType(const uint8_t*& data_ptr) const
+{
   return m_reader_ptr->readuint8_t(data_ptr, 73);
 }
 
-int ParseFieldHeaderData::readSetIndex(const uint8_t* &data_ptr) const
+int ParseFieldHeaderData::readSetIndex(const uint8_t*& data_ptr) const
 {
   return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 82);
 }
-
-
-
-
-
 
 
 } // namespace data_processing

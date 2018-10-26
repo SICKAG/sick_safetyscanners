@@ -37,10 +37,7 @@
 namespace sick {
 namespace datastructure {
 
-ScanPoint::ScanPoint()
-{
-
-}
+ScanPoint::ScanPoint() {}
 
 ScanPoint::ScanPoint(float angle,
                      int16_t& distance,

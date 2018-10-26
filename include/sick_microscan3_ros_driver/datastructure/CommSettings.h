@@ -35,8 +35,8 @@
 #ifndef COMMSETTINGS_H
 #define COMMSETTINGS_H
 
-#include <iostream>
 #include <boost/asio/ip/address_v4.hpp>
+#include <iostream>
 
 namespace sick {
 namespace datastructure {

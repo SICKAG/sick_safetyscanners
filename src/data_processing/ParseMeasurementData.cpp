@@ -43,7 +43,7 @@ ParseMeasurementData::ParseMeasurementData()
 }
 
 datastructure::MeasurementData
-ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer &buffer,
+ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                        datastructure::Data& data)
 {
   datastructure::MeasurementData measurement_data;
@@ -53,7 +53,7 @@ ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer &buffer
     return measurement_data;
   }
   const uint8_t* data_ptr(buffer.getBuffer().data() +
-                       data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
+                          data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
 
   setStartAngleAndDelta(data);
   setDataInMeasurementData(data_ptr, measurement_data);
@@ -83,7 +83,8 @@ bool ParseMeasurementData::checkIfMeasurementDataIsPublished(const datastructure
   return true;
 }
 
-bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const
+bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(
+  const datastructure::Data& data) const
 {
   if (data.getDataHeaderPtr()->isEmpty())
   {
@@ -98,14 +99,14 @@ bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(const datastruc
 
 
 void ParseMeasurementData::setDataInMeasurementData(
-  const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t*& data_ptr, datastructure::MeasurementData& measurement_data)
 {
   setNumberOfBeamsInMeasurementData(data_ptr, measurement_data);
   setScanPointsInMeasurementData(data_ptr, measurement_data);
 }
 
 void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
-  const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data) const
+  const uint8_t*& data_ptr, datastructure::MeasurementData& measurement_data) const
 {
   measurement_data.setNumberOfBeams(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 0));
 }
@@ -117,7 +118,7 @@ void ParseMeasurementData::setStartAngleAndDelta(const datastructure::Data& data
 }
 
 void ParseMeasurementData::setScanPointsInMeasurementData(
-  const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data)
+  const uint8_t*& data_ptr, datastructure::MeasurementData& measurement_data)
 {
   for (size_t i = 0; i < measurement_data.getNumberOfBeams(); i++)
   {
@@ -127,11 +128,13 @@ void ParseMeasurementData::setScanPointsInMeasurementData(
 }
 
 void ParseMeasurementData::addScanPointToMeasurementData(
-  const uint16_t offset, const uint8_t* &data_ptr, datastructure::MeasurementData& measurement_data) const
+  const uint16_t offset,
+  const uint8_t*& data_ptr,
+  datastructure::MeasurementData& measurement_data) const
 {
-  int16_t distance             = m_reader_ptr->readuint16_tLittleEndian(data_ptr, (4 + offset * 4));
-  uint8_t reflectivity         = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (6 + offset * 4));
-  uint8_t status               = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (7 + offset * 4));
+  int16_t distance           = m_reader_ptr->readuint16_tLittleEndian(data_ptr, (4 + offset * 4));
+  uint8_t reflectivity       = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (6 + offset * 4));
+  uint8_t status             = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (7 + offset * 4));
   bool valid                 = status & (0x01 << 0);
   bool infinite              = status & (0x01 << 1);
   bool glare                 = status & (0x01 << 2);

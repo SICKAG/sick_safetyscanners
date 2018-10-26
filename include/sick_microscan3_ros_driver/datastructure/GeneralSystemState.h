@@ -35,8 +35,8 @@
 #ifndef GENERALSYSTEMSTATE_H
 #define GENERALSYSTEMSTATE_H
 
-#include <vector>
 #include <stdint.h>
+#include <vector>
 
 namespace sick {
 namespace datastructure {
@@ -206,7 +206,7 @@ public:
 
   /*!
    * \brief Sets the current monitoring case table 4.
-   * \param current_monitoring_case_no_table_4 The current monitoring case table 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           .
+   * \param current_monitoring_case_no_table_4 The current monitoring case table 4 .
    */
   void setCurrentMonitoringCaseNoTable_4(const uint8_t& current_monitoring_case_no_table_4);
 

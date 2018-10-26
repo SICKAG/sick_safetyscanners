@@ -38,15 +38,13 @@
 #include <sick_microscan3_ros_driver/datastructure/Data.h>
 #include <sick_microscan3_ros_driver/datastructure/PacketBuffer.h>
 
-#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseApplicationData.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseDataHeader.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseDerivedValues.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseGeneralSystemState.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseIntrusionData.h>
 #include <sick_microscan3_ros_driver/data_processing/ParseMeasurementData.h>
-
-
+#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
 
 
 namespace sick {
@@ -57,7 +55,8 @@ class ParseData
 public:
   ParseData();
 
-  bool parseUDPSequence(const sick::datastructure::PacketBuffer buffer, sick::datastructure::Data& data) const;
+  bool parseUDPSequence(const sick::datastructure::PacketBuffer buffer,
+                        sick::datastructure::Data& data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
@@ -65,19 +64,25 @@ private:
   std::shared_ptr<sick::data_processing::ParseDataHeader> m_data_header_parser_ptr;
   std::shared_ptr<sick::data_processing::ParseDerivedValues> m_derived_values_parser_ptr;
   std::shared_ptr<sick::data_processing::ParseMeasurementData> m_measurement_data_parser_ptr;
-  std::shared_ptr<sick::data_processing::ParseGeneralSystemState>
-    m_general_system_state_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseGeneralSystemState> m_general_system_state_parser_ptr;
   std::shared_ptr<sick::data_processing::ParseIntrusionData> m_intrusion_data_parser_ptr;
   std::shared_ptr<sick::data_processing::ParseApplicationData> m_application_data_parser_ptr;
 
 
-  void setDataBlocksInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
-  void setDataHeaderInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
-  void setDerivedValuesInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
-  void setMeasurementDataInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
-  void setGeneralSystemStateInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
-  void setIntrusionDataInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
-  void setApplicationDataInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const;
+  void setDataBlocksInData(const datastructure::PacketBuffer& buffer,
+                           datastructure::Data& data) const;
+  void setDataHeaderInData(const datastructure::PacketBuffer& buffer,
+                           datastructure::Data& data) const;
+  void setDerivedValuesInData(const datastructure::PacketBuffer& buffer,
+                              datastructure::Data& data) const;
+  void setMeasurementDataInData(const datastructure::PacketBuffer& buffer,
+                                datastructure::Data& data) const;
+  void setGeneralSystemStateInData(const datastructure::PacketBuffer& buffer,
+                                   datastructure::Data& data) const;
+  void setIntrusionDataInData(const datastructure::PacketBuffer& buffer,
+                              datastructure::Data& data) const;
+  void setApplicationDataInData(const datastructure::PacketBuffer& buffer,
+                                datastructure::Data& data) const;
 };
 
 } // namespace data_processing

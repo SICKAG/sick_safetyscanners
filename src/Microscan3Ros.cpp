@@ -77,8 +77,8 @@ void Microscan3Ros::readTypeCodeSettings()
   m_range_max = type_code.getMaxRange();
 }
 
-void Microscan3Ros::callback(const sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config,
-                             const uint32_t &level)
+void Microscan3Ros::callback(
+  const sick_microscan3_ros_driver::Microscan3ConfigurationConfig& config, const uint32_t& level)
 {
   if (isInitialised())
   {
@@ -322,8 +322,7 @@ Microscan3Ros::createDerivedValuesMessage(const sick::datastructure::Data& data)
 
   if (!data.getDerivedValuesPtr()->isEmpty())
   {
-    std::shared_ptr<sick::datastructure::DerivedValues> derived_values =
-      data.getDerivedValuesPtr();
+    std::shared_ptr<sick::datastructure::DerivedValues> derived_values = data.getDerivedValuesPtr();
 
     msg.multiplication_factor   = derived_values->getMultiplicationFactor();
     msg.scan_time               = derived_values->getScanTime();
@@ -482,7 +481,7 @@ Microscan3Ros::createApplicationInputsMessage(const sick::datastructure::Data& d
   sick_microscan3_ros_driver::ApplicationInputsMsg msg;
 
   std::shared_ptr<sick::datastructure::ApplicationData> app_data = data.getApplicationDataPtr();
-  sick::datastructure::ApplicationInputs inputs                    = app_data->getInputs();
+  sick::datastructure::ApplicationInputs inputs                  = app_data->getInputs();
   std::vector<bool> unsafe_inputs       = inputs.getUnsafeInputsInputSourcesVector();
   std::vector<bool> unsafe_inputs_flags = inputs.getUnsafeInputsFlagsVector();
   for (size_t i = 0; i < unsafe_inputs.size(); i++)
@@ -490,7 +489,7 @@ Microscan3Ros::createApplicationInputsMessage(const sick::datastructure::Data& d
     msg.unsafe_inputs_input_sources.push_back(unsafe_inputs.at(i));
     msg.unsafe_inputs_flags.push_back(unsafe_inputs_flags.at(i));
   }
-  std::vector<uint16_t> monitoring_case     = inputs.getMonitoringCasevector();
+  std::vector<uint16_t> monitoring_case   = inputs.getMonitoringCasevector();
   std::vector<bool> monitoring_case_flags = inputs.getMonitoringCaseFlagsVector();
   for (size_t i = 0; i < monitoring_case.size(); i++)
   {
@@ -515,7 +514,7 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
   sick_microscan3_ros_driver::ApplicationOutputsMsg msg;
 
   std::shared_ptr<sick::datastructure::ApplicationData> app_data = data.getApplicationDataPtr();
-  sick::datastructure::ApplicationOutputs outputs                  = app_data->getOutputs();
+  sick::datastructure::ApplicationOutputs outputs                = app_data->getOutputs();
 
   std::vector<bool> eval_out         = outputs.getEvalOutVector();
   std::vector<bool> eval_out_is_safe = outputs.getEvalOutIsSafeVector();
@@ -527,7 +526,7 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
     msg.evaluation_path_outputs_is_valid.push_back(eval_out_valid.at(i));
   }
 
-  std::vector<uint16_t> monitoring_case     = outputs.getMonitoringCaseVector();
+  std::vector<uint16_t> monitoring_case   = outputs.getMonitoringCaseVector();
   std::vector<bool> monitoring_case_flags = outputs.getMonitoringCaseFlagsVector();
   for (size_t i = 0; i < monitoring_case.size(); i++)
   {
@@ -555,7 +554,7 @@ Microscan3Ros::createApplicationOutputsMessage(const sick::datastructure::Data& 
     outputs.getVelocity1TransmittedSafely();
   msg.linear_velocity_outputs_velocity_1_valid = outputs.getVelocity1Valid();
 
-  std::vector<int16_t> resulting_velocities      = outputs.getResultingVelocityVector();
+  std::vector<int16_t> resulting_velocities    = outputs.getResultingVelocityVector();
   std::vector<bool> resulting_velocities_flags = outputs.getResultingVelocityIsValidVector();
 
   for (size_t i = 0; i < resulting_velocities.size(); i++)

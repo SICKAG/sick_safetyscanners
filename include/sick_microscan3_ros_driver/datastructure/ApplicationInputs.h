@@ -35,8 +35,8 @@
 #ifndef APPLICATIONINPUTS_H
 #define APPLICATIONINPUTS_H
 
-#include <vector>
 #include <stdint.h>
+#include <vector>
 
 namespace sick {
 namespace datastructure {

@@ -91,7 +91,8 @@ private:
 
   AsyncTCPClient(AsyncTCPClient&); // block default copy constructor
 
-  void handleSendAndReceive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
+  void handleSendAndReceive(const boost::system::error_code& error,
+                            const std::size_t& bytes_transferred);
 };
 } // namespace communication
 } // namespace sick

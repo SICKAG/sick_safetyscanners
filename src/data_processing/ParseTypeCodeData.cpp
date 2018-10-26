@@ -45,8 +45,8 @@ ParseTypeCodeData::ParseTypeCodeData()
 }
 
 
-bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer &buffer,
-                                      sick::datastructure::TypeCode& type_code) const
+bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                                         sick::datastructure::TypeCode& type_code) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
   type_code.setInterfaceType(readInterfaceType(data_ptr));
@@ -55,15 +55,15 @@ bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer &buff
 }
 
 
-int ParseTypeCodeData::readInterfaceType(const uint8_t* &data_ptr) const
+int ParseTypeCodeData::readInterfaceType(const uint8_t*& data_ptr) const
 {
   uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 14);
   uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 15);
-  
+
   int res = sick::datastructure::e_interface_type::E_EFIPRO;
 
-  if ((type_code_interface_1 == 'Z' && type_code_interface_2 == 'A')
-      || (type_code_interface_1 == 'A' && type_code_interface_2 == 'A'))
+  if ((type_code_interface_1 == 'Z' && type_code_interface_2 == 'A') ||
+      (type_code_interface_1 == 'A' && type_code_interface_2 == 'A'))
   {
     res = sick::datastructure::e_interface_type::E_EFIPRO;
   }
@@ -71,8 +71,8 @@ int ParseTypeCodeData::readInterfaceType(const uint8_t* &data_ptr) const
   {
     res = sick::datastructure::e_interface_type::E_ETHERNET_IP;
   }
-  else if ((type_code_interface_1 == 'P' && type_code_interface_2 == 'Z')
-    || (type_code_interface_1 == 'L' && type_code_interface_2 == 'Z'))
+  else if ((type_code_interface_1 == 'P' && type_code_interface_2 == 'Z') ||
+           (type_code_interface_1 == 'L' && type_code_interface_2 == 'Z'))
   {
     res = sick::datastructure::e_interface_type::E_PROFINET;
   }
@@ -80,20 +80,20 @@ int ParseTypeCodeData::readInterfaceType(const uint8_t* &data_ptr) const
   {
     res = sick::datastructure::e_interface_type::E_NONSAFE_ETHERNET;
   }
-  
+
   return res;
 }
 
-float ParseTypeCodeData::readMaxRange(const uint8_t* &data_ptr) const
+float ParseTypeCodeData::readMaxRange(const uint8_t*& data_ptr) const
 {
   uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 12);
   uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 13);
-  
+
   int res = sick::datastructure::e_ranges::E_NORMAL_RANGE;
 
-  if ((type_code_interface_1 == '3' && type_code_interface_2 == '0')
-      || (type_code_interface_1 == '4' && type_code_interface_2 == '0')
-      || (type_code_interface_1 == '5' && type_code_interface_2 == '5'))
+  if ((type_code_interface_1 == '3' && type_code_interface_2 == '0') ||
+      (type_code_interface_1 == '4' && type_code_interface_2 == '0') ||
+      (type_code_interface_1 == '5' && type_code_interface_2 == '5'))
   {
     res = sick::datastructure::e_ranges::E_NORMAL_RANGE;
   }
@@ -104,7 +104,6 @@ float ParseTypeCodeData::readMaxRange(const uint8_t* &data_ptr) const
 
   return (float)res;
 }
-
 
 
 } // namespace data_processing

@@ -75,9 +75,6 @@ public:
   void waitForCompletion();
 
 private:
-
-
-
   std::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;
   std::shared_ptr<sick::data_processing::ParseTCPPacket> m_parser_ptr;
   std::shared_ptr<sick::data_processing::TCPPacketMerger> m_packet_merger_ptr;
@@ -96,7 +93,8 @@ private:
   bool findCommand(const uint16_t& request_id, CommandPtr& command);
   bool removeCommand(const uint16_t& request_id);
 
-  bool startProcessingAndRemovePendingCommandAfterwards(const sick::datastructure::PacketBuffer& packet);
+  bool
+  startProcessingAndRemovePendingCommandAfterwards(const sick::datastructure::PacketBuffer& packet);
   bool addPacketToMerger(const sick::datastructure::PacketBuffer& packet);
   bool checkIfPacketIsCompleteAndOtherwiseListenForMorePackets();
   bool sendTelegramAndListenForAnswer(const CommandPtr& command);

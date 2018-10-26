@@ -40,11 +40,12 @@
 namespace sick {
 namespace cola2 {
 
-DeviceNameVariableCommand::DeviceNameVariableCommand(Cola2Session& session, std::string &device_name)
+DeviceNameVariableCommand::DeviceNameVariableCommand(Cola2Session& session,
+                                                     std::string& device_name)
   : VariableCommand(session, 17)
   , m_device_name(device_name)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_writer_ptr             = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_device_name_parser_ptr = std::make_shared<sick::data_processing::ParseDeviceName>();
 }
 
@@ -66,12 +67,11 @@ bool DeviceNameVariableCommand::processReply()
     return false;
   }
 
-  m_device_name_parser_ptr->parseTCPSequence(getDataVector(),m_device_name);
+  m_device_name_parser_ptr->parseTCPSequence(getDataVector(), m_device_name);
 
 
   return true;
 }
-
 
 
 } // namespace cola2

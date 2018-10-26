@@ -49,13 +49,15 @@ ParseData::ParseData()
   m_application_data_parser_ptr = std::make_shared<sick::data_processing::ParseApplicationData>();
 }
 
-bool ParseData::parseUDPSequence(const datastructure::PacketBuffer buffer, datastructure::Data& data) const
+bool ParseData::parseUDPSequence(const datastructure::PacketBuffer buffer,
+                                 datastructure::Data& data) const
 {
   setDataBlocksInData(buffer, data);
   return true;
 }
 
-void ParseData::setDataBlocksInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const
+void ParseData::setDataBlocksInData(const datastructure::PacketBuffer& buffer,
+                                    datastructure::Data& data) const
 {
   setDataHeaderInData(buffer, data);
   setDerivedValuesInData(buffer, data);
@@ -65,7 +67,8 @@ void ParseData::setDataBlocksInData(const datastructure::PacketBuffer& buffer, d
   setApplicationDataInData(buffer, data);
 }
 
-void ParseData::setDataHeaderInData(const datastructure::PacketBuffer& buffer, datastructure::Data& data) const
+void ParseData::setDataHeaderInData(const datastructure::PacketBuffer& buffer,
+                                    datastructure::Data& data) const
 {
   sick::datastructure::DataHeader data_header =
     m_data_header_parser_ptr->parseUDPSequence(buffer, data);

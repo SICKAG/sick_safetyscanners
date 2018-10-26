@@ -38,28 +38,27 @@
 #include <iostream>
 
 
-
 namespace sick {
 namespace datastructure {
 
-enum e_interface_type {
+enum e_interface_type
+{
   E_EFIPRO,
   E_ETHERNET_IP,
   E_PROFINET,
   E_NONSAFE_ETHERNET
 };
 
-enum e_ranges {
+enum e_ranges
+{
   E_NORMAL_RANGE = 40,
-  E_LONG_RANGE = 64
+  E_LONG_RANGE   = 64
 };
 
 
 class TypeCode
 {
 public:
-
-
   TypeCode();
   int getInterfaceType() const;
   void setInterfaceType(int interface_type);
@@ -70,7 +69,6 @@ public:
 private:
   int m_interface_type;
   float m_max_range;
-
 };
 
 

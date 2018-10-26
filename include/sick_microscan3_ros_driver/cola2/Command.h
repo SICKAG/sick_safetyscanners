@@ -52,7 +52,9 @@ class Cola2Session;
 class Command
 {
 public:
-  Command(sick::cola2::Cola2Session& session, const uint16_t &command_type, const uint16_t &command_mode);
+  Command(sick::cola2::Cola2Session& session,
+          const uint16_t& command_type,
+          const uint16_t& command_mode);
 
 
   void lockExecutionMutex();
@@ -64,20 +66,20 @@ public:
   void waitForCompletion();
 
   uint32_t getSessionID() const;
-  void setSessionID(const uint32_t &session_id);
+  void setSessionID(const uint32_t& session_id);
 
 
   bool wasSuccessful() const;
 
 
   uint8_t getCommandType() const;
-  void setCommandType(const uint8_t &command_type);
+  void setCommandType(const uint8_t& command_type);
 
   uint8_t getCommandMode() const;
-  void setCommandMode(const uint8_t &command_mode);
+  void setCommandMode(const uint8_t& command_mode);
 
   uint16_t getRequestID() const;
-  void setRequestID(const uint16_t &request_id);
+  void setRequestID(const uint16_t& request_id);
 
   std::vector<uint8_t> getDataVector() const;
   void setDataVector(const std::vector<uint8_t>& data);
@@ -101,7 +103,7 @@ private:
 
   std::vector<uint8_t> m_data_vector;
 
-  virtual bool processReply() = 0;
+  virtual bool processReply()                                                                   = 0;
   virtual void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const = 0;
 
   void addTelegramHeader(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;

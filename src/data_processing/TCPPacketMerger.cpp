@@ -60,7 +60,7 @@ sick::datastructure::PacketBuffer TCPPacketMerger::getDeployedPacketBuffer()
   return m_deployed_packet_buffer;
 }
 
-bool TCPPacketMerger::addTCPPacket(const datastructure::PacketBuffer &buffer)
+bool TCPPacketMerger::addTCPPacket(const datastructure::PacketBuffer& buffer)
 {
   if (isComplete())
   {
@@ -72,7 +72,7 @@ bool TCPPacketMerger::addTCPPacket(const datastructure::PacketBuffer &buffer)
   return isComplete();
 }
 
-bool TCPPacketMerger::addToMap(const datastructure::PacketBuffer &newPacket)
+bool TCPPacketMerger::addToMap(const datastructure::PacketBuffer& newPacket)
 {
   uint32_t currentSize   = getCurrentSize();
   uint32_t remainingSize = m_targetSize - currentSize;
