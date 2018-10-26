@@ -72,7 +72,7 @@ bool CreateSession::processReply()
       (getCommandType() == 0x4F && getCommandMode() == 0x41))
   {
     m_session.setSessionID(getSessionID());
-    ROS_INFO("Successfully opened Cola2 session with sessionID: %i", m_session.getSessionID());
+    ROS_INFO("Successfully opened Cola2 session with sessionID: %u", m_session.getSessionID());
     return true;
   }
   else
