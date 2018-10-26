@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 VariableCommand::VariableCommand(Cola2Session& session, const uint16_t& variable_index)
-  : Command(session, 0x52, 0x49)  // see cola2 manual 0x52 = 'R' and  0x49 = 'I'
+  : Command(session, 0x52, 0x49) // see cola2 manual 0x52 = 'R' and  0x49 = 'I'
   , m_variable_index(variable_index)
 {
   m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
@@ -63,7 +63,8 @@ bool VariableCommand::canBeExecutedWithoutSessionID() const
 
 bool VariableCommand::processReply()
 {
-  if (getCommandType() == 'R' && getCommandMode() == 'A')
+  if ((getCommandType() == 'R' && getCommandMode() == 'A') ||
+      (getCommandType() == 0x52 && getCommandMode() == 0x41))
   {
     ROS_INFO("Command Variable Acknowledged.");
     return true;
@@ -85,5 +86,5 @@ void VariableCommand::setVariableIndex(const uint16_t& variable_index)
   m_variable_index = variable_index;
 }
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick

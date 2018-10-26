@@ -42,7 +42,7 @@ namespace sick {
 namespace cola2 {
 
 CloseSession::CloseSession(Cola2Session& session)
-  : Command(session, 0x43, 0x58)  // see cola2 manual 0x4F = O, 0x58 = X
+  : Command(session, 0x43, 0x58) // see cola2 manual 0x43 = C, 0x58 = X
 {
 }
 
@@ -57,7 +57,8 @@ bool CloseSession::canBeExecutedWithoutSessionID() const
 
 bool CloseSession::processReply()
 {
-  if (getCommandType() == 'C' && getCommandMode() == 'A')
+  if ((getCommandType() == 'C' && getCommandMode() == 'A') ||
+      (getCommandType() == 0x43 && getCommandMode() == 0x41))
   {
     m_session.setSessionID(getSessionID());
     ROS_INFO("Successfully closed Cola2 session with sessionID: %i", m_session.getSessionID());
@@ -70,5 +71,5 @@ bool CloseSession::processReply()
   }
 }
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick

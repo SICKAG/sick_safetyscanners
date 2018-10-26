@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 CreateSession::CreateSession(Cola2Session& session)
-  : Command(session, 0x4F, 0x58)  // see cola2 manual 0x4F = O, 0x58 = X
+  : Command(session, 0x4F, 0x58) // see cola2 manual 0x4F = O, 0x58 = X
 {
   m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
@@ -68,7 +68,8 @@ bool CreateSession::canBeExecutedWithoutSessionID() const
 
 bool CreateSession::processReply()
 {
-  if (getCommandType() == 'O' && getCommandMode() == 'A')
+  if ((getCommandType() == 'O' && getCommandMode() == 'A') ||
+      (getCommandType() == 0x4F && getCommandMode() == 0x41))
   {
     m_session.setSessionID(getSessionID());
     ROS_INFO("Successfully opened Cola2 session with sessionID: %i", m_session.getSessionID());
@@ -89,9 +90,9 @@ void CreateSession::writeHeartbeatTimeoutToDataPtr(uint8_t*& data_ptr) const
 
 void CreateSession::writeClientIdToDataPtr(uint8_t*& data_ptr) const
 {
-  uint32_t clientID = 1;  // can be any random number
+  uint32_t clientID = 1; // can be any random number
   m_writer_ptr->writeuint32_tBigEndian(data_ptr, clientID, 1);
 }
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick

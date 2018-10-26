@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 MethodCommand::MethodCommand(Cola2Session& session, const uint16_t& method_index)
-  : Command(session, 0x4D, 0x49)  // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
+  : Command(session, 0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
   , m_method_index(method_index)
 {
   m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
@@ -62,7 +62,8 @@ bool MethodCommand::canBeExecutedWithoutSessionID() const
 
 bool MethodCommand::processReply()
 {
-  if (getCommandType() == 'A' && getCommandMode() == 'I')
+  if ((getCommandType() == 'A' && getCommandMode() == 'I') ||
+      (getCommandType() == 0x41 && getCommandMode() == 0x49))
   {
     ROS_INFO("Command Method Acknowledged.");
     return true;
@@ -84,5 +85,5 @@ void MethodCommand::setMethodIndex(const uint16_t& method_index)
   m_method_index = method_index;
 }
 
-}  // namespace cola2
-}  // namespace sick
+} // namespace cola2
+} // namespace sick
