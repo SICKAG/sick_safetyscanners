@@ -58,8 +58,6 @@ public:
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
   std::shared_ptr<sick::data_processing::ParseFieldHeaderData> m_field_header_parser_ptr;
-
-  sick::datastructure::FieldData& m_field_data;
 };
 
 } // namespace cola2

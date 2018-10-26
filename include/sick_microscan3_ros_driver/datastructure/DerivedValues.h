@@ -149,7 +149,6 @@ private:
   uint16_t m_multiplication_factor;
   uint16_t m_number_of_beams;
   uint16_t m_scan_time; // ms
-  uint32_t unsigned_test_start_angle;
   float m_start_angle;
   float m_angular_beam_resolution;
   uint32_t m_interbeam_period; // usecs
