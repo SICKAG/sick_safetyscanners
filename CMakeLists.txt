@@ -11,12 +11,11 @@ add_definitions(-std=c++11 -Wall)
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED
   COMPONENTS
-    roslint
-    roscpp
-    std_msgs
-    sensor_msgs
     dynamic_reconfigure
     message_generation
+    roscpp
+    sensor_msgs
+    std_msgs
 )
 
 ## Find system libraries
@@ -30,24 +29,24 @@ generate_dynamic_reconfigure_options(
 
 add_message_files(
   FILES
-  ExtendedLaserScanMsg.msg
-  RawMicroScanDataMsg.msg
+  ApplicationDataMsg.msg
+  ApplicationInputsMsg.msg
+  ApplicationOutputsMsg.msg
   DataHeaderMsg.msg
   DerivedValuesMsg.msg
+  ExtendedLaserScanMsg.msg
   GeneralSystemStateMsg.msg
   IntrusionDataMsg.msg
   IntrusionDatumMsg.msg
   MeasurementDataMsg.msg
+  RawMicroScanDataMsg.msg
   ScanPointMsg.msg
-  ApplicationDataMsg.msg
-  ApplicationInputsMsg.msg
-  ApplicationOutputsMsg.msg
 )
 
 generate_messages(
   DEPENDENCIES
-  std_msgs
   sensor_msgs
+  std_msgs
 )
 
 ###################################
@@ -66,11 +65,11 @@ catkin_package(
   LIBRARIES
     ${PROJECT_NAME}_core
   CATKIN_DEPENDS
-    roscpp
-    std_msgs
-    sensor_msgs
     dynamic_reconfigure
     message_runtime
+    roscpp
+    sensor_msgs
+    std_msgs
   DEPENDS
     Boost
 )
@@ -81,7 +80,6 @@ catkin_package(
 ## Build ##
 ###########
 
-roslint_cpp()
 
 ## Specify additional locations of header files
 ## Your package locations should be listed before other locations
@@ -94,53 +92,53 @@ include_directories(
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME}_core
-  src/Microscan3.cpp
-  src/communication/AsyncUDPClient.cpp
-  src/communication/AsyncTCPClient.cpp
-  src/datastructure/PacketBuffer.cpp
-  src/datastructure/DatagramHeader.cpp
-  src/datastructure/Data.cpp
-  src/datastructure/DataHeader.cpp
-  src/datastructure/GeneralSystemState.cpp
-  src/datastructure/DerivedValues.cpp
-  src/datastructure/MeasurementData.cpp
-  src/datastructure/ScanPoint.cpp
-  src/datastructure/IntrusionData.cpp
-  src/datastructure/IntrusionDatum.cpp
-  src/datastructure/ApplicationData.cpp
-  src/datastructure/ApplicationInputs.cpp
-  src/datastructure/ApplicationOutputs.cpp
-  src/datastructure/CommSettings.cpp
-  src/datastructure/TypeCode.cpp
-  src/datastructure/FieldData.cpp
-  src/data_processing/UDPPacketMerger.cpp
-  src/data_processing/ParseDatagramHeader.cpp
-  src/data_processing/ParseData.cpp
-  src/data_processing/ParseDataHeader.cpp
-  src/data_processing/ParseDerivedValues.cpp
-  src/data_processing/ParseMeasurementData.cpp
-  src/data_processing/ParseGeneralSystemState.cpp
-  src/data_processing/ParseIntrusionData.cpp
-  src/data_processing/ParseApplicationData.cpp
-  src/data_processing/ReadWriteHelper.cpp
-  src/data_processing/TCPPacketMerger.cpp
-  src/data_processing/ParseTCPPacket.cpp
-  src/data_processing/ParseTypeCodeData.cpp
-  src/data_processing/ParseFieldHeaderData.cpp
-  src/data_processing/ParseFieldGeometryData.cpp
-  src/data_processing/ParseDeviceName.cpp
-  src/cola2/Cola2Session.cpp
-  src/cola2/Command.cpp
-  src/cola2/CreateSession.cpp
-  src/cola2/CloseSession.cpp
-  src/cola2/MethodCommand.cpp
-  src/cola2/ChangeCommSettingsCommand.cpp
-  src/cola2/VariableCommand.cpp
-  src/cola2/TypeCodeVariableCommand.cpp
-  src/cola2/FieldHeaderVariableCommand.cpp
-  src/cola2/FieldGeometryVariableCommand.cpp
-  src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
-  src/cola2/DeviceNameVariableCommand.cpp
+src/Microscan3.cpp
+src/cola2/ChangeCommSettingsCommand.cpp
+src/cola2/CloseSession.cpp
+src/cola2/Cola2Session.cpp
+src/cola2/Command.cpp
+src/cola2/CreateSession.cpp
+src/cola2/DeviceNameVariableCommand.cpp
+src/cola2/FieldGeometryVariableCommand.cpp
+src/cola2/FieldHeaderVariableCommand.cpp
+src/cola2/MethodCommand.cpp
+src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
+src/cola2/TypeCodeVariableCommand.cpp
+src/cola2/VariableCommand.cpp
+src/communication/AsyncTCPClient.cpp
+src/communication/AsyncUDPClient.cpp
+src/data_processing/ParseApplicationData.cpp
+src/data_processing/ParseData.cpp
+src/data_processing/ParseDataHeader.cpp
+src/data_processing/ParseDatagramHeader.cpp
+src/data_processing/ParseDerivedValues.cpp
+src/data_processing/ParseDeviceName.cpp
+src/data_processing/ParseFieldGeometryData.cpp
+src/data_processing/ParseFieldHeaderData.cpp
+src/data_processing/ParseGeneralSystemState.cpp
+src/data_processing/ParseIntrusionData.cpp
+src/data_processing/ParseMeasurementData.cpp
+src/data_processing/ParseTCPPacket.cpp
+src/data_processing/ParseTypeCodeData.cpp
+src/data_processing/ReadWriteHelper.cpp
+src/data_processing/TCPPacketMerger.cpp
+src/data_processing/UDPPacketMerger.cpp
+src/datastructure/ApplicationData.cpp
+src/datastructure/ApplicationInputs.cpp
+src/datastructure/ApplicationOutputs.cpp
+src/datastructure/CommSettings.cpp
+src/datastructure/Data.cpp
+src/datastructure/DataHeader.cpp
+src/datastructure/DatagramHeader.cpp
+src/datastructure/DerivedValues.cpp
+src/datastructure/FieldData.cpp
+src/datastructure/GeneralSystemState.cpp
+src/datastructure/IntrusionData.cpp
+src/datastructure/IntrusionDatum.cpp
+src/datastructure/MeasurementData.cpp
+src/datastructure/PacketBuffer.cpp
+src/datastructure/ScanPoint.cpp
+src/datastructure/TypeCode.cpp
 )
 
 ## Declare cpp executables
