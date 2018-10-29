@@ -44,11 +44,25 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parser for the derived values from the udp data packets.
+   */
 class ParseDerivedValues
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseDerivedValues();
 
+  /*!
+   * \brief Parsed the packet buffer and returns the derived values.
+   *
+   * \param buffer The incoming packet buffer.
+   * \param data The already parsed data. Used for checks if the derived values are enabled.
+   *
+   * \returns The parsed derived values.
+   */
   datastructure::DerivedValues parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                                 datastructure::Data& data) const;
 

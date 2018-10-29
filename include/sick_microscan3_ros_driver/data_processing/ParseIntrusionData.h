@@ -46,14 +46,29 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parser to read the intrusion data from a udp sequence.
+   */
 class ParseIntrusionData
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseIntrusionData();
 
+  /*!
+   * \brief Parse a udp sequence to read the intrusion data if enabled.
+   *
+   * \param buffer The incoming sequence.
+   * \param data The already parsed data to check if intrusion data is enabled.
+   *
+   * \returns The parsed intrusion data.
+   */
   datastructure::IntrusionData parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                                 datastructure::Data& data);
 
+  //TODO check if public needed.
   uint16_t getNumScanPoints() const;
   void setNumScanPoints(const uint16_t num_scan_points);
 

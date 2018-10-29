@@ -25,7 +25,7 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file UDPPAcketMerger.h
+ * \file UDPPacketMerger.h
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2018-09-24
@@ -45,14 +45,38 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Merges udp packets together to a complete data packet.
+   */
 class UDPPacketMerger
 {
 public:
+  /*!
+   * \brief Constructor of udp packet merger.
+   */
   UDPPacketMerger();
 
+  /*!
+   * \brief Returns if a data packet is complete.
+   *
+   * \returns If a data packet is complete.
+   */
   bool isComplete() const;
 
+  /*!
+   * \brief Adds a udp packet to the packet map, when a data packet is complete it will return true.
+   *
+   * \param buffer The new udp packet.
+   *
+   * \returns True if a data packet is complete.
+   */
   bool addUDPPacket(const sick::datastructure::PacketBuffer& buffer);
+
+  /*!
+   * \brief Get the latest complete data packet.
+   *
+   * \returns The latest complete data packet.
+   */
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
 
 private:

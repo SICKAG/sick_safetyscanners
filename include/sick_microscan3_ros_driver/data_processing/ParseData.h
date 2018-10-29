@@ -50,11 +50,26 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parses the udp data packets depending on which data will be received.
+   */
 class ParseData
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseData();
 
+  /*!
+   * \brief Parses the udp data transferred in the packet buffer. It will be parsed into the data
+   * reference.
+   *
+   * \param buffer The incoming data buffer.
+   * \param data Reference to the parsed data.
+   *
+   * \returns If parsing the data was successful.
+   */
   bool parseUDPSequence(const sick::datastructure::PacketBuffer buffer,
                         sick::datastructure::Data& data) const;
 

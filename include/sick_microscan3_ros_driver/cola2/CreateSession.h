@@ -41,12 +41,39 @@
 namespace sick {
 namespace cola2 {
 
+  /*!
+   * \brief Command to create a new cola2 session.
+   */
 class CreateSession : public Command
 {
 public:
+
+  /*!
+   * \brief Constructor to create a new command to set up a new session.
+   *
+   * \param session The new session which will be setup.
+   */
   explicit CreateSession(Cola2Session& session);
+
+  /*!
+   * \brief Adds the data to the telegram.
+   *
+   * \param telegram The telegram which will be modified by the data.
+   */
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+
+  /*!
+   * \brief Returns true since creating a new session is possible without a session ID.
+   *
+   * \returns true.
+   */
   bool canBeExecutedWithoutSessionID() const;
+
+  /*!
+   * \brief Processes the return from the sensor. Checks if the request was successful.
+   *
+   * \returns If processing of the returned data was successful.
+   */
   bool processReply();
 
 private:

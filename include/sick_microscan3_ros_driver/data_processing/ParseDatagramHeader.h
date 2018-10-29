@@ -44,10 +44,30 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parser for the datagram header.
+   *
+   * Parses the datagram header to match the udp packets together so the complete datapacket can be
+   * used in further parsing steps. Uses the raw data from the udp packets.
+   */
 class ParseDatagramHeader
 {
 public:
+  
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseDatagramHeader();
+
+  /*!
+   * \brief Parses the udp sequence to get the identification and the offset for the datagram
+   * header.
+   *
+   * \param buffer The incoming udp datapackets.
+   * \param header The parsed datagram header.
+   *
+   * \returns If parsing the datagram header was successful.
+   */
   bool parseUDPSequence(const datastructure::PacketBuffer& buffer,
                         sick::datastructure::DatagramHeader& header) const;
 

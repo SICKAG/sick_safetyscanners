@@ -47,13 +47,27 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parser for the measurement data from a udp sequence.
+   */
 class ParseMeasurementData
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseMeasurementData();
 
+  /*!
+   * \brief Parses the measurement data if it is enabled.
+   *
+   * \param buffer The incoming udp sequence.
+   * \param data The already parsed data to check if it is enabled.
+   *
+   * \returns The parsed measurement data.
+   */
   datastructure::MeasurementData parseUDPSequence(const datastructure::PacketBuffer& buffer,
-                                                  datastructure::Data& header);
+                                                  datastructure::Data& data);
 
 private:
   float m_angle;

@@ -80,7 +80,7 @@ public:
 
   /*!
    * \brief Returns if measurement data has been enabled.
-   * \return If measurment data has been enabled.
+   * \return If measurement data has been enabled.
    */
   bool isEmpty() const;
 

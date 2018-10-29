@@ -50,16 +50,37 @@
 
 namespace sick {
 namespace communication {
+
+  /*!
+   * \brief An asynchronous udp client.
+   */
 class AsyncUDPClient
 {
 public:
+  /*!
+   * \brief Typedef to a reference to a function. Will be used to process the incoming packets.
+   */
   typedef boost::function<void(const sick::datastructure::PacketBuffer&)> PacketHandler;
 
+  /*!
+   * \brief Constructor of the asynchronous udp client.
+   *
+   * \param packet_handler Function to handle incoming packets.
+   * \param io_service Instance of the boost io_service.
+   * \param local_port The local port, where the udp packets will arrive.
+   */
   AsyncUDPClient(PacketHandler packet_handler,
                  boost::asio::io_service& io_service,
                  const uint16_t& local_port = 0);
+
+  /*!
+   * \brief The destructor of the asynchronous udp client.
+   */
   virtual ~AsyncUDPClient();
 
+  /*!
+   * \brief Start the listening loop for the udp data packets.
+   */
   void run_service();
 
 private:

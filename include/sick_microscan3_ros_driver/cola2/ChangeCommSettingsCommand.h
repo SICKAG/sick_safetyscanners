@@ -43,14 +43,53 @@
 namespace sick {
 namespace cola2 {
 
+
+  /*!
+   * \brief Method command class for changing the settings in the sensor. Such as which data
+   * packages to enable.
+   */
 class ChangeCommSettingsCommand : public MethodCommand
 {
 public:
+  /*!
+   * \brief Typedef to reference the base class.
+   */
   typedef sick::cola2::MethodCommand base_class;
 
+  /*!
+   * \brief Constructor of the Command, takes the current session and the new set of parameters for
+   * the sensor.
+   *
+   * \param session The current Cola2 session, in which the parameters should be transferred.
+   * \param settings The new settings for the sensor. While the command will be executed in the
+   * session, these parameters will be set in the sensor.
+   */
   ChangeCommSettingsCommand(Cola2Session& session, const datastructure::CommSettings& settings);
+
+
+  /*!
+   * \brief Adds the settings as  data to the packetbuffer.
+   *
+   * \param telegram The telegram, which will be modified the settings as data.
+   */
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+
+
+  /*!
+   * \brief Returns if the command can be executed without a session ID. Will return false for most
+   * commands except the commands to establish a connection.
+   *
+   * \returns If the command needs a session ID to be executed.
+   */
   bool canBeExecutedWithoutSessionID() const;
+
+
+  /*!
+   * \brief Processes the return from the sensor. Checks if the method was acknowledged by the
+   * sensor.
+   *
+   * \returns If processing of the returned data was successful.
+   */
   bool processReply();
 
 

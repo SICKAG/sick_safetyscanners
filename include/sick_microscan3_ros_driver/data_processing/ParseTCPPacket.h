@@ -44,20 +44,53 @@
 namespace sick {
 
 namespace cola2 {
+  /*!
+   * \brief Forward declaration of Command class.
+   */
 class Command;
 }
 
 namespace data_processing {
 
 
+  /*!
+   * \brief Parser for an incoming TCP packet.
+   */
 class ParseTCPPacket
 {
 public:
+  /*!
+   * \brief Constructor of parser.
+   */
   ParseTCPPacket();
 
+  /*!
+   * \brief Parse the tcp sequence to get the header information of the cola2 protocol.
+   *
+   * \param buffer The incoming tcp connection.
+   * \param command Reference to the command and set the returned method type and mode and the data. 
+   *
+   * \returns If parsing was successful.
+   */
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
                         sick::cola2::Command& command) const;
+
+  /*!
+   * \brief Gets the expected packet length for a buffer.
+   *
+   * \param buffer The incoming tcp packet.
+   *
+   * \returns Expected length of the incoming packet buffer.
+   */
   uint32_t getExpectedPacketLength(const datastructure::PacketBuffer& buffer);
+
+  /*!
+   * \brief Gets the request ID of the incoming tcp packet.
+   *
+   * \param buffer The incoming tcp packet.
+   *
+   * \returns The request ID of the incoming packet buffer.
+   */
   uint16_t getRequestID(const datastructure::PacketBuffer& buffer) const;
 
 private:

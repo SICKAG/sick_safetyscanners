@@ -74,10 +74,10 @@ public:
   typedef boost::function<void(const sick::datastructure::Data&)> packetReceivedCallbackFunction;
 
   /*!
-   * \brief Constructor of the Microscan3 class
+   * \brief Constructor of the Microscan3 class.
    * \param newPacketReceivedCallbackFunction Function from the calling class, which will be
-   * called when a new packet is received
-   * \param settings Current settings for the sensor
+   * called when a new packet is received.
+   * \param settings Current settings for the sensor.
    */
   Microscan3(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
              sick::datastructure::CommSettings settings);
@@ -88,15 +88,15 @@ public:
   virtual ~Microscan3();
 
   /*!
-   * \brief Start the connection to the sensor and enables output
-   * \return If the setup was correct
+   * \brief Start the connection to the sensor and enables output.
+   * \return If the setup was correct.
    */
 
   bool run();
 
   /*!
-   * \brief Changes the internal settings of the sensor
-   * \param settings New set of settign to pass to the sensor
+   * \brief Changes the internal settings of the sensor.
+   * \param settings New set of settings to pass to the sensor.
    */
   void changeSensorSettings(const sick::datastructure::CommSettings& settings);
 

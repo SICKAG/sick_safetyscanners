@@ -47,10 +47,25 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parses the application data from a packet buffer.
+   */
 class ParseApplicationData
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseApplicationData();
+
+  /*!
+   * \brief Parses the application data from the packet buffer.
+   *
+   * \param buffer The incoming packet buffer with raw data.
+   * \param data The already parsed data, used to check if needed data is there.
+   *
+   * \returns The parsed application data.
+   */
   datastructure::ApplicationData parseUDPSequence(const sick::datastructure::PacketBuffer& buffer,
                                                   datastructure::Data& data) const;
 

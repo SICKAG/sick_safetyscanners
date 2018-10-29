@@ -45,11 +45,29 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parser for the data header. 
+   *
+   * Is required before the other complete udp packet parsers. It will return which data packages
+   * are enabled and therefore the other parsers can be used accordingly.
+   */
 class ParseDataHeader
 {
 public:
+  
+  /*!
+   * \brief  Constructor of the parser.
+   */
   ParseDataHeader();
 
+  /*!
+   * \brief Parses the data header from a udp sequence.
+   *
+   * \param buffer The complete udp packet.
+   * \param data The already parsed data used for checks.
+   *
+   * \returns The parsed data header.
+   */
   datastructure::DataHeader parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                              datastructure::Data& data) const;
 

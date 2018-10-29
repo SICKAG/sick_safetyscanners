@@ -49,41 +49,137 @@
 namespace sick {
 namespace cola2 {
 
+/*!
+ * \brief Forward declaration of the cola2session class.
+ */
 class Cola2Session;
 
+
+/*!
+ * \brief Base class for commands. Defines the base interface and does the common tasks.
+ */
 class Command
 {
 public:
+  /*!
+   * \brief Constructor of the command. Sets the common variables for a command to the sensor.
+   *
+   * \param session The session in which the command will be executed.
+   * \param command_type Defines what type of command will be executed in the sensor (Read, Write,
+   * Invoking a method).
+   * \param command_mode Specifies the mode of the command. If the request is by index or name.
+   */
   Command(sick::cola2::Cola2Session& session,
           const uint16_t& command_type,
           const uint16_t& command_mode);
 
 
+  /*!
+   * \brief Locks a mutex to prevent other commands being executed in parallel.
+   */
   void lockExecutionMutex();
 
+  /*!
+   * \brief Adds the data to the telegram and afterwards the header with the correct length.
+   *
+   * \param telegram The telegram, which will be modified with the data and header.
+   */
   void constructTelegram(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
 
+    /*!
+     * \brief Parses the da incoming data package and then processes it with the inherited
+     * processReply. Afterwards the mutex will be unlocked to allow new commands to be send.
+     *
+     *
+     * \param packet The incoming data package which will be processed.
+     */
   void processReplyBase(const sick::datastructure::PacketBuffer::VectorBuffer& packet);
 
+
+  /*!
+   * \brief Scooped call to the mutex, which will block until the reply was processed. 
+   */
   void waitForCompletion();
 
+
+  /*!
+   * \brief Returns the current session ID.
+   *
+   * \returns The current session ID.
+   */
   uint32_t getSessionID() const;
+
+
+  /*!
+   * \brief Sets the session ID.
+   *
+   * \param session_id The new session ID.
+   */
   void setSessionID(const uint32_t& session_id);
 
 
+  /*!
+   * \brief Returns if the command was successfully parsed. 
+   *
+   * \returns If the command was successfully parsed.
+   */
   bool wasSuccessful() const;
 
 
+  /*!
+   * \brief Returns the command type.
+   *
+   * \returns The command type.
+   */
   uint8_t getCommandType() const;
+
+  /*!
+   * \brief Sets the command type.
+   *
+   * \param command_type The new command type.
+   */
   void setCommandType(const uint8_t& command_type);
 
+  /*!
+   * \brief Returns the command mode.
+   *
+   * \returns The command mode.
+   */
   uint8_t getCommandMode() const;
+
+  /*!
+   * \brief Sets the command mode.
+   *
+   * \param command_mode The new command mode.
+   */
   void setCommandMode(const uint8_t& command_mode);
 
+  /*!
+   * \brief Returns the request id of the command.
+   *
+   * \returns The request id.
+   */
   uint16_t getRequestID() const;
+
+  /*!
+   * \brief Sets the request ID of the command.
+   *
+   * \param request_id The new request id.
+   */
   void setRequestID(const uint16_t& request_id);
 
+  /*!
+   * \brief Returns the data vector.
+   *
+   * \returns The data vector.
+   */
   std::vector<uint8_t> getDataVector() const;
+
+  /*!
+   * \brief Sets the data vector.
+   *
+   * \param data The new data vector.
+   */
   void setDataVector(const std::vector<uint8_t>& data);
 
 protected:

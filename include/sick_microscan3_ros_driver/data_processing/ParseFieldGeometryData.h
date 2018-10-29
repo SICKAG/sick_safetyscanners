@@ -45,18 +45,29 @@
 
 namespace sick {
 
-namespace cola2 {
-class Command;
-}
-
 namespace data_processing {
 
 
+  /*!
+   * \brief Parser to read field geometry data.
+   */
 class ParseFieldGeometryData
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseFieldGeometryData();
 
+  /*!
+   * \brief Parses a tcp sequence and return the field geometry data of the warning and protective
+   * fields.
+   *
+   * \param buffer The incoming tcp sequence.
+   * \param field_data Reference to the field data to set the geometry data.
+   *
+   * \returns If parsing the sequence was successful.
+   */
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
                         datastructure::FieldData& field_data) const;
 

@@ -127,7 +127,7 @@ public:
 
 private:
   float m_angle;
-  int16_t m_distance;
+  int16_t m_distance; // in mm
   uint8_t m_reflectivity;
   bool m_valid_bit;
   bool m_infinite_bit;

@@ -46,11 +46,25 @@
 namespace sick {
 namespace data_processing {
 
+  /*!
+   * \brief Parser to parse the general system state from the udp packets.
+   */
 class ParseGeneralSystemState
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseGeneralSystemState();
 
+  /*!
+   * \brief Parses the udp sequence to read the general system state if enabled.
+   *
+   * \param buffer The incoming sequence.
+   * \param data The already parsed data. Used to check if the general system state is enabled.
+   *
+   * \returns If parsing was successful.
+   */
   datastructure::GeneralSystemState
   parseUDPSequence(const sick::datastructure::PacketBuffer& buffer,
                    datastructure::Data& data) const;

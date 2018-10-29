@@ -41,12 +41,42 @@
 namespace sick {
 namespace cola2 {
 
+  /*!
+   * \brief Command to close a cola2 session between host and sensor.
+   */
 class CloseSession : public Command
 {
 public:
+
+  /*!
+   * \brief Constructor of the command to close a cola2 session.
+   *
+   * \param session The currents cola2 session, which will be closed on executing the command.
+   */
   explicit CloseSession(Cola2Session& session);
+
+  /*!
+   * \brief Adds data to the telegram. The close cola2 session command does not carry any extra data
+   * and therefor this function does not add any data.
+   *
+   * \param telegram The telegram which will be modified.
+   */
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+
+
+  /*!
+   * \brief Returns if the command can be executed without a session ID. Will return false for most
+   * commands except the commands to establish a connection.
+   *
+   * \returns If the command needs a session ID to be executed.
+   */
   bool canBeExecutedWithoutSessionID() const;
+
+  /*!
+   * \brief Processes the return from the sensor.
+   *
+   * \returns If processing of the returned data was successful.
+   */
   bool processReply();
 };
 

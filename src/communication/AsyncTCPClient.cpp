@@ -139,7 +139,5 @@ void AsyncTCPClient::handle_receive(const boost::system::error_code& error,
 }
 
 
-void AsyncTCPClient::run_service() {}
-
 } // namespace communication
 } // namespace sick

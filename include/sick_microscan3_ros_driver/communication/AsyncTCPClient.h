@@ -52,22 +52,62 @@
 
 namespace sick {
 namespace communication {
+
+  /*!
+   * \brief A asynchronous tcp client.
+   *
+   * Responsible to handle the connection to an IP-address and a port. Transfers the data to the
+   * specified target and receives the answer. The answer will be passed to a packet handler.
+   */
 class AsyncTCPClient
 {
 public:
+  /*!
+   * \brief Typedef to a function referencing a packet handler. This can be passed to the class and
+   * therefore be called on processing the data.
+   */
   typedef boost::function<void(const sick::datastructure::PacketBuffer&)> PacketHandler;
 
+  /*!
+   * \brief Constructor of the asynchronous tcp client.
+   *
+   * \param packet_handler Function which handles the packets on processing.
+   * \param io_service The boost io_service instance.
+   * \param server_ip The IP address of the server to connect to.
+   * \param server_port The port on the server to connect to.
+   */
   AsyncTCPClient(PacketHandler packet_handler,
                  boost::asio::io_service& io_service,
-                 const boost::asio::ip::address_v4& host,
+                 const boost::asio::ip::address_v4& server_ip,
                  const uint16_t& server_port);
+
+  /*!
+   * \brief The destructor of the asynchronous tcp client.
+   */
   virtual ~AsyncTCPClient();
 
-  void run_service();
-
+  /*!
+   * \brief Establishes a connection from the host to the sensor. 
+   */
   void do_connect();
+
+  /*!
+   * \brief Start a cycle of sensing a command and waiting got the return.
+   *
+   * \param sendBuffer The telegram which will be sent to the server.
+   */
   void doSendAndReceive(const sick::datastructure::PacketBuffer::VectorBuffer& sendBuffer);
+
+  /*!
+   * \brief Initiates the listening for a message from the server.
+   */
   void initiateReceive();
+
+  /*!
+   * \brief Sets the packet handler function.
+   *
+   * \param packet_handler The new packet handler function.
+   */
   void setPacketHandler(const PacketHandler& packet_handler);
 
 private:

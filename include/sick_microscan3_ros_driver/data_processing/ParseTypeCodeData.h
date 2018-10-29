@@ -43,18 +43,28 @@
 
 namespace sick {
 
-namespace cola2 {
-class Command;
-}
-
 namespace data_processing {
 
 
+  /*!
+   * \brief Parser to read the type code of a tcp sequence.
+   */
 class ParseTypeCodeData
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseTypeCodeData();
 
+  /*!
+   * \brief Parses a tcp sequence to read the type code of the sensor.
+   *
+   * \param buffer The incoming tcp sequence.
+   * \param type_code Reference to the type code, which will be written while parsing.
+   *
+   * \returns If parsing was successful.
+   */
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
                         datastructure::TypeCode& type_code) const;
 

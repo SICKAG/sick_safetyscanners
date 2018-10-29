@@ -44,18 +44,28 @@
 
 namespace sick {
 
-namespace cola2 {
-class Command;
-}
-
 namespace data_processing {
 
 
+  /*!
+   * \brief Parser to read the device name from a tcp sequence.
+   */
 class ParseDeviceName
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseDeviceName();
 
+  /*!
+   * \brief Parses a tcp sequence to read the device name of the sensor.
+   *
+   * \param buffer The incoming data sequence.
+   * \param device_name Reference to the parsed device name.
+   *
+   * \returns If parsing the device name was successful.
+   */
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer, std::string& device_name) const;
 
 private:

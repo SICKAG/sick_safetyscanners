@@ -43,14 +43,46 @@
 namespace sick {
 namespace cola2 {
 
+  /*!
+   * \brief Command to read the type code of the sensor.
+   */
 class TypeCodeVariableCommand : public VariableCommand
 {
 public:
+  
+  /*!
+   * \brief Typedef to reference the base class.
+   */
   typedef sick::cola2::VariableCommand base_class;
 
+  /*!
+   * \brief Constructor of the Command.
+   *
+   * \param session The current cola2 session.
+   * \param type_code Reference to the type code variable, which will be written on execution.
+   */
   TypeCodeVariableCommand(Cola2Session& session, datastructure::TypeCode& type_code);
+
+  /*!
+   * \brief Adds the data to the telegram.
+   *
+   * \param telegram The telegram which will be modified by the data.
+   */
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+
+  /*!
+   * \brief Returns if the command can be executed without a session ID. Will return false for most
+   * commands except the commands to establish a connection.
+   *
+   * \returns If the command needs a session ID to be executed.
+   */
   bool canBeExecutedWithoutSessionID() const;
+
+  /*!
+   * \brief Processes the return from the sensor.
+   *
+   * \returns If processing of the returned data was successful.
+   */
   bool processReply();
 
 

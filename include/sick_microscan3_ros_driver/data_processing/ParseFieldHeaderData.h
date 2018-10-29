@@ -43,18 +43,28 @@
 
 namespace sick {
 
-namespace cola2 {
-class Command;
-}
-
 namespace data_processing {
 
 
+  /*!
+   * \brief Parser to read the field header for protective and warning fields.
+   */
 class ParseFieldHeaderData
 {
 public:
+  /*!
+   * \brief Constructor of the parser.
+   */
   ParseFieldHeaderData();
 
+  /*!
+   * \brief Parses a tcp sequence to read the header for a warning or protective field.
+   *
+   * \param buffer The incoming tcp sequence.
+   * \param field_data Reference to the field data where the information will be set.
+   *
+   * \returns If parsing was successful.
+   */
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
                         datastructure::FieldData& field_data) const;
 

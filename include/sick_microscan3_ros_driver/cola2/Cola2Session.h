@@ -53,28 +53,87 @@
 namespace sick {
 namespace cola2 {
 
+  /*!
+   * \brief Forward declaration of command class.
+   */
 class Command;
+
+
+/*!
+ * \brief Forward declaration of create session class.
+ */
 class CreateSession;
 
 
+/*!
+ * \brief Establishes a cola2 session with a sensor and enables execution of commands in this
+ * session.
+ */
 class Cola2Session
 {
 public:
+
+
+  /*!
+   * \brief Typedef for a pointer containing a command to be executed.
+   */
   typedef std::shared_ptr<sick::cola2::Command> CommandPtr;
 
+  /*!
+   * \brief Constructor of the cola2 session. 
+   *
+   * \param async_tcp_client Pointer to an instance of a TCP-client. Will be used to establish a
+   * connection to the sensor.
+   */
   explicit Cola2Session(const std::shared_ptr<communication::AsyncTCPClient>& async_tcp_client);
 
+  /*!
+   * \brief Executes the command passed to the function.
+   *
+   * \param command The command to be executed.
+   *
+   * \returns If the execution was successful.
+   */
   bool executeCommand(const CommandPtr& command);
 
+  /*!
+   * \brief Returns the current session ID.
+   *
+   * \returns The current session ID.
+   */
   uint32_t getSessionID() const;
+
+  /*!
+   * \brief Sets the current session ID.
+   *
+   * \param session_id The new session ID.
+   */
   void setSessionID(const uint32_t& session_id);
 
+  /*!
+   * \brief Returns the next request ID. The request ID is used to match the return packages of the
+   * sensor to the right command.
+   *
+   * \returns A new request ID.
+   */
   uint16_t getNextRequestID();
 
+
+  /*!
+   * \brief Closes a session with the sensor. Executes the close session command.
+   *
+   * \returns If closing the session was successful.
+   */
   bool close();
+
+
+  /*!
+   * \brief Opens a session with the sensor. Executes the create session command.
+   *
+   * \returns If opening a session was successful.
+   */
   bool open();
 
-  void waitForCompletion();
 
 private:
   std::shared_ptr<sick::communication::AsyncTCPClient> m_async_tcp_client_ptr;

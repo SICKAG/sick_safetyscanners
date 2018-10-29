@@ -43,15 +43,50 @@
 namespace sick {
 namespace cola2 {
 
+  /*!
+   * \brief Command to read the header of the monitoring case table.
+   */
 class MonitoringCaseTableHeaderVariableCommand : public VariableCommand
 {
 public:
+  
+  /*!
+   * \brief Typedef to reference the base class.
+   */
   typedef sick::cola2::VariableCommand base_class;
 
+
+  /*!
+   * \brief Constructor of the command.
+   *
+   * \param session The current cola2 session.
+   * \param field_data 
+   *
+   * TODO
+   */
   MonitoringCaseTableHeaderVariableCommand(Cola2Session& session,
                                            datastructure::FieldData& field_data);
+
+  /*!
+   * \brief Adds the data to the telegram.
+   *
+   * \param telegram The telegram which will be modified by the data.
+   */
   void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+
+  /*!
+   * \brief Returns if the command can be executed without a session ID. Will return false for most
+   * commands except the commands to establish a connection.
+   *
+   * \returns If the command needs a session ID to be executed.
+   */
   bool canBeExecutedWithoutSessionID() const;
+
+  /*!
+   * \brief Processes the return from the sensor.
+   *
+   * \returns If processing of the returned data was successful.
+   */
   bool processReply();
 
 
