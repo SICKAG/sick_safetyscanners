@@ -37,8 +37,9 @@
 
 namespace sick {
 
-SickSafetyscanners::SickSafetyscanners(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
-                       sick::datastructure::CommSettings settings)
+SickSafetyscanners::SickSafetyscanners(
+  packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
+  sick::datastructure::CommSettings settings)
   : m_newPacketReceivedCallbackFunction(newPacketReceivedCallbackFunction)
 {
   ROS_INFO("Starting SickSafetyscanners");
@@ -58,7 +59,8 @@ SickSafetyscanners::~SickSafetyscanners()
 
 bool SickSafetyscanners::run()
 {
-  m_udp_client_thread_ptr.reset(new boost::thread(boost::bind(&SickSafetyscanners::UDPClientThread, this)));
+  m_udp_client_thread_ptr.reset(
+    new boost::thread(boost::bind(&SickSafetyscanners::UDPClientThread, this)));
 
   m_async_udp_client_ptr->run_service();
   return true;
@@ -89,7 +91,7 @@ void SickSafetyscanners::changeSensorSettings(const datastructure::CommSettings&
 }
 
 void SickSafetyscanners::requestTypeCode(const datastructure::CommSettings& settings,
-                                 sick::datastructure::TypeCode& type_code)
+                                         sick::datastructure::TypeCode& type_code)
 {
   startTCPConnection(settings);
 
@@ -110,7 +112,8 @@ void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSetti
   m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 }
 
-void SickSafetyscanners::changeCommSettingsinColaSession(const datastructure::CommSettings& settings)
+void SickSafetyscanners::changeCommSettingsinColaSession(
+  const datastructure::CommSettings& settings)
 {
   m_session_ptr->open();
   sick::cola2::Cola2Session::CommandPtr command_ptr =

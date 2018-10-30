@@ -80,7 +80,7 @@ public:
    * \param settings Current settings for the sensor.
    */
   SickSafetyscanners(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
-             sick::datastructure::CommSettings settings);
+                     sick::datastructure::CommSettings settings);
 
   /*!
    * \brief Destructor

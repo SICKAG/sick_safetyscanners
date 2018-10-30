@@ -47,9 +47,9 @@
 
 // Package
 #include <sick_safetyscanners/ExtendedLaserScanMsg.h>
+#include <sick_safetyscanners/RawMicroScanDataMsg.h>
 #include <sick_safetyscanners/SickSafetyscanners.h>
 #include <sick_safetyscanners/SickSafetyscannersConfigurationConfig.h>
-#include <sick_safetyscanners/RawMicroScanDataMsg.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
 
 #include <dynamic_reconfigure/server.h>
@@ -89,9 +89,9 @@ public:
   /*!
    * \brief Constructor of the SickSafetyscannersRos
    *
-   * Constructor of the SickSafetyscannersRos, loads all parameters from the parameter server, initialises
-   * the dynamic reconfiguration server. Furthermore initialises the ROS Publishers for the
-   * different laserscan outputs.
+   * Constructor of the SickSafetyscannersRos, loads all parameters from the parameter server,
+   * initialises the dynamic reconfiguration server. Furthermore initialises the ROS Publishers for
+   * the different laserscan outputs.
    */
   SickSafetyscannersRos();
 
@@ -153,8 +153,7 @@ private:
   createExtendedLaserScanMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::RawMicroScanDataMsg
   createRawDataMessage(const sick::datastructure::Data& data);
-  sick_safetyscanners::DataHeaderMsg
-  createDataHeaderMessage(const sick::datastructure::Data& data);
+  sick_safetyscanners::DataHeaderMsg createDataHeaderMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::DerivedValuesMsg
   createDerivedValuesMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::GeneralSystemStateMsg

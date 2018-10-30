@@ -57,8 +57,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_device->run();
   m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 100);
   m_extended_laser_scan_publisher =
-    m_private_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan",
-                                                                             100);
+    m_private_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
   m_raw_data_publisher =
     m_private_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
 
@@ -202,8 +201,7 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
 
   if (!data.getMeasurementDataPtr()->isEmpty() && !data.getDerivedValuesPtr()->isEmpty())
   {
-    sick_safetyscanners::ExtendedLaserScanMsg extended_scan =
-      createExtendedLaserScanMessage(data);
+    sick_safetyscanners::ExtendedLaserScanMsg extended_scan = createExtendedLaserScanMessage(data);
 
     m_extended_laser_scan_publisher.publish(extended_scan);
   }
@@ -230,12 +228,13 @@ SickSafetyscannersRos::createExtendedLaserScanMessage(const sick::datastructure:
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     msg.reflektor_status[i]                         = scan_point.getReflectorBit();
-    msg.intrusion[i] = scan_point.getContaminationBit();
+    msg.intrusion[i]                                = scan_point.getContaminationBit();
   }
   return msg;
 }
 
-sensor_msgs::LaserScan SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& data)
+sensor_msgs::LaserScan
+SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& data)
 {
   sensor_msgs::LaserScan scan;
   scan.header.frame_id     = m_laser_scan_frame_name;
