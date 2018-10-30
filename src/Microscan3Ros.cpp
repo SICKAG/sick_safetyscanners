@@ -225,10 +225,12 @@ Microscan3Ros::createExtendedLaserScanMessage(const sick::datastructure::Data& d
     data.getMeasurementDataPtr()->getScanPointsVector();
 
   msg.reflektor_status.resize(num_scan_points);
+  msg.intrusion.resize(num_scan_points);
   for (uint16_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     msg.reflektor_status[i]                         = scan_point.getReflectorBit();
+    msg.intrusion[i] = scan_point.getContaminationBit();
   }
   return msg;
 }

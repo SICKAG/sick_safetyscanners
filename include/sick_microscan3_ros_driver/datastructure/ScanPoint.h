@@ -41,7 +41,7 @@ namespace sick {
 namespace datastructure {
 
 /*!
- * \brief Class containign the data of a single scan point.
+ * \brief Class containing the data of a single scan point.
  */
 class ScanPoint
 {
