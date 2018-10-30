@@ -58,7 +58,7 @@ roslaunch sick_safetyscanners sick_safetyscanners.launch sensor_ip:=192.168.1.10
 
 This will start the driver and the dynamic reconfigure node. In this you can set different parameters on runtime, especially the angles and the data the sensor should publish. If these parameters should be set on startup they can be loaded to the parameter server beforehand.
 
-To visualize the data start rviz and subscribe to the /sick_safetyscanner/laser_scan topic.
+To visualize the data start rviz and subscribe to the ~/laser_scan topic.
 
 ```
 rosrun rviz rviz 
@@ -67,7 +67,7 @@ rosrun rviz rviz
 ### Troubleshooting
 
 * Check if the sensor has power and is connected to the host.
-* Check if booth sensor and host are in the same subnet e.g. 192.168.1
+* Check if both sensor and host are in the same subnet e.g. 192.168.1
 * Check if the launch file is called with the correct parameters for IP-addresses and ports.
 
 ## ROS API
@@ -119,6 +119,7 @@ Publishes the raw data from the sensor as a ros message.
 ## Creators
 
 **Lennart Puck** 
+
 FZI Forschungszentrum Informatik
 
 
