@@ -73,6 +73,11 @@ public:
           const uint16_t& command_type,
           const uint16_t& command_mode);
 
+  /*!
+   * \brief We have virtual member functions, so a virtual destructor is needed.
+   */
+  virtual ~Command() {}
+
 
   /*!
    * \brief Locks a mutex to prevent other commands being executed in parallel.
