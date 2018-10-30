@@ -37,8 +37,6 @@
 
 #include <stdint.h>
 
-// TODO Doku
-
 namespace sick {
 namespace datastructure {
 

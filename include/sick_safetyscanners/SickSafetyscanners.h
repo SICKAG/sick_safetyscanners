@@ -32,8 +32,8 @@
  */
 //----------------------------------------------------------------------
 
-#ifndef SICK_SAFETYSCANNERS_MICROSCAN3_H
-#define SICK_SAFETYSCANNERS_MICROSCAN3_H
+#ifndef SICK_SAFETYSCANNERS_SICKSAFETYSCANNERS_H
+#define SICK_SAFETYSCANNERS_SICKSAFETYSCANNERS_H
 
 #include <ros/ros.h>
 
@@ -133,4 +133,4 @@ private:
 
 } // namespace sick
 
-#endif // SICK_SAFETYSCANNERS_MICROSCAN3_H
+#endif // SICK_SAFETYSCANNERS_SICKSAFETYSCANNERS_H

@@ -67,8 +67,6 @@ public:
    */
   datastructure::IntrusionData parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                                 datastructure::Data& data);
-
-  // TODO check if public needed.
   uint16_t getNumScanPoints() const;
   void setNumScanPoints(const uint16_t num_scan_points);
 
