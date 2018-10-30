@@ -49,28 +49,94 @@
 namespace sick {
 namespace datastructure {
 
+  /*!
+   * \brief The data class containing all data blocks of a measurment.
+   */
 class Data
 {
 public:
+  /*!
+   * \brief Constructor of data instance.
+   */
   Data();
 
+  /*!
+   * \brief Gets the data header.
+   *
+   * \returns The data header.
+   */
   std::shared_ptr<DataHeader> getDataHeaderPtr() const;
+  /*!
+   * \brief Sets the data header.
+   *
+   * \param data_header_ptr The new data header.
+   */
   void setDataHeaderPtr(const std::shared_ptr<DataHeader>& data_header_ptr);
 
+  /*!
+   * \brief Gets the general system state.
+   *
+   * \returns The general system state.
+   */
   std::shared_ptr<GeneralSystemState> getGeneralSystemStatePtr() const;
   void
+    /*!
+     * \brief Sets the general system state.
+     *
+     * \param general_system_state_ptr The new general system state.
+     */
   setGeneralSystemStatePtr(const std::shared_ptr<GeneralSystemState>& general_system_state_ptr);
 
+  /*!
+   * \brief Gets the derived values.
+   *
+   * \returns The derived values.
+   */
   std::shared_ptr<DerivedValues> getDerivedValuesPtr() const;
+  /*!
+   * \brief Sets the derived values.
+   *
+   * \param derived_values_ptr The new derived values.
+   */
   void setDerivedValuesPtr(const std::shared_ptr<DerivedValues>& derived_values_ptr);
 
+  /*!
+   * \brief Gets the measurement data.
+   *
+   * \returns The measurement data.
+   */
   std::shared_ptr<MeasurementData> getMeasurementDataPtr() const;
+  /*!
+   * \brief Sets the measurement data.
+   *
+   * \param measurement_data_ptr The new measurement data.
+   */
   void setMeasurementDataPtr(const std::shared_ptr<MeasurementData>& measurement_data_ptr);
 
+  /*!
+   * \brief Gets the intrusion data.
+   *
+   * \returns The intrusion data.
+   */
   std::shared_ptr<IntrusionData> getIntrusionDataPtr() const;
+  /*!
+   * \brief Sets the intrusion data.
+   *
+   * \param intrusion_data_ptr The new intrusion data.
+   */
   void setIntrusionDataPtr(const std::shared_ptr<IntrusionData>& intrusion_data_ptr);
 
+  /*!
+   * \brief Gets the application data.
+   *
+   * \returns The application data.
+   */
   std::shared_ptr<ApplicationData> getApplicationDataPtr() const;
+  /*!
+   * \brief Sets the application data.
+   *
+   * \param application_data_ptr The new application data.
+   */
   void setApplicationDataPtr(const std::shared_ptr<ApplicationData>& application_data_ptr);
 
 private:

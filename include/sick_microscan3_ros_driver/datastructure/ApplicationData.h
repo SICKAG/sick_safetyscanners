@@ -41,18 +41,54 @@
 namespace sick {
 namespace datastructure {
 
+  /*!
+   * \brief The application io class, bundles application input and output.
+   */
 class ApplicationData
 {
 public:
+  /*!
+   * \brief Constructor of the application data.
+   */
   ApplicationData();
 
+  /*!
+   * \brief Gets the application input.
+   *
+   * \returns The application input.
+   */
   ApplicationInputs getInputs() const;
+  /*!
+   * \brief Sets the application input.
+   *
+   * \param inputs The new application input.
+   */
   void setInputs(const ApplicationInputs& inputs);
 
+  /*!
+   * \brief Gets the application output.
+   *
+   * \returns The application output.
+   */
   ApplicationOutputs getOutputs() const;
+  /*!
+   * \brief Sets the application output.
+   *
+   * \param outputs The application output.
+   */
   void setOutputs(const ApplicationOutputs& outputs);
 
+  /*!
+   * \brief Check if application data is empty.
+   *
+   * \returns If application data is empty.
+   */
   bool isEmpty() const;
+  /*!
+   * \brief Sets if application data is empty.
+   *
+   * \param is_empty If application data is empty.
+   */
   void setIsEmpty(bool is_empty);
 
 private:
