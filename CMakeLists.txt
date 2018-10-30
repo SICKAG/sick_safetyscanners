@@ -20,7 +20,7 @@ find_package(catkin REQUIRED
 
 ## Find system libraries
 #find_package(Eigen3 REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system thread)
 
 generate_dynamic_reconfigure_options(
   config/SickSafetyscannersConfiguration.cfg
@@ -143,7 +143,7 @@ add_library(${PROJECT_NAME}_core
 )
 
 ## Declare cpp executables
-add_executable(${PROJECT_NAME}
+add_executable(${PROJECT_NAME}_node
   nodes/${PROJECT_NAME}_node.cpp
   src/SickSafetyscannersRos.cpp
 )
@@ -154,7 +154,7 @@ add_dependencies(${PROJECT_NAME}_core
   ${catkin_EXPORTED_TARGETS}
 )
 
-add_dependencies(${PROJECT_NAME}
+add_dependencies(${PROJECT_NAME}_node
   ${${PROJECT_NAME}_EXPORTED_TARGETS}
   ${catkin_EXPORTED_TARGETS}
 )
@@ -164,7 +164,7 @@ target_link_libraries(${PROJECT_NAME}_core
   ${catkin_LIBRARIES}
 )
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(${PROJECT_NAME}_node
   ${PROJECT_NAME}_core
   ${catkin_LIBRARIES}
 )
@@ -183,7 +183,7 @@ install(
 )
 
 install(
-  TARGETS ${PROJECT_NAME}
+  TARGETS ${PROJECT_NAME}_node
   ARCHIVE DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   LIBRARY DESTINATION ${CATKIN_PACKAGE_LIB_DESTINATION}
   RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
