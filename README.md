@@ -1,6 +1,6 @@
-# Sick SickSafetyscanners ROS Driver
+# Sick_Safetyscanners ROS Driver
 
-A ROS Driver which reads the raw data from the SickSafetyscanners and publishes the data as a laser_scan msg.
+A ROS Driver which reads the raw data from the SICK Safetyscanners and publishes the data as a laser_scan msg.
 
 ## Getting started
 
