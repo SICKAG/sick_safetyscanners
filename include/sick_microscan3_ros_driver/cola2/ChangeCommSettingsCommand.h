@@ -44,10 +44,10 @@ namespace sick {
 namespace cola2 {
 
 
-  /*!
-   * \brief Method command class for changing the settings in the sensor. Such as which data
-   * packages to enable.
-   */
+/*!
+ * \brief Method command class for changing the settings in the sensor. Such as which data
+ * packages to enable.
+ */
 class ChangeCommSettingsCommand : public MethodCommand
 {
 public:

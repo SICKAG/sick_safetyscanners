@@ -47,9 +47,9 @@ namespace sick {
 namespace data_processing {
 
 
-  /*!
-   * \brief Parser to read the device name from a tcp sequence.
-   */
+/*!
+ * \brief Parser to read the device name from a tcp sequence.
+ */
 class ParseDeviceName
 {
 public:

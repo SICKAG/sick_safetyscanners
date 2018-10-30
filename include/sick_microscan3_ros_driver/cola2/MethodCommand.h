@@ -40,13 +40,12 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command for method calls to the sensor
-   */
+/*!
+ * \brief Command for method calls to the sensor
+ */
 class MethodCommand : public Command
 {
 public:
-  
   /*!
    * \brief Constructor of the method command.
    *

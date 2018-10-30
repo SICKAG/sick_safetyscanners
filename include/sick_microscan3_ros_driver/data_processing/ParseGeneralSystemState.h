@@ -46,9 +46,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Parser to parse the general system state from the udp packets.
-   */
+/*!
+ * \brief Parser to parse the general system state from the udp packets.
+ */
 class ParseGeneralSystemState
 {
 public:

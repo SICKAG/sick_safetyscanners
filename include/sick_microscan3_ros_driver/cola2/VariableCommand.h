@@ -40,13 +40,12 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command to read a variable from the sensor.
-   */
+/*!
+ * \brief Command to read a variable from the sensor.
+ */
 class VariableCommand : public Command
 {
 public:
-  
   /*!
    * \brief Constructor of the command.
    *

@@ -45,9 +45,9 @@ namespace sick {
 namespace datastructure {
 
 
-  /*!
-   * \brief Field data for warning and protective fields.
-   */
+/*!
+ * \brief Field data for warning and protective fields.
+ */
 class FieldData
 {
 public:
@@ -133,7 +133,7 @@ private:
   bool m_is_warning_field;
   bool m_is_protective_field;
   ScanPoint m_field_geometry;
-  std::vector<uint16_t> m_beam_distances;  // in mm
+  std::vector<uint16_t> m_beam_distances; // in mm
 };
 
 

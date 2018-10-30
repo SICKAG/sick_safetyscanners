@@ -86,18 +86,18 @@ public:
    */
   void constructTelegram(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
 
-    /*!
-     * \brief Parses the da incoming data package and then processes it with the inherited
-     * processReply. Afterwards the mutex will be unlocked to allow new commands to be send.
-     *
-     *
-     * \param packet The incoming data package which will be processed.
-     */
+  /*!
+   * \brief Parses the da incoming data package and then processes it with the inherited
+   * processReply. Afterwards the mutex will be unlocked to allow new commands to be send.
+   *
+   *
+   * \param packet The incoming data package which will be processed.
+   */
   void processReplyBase(const sick::datastructure::PacketBuffer::VectorBuffer& packet);
 
 
   /*!
-   * \brief Scooped call to the mutex, which will block until the reply was processed. 
+   * \brief Scooped call to the mutex, which will block until the reply was processed.
    */
   void waitForCompletion();
 
@@ -119,7 +119,7 @@ public:
 
 
   /*!
-   * \brief Returns if the command was successfully parsed. 
+   * \brief Returns if the command was successfully parsed.
    *
    * \returns If the command was successfully parsed.
    */

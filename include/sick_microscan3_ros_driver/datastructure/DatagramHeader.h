@@ -41,10 +41,10 @@ namespace sick {
 namespace datastructure {
 
 
-  /*!
-   * \brief Contains the contents of a udp datagram header. Used to match the datagrams together to
-   * form a complete data packet.
-   */
+/*!
+ * \brief Contains the contents of a udp datagram header. Used to match the datagrams together to
+ * form a complete data packet.
+ */
 class DatagramHeader
 {
 public:
@@ -142,7 +142,7 @@ public:
   /*!
    * \brief Gets the fragment offset of the data.
    *
-   * Offset (in bytes) of the measurement data carried in this datagram (fragment) relative to 
+   * Offset (in bytes) of the measurement data carried in this datagram (fragment) relative to
    * the start of the overall measurement data output instance.
    *
    * \returns The fragment offset.

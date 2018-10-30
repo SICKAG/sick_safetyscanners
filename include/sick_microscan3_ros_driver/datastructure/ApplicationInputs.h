@@ -41,9 +41,9 @@
 namespace sick {
 namespace datastructure {
 
-  /*!
-   * \brief The applications inputs from a udp data packet.
-   */
+/*!
+ * \brief The applications inputs from a udp data packet.
+ */
 class ApplicationInputs
 {
 public:
@@ -55,7 +55,7 @@ public:
   /*!
    * \brief Gets the unsafe input sources.
    *
-   * The individual bits represent the current state of the static input sources used for 
+   * The individual bits represent the current state of the static input sources used for
    * monitoring case switching
    *
    * \returns The unsafe input sources.

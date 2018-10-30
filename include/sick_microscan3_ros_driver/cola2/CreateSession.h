@@ -41,13 +41,12 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command to create a new cola2 session.
-   */
+/*!
+ * \brief Command to create a new cola2 session.
+ */
 class CreateSession : public Command
 {
 public:
-
   /*!
    * \brief Constructor to create a new command to set up a new session.
    *

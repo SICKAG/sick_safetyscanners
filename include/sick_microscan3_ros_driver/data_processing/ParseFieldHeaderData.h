@@ -46,9 +46,9 @@ namespace sick {
 namespace data_processing {
 
 
-  /*!
-   * \brief Parser to read the field header for protective and warning fields.
-   */
+/*!
+ * \brief Parser to read the field header for protective and warning fields.
+ */
 class ParseFieldHeaderData
 {
 public:

@@ -45,16 +45,15 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Parser for the data header. 
-   *
-   * Is required before the other complete udp packet parsers. It will return which data packages
-   * are enabled and therefore the other parsers can be used accordingly.
-   */
+/*!
+ * \brief Parser for the data header.
+ *
+ * Is required before the other complete udp packet parsers. It will return which data packages
+ * are enabled and therefore the other parsers can be used accordingly.
+ */
 class ParseDataHeader
 {
 public:
-  
   /*!
    * \brief  Constructor of the parser.
    */

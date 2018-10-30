@@ -50,9 +50,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Parses the udp data packets depending on which data will be received.
-   */
+/*!
+ * \brief Parses the udp data packets depending on which data will be received.
+ */
 class ParseData
 {
 public:

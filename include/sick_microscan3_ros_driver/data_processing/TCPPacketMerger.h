@@ -44,9 +44,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Merges incoming tcp packets together to get a complete data packet.
-   */
+/*!
+ * \brief Merges incoming tcp packets together to get a complete data packet.
+ */
 class TCPPacketMerger
 {
 public:
@@ -85,14 +85,14 @@ public:
    * \returns The latest complete data packet.
    */
   sick::datastructure::PacketBuffer getDeployedPacketBuffer();
-  
+
   /*!
    * \brief Returns the expected target size of a complete data packet.
    *
    * \returns The target size of a complete data packet.
    */
   uint32_t getTargetSize() const;
-  
+
   /*!
    * \brief Sets the target size of a data packet.
    *

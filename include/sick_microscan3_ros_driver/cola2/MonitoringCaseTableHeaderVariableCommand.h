@@ -43,13 +43,12 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command to read the header of the monitoring case table.
-   */
+/*!
+ * \brief Command to read the header of the monitoring case table.
+ */
 class MonitoringCaseTableHeaderVariableCommand : public VariableCommand
 {
 public:
-  
   /*!
    * \brief Typedef to reference the base class.
    */
@@ -60,7 +59,7 @@ public:
    * \brief Constructor of the command.
    *
    * \param session The current cola2 session.
-   * \param field_data 
+   * \param field_data
    *
    * TODO
    */

@@ -45,9 +45,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Merges udp packets together to a complete data packet.
-   */
+/*!
+ * \brief Merges udp packets together to a complete data packet.
+ */
 class UDPPacketMerger
 {
 public:

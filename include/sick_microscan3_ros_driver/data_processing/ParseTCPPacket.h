@@ -44,18 +44,18 @@
 namespace sick {
 
 namespace cola2 {
-  /*!
-   * \brief Forward declaration of Command class.
-   */
+/*!
+ * \brief Forward declaration of Command class.
+ */
 class Command;
-}
+} // namespace cola2
 
 namespace data_processing {
 
 
-  /*!
-   * \brief Parser for an incoming TCP packet.
-   */
+/*!
+ * \brief Parser for an incoming TCP packet.
+ */
 class ParseTCPPacket
 {
 public:
@@ -68,7 +68,7 @@ public:
    * \brief Parse the tcp sequence to get the header information of the cola2 protocol.
    *
    * \param buffer The incoming tcp connection.
-   * \param command Reference to the command and set the returned method type and mode and the data. 
+   * \param command Reference to the command and set the returned method type and mode and the data.
    *
    * \returns If parsing was successful.
    */

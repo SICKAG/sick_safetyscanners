@@ -46,9 +46,9 @@ namespace sick {
 namespace data_processing {
 
 
-  /*!
-   * \brief Parser to read the type code of a tcp sequence.
-   */
+/*!
+ * \brief Parser to read the type code of a tcp sequence.
+ */
 class ParseTypeCodeData
 {
 public:

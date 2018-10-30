@@ -41,13 +41,12 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command to close a cola2 session between host and sensor.
-   */
+/*!
+ * \brief Command to close a cola2 session between host and sensor.
+ */
 class CloseSession : public Command
 {
 public:
-
   /*!
    * \brief Constructor of the command to close a cola2 session.
    *

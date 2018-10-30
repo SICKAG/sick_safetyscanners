@@ -41,9 +41,9 @@
 namespace sick {
 namespace datastructure {
 
-  /*!
-   * \brief The application io class, bundles application input and output.
-   */
+/*!
+ * \brief The application io class, bundles application input and output.
+ */
 class ApplicationData
 {
 public:

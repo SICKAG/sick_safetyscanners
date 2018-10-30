@@ -43,20 +43,19 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command to read the field geometry from the sensor.
-   */
+/*!
+ * \brief Command to read the field geometry from the sensor.
+ */
 class FieldGeometryVariableCommand : public VariableCommand
 {
 public:
-  
   /*!
    * \brief Typedef to reference the base class.
    */
   typedef sick::cola2::VariableCommand base_class;
 
   /*!
-   * \brief Constructor of the command. 
+   * \brief Constructor of the command.
    *
    * Takes the current cola2 session and a reference to the field data variable which will be
    * written on execution. The index defines which field variable will be read. Depending on the

@@ -51,9 +51,9 @@
 namespace sick {
 namespace communication {
 
-  /*!
-   * \brief An asynchronous udp client.
-   */
+/*!
+ * \brief An asynchronous udp client.
+ */
 class AsyncUDPClient
 {
 public:

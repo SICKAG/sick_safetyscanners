@@ -43,13 +43,12 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command to read the type code of the sensor.
-   */
+/*!
+ * \brief Command to read the type code of the sensor.
+ */
 class TypeCodeVariableCommand : public VariableCommand
 {
 public:
-  
   /*!
    * \brief Typedef to reference the base class.
    */

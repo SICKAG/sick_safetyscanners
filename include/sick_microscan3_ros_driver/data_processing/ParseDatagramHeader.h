@@ -44,16 +44,15 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Parser for the datagram header.
-   *
-   * Parses the datagram header to match the udp packets together so the complete datapacket can be
-   * used in further parsing steps. Uses the raw data from the udp packets.
-   */
+/*!
+ * \brief Parser for the datagram header.
+ *
+ * Parses the datagram header to match the udp packets together so the complete datapacket can be
+ * used in further parsing steps. Uses the raw data from the udp packets.
+ */
 class ParseDatagramHeader
 {
 public:
-  
   /*!
    * \brief Constructor of the parser.
    */

@@ -47,9 +47,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Parser for the measurement data from a udp sequence.
-   */
+/*!
+ * \brief Parser for the measurement data from a udp sequence.
+ */
 class ParseMeasurementData
 {
 public:

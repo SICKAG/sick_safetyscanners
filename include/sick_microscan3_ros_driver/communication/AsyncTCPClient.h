@@ -53,12 +53,12 @@
 namespace sick {
 namespace communication {
 
-  /*!
-   * \brief A asynchronous tcp client.
-   *
-   * Responsible to handle the connection to an IP-address and a port. Transfers the data to the
-   * specified target and receives the answer. The answer will be passed to a packet handler.
-   */
+/*!
+ * \brief A asynchronous tcp client.
+ *
+ * Responsible to handle the connection to an IP-address and a port. Transfers the data to the
+ * specified target and receives the answer. The answer will be passed to a packet handler.
+ */
 class AsyncTCPClient
 {
 public:
@@ -87,7 +87,7 @@ public:
   virtual ~AsyncTCPClient();
 
   /*!
-   * \brief Establishes a connection from the host to the sensor. 
+   * \brief Establishes a connection from the host to the sensor.
    */
   void do_connect();
 

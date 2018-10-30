@@ -43,13 +43,12 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Command to read the field header variables.
-   */
+/*!
+ * \brief Command to read the field header variables.
+ */
 class FieldHeaderVariableCommand : public VariableCommand
 {
 public:
-  
   /*!
    * \brief Typedef to reference the base class.
    */

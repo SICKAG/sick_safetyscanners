@@ -48,9 +48,9 @@ namespace sick {
 namespace data_processing {
 
 
-  /*!
-   * \brief Parser to read field geometry data.
-   */
+/*!
+ * \brief Parser to read field geometry data.
+ */
 class ParseFieldGeometryData
 {
 public:

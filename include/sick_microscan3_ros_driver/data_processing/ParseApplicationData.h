@@ -47,9 +47,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Parses the application data from a packet buffer.
-   */
+/*!
+ * \brief Parses the application data from a packet buffer.
+ */
 class ParseApplicationData
 {
 public:

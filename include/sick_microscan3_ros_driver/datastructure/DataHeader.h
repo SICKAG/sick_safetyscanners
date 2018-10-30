@@ -42,9 +42,9 @@
 namespace sick {
 namespace datastructure {
 
-  /*!
-   * \brief Contains the content of the data header of a udp data packet.
-   */
+/*!
+ * \brief Contains the content of the data header of a udp data packet.
+ */
 class DataHeader
 {
 public:
@@ -217,7 +217,7 @@ public:
   /*!
    * \brief Gets the general system state block offset.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The general system state block offset.
@@ -233,10 +233,10 @@ public:
   /*!
    * \brief Gets the general system state block size.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
-   * \returns The general system state block size. 
+   * \returns The general system state block size.
    */
   uint16_t getGeneralSystemStateBlockSize() const;
   /*!
@@ -249,7 +249,7 @@ public:
   /*!
    * \brief Gets the derived values block offset.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The derived values block offset.
@@ -265,7 +265,7 @@ public:
   /*!
    * \brief Gets the derived values block size.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The derived values block size.
@@ -281,7 +281,7 @@ public:
   /*!
    * \brief Gets the measurement data block offset.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The measurement data block offset.
@@ -297,7 +297,7 @@ public:
   /*!
    * \brief Gets the measurement data block size.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The measurement data block size.
@@ -313,7 +313,7 @@ public:
   /*!
    * \brief Gets the intrusion data block offset.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The intrusion data block offset.
@@ -329,7 +329,7 @@ public:
   /*!
    * \brief Gets the intrusion data block size.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The intrusion data block size.
@@ -345,10 +345,10 @@ public:
   /*!
    * \brief Gets the application io data block offset.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
-   * \returns The application io data block offset. 
+   * \returns The application io data block offset.
    */
   uint16_t getApplicationDataBlockOffset() const;
   /*!
@@ -361,7 +361,7 @@ public:
   /*!
    * \brief Gets the application io data block size.
    *
-   * If a block is  not included (not configured or data currently not available) then Size = 0 
+   * If a block is  not included (not configured or data currently not available) then Size = 0
    * and Offset = 0.
    *
    * \returns The application data io offset.

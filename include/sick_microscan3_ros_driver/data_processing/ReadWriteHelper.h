@@ -40,9 +40,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Class to read and write data at a certain place in a buffer.
-   */
+/*!
+ * \brief Class to read and write data at a certain place in a buffer.
+ */
 class ReadWriteHelper
 {
 public:
@@ -59,7 +59,7 @@ public:
    * \param offset Position the value will be written to.
    */
   void writeuint8_t(uint8_t*& buf, const uint8_t v, const uint16_t offset) const;
-  
+
   /*!
    * \brief Writes an unsigned 8-bit integer to a buffer at offset in big endian encoding.
    *
@@ -68,7 +68,7 @@ public:
    * \param offset Position the value will be written to.
    */
   void writeuint8_tBigEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset) const;
-  
+
   /*!
    * \brief Writes an unsigned 8-bit integer to a buffer at offset in little endian encoding.
    *
@@ -149,7 +149,7 @@ public:
    * \returns The value of the read integer.
    */
   uint8_t readuint8_t(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read an unsigned 8-bit integer at offset in big endian encoding.
    *
@@ -159,7 +159,7 @@ public:
    * \returns The value of the read integer.
    */
   uint8_t readuint8_tBigEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read an unsigned 8-bit integer at offset in big little encoding.
    *
@@ -169,7 +169,7 @@ public:
    * \returns The value of the read integer.
    */
   uint8_t readuint8_tLittleEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read a signed 8-bit integer at offset.
    *
@@ -179,7 +179,7 @@ public:
    * \returns The value of the read integer.
    */
   int8_t readint8_t(const uint8_t*& buffer, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read a signed 8-bit integer at offset in big endian encoding.
    *
@@ -189,7 +189,7 @@ public:
    * \returns The value of the read integer.
    */
   int8_t readint8_tBigEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read a signed 8-bit integer at offset in little endian encoding.
    *
@@ -209,7 +209,7 @@ public:
    * \returns The value of the read integer.
    */
   uint16_t readuint16_tBigEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read an unsigned 16-bit integer at offset in little endian encoding.
    *
@@ -219,7 +219,7 @@ public:
    * \returns The value of the read integer.
    */
   uint16_t readuint16_tLittleEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read a signed 16-bit integer at offset in big endian encoding.
    *
@@ -229,7 +229,7 @@ public:
    * \returns The value of the read integer.
    */
   int16_t readint16_tBigEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read a signed 16-bit integer at offset in little endian encoding.
    *
@@ -249,7 +249,7 @@ public:
    * \returns The value of the read integer.
    */
   uint32_t readuint32_tBigEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read an unsigned 32-bit integer at offset in little endian encoding.
    *
@@ -259,7 +259,7 @@ public:
    * \returns The value of the read integer.
    */
   uint32_t readuint32_tLittleEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read an unsigned 32-bit integer at offset in big endian encoding.
    *
@@ -269,7 +269,7 @@ public:
    * \returns The value of the read integer.
    */
   int32_t readint32_tBigEndian(const uint8_t*& buf, const uint16_t offset) const;
-  
+
   /*!
    * \brief Read an unsigned 32-bit integer at offset in little endian encoding.
    *

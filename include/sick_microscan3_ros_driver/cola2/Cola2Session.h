@@ -53,9 +53,9 @@
 namespace sick {
 namespace cola2 {
 
-  /*!
-   * \brief Forward declaration of command class.
-   */
+/*!
+ * \brief Forward declaration of command class.
+ */
 class Command;
 
 
@@ -72,15 +72,13 @@ class CreateSession;
 class Cola2Session
 {
 public:
-
-
   /*!
    * \brief Typedef for a pointer containing a command to be executed.
    */
   typedef std::shared_ptr<sick::cola2::Command> CommandPtr;
 
   /*!
-   * \brief Constructor of the cola2 session. 
+   * \brief Constructor of the cola2 session.
    *
    * \param async_tcp_client Pointer to an instance of a TCP-client. Will be used to establish a
    * connection to the sensor.

@@ -44,9 +44,9 @@
 namespace sick {
 namespace data_processing {
 
-  /*!
-   * \brief Parser for the derived values from the udp data packets.
-   */
+/*!
+ * \brief Parser for the derived values from the udp data packets.
+ */
 class ParseDerivedValues
 {
 public:

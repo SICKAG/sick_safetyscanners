@@ -47,7 +47,6 @@ namespace cola2 {
 class DeviceNameVariableCommand : public VariableCommand
 {
 public:
-
   /*!
    * \brief Typedef to reference the base class.
    */

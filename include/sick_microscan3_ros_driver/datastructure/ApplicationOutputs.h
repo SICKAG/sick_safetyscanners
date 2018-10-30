@@ -42,9 +42,9 @@
 namespace sick {
 namespace datastructure {
 
-  /*!
-   * \brief The application outputs from a udp data packet.
-   */
+/*!
+ * \brief The application outputs from a udp data packet.
+ */
 class ApplicationOutputs
 {
 public:
@@ -87,7 +87,7 @@ public:
   std::vector<bool> getEvalOutIsValidVector() const;
   /*!
    * \brief Sets if an output path is valid.
-   * 
+   *
    * \param eval_out_is_valid_vector If an output path is valid.
    */
   void setEvalOutIsValidVector(const std::vector<bool>& eval_out_is_valid_vector);
@@ -225,7 +225,7 @@ public:
   /*!
    * \brief Gets the second linear velocity output.
    *
-   * \returns The second linear velocity output. 
+   * \returns The second linear velocity output.
    */
   int16_t getVelocity1() const;
   /*!

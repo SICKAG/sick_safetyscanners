@@ -42,9 +42,9 @@
 namespace sick {
 namespace datastructure {
 
-  /*!
-   * \brief Containing the communication settings for the sensor which can be changed on runtime.
-   */
+/*!
+ * \brief Containing the communication settings for the sensor which can be changed on runtime.
+ */
 class CommSettings
 {
 public:
