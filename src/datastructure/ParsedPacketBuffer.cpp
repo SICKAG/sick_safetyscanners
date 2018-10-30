@@ -32,7 +32,7 @@
  */
 //----------------------------------------------------------------------
 
-#include "sick_microscan3_ros_driver/datastructure/ParsedPacketBuffer.h"
+#include "sick_safetyscanners/datastructure/ParsedPacketBuffer.h"
 
 namespace sick {
 namespace datastructure {

@@ -32,7 +32,7 @@
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/data_processing/ParseMeasurementData.h>
+#include <sick_safetyscanners/data_processing/ParseMeasurementData.h>
 
 namespace sick {
 namespace data_processing {

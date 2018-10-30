@@ -32,7 +32,7 @@
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
 
 namespace sick {
 namespace data_processing {

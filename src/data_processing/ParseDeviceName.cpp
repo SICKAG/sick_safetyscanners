@@ -32,9 +32,9 @@
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/data_processing/ParseDeviceName.h>
+#include <sick_safetyscanners/data_processing/ParseDeviceName.h>
 
-#include <sick_microscan3_ros_driver/cola2/Command.h>
+#include <sick_safetyscanners/cola2/Command.h>
 
 namespace sick {
 namespace data_processing {

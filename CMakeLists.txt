@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(sick_microscan3_ros_driver)
+project(sick_safetyscanners)
 
 ## Use C++11
 #add_definitions(-std=c++11)
@@ -23,7 +23,7 @@ find_package(catkin REQUIRED
 find_package(Boost REQUIRED)
 
 generate_dynamic_reconfigure_options(
-  config/Microscan3Configuration.cfg
+  config/SickSafetyscannersConfiguration.cfg
 )
 
 
@@ -92,7 +92,7 @@ include_directories(
 
 ## Declare a cpp library
 add_library(${PROJECT_NAME}_core
-  src/Microscan3.cpp
+  src/SickSafetyscanners.cpp
   src/cola2/ChangeCommSettingsCommand.cpp
   src/cola2/CloseSession.cpp
   src/cola2/Cola2Session.cpp
@@ -145,7 +145,7 @@ add_library(${PROJECT_NAME}_core
 ## Declare cpp executables
 add_executable(${PROJECT_NAME}
   nodes/${PROJECT_NAME}_node.cpp
-  src/Microscan3Ros.cpp
+  src/SickSafetyscannersRos.cpp
 )
 
 ## Add dependencies to exported targets, like ROS msgs or srvs

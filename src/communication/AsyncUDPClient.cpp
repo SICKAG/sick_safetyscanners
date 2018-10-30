@@ -33,7 +33,7 @@
 //----------------------------------------------------------------------
 
 
-#include <sick_microscan3_ros_driver/communication/AsyncUDPClient.h>
+#include <sick_safetyscanners/communication/AsyncUDPClient.h>
 
 namespace sick {
 namespace communication {

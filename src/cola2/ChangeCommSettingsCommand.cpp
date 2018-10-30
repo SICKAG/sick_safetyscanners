@@ -33,10 +33,10 @@
 //----------------------------------------------------------------------
 
 
-#include <sick_microscan3_ros_driver/cola2/ChangeCommSettingsCommand.h>
+#include <sick_safetyscanners/cola2/ChangeCommSettingsCommand.h>
 
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
-#include <sick_microscan3_ros_driver/cola2/Command.h>
+#include <sick_safetyscanners/cola2/Cola2Session.h>
+#include <sick_safetyscanners/cola2/Command.h>
 
 namespace sick {
 namespace cola2 {

@@ -32,7 +32,7 @@
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/cola2/Cola2Session.h>
+#include <sick_safetyscanners/cola2/Cola2Session.h>
 
 namespace sick {
 namespace cola2 {

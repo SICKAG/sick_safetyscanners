@@ -32,7 +32,7 @@
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/datastructure/DataHeader.h>
+#include <sick_safetyscanners/datastructure/DataHeader.h>
 
 namespace sick {
 namespace datastructure {

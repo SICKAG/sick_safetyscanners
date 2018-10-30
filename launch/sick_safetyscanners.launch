@@ -1,0 +1,14 @@
+<launch>
+
+  <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
+  <node pkg="sick_safetyscanners" type="sick_safetyscanners" name="sick_safetyscanners" output="screen">
+     <param name="sensor_ip" type="string" value="192.168.1.11" />
+     <param name="sensor_tcp_port" type="int" value="2122" />
+     <param name="host_ip" type="string" value="192.168.1.9" />
+     <param name="host_udp_port" type="int" value="6061" />
+  </node>
+
+
+  <node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" />
+</launch>
+

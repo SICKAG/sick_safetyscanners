@@ -32,7 +32,7 @@
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/datastructure/DerivedValues.h>
+#include <sick_safetyscanners/datastructure/DerivedValues.h>
 
 namespace sick {
 namespace datastructure {

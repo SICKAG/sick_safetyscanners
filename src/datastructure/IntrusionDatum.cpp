@@ -32,7 +32,7 @@
  */
 //----------------------------------------------------------------------
 
-#include <sick_microscan3_ros_driver/datastructure/IntrusionDatum.h>
+#include <sick_safetyscanners/datastructure/IntrusionDatum.h>
 
 namespace sick {
 namespace datastructure {

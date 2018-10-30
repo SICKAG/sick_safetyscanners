@@ -74,7 +74,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.00999999978
       Style: Flat Squares
-      Topic: /sick_microscan3_ros_driver/laser_scan
+      Topic: /sick_safetyscanners/laser_scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
