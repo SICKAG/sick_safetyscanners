@@ -62,7 +62,7 @@
 namespace sick {
 
 /*!
- * @brief Class managing the algorithmic part of the package.
+ * \brief Class managing the algorithmic part of the package.
  */
 class Microscan3
 {
@@ -91,7 +91,6 @@ public:
    * \brief Start the connection to the sensor and enables output.
    * \return If the setup was correct.
    */
-
   bool run();
 
   /*!

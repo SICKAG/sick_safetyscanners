@@ -50,7 +50,7 @@ namespace sick {
 namespace datastructure {
 
 /*!
- * \brief The data class containing all data blocks of a measurment.
+ * \brief The data class containing all data blocks of a measurement.
  */
 class Data
 {

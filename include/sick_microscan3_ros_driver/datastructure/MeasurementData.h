@@ -73,7 +73,7 @@ public:
   std::vector<ScanPoint> getScanPointsVector() const;
 
   /*!
-   * \brief Add a single scanpoint to the vecotr of scanpoints.
+   * \brief Add a single scanpoint to the vector of scanpoints.
    * \param scan_point New scanpoint to add.
    */
   void addScanPoint(ScanPoint scan_point);

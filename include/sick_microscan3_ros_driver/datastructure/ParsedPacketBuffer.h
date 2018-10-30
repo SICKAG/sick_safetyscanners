@@ -60,7 +60,7 @@ public:
   typedef std::vector<ParsedPacketBuffer> ParsedPacketBufferVector;
 
   /*!
-   * \brief Constructor of struct for ParsedPacketBuffer.
+   * \brief Constructor of ParsedPacketBuffer.
    * \param packet_buffer: Input Packetbuffer
    * \param datagram_header: Input parsed header of PacketBuffer.
    */

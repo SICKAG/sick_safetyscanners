@@ -58,16 +58,16 @@ public:
   DerivedValues();
 
   /*!
-   * \brief Return the mulitplication factor.
+   * \brief Return the multiplication factor.
    *  Multiplication factor to be applied to the beam distance values to
    *  get the distance in millimeter.
-   * \return The mulitplication factor.
+   * \return The multiplication factor.
    */
   uint16_t getMultiplicationFactor() const;
 
   /*!
-   * \brief Sets the mulitplication factor.
-   * \param multiplication_factor new multiplication factor.
+   * \brief Sets the multiplication factor.
+   * \param multiplication_factor The new multiplication factor.
    */
   void setMultiplicationFactor(const uint16_t& multiplication_factor);
 
@@ -115,7 +115,7 @@ public:
 
   /*!
    * \brief Set the angular resolution between beams.
-   * \param angular_beam_resolution The angualr resolution between two beams.
+   * \param angular_beam_resolution The angular resolution between two beams.
    */
   void setAngularBeamResolution(const int32_t& angular_beam_resolution);
 

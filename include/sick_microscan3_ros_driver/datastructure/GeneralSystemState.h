@@ -56,7 +56,7 @@ public:
 
   /*!
    * \brief Returns if run mode is active.
-   * \return If runmode is active.
+   * \return If run mode is active.
    */
   bool getRunModeActive() const;
   /*!
@@ -79,7 +79,7 @@ public:
 
   /*!
    * \brief Returns if a contamination warning is exists.
-   * \return If a contamiantion warning exists.
+   * \return If a contamination warning exists.
    */
   bool getContaminationWarning() const;
 
@@ -109,13 +109,13 @@ public:
 
   /*!
    * \brief Set the reference contour status.
-   * \param reference_contour_status The new reference controu status.
+   * \param reference_contour_status The new reference contour status.
    */
   void setReferenceContourStatus(bool reference_contour_status);
 
   /*!
    * \brief Returns if the manipulation status is set to true.
-   * \return If the manipualtion status is set.
+   * \return If the manipulation status is set.
    */
   bool getManipulationStatus() const;
 

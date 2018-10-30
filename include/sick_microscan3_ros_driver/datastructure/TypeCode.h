@@ -56,14 +56,40 @@ enum e_ranges
 };
 
 
+/*!
+ * \brief Class containing the type code of a laser scanner.
+ */
 class TypeCode
 {
 public:
+  /*!
+   * \brief Constructor of the type code.
+   */
   TypeCode();
+  /*!
+   * \brief Gets the interface type for the scanner.
+   *
+   * \returns The interface type for the scanner.
+   */
   uint8_t getInterfaceType() const;
+  /*!
+   * \brief Sets the interface type for the scanner.
+   *
+   * \param interface_type The interface type for the scanner.
+   */
   void setInterfaceType(uint8_t interface_type);
 
+  /*!
+   * \brief Gets the max range for the scanner.
+   *
+   * \returns The max range for the scanner.
+   */
   float getMaxRange() const;
+  /*!
+   * \brief Sets the max range for the scanner.
+   *
+   * \param max_distance The max range for the scanner.
+   */
   void setMaxRange(float max_distance);
 
 private:

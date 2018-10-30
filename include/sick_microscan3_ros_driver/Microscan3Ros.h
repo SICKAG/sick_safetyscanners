@@ -91,7 +91,7 @@ public:
    *
    * Constructor of the Microscan3Ros, loads all parameters from the parameter server, initialises
    * the dynamic reconfiguration server. Furthermore initialises the ROS Publishers for the
-   * different Laserscan outputs.
+   * different laserscan outputs.
    */
   Microscan3Ros();
 
@@ -133,7 +133,7 @@ private:
   bool readParameters();
 
   /*!
-   * \brief Funtion which is called when a new complete UDP Packet is received
+   * \brief Function which is called when a new complete UDP Packet is received
    * \param data, the assortment of all data from the sensor
    */
   void receivedUDPPacket(const datastructure::Data& data);

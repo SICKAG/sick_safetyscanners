@@ -60,7 +60,7 @@ public:
 
   /*!
    * \brief Setter of the size for the flag vector.
-   * \param size Size of the falg vector.
+   * \param size Size of the flag vector.
    */
   void setSize(const int32_t& size);
 
