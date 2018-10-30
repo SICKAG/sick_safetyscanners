@@ -20,7 +20,7 @@ find_package(catkin REQUIRED
 
 ## Find system libraries
 #find_package(Eigen3 REQUIRED)
-find_package(Boost REQUIRED)
+find_package(Boost REQUIRED COMPONENTS system thread)
 
 generate_dynamic_reconfigure_options(
   config/SickSafetyscannersConfiguration.cfg
