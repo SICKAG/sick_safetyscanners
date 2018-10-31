@@ -32,9 +32,10 @@ In the following instructions, replace `<rosdistro>` with the name of your ROS d
 
 #### From Binaries
 
-The driver is released at longer intervals as a binary package. 
+The driver is released at longer intervals as a binary package. At the moment the initial release is still in progress. Once it is released it can be installed with the foloowing command:
 
-`sudo apt-get install ros-<rosdistro>-sick_safetyscanners`
+~~`sudo apt-get install ros-<rosdistro>-sick_safetyscanners`~~
+
 
 #### From Source
 
@@ -99,22 +100,22 @@ Publishes the raw data from the sensor as a ros message.
 
 ### ROS parameters
 
-| Parameter Name        | Type | Required on startup | Information |
-| -------------                   |  ------------- | ------------| ------------- |
-| sensor_ip                    | String  | ✔ |Sensor IP address. Can be passed as an argument to the launch file. |
-| sensor_tcp_port          | Integer | ✔ | Sensor TCP Port.  Can be passed as an argument to the launch file. |
-| host_ip                        |   String   | ✔ | IHost IP address.  Can be passed as an argument to the launch file.  |
-| host_udp_port             | Integer | ✔ | Host UDP Port.  Can be passed as an argument to the launch file.  |
-| laser_scan_frame_name  | String | | The frame name of the sensor message  |
-| publish_frequency    | Integer | | How many scans should be publised (1 means every scan, 2 every second scan, ... ) |
-| angle_start              | Double | | Start angle of scan, if both start and end angle are set to 0, all angels are regarded  |
-| angle_end                | Double | | End angle of scan, if both start and end angle are set to 0, all angels are regarded  |
-| channel_enabled     | Boolean | | If the channel should be enabled  |
-| general_system_state  | Boolean | | If the general system state should be published  |
-| derived_settings      | Boolean | | If the derived settings should be published  |
-| measurement_data  | Boolean | | If the measurement data should be published  |
-| intrusion_data          | Boolean | | If the intrusion data should be published  |
-| application_io_data  | Boolean | | If the application IO data should be published  |
+| Parameter Name        | Type | Default |Required on startup | Information |
+| -------------                   |  ------|------- | ------------| ------------- |
+| sensor_ip                    | String | 192.168.1.11 | ✔ |Sensor IP address. Can be passed as an argument to the launch file. |
+| sensor_tcp_port          | Integer | 2122 | ✔ | Sensor TCP Port.  Can be passed as an argument to the launch file. |
+| host_ip                        |   String  | 192.168.1.9 | ✔ | Host IP address.  Can be passed as an argument to the launch file.  |
+| host_udp_port             | Integer | 6061 | ✔ | Host UDP Port.  Can be passed as an argument to the launch file.  |
+| laser_scan_frame_name  | String | laser_scan | | The frame name of the sensor message  |
+| publish_frequency    | Integer | 1 | | How many scans should be publised (1 means every scan, 2 every second scan, ... ) |
+| angle_start              | Double |  0.0| | Start angle of scan, if both start and end angle are set to 0, all angels are regarded  |
+| angle_end                | Double | 0.0 | | End angle of scan, if both start and end angle are set to 0, all angels are regarded  |
+| channel_enabled     | Boolean | true | | If the channel should be enabled  |
+| general_system_state  | Boolean | true | | If the general system state should be published  |
+| derived_settings      | Boolean | true | | If the derived settings should be published  |
+| measurement_data  | Boolean | true | | If the measurement data should be published  |
+| intrusion_data          | Boolean | true | | If the intrusion data should be published  |
+| application_io_data  | Boolean | true | | If the application IO data should be published  |
 
 ## Creators
 
