@@ -11,9 +11,28 @@ A ROS Driver which reads the raw data from the SICK Safetyscanners and publishes
 
 ## Supported Hardware
 
-| Device Name  | Type | Description |
-| ------------- | ------------- | ------------- |
-| microScan3 Pro | MICS3-CBAZ55ZA1  | Safety Laserscanner,  EFIPRO, Protective field range 5.5m, Scanning angle 275°  |
+| Product Family  | Product Type | Description |
+| ---------------------- | -------------------- | ------------- |
+| microScan3 Core | MICS3-ACAZ40PZ1 | Safety Laser Scanner, PROFINET PROFIsafe, Protective Field Range: 4 m |
+|  | MICS3-ACAZ55PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 5.5 m |
+|  | MICS3-ACAZ90PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 9 m |
+|  | MICS3-ABAZ40IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety,  Protective Field Range: 4 m |
+|  | MICS3-ABAZ55IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 5.5 m |
+|  | MICS3-ABAZ90IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 9 m |
+|  | MICS3-ABAZ40ZA1 | Safety Laser Scanner, EFI-pro,  Protective Field Range: 4 m |
+|  | MICS3-ABAZ55ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 5.5 m |
+|  | MICS3-ABAZ90ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 9 m |
+|  |  |  |
+| microScan3 Pro | MICS3-CBAZ40PZ1 | Safety Laser Scanner, PROFINET PROFIsafe, Protective Field Range: 4 m |
+|  | MICS3-CBAZ55PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 5.5 m |
+|  | MICS3-CBAZ90PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 9 m |
+|  | MICS3-CBAZ40IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety,  Protective Field Range: 4 m |
+|  | MICS3-CBAZ55IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 5.5 m |
+|  | MICS3-CBAZ90IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 9 m |
+|  | MICS3-CBAZ40ZA1 | Safety Laser Scanner, EFI-pro,  Protective Field Range: 4 m |
+|  | MICS3-CBAZ55ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 5.5 m |
+|  | MICS3-CBAZ90ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 9 m |
+|  |  |  |
 
 ## Getting started
 
@@ -32,7 +51,7 @@ In the following instructions, replace `<rosdistro>` with the name of your ROS d
 
 #### From Binaries
 
-The driver is released at longer intervals as a binary package. At the moment the initial release is still in progress. Once it is released it can be installed with the foloowing command:
+The driver is released at longer intervals as a binary package. At the moment the initial release is still in progress. Once it is released it can be installed with the following command:
 
 ~~`sudo apt-get install ros-<rosdistro>-sick_safetyscanners`~~
 
