@@ -68,7 +68,14 @@ void AsyncTCPClient::do_connect()
 {
   boost::mutex::scoped_lock lock(m_connect_mutex);
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec) {
-    ROS_ERROR("TCP error code: %i", ec.value());
+    if (ec != 0)
+    {
+      ROS_ERROR("TCP error code: %i", ec.value());
+    }
+    else
+    {
+      ROS_INFO("TCP connection successfully established.");
+    }
     m_connect_condition.notify_all();
   });
 
