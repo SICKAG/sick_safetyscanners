@@ -7,6 +7,8 @@
 
   <maintainer email="puck@fzi.de">Lennart Puck</maintainer>
 
+  <author>Lennart Puck</author>
+
   <license>ALv2</license>
 
   <depend>roscpp</depend>
