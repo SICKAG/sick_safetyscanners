@@ -49,9 +49,20 @@ bool ParseMeasurementCurrentConfigData::parseTCPSequence(const datastructure::Pa
                                                          datastructure::FieldData& field_data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
+  field_data.setStartAngle(readStartAngle(data_ptr));
+  field_data.setAngularBeamResolution(readAngularBeamResolution(data_ptr));
   return true;
 }
 
+uint32_t ParseMeasurementCurrentConfigData::readStartAngle(const uint8_t* data_ptr) const
+{
+  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 36);
+}
+
+uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(const uint8_t* data_ptr) const
+{
+  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 40);
+}
 
 } // namespace data_processing
 } // namespace sick

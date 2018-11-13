@@ -71,6 +71,8 @@ public:
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
+  uint32_t readStartAngle(const uint8_t* data_ptr) const;
+  uint32_t readAngularBeamResolution(const uint8_t* data_ptr) const;
 };
 
 } // namespace data_processing
