@@ -121,6 +121,11 @@ void SickSafetyscanners::changeCommSettingsinColaSession(
   m_session_ptr->executeCommand(command_ptr);
 
   sick::datastructure::FieldData field_data;
+
+  command_ptr = std::make_shared<sick::cola2::MeasurementCurrentConfigVariableCommand>(
+    boost::ref(*m_session_ptr), field_data);
+  m_session_ptr->executeCommand(command_ptr);
+
   command_ptr = std::make_shared<sick::cola2::FieldHeaderVariableCommand>(
     boost::ref(*m_session_ptr), field_data, 1);
   m_session_ptr->executeCommand(command_ptr);
