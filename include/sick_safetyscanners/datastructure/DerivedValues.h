@@ -40,10 +40,6 @@
 namespace sick {
 namespace datastructure {
 
-/*!
- * \brief Defined angle resolution to convert sensor input to the right frame
- */
-const double ANGLE_RESOLUTION = 4194304.0;
 
 /*!
  * \brief The DerivedValues class
@@ -144,6 +140,11 @@ public:
   void setIsEmpty(bool is_empty);
 
 private:
+  /*!
+   * \brief Defined angle resolution to convert sensor input to the right frame
+   */
+  const double ANGLE_RESOLUTION = 4194304.0;
+
   bool m_is_empty;
 
   uint16_t m_multiplication_factor;

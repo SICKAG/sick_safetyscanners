@@ -59,16 +59,6 @@ void FieldData::setIsWarningField(bool is_warning_field)
   m_is_warning_field = is_warning_field;
 }
 
-ScanPoint FieldData::getFieldGeometry() const
-{
-  return m_field_geometry;
-}
-
-void FieldData::setFieldGeometry(const ScanPoint& field_geometry)
-{
-  m_field_geometry = field_geometry;
-}
-
 bool FieldData::getIsProtectiveField() const
 {
   return m_is_protective_field;
@@ -89,6 +79,25 @@ void FieldData::setBeamDistances(const std::vector<uint16_t>& beam_distance)
   m_beam_distances = beam_distance;
 }
 
+float FieldData::getStartAngle() const
+{
+  return m_start_angle;
+}
+
+void FieldData::setStartAngle(const int32_t& start_angle)
+{
+  m_start_angle = (float)start_angle / ANGLE_RESOLUTION;
+}
+
+float FieldData::getAngularBeamResolution() const
+{
+  return m_angular_beam_resolution;
+}
+
+void FieldData::setAngularBeamResolution(const int32_t& angular_beam_resolution)
+{
+  m_angular_beam_resolution = (float)angular_beam_resolution / ANGLE_RESOLUTION;
+}
 
 } // namespace datastructure
 } // namespace sick
