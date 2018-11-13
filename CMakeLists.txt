@@ -101,6 +101,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/DeviceNameVariableCommand.cpp
   src/cola2/FieldGeometryVariableCommand.cpp
   src/cola2/FieldHeaderVariableCommand.cpp
+  src/cola2/MeasurementCurrentConfigVariableCommand.cpp
   src/cola2/MethodCommand.cpp
   src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
   src/cola2/TypeCodeVariableCommand.cpp
@@ -117,6 +118,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseFieldHeaderData.cpp
   src/data_processing/ParseGeneralSystemState.cpp
   src/data_processing/ParseIntrusionData.cpp
+  src/data_processing/ParseMeasurementCurrentConfigData.cpp
   src/data_processing/ParseMeasurementData.cpp
   src/data_processing/ParseTCPPacket.cpp
   src/data_processing/ParseTypeCodeData.cpp
