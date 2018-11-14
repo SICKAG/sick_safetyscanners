@@ -65,7 +65,7 @@ public:
    * \param field_data The field data reference which will be modified on execution.
    */
   MeasurementCurrentConfigVariableCommand(Cola2Session& session,
-                               datastructure::FieldData& field_data);
+                                          datastructure::FieldData& field_data);
 
   /*!
    * \brief Adds the data to the telegram.
@@ -92,7 +92,8 @@ public:
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
-  std::shared_ptr<sick::data_processing::ParseMeasurementCurrentConfigData> m_measurement_current_config_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseMeasurementCurrentConfigData>
+    m_measurement_current_config_parser_ptr;
 
   sick::datastructure::FieldData& m_field_data;
 };
