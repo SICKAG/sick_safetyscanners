@@ -1,0 +1,6 @@
+
+---
+
+sick_safetyscanners/FieldMsg[] fields
+string device_name
+int32 case_number
