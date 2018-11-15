@@ -60,6 +60,10 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     m_private_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
   m_raw_data_publisher =
     m_private_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
+  m_output_path_publisher =
+    m_private_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
+  m_field_service_server =
+    m_private_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
   readTypeCodeSettings();
 
@@ -567,6 +571,12 @@ SickSafetyscannersRos::createApplicationOutputsMessage(const sick::datastructure
 
 
   return msg;
+}
+
+bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request& req,
+                                         sick_safetyscanners::FieldData::Response& res)
+{
+  return true;
 }
 
 

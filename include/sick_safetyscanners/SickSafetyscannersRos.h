@@ -47,6 +47,8 @@
 
 // Package
 #include <sick_safetyscanners/ExtendedLaserScanMsg.h>
+#include <sick_safetyscanners/FieldData.h>
+#include <sick_safetyscanners/OutputPathsMsg.h>
 #include <sick_safetyscanners/RawMicroScanDataMsg.h>
 #include <sick_safetyscanners/SickSafetyscanners.h>
 #include <sick_safetyscanners/SickSafetyscannersConfigurationConfig.h>
@@ -112,6 +114,9 @@ private:
   ros::Publisher m_laser_scan_publisher;
   ros::Publisher m_extended_laser_scan_publisher;
   ros::Publisher m_raw_data_publisher;
+  ros::Publisher m_output_path_publisher;
+
+  ros::ServiceServer m_field_service_server;
 
   bool m_initialised;
 
@@ -173,6 +178,9 @@ private:
   sick_safetyscanners::ApplicationOutputsMsg
   createApplicationOutputsMessage(const sick::datastructure::Data& data);
   void readTypeCodeSettings();
+
+  bool getFieldData(sick_safetyscanners::FieldData::Request& req,
+                    sick_safetyscanners::FieldData::Response& res);
 };
 
 } // namespace sick
