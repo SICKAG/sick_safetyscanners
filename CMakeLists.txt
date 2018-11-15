@@ -35,12 +35,19 @@ add_message_files(
   DataHeaderMsg.msg
   DerivedValuesMsg.msg
   ExtendedLaserScanMsg.msg
+  FieldMsg.msg
   GeneralSystemStateMsg.msg
   IntrusionDataMsg.msg
   IntrusionDatumMsg.msg
   MeasurementDataMsg.msg
+  OutputPathsMsg.msg
   RawMicroScanDataMsg.msg
   ScanPointMsg.msg
+)
+
+add_service_files(
+  FILES
+  FieldData.srv
 )
 
 generate_messages(
