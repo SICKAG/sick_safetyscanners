@@ -156,6 +156,8 @@ private:
   sensor_msgs::LaserScan createLaserScanMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::ExtendedLaserScanMsg
   createExtendedLaserScanMessage(const sick::datastructure::Data& data);
+  sick_safetyscanners::OutputPathsMsg
+  createOutputPathsMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::RawMicroScanDataMsg
   createRawDataMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::DataHeaderMsg createDataHeaderMessage(const sick::datastructure::Data& data);

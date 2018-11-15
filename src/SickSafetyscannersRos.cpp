@@ -208,6 +208,9 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
     sick_safetyscanners::ExtendedLaserScanMsg extended_scan = createExtendedLaserScanMessage(data);
 
     m_extended_laser_scan_publisher.publish(extended_scan);
+
+    sick_safetyscanners::OutputPathsMsg output_paths = createOutputPathsMessage(data);
+    m_output_path_publisher.publish(output_paths);
   }
 
   sick_safetyscanners::RawMicroScanDataMsg raw_data = createRawDataMessage(data);
@@ -276,6 +279,27 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   }
 
   return scan;
+}
+
+sick_safetyscanners::OutputPathsMsg
+SickSafetyscannersRos::createOutputPathsMessage(const sick::datastructure::Data& data)
+{
+  sick_safetyscanners::OutputPathsMsg msg;
+
+  std::shared_ptr<sick::datastructure::ApplicationData> app_data = data.getApplicationDataPtr();
+  sick::datastructure::ApplicationOutputs outputs                = app_data->getOutputs();
+
+  std::vector<bool> eval_out         = outputs.getEvalOutVector();
+  std::vector<bool> eval_out_is_safe = outputs.getEvalOutIsSafeVector();
+  std::vector<bool> eval_out_valid   = outputs.getEvalOutIsValidVector();
+
+  for (size_t i = 0; i < eval_out.size(); i++)
+  {
+    msg.status.push_back(eval_out.at(i));
+    msg.is_safe.push_back(eval_out_is_safe.at(i));
+    msg.is_valid.push_back(eval_out_valid.at(i));
+  }
+  return msg;
 }
 
 sick_safetyscanners::RawMicroScanDataMsg
