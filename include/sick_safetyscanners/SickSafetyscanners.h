@@ -108,6 +108,15 @@ public:
   void requestTypeCode(const sick::datastructure::CommSettings& settings,
                        sick::datastructure::TypeCode& type_code);
 
+  /*!
+   * \brief Requests data of the protective and warning fields from the sensor.
+   *
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param field_data Returned field data.
+   */
+  void requestFieldData(const sick::datastructure::CommSettings& settings,
+                        sick::datastructure::FieldData& field_data);
+
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 
@@ -127,9 +136,10 @@ private:
   bool UDPClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   void startTCPConnection(const sick::datastructure::CommSettings& settings);
-  void changeCommSettingsinColaSession(const datastructure::CommSettings& settings);
+  void changeCommSettingsInColaSession(const datastructure::CommSettings& settings);
   void stopTCPConnection();
-  void requestTypeCodeinColaSession(sick::datastructure::TypeCode& type_code);
+  void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
+  void requestFieldDataInColaSession(sick::datastructure::FieldData& field_data);
 };
 
 } // namespace sick

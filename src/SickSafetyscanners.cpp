@@ -85,7 +85,7 @@ void SickSafetyscanners::changeSensorSettings(const datastructure::CommSettings&
 {
   startTCPConnection(settings);
 
-  changeCommSettingsinColaSession(settings);
+  changeCommSettingsInColaSession(settings);
 
   stopTCPConnection();
 }
@@ -95,7 +95,17 @@ void SickSafetyscanners::requestTypeCode(const datastructure::CommSettings& sett
 {
   startTCPConnection(settings);
 
-  requestTypeCodeinColaSession(type_code);
+  requestTypeCodeInColaSession(type_code);
+
+  stopTCPConnection();
+}
+
+void SickSafetyscanners::requestFieldData(const datastructure::CommSettings& settings,
+                                          sick::datastructure::FieldData& field_data)
+{
+  startTCPConnection(settings);
+
+  requestFieldDataInColaSession(field_data);
 
   stopTCPConnection();
 }
@@ -112,7 +122,7 @@ void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSetti
   m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 }
 
-void SickSafetyscanners::changeCommSettingsinColaSession(
+void SickSafetyscanners::changeCommSettingsInColaSession(
   const datastructure::CommSettings& settings)
 {
   m_session_ptr->open();
@@ -120,10 +130,16 @@ void SickSafetyscanners::changeCommSettingsinColaSession(
     std::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr), settings);
   m_session_ptr->executeCommand(command_ptr);
 
-  sick::datastructure::FieldData field_data;
+  m_session_ptr->close();
+}
 
-  command_ptr = std::make_shared<sick::cola2::MeasurementCurrentConfigVariableCommand>(
-    boost::ref(*m_session_ptr), field_data);
+void SickSafetyscanners::requestFieldDataInColaSession(sick::datastructure::FieldData& field_data)
+{
+  m_session_ptr->open();
+
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::MeasurementCurrentConfigVariableCommand>(
+      boost::ref(*m_session_ptr), field_data);
   m_session_ptr->executeCommand(command_ptr);
 
   command_ptr = std::make_shared<sick::cola2::FieldHeaderVariableCommand>(
@@ -143,11 +159,9 @@ void SickSafetyscanners::changeCommSettingsinColaSession(
   m_session_ptr->executeCommand(command_ptr);
 
   ROS_INFO("Device name: %s", m_device_name.c_str());
-
-  m_session_ptr->close();
 }
 
-void SickSafetyscanners::requestTypeCodeinColaSession(sick::datastructure::TypeCode& type_code)
+void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code)
 {
   m_session_ptr->open();
   sick::cola2::Cola2Session::CommandPtr command_ptr =
