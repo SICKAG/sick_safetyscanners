@@ -600,6 +600,9 @@ SickSafetyscannersRos::createApplicationOutputsMessage(const sick::datastructure
 bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request& req,
                                          sick_safetyscanners::FieldData::Response& res)
 {
+   sick::datastructure::FieldData field_data;
+   m_device->requestFieldData(m_communication_settings, field_data);
+
   return true;
 }
 

@@ -53,6 +53,7 @@
 #include <sick_safetyscanners/SickSafetyscanners.h>
 #include <sick_safetyscanners/SickSafetyscannersConfigurationConfig.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
+#include <sick_safetyscanners/datastructure/FieldData.h>
 
 #include <dynamic_reconfigure/server.h>
 
