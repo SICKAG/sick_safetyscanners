@@ -101,7 +101,7 @@ void SickSafetyscanners::requestTypeCode(const datastructure::CommSettings& sett
 }
 
 void SickSafetyscanners::requestFieldData(const datastructure::CommSettings& settings,
-                                          sick::datastructure::FieldData& field_data)
+                                          std::vector<sick::datastructure::FieldData>& field_data)
 {
   startTCPConnection(settings);
 
@@ -133,30 +133,43 @@ void SickSafetyscanners::changeCommSettingsInColaSession(
   m_session_ptr->close();
 }
 
-void SickSafetyscanners::requestFieldDataInColaSession(sick::datastructure::FieldData& field_data)
+void SickSafetyscanners::requestFieldDataInColaSession(
+  std::vector<sick::datastructure::FieldData>& fields)
 {
   m_session_ptr->open();
 
+  sick::datastructure::FieldData common_field_data;
+
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::MeasurementCurrentConfigVariableCommand>(
-      boost::ref(*m_session_ptr), field_data);
-  m_session_ptr->executeCommand(command_ptr);
-
-  command_ptr = std::make_shared<sick::cola2::FieldHeaderVariableCommand>(
-    boost::ref(*m_session_ptr), field_data, 1);
-  m_session_ptr->executeCommand(command_ptr);
-
-  command_ptr = std::make_shared<sick::cola2::FieldGeometryVariableCommand>(
-    boost::ref(*m_session_ptr), field_data, 1);
+      boost::ref(*m_session_ptr), common_field_data);
   m_session_ptr->executeCommand(command_ptr);
 
   command_ptr = std::make_shared<sick::cola2::MonitoringCaseTableHeaderVariableCommand>(
-    boost::ref(*m_session_ptr), field_data);
+    boost::ref(*m_session_ptr), common_field_data);
   m_session_ptr->executeCommand(command_ptr);
 
   command_ptr = std::make_shared<sick::cola2::DeviceNameVariableCommand>(boost::ref(*m_session_ptr),
                                                                          m_device_name);
   m_session_ptr->executeCommand(command_ptr);
+
+  for (int i = 0; i < 128; i++)
+  {
+    sick::datastructure::FieldData field_data;
+
+    command_ptr = std::make_shared<sick::cola2::FieldHeaderVariableCommand>(
+      boost::ref(*m_session_ptr), field_data, i);
+    m_session_ptr->executeCommand(command_ptr);
+
+    command_ptr = std::make_shared<sick::cola2::FieldGeometryVariableCommand>(
+      boost::ref(*m_session_ptr), field_data, i);
+    m_session_ptr->executeCommand(command_ptr);
+
+    field_data.setStartAngleDegrees(common_field_data.getStartAngle());
+    field_data.setAngularBeamResolutionDegrees(common_field_data.getAngularBeamResolution());
+
+    fields.push_back(field_data);
+  }
 
   ROS_INFO("Device name: %s", m_device_name.c_str());
 }

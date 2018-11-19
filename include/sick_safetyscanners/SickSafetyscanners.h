@@ -43,6 +43,7 @@
 
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include <sick_safetyscanners/communication/AsyncTCPClient.h>
 #include <sick_safetyscanners/communication/AsyncUDPClient.h>
@@ -115,7 +116,7 @@ public:
    * \param field_data Returned field data.
    */
   void requestFieldData(const sick::datastructure::CommSettings& settings,
-                        sick::datastructure::FieldData& field_data);
+                        std::vector<sick::datastructure::FieldData>& field_data);
 
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
@@ -139,7 +140,7 @@ private:
   void changeCommSettingsInColaSession(const datastructure::CommSettings& settings);
   void stopTCPConnection();
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
-  void requestFieldDataInColaSession(sick::datastructure::FieldData& field_data);
+  void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
 };
 
 } // namespace sick
