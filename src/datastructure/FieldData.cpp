@@ -39,6 +39,16 @@ namespace datastructure {
 
 FieldData::FieldData() {}
 
+bool FieldData::getIsValid() const
+{
+  return m_is_valid;
+}
+
+void FieldData::setIsValid(bool is_valid)
+{
+  m_is_valid = is_valid;
+}
+
 uint16_t FieldData::getFieldSetIndex() const
 {
   return m_field_set_index;

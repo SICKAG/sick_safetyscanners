@@ -49,8 +49,26 @@ bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& b
                                             datastructure::FieldData& field_data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  setFieldType(data_ptr, field_data);
+  bool valid = isValid(data_ptr);
+  field_data.setIsValid(valid);
+
+  if (valid)
+  {
+    setFieldType(data_ptr, field_data);
+  }
   return true;
+}
+
+bool ParseFieldHeaderData::isValid(const uint8_t*& data_ptr) const
+{
+  bool res     = false;
+  uint8_t byte = m_reader_ptr->readuint8_t(data_ptr, 0);
+  if (byte == 'R' || byte == 'Y')
+  {
+    res = true;
+  }
+
+  return res;
 }
 
 void ParseFieldHeaderData::setFieldType(const uint8_t*& data_ptr,

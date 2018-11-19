@@ -54,6 +54,20 @@ public:
   FieldData();
 
   /*!
+   * \brief Returns if the received field data is valid.
+   *
+   * \returns If the received field data is valid.
+   */
+  bool getIsValid() const;
+
+  /*!
+   * \brief Sets if the field data is valid.
+   *
+   * \param is_valid if the field data is valid.
+   */
+  void setIsValid(bool is_valid);
+
+  /*!
    * \brief Returns the index of the field set the field belongs to.
    *
    * \returns The index of the field set the field belongs to.
@@ -152,6 +166,7 @@ private:
    */
   const double ANGLE_RESOLUTION = 4194304.0;
 
+  bool m_is_valid;
   uint16_t m_field_set_index;
   bool m_is_warning_field;
   bool m_is_protective_field;

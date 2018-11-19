@@ -161,14 +161,17 @@ void SickSafetyscanners::requestFieldDataInColaSession(
       boost::ref(*m_session_ptr), field_data, i);
     m_session_ptr->executeCommand(command_ptr);
 
-    command_ptr = std::make_shared<sick::cola2::FieldGeometryVariableCommand>(
-      boost::ref(*m_session_ptr), field_data, i);
-    m_session_ptr->executeCommand(command_ptr);
+    if (field_data.getIsValid())
+    {
+      command_ptr = std::make_shared<sick::cola2::FieldGeometryVariableCommand>(
+        boost::ref(*m_session_ptr), field_data, i);
+      m_session_ptr->executeCommand(command_ptr);
 
-    field_data.setStartAngleDegrees(common_field_data.getStartAngle());
-    field_data.setAngularBeamResolutionDegrees(common_field_data.getAngularBeamResolution());
+      field_data.setStartAngleDegrees(common_field_data.getStartAngle());
+      field_data.setAngularBeamResolutionDegrees(common_field_data.getAngularBeamResolution());
 
-    fields.push_back(field_data);
+      fields.push_back(field_data);
+    }
   }
 
   ROS_INFO("Device name: %s", m_device_name.c_str());
