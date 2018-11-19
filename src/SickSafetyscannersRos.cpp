@@ -600,8 +600,26 @@ SickSafetyscannersRos::createApplicationOutputsMessage(const sick::datastructure
 bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request& req,
                                          sick_safetyscanners::FieldData::Response& res)
 {
-  std::vector<sick::datastructure::FieldData> field_data;
-  m_device->requestFieldData(m_communication_settings, field_data);
+  std::vector<sick::datastructure::FieldData> fields;
+  m_device->requestFieldData(m_communication_settings, fields);
+
+  for (size_t i = 0; i < fields.size(); i++)
+  {
+    sick::datastructure::FieldData field = fields.at(i);
+    sick_safetyscanners::FieldMsg field_msg;
+
+    field_msg.start_angle        = field.getStartAngle();
+    field_msg.angular_resolution = field.getAngularBeamResolution();
+    field_msg.protective_field   = field.getIsProtectiveField();
+
+    std::vector<uint16_t> ranges = field.getBeamDistances();
+    for (size_t j = 0; j < ranges.size(); j++)
+    {
+      field_msg.ranges.push_back(static_cast<float>(ranges.at(j)) * 1e-3);
+    }
+
+    res.fields.push_back(field_msg);
+  }
 
   return true;
 }

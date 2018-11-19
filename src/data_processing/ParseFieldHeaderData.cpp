@@ -55,6 +55,8 @@ bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& b
   if (valid)
   {
     setFieldType(data_ptr, field_data);
+    uint16_t set_index = readSetIndex(data_ptr);
+    field_data.setFieldSetIndex(set_index);
   }
   return true;
 }
