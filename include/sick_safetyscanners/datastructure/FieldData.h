@@ -122,6 +122,13 @@ public:
   void setStartAngle(const int32_t& start_angle);
 
   /*!
+   * \brief Set the start angle of the scan from degrees.
+   * \param start_angle Start angle of the scan in degrees.
+   */
+  void setStartAngleDegrees(const float& start_angle);
+
+
+  /*!
    * \brief Returns the angular resolution between the beams.
    * \return Angular resolution between beams.
    */
@@ -132,6 +139,12 @@ public:
    * \param angular_beam_resolution The angular resolution between two beams.
    */
   void setAngularBeamResolution(const int32_t& angular_beam_resolution);
+
+  /*!
+   * \brief Set the angular resolution between beams from degrees.
+   * \param angular_beam_resolution The angular resolution between two beams in degrees.
+   */
+  void setAngularBeamResolutionDegrees(const float& angular_beam_resolution);
 
 private:
   /*!

@@ -89,6 +89,11 @@ void FieldData::setStartAngle(const int32_t& start_angle)
   m_start_angle = (float)start_angle / ANGLE_RESOLUTION;
 }
 
+void FieldData::setStartAngleDegrees(const float& start_angle)
+{
+  m_start_angle = start_angle;
+}
+
 float FieldData::getAngularBeamResolution() const
 {
   return m_angular_beam_resolution;
@@ -97,6 +102,11 @@ float FieldData::getAngularBeamResolution() const
 void FieldData::setAngularBeamResolution(const int32_t& angular_beam_resolution)
 {
   m_angular_beam_resolution = (float)angular_beam_resolution / ANGLE_RESOLUTION;
+}
+
+void FieldData::setAngularBeamResolutionDegrees(const float& angular_beam_resolution)
+{
+  m_angular_beam_resolution = angular_beam_resolution;
 }
 
 } // namespace datastructure
