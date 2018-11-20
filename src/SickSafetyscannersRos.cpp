@@ -621,6 +621,10 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
     res.fields.push_back(field_msg);
   }
 
+  std::string device_name;
+  m_device->requestDeviceName(m_communication_settings, device_name);
+  res.device_name = device_name;
+
   return true;
 }
 

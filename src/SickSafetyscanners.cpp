@@ -110,6 +110,18 @@ void SickSafetyscanners::requestFieldData(const datastructure::CommSettings& set
   stopTCPConnection();
 }
 
+
+void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& settings,
+                                           std::string& device_name)
+{
+  startTCPConnection(settings);
+
+  requestDeviceNameInColaSession(device_name);
+
+  stopTCPConnection();
+}
+
+
 void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSettings& settings)
 {
   std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client =
@@ -149,10 +161,6 @@ void SickSafetyscanners::requestFieldDataInColaSession(
     boost::ref(*m_session_ptr), common_field_data);
   m_session_ptr->executeCommand(command_ptr);
 
-  command_ptr = std::make_shared<sick::cola2::DeviceNameVariableCommand>(boost::ref(*m_session_ptr),
-                                                                         m_device_name);
-  m_session_ptr->executeCommand(command_ptr);
-
   for (int i = 0; i < 128; i++)
   {
     sick::datastructure::FieldData field_data;
@@ -174,7 +182,19 @@ void SickSafetyscanners::requestFieldDataInColaSession(
     }
   }
 
-  ROS_INFO("Device name: %s", m_device_name.c_str());
+  m_session_ptr->close();
+}
+
+void SickSafetyscanners::requestDeviceNameInColaSession(std::string& device_name)
+{
+  m_session_ptr->open();
+
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::DeviceNameVariableCommand>(boost::ref(*m_session_ptr),
+                                                             device_name);
+  m_session_ptr->executeCommand(command_ptr);
+  ROS_INFO("Device name: %s", device_name.c_str());
+  m_session_ptr->close();
 }
 
 void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code)

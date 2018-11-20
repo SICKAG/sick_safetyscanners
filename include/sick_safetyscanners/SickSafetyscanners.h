@@ -118,6 +118,15 @@ public:
   void requestFieldData(const sick::datastructure::CommSettings& settings,
                         std::vector<sick::datastructure::FieldData>& field_data);
 
+  /*!
+   * \brief Requests the name of the device from the sensor.
+   *
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param device_name Returned device name.
+   */
+  void requestDeviceName(const sick::datastructure::CommSettings& settings,
+                         std::string& device_name);
+
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 
@@ -141,6 +150,7 @@ private:
   void stopTCPConnection();
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
+  void requestDeviceNameInColaSession(std::string& device_name);
 };
 
 } // namespace sick
