@@ -123,7 +123,7 @@ private:
 
   boost::condition m_connect_condition;
   boost::mutex m_connect_mutex;
-
+  boost::mutex m_socket_mutex;
 
   void start_receive();
   void handle_receive(const boost::system::error_code& error, const std::size_t& bytes_transferred);

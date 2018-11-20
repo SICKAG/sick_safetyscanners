@@ -61,12 +61,14 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
 
 AsyncTCPClient::~AsyncTCPClient()
 {
+  boost::mutex::scoped_lock lock(m_socket_mutex);
   m_socket_ptr->close();
 }
 
 void AsyncTCPClient::do_connect()
 {
-  boost::mutex::scoped_lock lock(m_connect_mutex);
+  boost::mutex::scoped_lock lock(m_socket_mutex);
+  boost::mutex::scoped_lock lock_connect(m_connect_mutex);
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec) {
     if (ec != 0)
     {
@@ -79,13 +81,14 @@ void AsyncTCPClient::do_connect()
     m_connect_condition.notify_all();
   });
 
-  m_connect_condition.wait(lock);
+  m_connect_condition.wait(lock_connect);
 }
 
 
 void AsyncTCPClient::doSendAndReceive(
   const sick::datastructure::PacketBuffer::VectorBuffer& sendBuffer)
 {
+  boost::mutex::scoped_lock lock(m_socket_mutex);
   if (!m_socket_ptr)
   {
     return;
@@ -99,6 +102,7 @@ void AsyncTCPClient::doSendAndReceive(
 
 void AsyncTCPClient::initiateReceive()
 {
+  boost::mutex::scoped_lock lock(m_socket_mutex);
   if (!m_socket_ptr)
   {
     return;
