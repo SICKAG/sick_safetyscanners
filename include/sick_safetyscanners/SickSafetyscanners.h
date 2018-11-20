@@ -127,6 +127,14 @@ public:
   void requestDeviceName(const sick::datastructure::CommSettings& settings,
                          std::string& device_name);
 
+
+  /*!
+   * \brief Returns the current active case number.
+   *
+   * \returns The current active case number.
+   */
+  int getActiveCaseNumber() const;
+
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 
@@ -141,6 +149,7 @@ private:
   std::shared_ptr<sick::data_processing::UDPPacketMerger> m_packet_merger_ptr;
 
   std::string m_device_name;
+  int m_active_case_number;
 
   void processUDPPacket(const datastructure::PacketBuffer& buffer);
   bool UDPClientThread();
