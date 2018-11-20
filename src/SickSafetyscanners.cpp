@@ -132,24 +132,21 @@ void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSetti
       settings.getSensorTcpPort());
   async_tcp_client->do_connect();
   m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
+
+  m_session_ptr->open();
 }
 
 void SickSafetyscanners::changeCommSettingsInColaSession(
   const datastructure::CommSettings& settings)
 {
-  m_session_ptr->open();
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::ChangeCommSettingsCommand>(boost::ref(*m_session_ptr), settings);
   m_session_ptr->executeCommand(command_ptr);
-
-  m_session_ptr->close();
 }
 
 void SickSafetyscanners::requestFieldDataInColaSession(
   std::vector<sick::datastructure::FieldData>& fields)
 {
-  m_session_ptr->open();
-
   sick::datastructure::FieldData common_field_data;
 
   sick::cola2::Cola2Session::CommandPtr command_ptr =
@@ -181,34 +178,27 @@ void SickSafetyscanners::requestFieldDataInColaSession(
       fields.push_back(field_data);
     }
   }
-
-  m_session_ptr->close();
 }
 
 void SickSafetyscanners::requestDeviceNameInColaSession(std::string& device_name)
 {
-  m_session_ptr->open();
-
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::DeviceNameVariableCommand>(boost::ref(*m_session_ptr),
                                                              device_name);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Device name: %s", device_name.c_str());
-  m_session_ptr->close();
 }
 
 void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code)
 {
-  m_session_ptr->open();
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::TypeCodeVariableCommand>(boost::ref(*m_session_ptr), type_code);
   m_session_ptr->executeCommand(command_ptr);
-
-  m_session_ptr->close();
 }
 
 void SickSafetyscanners::stopTCPConnection()
 {
+  m_session_ptr->close();
   m_session_ptr.reset();
 }
 
