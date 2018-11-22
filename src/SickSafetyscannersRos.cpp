@@ -636,8 +636,8 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
     sick::datastructure::FieldData field = fields.at(i);
     sick_safetyscanners::FieldMsg field_msg;
 
-    field_msg.start_angle        = field.getStartAngle();
-    field_msg.angular_resolution = field.getAngularBeamResolution();
+    field_msg.start_angle        = degToRad(field.getStartAngle());
+    field_msg.angular_resolution = degToRad(field.getAngularBeamResolution());
     field_msg.protective_field   = field.getIsProtectiveField();
 
     std::vector<uint16_t> ranges = field.getBeamDistances();
