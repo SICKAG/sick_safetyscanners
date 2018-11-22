@@ -231,13 +231,41 @@ SickSafetyscannersRos::createExtendedLaserScanMessage(const sick::datastructure:
 
   msg.reflektor_status.resize(num_scan_points);
   msg.intrusion.resize(num_scan_points);
+  msg.reflektor_median.resize(num_scan_points);
+  std::vector<bool> medians = getMedianReflectors(scan_points);
   for (uint16_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     msg.reflektor_status[i]                         = scan_point.getReflectorBit();
     msg.intrusion[i]                                = scan_point.getContaminationBit();
+    msg.reflektor_median[i]                         = medians.at(i);
   }
   return msg;
+}
+
+std::vector<bool> SickSafetyscannersRos::getMedianReflectors(
+  const std::vector<sick::datastructure::ScanPoint> scan_points)
+{
+  std::vector<bool> res;
+  res.resize(scan_points.size());
+  bool last = false;
+  int start = -1;
+  for (size_t i = 0; i < scan_points.size(); i++)
+  {
+    res.at(i) = false;
+    if (!last && scan_points.at(i).getReflectorBit())
+    {
+      last  = true;
+      start = i;
+    }
+    else if (last && (!scan_points.at(i).getReflectorBit() || i == scan_points.size() - 1))
+    {
+      last                              = false;
+      res.at(start + ((i - start) / 2)) = true;
+    }
+  }
+
+  return res;
 }
 
 sensor_msgs::LaserScan

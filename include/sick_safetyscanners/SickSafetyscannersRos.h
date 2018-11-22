@@ -157,6 +157,8 @@ private:
   sensor_msgs::LaserScan createLaserScanMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::ExtendedLaserScanMsg
   createExtendedLaserScanMessage(const sick::datastructure::Data& data);
+  std::vector<bool>
+  getMedianReflectors(const std::vector<sick::datastructure::ScanPoint> scan_points);
   sick_safetyscanners::OutputPathsMsg
   createOutputPathsMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::RawMicroScanDataMsg
