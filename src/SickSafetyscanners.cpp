@@ -204,7 +204,6 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
 void SickSafetyscanners::stopTCPConnection()
 {
   m_session_ptr->close();
-  sleep(5); //@TODO Quick fix for arm boards, wait for proper close needed!
   m_session_ptr.reset();
 }
 

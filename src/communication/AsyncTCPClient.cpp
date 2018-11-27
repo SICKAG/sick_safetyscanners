@@ -62,7 +62,26 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
 AsyncTCPClient::~AsyncTCPClient()
 {
   boost::mutex::scoped_lock lock(m_socket_mutex);
-  m_socket_ptr->close();
+  boost::system::error_code ec;
+  m_socket_ptr->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
+  if (ec != 0)
+  {
+    ROS_ERROR("Error shutting socket down: %i", ec.value());
+  }
+  else
+  {
+    ROS_INFO("TCP Connection successfully shutdown");
+  }
+
+  m_socket_ptr->close(ec);
+  if (ec != 0)
+  {
+    ROS_ERROR("Error closing Socket: %i", ec.value());
+  }
+  else
+  {
+    ROS_INFO("TCP Socket successfully closed.");
+  }
 }
 
 void AsyncTCPClient::do_connect()
