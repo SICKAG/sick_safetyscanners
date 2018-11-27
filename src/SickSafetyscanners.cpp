@@ -226,13 +226,11 @@ void SickSafetyscanners::processUDPPacket(const sick::datastructure::PacketBuffe
     {
       std::vector<uint16_t> monitoring_case_numbers =
         data.getApplicationDataPtr()->getOutputs().getMonitoringCaseVector();
-      for (size_t i = 0; i < monitoring_case_numbers.size(); i++)
+      std::vector<bool> monitoring_case_number_flags =
+        data.getApplicationDataPtr()->getOutputs().getMonitoringCaseFlagsVector();
+      if (monitoring_case_number_flags.at(0))
       {
-        if (monitoring_case_numbers.at(i))
-        {
-          m_active_case_number = i;
-          break;
-        }
+        m_active_case_number = monitoring_case_numbers.at(0);
       }
     }
 
