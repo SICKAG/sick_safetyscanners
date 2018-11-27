@@ -182,6 +182,10 @@ void SickSafetyscanners::requestFieldDataInColaSession(
 
       fields.push_back(field_data);
     }
+    else if (i > 0) // index 0 is reserved for contour data
+    {
+      break; // skip other requests after first try
+    }
   }
 }
 
