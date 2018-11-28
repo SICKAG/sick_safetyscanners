@@ -59,10 +59,7 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
   ROS_INFO("TCP client is setup");
 }
 
-AsyncTCPClient::~AsyncTCPClient()
-{
-
-}
+AsyncTCPClient::~AsyncTCPClient() {}
 
 void AsyncTCPClient::doDisconnect()
 {
