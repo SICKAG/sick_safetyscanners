@@ -63,8 +63,7 @@ public:
    *
    * TODO
    */
-  MonitoringCaseVariableCommand(Cola2Session& session,
-                                           datastructure::FieldData& field_data);
+  MonitoringCaseVariableCommand(Cola2Session& session, datastructure::FieldData& field_data);
 
   /*!
    * \brief Adds the data to the telegram.
