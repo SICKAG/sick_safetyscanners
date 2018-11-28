@@ -111,6 +111,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/MeasurementCurrentConfigVariableCommand.cpp
   src/cola2/MethodCommand.cpp
   src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
+  src/cola2/MonitoringCaseVariableCommand.cpp
   src/cola2/TypeCodeVariableCommand.cpp
   src/cola2/VariableCommand.cpp
   src/communication/AsyncTCPClient.cpp
