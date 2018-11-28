@@ -61,6 +61,11 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
 
 AsyncTCPClient::~AsyncTCPClient()
 {
+
+}
+
+void AsyncTCPClient::doDisconnect()
+{
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::system::error_code ec;
   m_socket_ptr->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);

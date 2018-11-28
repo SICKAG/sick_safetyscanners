@@ -92,6 +92,11 @@ public:
   void do_connect();
 
   /*!
+   * \brief Disconnects the host from the sensor
+   */
+  void doDisconnect();
+
+  /*!
    * \brief Start a cycle of sensing a command and waiting got the return.
    *
    * \param sendBuffer The telegram which will be sent to the server.

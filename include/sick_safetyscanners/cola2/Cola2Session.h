@@ -85,6 +85,12 @@ public:
    */
   explicit Cola2Session(const std::shared_ptr<communication::AsyncTCPClient>& async_tcp_client);
 
+
+  /*!
+   * \brief Triggers the disconnection of the tcp socket.
+   */
+  void doDisconnect();
+
   /*!
    * \brief Executes the command passed to the function.
    *

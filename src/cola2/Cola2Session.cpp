@@ -59,6 +59,11 @@ bool Cola2Session::close()
   return executeCommand(command_ptr);
 }
 
+void Cola2Session::doDisconnect()
+{
+  m_async_tcp_client_ptr->doDisconnect();
+}
+
 bool Cola2Session::executeCommand(const CommandPtr& command)
 {
   addCommand(command->getRequestID(), command);

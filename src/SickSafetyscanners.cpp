@@ -210,6 +210,7 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
 void SickSafetyscanners::stopTCPConnection()
 {
   m_session_ptr->close();
+  m_session_ptr->doDisconnect();
 }
 
 
