@@ -136,6 +136,8 @@ void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSetti
       settings.getSensorIp(),
       settings.getSensorTcpPort());
   async_tcp_client->do_connect();
+
+  m_session_ptr.reset();
   m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
 
   m_session_ptr->open();
@@ -208,7 +210,6 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
 void SickSafetyscanners::stopTCPConnection()
 {
   m_session_ptr->close();
-  m_session_ptr.reset();
 }
 
 
