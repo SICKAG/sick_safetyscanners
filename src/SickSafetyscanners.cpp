@@ -62,7 +62,7 @@ bool SickSafetyscanners::run()
   m_udp_client_thread_ptr.reset(
     new boost::thread(boost::bind(&SickSafetyscanners::UDPClientThread, this)));
 
-  m_async_udp_client_ptr->run_service();
+  m_async_udp_client_ptr->runService();
   return true;
 }
 
@@ -135,7 +135,7 @@ void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSetti
       boost::ref(*m_io_service_ptr),
       settings.getSensorIp(),
       settings.getSensorTcpPort());
-  async_tcp_client->do_connect();
+  async_tcp_client->doConnect();
 
   m_session_ptr.reset();
   m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);

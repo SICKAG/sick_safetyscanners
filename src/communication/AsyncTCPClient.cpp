@@ -59,10 +59,7 @@ AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
   ROS_INFO("TCP client is setup");
 }
 
-AsyncTCPClient::~AsyncTCPClient()
-{
-
-}
+AsyncTCPClient::~AsyncTCPClient() {}
 
 void AsyncTCPClient::doDisconnect()
 {
@@ -89,7 +86,7 @@ void AsyncTCPClient::doDisconnect()
   }
 }
 
-void AsyncTCPClient::do_connect()
+void AsyncTCPClient::doConnect()
 {
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::mutex::scoped_lock lock_connect(m_connect_mutex);
@@ -133,7 +130,7 @@ void AsyncTCPClient::initiateReceive()
   }
   m_socket_ptr->async_read_some(boost::asio::buffer(m_recv_buffer),
                                 [this](boost::system::error_code ec, std::size_t bytes_recvd) {
-                                  this->handle_receive(ec, bytes_recvd);
+                                  this->handleReceive(ec, bytes_recvd);
                                 });
 }
 
@@ -157,10 +154,10 @@ void AsyncTCPClient::handleSendAndReceive(const boost::system::error_code& error
 }
 
 
-void AsyncTCPClient::start_receive() {}
+void AsyncTCPClient::startReceive() {}
 
-void AsyncTCPClient::handle_receive(const boost::system::error_code& error,
-                                    const std::size_t& bytes_transferred)
+void AsyncTCPClient::handleReceive(const boost::system::error_code& error,
+                                   const std::size_t& bytes_transferred)
 {
   if (!error)
   {
