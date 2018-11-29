@@ -69,7 +69,6 @@ bool MonitoringCaseVariableCommand::processReply()
   {
     return false;
   }
-
   m_monitoring_case_parser_ptr->parseTCPSequence(getDataVector(), m_monitoring_case_data);
   return true;
 }

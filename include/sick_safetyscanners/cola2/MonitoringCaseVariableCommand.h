@@ -94,7 +94,7 @@ private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
   std::shared_ptr<sick::data_processing::ParseMonitoringCaseData> m_monitoring_case_parser_ptr;
 
-  sick::datastructure::MonitoringCaseData m_monitoring_case_data;
+  sick::datastructure::MonitoringCaseData& m_monitoring_case_data;
 };
 
 } // namespace cola2

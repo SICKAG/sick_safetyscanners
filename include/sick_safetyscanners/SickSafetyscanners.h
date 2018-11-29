@@ -59,6 +59,7 @@
 #include <sick_safetyscanners/cola2/FieldHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementCurrentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
+#include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
 
 namespace sick {

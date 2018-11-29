@@ -186,7 +186,23 @@ void SickSafetyscanners::requestFieldDataInColaSession(
     }
     else if (i > 0) // index 0 is reserved for contour data
     {
-      break; // skip other requests after first try
+      break; // skip other requests after first invalid
+    }
+  }
+
+  for (int i = 0; i < 254; i++)
+  {
+    sick::datastructure::MonitoringCaseData monitoring_case_data;
+
+    command_ptr = std::make_shared<sick::cola2::MonitoringCaseVariableCommand>(
+      boost::ref(*m_session_ptr), monitoring_case_data, i);
+    m_session_ptr->executeCommand(command_ptr);
+    if (monitoring_case_data.getIsValid())
+    {
+    }
+    else
+    {
+      break; // skip other requests after first invalid
     }
   }
 }
