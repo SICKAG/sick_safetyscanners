@@ -50,10 +50,23 @@ bool ParseMonitoringCaseData::parseTCPSequence(
   sick::datastructure::MonitoringCaseData& monitoring_case_data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
+  bool valid = isValid(data_ptr);
+  monitoring_case_data.setIsValid(valid);
 
   return true;
 }
 
+bool ParseMonitoringCaseData::isValid(const uint8_t*& data_ptr) const
+{
+  bool res     = false;
+  uint8_t byte = m_reader_ptr->readuint8_t(data_ptr, 0);
+  if (byte == 'R' || byte == 'Y')
+  {
+    res = true;
+  }
+
+  return res;
+}
 
 } // namespace data_processing
 } // namespace sick

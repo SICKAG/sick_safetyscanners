@@ -72,6 +72,7 @@ public:
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  bool isValid(const uint8_t*& data_ptr) const;
 };
 
 } // namespace data_processing
