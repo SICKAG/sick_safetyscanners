@@ -52,7 +52,6 @@ bool ParseMonitoringCaseData::parseTCPSequence(
   const uint8_t* data_ptr(buffer.getBuffer().data());
   bool valid = isValid(data_ptr);
   monitoring_case_data.setIsValid(valid);
-
   return true;
 }
 
@@ -64,8 +63,12 @@ bool ParseMonitoringCaseData::isValid(const uint8_t*& data_ptr) const
   {
     res = true;
   }
-
   return res;
+}
+
+uint16_t ParseMonitoringCaseData::readMonitoringCaseNumber(const uint8_t*& data_ptr) const
+{
+  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 6);
 }
 
 } // namespace data_processing
