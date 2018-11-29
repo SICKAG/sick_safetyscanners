@@ -41,12 +41,15 @@ namespace sick {
 namespace cola2 {
 
 
-MonitoringCaseVariableCommand::MonitoringCaseVariableCommand(Cola2Session& session,
-                                                             datastructure::FieldData& field_data)
-  : VariableCommand(session, 2100)
+MonitoringCaseVariableCommand::MonitoringCaseVariableCommand(
+  Cola2Session& session,
+  datastructure::MonitoringCaseData& monitoring_case_data,
+  const uint16_t index)
+  : VariableCommand(session, 2101 + index)
+  , m_monitoring_case_data(monitoring_case_data)
 {
-  m_writer_ptr              = std::make_shared<sick::data_processing::ReadWriteHelper>();
-  m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
+  m_writer_ptr                 = std::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_monitoring_case_parser_ptr = std::make_shared<sick::data_processing::ParseMonitoringCaseData>();
 }
 
 void MonitoringCaseVariableCommand::addTelegramData(
@@ -67,7 +70,7 @@ bool MonitoringCaseVariableCommand::processReply()
     return false;
   }
 
-  // m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
+  m_monitoring_case_parser_ptr->parseTCPSequence(getDataVector(), m_monitoring_case_data);
   return true;
 }
 

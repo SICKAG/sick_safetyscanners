@@ -37,7 +37,7 @@
 
 
 #include <sick_safetyscanners/cola2/VariableCommand.h>
-#include <sick_safetyscanners/data_processing/ParseFieldHeaderData.h>
+#include <sick_safetyscanners/data_processing/ParseMonitoringCaseData.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
 
 namespace sick {
@@ -59,11 +59,13 @@ public:
    * \brief Constructor of the command.
    *
    * \param session The current cola2 session.
-   * \param field_data
+   * \param monitoring_case_data Reference to the monitoring case data.
+   * \param index Index of the variable to ask from the sensor, in range [0-254]
    *
-   * TODO
    */
-  MonitoringCaseVariableCommand(Cola2Session& session, datastructure::FieldData& field_data);
+  MonitoringCaseVariableCommand(Cola2Session& session,
+                                datastructure::MonitoringCaseData& monitoring_case_data,
+                                const uint16_t index);
 
   /*!
    * \brief Adds the data to the telegram.
@@ -90,7 +92,9 @@ public:
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
-  std::shared_ptr<sick::data_processing::ParseFieldHeaderData> m_field_header_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseMonitoringCaseData> m_monitoring_case_parser_ptr;
+
+  sick::datastructure::MonitoringCaseData m_monitoring_case_data;
 };
 
 } // namespace cola2
