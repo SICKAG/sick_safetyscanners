@@ -128,6 +128,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseIntrusionData.cpp
   src/data_processing/ParseMeasurementCurrentConfigData.cpp
   src/data_processing/ParseMeasurementData.cpp
+  src/data_processing/ParseMonitoringCaseData.cpp
   src/data_processing/ParseTCPPacket.cpp
   src/data_processing/ParseTypeCodeData.cpp
   src/data_processing/ReadWriteHelper.cpp
@@ -146,6 +147,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/IntrusionData.cpp
   src/datastructure/IntrusionDatum.cpp
   src/datastructure/MeasurementData.cpp
+  src/datastructure/MonitoringCaseData.cpp
   src/datastructure/PacketBuffer.cpp
   src/datastructure/ParsedPacketBuffer.cpp
   src/datastructure/ScanPoint.cpp
