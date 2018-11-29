@@ -52,6 +52,20 @@ bool ParseMonitoringCaseData::parseTCPSequence(
   const uint8_t* data_ptr(buffer.getBuffer().data());
   bool valid = isValid(data_ptr);
   monitoring_case_data.setIsValid(valid);
+  if (valid)
+  {
+    monitoring_case_data.setMonitoringCaseNumber(readMonitoringCaseNumber(data_ptr));
+
+    std::vector<uint16_t> indices;
+    std::vector<bool> fields_valid;
+    for (uint8_t i = 0; i < 8; i++)
+    {
+      indices.push_back(readFieldIndex(data_ptr, i));
+      fields_valid.push_back(readFieldValid(data_ptr, i));
+    }
+    monitoring_case_data.setFieldIndices(indices);
+    monitoring_case_data.setFieldsValid(fields_valid);
+  }
   return true;
 }
 
@@ -69,6 +83,19 @@ bool ParseMonitoringCaseData::isValid(const uint8_t*& data_ptr) const
 uint16_t ParseMonitoringCaseData::readMonitoringCaseNumber(const uint8_t*& data_ptr) const
 {
   return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 6);
+}
+
+uint16_t ParseMonitoringCaseData::readFieldIndex(const uint8_t*& data_ptr,
+                                                 const uint8_t index) const
+{
+  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 158 + (index * 4));
+}
+
+bool ParseMonitoringCaseData::readFieldValid(const uint8_t*& data_ptr, const uint8_t index) const
+{
+  uint8_t byte = m_reader_ptr->readuint8_t(data_ptr, 157 + (index * 4));
+
+  return byte & (0x01 << 0);
 }
 
 } // namespace data_processing
