@@ -97,7 +97,7 @@ void SickSafetyscannersRos::callback(
                                          config.application_io_data);
     m_device->changeSensorSettings(m_communication_settings);
 
-    m_laser_scan_frame_name = config.laser_scan_frame_name;
+    m_frame_id = config.frame_id;
   }
 }
 
@@ -186,7 +186,7 @@ bool SickSafetyscannersRos::readParameters()
   m_communication_settings.setFeatures(
     general_system_state, derived_settings, measurement_data, intrusion_data, application_io_data);
 
-  m_private_nh.getParam("laser_scan_frame_name", m_laser_scan_frame_name);
+  m_private_nh.getParam("frame_id", m_frame_id);
 
 
   return true;
@@ -272,7 +272,7 @@ sensor_msgs::LaserScan
 SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& data)
 {
   sensor_msgs::LaserScan scan;
-  scan.header.frame_id     = m_laser_scan_frame_name;
+  scan.header.frame_id     = m_frame_id;
   scan.header.stamp        = ros::Time::now();
   uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
 
