@@ -52,7 +52,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
-  m_laser_scan_publisher = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 100);
+  m_laser_scan_publisher = m_nh.advertise<sensor_msgs::LaserScan>("scan", 100);
   m_extended_laser_scan_publisher =
     m_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
   m_raw_data_publisher =
