@@ -88,8 +88,8 @@ void SickSafetyscannersRos::callback(
   {
     m_communication_settings.setEnabled(config.channel_enabled);
     m_communication_settings.setPublishingFequency(config.publish_frequency);
-    m_communication_settings.setStartAngle(config.angle_start);
-    m_communication_settings.setEndAngle(config.angle_end);
+    m_communication_settings.setStartAngle(sick::radToDeg(config.angle_start));
+    m_communication_settings.setEndAngle(sick::radToDeg(config.angle_end));
     m_communication_settings.setFeatures(config.general_system_state,
                                          config.derived_settings,
                                          config.measurement_data,
@@ -164,11 +164,11 @@ bool SickSafetyscannersRos::readParameters()
 
   float angle_start;
   m_private_nh.getParam("angle_start", angle_start);
-  m_communication_settings.setStartAngle(angle_start);
+  m_communication_settings.setStartAngle(sick::radToDeg(angle_start));
 
   float angle_end;
   m_private_nh.getParam("angle_end", angle_end);
-  m_communication_settings.setEndAngle(angle_end);
+  m_communication_settings.setEndAngle(sick::radToDeg(angle_end));
 
   bool general_system_state;
   m_private_nh.getParam("general_system_state", general_system_state);
