@@ -52,15 +52,15 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
-  m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 100);
+  m_laser_scan_publisher = m_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 100);
   m_extended_laser_scan_publisher =
-    m_private_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
+    m_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
   m_raw_data_publisher =
-    m_private_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
+    m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
   m_output_path_publisher =
-    m_private_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
+    m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
   m_field_service_server =
-    m_private_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
+    m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
   m_device = std::make_shared<sick::SickSafetyscanners>(
     boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), m_communication_settings);
