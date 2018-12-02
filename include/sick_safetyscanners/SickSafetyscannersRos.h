@@ -129,6 +129,7 @@ private:
     m_dynamic_reconfiguration_server;
 
   std::string m_frame_id;
+  double m_time_offset;
   double m_range_min;
   double m_range_max;
 

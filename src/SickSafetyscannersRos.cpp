@@ -98,6 +98,8 @@ void SickSafetyscannersRos::callback(
     m_device->changeSensorSettings(m_communication_settings);
 
     m_frame_id = config.frame_id;
+
+    m_time_offset = config.time_offset;
   }
 }
 
@@ -198,7 +200,6 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
   {
     sensor_msgs::LaserScan scan = createLaserScanMessage(data);
 
-
     m_laser_scan_publisher.publish(scan);
   }
 
@@ -274,6 +275,8 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   sensor_msgs::LaserScan scan;
   scan.header.frame_id     = m_frame_id;
   scan.header.stamp        = ros::Time::now();
+  // Add time offset (to account for network latency etc.)
+  scan.header.stamp += ros::Duration().fromSec(m_time_offset);
   uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle());
