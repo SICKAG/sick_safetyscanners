@@ -128,7 +128,7 @@ private:
   dynamic_reconfigure::Server<sick_safetyscanners::SickSafetyscannersConfigurationConfig>
     m_dynamic_reconfiguration_server;
 
-  std::string m_laser_scan_frame_name;
+  std::string m_frame_id;
   double m_range_min;
   double m_range_max;
 
