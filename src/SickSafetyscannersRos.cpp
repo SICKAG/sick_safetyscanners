@@ -113,7 +113,7 @@ SickSafetyscannersRos::~SickSafetyscannersRos() {}
 
 bool SickSafetyscannersRos::readParameters()
 {
-  std::string sensor_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_sensor_ip;
+  std::string sensor_ip_adress = "192.168.1.10";
   if (!m_private_nh.getParam("sensor_ip", sensor_ip_adress))
   {
     //    sensor_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_sensor_ip;
@@ -121,27 +121,24 @@ bool SickSafetyscannersRos::readParameters()
   }
   m_communication_settings.setSensorIp(sensor_ip_adress);
 
-  int sensor_tcp_port;
+  int sensor_tcp_port = 2122;
   if (!m_private_nh.getParam("sensor_tcp_port", sensor_tcp_port))
   {
-    sensor_tcp_port = sick_safetyscanners::SickSafetyscannersConfiguration_sensor_tcp_port;
     ROS_WARN("Using default sensor TCP port: %i", sensor_tcp_port);
   }
   m_communication_settings.setSensorTcpPort(sensor_tcp_port);
 
 
-  std::string host_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_host_ip;
+  std::string host_ip_adress = "192.168.1.9";
   if (!m_private_nh.getParam("host_ip", host_ip_adress))
   {
-    //    host_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_host_ip;
     ROS_WARN("Using default host IP: %s", host_ip_adress.c_str());
   }
   m_communication_settings.setHostIp(host_ip_adress);
 
-  int host_udp_port;
+  int host_udp_port = 6060;
   if (!m_private_nh.getParam("host_udp_port", host_udp_port))
   {
-    host_udp_port = sick_safetyscanners::SickSafetyscannersConfiguration_host_udp_port;
     ROS_WARN("Using default host UDP Port: %i", host_udp_port);
   }
   m_communication_settings.setHostUdpPort(host_udp_port);
@@ -150,7 +147,7 @@ bool SickSafetyscannersRos::readParameters()
            "will be loaded.");
 
 
-  int channel = sick_safetyscanners::SickSafetyscannersConfiguration_channel;
+  int channel = 0;
   m_private_nh.getParam("channel", channel);
   m_communication_settings.setChannel(channel);
 
