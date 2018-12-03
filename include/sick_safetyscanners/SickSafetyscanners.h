@@ -128,6 +128,10 @@ public:
   void requestDeviceName(const sick::datastructure::CommSettings& settings,
                          std::string& device_name);
 
+  void
+  requestMonitoringCases(const sick::datastructure::CommSettings& settings,
+                         std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
+
 
   /*!
    * \brief Returns the current active case number.
@@ -161,6 +165,8 @@ private:
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
   void requestDeviceNameInColaSession(std::string& device_name);
+  void requestMonitoringCaseDataInColaSession(
+    std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 };
 
 } // namespace sick

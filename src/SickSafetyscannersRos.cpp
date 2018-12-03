@@ -652,7 +652,27 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
   std::string device_name;
   m_device->requestDeviceName(m_communication_settings, device_name);
   res.device_name = device_name;
-  res.case_number = m_device->getActiveCaseNumber();
+
+
+  std::vector<sick::datastructure::MonitoringCaseData> monitoring_cases;
+  m_device->requestMonitoringCases(m_communication_settings, monitoring_cases);
+
+  for (size_t i = 0; i < monitoring_cases.size(); i++)
+  {
+    sick::datastructure::MonitoringCaseData monitoring_case_data = monitoring_cases.at(i);
+    sick_safetyscanners::MonitoringCaseMsg monitoring_case_msg;
+
+    monitoring_case_msg.monitoring_case_number = monitoring_case_data.getMonitoringCaseNumber();
+    std::vector<uint16_t> mon_fields           = monitoring_case_data.getFieldIndices();
+    std::vector<bool> mon_fields_valid         = monitoring_case_data.getFieldsValid();
+    for (size_t j = 0; j < mon_fields.size(); j++)
+    {
+      monitoring_case_msg.fields.push_back(mon_fields.at(j));
+      monitoring_case_msg.fields_valid.push_back(mon_fields_valid.at(j));
+    }
+    res.monitoring_cases.push_back(monitoring_case_msg);
+  }
+
   return true;
 }
 

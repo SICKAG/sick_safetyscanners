@@ -110,6 +110,16 @@ void SickSafetyscanners::requestFieldData(const datastructure::CommSettings& set
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestMonitoringCases(
+  const datastructure::CommSettings& settings,
+  std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases)
+{
+  startTCPConnection(settings);
+
+  requestMonitoringCaseDataInColaSession(monitoring_cases);
+
+  stopTCPConnection();
+}
 
 void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& settings,
                                            std::string& device_name)
@@ -189,7 +199,12 @@ void SickSafetyscanners::requestFieldDataInColaSession(
       break; // skip other requests after first invalid
     }
   }
+}
 
+void SickSafetyscanners::requestMonitoringCaseDataInColaSession(
+  std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr;
   for (int i = 0; i < 254; i++)
   {
     sick::datastructure::MonitoringCaseData monitoring_case_data;
@@ -199,6 +214,7 @@ void SickSafetyscanners::requestFieldDataInColaSession(
     m_session_ptr->executeCommand(command_ptr);
     if (monitoring_case_data.getIsValid())
     {
+      monitoring_cases.push_back(monitoring_case_data);
     }
     else
     {

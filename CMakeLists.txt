@@ -40,6 +40,7 @@ add_message_files(
   IntrusionDataMsg.msg
   IntrusionDatumMsg.msg
   MeasurementDataMsg.msg
+  MonitoringCaseMsg.msg
   OutputPathsMsg.msg
   RawMicroScanDataMsg.msg
   ScanPointMsg.msg
