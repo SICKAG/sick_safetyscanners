@@ -133,13 +133,6 @@ public:
                          std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 
 
-  /*!
-   * \brief Returns the current active case number.
-   *
-   * \returns The current active case number.
-   */
-  int getActiveCaseNumber() const;
-
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
 

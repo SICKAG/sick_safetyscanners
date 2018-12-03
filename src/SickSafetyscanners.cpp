@@ -131,11 +131,6 @@ void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& se
   stopTCPConnection();
 }
 
-int SickSafetyscanners::getActiveCaseNumber() const
-{
-  return m_active_case_number;
-}
-
 
 void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSettings& settings)
 {
@@ -255,18 +250,6 @@ void SickSafetyscanners::processUDPPacket(const sick::datastructure::PacketBuffe
     sick::datastructure::Data data;
     sick::data_processing::ParseData data_parser;
     data_parser.parseUDPSequence(deployedBuffer, data);
-
-    if (!data.getApplicationDataPtr()->isEmpty())
-    {
-      std::vector<uint16_t> monitoring_case_numbers =
-        data.getApplicationDataPtr()->getOutputs().getMonitoringCaseVector();
-      std::vector<bool> monitoring_case_number_flags =
-        data.getApplicationDataPtr()->getOutputs().getMonitoringCaseFlagsVector();
-      if (monitoring_case_number_flags.at(0))
-      {
-        m_active_case_number = monitoring_case_numbers.at(0);
-      }
-    }
 
     m_newPacketReceivedCallbackFunction(data);
   }
