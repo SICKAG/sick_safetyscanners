@@ -128,6 +128,12 @@ public:
   void requestDeviceName(const sick::datastructure::CommSettings& settings,
                          std::string& device_name);
 
+  /*!
+   * \brief Requests the monitoring cases from the sensor.
+   *
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param monitoring_cases Returned monitoring cases.
+   */
   void
   requestMonitoringCases(const sick::datastructure::CommSettings& settings,
                          std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
