@@ -321,6 +321,13 @@ SickSafetyscannersRos::createOutputPathsMessage(const sick::datastructure::Data&
   std::vector<bool> eval_out_is_safe = outputs.getEvalOutIsSafeVector();
   std::vector<bool> eval_out_valid   = outputs.getEvalOutIsValidVector();
 
+  std::vector<uint16_t> monitoring_case_numbers  = outputs.getMonitoringCaseVector();
+  std::vector<bool> monitoring_case_number_flags = outputs.getMonitoringCaseFlagsVector();
+  if (monitoring_case_number_flags.at(0))
+  {
+    msg.active_monitoring_case = monitoring_case_numbers.at(0);
+  }
+
   for (size_t i = 0; i < eval_out.size(); i++)
   {
     msg.status.push_back(eval_out.at(i));
