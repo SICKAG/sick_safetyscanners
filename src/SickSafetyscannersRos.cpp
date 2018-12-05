@@ -42,6 +42,9 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   : m_nh()
   , m_private_nh("~")
   , m_initialised(false)
+  , m_time_offset(0.0)
+  , m_range_min(0.0)
+  , m_range_max(0.0)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
