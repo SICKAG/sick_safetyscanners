@@ -129,13 +129,13 @@ public:
    *
    * \returns The publishing frequency.
    */
-  uint16_t getPublishingFequency() const;
+  uint16_t getPublishingFrequency() const;
   /*!
    * \brief Sets the publishing frequency.
    *
-   * \param publishing_fequency The publishing frequency.
+   * \param publishing_frequency The publishing frequency.
    */
-  void setPublishingFequency(const uint16_t& publishing_fequency);
+  void setPublishingFrequency(const uint16_t& publishing_frequency);
 
   /*!
    * \brief Gets the start angle of the scan.
@@ -230,7 +230,7 @@ private:
   uint8_t m_channel;
   bool m_enabled;
   uint8_t m_e_interface_type;
-  uint16_t m_publishing_fequency;
+  uint16_t m_publishing_frequency;
   uint32_t m_start_angle;
   uint32_t m_end_angle;
   uint16_t m_features;

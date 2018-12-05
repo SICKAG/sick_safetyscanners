@@ -121,7 +121,7 @@ void ChangeCommSettingsCommand::writePortToDataPtr(uint8_t*& data_ptr) const
 
 void ChangeCommSettingsCommand::writeFrequencyToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getPublishingFequency(), 14);
+  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getPublishingFrequency(), 14);
 }
 
 void ChangeCommSettingsCommand::writeStartAngleToDataPtr(uint8_t*& data_ptr) const
