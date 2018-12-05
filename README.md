@@ -7,7 +7,7 @@
 - [ROS API](#ros-api)
 - [Creators](#creators)
 
-A ROS Driver which reads the raw data from the SICK Safetyscanners and publishes the data as a laser_scan msg.
+A ROS Driver which reads the raw data from the SICK Safety Scanners and publishes the data as a laser_scan msg.
 
 ## Supported Hardware
 
