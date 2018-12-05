@@ -126,7 +126,7 @@ Publishes the raw data from the sensor as a ros message.
 | host_ip                        |   String  | 192.168.1.9 | ✔ | Host IP address.  Can be passed as an argument to the launch file.  |
 | host_udp_port             | Integer | 6061 | ✔ | Host UDP Port.  Can be passed as an argument to the launch file.  |
 | frame_id  | String | laser_scan | | The frame name of the sensor message  |
-| publish_frequency    | Integer | 1 | | How many scans should be published (1 means every scan, 2 every second scan, ... ) |
+| skip    | Integer | 0 | | The number of scans to skip between each measured scan.  For a 25Hz laser, setting 'skip' to 0 makes it publish at 25Hz, 'skip' to 1 makes it publish at 12.5Hz. |
 | angle_start              | Double |  0.0| | Start angle of scan in radians, if both start and end angle are set to 0, all angels are regarded  |
 | angle_end                | Double | 0.0 | | End angle of scan in radians, if both start and end angle are set to 0, all angels are regarded  |
 | channel_enabled     | Boolean | true | | If the channel should be enabled  |

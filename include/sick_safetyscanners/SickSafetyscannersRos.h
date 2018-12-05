@@ -82,6 +82,16 @@ inline float radToDeg(float rad)
 }
 
 /*!
+ * \brief Converts a skip value into a "publish frequency" value
+ * \param skip The number of scans to skip between each measured scan.  For a 25Hz laser, setting 'skip' to 0 makes it publish at 25Hz, 'skip' to 1 makes it publish at 12.5Hz.
+ * \return "Publish Frequency" ie. One out of every n_th scan will be published.  1 is publish every scan.  2 is publish at half rate, and so on.
+ */
+inline uint16_t skipToPublishFrequency(int skip)
+{
+  return skip + 1;
+}
+
+/*!
  * \brief The SickSafetyscannersRos class
  *
  * Main class for the node to handle the ROS interfacing.
