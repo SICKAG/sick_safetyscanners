@@ -94,14 +94,14 @@ void CommSettings::setEInterfaceType(const uint8_t& e_interface_type)
   m_e_interface_type = e_interface_type;
 }
 
-uint16_t CommSettings::getPublishingFequency() const
+uint16_t CommSettings::getPublishingFrequency() const
 {
-  return m_publishing_fequency;
+  return m_publishing_frequency;
 }
 
-void CommSettings::setPublishingFequency(const uint16_t& publishing_fequency)
+void CommSettings::setPublishingFrequency(const uint16_t& publishing_frequency)
 {
-  m_publishing_fequency = publishing_fequency;
+  m_publishing_frequency = publishing_frequency;
 }
 
 uint32_t CommSettings::getStartAngle() const

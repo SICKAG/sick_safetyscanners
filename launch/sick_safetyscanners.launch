@@ -5,7 +5,7 @@
   <arg name="host_udp_port" default="6061" />
 
   <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
-  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen">
+  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners">
      <param name="sensor_ip" type="string" value="$(arg sensor_ip)" />
      <param name="sensor_tcp_port" type="int" value="$(arg sensor_tcp_port)" />
      <param name="host_ip" type="string" value="$(arg host_ip)" />

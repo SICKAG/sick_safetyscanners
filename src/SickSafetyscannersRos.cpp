@@ -42,6 +42,9 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   : m_nh()
   , m_private_nh("~")
   , m_initialised(false)
+  , m_time_offset(0.0)
+  , m_range_min(0.0)
+  , m_range_max(0.0)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
@@ -52,15 +55,14 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
-  m_laser_scan_publisher = m_private_nh.advertise<sensor_msgs::LaserScan>("laser_scan", 100);
+  m_laser_scan_publisher = m_nh.advertise<sensor_msgs::LaserScan>("scan", 100);
   m_extended_laser_scan_publisher =
-    m_private_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
-  m_raw_data_publisher =
-    m_private_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
+    m_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
+  m_raw_data_publisher = m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
   m_output_path_publisher =
-    m_private_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
+    m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
   m_field_service_server =
-    m_private_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
+    m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
   m_device = std::make_shared<sick::SickSafetyscanners>(
     boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), m_communication_settings);
@@ -87,9 +89,9 @@ void SickSafetyscannersRos::callback(
   if (isInitialised())
   {
     m_communication_settings.setEnabled(config.channel_enabled);
-    m_communication_settings.setPublishingFequency(config.publish_frequency);
-    m_communication_settings.setStartAngle(config.angle_start);
-    m_communication_settings.setEndAngle(config.angle_end);
+    m_communication_settings.setPublishingFrequency(skipToPublishFrequency(config.skip));
+    m_communication_settings.setStartAngle(sick::radToDeg(config.angle_start));
+    m_communication_settings.setEndAngle(sick::radToDeg(config.angle_end));
     m_communication_settings.setFeatures(config.general_system_state,
                                          config.derived_settings,
                                          config.measurement_data,
@@ -97,7 +99,9 @@ void SickSafetyscannersRos::callback(
                                          config.application_io_data);
     m_device->changeSensorSettings(m_communication_settings);
 
-    m_laser_scan_frame_name = config.laser_scan_frame_name;
+    m_frame_id = config.frame_id;
+
+    m_time_offset = config.time_offset;
   }
 }
 
@@ -111,7 +115,7 @@ SickSafetyscannersRos::~SickSafetyscannersRos() {}
 
 bool SickSafetyscannersRos::readParameters()
 {
-  std::string sensor_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_sensor_ip;
+  std::string sensor_ip_adress = "192.168.1.10";
   if (!m_private_nh.getParam("sensor_ip", sensor_ip_adress))
   {
     //    sensor_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_sensor_ip;
@@ -119,27 +123,24 @@ bool SickSafetyscannersRos::readParameters()
   }
   m_communication_settings.setSensorIp(sensor_ip_adress);
 
-  int sensor_tcp_port;
+  int sensor_tcp_port = 2122;
   if (!m_private_nh.getParam("sensor_tcp_port", sensor_tcp_port))
   {
-    sensor_tcp_port = sick_safetyscanners::SickSafetyscannersConfiguration_sensor_tcp_port;
     ROS_WARN("Using default sensor TCP port: %i", sensor_tcp_port);
   }
   m_communication_settings.setSensorTcpPort(sensor_tcp_port);
 
 
-  std::string host_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_host_ip;
+  std::string host_ip_adress = "192.168.1.9";
   if (!m_private_nh.getParam("host_ip", host_ip_adress))
   {
-    //    host_ip_adress = sick_safetyscanners::SickSafetyscannersConfiguration_host_ip;
     ROS_WARN("Using default host IP: %s", host_ip_adress.c_str());
   }
   m_communication_settings.setHostIp(host_ip_adress);
 
-  int host_udp_port;
+  int host_udp_port = 6060;
   if (!m_private_nh.getParam("host_udp_port", host_udp_port))
   {
-    host_udp_port = sick_safetyscanners::SickSafetyscannersConfiguration_host_udp_port;
     ROS_WARN("Using default host UDP Port: %i", host_udp_port);
   }
   m_communication_settings.setHostUdpPort(host_udp_port);
@@ -148,7 +149,7 @@ bool SickSafetyscannersRos::readParameters()
            "will be loaded.");
 
 
-  int channel = sick_safetyscanners::SickSafetyscannersConfiguration_channel;
+  int channel = 0;
   m_private_nh.getParam("channel", channel);
   m_communication_settings.setChannel(channel);
 
@@ -156,17 +157,17 @@ bool SickSafetyscannersRos::readParameters()
   m_private_nh.getParam("channel_enabled", enabled);
   m_communication_settings.setEnabled(enabled);
 
-  int publish_frequency;
-  m_private_nh.getParam("publish_frequency", publish_frequency);
-  m_communication_settings.setPublishingFequency(publish_frequency);
+  int skip;
+  m_private_nh.getParam("skip", skip);
+  m_communication_settings.setPublishingFrequency(skipToPublishFrequency(skip));
 
   float angle_start;
   m_private_nh.getParam("angle_start", angle_start);
-  m_communication_settings.setStartAngle(angle_start);
+  m_communication_settings.setStartAngle(sick::radToDeg(angle_start));
 
   float angle_end;
   m_private_nh.getParam("angle_end", angle_end);
-  m_communication_settings.setEndAngle(angle_end);
+  m_communication_settings.setEndAngle(sick::radToDeg(angle_end));
 
   bool general_system_state;
   m_private_nh.getParam("general_system_state", general_system_state);
@@ -186,7 +187,7 @@ bool SickSafetyscannersRos::readParameters()
   m_communication_settings.setFeatures(
     general_system_state, derived_settings, measurement_data, intrusion_data, application_io_data);
 
-  m_private_nh.getParam("laser_scan_frame_name", m_laser_scan_frame_name);
+  m_private_nh.getParam("frame_id", m_frame_id);
 
 
   return true;
@@ -197,7 +198,6 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
   if (!data.getMeasurementDataPtr()->isEmpty() && !data.getDerivedValuesPtr()->isEmpty())
   {
     sensor_msgs::LaserScan scan = createLaserScanMessage(data);
-
 
     m_laser_scan_publisher.publish(scan);
   }
@@ -272,8 +272,10 @@ sensor_msgs::LaserScan
 SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& data)
 {
   sensor_msgs::LaserScan scan;
-  scan.header.frame_id     = m_laser_scan_frame_name;
-  scan.header.stamp        = ros::Time::now();
+  scan.header.frame_id = m_frame_id;
+  scan.header.stamp    = ros::Time::now();
+  // Add time offset (to account for network latency etc.)
+  scan.header.stamp += ros::Duration().fromSec(m_time_offset);
   uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle());
