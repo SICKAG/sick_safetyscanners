@@ -42,8 +42,8 @@ The ROS driver will be released as a debian package, and therefore can be instal
 
 * Linux
 * Working ROS-Distro
-* Correctly setup SickSafetyscanner
-* Connected SickSafetyscanners and a correctly setup ethernet network. Both the host and the sensor have to be in the same network.
+* Correctly setup SICK Safety Scanner
+* Connected SICK Safety Scanner and a correctly setup ethernet network. Both the host and the sensor have to be in the same network.
 
 ### Installation
 
@@ -104,13 +104,13 @@ rosrun rviz rviz
 Publishes a scan from the laserscanner
 
 `
-~/extended_laser_scan (type sick_safetyscanners/ExtendedLaserScanMsg)
+~/extended_laser_scan (type: sick_safetyscanners/ExtendedLaserScanMsg)
 `
 
 Extends the basic laser scan message by reflector data and intrusion data.
 
 `
-~/output_paths (type sick_safetyscanners/OutputPathMsg)
+~/output_paths (type: sick_safetyscanners/OutputPathMsg)
 `
 
 Gives feedback of the current status of the output paths.
@@ -139,7 +139,7 @@ Returns all configured protective and warning fields for the sensor
 | sensor_tcp_port          | Integer | 2122 | ✔ | Sensor TCP Port.  Can be passed as an argument to the launch file. |
 | host_ip                        |   String  | 192.168.1.9 | ✔ | Host IP address.  Can be passed as an argument to the launch file.  |
 | host_udp_port             | Integer | 6061 | ✔ | Host UDP Port.  Can be passed as an argument to the launch file.  |
-| frame_id  | String | laser_scan | | The frame name of the sensor message  |
+| frame_id  | String | scan | | The frame name of the sensor message  |
 | skip    | Integer | 0 | | The number of scans to skip between each measured scan.  For a 25Hz laser, setting 'skip' to 0 makes it publish at 25Hz, 'skip' to 1 makes it publish at 12.5Hz. |
 | angle_start              | Double |  0.0| | Start angle of scan in radians, if both start and end angle are set to 0, all angels are regarded  |
 | angle_end                | Double | 0.0 | | End angle of scan in radians, if both start and end angle are set to 0, all angels are regarded  |
