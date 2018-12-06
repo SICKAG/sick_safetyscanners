@@ -58,8 +58,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_laser_scan_publisher = m_nh.advertise<sensor_msgs::LaserScan>("scan", 100);
   m_extended_laser_scan_publisher =
     m_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
-  m_raw_data_publisher =
-    m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
+  m_raw_data_publisher = m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
   m_output_path_publisher =
     m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
   m_field_service_server =
@@ -273,8 +272,8 @@ sensor_msgs::LaserScan
 SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& data)
 {
   sensor_msgs::LaserScan scan;
-  scan.header.frame_id     = m_frame_id;
-  scan.header.stamp        = ros::Time::now();
+  scan.header.frame_id = m_frame_id;
+  scan.header.stamp    = ros::Time::now();
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
   uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
