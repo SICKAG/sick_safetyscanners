@@ -64,9 +64,9 @@ Visualization Manager:
       Enabled: true
       Invert Rainbow: false
       Max Color: 255; 255; 255
-      Max Intensity: 101
+      Max Intensity: 91
       Min Color: 0; 0; 0
-      Min Intensity: 10
+      Min Intensity: 22
       Name: LaserScan
       Position Transformer: XYZ
       Queue Size: 10
@@ -74,7 +74,7 @@ Visualization Manager:
       Size (Pixels): 3
       Size (m): 0.00999999978
       Style: Flat Squares
-      Topic: /sick_safetyscanners/laser_scan
+      Topic: /sick_safetyscanners/scan
       Unreliable: false
       Use Fixed Frame: true
       Use rainbow: true
@@ -83,7 +83,7 @@ Visualization Manager:
   Global Options:
     Background Color: 48; 48; 48
     Default Light: true
-    Fixed Frame: laser_scan
+    Fixed Frame: scan
     Frame Rate: 30
   Name: root
   Tools:
@@ -104,7 +104,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/Orbit
-      Distance: 5.82411146
+      Distance: 5.48095274
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.0599999987
         Stereo Focal Distance: 1
@@ -119,10 +119,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.00999999978
-      Pitch: 0.639796019
+      Pitch: 1.19479609
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 4.43224525
+      Yaw: 1.58906567
     Saved: ~
 Window Geometry:
   Displays:
