@@ -3,4 +3,4 @@
 
 sick_safetyscanners/FieldMsg[] fields
 string device_name
-int32 case_number
+sick_safetyscanners/MonitoringCaseMsg[] monitoring_cases

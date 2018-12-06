@@ -62,7 +62,7 @@ bool SickSafetyscanners::run()
   m_udp_client_thread_ptr.reset(
     new boost::thread(boost::bind(&SickSafetyscanners::UDPClientThread, this)));
 
-  m_async_udp_client_ptr->run_service();
+  m_async_udp_client_ptr->runService();
   return true;
 }
 
@@ -110,6 +110,16 @@ void SickSafetyscanners::requestFieldData(const datastructure::CommSettings& set
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestMonitoringCases(
+  const datastructure::CommSettings& settings,
+  std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases)
+{
+  startTCPConnection(settings);
+
+  requestMonitoringCaseDataInColaSession(monitoring_cases);
+
+  stopTCPConnection();
+}
 
 void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& settings,
                                            std::string& device_name)
@@ -121,11 +131,6 @@ void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& se
   stopTCPConnection();
 }
 
-int SickSafetyscanners::getActiveCaseNumber() const
-{
-  return m_active_case_number;
-}
-
 
 void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSettings& settings)
 {
@@ -135,7 +140,7 @@ void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSetti
       boost::ref(*m_io_service_ptr),
       settings.getSensorIp(),
       settings.getSensorTcpPort());
-  async_tcp_client->do_connect();
+  async_tcp_client->doConnect();
 
   m_session_ptr.reset();
   m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
@@ -186,7 +191,29 @@ void SickSafetyscanners::requestFieldDataInColaSession(
     }
     else if (i > 0) // index 0 is reserved for contour data
     {
-      break; // skip other requests after first try
+      break; // skip other requests after first invalid
+    }
+  }
+}
+
+void SickSafetyscanners::requestMonitoringCaseDataInColaSession(
+  std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr;
+  for (int i = 0; i < 254; i++)
+  {
+    sick::datastructure::MonitoringCaseData monitoring_case_data;
+
+    command_ptr = std::make_shared<sick::cola2::MonitoringCaseVariableCommand>(
+      boost::ref(*m_session_ptr), monitoring_case_data, i);
+    m_session_ptr->executeCommand(command_ptr);
+    if (monitoring_case_data.getIsValid())
+    {
+      monitoring_cases.push_back(monitoring_case_data);
+    }
+    else
+    {
+      break; // skip other requests after first invalid
     }
   }
 }
@@ -223,18 +250,6 @@ void SickSafetyscanners::processUDPPacket(const sick::datastructure::PacketBuffe
     sick::datastructure::Data data;
     sick::data_processing::ParseData data_parser;
     data_parser.parseUDPSequence(deployedBuffer, data);
-
-    if (!data.getApplicationDataPtr()->isEmpty())
-    {
-      std::vector<uint16_t> monitoring_case_numbers =
-        data.getApplicationDataPtr()->getOutputs().getMonitoringCaseVector();
-      std::vector<bool> monitoring_case_number_flags =
-        data.getApplicationDataPtr()->getOutputs().getMonitoringCaseFlagsVector();
-      if (monitoring_case_number_flags.at(0))
-      {
-        m_active_case_number = monitoring_case_numbers.at(0);
-      }
-    }
 
     m_newPacketReceivedCallbackFunction(data);
   }

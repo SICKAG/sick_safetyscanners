@@ -7,7 +7,7 @@
 - [ROS API](#ros-api)
 - [Creators](#creators)
 
-A ROS Driver which reads the raw data from the SICK Safetyscanners and publishes the data as a laser_scan msg.
+A ROS Driver which reads the raw data from the SICK Safety Scanners and publishes the data as a laser_scan msg.
 
 ## Supported Hardware
 
@@ -51,7 +51,7 @@ In the following instructions, replace `<rosdistro>` with the name of your ROS d
 
 #### From Binaries
 
-The driver is released at longer intervals as a binary package. At the moment the initial release is still in progress. Once it is released it can be installed with the following command:
+The driver is released at longer intervals as a binary package. 
 
 `sudo apt-get install ros-<rosdistro>-sick_safetyscanners`
 
@@ -107,14 +107,28 @@ Publishes a scan from the laserscanner
 ~/extended_laser_scan (type sick_safetyscanners/ExtendedLaserScanMsg)
 `
 
-Extends the basic laser scan message by reflektor data and intrusion data.
+Extends the basic laser scan message by reflector data and intrusion data.
+
+`
+~/output_paths (type sick_safetyscanners/OutputPathMsg)
+`
+
+Gives feedback of the current status of the output paths.
 
 
 `
 ~/raw_data (type: sick_safetyscanners/RawMicroScanDataMsg)
 `
 
-Publishes the raw data from the sensor as a ros message.
+Publishes the raw data from the sensor as a ROS message.
+
+### Advertised ROS Services
+
+`
+~/field_data
+`
+
+Returns all configured protective and warning fields for the sensor
 
 
 ### ROS parameters

@@ -58,8 +58,9 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_laser_scan_publisher = m_nh.advertise<sensor_msgs::LaserScan>("scan", 100);
   m_extended_laser_scan_publisher =
     m_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
-  m_raw_data_publisher =
-    m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
+
+  m_raw_data_publisher = m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
+
   m_output_path_publisher =
     m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
   m_field_service_server =
@@ -273,8 +274,10 @@ sensor_msgs::LaserScan
 SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& data)
 {
   sensor_msgs::LaserScan scan;
-  scan.header.frame_id     = m_frame_id;
-  scan.header.stamp        = ros::Time::now();
+
+  scan.header.frame_id = m_frame_id;
+  scan.header.stamp    = ros::Time::now();
+
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
   uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
@@ -323,6 +326,13 @@ SickSafetyscannersRos::createOutputPathsMessage(const sick::datastructure::Data&
   std::vector<bool> eval_out         = outputs.getEvalOutVector();
   std::vector<bool> eval_out_is_safe = outputs.getEvalOutIsSafeVector();
   std::vector<bool> eval_out_valid   = outputs.getEvalOutIsValidVector();
+
+  std::vector<uint16_t> monitoring_case_numbers  = outputs.getMonitoringCaseVector();
+  std::vector<bool> monitoring_case_number_flags = outputs.getMonitoringCaseFlagsVector();
+  if (monitoring_case_number_flags.at(0))
+  {
+    msg.active_monitoring_case = monitoring_case_numbers.at(0);
+  }
 
   for (size_t i = 0; i < eval_out.size(); i++)
   {
@@ -655,7 +665,27 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
   std::string device_name;
   m_device->requestDeviceName(m_communication_settings, device_name);
   res.device_name = device_name;
-  res.case_number = m_device->getActiveCaseNumber();
+
+
+  std::vector<sick::datastructure::MonitoringCaseData> monitoring_cases;
+  m_device->requestMonitoringCases(m_communication_settings, monitoring_cases);
+
+  for (size_t i = 0; i < monitoring_cases.size(); i++)
+  {
+    sick::datastructure::MonitoringCaseData monitoring_case_data = monitoring_cases.at(i);
+    sick_safetyscanners::MonitoringCaseMsg monitoring_case_msg;
+
+    monitoring_case_msg.monitoring_case_number = monitoring_case_data.getMonitoringCaseNumber();
+    std::vector<uint16_t> mon_fields           = monitoring_case_data.getFieldIndices();
+    std::vector<bool> mon_fields_valid         = monitoring_case_data.getFieldsValid();
+    for (size_t j = 0; j < mon_fields.size(); j++)
+    {
+      monitoring_case_msg.fields.push_back(mon_fields.at(j));
+      monitoring_case_msg.fields_valid.push_back(mon_fields_valid.at(j));
+    }
+    res.monitoring_cases.push_back(monitoring_case_msg);
+  }
+
   return true;
 }
 

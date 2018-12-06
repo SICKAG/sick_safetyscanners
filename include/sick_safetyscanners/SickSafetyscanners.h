@@ -59,6 +59,7 @@
 #include <sick_safetyscanners/cola2/FieldHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementCurrentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
+#include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
 
 namespace sick {
@@ -127,13 +128,16 @@ public:
   void requestDeviceName(const sick::datastructure::CommSettings& settings,
                          std::string& device_name);
 
-
   /*!
-   * \brief Returns the current active case number.
+   * \brief Requests the monitoring cases from the sensor.
    *
-   * \returns The current active case number.
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param monitoring_cases Returned monitoring cases.
    */
-  int getActiveCaseNumber() const;
+  void
+  requestMonitoringCases(const sick::datastructure::CommSettings& settings,
+                         std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
+
 
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
@@ -160,6 +164,8 @@ private:
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
   void requestDeviceNameInColaSession(std::string& device_name);
+  void requestMonitoringCaseDataInColaSession(
+    std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 };
 
 } // namespace sick

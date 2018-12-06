@@ -64,17 +64,17 @@ AsyncUDPClient::~AsyncUDPClient()
   m_io_service.stop();
 }
 
-void AsyncUDPClient::start_receive()
+void AsyncUDPClient::startReceive()
 {
   m_socket_ptr->async_receive_from(boost::asio::buffer(m_recv_buffer),
                                    m_remote_endpoint,
                                    [this](boost::system::error_code ec, std::size_t bytes_recvd) {
-                                     this->handle_receive(ec, bytes_recvd);
+                                     this->handleReceive(ec, bytes_recvd);
                                    });
 }
 
-void AsyncUDPClient::handle_receive(const boost::system::error_code& error,
-                                    const std::size_t& bytes_transferred)
+void AsyncUDPClient::handleReceive(const boost::system::error_code& error,
+                                   const std::size_t& bytes_transferred)
 {
   if (!error)
   {
@@ -85,13 +85,13 @@ void AsyncUDPClient::handle_receive(const boost::system::error_code& error,
   {
     ROS_ERROR("Error in UDP handle receive: %i", error.value());
   }
-  start_receive();
+  startReceive();
 }
 
 
-void AsyncUDPClient::run_service()
+void AsyncUDPClient::runService()
 {
-  start_receive();
+  startReceive();
 }
 
 } // namespace communication

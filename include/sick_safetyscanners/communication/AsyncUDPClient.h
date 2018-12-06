@@ -81,7 +81,7 @@ public:
   /*!
    * \brief Start the listening loop for the udp data packets.
    */
-  void run_service();
+  void runService();
 
 private:
   datastructure::PacketBuffer::ArrayBuffer m_recv_buffer;
@@ -93,8 +93,8 @@ private:
   std::shared_ptr<boost::asio::ip::udp::socket> m_socket_ptr;
   boost::asio::ip::udp::endpoint m_remote_endpoint;
 
-  void start_receive();
-  void handle_receive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
+  void startReceive();
+  void handleReceive(const boost::system::error_code& error, const std::size_t& bytes_transferred);
 
 
   AsyncUDPClient(AsyncUDPClient&); // block default copy constructor
