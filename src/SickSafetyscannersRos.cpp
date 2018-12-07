@@ -65,7 +65,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
   m_device = std::make_shared<sick::SickSafetyscanners>(
-    boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), m_communication_settings);
+    boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), &m_communication_settings);
   m_device->run();
   readTypeCodeSettings();
 
@@ -138,7 +138,7 @@ bool SickSafetyscannersRos::readParameters()
   }
   m_communication_settings.setHostIp(host_ip_adress);
 
-  int host_udp_port = 6060;
+  int host_udp_port = 0;
   if (!m_private_nh.getParam("host_udp_port", host_udp_port))
   {
     ROS_WARN("Using default host UDP Port: %i", host_udp_port);

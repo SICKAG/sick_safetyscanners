@@ -2,7 +2,7 @@
   <arg name="sensor_ip" default="192.168.1.11" />
   <arg name="sensor_tcp_port" default="2122" />
   <arg name="host_ip" default="192.168.1.9" />
-  <arg name="host_udp_port" default="6061" />
+  <arg name="host_udp_port" default="0" />
 
   <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
   <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners">

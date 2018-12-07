@@ -103,7 +103,7 @@ private:
   void writeChannelToDataPtr(uint8_t*& data_ptr) const;
   void writeEnabledToDataPtr(uint8_t*& data_ptr) const;
   void writeEInterfaceTypeToDataPtr(uint8_t*& data_ptr) const;
-  void writeIPAdresstoDataPtr(uint8_t*& data_ptr) const;
+  void writeIPAddresstoDataPtr(uint8_t*& data_ptr) const;
   void writePortToDataPtr(uint8_t*& data_ptr) const;
   void writeFrequencyToDataPtr(uint8_t*& data_ptr) const;
   void writeStartAngleToDataPtr(uint8_t*& data_ptr) const;

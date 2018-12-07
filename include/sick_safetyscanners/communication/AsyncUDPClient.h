@@ -83,6 +83,12 @@ public:
    */
   void runService();
 
+  /*!
+   * \brief Returns the actual port assigned to the local machine
+   * \return Local port number
+   */
+  unsigned short get_local_port();
+
 private:
   datastructure::PacketBuffer::ArrayBuffer m_recv_buffer;
 

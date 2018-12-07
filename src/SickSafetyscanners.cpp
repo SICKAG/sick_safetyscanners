@@ -39,7 +39,7 @@ namespace sick {
 
 SickSafetyscanners::SickSafetyscanners(
   packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
-  sick::datastructure::CommSettings settings)
+  sick::datastructure::CommSettings* settings)
   : m_newPacketReceivedCallbackFunction(newPacketReceivedCallbackFunction)
 {
   ROS_INFO("Starting SickSafetyscanners");
@@ -47,7 +47,8 @@ SickSafetyscanners::SickSafetyscanners(
   m_async_udp_client_ptr = std::make_shared<sick::communication::AsyncUDPClient>(
     boost::bind(&SickSafetyscanners::processUDPPacket, this, _1),
     boost::ref(*m_io_service_ptr),
-    settings.getHostUdpPort());
+    settings->getHostUdpPort());
+  settings->setHostUdpPort(m_async_udp_client_ptr->get_local_port());  // Store which port was used, needed for data request from the laser
   m_packet_merger_ptr = std::make_shared<sick::data_processing::UDPPacketMerger>();
   ROS_INFO("Started SickSafetyscanners");
 }
