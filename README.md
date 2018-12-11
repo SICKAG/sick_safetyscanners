@@ -11,6 +11,8 @@ A ROS Driver which reads the raw data from the SICK Safety Scanners and publishe
 
 ## Supported Hardware
 
+![ ](docs/images/mS3-ROS-logo.PNG  "Sick microScan3")
+
 | Product Family  | Product Type | Description |
 | ---------------------- | -------------------- | ------------- |
 | microScan3 Core | MICS3-ACAZ40PZ1 | Safety Laser Scanner, PROFINET PROFIsafe, Protective Field Range: 4 m |
