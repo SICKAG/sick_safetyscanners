@@ -96,7 +96,8 @@ void AsyncUDPClient::runService()
 
 unsigned short AsyncUDPClient::get_local_port()
 {
-  if(m_socket_ptr){
+  if (m_socket_ptr)
+  {
     return m_socket_ptr->local_endpoint().port();
   }
   return 0;
