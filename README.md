@@ -138,7 +138,7 @@ Returns all configured protective and warning fields for the sensor
 | sensor_ip                    | String | 192.168.1.11 | ✔ |Sensor IP address. Can be passed as an argument to the launch file. |
 | sensor_tcp_port          | Integer | 2122 | ✔ | Sensor TCP Port.  Can be passed as an argument to the launch file. |
 | host_ip                        |   String  | 192.168.1.9 | ✔ | Host IP address.  Can be passed as an argument to the launch file.  |
-| host_udp_port             | Integer | 6061 | ✔ | Host UDP Port.  Can be passed as an argument to the launch file.  |
+| host_udp_port             | Integer | 0 | | Host UDP Port.  Can be passed as an argument to the launch file.  Zero allows system chosen port. |
 | frame_id  | String | scan | | The frame name of the sensor message  |
 | skip    | Integer | 0 | | The number of scans to skip between each measured scan.  For a 25Hz laser, setting 'skip' to 0 makes it publish at 25Hz, 'skip' to 1 makes it publish at 12.5Hz. |
 | angle_start              | Double |  0.0| | Start angle of scan in radians, if both start and end angle are set to 0, all angels are regarded  |

@@ -94,5 +94,13 @@ void AsyncUDPClient::runService()
   startReceive();
 }
 
+unsigned short AsyncUDPClient::get_local_port()
+{
+  if(m_socket_ptr){
+    return m_socket_ptr->local_endpoint().port();
+  }
+  return 0;
+}
+
 } // namespace communication
 } // namespace sick
