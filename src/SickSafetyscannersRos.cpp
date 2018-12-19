@@ -45,10 +45,11 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   , m_time_offset(0.0)
   , m_range_min(0.0)
   , m_range_max(0.0)
+  , m_angle_offset(-90.0)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
-    boost::bind(&SickSafetyscannersRos::callback, this, _1, _2);
+    boost::bind(&SickSafetyscannersRos::reconfigure_callback, this, _1, _2);
   m_dynamic_reconfiguration_server.setCallback(reconf_callback);
   if (!readParameters())
   {
@@ -83,15 +84,23 @@ void SickSafetyscannersRos::readTypeCodeSettings()
   m_range_max = type_code.getMaxRange();
 }
 
-void SickSafetyscannersRos::callback(
+void SickSafetyscannersRos::reconfigure_callback(
   const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config, const uint32_t& level)
 {
   if (isInitialised())
   {
     m_communication_settings.setEnabled(config.channel_enabled);
     m_communication_settings.setPublishingFrequency(skipToPublishFrequency(config.skip));
-    m_communication_settings.setStartAngle(sick::radToDeg(config.angle_start));
-    m_communication_settings.setEndAngle(sick::radToDeg(config.angle_end));
+    if (config.angle_start == config.angle_end)
+    {
+      m_communication_settings.setStartAngle(sick::radToDeg(0));
+      m_communication_settings.setEndAngle(sick::radToDeg(0));
+    }
+    else
+    {
+      m_communication_settings.setStartAngle(sick::radToDeg(config.angle_start) - m_angle_offset);
+      m_communication_settings.setEndAngle(sick::radToDeg(config.angle_end) - m_angle_offset);
+    }
     m_communication_settings.setFeatures(config.general_system_state,
                                          config.derived_settings,
                                          config.measurement_data,
@@ -189,6 +198,16 @@ bool SickSafetyscannersRos::readParameters()
 
   m_private_nh.getParam("frame_id", m_frame_id);
 
+  m_private_nh.getParam("use_sick_angles", m_use_sick_angles);
+
+  if (m_use_sick_angles)
+  {
+    m_angle_offset = 0;
+  }
+  else
+  {
+    m_angle_offset = -90.0;
+  }
 
   return true;
 }
@@ -278,12 +297,13 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
   uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
 
-  scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle());
+  scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle() + m_angle_offset);
   double angle_max =
     sick::degToRad(data.getMeasurementDataPtr()
                      ->getScanPointsVector()
                      .at(data.getMeasurementDataPtr()->getScanPointsVector().size() - 1)
-                     .getAngle());
+                     .getAngle() +
+                   m_angle_offset);
   scan.angle_max       = angle_max;
   scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
   boost::posix_time::microseconds time_increment =
@@ -395,7 +415,7 @@ SickSafetyscannersRos::createDerivedValuesMessage(const sick::datastructure::Dat
     msg.scan_time               = derived_values->getScanTime();
     msg.interbeam_period        = derived_values->getInterbeamPeriod();
     msg.number_of_beams         = derived_values->getNumberOfBeams();
-    msg.start_angle             = derived_values->getStartAngle();
+    msg.start_angle             = derived_values->getStartAngle() + m_angle_offset;
     msg.angular_beam_resolution = derived_values->getAngularBeamResolution();
   }
   return msg;
@@ -480,7 +500,7 @@ SickSafetyscannersRos::createScanPointMessageVector(const sick::datastructure::D
     sick_safetyscanners::ScanPointMsg msg;
     msg.distance              = scan_point.getDistance();
     msg.reflectivity          = scan_point.getReflectivity();
-    msg.angle                 = scan_point.getAngle();
+    msg.angle                 = scan_point.getAngle() + m_angle_offset;
     msg.valid                 = scan_point.getValidBit();
     msg.infinite              = scan_point.getInfiniteBit();
     msg.glare                 = scan_point.getGlareBit();
@@ -645,7 +665,7 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
     sick::datastructure::FieldData field = fields.at(i);
     sick_safetyscanners::FieldMsg field_msg;
 
-    field_msg.start_angle        = degToRad(field.getStartAngle());
+    field_msg.start_angle        = degToRad(field.getStartAngle() + m_angle_offset);
     field_msg.angular_resolution = degToRad(field.getAngularBeamResolution());
     field_msg.protective_field   = field.getIsProtectiveField();
 

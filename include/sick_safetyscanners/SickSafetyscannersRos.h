@@ -145,6 +145,9 @@ private:
   double m_range_min;
   double m_range_max;
 
+  bool m_use_sick_angles;
+  float m_angle_offset;
+
   /*!
    * @brief Reads and verifies the ROS parameters.
    * @return True if successful.
@@ -162,8 +165,9 @@ private:
    * \param config The new configuration to set
    * \param level Level of the new configuration
    */
-  void callback(const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config,
-                const uint32_t& level);
+  void
+  reconfigure_callback(const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config,
+                       const uint32_t& level);
 
   bool isInitialised();
 
