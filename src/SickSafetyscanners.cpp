@@ -165,8 +165,12 @@ void SickSafetyscanners::requestFieldDataInColaSession(
   sick::datastructure::FieldData common_field_data;
 
   sick::cola2::Cola2Session::CommandPtr command_ptr =
-    std::make_shared<sick::cola2::MeasurementCurrentConfigVariableCommand>(
+    std::make_shared<sick::cola2::MeasurementPersistentConfigVariableCommand>(
       boost::ref(*m_session_ptr), common_field_data);
+  m_session_ptr->executeCommand(command_ptr);
+
+  command_ptr = std::make_shared<sick::cola2::MeasurementCurrentConfigVariableCommand>(
+    boost::ref(*m_session_ptr), common_field_data);
   m_session_ptr->executeCommand(command_ptr);
 
   command_ptr = std::make_shared<sick::cola2::MonitoringCaseTableHeaderVariableCommand>(

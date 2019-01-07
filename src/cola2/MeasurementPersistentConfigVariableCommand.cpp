@@ -25,38 +25,52 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file ParseMeasurementCurrentConfigData.cpp
+ * \file MeasurementPersistentConfigVariableCommand.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2019-01-07
  */
 //----------------------------------------------------------------------
 
-#include <sick_safetyscanners/data_processing/ParseMeasurementCurrentConfigData.h>
+#include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
 
+#include <sick_safetyscanners/cola2/Cola2Session.h>
 #include <sick_safetyscanners/cola2/Command.h>
 
 namespace sick {
-namespace data_processing {
+namespace cola2 {
 
-ParseMeasurementCurrentConfigData::ParseMeasurementCurrentConfigData()
+MeasurementPersistentConfigVariableCommand::MeasurementPersistentConfigVariableCommand(
+  Cola2Session& session, datastructure::FieldData& field_data)
+  : VariableCommand(session, 177)
+  , m_field_data(field_data)
 {
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
+  m_measurement_persistent_config_parser_ptr =
+    std::make_shared<sick::data_processing::ParseMeasurementPersistentConfigData>();
 }
 
-
-bool ParseMeasurementCurrentConfigData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
-                                                         datastructure::FieldData& field_data) const
+void MeasurementPersistentConfigVariableCommand::addTelegramData(
+  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
-  field_data.setAngularBeamResolution(readAngularBeamResolution(data_ptr));
+  base_class::addTelegramData(telegram);
+}
+
+bool MeasurementPersistentConfigVariableCommand::canBeExecutedWithoutSessionID() const
+{
   return true;
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(const uint8_t* data_ptr) const
+bool MeasurementPersistentConfigVariableCommand::processReply()
 {
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 40);
+  if (!base_class::processReply())
+  {
+    return false;
+  }
+  m_measurement_persistent_config_parser_ptr->parseTCPSequence(getDataVector(), m_field_data);
+  return true;
 }
 
-} // namespace data_processing
+
+} // namespace cola2
 } // namespace sick

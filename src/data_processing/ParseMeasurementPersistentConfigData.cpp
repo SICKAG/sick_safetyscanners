@@ -25,37 +25,37 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file ParseMeasurementCurrentConfigData.cpp
+ * \file ParseMeasurementPersistentConfigData.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2019-01-07
  */
 //----------------------------------------------------------------------
 
-#include <sick_safetyscanners/data_processing/ParseMeasurementCurrentConfigData.h>
+#include <sick_safetyscanners/data_processing/ParseMeasurementPersistentConfigData.h>
 
 #include <sick_safetyscanners/cola2/Command.h>
 
 namespace sick {
 namespace data_processing {
 
-ParseMeasurementCurrentConfigData::ParseMeasurementCurrentConfigData()
+ParseMeasurementPersistentConfigData::ParseMeasurementPersistentConfigData()
 {
   m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 
-bool ParseMeasurementCurrentConfigData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
-                                                         datastructure::FieldData& field_data) const
+bool ParseMeasurementPersistentConfigData::parseTCPSequence(
+  const datastructure::PacketBuffer& buffer, datastructure::FieldData& field_data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  field_data.setAngularBeamResolution(readAngularBeamResolution(data_ptr));
+  field_data.setStartAngle(readStartAngle(data_ptr));
   return true;
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(const uint8_t* data_ptr) const
+uint32_t ParseMeasurementPersistentConfigData::readStartAngle(const uint8_t* data_ptr) const
 {
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 40);
+  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16);
 }
 
 } // namespace data_processing

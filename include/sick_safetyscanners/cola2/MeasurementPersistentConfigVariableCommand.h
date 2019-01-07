@@ -25,28 +25,28 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file MeasurementCurrentConfigVariableCommand.h
+ * \file MeasurementPersistentConfigVariableCommand.h
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2019-01-07
  */
 //----------------------------------------------------------------------
 
-#ifndef SICK_SAFETYSCANNERS_COLA2_MEASUREMENTCURRENTCONFIGVARIABLECOMMAND_H
-#define SICK_SAFETYSCANNERS_COLA2_MEASUREMENTCURRENTCONFIGVARIABLECOMMAND_H
+#ifndef SICK_SAFETYSCANNERS_COLA2_MEASUREMENTPERSISTENTCONFIGVARIABLECOMMAND_H
+#define SICK_SAFETYSCANNERS_COLA2_MEASUREMENTPERSISTENTCONFIGVARIABLECOMMAND_H
 
 
 #include <sick_safetyscanners/cola2/VariableCommand.h>
-#include <sick_safetyscanners/data_processing/ParseMeasurementCurrentConfigData.h>
+#include <sick_safetyscanners/data_processing/ParseMeasurementPersistentConfigData.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
 
 namespace sick {
 namespace cola2 {
 
 /*!
- * \brief Command to read the current configuration from the sensor.
+ * \brief Command to read the persistent configuration from the sensor.
  */
-class MeasurementCurrentConfigVariableCommand : public VariableCommand
+class MeasurementPersistentConfigVariableCommand : public VariableCommand
 {
 public:
   /*!
@@ -64,8 +64,8 @@ public:
    * \param session The current cola2 session.
    * \param field_data The field data reference which will be modified on execution.
    */
-  MeasurementCurrentConfigVariableCommand(Cola2Session& session,
-                                          datastructure::FieldData& field_data);
+  MeasurementPersistentConfigVariableCommand(Cola2Session& session,
+                                             datastructure::FieldData& field_data);
 
   /*!
    * \brief Adds the data to the telegram.
@@ -92,8 +92,8 @@ public:
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
-  std::shared_ptr<sick::data_processing::ParseMeasurementCurrentConfigData>
-    m_measurement_current_config_parser_ptr;
+  std::shared_ptr<sick::data_processing::ParseMeasurementPersistentConfigData>
+    m_measurement_persistent_config_parser_ptr;
 
   sick::datastructure::FieldData& m_field_data;
 };
@@ -101,4 +101,4 @@ private:
 } // namespace cola2
 } // namespace sick
 
-#endif // SICK_SAFETYSCANNERS_COLA2_MEASUREMENTCURRENTCONFIGVARIABLECOMMAND_H
+#endif // SICK_SAFETYSCANNERS_COLA2_MEASUREMENTPERSISTENTCONFIGVARIABLECOMMAND_H

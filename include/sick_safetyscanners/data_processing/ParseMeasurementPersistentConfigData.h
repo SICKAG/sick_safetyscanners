@@ -25,15 +25,15 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file ParseMeasurementCurrentConfigData.h
+ * \file ParseMeasurementPersistentConfigData.h
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2018-10-16
  */
 //----------------------------------------------------------------------
 
-#ifndef SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTCURRENTCONFIGDATA_H
-#define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTCURRENTCONFIGDATA_H
+#ifndef SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTPERSISTENTCONFIGDATA_H
+#define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTPERSISTENTCONFIGDATA_H
 
 #include <sick_safetyscanners/datastructure/Data.h>
 #include <sick_safetyscanners/datastructure/FieldData.h>
@@ -47,18 +47,18 @@ namespace data_processing {
 
 
 /*!
- * \brief Parser to read the field header for protective and warning fields.
+ * \brief Parser to read the persistent configuration of the sensor.
  */
-class ParseMeasurementCurrentConfigData
+class ParseMeasurementPersistentConfigData
 {
 public:
   /*!
    * \brief Constructor of the parser.
    */
-  ParseMeasurementCurrentConfigData();
+  ParseMeasurementPersistentConfigData();
 
   /*!
-   * \brief Parses a tcp sequence to read the header for a warning or protective field.
+   * \brief Parses a tcp sequence to read the persistent configuration of the sensor.
    *
    * \param buffer The incoming tcp sequence.
    * \param field_data Reference to the field data where the information will be set.
@@ -71,10 +71,10 @@ public:
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
-  uint32_t readAngularBeamResolution(const uint8_t* data_ptr) const;
+  uint32_t readStartAngle(const uint8_t* data_ptr) const;
 };
 
 } // namespace data_processing
 } // namespace sick
 
-#endif // SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTCURRENTCONFIGDATA_H
+#endif // SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTPERSISTENTCONFIGDATA_H
