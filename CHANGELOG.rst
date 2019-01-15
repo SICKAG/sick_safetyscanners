@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.2 (2019-01-15)
+------------------
 * Read the start angle of the field data from the persistent config instead of the current config
 * Changed to 0 angle being at the front of the scan
 * Allow system to choose the host udp port from the ephemeral range.  Resolve typo -> IPAdress to IPAddress
