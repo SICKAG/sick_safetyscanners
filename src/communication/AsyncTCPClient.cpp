@@ -33,6 +33,7 @@
 //----------------------------------------------------------------------
 
 #include <sick_safetyscanners/communication/AsyncTCPClient.h>
+#include <ros/console.h>
 
 namespace sick {
 namespace communication {

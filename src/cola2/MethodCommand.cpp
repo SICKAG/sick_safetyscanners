@@ -37,6 +37,8 @@
 #include <sick_safetyscanners/cola2/Cola2Session.h>
 #include <sick_safetyscanners/cola2/Command.h>
 
+#include <ros/console.h>
+
 namespace sick {
 namespace cola2 {
 

@@ -1,0 +1,16 @@
+#ifndef SICK_SAFETYSCANNERS_CONSOLE_CONSOLEWRAPPER_H
+#define SICK_SAFETYSCANNERS_CONSOLE_CONSOLEWRAPPER_H
+
+#ifndef NO_ROS_CONSOLE
+
+#define ROS_INFO(...) 
+#define ROS_WARN(...)
+#define ROS_ERROR(...)
+
+#else
+
+#include <ros/console>
+
+#endif // NO_ROS_CONSOLE
+
+#endif // SICK_SAFETYSCANNERS_CONSOLE_CONSOLEWRAPPER_H

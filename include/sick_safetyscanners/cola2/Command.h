@@ -35,8 +35,6 @@
 #ifndef SICK_SAFETYSCANNERS_COLA2_COMMAND_H
 #define SICK_SAFETYSCANNERS_COLA2_COMMAND_H
 
-#include <ros/ros.h>
-
 #include <vector>
 
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
