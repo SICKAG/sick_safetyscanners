@@ -34,6 +34,8 @@
 
 
 #include "sick_safetyscanners/SickSafetyscanners.h"
+#include <sick_safetyscanners/console/console_wrapper.h>
+
 
 namespace sick {
 
