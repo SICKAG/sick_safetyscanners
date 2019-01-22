@@ -57,6 +57,8 @@ SickSafetyscanners::SickSafetyscanners(
 
 SickSafetyscanners::~SickSafetyscanners()
 {
+  m_io_service_ptr->stop();
+  m_udp_client_thread_ptr->join();
   m_udp_client_thread_ptr.reset();
 }
 
