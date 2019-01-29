@@ -41,7 +41,6 @@ namespace data_processing {
 
 ParseMeasurementCurrentConfigData::ParseMeasurementCurrentConfigData()
 {
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 
@@ -55,7 +54,7 @@ bool ParseMeasurementCurrentConfigData::parseTCPSequence(const datastructure::Pa
 
 uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(const uint8_t* data_ptr) const
 {
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 40);
+  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr, 40);
 }
 
 } // namespace data_processing

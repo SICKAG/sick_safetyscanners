@@ -45,7 +45,6 @@ TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session,
   : VariableCommand(session, 0x000d)
   , m_type_code(type_code)
 {
-  m_writer_ptr           = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
 }
 

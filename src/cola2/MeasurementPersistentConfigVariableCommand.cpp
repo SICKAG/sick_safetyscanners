@@ -45,7 +45,6 @@ MeasurementPersistentConfigVariableCommand::MeasurementPersistentConfigVariableC
   : VariableCommand(session, 177)
   , m_field_data(field_data)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_measurement_persistent_config_parser_ptr =
     std::make_shared<sick::data_processing::ParseMeasurementPersistentConfigData>();
 }

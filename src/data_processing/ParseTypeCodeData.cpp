@@ -41,7 +41,6 @@ namespace data_processing {
 
 ParseTypeCodeData::ParseTypeCodeData()
 {
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 
@@ -57,8 +56,8 @@ bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buff
 
 uint8_t ParseTypeCodeData::readInterfaceType(const uint8_t*& data_ptr) const
 {
-  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 14);
-  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 15);
+  uint8_t type_code_interface_1 = ReadWriteHelper::readuint8_t(data_ptr, 14);
+  uint8_t type_code_interface_2 = ReadWriteHelper::readuint8_t(data_ptr, 15);
 
   uint8_t res = sick::datastructure::e_interface_type::E_EFIPRO;
 
@@ -86,8 +85,8 @@ uint8_t ParseTypeCodeData::readInterfaceType(const uint8_t*& data_ptr) const
 
 float ParseTypeCodeData::readMaxRange(const uint8_t*& data_ptr) const
 {
-  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 12);
-  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 13);
+  uint8_t type_code_interface_1 = ReadWriteHelper::readuint8_t(data_ptr, 12);
+  uint8_t type_code_interface_2 = ReadWriteHelper::readuint8_t(data_ptr, 13);
 
   int res = sick::datastructure::e_ranges::E_NORMAL_RANGE;
 

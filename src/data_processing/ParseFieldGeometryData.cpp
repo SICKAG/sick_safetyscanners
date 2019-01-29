@@ -41,7 +41,6 @@ namespace data_processing {
 
 ParseFieldGeometryData::ParseFieldGeometryData()
 {
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 
@@ -62,13 +61,13 @@ bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer&
 
 uint32_t ParseFieldGeometryData::readArrayLength(const uint8_t*& data_ptr) const
 {
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 4);
+  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr, 4);
 }
 
 uint16_t ParseFieldGeometryData::readArrayElement(const uint8_t*& data_ptr,
                                                   uint32_t elem_number) const
 {
-  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 8 + elem_number * 2);
+  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr, 8 + elem_number * 2);
 }
 
 

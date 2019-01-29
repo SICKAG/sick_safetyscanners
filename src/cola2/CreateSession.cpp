@@ -43,7 +43,6 @@ namespace cola2 {
 CreateSession::CreateSession(Cola2Session& session)
   : Command(session, 0x4F, 0x58) // see cola2 manual 0x4F = O, 0x58 = X
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void CreateSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
@@ -85,13 +84,13 @@ bool CreateSession::processReply()
 void CreateSession::writeHeartbeatTimeoutToDataPtr(uint8_t*& data_ptr) const
 {
   uint8_t heartBeatTimeoutSeconds = 60;
-  m_writer_ptr->writeuint8_tBigEndian(data_ptr, heartBeatTimeoutSeconds, 0);
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr, heartBeatTimeoutSeconds, 0);
 }
 
 void CreateSession::writeClientIdToDataPtr(uint8_t*& data_ptr) const
 {
   uint32_t clientID = 1; // can be any random number
-  m_writer_ptr->writeuint32_tBigEndian(data_ptr, clientID, 1);
+  ReadWriteHelper::writeuint32_tBigEndian(data_ptr, clientID, 1);
 }
 
 } // namespace cola2

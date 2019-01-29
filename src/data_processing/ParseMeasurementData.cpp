@@ -39,7 +39,6 @@ namespace data_processing {
 
 ParseMeasurementData::ParseMeasurementData()
 {
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 datastructure::MeasurementData
@@ -108,7 +107,7 @@ void ParseMeasurementData::setDataInMeasurementData(
 void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
   const uint8_t*& data_ptr, datastructure::MeasurementData& measurement_data) const
 {
-  measurement_data.setNumberOfBeams(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 0));
+  measurement_data.setNumberOfBeams(ReadWriteHelper::readuint32_tLittleEndian(data_ptr, 0));
 }
 
 void ParseMeasurementData::setStartAngleAndDelta(const datastructure::Data& data)
@@ -132,9 +131,9 @@ void ParseMeasurementData::addScanPointToMeasurementData(
   const uint8_t*& data_ptr,
   datastructure::MeasurementData& measurement_data) const
 {
-  int16_t distance           = m_reader_ptr->readuint16_tLittleEndian(data_ptr, (4 + offset * 4));
-  uint8_t reflectivity       = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (6 + offset * 4));
-  uint8_t status             = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (7 + offset * 4));
+  int16_t distance           = ReadWriteHelper::readuint16_tLittleEndian(data_ptr, (4 + offset * 4));
+  uint8_t reflectivity       = ReadWriteHelper::readuint8_tLittleEndian(data_ptr, (6 + offset * 4));
+  uint8_t status             = ReadWriteHelper::readuint8_tLittleEndian(data_ptr, (7 + offset * 4));
   bool valid                 = status & (0x01 << 0);
   bool infinite              = status & (0x01 << 1);
   bool glare                 = status & (0x01 << 2);

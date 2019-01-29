@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DatagramHeader.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 namespace data_processing {
@@ -71,8 +71,6 @@ public:
                         sick::datastructure::DatagramHeader& header) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
   void setDataInHeader(const uint8_t*& data_ptr, datastructure::DatagramHeader& header) const;
 
   void setDatagramMarkerInHeader(const uint8_t*& data_ptr,

@@ -42,7 +42,7 @@
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
 #include <sick_safetyscanners/data_processing/ParseTCPPacket.h>
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <boost/thread/mutex.hpp>
 
@@ -192,7 +192,6 @@ protected:
 
 private:
   std::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
   boost::mutex m_execution_mutex;
 

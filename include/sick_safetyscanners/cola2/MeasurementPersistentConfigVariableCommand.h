@@ -91,7 +91,6 @@ public:
 
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
   std::shared_ptr<sick::data_processing::ParseMeasurementPersistentConfigData>
     m_measurement_persistent_config_parser_ptr;
 

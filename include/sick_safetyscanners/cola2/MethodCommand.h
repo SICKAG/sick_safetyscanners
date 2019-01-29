@@ -81,7 +81,6 @@ public:
 
 private:
   uint16_t m_method_index;
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 };
 
 } // namespace cola2

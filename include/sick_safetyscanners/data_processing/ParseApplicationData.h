@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DerivedValues.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <vector>
 
@@ -70,7 +70,6 @@ public:
                                                   datastructure::Data& data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setDataInApplicationData(const uint8_t*& data_ptr,
                                 datastructure::ApplicationData& application_data) const;
   void

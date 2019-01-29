@@ -44,7 +44,7 @@
 #include <sick_safetyscanners/data_processing/ParseGeneralSystemState.h>
 #include <sick_safetyscanners/data_processing/ParseIntrusionData.h>
 #include <sick_safetyscanners/data_processing/ParseMeasurementData.h>
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 
 namespace sick {
@@ -74,8 +74,6 @@ public:
                         sick::datastructure::Data& data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
   std::shared_ptr<sick::data_processing::ParseDataHeader> m_data_header_parser_ptr;
   std::shared_ptr<sick::data_processing::ParseDerivedValues> m_derived_values_parser_ptr;
   std::shared_ptr<sick::data_processing::ParseMeasurementData> m_measurement_data_parser_ptr;

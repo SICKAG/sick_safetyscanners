@@ -85,7 +85,6 @@ public:
 
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
   std::shared_ptr<sick::data_processing::ParseDeviceName> m_device_name_parser_ptr;
 
   std::string& m_device_name;

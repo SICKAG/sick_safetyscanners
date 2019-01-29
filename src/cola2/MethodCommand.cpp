@@ -44,7 +44,6 @@ MethodCommand::MethodCommand(Cola2Session& session, const uint16_t& method_index
   : Command(session, 0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
   , m_method_index(method_index)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
@@ -52,7 +51,7 @@ void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuf
   uint16_t prevSize = telegram.size();
   telegram.resize(prevSize + 2);
   uint8_t* data_ptr = telegram.data() + prevSize;
-  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_method_index, 0);
+  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr, m_method_index, 0);
 }
 
 bool MethodCommand::canBeExecutedWithoutSessionID() const

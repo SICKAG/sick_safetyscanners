@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/FieldData.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 
@@ -69,8 +69,6 @@ public:
                         datastructure::FieldData& field_data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
   uint32_t readAngularBeamResolution(const uint8_t* data_ptr) const;
 };
 

@@ -39,7 +39,6 @@ namespace data_processing {
 
 ParseIntrusionData::ParseIntrusionData()
 {
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 datastructure::IntrusionData
@@ -136,7 +135,7 @@ void ParseIntrusionData::setDataInIntrusionDatums(
 uint16_t ParseIntrusionData::setSizeInIntrusionDatum(
   const uint16_t offset, const uint8_t*& data_ptr, sick::datastructure::IntrusionDatum& datum) const
 {
-  uint32_t numBytesToRead = m_reader_ptr->readuint32_tLittleEndian(data_ptr, offset);
+  uint32_t numBytesToRead = ReadWriteHelper::readuint32_tLittleEndian(data_ptr, offset);
   datum.setSize(numBytesToRead);
   return offset;
 }
@@ -150,7 +149,7 @@ uint16_t ParseIntrusionData::setFlagsInIntrusionDatum(
        (num_read_bytes < datum.getSize()) && (num_read_flags < m_num_scan_points);
        num_read_bytes++)
   {
-    uint8_t bitset = m_reader_ptr->readuint8_tLittleEndian(data_ptr, offset + num_read_bytes);
+    uint8_t bitset = ReadWriteHelper::readuint8_tLittleEndian(data_ptr, offset + num_read_bytes);
     for (uint32_t i_bit = 0; (i_bit < 8) && (num_read_flags < m_num_scan_points);
          i_bit++, num_read_flags++)
     {

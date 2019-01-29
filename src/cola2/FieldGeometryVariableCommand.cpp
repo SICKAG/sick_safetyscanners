@@ -46,7 +46,6 @@ FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session
   : VariableCommand(session, 0x2810 + index)
   , m_field_data(field_data)
 {
-  m_writer_ptr                = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_field_geometry_parser_ptr = std::make_shared<sick::data_processing::ParseFieldGeometryData>();
 }
 

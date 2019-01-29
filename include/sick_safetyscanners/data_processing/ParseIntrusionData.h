@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DerivedValues.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <vector>
 
@@ -73,7 +73,6 @@ public:
 private:
   uint16_t m_num_scan_points;
 
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setDataInIntrusionData(const uint8_t*& data_ptr,
                               datastructure::IntrusionData& intrusion_data) const;
   void setDataInIntrusionDatums(

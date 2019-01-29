@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DerivedValues.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 
@@ -94,7 +94,6 @@ public:
   uint16_t getRequestID(const datastructure::PacketBuffer& buffer) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   uint32_t readSTx(const uint8_t*& data_ptr) const;
   uint32_t readLength(const uint8_t*& data_ptr) const;
   uint16_t readRequestID(const uint8_t*& data_ptr) const;

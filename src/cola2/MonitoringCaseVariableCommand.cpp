@@ -48,7 +48,6 @@ MonitoringCaseVariableCommand::MonitoringCaseVariableCommand(
   : VariableCommand(session, 2101 + index)
   , m_monitoring_case_data(monitoring_case_data)
 {
-  m_writer_ptr                 = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_monitoring_case_parser_ptr = std::make_shared<sick::data_processing::ParseMonitoringCaseData>();
 }
 

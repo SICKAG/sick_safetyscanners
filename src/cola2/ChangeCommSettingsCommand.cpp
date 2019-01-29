@@ -46,7 +46,6 @@ ChangeCommSettingsCommand::ChangeCommSettingsCommand(
   : MethodCommand(session, 0x00b0)
   , m_settings(settings)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void ChangeCommSettingsCommand::addTelegramData(
@@ -96,47 +95,47 @@ bool ChangeCommSettingsCommand::processReply()
 
 void ChangeCommSettingsCommand::writeChannelToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint8_tLittleEndian(data_ptr, m_settings.getChannel(), 0);
+  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr, m_settings.getChannel(), 0);
 }
 
 void ChangeCommSettingsCommand::writeEnabledToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint8_tLittleEndian(data_ptr, m_settings.getEnabled(), 4);
+  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr, m_settings.getEnabled(), 4);
 }
 
 void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint8_tLittleEndian(data_ptr, m_settings.getEInterfaceType(), 5);
+  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr, m_settings.getEInterfaceType(), 5);
 }
 
 void ChangeCommSettingsCommand::writeIPAddresstoDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint32_tLittleEndian(data_ptr, m_settings.getHostIp().to_ulong(), 8);
+  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr, m_settings.getHostIp().to_ulong(), 8);
 }
 
 void ChangeCommSettingsCommand::writePortToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getHostUdpPort(), 12);
+  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr, m_settings.getHostUdpPort(), 12);
 }
 
 void ChangeCommSettingsCommand::writeFrequencyToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getPublishingFrequency(), 14);
+  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr, m_settings.getPublishingFrequency(), 14);
 }
 
 void ChangeCommSettingsCommand::writeStartAngleToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint32_tLittleEndian(data_ptr, m_settings.getStartAngle(), 16);
+  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr, m_settings.getStartAngle(), 16);
 }
 
 void ChangeCommSettingsCommand::writeEndAngleToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint32_tLittleEndian(data_ptr, m_settings.getEndAngle(), 20);
+  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr, m_settings.getEndAngle(), 20);
 }
 
 void ChangeCommSettingsCommand::writeFeaturesToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_settings.getFeatures(), 24);
+  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr, m_settings.getFeatures(), 24);
 }
 
 

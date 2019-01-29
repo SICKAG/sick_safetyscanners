@@ -86,7 +86,7 @@ public:
 
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
+
   std::shared_ptr<sick::data_processing::ParseTypeCodeData> m_type_code_parser_ptr;
 
   sick::datastructure::TypeCode& m_type_code;

@@ -48,7 +48,6 @@ Command::Command(Cola2Session& session, const uint16_t& command_type, const uint
   m_session_id     = m_session.getSessionID();
   m_request_id     = m_session.getNextRequestID();
   m_tcp_parser_ptr = std::make_shared<sick::data_processing::ParseTCPPacket>();
-  m_writer_ptr     = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 void Command::lockExecutionMutex()
@@ -160,46 +159,46 @@ void Command::writeDataToDataPtr(uint8_t*& data_ptr,
 void Command::writeCola2StxToDataPtr(uint8_t*& data_ptr) const
 {
   uint32_t cola2_stx = 0x02020202;
-  m_writer_ptr->writeuint32_tBigEndian(data_ptr, cola2_stx, 0);
+  ReadWriteHelper::writeuint32_tBigEndian(data_ptr, cola2_stx, 0);
 }
 
 void Command::writeLengthToDataPtr(uint8_t*& data_ptr,
                                    datastructure::PacketBuffer::VectorBuffer& telegram) const
 {
   uint32_t length = 10 + telegram.size();
-  m_writer_ptr->writeuint32_tBigEndian(data_ptr, length, 4);
+  ReadWriteHelper::writeuint32_tBigEndian(data_ptr, length, 4);
 }
 
 void Command::writeCola2HubCntrToDataPtr(uint8_t*& data_ptr) const
 {
   uint8_t cola2_hub_cntr = 0x00;
-  m_writer_ptr->writeuint8_tBigEndian(data_ptr, cola2_hub_cntr, 8);
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr, cola2_hub_cntr, 8);
 }
 
 void Command::writeCola2NoCToDataPtr(uint8_t*& data_ptr) const
 {
   uint8_t cola2_noc = 0x00;
-  m_writer_ptr->writeuint8_tBigEndian(data_ptr, cola2_noc, 9);
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr, cola2_noc, 9);
 }
 
 void Command::writeSessionIdToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint32_tBigEndian(data_ptr, getSessionID(), 10);
+  ReadWriteHelper::writeuint32_tBigEndian(data_ptr, getSessionID(), 10);
 }
 
 void Command::writeRequestIdToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint16_tBigEndian(data_ptr, getRequestID(), 14);
+  ReadWriteHelper::writeuint16_tBigEndian(data_ptr, getRequestID(), 14);
 }
 
 void Command::writeCommandTypeToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint8_tBigEndian(data_ptr, getCommandType(), 16);
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr, getCommandType(), 16);
 }
 
 void Command::writeCommandModeToDataPtr(uint8_t*& data_ptr) const
 {
-  m_writer_ptr->writeuint8_tBigEndian(data_ptr, getCommandMode(), 17);
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr, getCommandMode(), 17);
 }
 
 } // namespace cola2

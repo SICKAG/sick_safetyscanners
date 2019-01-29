@@ -41,7 +41,6 @@ namespace data_processing {
 
 ParseMeasurementPersistentConfigData::ParseMeasurementPersistentConfigData()
 {
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
 
@@ -55,7 +54,7 @@ bool ParseMeasurementPersistentConfigData::parseTCPSequence(
 
 uint32_t ParseMeasurementPersistentConfigData::readStartAngle(const uint8_t* data_ptr) const
 {
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16);
+  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr, 16);
 }
 
 } // namespace data_processing

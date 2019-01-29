@@ -40,7 +40,7 @@
 #include <sick_safetyscanners/datastructure/DataHeader.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 namespace data_processing {
@@ -71,7 +71,6 @@ public:
                                              datastructure::Data& data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setVersionIndicatorInDataHeader(const uint8_t*& data_ptr,
                                        datastructure::DataHeader& data_header) const;
   void setMajorVersionInDataHeader(const uint8_t*& data_ptr,

@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/MeasurementData.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <string>
 #include <vector>
@@ -72,7 +72,6 @@ public:
 private:
   float m_angle;
   float m_angle_delta;
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
   void setDataInMeasurementData(const uint8_t*& data_ptr,
                                 datastructure::MeasurementData& measurement_data);
   void setNumberOfBeamsInMeasurementData(const uint8_t*& data_ptr,
