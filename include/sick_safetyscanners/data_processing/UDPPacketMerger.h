@@ -41,6 +41,7 @@
 #include <sick_safetyscanners/data_processing/ParseDatagramHeader.h>
 
 #include <algorithm>
+#include <mutex>
 
 namespace sick {
 namespace data_processing {
@@ -85,6 +86,7 @@ private:
 
   std::map<uint32_t, sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector>
     m_parsed_packet_buffer_map;
+  std::mutex m_buffer_mutex;
 
   bool addToMap(const sick::datastructure::PacketBuffer& buffer,
                 const sick::datastructure::DatagramHeader& header);
@@ -94,7 +96,7 @@ private:
     const sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector& vec);
   sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector
   getSortedParsedPacketBufferForIdentification(const sick::datastructure::DatagramHeader& header);
-  sick::datastructure::PacketBuffer::VectorBuffer removeHeaderFromParsedPacketBuffer(
+  std::vector<uint8_t> removeHeaderFromParsedPacketBuffer(
     const sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector& vec);
 };
 

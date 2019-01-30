@@ -48,12 +48,6 @@ TypeCodeVariableCommand::TypeCodeVariableCommand(Cola2Session& session,
   m_type_code_parser_ptr = std::make_shared<sick::data_processing::ParseTypeCodeData>();
 }
 
-void TypeCodeVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
 bool TypeCodeVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;

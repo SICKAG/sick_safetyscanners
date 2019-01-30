@@ -48,7 +48,9 @@ bool ParseMonitoringCaseData::parseTCPSequence(
   const datastructure::PacketBuffer& buffer,
   sick::datastructure::MonitoringCaseData& monitoring_case_data) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
   bool valid = isValid(data_ptr);
   monitoring_case_data.setIsValid(valid);
   if (valid)
@@ -68,10 +70,10 @@ bool ParseMonitoringCaseData::parseTCPSequence(
   return true;
 }
 
-bool ParseMonitoringCaseData::isValid(const uint8_t*& data_ptr) const
+bool ParseMonitoringCaseData::isValid(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   bool res     = false;
-  uint8_t byte = ReadWriteHelper::readuint8_t(data_ptr, 0);
+  uint8_t byte = ReadWriteHelper::readuint8_t(data_ptr + 0);
   if (byte == 'R' || byte == 'Y')
   {
     res = true;
@@ -79,20 +81,20 @@ bool ParseMonitoringCaseData::isValid(const uint8_t*& data_ptr) const
   return res;
 }
 
-uint16_t ParseMonitoringCaseData::readMonitoringCaseNumber(const uint8_t*& data_ptr) const
+uint16_t ParseMonitoringCaseData::readMonitoringCaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr, 6);
+  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 6);
 }
 
-uint16_t ParseMonitoringCaseData::readFieldIndex(const uint8_t*& data_ptr,
+uint16_t ParseMonitoringCaseData::readFieldIndex(std::vector<uint8_t>::const_iterator data_ptr,
                                                  const uint8_t index) const
 {
-  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr, 158 + (index * 4));
+  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 158 + (index * 4));
 }
 
-bool ParseMonitoringCaseData::readFieldValid(const uint8_t*& data_ptr, const uint8_t index) const
+bool ParseMonitoringCaseData::readFieldValid(std::vector<uint8_t>::const_iterator data_ptr, const uint8_t index) const
 {
-  uint8_t byte = ReadWriteHelper::readuint8_t(data_ptr, 157 + (index * 4));
+  uint8_t byte = ReadWriteHelper::readuint8_t(data_ptr + 157 + (index * 4));
 
   return byte & (0x01 << 0);
 }

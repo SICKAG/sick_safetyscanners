@@ -156,7 +156,7 @@ private:
   std::string m_device_name;
   int m_active_case_number;
 
-  void processUDPPacket(const datastructure::PacketBuffer& buffer);
+  void processUDPPacket(const sick::datastructure::PacketBuffer& buffer);
   bool UDPClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   void startTCPConnection(const sick::datastructure::CommSettings& settings);
@@ -166,7 +166,7 @@ private:
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
   void requestDeviceNameInColaSession(std::string& device_name);
   void requestMonitoringCaseDataInColaSession(
-    std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
+  std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 };
 
 } // namespace sick

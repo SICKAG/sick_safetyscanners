@@ -70,10 +70,10 @@ public:
 
 private:
 
-  bool isValid(const uint8_t*& data_ptr) const;
-  void setFieldType(const uint8_t*& data_ptr, datastructure::FieldData& field_data) const;
-  uint8_t readFieldType(const uint8_t*& data_ptr) const;
-  uint16_t readSetIndex(const uint8_t*& data_ptr) const;
+  bool isValid(std::vector<uint8_t>::const_iterator data_ptr) const;
+  void setFieldType(std::vector<uint8_t>::const_iterator data_ptr, datastructure::FieldData& field_data) const;
+  uint8_t readFieldType(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readSetIndex(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

@@ -49,11 +49,10 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
    */
-  inline void writeuint8_t(uint8_t*& buf, const uint8_t v, const uint16_t offset)
+  inline void writeuint8_t(std::vector<uint8_t>::iterator it, const uint8_t v)
   {
-    buf[offset] = v;
+    *(it+0) = v;
   }
 
   /*!
@@ -61,11 +60,11 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeuint8_tBigEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset)
+  inline void writeuint8_tBigEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
   {
-    writeuint8_t(buf, v, offset);
+    writeuint8_t(it, v);
   }
 
   /*!
@@ -73,11 +72,11 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeuint8_tLittleEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset)
+  inline void writeuint8_tLittleEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
   {
-    writeuint8_t(buf, v, offset);
+    writeuint8_t(it, v);
   }
 
   /*!
@@ -85,11 +84,11 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeint8_t(uint8_t*& buf, const uint8_t v, const uint16_t offset)
+  inline void writeint8_t(std::vector<uint8_t>::iterator it, const uint8_t v)
   {
-    writeuint8_t(buf, v, offset);
+    writeuint8_t(it, v);
   }
 
   /*!
@@ -97,11 +96,11 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeint8_tBigEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset)
+  inline void writeint8_tBigEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
   {
-    writeint8_t(buf, v, offset);
+    writeint8_t(it, v);
   }
 
   /*!
@@ -109,11 +108,11 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeint8_tLittleEndian(uint8_t*& buf, const uint8_t v, const uint16_t offset)
+  inline void writeint8_tLittleEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
   {
-    writeint8_t(buf, v, offset);
+    writeint8_t(it, v);
   }
 
   /*!
@@ -121,12 +120,12 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeuint16_tBigEndian(uint8_t*& buf, const uint16_t v, const uint16_t offset)
+  inline void writeuint16_tBigEndian(std::vector<uint8_t>::iterator it, const uint16_t v)
   {
-    buf[offset]     = (v & 0xff00) >> 8;
-    buf[offset + 1] = v & 0xff;
+    *(it+0) = (v & 0xff00) >> 8;
+    *(it+1) = v & 0xff;
   }
 
   /*!
@@ -134,12 +133,12 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeuint16_tLittleEndian(uint8_t*& buf, const uint16_t v, const uint16_t offset)
+  inline void writeuint16_tLittleEndian(std::vector<uint8_t>::iterator it, const uint16_t v)
   {
-    buf[offset + 1] = (v & 0xff00) >> 8;
-    buf[offset]     = v & 0xff;
+    *(it+0) = v & 0xff;
+    *(it+1) = (v & 0xff00) >> 8;
   }
 
 
@@ -148,14 +147,14 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeuint32_tBigEndian(uint8_t*& buf, const uint32_t v, const uint16_t offset)
+  inline void writeuint32_tBigEndian(std::vector<uint8_t>::iterator it, const uint32_t v)
   {
-    buf[offset]     = (v & 0xff000000) >> 24;
-    buf[offset + 1] = (v & 0xff0000) >> 16;
-    buf[offset + 2] = (v & 0xff00) >> 8;
-    buf[offset + 3] = v & 0xff;
+    *(it+0) = (v & 0xff000000) >> 24;
+    *(it+1) = (v & 0xff0000) >> 16;
+    *(it+2) = (v & 0xff00) >> 8;
+    *(it+3) = v & 0xff;
   }
 
   /*!
@@ -163,14 +162,14 @@ namespace ReadWriteHelper {
    *
    * \param buf The buffer to write to.
    * \param v Value which will be written.
-   * \param offset Position the value will be written to.
+   
    */
-  inline void writeuint32_tLittleEndian(uint8_t*& buf, const uint32_t v, const uint16_t offset)
+  inline void writeuint32_tLittleEndian(std::vector<uint8_t>::iterator it, const uint32_t v)
   {
-    buf[offset + 3] = (v & 0xff000000) >> 24;
-    buf[offset + 2] = (v & 0xff0000) >> 16;
-    buf[offset + 1] = (v & 0xff00) >> 8;
-    buf[offset]     = v & 0xff;
+    *(it+3) = (v & 0xff000000) >> 24;
+    *(it+2) = (v & 0xff0000) >> 16;
+    *(it+1) = (v & 0xff00) >> 8;
+    *(it+0) = v & 0xff;
   }
 
   /*!
@@ -181,10 +180,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline uint8_t readuint8_t(const uint8_t*& buf, const uint16_t offset)
+  inline uint8_t readuint8_t(std::vector<uint8_t>::const_iterator it)
   {
-    uint8_t value = buf[offset];
-    return value;
+    return *(it+0);
   }
 
   /*!
@@ -195,9 +193,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline uint8_t readuint8_tBigEndian(const uint8_t*& buf, const uint16_t offset)
+  inline uint8_t readuint8_tBigEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readuint8_t(buf, offset);
+    return readuint8_t(it);
   }
 
   /*!
@@ -208,9 +206,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline uint8_t readuint8_tLittleEndian(const uint8_t*& buf, const uint16_t offset)
+  inline uint8_t readuint8_tLittleEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readuint8_t(buf, offset);
+    return readuint8_t(it);
   }
 
   /*!
@@ -221,9 +219,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline int8_t readint8_t(const uint8_t*& buffer, const uint16_t offset)
+  inline int8_t readint8_t(std::vector<uint8_t>::const_iterator it)
   {
-    return readuint8_t(buffer, offset);
+    return readuint8_t(it);
   }
 
   /*!
@@ -234,9 +232,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline int8_t readint8_tBigEndian(const uint8_t*& buf, const uint16_t offset)
+  inline int8_t readint8_tBigEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readint8_t(buf, offset);
+    return readint8_t(it);
   }
 
   /*!
@@ -247,9 +245,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline int8_t readint8_tLittleEndian(const uint8_t*& buf, const uint16_t offset)
+  inline int8_t readint8_tLittleEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readint8_t(buf, offset);
+    return readint8_t(it);
   }
 
   /*!
@@ -260,9 +258,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline uint16_t readuint16_tBigEndian(const uint8_t*& buf, const uint16_t offset)
+  inline uint16_t readuint16_tBigEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return (buf[offset] << 8) + buf[offset + 1];
+    return (*(it+0) << 8) + *(it+1);
   }
 
   /*!
@@ -273,9 +271,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline uint16_t readuint16_tLittleEndian(const uint8_t*& buf, const uint16_t offset)
+  inline uint16_t readuint16_tLittleEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return (buf[offset + 1] << 8) + buf[offset];
+    return (*(it+1) << 8) + *(it+0);
   }
 
   /*!
@@ -286,9 +284,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline int16_t readint16_tBigEndian(const uint8_t*& buf, const uint16_t offset)
+  inline int16_t readint16_tBigEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readuint16_tBigEndian(buf, offset);
+    return readuint16_tBigEndian(it);
   }
 
   /*!
@@ -299,9 +297,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline int16_t readint16_tLittleEndian(const uint8_t*& buf, const uint16_t offset)
+  inline int16_t readint16_tLittleEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readuint16_tLittleEndian(buf, offset);
+    return readuint16_tLittleEndian(it);
   }
 
   /*!
@@ -312,9 +310,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline uint32_t readuint32_tBigEndian(const uint8_t*& buf, const uint16_t offset)
+  inline uint32_t readuint32_tBigEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return (buf[offset] << 24) + (buf[offset + 1] << 16) + (buf[offset + 2] << 8) + buf[offset + 3];
+    return (*(it+0) << 24) + (*(it+1) << 16) + (*(it+2) << 8) + *(it+3);
   }
 
   /*!
@@ -325,9 +323,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline uint32_t readuint32_tLittleEndian(const uint8_t*& buf, const uint16_t offset)
+  inline uint32_t readuint32_tLittleEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return (buf[offset + 3] << 24) + (buf[offset + 2] << 16) + (buf[offset + 1] << 8) + buf[offset];
+    return (*(it+3) << 24) + (*(it+2) << 16) + (*(it+1) << 8) + *(it+0);
   }
 
   /*!
@@ -338,9 +336,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline int32_t readint32_tBigEndian(const uint8_t*& buf, const uint16_t offset)
+  inline int32_t readint32_tBigEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readuint32_tBigEndian(buf, offset);
+    return readuint32_tBigEndian(it);
   }
 
 
@@ -352,9 +350,9 @@ namespace ReadWriteHelper {
    *
    * \returns The value of the read integer.
    */
-  inline int32_t readint32_tLittleEndian(const uint8_t*& buf, const uint16_t offset)
+  inline int32_t readint32_tLittleEndian(std::vector<uint8_t>::const_iterator it)
   {
-    return readuint32_tLittleEndian(buf, offset);
+    return readuint32_tLittleEndian(it);
   }
 
 } // namespace ReadWriteHelper

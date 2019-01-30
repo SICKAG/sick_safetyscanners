@@ -71,20 +71,20 @@ public:
                         sick::datastructure::DatagramHeader& header) const;
 
 private:
-  void setDataInHeader(const uint8_t*& data_ptr, datastructure::DatagramHeader& header) const;
+  void setDataInHeader(std::vector<uint8_t>::const_iterator data_ptr, datastructure::DatagramHeader& header) const;
 
-  void setDatagramMarkerInHeader(const uint8_t*& data_ptr,
+  void setDatagramMarkerInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DatagramHeader& header) const;
-  void setProtocolInHeader(const uint8_t*& data_ptr, datastructure::DatagramHeader& header) const;
-  void setMajorVersionInHeader(const uint8_t*& data_ptr,
+  void setProtocolInHeader(std::vector<uint8_t>::const_iterator data_ptr, datastructure::DatagramHeader& header) const;
+  void setMajorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                datastructure::DatagramHeader& header) const;
-  void setMinorVersionInHeader(const uint8_t*& data_ptr,
+  void setMinorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                datastructure::DatagramHeader& header) const;
-  void setTotalLengthInHeader(const uint8_t*& data_ptr,
+  void setTotalLengthInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                               datastructure::DatagramHeader& header) const;
-  void setIdentificationInHeader(const uint8_t*& data_ptr,
+  void setIdentificationInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DatagramHeader& header) const;
-  void setFragmentOffsetInHeader(const uint8_t*& data_ptr,
+  void setFragmentOffsetInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DatagramHeader& header) const;
 };
 

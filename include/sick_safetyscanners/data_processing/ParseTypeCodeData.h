@@ -69,8 +69,8 @@ public:
                         datastructure::TypeCode& type_code) const;
 
 private:
-  uint8_t readInterfaceType(const uint8_t*& data_ptr) const;
-  float readMaxRange(const uint8_t*& data_ptr) const;
+  uint8_t readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const;
+  float readMaxRange(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

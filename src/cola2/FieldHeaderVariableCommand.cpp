@@ -49,12 +49,6 @@ FieldHeaderVariableCommand::FieldHeaderVariableCommand(Cola2Session& session,
   m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
 }
 
-void FieldHeaderVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
 bool FieldHeaderVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;

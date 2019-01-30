@@ -71,10 +71,10 @@ public:
                         datastructure::MonitoringCaseData& monitoring_case_data) const;
 
 private:
-  bool isValid(const uint8_t*& data_ptr) const;
-  uint16_t readMonitoringCaseNumber(const uint8_t*& data_ptr) const;
-  uint16_t readFieldIndex(const uint8_t*& data_ptr, const uint8_t index) const;
-  bool readFieldValid(const uint8_t*& data_ptr, const uint8_t index) const;
+  bool isValid(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readMonitoringCaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readFieldIndex(std::vector<uint8_t>::const_iterator data_ptr, const uint8_t index) const;
+  bool readFieldValid(std::vector<uint8_t>::const_iterator data_ptr, const uint8_t index) const;
 };
 
 } // namespace data_processing

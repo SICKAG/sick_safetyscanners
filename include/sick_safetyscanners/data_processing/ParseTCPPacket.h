@@ -94,16 +94,16 @@ public:
   uint16_t getRequestID(const datastructure::PacketBuffer& buffer) const;
 
 private:
-  uint32_t readSTx(const uint8_t*& data_ptr) const;
-  uint32_t readLength(const uint8_t*& data_ptr) const;
-  uint16_t readRequestID(const uint8_t*& data_ptr) const;
-  uint8_t readHubCntr(const uint8_t*& data_ptr) const;
-  uint8_t readNoC(const uint8_t*& data_ptr) const;
-  uint32_t readSessionID(const uint8_t*& data_ptr) const;
-  uint8_t readCommandType(const uint8_t*& data_ptr) const;
-  uint8_t readCommandMode(const uint8_t*& data_ptr) const;
-  uint16_t readErrorCode(const uint8_t*& data_ptr) const;
-  void readData(const datastructure::PacketBuffer& buffer, std::vector<uint8_t>& byteVector) const;
+  uint32_t readSTx(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readLength(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readRequestID(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readHubCntr(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readNoC(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readSessionID(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readCommandType(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readCommandMode(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readErrorCode(std::vector<uint8_t>::const_iterator data_ptr) const;
+  std::vector<uint8_t> readData(const datastructure::PacketBuffer& buffer) const;
   void setCommandValuesFromPacket(const sick::datastructure::PacketBuffer& buffer,
                                   sick::cola2::Command& command) const;
 };

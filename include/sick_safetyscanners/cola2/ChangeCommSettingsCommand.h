@@ -71,8 +71,9 @@ public:
    * \brief Adds the settings as  data to the packetbuffer.
    *
    * \param telegram The telegram, which will be modified the settings as data.
+   * \returns Completed telegram
    */
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  std::vector<uint8_t> addTelegramData(const std::vector<uint8_t>& telegram) const;
 
 
   /*!
@@ -96,18 +97,16 @@ public:
 private:
   sick::datastructure::CommSettings m_settings;
 
-  uint8_t*
-  prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  void writeDataToDataPtr(uint8_t*& data_ptr) const;
-  void writeChannelToDataPtr(uint8_t*& data_ptr) const;
-  void writeEnabledToDataPtr(uint8_t*& data_ptr) const;
-  void writeEInterfaceTypeToDataPtr(uint8_t*& data_ptr) const;
-  void writeIPAddresstoDataPtr(uint8_t*& data_ptr) const;
-  void writePortToDataPtr(uint8_t*& data_ptr) const;
-  void writeFrequencyToDataPtr(uint8_t*& data_ptr) const;
-  void writeStartAngleToDataPtr(uint8_t*& data_ptr) const;
-  void writeEndAngleToDataPtr(uint8_t*& data_ptr) const;
-  void writeFeaturesToDataPtr(uint8_t*& data_ptr) const;
+  void writeDataToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeChannelToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeEnabledToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeEInterfaceTypeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeIPAddresstoDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writePortToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeFrequencyToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeStartAngleToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeEndAngleToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeFeaturesToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
 };
 
 } // namespace cola2

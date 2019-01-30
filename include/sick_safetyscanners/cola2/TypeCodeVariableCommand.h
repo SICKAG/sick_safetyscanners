@@ -63,13 +63,6 @@ public:
   TypeCodeVariableCommand(Cola2Session& session, datastructure::TypeCode& type_code);
 
   /*!
-   * \brief Adds the data to the telegram.
-   *
-   * \param telegram The telegram which will be modified by the data.
-   */
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
-
-  /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most
    * commands except the commands to establish a connection.
    *
@@ -86,7 +79,6 @@ public:
 
 
 private:
-
   std::shared_ptr<sick::data_processing::ParseTypeCodeData> m_type_code_parser_ptr;
 
   sick::datastructure::TypeCode& m_type_code;

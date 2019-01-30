@@ -58,8 +58,9 @@ public:
    * \brief Adds the data to the telegram.
    *
    * \param telegram The telegram which will be modified by the data.
+   * \returns Completed new telegram message
    */
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  std::vector<uint8_t> addTelegramData(const std::vector<uint8_t>& telegram) const;
 
   /*!
    * \brief Returns true since creating a new session is possible without a session ID.
@@ -76,10 +77,10 @@ public:
   bool processReply();
 
 private:
-  uint8_t*
-  prepareTelegramAndGetDataPtr(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  void writeHeartbeatTimeoutToDataPtr(uint8_t*& data_ptr) const;
-  void writeClientIdToDataPtr(uint8_t*& data_ptr) const;
+  /*std::vector<uint8_t>
+  prepareTelegramAndGetDataPtr(const std::vector<uint8_t>& telegram) const;*/
+  void writeHeartbeatTimeoutToDataPtr(std::vector<uint8_t>::iterator it) const;
+  void writeClientIdToDataPtr(std::vector<uint8_t>::iterator it) const;
 };
 
 } // namespace cola2

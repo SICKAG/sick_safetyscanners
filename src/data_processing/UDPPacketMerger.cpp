@@ -57,6 +57,9 @@ sick::datastructure::PacketBuffer UDPPacketMerger::getDeployedPacketBuffer()
 
 bool UDPPacketMerger::addUDPPacket(const datastructure::PacketBuffer& buffer)
 {
+  // Protect the internal memory for duplciate calls
+  std::lock_guard<std::mutex> lock(m_buffer_mutex);
+
   if (isComplete())
   {
     m_is_complete = false;
@@ -101,7 +104,7 @@ bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader& head
 
   sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector vec =
     getSortedParsedPacketBufferForIdentification(header);
-  sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer =
+  std::vector<uint8_t> headerless_packet_buffer =
     removeHeaderFromParsedPacketBuffer(vec);
   m_deployed_packet_buffer.setBuffer(headerless_packet_buffer);
   return true;
@@ -145,18 +148,20 @@ UDPPacketMerger::getSortedParsedPacketBufferForIdentification(
   return vec;
 }
 
-sick::datastructure::PacketBuffer::VectorBuffer UDPPacketMerger::removeHeaderFromParsedPacketBuffer(
+std::vector<uint8_t> UDPPacketMerger::removeHeaderFromParsedPacketBuffer(
   const sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector& vec)
 {
-  sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
+  std::vector<uint8_t> headerless_packet_buffer;
   for (auto& parsed_packet_buffer : vec)
   {
     sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.getPacketBuffer();
 
+    // This insert is memory safe because we constructed the buffer in this function
+    const std::shared_ptr<std::vector<uint8_t> const> vecPtr = packet_buffer.getBuffer();
     headerless_packet_buffer.insert(headerless_packet_buffer.end(),
-                                    packet_buffer.getBuffer().begin() +
+                                    vecPtr->begin() +
                                       sick::datastructure::DatagramHeader::HEADER_SIZE,
-                                    packet_buffer.getBuffer().end());
+                                    vecPtr->end());
   }
   return headerless_packet_buffer;
 }

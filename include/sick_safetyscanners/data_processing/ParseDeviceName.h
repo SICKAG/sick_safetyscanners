@@ -69,7 +69,7 @@ public:
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer, std::string& device_name) const;
 
 private:
-  std::string readDeviceName(const uint8_t*& data_ptr) const;
+  std::string readDeviceName(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

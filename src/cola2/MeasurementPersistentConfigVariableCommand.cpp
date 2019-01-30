@@ -49,12 +49,6 @@ MeasurementPersistentConfigVariableCommand::MeasurementPersistentConfigVariableC
     std::make_shared<sick::data_processing::ParseMeasurementPersistentConfigData>();
 }
 
-void MeasurementPersistentConfigVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
 bool MeasurementPersistentConfigVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;

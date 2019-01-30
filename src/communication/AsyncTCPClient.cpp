@@ -107,7 +107,7 @@ void AsyncTCPClient::doConnect()
 
 
 void AsyncTCPClient::doSendAndReceive(
-  const sick::datastructure::PacketBuffer::VectorBuffer& sendBuffer)
+  const std::vector<uint8_t>& sendBuffer)
 {
   boost::mutex::scoped_lock lock(m_socket_mutex);
   if (!m_socket_ptr)

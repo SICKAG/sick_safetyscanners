@@ -69,7 +69,7 @@ public:
                         datastructure::FieldData& field_data) const;
 
 private:
-  uint32_t readAngularBeamResolution(const uint8_t* data_ptr) const;
+  uint32_t readAngularBeamResolution(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

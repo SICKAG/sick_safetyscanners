@@ -46,12 +46,13 @@ MethodCommand::MethodCommand(Cola2Session& session, const uint16_t& method_index
 {
 }
 
-void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
+std::vector<uint8_t> MethodCommand::addTelegramData(const std::vector<uint8_t>& telegram) const
 {
-  uint16_t prevSize = telegram.size();
-  telegram.resize(prevSize + 2);
-  uint8_t* data_ptr = telegram.data() + prevSize;
-  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr, m_method_index, 0);
+  auto output = expandTelegram(telegram, 2);
+  // Add new values after telegram
+  auto new_data_offset_it = output.begin()+telegram.size();
+  ReadWriteHelper::writeuint16_tLittleEndian(new_data_offset_it, m_method_index);  
+  return output;
 }
 
 bool MethodCommand::canBeExecutedWithoutSessionID() const

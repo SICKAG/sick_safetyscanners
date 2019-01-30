@@ -49,12 +49,6 @@ FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session
   m_field_geometry_parser_ptr = std::make_shared<sick::data_processing::ParseFieldGeometryData>();
 }
 
-void FieldGeometryVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
 bool FieldGeometryVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;

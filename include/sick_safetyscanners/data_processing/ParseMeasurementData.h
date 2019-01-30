@@ -72,15 +72,15 @@ public:
 private:
   float m_angle;
   float m_angle_delta;
-  void setDataInMeasurementData(const uint8_t*& data_ptr,
+  void setDataInMeasurementData(std::vector<uint8_t>::const_iterator data_ptr,
                                 datastructure::MeasurementData& measurement_data);
-  void setNumberOfBeamsInMeasurementData(const uint8_t*& data_ptr,
+  void setNumberOfBeamsInMeasurementData(std::vector<uint8_t>::const_iterator data_ptr,
                                          datastructure::MeasurementData& measurement_data) const;
   void setStartAngleAndDelta(const datastructure::Data& data);
-  void setScanPointsInMeasurementData(const uint8_t*& data_ptr,
+  void setScanPointsInMeasurementData(std::vector<uint8_t>::const_iterator data_ptr,
                                       datastructure::MeasurementData& measurement_data);
   void addScanPointToMeasurementData(uint16_t offset,
-                                     const uint8_t*& data_ptr,
+                                     std::vector<uint8_t>::const_iterator data_ptr,
                                      datastructure::MeasurementData& measurement_data) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfMeasurementDataIsPublished(const datastructure::Data& data) const;

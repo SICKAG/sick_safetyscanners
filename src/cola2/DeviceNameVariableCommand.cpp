@@ -48,12 +48,6 @@ DeviceNameVariableCommand::DeviceNameVariableCommand(Cola2Session& session,
   m_device_name_parser_ptr = std::make_shared<sick::data_processing::ParseDeviceName>();
 }
 
-void DeviceNameVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
 bool DeviceNameVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;

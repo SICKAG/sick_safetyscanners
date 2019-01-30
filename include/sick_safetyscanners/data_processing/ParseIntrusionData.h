@@ -73,16 +73,16 @@ public:
 private:
   uint16_t m_num_scan_points;
 
-  void setDataInIntrusionData(const uint8_t*& data_ptr,
+  void setDataInIntrusionData(std::vector<uint8_t>::const_iterator data_ptr,
                               datastructure::IntrusionData& intrusion_data) const;
   void setDataInIntrusionDatums(
-    const uint8_t*& data_ptr,
+    std::vector<uint8_t>::const_iterator data_ptr,
     std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums) const;
   uint16_t setSizeInIntrusionDatum(const uint16_t offset,
-                                   const uint8_t*& data_ptr,
+                                   std::vector<uint8_t>::const_iterator data_ptr,
                                    sick::datastructure::IntrusionDatum& datum) const;
   uint16_t setFlagsInIntrusionDatum(const uint16_t offset,
-                                    const uint8_t*& data_ptr,
+                                    std::vector<uint8_t>::const_iterator data_ptr,
                                     sick::datastructure::IntrusionDatum& datum) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfIntrusionDataIsPublished(const datastructure::Data& data) const;

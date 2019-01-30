@@ -47,14 +47,16 @@ ParseMeasurementCurrentConfigData::ParseMeasurementCurrentConfigData()
 bool ParseMeasurementCurrentConfigData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
                                                          datastructure::FieldData& field_data) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
   field_data.setAngularBeamResolution(readAngularBeamResolution(data_ptr));
   return true;
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(const uint8_t* data_ptr) const
+uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr, 40);
+  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 40);
 }
 
 } // namespace data_processing

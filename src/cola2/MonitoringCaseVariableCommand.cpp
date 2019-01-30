@@ -51,12 +51,6 @@ MonitoringCaseVariableCommand::MonitoringCaseVariableCommand(
   m_monitoring_case_parser_ptr = std::make_shared<sick::data_processing::ParseMonitoringCaseData>();
 }
 
-void MonitoringCaseVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
 bool MonitoringCaseVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;

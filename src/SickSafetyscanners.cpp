@@ -256,9 +256,8 @@ void SickSafetyscanners::processUDPPacket(const sick::datastructure::PacketBuffe
   {
     sick::datastructure::PacketBuffer deployedBuffer =
       m_packet_merger_ptr->getDeployedPacketBuffer();
-    sick::datastructure::Data data;
     sick::data_processing::ParseData data_parser;
-    data_parser.parseUDPSequence(deployedBuffer, data);
+    sick::datastructure::Data data = data_parser.parseUDPSequence(deployedBuffer);
 
     m_newPacketReceivedCallbackFunction(data);
   }

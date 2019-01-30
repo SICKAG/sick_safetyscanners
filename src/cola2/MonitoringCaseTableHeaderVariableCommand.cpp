@@ -49,12 +49,6 @@ MonitoringCaseTableHeaderVariableCommand::MonitoringCaseTableHeaderVariableComma
   m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
 }
 
-void MonitoringCaseTableHeaderVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
-}
-
 bool MonitoringCaseTableHeaderVariableCommand::canBeExecutedWithoutSessionID() const
 {
   return true;

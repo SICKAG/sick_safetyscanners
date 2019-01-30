@@ -70,20 +70,20 @@ public:
                    datastructure::Data& data) const;
 
 private:
-  void setDataInGeneralSystemState(const uint8_t*& data_ptr,
+  void setDataInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
                                    datastructure::GeneralSystemState& general_System_state) const;
   void
-  setStatusBitsInGeneralSystemState(const uint8_t*& data_ptr,
+  setStatusBitsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
                                     datastructure::GeneralSystemState& general_System_state) const;
   void setSafeCutOffPathInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
   void setNonSafeCutOffPathInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
   void setResetRequiredCutOffPathInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
   void setCurrentMonitoringCasesInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
-  void setErrorsInGeneralSystemState(const uint8_t*& data_ptr,
+    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+  void setErrorsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
                                      datastructure::GeneralSystemState& general_System_state) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfGeneralSystemStateIsPublished(const datastructure::Data& data) const;

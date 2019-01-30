@@ -45,19 +45,14 @@ CreateSession::CreateSession(Cola2Session& session)
 {
 }
 
-void CreateSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
+std::vector<uint8_t> CreateSession::addTelegramData(const std::vector<uint8_t>& telegram) const
 {
-  uint8_t* data_ptr = prepareTelegramAndGetDataPtr(telegram);
-  writeHeartbeatTimeoutToDataPtr(data_ptr);
-  writeClientIdToDataPtr(data_ptr);
-}
-
-uint8_t* CreateSession::prepareTelegramAndGetDataPtr(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  uint16_t prevSize = telegram.size();
-  telegram.resize(prevSize + 5);
-  return telegram.data() + prevSize;
+  auto output = expandTelegram(telegram, 5);
+  // Add new values after telegram
+  auto new_data_offset_it = output.begin()+telegram.size();
+  writeHeartbeatTimeoutToDataPtr(new_data_offset_it);
+  writeClientIdToDataPtr(new_data_offset_it);
+  return output;
 }
 
 bool CreateSession::canBeExecutedWithoutSessionID() const
@@ -81,16 +76,16 @@ bool CreateSession::processReply()
   }
 }
 
-void CreateSession::writeHeartbeatTimeoutToDataPtr(uint8_t*& data_ptr) const
+void CreateSession::writeHeartbeatTimeoutToDataPtr(std::vector<uint8_t>::iterator it) const
 {
   uint8_t heartBeatTimeoutSeconds = 60;
-  ReadWriteHelper::writeuint8_tBigEndian(data_ptr, heartBeatTimeoutSeconds, 0);
+  ReadWriteHelper::writeuint8_tBigEndian(it+0, heartBeatTimeoutSeconds);
 }
 
-void CreateSession::writeClientIdToDataPtr(uint8_t*& data_ptr) const
+void CreateSession::writeClientIdToDataPtr(std::vector<uint8_t>::iterator it) const
 {
   uint32_t clientID = 1; // can be any random number
-  ReadWriteHelper::writeuint32_tBigEndian(data_ptr, clientID, 1);
+  ReadWriteHelper::writeuint32_tBigEndian(it+1, clientID);
 }
 
 } // namespace cola2
