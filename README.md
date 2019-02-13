@@ -143,15 +143,14 @@ Returns all configured protective and warning fields for the sensor
 | host_udp_port             | Integer | 0 | | Host UDP Port.  Can be passed as an argument to the launch file.  Zero allows system chosen port. |
 | frame_id  | String | scan | | The frame name of the sensor message  |
 | skip    | Integer | 0 | | The number of scans to skip between each measured scan.  For a 25Hz laser, setting 'skip' to 0 makes it publish at 25Hz, 'skip' to 1 makes it publish at 12.5Hz. |
-| angle_start              | Double |  0.0| | Start angle of scan in radians, if both start and end angle are equal, all angels are regarded  |
-| angle_end                | Double | 0.0 | | End angle of scan in radians, if both start and end angle are equal, all angels are regarded  |
+| angle_start              | Double |  0.0| | Start angle of scan in radians, if both start and end angle are equal, all angels are regarded.  0° is at the front of the scanner. |
+| angle_end                | Double | 0.0 | | End angle of scan in radians, if both start and end angle are equal, all angels are regarded.  0° is at the front of the scanner. |
 | channel_enabled     | Boolean | true | | If the channel should be enabled  |
 | general_system_state  | Boolean | true | | If the general system state should be published  |
 | derived_settings      | Boolean | true | | If the derived settings should be published  |
 | measurement_data  | Boolean | true | | If the measurement data should be published  |
 | intrusion_data          | Boolean | true | | If the intrusion data should be published  |
 | application_io_data  | Boolean | true | | If the application IO data should be published  |
-| use_sick_angles | Boolean |  false | | If this flag is set, the predefined angles from SICK are used. If this flag is set to false an offset of -90° is added to the angles so that 0° is at the front of the scanner. |
 
 ## Creators
 

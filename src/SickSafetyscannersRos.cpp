@@ -172,11 +172,11 @@ bool SickSafetyscannersRos::readParameters()
 
   float angle_start;
   m_private_nh.getParam("angle_start", angle_start);
-  m_communication_settings.setStartAngle(sick::radToDeg(angle_start));
+  m_communication_settings.setStartAngle(sick::radToDeg(angle_start) - m_angle_offset);
 
   float angle_end;
   m_private_nh.getParam("angle_end", angle_end);
-  m_communication_settings.setEndAngle(sick::radToDeg(angle_end));
+  m_communication_settings.setEndAngle(sick::radToDeg(angle_end) - m_angle_offset);
 
   bool general_system_state;
   m_private_nh.getParam("general_system_state", general_system_state);
@@ -197,17 +197,6 @@ bool SickSafetyscannersRos::readParameters()
     general_system_state, derived_settings, measurement_data, intrusion_data, application_io_data);
 
   m_private_nh.getParam("frame_id", m_frame_id);
-
-  m_private_nh.getParam("use_sick_angles", m_use_sick_angles);
-
-  if (m_use_sick_angles)
-  {
-    m_angle_offset = 0;
-  }
-  else
-  {
-    m_angle_offset = -90.0;
-  }
 
   return true;
 }
