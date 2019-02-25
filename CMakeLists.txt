@@ -141,6 +141,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/ApplicationInputs.cpp
   src/datastructure/ApplicationOutputs.cpp
   src/datastructure/CommSettings.cpp
+  src/datastructure/ConfigData.cpp
   src/datastructure/Data.cpp
   src/datastructure/DataHeader.cpp
   src/datastructure/DatagramHeader.cpp
