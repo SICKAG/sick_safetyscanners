@@ -62,10 +62,10 @@ public:
    * sensor up to 128 variables can be defined.
    *
    * \param session The current cola2 session.
-   * \param field_data The field data reference which will be modified on execution.
+   * \param config_data The config data reference which will be modified on execution.
    */
   MeasurementPersistentConfigVariableCommand(Cola2Session& session,
-                                             datastructure::FieldData& field_data);
+                                             datastructure::ConfigData& config_data);
 
   /*!
    * \brief Adds the data to the telegram.
@@ -95,7 +95,7 @@ private:
   std::shared_ptr<sick::data_processing::ParseMeasurementPersistentConfigData>
     m_measurement_persistent_config_parser_ptr;
 
-  sick::datastructure::FieldData& m_field_data;
+  sick::datastructure::ConfigData& m_config_data;
 };
 
 } // namespace cola2

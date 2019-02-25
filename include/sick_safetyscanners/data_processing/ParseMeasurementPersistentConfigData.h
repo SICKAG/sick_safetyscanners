@@ -35,8 +35,8 @@
 #ifndef SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTPERSISTENTCONFIGDATA_H
 #define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTPERSISTENTCONFIGDATA_H
 
+#include <sick_safetyscanners/datastructure/ConfigData.h>
 #include <sick_safetyscanners/datastructure/Data.h>
-#include <sick_safetyscanners/datastructure/FieldData.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
 #include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
@@ -61,17 +61,18 @@ public:
    * \brief Parses a tcp sequence to read the persistent configuration of the sensor.
    *
    * \param buffer The incoming tcp sequence.
-   * \param field_data Reference to the field data where the information will be set.
+   * \param config_data Reference to the config data where the persistent configuration will be set.
    *
    * \returns If parsing was successful.
    */
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
-                        datastructure::FieldData& field_data) const;
+                        datastructure::ConfigData& config_data) const;
 
 private:
   std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
 
   uint32_t readStartAngle(const uint8_t* data_ptr) const;
+  uint32_t readEndAngle(const uint8_t* data_ptr) const;
 };
 
 } // namespace data_processing

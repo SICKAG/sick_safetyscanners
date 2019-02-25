@@ -46,16 +46,22 @@ ParseMeasurementPersistentConfigData::ParseMeasurementPersistentConfigData()
 
 
 bool ParseMeasurementPersistentConfigData::parseTCPSequence(
-  const datastructure::PacketBuffer& buffer, datastructure::FieldData& field_data) const
+  const datastructure::PacketBuffer& buffer, datastructure::ConfigData& config_data) const
 {
   const uint8_t* data_ptr(buffer.getBuffer().data());
-  field_data.setStartAngle(readStartAngle(data_ptr));
+  config_data.setStartAngle(readStartAngle(data_ptr));
+  config_data.setEndAngle(readEndAngle(data_ptr));
   return true;
 }
 
 uint32_t ParseMeasurementPersistentConfigData::readStartAngle(const uint8_t* data_ptr) const
 {
   return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16);
+}
+
+uint32_t ParseMeasurementPersistentConfigData::readEndAngle(const uint8_t* data_ptr) const
+{
+  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 20);
 }
 
 } // namespace data_processing

@@ -41,9 +41,9 @@ namespace sick {
 namespace cola2 {
 
 MeasurementPersistentConfigVariableCommand::MeasurementPersistentConfigVariableCommand(
-  Cola2Session& session, datastructure::FieldData& field_data)
+  Cola2Session& session, datastructure::ConfigData& config_data)
   : VariableCommand(session, 177)
-  , m_field_data(field_data)
+  , m_config_data(config_data)
 {
   m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_measurement_persistent_config_parser_ptr =
@@ -67,7 +67,7 @@ bool MeasurementPersistentConfigVariableCommand::processReply()
   {
     return false;
   }
-  m_measurement_persistent_config_parser_ptr->parseTCPSequence(getDataVector(), m_field_data);
+  m_measurement_persistent_config_parser_ptr->parseTCPSequence(getDataVector(), m_config_data);
   return true;
 }
 

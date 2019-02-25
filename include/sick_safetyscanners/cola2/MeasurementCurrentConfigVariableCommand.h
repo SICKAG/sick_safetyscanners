@@ -57,15 +57,14 @@ public:
   /*!
    * \brief Constructor of the command.
    *
-   * Takes the current cola2 session and a reference to the field data variable which will be
-   * written on execution. The index defines which field variable will be read. Depending on the
-   * sensor up to 128 variables can be defined.
+   * Takes the current cola2 session and a reference to the config data variable which will be
+   * written on execution.
    *
    * \param session The current cola2 session.
-   * \param field_data The field data reference which will be modified on execution.
+   * \param config_data The config data reference which will be modified on execution.
    */
   MeasurementCurrentConfigVariableCommand(Cola2Session& session,
-                                          datastructure::FieldData& field_data);
+                                          datastructure::ConfigData& config_data);
 
   /*!
    * \brief Adds the data to the telegram.
@@ -95,7 +94,7 @@ private:
   std::shared_ptr<sick::data_processing::ParseMeasurementCurrentConfigData>
     m_measurement_current_config_parser_ptr;
 
-  sick::datastructure::FieldData& m_field_data;
+  sick::datastructure::ConfigData& m_config_data;
 };
 
 } // namespace cola2
