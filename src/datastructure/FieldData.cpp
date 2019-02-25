@@ -104,6 +104,21 @@ void FieldData::setStartAngleDegrees(const float& start_angle)
   m_start_angle = start_angle;
 }
 
+float FieldData::getEndAngle() const
+{
+  return m_end_angle;
+}
+
+void FieldData::setEndAngle(const int32_t& end_angle)
+{
+  m_end_angle = (float)end_angle / ANGLE_RESOLUTION;
+}
+
+void FieldData::setEndAngleDegrees(const float& end_angle)
+{
+  m_end_angle = end_angle;
+}
+
 float FieldData::getAngularBeamResolution() const
 {
   return m_angular_beam_resolution;

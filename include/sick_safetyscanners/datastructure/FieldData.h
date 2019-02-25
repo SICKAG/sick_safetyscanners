@@ -25,7 +25,7 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file FieldData.cpp
+ * \file FieldData.h
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2018-10-16
@@ -141,6 +141,23 @@ public:
    */
   void setStartAngleDegrees(const float& start_angle);
 
+  /*!
+   * \brief Get the end angle of the scan.
+   * \return End angle of the scan.
+   */
+  float getEndAngle() const;
+
+  /*!
+   * \brief Set the end angle of the scan.
+   * \param end_angle End angle of the scan.
+   */
+  void setEndAngle(const int32_t& end_angle);
+
+  /*!
+   * \brief Set the end angle of the scan from degrees.
+   * \param end_angle End angle of the scan in degrees.
+   */
+  void setEndAngleDegrees(const float& end_angle);
 
   /*!
    * \brief Returns the angular resolution between the beams.
@@ -172,6 +189,7 @@ private:
   bool m_is_protective_field;
   std::vector<uint16_t> m_beam_distances; // in mm
   float m_start_angle;
+  float m_end_angle;
   float m_angular_beam_resolution;
 };
 
