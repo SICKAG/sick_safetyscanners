@@ -56,6 +56,8 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     ROS_ERROR("Could not read parameters.");
     ros::requestShutdown();
   }
+  //tcp port can not be changed in the sensor configuration, therefore it is hardcoded
+  m_communication_settings.setSensorTcpPort(2122); 
   m_laser_scan_publisher = m_nh.advertise<sensor_msgs::LaserScan>("scan", 100);
   m_extended_laser_scan_publisher =
     m_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
@@ -145,12 +147,6 @@ bool SickSafetyscannersRos::readParameters()
   }
   m_communication_settings.setSensorIp(sensor_ip_adress);
 
-  int sensor_tcp_port = 2122;
-  if (!m_private_nh.getParam("sensor_tcp_port", sensor_tcp_port))
-  {
-    ROS_WARN("Using default sensor TCP port: %i", sensor_tcp_port);
-  }
-  m_communication_settings.setSensorTcpPort(sensor_tcp_port);
 
 
   std::string host_ip_adress = "192.168.1.9";

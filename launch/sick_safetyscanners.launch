@@ -1,6 +1,5 @@
 <launch>
   <arg name="sensor_ip"             default="192.168.1.11" />
-  <arg name="sensor_tcp_port"       default="2122" />
   <arg name="host_ip"               default="192.168.1.9" />
   <arg name="host_udp_port"         default="0" />
   <arg name="frame_id"              default="scan" />
@@ -19,7 +18,6 @@
   <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
   <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners">
      <param name="sensor_ip"              type="string" value="$(arg sensor_ip)" />
-     <param name="sensor_tcp_port"        type="int"    value="$(arg sensor_tcp_port)" />
      <param name="host_ip"                type="string" value="$(arg host_ip)" />
      <param name="host_udp_port"          type="int"    value="$(arg host_udp_port)" />
      <param name="frame_id"               type="string" value="$(arg frame_id)" />
