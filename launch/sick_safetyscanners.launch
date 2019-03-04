@@ -14,24 +14,26 @@
   <arg name="measurement_data"      default="True" />
   <arg name="intrusion_data"        default="True" />
   <arg name="application_io_data"   default="True" />
+  <arg name="use_persistent_config"   default="False" />
 
   <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
   <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners">
-     <param name="sensor_ip"            type="string" value="$(arg sensor_ip)" />
-     <param name="sensor_tcp_port"      type="int"    value="$(arg sensor_tcp_port)" />
-     <param name="host_ip"              type="string" value="$(arg host_ip)" />
-     <param name="host_udp_port"        type="int"    value="$(arg host_udp_port)" />
-     <param name="frame_id"             type="string" value="$(arg frame_id)" />
-     <param name="skip"                 type="int"    value="$(arg skip)" />
-     <param name="angle_start"          type="double" value="$(arg angle_start)" />
-     <param name="angle_end"            type="double" value="$(arg angle_end)" />
-     <param name="time_offset"          type="double" value="$(arg time_offset)" />
-     <param name="channel_enabled"      type="bool"   value="$(arg channel_enabled)" />
-     <param name="general_system_state" type="bool"   value="$(arg general_system_state)" />
-     <param name="derived_settings"     type="bool"   value="$(arg derived_settings)" />
-     <param name="measurement_data"     type="bool"   value="$(arg measurement_data)" />
-     <param name="intrusion_data"       type="bool"   value="$(arg intrusion_data)" />
-     <param name="application_io_data"  type="bool"   value="$(arg application_io_data)" />
+     <param name="sensor_ip"              type="string" value="$(arg sensor_ip)" />
+     <param name="sensor_tcp_port"        type="int"    value="$(arg sensor_tcp_port)" />
+     <param name="host_ip"                type="string" value="$(arg host_ip)" />
+     <param name="host_udp_port"          type="int"    value="$(arg host_udp_port)" />
+     <param name="frame_id"               type="string" value="$(arg frame_id)" />
+     <param name="skip"                   type="int"    value="$(arg skip)" />
+     <param name="angle_start"            type="double" value="$(arg angle_start)" />
+     <param name="angle_end"              type="double" value="$(arg angle_end)" />
+     <param name="time_offset"            type="double" value="$(arg time_offset)" />
+     <param name="channel_enabled"        type="bool"   value="$(arg channel_enabled)" />
+     <param name="general_system_state"   type="bool"   value="$(arg general_system_state)" />
+     <param name="derived_settings"       type="bool"   value="$(arg derived_settings)" />
+     <param name="measurement_data"       type="bool"   value="$(arg measurement_data)" />
+     <param name="intrusion_data"         type="bool"   value="$(arg intrusion_data)" />
+     <param name="application_io_data"    type="bool"   value="$(arg application_io_data)" />
+     <param name="use_persistent_config"  type="bool"   value="$(arg use_persistent_config)" />
   </node>
 
 

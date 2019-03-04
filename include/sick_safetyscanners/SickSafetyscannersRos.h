@@ -147,6 +147,7 @@ private:
 
   bool m_use_sick_angles;
   float m_angle_offset;
+  bool m_use_pers_conf;
 
   /*!
    * @brief Reads and verifies the ROS parameters.
@@ -200,6 +201,7 @@ private:
   sick_safetyscanners::ApplicationOutputsMsg
   createApplicationOutputsMessage(const sick::datastructure::Data& data);
   void readTypeCodeSettings();
+  void readPersistentConfig();
 
   bool getFieldData(sick_safetyscanners::FieldData::Request& req,
                     sick_safetyscanners::FieldData::Response& res);

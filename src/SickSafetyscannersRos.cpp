@@ -70,6 +70,11 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_device->run();
   readTypeCodeSettings();
 
+  if (m_use_pers_conf)
+  {
+    readPersistentConfig();
+  }
+
   m_device->changeSensorSettings(m_communication_settings);
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
@@ -82,6 +87,14 @@ void SickSafetyscannersRos::readTypeCodeSettings()
   m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
   m_range_min = 0.1;
   m_range_max = type_code.getMaxRange();
+}
+
+void SickSafetyscannersRos::readPersistentConfig()
+{
+  sick::datastructure::ConfigData config_data;
+  m_device->requestPersistentConfig(m_communication_settings, config_data);
+  m_communication_settings.setStartAngle(config_data.getStartAngle());
+  m_communication_settings.setEndAngle(config_data.getEndAngle());
 }
 
 void SickSafetyscannersRos::reconfigure_callback(
@@ -208,6 +221,10 @@ bool SickSafetyscannersRos::readParameters()
   {
     m_angle_offset = -90.0;
   }
+
+  m_private_nh.getParam("use_persistent_config", m_use_pers_conf);
+
+
 
   return true;
 }
