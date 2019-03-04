@@ -50,8 +50,8 @@
 #include <sick_safetyscanners/data_processing/ParseData.h>
 #include <sick_safetyscanners/data_processing/UDPPacketMerger.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
-#include <sick_safetyscanners/datastructure/PacketBuffer.h>
 #include <sick_safetyscanners/datastructure/ConfigData.h>
+#include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
 #include <sick_safetyscanners/cola2/ChangeCommSettingsCommand.h>
 #include <sick_safetyscanners/cola2/Cola2Session.h>
@@ -63,7 +63,6 @@
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
-#include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
 
 namespace sick {
 
@@ -138,7 +137,7 @@ public:
    * \param config_data Returned persistent configuration data.
    */
   void requestPersistentConfig(const datastructure::CommSettings& settings,
-                                           sick::datastructure::ConfigData& config_data);
+                               sick::datastructure::ConfigData& config_data);
   /*!
    * \brief Requests the monitoring cases from the sensor.
    *

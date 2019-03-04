@@ -225,7 +225,6 @@ bool SickSafetyscannersRos::readParameters()
   m_private_nh.getParam("use_persistent_config", m_use_pers_conf);
 
 
-
   return true;
 }
 
