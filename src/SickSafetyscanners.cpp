@@ -136,6 +136,15 @@ void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& se
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestPersistentConfig(const datastructure::CommSettings& settings,
+                                           sick::datastructure::ConfigData& config_data)
+{
+  startTCPConnection(settings);
+
+  requestPersistentConfigInColaSession(config_data);
+
+  stopTCPConnection();
+}
 
 void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSettings& settings)
 {
@@ -241,6 +250,13 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
 {
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::TypeCodeVariableCommand>(boost::ref(*m_session_ptr), type_code);
+  m_session_ptr->executeCommand(command_ptr);
+}
+
+void SickSafetyscanners::requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::MeasurementPersistentConfigVariableCommand>(boost::ref(*m_session_ptr), config_data);
   m_session_ptr->executeCommand(command_ptr);
 }
 

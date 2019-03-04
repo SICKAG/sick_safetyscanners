@@ -51,6 +51,7 @@
 #include <sick_safetyscanners/data_processing/UDPPacketMerger.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
+#include <sick_safetyscanners/datastructure/ConfigData.h>
 
 #include <sick_safetyscanners/cola2/ChangeCommSettingsCommand.h>
 #include <sick_safetyscanners/cola2/Cola2Session.h>
@@ -62,6 +63,7 @@
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
+#include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
 
 namespace sick {
 
@@ -130,6 +132,14 @@ public:
                          std::string& device_name);
 
   /*!
+   * \brief Requests the persistent configuration from the sensor.
+   *
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param config_data Returned persistent configuration data.
+   */
+  void requestPersistentConfig(const datastructure::CommSettings& settings,
+                                           sick::datastructure::ConfigData& config_data);
+  /*!
    * \brief Requests the monitoring cases from the sensor.
    *
    * \param settings Settings containing information to establish a connection to the sensor.
@@ -165,6 +175,7 @@ private:
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
   void requestDeviceNameInColaSession(std::string& device_name);
+  void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestMonitoringCaseDataInColaSession(
     std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 };
