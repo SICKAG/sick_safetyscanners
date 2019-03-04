@@ -138,7 +138,6 @@ Returns all configured protective and warning fields for the sensor
 | Parameter Name        | Type | Default |Required on startup | Information |
 | -------------                   |  ------|------- | ------------| ------------- |
 | sensor_ip                    | String | 192.168.1.11 | ✔ |Sensor IP address. Can be passed as an argument to the launch file. |
-| sensor_tcp_port          | Integer | 2122 | ✔ | Sensor TCP Port.  Can be passed as an argument to the launch file. |
 | host_ip                        |   String  | 192.168.1.9 | ✔ | Host IP address.  Can be passed as an argument to the launch file.  |
 | host_udp_port             | Integer | 0 | | Host UDP Port.  Can be passed as an argument to the launch file.  Zero allows system chosen port. |
 | frame_id  | String | scan | | The frame name of the sensor message  |
@@ -152,6 +151,7 @@ Returns all configured protective and warning fields for the sensor
 | intrusion_data          | Boolean | true | | If the intrusion data should be published  |
 | application_io_data  | Boolean | true | | If the application IO data should be published  |
 | use_sick_angles | Boolean |  false | | If this flag is set, the predefined angles from SICK are used. If this flag is set to false an offset of -90° is added to the angles so that 0° is at the front of the scanner. |
+| use_persistent_config | Boolean |  false | | If this flag is set, the configured angles from the sensor are loaded and used and the ROS parameters *angle_start* and *angle_end* are disregarded|
 
 ## Creators
 
