@@ -62,6 +62,7 @@
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
+#include <sick_safetyscanners/cola2/DeviceStatusVariableCommand.h>
 
 namespace sick {
 
@@ -139,6 +140,9 @@ public:
   requestMonitoringCases(const sick::datastructure::CommSettings& settings,
                          std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 
+  void requestDeviceStatus(const sick::datastructure::CommSettings& settings,
+                           sick::datastructure::DeviceStatus& device_status);
+
 
 private:
   packetReceivedCallbackFunction m_newPacketReceivedCallbackFunction;
@@ -167,6 +171,7 @@ private:
   void requestDeviceNameInColaSession(std::string& device_name);
   void requestMonitoringCaseDataInColaSession(
     std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
+  void requestDeviceStatusInColaSession(sick::datastructure::DeviceStatus& device_status);
 };
 
 } // namespace sick

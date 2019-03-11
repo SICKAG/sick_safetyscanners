@@ -126,6 +126,16 @@ void SickSafetyscanners::requestMonitoringCases(
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestDeviceStatus(const datastructure::CommSettings& settings,
+                                             datastructure::DeviceStatus& device_status)
+{
+  startTCPConnection(settings);
+
+  requestDeviceStatusInColaSession(device_status);
+
+  stopTCPConnection();
+}
+
 void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& settings,
                                            std::string& device_name)
 {
@@ -225,6 +235,14 @@ void SickSafetyscanners::requestMonitoringCaseDataInColaSession(
       break; // skip other requests after first invalid
     }
   }
+}
+
+void SickSafetyscanners::requestDeviceStatusInColaSession(datastructure::DeviceStatus& device_status)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::DeviceStatusVariableCommand>(boost::ref(*m_session_ptr),
+                                                               device_status);
+  m_session_ptr->executeCommand(command_ptr);
 }
 
 void SickSafetyscanners::requestDeviceNameInColaSession(std::string& device_name)
