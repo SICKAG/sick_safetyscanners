@@ -124,6 +124,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseDatagramHeader.cpp
   src/data_processing/ParseDerivedValues.cpp
   src/data_processing/ParseDeviceName.cpp
+  src/data_processing/ParseDeviceStatus.cpp
   src/data_processing/ParseFieldGeometryData.cpp
   src/data_processing/ParseFieldHeaderData.cpp
   src/data_processing/ParseGeneralSystemState.cpp
@@ -145,6 +146,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/DataHeader.cpp
   src/datastructure/DatagramHeader.cpp
   src/datastructure/DerivedValues.cpp
+  src/datastructure/DeviceStatus.cpp
   src/datastructure/FieldData.cpp
   src/datastructure/GeneralSystemState.cpp
   src/datastructure/IntrusionData.cpp
