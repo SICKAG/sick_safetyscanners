@@ -107,6 +107,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/Command.cpp
   src/cola2/CreateSession.cpp
   src/cola2/DeviceNameVariableCommand.cpp
+  src/cola2/DeviceStatusVariableCommand.cpp
   src/cola2/FieldGeometryVariableCommand.cpp
   src/cola2/FieldHeaderVariableCommand.cpp
   src/cola2/MeasurementCurrentConfigVariableCommand.cpp
