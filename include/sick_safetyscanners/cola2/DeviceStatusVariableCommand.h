@@ -1,5 +1,39 @@
-#ifndef DEVICESTATUSVARIABLECOMMAND_H
-#define DEVICESTATUSVARIABLECOMMAND_H
+// this is for emacs file handling -*- mode: c++; indent-tabs-mode: nil -*-
+
+// -- BEGIN LICENSE BLOCK ----------------------------------------------
+
+/*!
+*  Copyright (C) 2018, SICK AG, Waldkirch
+*  Copyright (C) 2018, FZI Forschungszentrum Informatik, Karlsruhe, Germany
+*
+*
+* Licensed under the Apache License, Version 2.0 (the "License");
+* you may not use this file except in compliance with the License.
+* You may obtain a copy of the License at
+*
+*    http://www.apache.org/licenses/LICENSE-2.0
+*
+* Unless required by applicable law or agreed to in writing, software
+* distributed under the License is distributed on an "AS IS" BASIS,
+* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+* See the License for the specific language governing permissions and
+* limitations under the License.
+
+*/
+
+// -- END LICENSE BLOCK ------------------------------------------------
+
+//----------------------------------------------------------------------
+/*!
+ * \file DeviceStatusVariableCommand.h
+ *
+ * \author  Jonathan Meyer <jmeyer1292@gmail.com>
+ * \date    2019-03-11
+ */
+//----------------------------------------------------------------------
+
+#ifndef SICK_SAFETY_SCANNERS_COLA2_DEVICESTATUSVARIABLECOMMAND_H
+#define SICK_SAFETY_SCANNERS_COLA2_DEVICESTATUSVARIABLECOMMAND_H
 
 #include <sick_safetyscanners/cola2/VariableCommand.h>
 #include <sick_safetyscanners/data_processing/ParseDeviceStatus.h>
@@ -9,7 +43,7 @@ namespace sick {
 namespace cola2 {
 
 /*!
- * \brief Command to read the field geometry from the sensor.
+ * \brief Command to read the device status registers from the sensor.
  */
 class DeviceStatusVariableCommand : public VariableCommand
 {
@@ -22,13 +56,11 @@ public:
   /*!
    * \brief Constructor of the command.
    *
-   * Takes the current cola2 session and a reference to the field data variable which will be
-   * written on execution. The index defines which field variable will be read. Depending on the
-   * sensor up to 128 variables can be defined.
+   * Takes the current cola2 session and a reference to the device status variable which will be
+   * written on execution.
    *
    * \param session The current cola2 session.
-   * \param field_data The field data reference which will be modified on execution.
-   * \param index The variable index in a range of [0, 127].
+   * \param field_data The device status reference which will be modified on execution.
    */
   DeviceStatusVariableCommand(Cola2Session& session,
                               datastructure::DeviceStatus& device_status);
@@ -67,4 +99,4 @@ private:
 } // namespace sick
 
 
-#endif // DEVICESTATUSVARIABLECOMMAND_H
+#endif // SICK_SAFETY_SCANNERS_COLA2_DEVICESTATUSVARIABLECOMMAND_H
