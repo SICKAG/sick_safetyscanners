@@ -35,6 +35,8 @@ A ROS Driver which reads the raw data from the SICK Safety Scanners and publishe
 |  | MICS3-CBAZ55ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 5.5 m |
 |  | MICS3-CBAZ90ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 9 m |
 |  |  |  |
+| outdoorScan3 Pro | MICS3-CBUZ40IZ1P01 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 4 m |
+|  |  |  |
 
 ## Getting started
 
