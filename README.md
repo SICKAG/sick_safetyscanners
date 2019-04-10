@@ -72,10 +72,10 @@ source ~/catkin_ws/install/setup.bash
 
 ### Starting
 
-To start the driver the launch file has to be started. For the driver to work correctly, the sensor ip, sensor tcp port and host ip have to be defined. These parameters can be passed to the sensor as arguments via launch file.
+To start the driver the launch file has to be started. For the driver to work correctly, the sensor ip and host ip have to be defined. These parameters can be passed to the sensor as arguments via launch file.
 
 ```
-roslaunch sick_safetyscanners sick_safetyscanners.launch sensor_ip:=192.168.1.10 sensor_tcp_port:=2122 host_ip:=192.168.1.9
+roslaunch sick_safetyscanners sick_safetyscanners.launch sensor_ip:=192.168.1.10 host_ip:=192.168.1.9
 ```
 
 This will start the driver and the dynamic reconfigure node. In this you can set different parameters on runtime, especially the angles and the data the sensor should publish. If these parameters should be set on startup they can be loaded to the parameter server beforehand.
