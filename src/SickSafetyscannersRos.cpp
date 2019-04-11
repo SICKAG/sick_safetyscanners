@@ -46,6 +46,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   , m_range_min(0.0)
   , m_range_max(0.0)
   , m_angle_offset(-90.0)
+  , m_use_pers_conf(false)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
