@@ -85,6 +85,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
 
 void SickSafetyscannersRos::readTypeCodeSettings()
 {
+  ROS_INFO("Reading Type code settings");
   sick::datastructure::TypeCode type_code;
   m_device->requestTypeCode(m_communication_settings, type_code);
   m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
@@ -94,6 +95,7 @@ void SickSafetyscannersRos::readTypeCodeSettings()
 
 void SickSafetyscannersRos::readPersistentConfig()
 {
+  ROS_INFO("Reading Persistent Configuration");
   sick::datastructure::ConfigData config_data;
   m_device->requestPersistentConfig(m_communication_settings, config_data);
   m_communication_settings.setStartAngle(config_data.getStartAngle());
@@ -181,11 +183,21 @@ bool SickSafetyscannersRos::readParameters()
 
   float angle_start;
   m_private_nh.getParam("angle_start", angle_start);
-  m_communication_settings.setStartAngle(sick::radToDeg(angle_start) - m_angle_offset);
 
   float angle_end;
   m_private_nh.getParam("angle_end", angle_end);
-  m_communication_settings.setEndAngle(sick::radToDeg(angle_end) - m_angle_offset);
+
+  // Included check before calculations to prevent rounding errors while calculating
+  if (angle_start == angle_end)
+  {
+    m_communication_settings.setStartAngle(sick::radToDeg(0));
+    m_communication_settings.setEndAngle(sick::radToDeg(0));
+  }
+  else
+  {
+    m_communication_settings.setStartAngle(sick::radToDeg(angle_start) - m_angle_offset);
+    m_communication_settings.setEndAngle(sick::radToDeg(angle_end) - m_angle_offset);
+  }
 
   bool general_system_state;
   m_private_nh.getParam("general_system_state", general_system_state);
