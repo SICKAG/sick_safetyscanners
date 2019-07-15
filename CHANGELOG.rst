@@ -2,6 +2,31 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* erasing completed frames from map. 
+* Fixed error on startup that no scan was visualised
+  The fix should prevent the node from starting without
+  publishing any data. The error appears to be related to
+  minor rounding errors, thus setting the resolution smaller then
+  the lowest resolution. But not equal start and end angles.
+  This should fix issue #11 and #12
+* added initialisation of use_pers_config
+* Merge Pull Request #9
+  Removing the possibilities to use the angles from the sensor it self.
+  Since dynamic reconfigure can only be set up for one frame.
+* removed tcp port from configuration since it can not be configured in the sensor
+* added parameter to use persistent config
+* Added methods to request persistent data from sensor
+* added all parameters to launch file
+* updated persistent and current config command and parser to use config data instead of field data
+* removed unused end angle from field data
+* added datastructure for configs
+* Fix issue with m_angle_offset.  Remove use_sick_angles
+* Use C++ STL to reduce risk of memory corruption
+* Change ReadWriteHelper to namespace functions instead of a stateless class
+* Contributors: Chad Rockey, Jonathan Meyer, Lennart Puck, NicolasLoeffler
+
 1.0.2 (2019-01-15)
 ------------------
 * Read the start angle of the field data from the persistent config instead of the current config
