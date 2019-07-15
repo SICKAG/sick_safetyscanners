@@ -40,7 +40,7 @@
 #include <sick_safetyscanners/datastructure/DataHeader.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 namespace data_processing {
@@ -71,55 +71,55 @@ public:
                                              datastructure::Data& data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setVersionIndicatorInDataHeader(const uint8_t*& data_ptr,
+  void setVersionIndicatorInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                        datastructure::DataHeader& data_header) const;
-  void setMajorVersionInDataHeader(const uint8_t*& data_ptr,
+  void setMajorVersionInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                    datastructure::DataHeader& data_header) const;
-  void setMinorVersionInDataHeader(const uint8_t*& data_ptr,
+  void setMinorVersionInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                    datastructure::DataHeader& data_header) const;
-  void setVersionReleaseInDataHeader(const uint8_t*& data_ptr,
+  void setVersionReleaseInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                      datastructure::DataHeader& data_header) const;
-  void setSerialNumberOfDeviceInDataHeader(const uint8_t*& data_ptr,
+  void setSerialNumberOfDeviceInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                            datastructure::DataHeader& data_header) const;
-  void setSerialNumberOfSystemPlugInDataHeader(const uint8_t*& data_ptr,
+  void setSerialNumberOfSystemPlugInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::DataHeader& data_header) const;
-  void setChannelNumberInDataHeader(const uint8_t*& data_ptr,
+  void setChannelNumberInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                     datastructure::DataHeader& data_header) const;
-  void setSequenceNumberInDataHeader(const uint8_t*& data_ptr,
+  void setSequenceNumberInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                      datastructure::DataHeader& data_header) const;
-  void setScanNumberInDataHeader(const uint8_t*& data_ptr,
+  void setScanNumberInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DataHeader& data_header) const;
-  void setTimestampDateInDataHeader(const uint8_t*& data_ptr,
+  void setTimestampDateInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                     datastructure::DataHeader& data_header) const;
-  void setTimestampTimeInDataHeader(const uint8_t*& data_ptr,
+  void setTimestampTimeInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                     datastructure::DataHeader& data_header) const;
-  void setGeneralSystemStateBlockOffsetInDataHeader(const uint8_t*& data_ptr,
+  void setGeneralSystemStateBlockOffsetInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                     datastructure::DataHeader& data_header) const;
-  void setGeneralSystemStateBlockSizeInDataHeader(const uint8_t*& data_ptr,
+  void setGeneralSystemStateBlockSizeInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::DataHeader& data_header) const;
-  void setDerivedValuesBlockOffsetInDataHeader(const uint8_t*& data_ptr,
+  void setDerivedValuesBlockOffsetInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::DataHeader& data_header) const;
-  void setDerivedValuesBlockSizeInDataHeader(const uint8_t*& data_ptr,
+  void setDerivedValuesBlockSizeInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                              datastructure::DataHeader& data_header) const;
-  void setMeasurementDataBlockOffsetInDataHeader(const uint8_t*& data_ptr,
+  void setMeasurementDataBlockOffsetInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                  datastructure::DataHeader& data_header) const;
-  void setMeasurementDataBlockSizeInDataHeader(const uint8_t*& data_ptr,
+  void setMeasurementDataBlockSizeInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::DataHeader& data_header) const;
-  void setIntrusionDataBlockOffsetInDataHeader(const uint8_t*& data_ptr,
+  void setIntrusionDataBlockOffsetInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::DataHeader& data_header) const;
-  void setIntrusionDataBlockSizeInDataHeader(const uint8_t*& data_ptr,
+  void setIntrusionDataBlockSizeInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                              datastructure::DataHeader& data_header) const;
-  void setApplicationDataBlockOffsetInDataHeader(const uint8_t*& data_ptr,
+  void setApplicationDataBlockOffsetInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                  datastructure::DataHeader& data_header) const;
-  void setApplicationDataBlockSizeInDataHeader(const uint8_t*& data_ptr,
+  void setApplicationDataBlockSizeInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::DataHeader& data_header) const;
-  void setDataInDataHeader(const uint8_t*& data_ptr, datastructure::DataHeader& data_header) const;
-  void setVersionInDataHeader(const uint8_t*& data_ptr,
+  void setDataInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
+                           datastructure::DataHeader& data_header) const;
+  void setVersionInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                               datastructure::DataHeader& data_header) const;
-  void setScanHeaderInDataHeader(const uint8_t*& data_ptr,
+  void setScanHeaderInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DataHeader& data_header) const;
-  void setDataBlocksInDataHeader(const uint8_t*& data_ptr,
+  void setDataBlocksInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DataHeader& data_header) const;
 };
 

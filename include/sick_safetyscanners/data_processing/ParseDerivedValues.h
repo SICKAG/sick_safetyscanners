@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DerivedValues.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 namespace data_processing {
@@ -67,20 +67,19 @@ public:
                                                 datastructure::Data& data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInDerivedValues(const uint8_t*& data_ptr,
+  void setDataInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,
                               datastructure::DerivedValues& derived_values) const;
-  void setMultiplicationFactorInDerivedValues(const uint8_t*& data_ptr,
+  void setMultiplicationFactorInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,
                                               datastructure::DerivedValues& derived_values) const;
-  void setNumberOfBeamsInDerivedValues(const uint8_t*& data_ptr,
+  void setNumberOfBeamsInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,
                                        datastructure::DerivedValues& derived_values) const;
-  void setScanTimeInDerivedValues(const uint8_t*& data_ptr,
+  void setScanTimeInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,
                                   datastructure::DerivedValues& derived_values) const;
-  void setStartAngleInDerivedValues(const uint8_t*& data_ptr,
+  void setStartAngleInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,
                                     datastructure::DerivedValues& derived_values) const;
-  void setAngularBeamResolutionInDerivedValues(const uint8_t*& data_ptr,
+  void setAngularBeamResolutionInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::DerivedValues& derived_values) const;
-  void setInterbeamPeriodInDerivedValues(const uint8_t*& data_ptr,
+  void setInterbeamPeriodInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,
                                          datastructure::DerivedValues& derived_values) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfDerivedValuesIsPublished(const datastructure::Data& data) const;

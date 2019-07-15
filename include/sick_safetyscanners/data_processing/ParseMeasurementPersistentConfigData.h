@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/Data.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 
@@ -69,10 +69,8 @@ public:
                         datastructure::ConfigData& config_data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
-  uint32_t readStartAngle(const uint8_t* data_ptr) const;
-  uint32_t readEndAngle(const uint8_t* data_ptr) const;
+  uint32_t readEndAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

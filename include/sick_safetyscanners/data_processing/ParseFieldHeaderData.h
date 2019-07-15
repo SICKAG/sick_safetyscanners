@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/FieldData.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 
@@ -69,12 +69,11 @@ public:
                         datastructure::FieldData& field_data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
-  bool isValid(const uint8_t*& data_ptr) const;
-  void setFieldType(const uint8_t*& data_ptr, datastructure::FieldData& field_data) const;
-  uint8_t readFieldType(const uint8_t*& data_ptr) const;
-  uint16_t readSetIndex(const uint8_t*& data_ptr) const;
+  bool isValid(std::vector<uint8_t>::const_iterator data_ptr) const;
+  void setFieldType(std::vector<uint8_t>::const_iterator data_ptr,
+                    datastructure::FieldData& field_data) const;
+  uint8_t readFieldType(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readSetIndex(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

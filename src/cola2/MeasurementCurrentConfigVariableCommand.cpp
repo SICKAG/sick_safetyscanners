@@ -45,15 +45,8 @@ MeasurementCurrentConfigVariableCommand::MeasurementCurrentConfigVariableCommand
   : VariableCommand(session, 178)
   , m_config_data(config_data)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_measurement_current_config_parser_ptr =
     std::make_shared<sick::data_processing::ParseMeasurementCurrentConfigData>();
-}
-
-void MeasurementCurrentConfigVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
 }
 
 bool MeasurementCurrentConfigVariableCommand::canBeExecutedWithoutSessionID() const

@@ -39,29 +39,30 @@
 namespace sick {
 namespace data_processing {
 
-ParseMeasurementPersistentConfigData::ParseMeasurementPersistentConfigData()
-{
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-}
+ParseMeasurementPersistentConfigData::ParseMeasurementPersistentConfigData() {}
 
 
 bool ParseMeasurementPersistentConfigData::parseTCPSequence(
   const datastructure::PacketBuffer& buffer, datastructure::ConfigData& config_data) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   config_data.setStartAngle(readStartAngle(data_ptr));
   config_data.setEndAngle(readEndAngle(data_ptr));
   return true;
 }
 
-uint32_t ParseMeasurementPersistentConfigData::readStartAngle(const uint8_t* data_ptr) const
+uint32_t ParseMeasurementPersistentConfigData::readStartAngle(
+  std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 16);
+  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 16);
 }
 
-uint32_t ParseMeasurementPersistentConfigData::readEndAngle(const uint8_t* data_ptr) const
+uint32_t ParseMeasurementPersistentConfigData::readEndAngle(
+  std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return m_reader_ptr->readuint32_tLittleEndian(data_ptr, 20);
+  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 20);
 }
 
 } // namespace data_processing

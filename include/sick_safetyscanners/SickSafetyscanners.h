@@ -165,7 +165,7 @@ private:
   std::string m_device_name;
   int m_active_case_number;
 
-  void processUDPPacket(const datastructure::PacketBuffer& buffer);
+  void processUDPPacket(const sick::datastructure::PacketBuffer& buffer);
   bool UDPClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   void startTCPConnection(const sick::datastructure::CommSettings& settings);

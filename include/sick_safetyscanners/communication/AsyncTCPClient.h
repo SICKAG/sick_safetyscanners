@@ -101,7 +101,7 @@ public:
    *
    * \param sendBuffer The telegram which will be sent to the server.
    */
-  void doSendAndReceive(const sick::datastructure::PacketBuffer::VectorBuffer& sendBuffer);
+  void doSendAndReceive(const std::vector<uint8_t>& sendBuffer);
 
   /*!
    * \brief Initiates the listening for a message from the server.

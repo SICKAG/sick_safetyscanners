@@ -46,14 +46,7 @@ MonitoringCaseTableHeaderVariableCommand::MonitoringCaseTableHeaderVariableComma
   Cola2Session& session, datastructure::FieldData& field_data)
   : VariableCommand(session, 2100)
 {
-  m_writer_ptr              = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
-}
-
-void MonitoringCaseTableHeaderVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
 }
 
 bool MonitoringCaseTableHeaderVariableCommand::canBeExecutedWithoutSessionID() const

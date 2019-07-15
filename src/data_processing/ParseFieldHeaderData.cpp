@@ -39,17 +39,16 @@
 namespace sick {
 namespace data_processing {
 
-ParseFieldHeaderData::ParseFieldHeaderData()
-{
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-}
+ParseFieldHeaderData::ParseFieldHeaderData() {}
 
 
 bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
                                             datastructure::FieldData& field_data) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
-  bool valid = isValid(data_ptr);
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
+  bool valid                                               = isValid(data_ptr);
   field_data.setIsValid(valid);
 
   if (valid)
@@ -61,10 +60,10 @@ bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& b
   return true;
 }
 
-bool ParseFieldHeaderData::isValid(const uint8_t*& data_ptr) const
+bool ParseFieldHeaderData::isValid(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   bool res     = false;
-  uint8_t byte = m_reader_ptr->readuint8_t(data_ptr, 0);
+  uint8_t byte = ReadWriteHelper::readuint8_t(data_ptr + 0);
   if (byte == 'R' || byte == 'Y')
   {
     res = true;
@@ -73,7 +72,7 @@ bool ParseFieldHeaderData::isValid(const uint8_t*& data_ptr) const
   return res;
 }
 
-void ParseFieldHeaderData::setFieldType(const uint8_t*& data_ptr,
+void ParseFieldHeaderData::setFieldType(std::vector<uint8_t>::const_iterator data_ptr,
                                         datastructure::FieldData& field_data) const
 {
   uint8_t field_type = readFieldType(data_ptr);
@@ -90,14 +89,14 @@ void ParseFieldHeaderData::setFieldType(const uint8_t*& data_ptr,
 }
 
 
-uint8_t ParseFieldHeaderData::readFieldType(const uint8_t*& data_ptr) const
+uint8_t ParseFieldHeaderData::readFieldType(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return m_reader_ptr->readuint8_t(data_ptr, 73);
+  return ReadWriteHelper::readuint8_t(data_ptr + 73);
 }
 
-uint16_t ParseFieldHeaderData::readSetIndex(const uint8_t*& data_ptr) const
+uint16_t ParseFieldHeaderData::readSetIndex(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 82);
+  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 82);
 }
 
 

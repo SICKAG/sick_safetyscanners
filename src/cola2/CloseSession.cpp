@@ -46,8 +46,9 @@ CloseSession::CloseSession(Cola2Session& session)
 {
 }
 
-void CloseSession::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
+std::vector<uint8_t> CloseSession::addTelegramData(const std::vector<uint8_t>& telegram) const
 {
+  return telegram;
 }
 
 bool CloseSession::canBeExecutedWithoutSessionID() const

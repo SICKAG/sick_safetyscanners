@@ -62,6 +62,9 @@ sick::datastructure::PacketBuffer TCPPacketMerger::getDeployedPacketBuffer()
 
 bool TCPPacketMerger::addTCPPacket(const datastructure::PacketBuffer& buffer)
 {
+  // Protect the internal memory for duplciate calls
+  std::lock_guard<std::mutex> lock(m_buffer_mutex);
+
   if (isComplete())
   {
     m_is_complete = false;
@@ -97,14 +100,12 @@ bool TCPPacketMerger::deployPacketIfComplete()
 
 bool TCPPacketMerger::deployPacket()
 {
-  sick::datastructure::PacketBuffer::VectorBuffer headerless_packet_buffer;
+  std::vector<uint8_t> headerless_packet_buffer;
   for (auto& parsed_packet_buffer : m_buffer_vector)
   {
-    sick::datastructure::PacketBuffer packet_buffer = parsed_packet_buffer.getBuffer();
-
-    headerless_packet_buffer.insert(headerless_packet_buffer.end(),
-                                    packet_buffer.getBuffer().begin(),
-                                    packet_buffer.getBuffer().end());
+    // This insert is memory safe because we constructed the vector in this function
+    const std::shared_ptr<std::vector<uint8_t> const> vecPtr = parsed_packet_buffer.getBuffer();
+    headerless_packet_buffer.insert(headerless_packet_buffer.end(), vecPtr->begin(), vecPtr->end());
   }
   m_deployed_packet_buffer.setBuffer(headerless_packet_buffer);
   m_buffer_vector.clear();
@@ -121,7 +122,7 @@ void TCPPacketMerger::setTargetSize(const uint32_t& targetSize)
   m_targetSize = targetSize;
 }
 
-uint32_t TCPPacketMerger::getCurrentSize() const
+uint32_t TCPPacketMerger::getCurrentSize()
 {
   size_t sum = 0;
   for (auto it_packet = m_buffer_vector.begin(); it_packet != m_buffer_vector.end(); ++it_packet)
@@ -129,6 +130,7 @@ uint32_t TCPPacketMerger::getCurrentSize() const
     const auto& packet = *it_packet;
     sum += packet.getLength();
   }
+
   return static_cast<uint32_t>(sum);
 }
 

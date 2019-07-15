@@ -39,29 +39,28 @@
 namespace sick {
 namespace data_processing {
 
-ParseDeviceName::ParseDeviceName()
-{
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-}
+ParseDeviceName::ParseDeviceName() {}
 
 
 bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer& buffer,
                                        std::string& device_name) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
-  device_name = readDeviceName(data_ptr);
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
+  device_name                                              = readDeviceName(data_ptr);
   return true;
 }
 
 
-std::string ParseDeviceName::readDeviceName(const uint8_t*& data_ptr) const
+std::string ParseDeviceName::readDeviceName(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint16_t string_length = m_reader_ptr->readuint16_tLittleEndian(data_ptr, 0);
+  uint16_t string_length = ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 0);
 
   std::string name;
   for (uint16_t i = 0; i < string_length; i++)
   {
-    name.push_back(m_reader_ptr->readuint16_tLittleEndian(data_ptr, 2 + i));
+    name.push_back(ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 2 + i));
   }
   return name;
 }
