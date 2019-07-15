@@ -44,16 +44,15 @@ VariableCommand::VariableCommand(Cola2Session& session, const uint16_t& variable
   : Command(session, 0x52, 0x49) // see cola2 manual 0x52 = 'R' and  0x49 = 'I'
   , m_variable_index(variable_index)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
-void VariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
+std::vector<uint8_t> VariableCommand::addTelegramData(const std::vector<uint8_t>& telegram) const
 {
-  uint16_t prevSize = telegram.size();
-  telegram.resize(prevSize + 2);
-  uint8_t* data_ptr = telegram.data() + prevSize;
-  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_variable_index, 0);
+  auto output = expandTelegram(telegram, 2);
+  // Add new values after telegram
+  auto new_data_offset_it = output.begin()+telegram.size();
+  ReadWriteHelper::writeuint16_tLittleEndian(new_data_offset_it, m_variable_index);
+  return output;  
 }
 
 bool VariableCommand::canBeExecutedWithoutSessionID() const

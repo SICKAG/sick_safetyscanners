@@ -58,8 +58,9 @@ public:
    * \brief Adds the data to the telegram.
    *
    * \param telegram The telegram which will be modified by the data.
+   * \return Completed telegram
    */
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  std::vector<uint8_t> addTelegramData(const std::vector<uint8_t>& telegram) const;
 
   /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most
@@ -81,7 +82,6 @@ public:
 
 private:
   uint16_t m_variable_index;
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 };
 
 } // namespace cola2

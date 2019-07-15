@@ -38,7 +38,7 @@
 #include <sick_safetyscanners/datastructure/Data.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <string>
 
@@ -69,8 +69,7 @@ public:
   bool parseTCPSequence(const datastructure::PacketBuffer& buffer, std::string& device_name) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  std::string readDeviceName(const uint8_t*& data_ptr) const;
+  std::string readDeviceName(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

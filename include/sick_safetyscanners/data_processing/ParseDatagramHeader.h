@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DatagramHeader.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 namespace data_processing {
@@ -71,22 +71,20 @@ public:
                         sick::datastructure::DatagramHeader& header) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
+  void setDataInHeader(std::vector<uint8_t>::const_iterator data_ptr, datastructure::DatagramHeader& header) const;
 
-  void setDataInHeader(const uint8_t*& data_ptr, datastructure::DatagramHeader& header) const;
-
-  void setDatagramMarkerInHeader(const uint8_t*& data_ptr,
+  void setDatagramMarkerInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DatagramHeader& header) const;
-  void setProtocolInHeader(const uint8_t*& data_ptr, datastructure::DatagramHeader& header) const;
-  void setMajorVersionInHeader(const uint8_t*& data_ptr,
+  void setProtocolInHeader(std::vector<uint8_t>::const_iterator data_ptr, datastructure::DatagramHeader& header) const;
+  void setMajorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                datastructure::DatagramHeader& header) const;
-  void setMinorVersionInHeader(const uint8_t*& data_ptr,
+  void setMinorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                datastructure::DatagramHeader& header) const;
-  void setTotalLengthInHeader(const uint8_t*& data_ptr,
+  void setTotalLengthInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                               datastructure::DatagramHeader& header) const;
-  void setIdentificationInHeader(const uint8_t*& data_ptr,
+  void setIdentificationInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DatagramHeader& header) const;
-  void setFragmentOffsetInHeader(const uint8_t*& data_ptr,
+  void setFragmentOffsetInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DatagramHeader& header) const;
 };
 

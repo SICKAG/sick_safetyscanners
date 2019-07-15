@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DerivedValues.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <vector>
 
@@ -70,80 +70,79 @@ public:
                                                   datastructure::Data& data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInApplicationData(const uint8_t*& data_ptr,
+  void setDataInApplicationData(std::vector<uint8_t>::const_iterator data_ptr,
                                 datastructure::ApplicationData& application_data) const;
   void
-  setApplicationInputsInApplicationData(const uint8_t*& data_ptr,
+  setApplicationInputsInApplicationData(std::vector<uint8_t>::const_iterator data_ptr,
                                         datastructure::ApplicationData& application_data) const;
   void
-  setApplicationOutputsInApplicationData(const uint8_t*& data_ptr,
+  setApplicationOutputsInApplicationData(std::vector<uint8_t>::const_iterator data_ptr,
                                          datastructure::ApplicationData& application_data) const;
-  void setDataInApplicationInputs(const uint8_t*& data_ptr,
+  void setDataInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                   datastructure::ApplicationInputs& inputs) const;
-  void setDataInApplicationOutputs(const uint8_t*& data_ptr,
+  void setDataInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                    datastructure::ApplicationOutputs& outputs) const;
-  void setUnsafeInputsInApplicationInputs(const uint8_t*& data_ptr,
+  void setUnsafeInputsInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                           datastructure::ApplicationInputs& inputs) const;
-  void setUnsafeInputsSourcesInApplicationInputs(const uint8_t*& data_ptr,
+  void setUnsafeInputsSourcesInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                  datastructure::ApplicationInputs& inputs) const;
-  void setUnsafeInputsFlagsInApplicationInputs(const uint8_t*& data_ptr,
+  void setUnsafeInputsFlagsInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::ApplicationInputs& inputs) const;
-  void setMonitoringCaseInputsInApplicationInputs(const uint8_t*& data_ptr,
+  void setMonitoringCaseInputsInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::ApplicationInputs& inputs) const;
-  void setMonitoringCaseNumbersInApplicationInputs(const uint8_t*& data_ptr,
+  void setMonitoringCaseNumbersInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                    datastructure::ApplicationInputs& inputs) const;
-  void setMonitoringCaseFlagsInApplicationInputs(const uint8_t*& data_ptr,
+  void setMonitoringCaseFlagsInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                  datastructure::ApplicationInputs& inputs) const;
-  void setLinearVelocityInputsInApplicationInputs(const uint8_t*& data_ptr,
+  void setLinearVelocityInputsInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::ApplicationInputs& inputs) const;
-  void setLinearVelocity0InApplicationInputs(const uint8_t*& data_ptr,
+  void setLinearVelocity0InApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                              datastructure::ApplicationInputs& inputs) const;
-  void setLinearVelocity1InApplicationInputs(const uint8_t*& data_ptr,
+  void setLinearVelocity1InApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                              datastructure::ApplicationInputs& inputs) const;
-  void setLinearVelocityFlagsInApplicationInputs(const uint8_t*& data_ptr,
+  void setLinearVelocityFlagsInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                  datastructure::ApplicationInputs& inputs) const;
-  void setSleepModeInputInApplicationInputs(const uint8_t*& data_ptr,
+  void setSleepModeInputInApplicationInputs(std::vector<uint8_t>::const_iterator data_ptr,
                                             datastructure::ApplicationInputs& inputs) const;
   void
-  setEvalutaionPathsOutputsInApplicationOutputs(const uint8_t*& data_ptr,
+  setEvalutaionPathsOutputsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                 datastructure::ApplicationOutputs& outputs) const;
   void setEvaluationPathsOutputsEvalOutInApplicationOutputs(
-    const uint8_t*& data_ptr, datastructure::ApplicationOutputs& outputs) const;
+    std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const;
   void setEvaluationPathsOutputsIsSafeInApplicationOutputs(
-    const uint8_t*& data_ptr, datastructure::ApplicationOutputs& outputs) const;
+    std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const;
   void setEvaluationPathsOutputsValidFlagsInApplicationOutputs(
-    const uint8_t*& data_ptr, datastructure::ApplicationOutputs& outputs) const;
+    std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const;
   void
-  setMonitoringCaseOutputsInApplicationOutputs(const uint8_t*& data_ptr,
+  setMonitoringCaseOutputsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::ApplicationOutputs& outputs) const;
   void
-  setMonitoringCaseNumbersInApplicationOutputs(const uint8_t*& data_ptr,
+  setMonitoringCaseNumbersInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::ApplicationOutputs& outputs) const;
-  void setMonitoringCaseFlagsInApplicationOutputs(const uint8_t*& data_ptr,
+  void setMonitoringCaseFlagsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::ApplicationOutputs& outputs) const;
-  void setSleepModeOutputInApplicationOutputs(const uint8_t*& data_ptr,
+  void setSleepModeOutputInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                               datastructure::ApplicationOutputs& outputs) const;
-  void setErrorFlagsInApplicationOutputs(const uint8_t*& data_ptr,
+  void setErrorFlagsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                          datastructure::ApplicationOutputs& outputs) const;
   void
-  setLinearVelocityOutoutsInApplicationOutputs(const uint8_t*& data_ptr,
+  setLinearVelocityOutoutsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::ApplicationOutputs& outputs) const;
-  void setLinearVelocity0InApplicationOutputs(const uint8_t*& data_ptr,
+  void setLinearVelocity0InApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                               datastructure::ApplicationOutputs& outputs) const;
-  void setLinearVelocity1InApplicationOutputs(const uint8_t*& data_ptr,
+  void setLinearVelocity1InApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                               datastructure::ApplicationOutputs& outputs) const;
-  void setLinearVelocityFlagsInApplicationOutputs(const uint8_t*& data_ptr,
+  void setLinearVelocityFlagsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::ApplicationOutputs& outputs) const;
   void
-  setResultingVelocityOutputsInApplicationOutputs(const uint8_t*& data_ptr,
+  setResultingVelocityOutputsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::ApplicationOutputs& outputs) const;
-  void setResultingVelocityInApplicationOutputs(const uint8_t*& data_ptr,
+  void setResultingVelocityInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                 datastructure::ApplicationOutputs& outputs) const;
   void
-  setResultingVelocityFlagsInApplicationOutputs(const uint8_t*& data_ptr,
+  setResultingVelocityFlagsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                 datastructure::ApplicationOutputs& outputs) const;
-  void setOutputFlagsinApplicationOutput(const uint8_t*& data_ptr,
+  void setOutputFlagsinApplicationOutput(std::vector<uint8_t>::const_iterator data_ptr,
                                          datastructure::ApplicationOutputs& outputs) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfApplicationDataIsPublished(const datastructure::Data& data) const;

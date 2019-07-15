@@ -39,7 +39,6 @@ namespace data_processing {
 
 ParseData::ParseData()
 {
-  m_reader_ptr                  = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_data_header_parser_ptr      = std::make_shared<sick::data_processing::ParseDataHeader>();
   m_derived_values_parser_ptr   = std::make_shared<sick::data_processing::ParseDerivedValues>();
   m_measurement_data_parser_ptr = std::make_shared<sick::data_processing::ParseMeasurementData>();
@@ -49,11 +48,11 @@ ParseData::ParseData()
   m_application_data_parser_ptr = std::make_shared<sick::data_processing::ParseApplicationData>();
 }
 
-bool ParseData::parseUDPSequence(const datastructure::PacketBuffer buffer,
-                                 datastructure::Data& data) const
+sick::datastructure::Data ParseData::parseUDPSequence(const datastructure::PacketBuffer& buffer) const
 {
+  sick::datastructure::Data data;
   setDataBlocksInData(buffer, data);
-  return true;
+  return data;
 }
 
 void ParseData::setDataBlocksInData(const datastructure::PacketBuffer& buffer,

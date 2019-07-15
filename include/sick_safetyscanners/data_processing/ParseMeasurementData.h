@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/MeasurementData.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <string>
 #include <vector>
@@ -72,16 +72,15 @@ public:
 private:
   float m_angle;
   float m_angle_delta;
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  void setDataInMeasurementData(const uint8_t*& data_ptr,
+  void setDataInMeasurementData(std::vector<uint8_t>::const_iterator data_ptr,
                                 datastructure::MeasurementData& measurement_data);
-  void setNumberOfBeamsInMeasurementData(const uint8_t*& data_ptr,
+  void setNumberOfBeamsInMeasurementData(std::vector<uint8_t>::const_iterator data_ptr,
                                          datastructure::MeasurementData& measurement_data) const;
   void setStartAngleAndDelta(const datastructure::Data& data);
-  void setScanPointsInMeasurementData(const uint8_t*& data_ptr,
+  void setScanPointsInMeasurementData(std::vector<uint8_t>::const_iterator data_ptr,
                                       datastructure::MeasurementData& measurement_data);
   void addScanPointToMeasurementData(uint16_t offset,
-                                     const uint8_t*& data_ptr,
+                                     std::vector<uint8_t>::const_iterator data_ptr,
                                      datastructure::MeasurementData& measurement_data) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfMeasurementDataIsPublished(const datastructure::Data& data) const;

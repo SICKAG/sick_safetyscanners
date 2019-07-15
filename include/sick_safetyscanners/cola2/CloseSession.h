@@ -59,8 +59,9 @@ public:
    * and therefor this function does not add any data.
    *
    * \param telegram The telegram which will be modified.
+   & \returns Completed telegram.
    */
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  std::vector<uint8_t> addTelegramData(const std::vector<uint8_t>& telegram) const;
 
 
   /*!

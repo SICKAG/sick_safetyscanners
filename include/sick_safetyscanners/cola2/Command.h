@@ -42,7 +42,7 @@
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
 #include <sick_safetyscanners/data_processing/ParseTCPPacket.h>
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <boost/thread/mutex.hpp>
 
@@ -88,8 +88,9 @@ public:
    * \brief Adds the data to the telegram and afterwards the header with the correct length.
    *
    * \param telegram The telegram, which will be modified with the data and header.
+   * \returns Completed telegram.
    */
-  void constructTelegram(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  std::vector<uint8_t> constructTelegram(const std::vector<uint8_t>& telegram) const;
 
   /*!
    * \brief Parses the da incoming data package and then processes it with the inherited
@@ -98,7 +99,7 @@ public:
    *
    * \param packet The incoming data package which will be processed.
    */
-  void processReplyBase(const sick::datastructure::PacketBuffer::VectorBuffer& packet);
+  void processReplyBase(const std::vector<uint8_t>& packet);
 
 
   /*!
@@ -190,9 +191,10 @@ public:
 protected:
   sick::cola2::Cola2Session& m_session;
 
+  std::vector<uint8_t> expandTelegram(const std::vector<uint8_t>& telegram, size_t additional_bytes) const;
+
 private:
   std::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
 
   boost::mutex m_execution_mutex;
 
@@ -206,22 +208,20 @@ private:
 
   std::vector<uint8_t> m_data_vector;
 
-  virtual bool processReply()                                                                   = 0;
-  virtual void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const = 0;
+  virtual bool processReply() = 0;
+  virtual std::vector<uint8_t> addTelegramData(const std::vector<uint8_t>& telegram) const = 0;
 
-  void addTelegramHeader(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  sick::datastructure::PacketBuffer::VectorBuffer prepareHeader() const;
-  void writeCola2StxToDataPtr(uint8_t*& data_ptr) const;
-  void writeLengthToDataPtr(uint8_t*& data_ptr,
-                            datastructure::PacketBuffer::VectorBuffer& telegram) const;
-  void writeCola2HubCntrToDataPtr(uint8_t*& data_ptr) const;
-  void writeCola2NoCToDataPtr(uint8_t*& data_ptr) const;
-  void writeSessionIdToDataPtr(uint8_t*& data_ptr) const;
-  void writeRequestIdToDataPtr(uint8_t*& data_ptr) const;
-  void writeCommandTypeToDataPtr(uint8_t*& data_ptr) const;
-  void writeCommandModeToDataPtr(uint8_t*& data_ptr) const;
-  void writeDataToDataPtr(uint8_t*& data_ptr,
-                          datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  std::vector<uint8_t> addTelegramHeader(const std::vector<uint8_t>& telegram) const;
+  std::vector<uint8_t> prepareHeader() const;
+  void writeCola2StxToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeLengthToDataPtr(std::vector<uint8_t>::iterator data_ptr, const std::vector<uint8_t>& telegram) const;
+  void writeCola2HubCntrToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeCola2NoCToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeSessionIdToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeRequestIdToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeCommandTypeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeCommandModeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
+  void writeDataToDataPtr(std::vector<uint8_t>::iterator data_ptr, const std::vector<uint8_t>& telegram) const;
 };
 
 

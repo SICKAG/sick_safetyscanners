@@ -65,10 +65,6 @@ public:
    * \brief Typedef for an arraybuffer which can be read from the sensor.
    */
   typedef boost::array<uint8_t, MAXSIZE> ArrayBuffer;
-  /*!
-   * \brief Typedef for a vector buffer, to sort the incoming packets.
-   */
-  typedef std::vector<uint8_t> VectorBuffer;
 
   /*!
    * \brief Constructor of PacketBuffer.
@@ -80,9 +76,9 @@ public:
    *
    * No explicit tag used to allow implicit conversion from different inputs types.
    *
-   * \param buffer Vectorbuffer to set for the PacketBuffer.
+   * \param buffer vector to set for the PacketBuffer.
    */
-  PacketBuffer(const VectorBuffer& buffer);
+  PacketBuffer(const std::vector<uint8_t>& buffer);
 
   /*!
    * \brief Constructor of PacketBuffer.
@@ -98,16 +94,16 @@ public:
   static uint32_t getMaxSize() { return MAXSIZE; }
 
   /*!
-   * \brief Getter to return the VectorBuffer saved in the PacketBuffer.
-   * \return VectorBuffer
+   * \brief Getter to return a copy of the data saved in the PacketBuffer.
+   * \return Data copy as shared_ptr<vector const>.  Needed because this bufer could be overwritten.
    */
-  const VectorBuffer& getBuffer() const;
+  std::shared_ptr<std::vector<uint8_t> const> getBuffer() const;
 
   /*!
    * \brief Setter for the PacketBuffer.
    * \param buffer Input VectorBuffer to save.
    */
-  void setBuffer(const VectorBuffer& buffer);
+  void setBuffer(const std::vector<uint8_t>& buffer);
 
   /*!
    * \brief Setter for the PacketBuffer.
@@ -124,7 +120,7 @@ public:
 
 
 private:
-  VectorBuffer m_buffer;
+  std::shared_ptr<std::vector<uint8_t> const> m_buffer;
 };
 
 } // namespace datastructure

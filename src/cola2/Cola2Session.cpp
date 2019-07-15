@@ -66,6 +66,7 @@ void Cola2Session::doDisconnect()
 
 bool Cola2Session::executeCommand(const CommandPtr& command)
 {
+
   addCommand(command->getRequestID(), command);
   sendTelegramAndListenForAnswer(command);
   return true;
@@ -74,8 +75,8 @@ bool Cola2Session::executeCommand(const CommandPtr& command)
 bool Cola2Session::sendTelegramAndListenForAnswer(const CommandPtr& command)
 {
   command->lockExecutionMutex(); // lock
-  sick::datastructure::PacketBuffer::VectorBuffer telegram;
-  command->constructTelegram(telegram);
+  std::vector<uint8_t> telegram;
+  telegram = command->constructTelegram(telegram);
   m_async_tcp_client_ptr->doSendAndReceive(telegram);
   command->waitForCompletion(); // scooped locked to wait, unlocked on data processing
   return true;
@@ -129,7 +130,7 @@ bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
   CommandPtr pendingCommand;
   if (findCommand(requestID, pendingCommand))
   {
-    pendingCommand->processReplyBase(packet.getBuffer());
+    pendingCommand->processReplyBase(*packet.getBuffer());
     removeCommand(requestID);
   }
   return true;
