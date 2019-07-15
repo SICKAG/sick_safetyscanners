@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.3 (2019-07-15)
+------------------
 * erasing completed frames from map. 
 * Fixed error on startup that no scan was visualised
   The fix should prevent the node from starting without
