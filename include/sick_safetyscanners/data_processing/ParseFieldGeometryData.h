@@ -73,7 +73,8 @@ public:
 
 private:
   uint32_t readArrayLength(std::vector<uint8_t>::const_iterator data_ptr) const;
-  uint16_t readArrayElement(std::vector<uint8_t>::const_iterator data_ptr, uint32_t elem_number) const;
+  uint16_t readArrayElement(std::vector<uint8_t>::const_iterator data_ptr,
+                            uint32_t elem_number) const;
 };
 
 } // namespace data_processing

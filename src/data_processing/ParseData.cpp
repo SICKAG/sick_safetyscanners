@@ -48,7 +48,8 @@ ParseData::ParseData()
   m_application_data_parser_ptr = std::make_shared<sick::data_processing::ParseApplicationData>();
 }
 
-sick::datastructure::Data ParseData::parseUDPSequence(const datastructure::PacketBuffer& buffer) const
+sick::datastructure::Data
+ParseData::parseUDPSequence(const datastructure::PacketBuffer& buffer) const
 {
   sick::datastructure::Data data;
   setDataBlocksInData(buffer, data);

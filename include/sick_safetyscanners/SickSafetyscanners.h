@@ -176,7 +176,7 @@ private:
   void requestDeviceNameInColaSession(std::string& device_name);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestMonitoringCaseDataInColaSession(
-  std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
+    std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 };
 
 } // namespace sick

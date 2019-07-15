@@ -37,9 +37,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseMeasurementData::ParseMeasurementData()
-{
-}
+ParseMeasurementData::ParseMeasurementData() {}
 
 datastructure::MeasurementData
 ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer& buffer,
@@ -53,8 +51,8 @@ ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer& buffer
   }
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin() +
-                          data.getDataHeaderPtr()->getMeasurementDataBlockOffset();
+  std::vector<uint8_t>::const_iterator data_ptr =
+    vecPtr->begin() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset();
 
   setStartAngleAndDelta(data);
   setDataInMeasurementData(data_ptr, measurement_data);
@@ -107,7 +105,8 @@ void ParseMeasurementData::setDataInMeasurementData(
 }
 
 void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::MeasurementData& measurement_data) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::MeasurementData& measurement_data) const
 {
   measurement_data.setNumberOfBeams(ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 0));
 }
@@ -133,14 +132,14 @@ void ParseMeasurementData::addScanPointToMeasurementData(
   std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::MeasurementData& measurement_data) const
 {
-  int16_t distance           = ReadWriteHelper::readuint16_tLittleEndian(data_ptr + (4 + offset * 4));
-  uint8_t reflectivity       = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + (6 + offset * 4));
-  uint8_t status             = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + (7 + offset * 4));
-  bool valid                 = status & (0x01 << 0);
-  bool infinite              = status & (0x01 << 1);
-  bool glare                 = status & (0x01 << 2);
-  bool reflector             = status & (0x01 << 3);
-  bool contamination         = status & (0x01 << 4);
+  int16_t distance     = ReadWriteHelper::readuint16_tLittleEndian(data_ptr + (4 + offset * 4));
+  uint8_t reflectivity = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + (6 + offset * 4));
+  uint8_t status       = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + (7 + offset * 4));
+  bool valid           = status & (0x01 << 0);
+  bool infinite        = status & (0x01 << 1);
+  bool glare           = status & (0x01 << 2);
+  bool reflector       = status & (0x01 << 3);
+  bool contamination   = status & (0x01 << 4);
   bool contamination_warning = status & (0x01 << 5);
   measurement_data.addScanPoint(sick::datastructure::ScanPoint(m_angle,
                                                                distance,

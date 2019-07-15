@@ -191,7 +191,8 @@ public:
 protected:
   sick::cola2::Cola2Session& m_session;
 
-  std::vector<uint8_t> expandTelegram(const std::vector<uint8_t>& telegram, size_t additional_bytes) const;
+  std::vector<uint8_t> expandTelegram(const std::vector<uint8_t>& telegram,
+                                      size_t additional_bytes) const;
 
 private:
   std::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
@@ -208,20 +209,22 @@ private:
 
   std::vector<uint8_t> m_data_vector;
 
-  virtual bool processReply() = 0;
+  virtual bool processReply()                                                              = 0;
   virtual std::vector<uint8_t> addTelegramData(const std::vector<uint8_t>& telegram) const = 0;
 
   std::vector<uint8_t> addTelegramHeader(const std::vector<uint8_t>& telegram) const;
   std::vector<uint8_t> prepareHeader() const;
   void writeCola2StxToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
-  void writeLengthToDataPtr(std::vector<uint8_t>::iterator data_ptr, const std::vector<uint8_t>& telegram) const;
+  void writeLengthToDataPtr(std::vector<uint8_t>::iterator data_ptr,
+                            const std::vector<uint8_t>& telegram) const;
   void writeCola2HubCntrToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
   void writeCola2NoCToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
   void writeSessionIdToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
   void writeRequestIdToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
   void writeCommandTypeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
   void writeCommandModeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const;
-  void writeDataToDataPtr(std::vector<uint8_t>::iterator data_ptr, const std::vector<uint8_t>& telegram) const;
+  void writeDataToDataPtr(std::vector<uint8_t>::iterator data_ptr,
+                          const std::vector<uint8_t>& telegram) const;
 };
 
 

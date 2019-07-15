@@ -39,9 +39,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseMeasurementCurrentConfigData::ParseMeasurementCurrentConfigData()
-{
-}
+ParseMeasurementCurrentConfigData::ParseMeasurementCurrentConfigData() {}
 
 
 bool ParseMeasurementCurrentConfigData::parseTCPSequence(
@@ -49,18 +47,20 @@ bool ParseMeasurementCurrentConfigData::parseTCPSequence(
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   config_data.setStartAngle(readStartAngle(data_ptr));
   config_data.setAngularBeamResolution(readAngularBeamResolution(data_ptr));
   return true;
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const
+uint32_t ParseMeasurementCurrentConfigData::readStartAngle(
+  std::vector<uint8_t>::const_iterator data_ptr) const
 {
   return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 36);
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(std::vector<uint8_t>::const_iterator data_ptr) const
+uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(
+  std::vector<uint8_t>::const_iterator data_ptr) const
 {
   return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 40);
 }

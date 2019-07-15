@@ -76,13 +76,17 @@ private:
   setStatusBitsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
                                     datastructure::GeneralSystemState& general_System_state) const;
   void setSafeCutOffPathInGeneralSystemState(
-    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_System_state) const;
   void setNonSafeCutOffPathInGeneralSystemState(
-    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_System_state) const;
   void setResetRequiredCutOffPathInGeneralSystemState(
-    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_System_state) const;
   void setCurrentMonitoringCasesInGeneralSystemState(
-    std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_System_state) const;
   void setErrorsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
                                      datastructure::GeneralSystemState& general_System_state) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;

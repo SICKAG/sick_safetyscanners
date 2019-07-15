@@ -113,7 +113,8 @@ private:
                                                  datastructure::DataHeader& data_header) const;
   void setApplicationDataBlockSizeInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::DataHeader& data_header) const;
-  void setDataInDataHeader(std::vector<uint8_t>::const_iterator data_ptr, datastructure::DataHeader& data_header) const;
+  void setDataInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
+                           datastructure::DataHeader& data_header) const;
   void setVersionInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,
                               datastructure::DataHeader& data_header) const;
   void setScanHeaderInDataHeader(std::vector<uint8_t>::const_iterator data_ptr,

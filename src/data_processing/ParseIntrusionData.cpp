@@ -37,9 +37,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseIntrusionData::ParseIntrusionData()
-{
-}
+ParseIntrusionData::ParseIntrusionData() {}
 
 datastructure::IntrusionData
 ParseIntrusionData::parseUDPSequence(const datastructure::PacketBuffer& buffer,
@@ -54,8 +52,8 @@ ParseIntrusionData::parseUDPSequence(const datastructure::PacketBuffer& buffer,
 
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin() +
-                          data.getDataHeaderPtr()->getIntrusionDataBlockOffset();
+  std::vector<uint8_t>::const_iterator data_ptr =
+    vecPtr->begin() + data.getDataHeaderPtr()->getIntrusionDataBlockOffset();
   setNumScanPoints(data.getDerivedValuesPtr()->getNumberOfBeams());
   setDataInIntrusionData(data_ptr, intrusion_data);
   return intrusion_data;
@@ -134,16 +132,20 @@ void ParseIntrusionData::setDataInIntrusionDatums(
 }
 
 
-uint16_t ParseIntrusionData::setSizeInIntrusionDatum(
-  const uint16_t offset, std::vector<uint8_t>::const_iterator data_ptr, sick::datastructure::IntrusionDatum& datum) const
+uint16_t
+ParseIntrusionData::setSizeInIntrusionDatum(const uint16_t offset,
+                                            std::vector<uint8_t>::const_iterator data_ptr,
+                                            sick::datastructure::IntrusionDatum& datum) const
 {
   uint32_t numBytesToRead = ReadWriteHelper::readuint32_tLittleEndian(data_ptr + offset);
   datum.setSize(numBytesToRead);
   return offset;
 }
 
-uint16_t ParseIntrusionData::setFlagsInIntrusionDatum(
-  const uint16_t offset, std::vector<uint8_t>::const_iterator data_ptr, sick::datastructure::IntrusionDatum& datum) const
+uint16_t
+ParseIntrusionData::setFlagsInIntrusionDatum(const uint16_t offset,
+                                             std::vector<uint8_t>::const_iterator data_ptr,
+                                             sick::datastructure::IntrusionDatum& datum) const
 {
   uint32_t num_read_flags = 0;
   std::vector<bool> flags;

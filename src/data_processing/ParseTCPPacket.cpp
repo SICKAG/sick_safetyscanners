@@ -39,15 +39,13 @@
 namespace sick {
 namespace data_processing {
 
-ParseTCPPacket::ParseTCPPacket()
-{
-}
+ParseTCPPacket::ParseTCPPacket() {}
 
 uint32_t ParseTCPPacket::getExpectedPacketLength(const datastructure::PacketBuffer& buffer)
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   return readLength(data_ptr) + 8; // for STX and Length which is not included in length datafield
 }
 
@@ -55,7 +53,7 @@ uint16_t ParseTCPPacket::getRequestID(const datastructure::PacketBuffer& buffer)
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   return readRequestID(data_ptr);
 }
 
@@ -64,7 +62,7 @@ bool ParseTCPPacket::parseTCPSequence(const datastructure::PacketBuffer& buffer,
                                       sick::cola2::Command& command) const
 {
   setCommandValuesFromPacket(buffer, command);
-  
+
   std::vector<uint8_t> byteVector = readData(buffer);
   command.setDataVector(byteVector);
 
@@ -76,7 +74,7 @@ void ParseTCPPacket::setCommandValuesFromPacket(const sick::datastructure::Packe
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   command.setSessionID(readSessionID(data_ptr));
   command.setRequestID(readRequestID(data_ptr));
   command.setCommandType(readCommandType(data_ptr));
@@ -132,7 +130,7 @@ std::vector<uint8_t> ParseTCPPacket::readData(const datastructure::PacketBuffer&
   }
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   return std::vector<uint8_t>(vecPtr->begin() + 20, vecPtr->end());
 }
 

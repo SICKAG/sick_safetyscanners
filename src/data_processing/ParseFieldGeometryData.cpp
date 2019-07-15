@@ -39,9 +39,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseFieldGeometryData::ParseFieldGeometryData()
-{
-}
+ParseFieldGeometryData::ParseFieldGeometryData() {}
 
 
 bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
@@ -49,8 +47,8 @@ bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer&
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
-  uint32_t array_length = readArrayLength(data_ptr);
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
+  uint32_t array_length                                    = readArrayLength(data_ptr);
   std::vector<uint16_t> geometry_distance_mm;
   for (uint32_t i = 0; i < array_length; i++)
   {
@@ -61,7 +59,8 @@ bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer&
   return true;
 }
 
-uint32_t ParseFieldGeometryData::readArrayLength(std::vector<uint8_t>::const_iterator data_ptr) const
+uint32_t
+ParseFieldGeometryData::readArrayLength(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 4);
 }

@@ -108,11 +108,14 @@ private:
   setEvalutaionPathsOutputsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                 datastructure::ApplicationOutputs& outputs) const;
   void setEvaluationPathsOutputsEvalOutInApplicationOutputs(
-    std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::ApplicationOutputs& outputs) const;
   void setEvaluationPathsOutputsIsSafeInApplicationOutputs(
-    std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::ApplicationOutputs& outputs) const;
   void setEvaluationPathsOutputsValidFlagsInApplicationOutputs(
-    std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::ApplicationOutputs& outputs) const;
   void
   setMonitoringCaseOutputsInApplicationOutputs(std::vector<uint8_t>::const_iterator data_ptr,
                                                datastructure::ApplicationOutputs& outputs) const;

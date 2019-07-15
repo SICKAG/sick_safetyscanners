@@ -52,8 +52,8 @@ PacketBuffer::PacketBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t
 
 std::shared_ptr<std::vector<uint8_t> const> PacketBuffer::getBuffer() const
 {
-    // Okay to share since it's a shared_ptr<vector const>
-    return m_buffer;
+  // Okay to share since it's a shared_ptr<vector const>
+  return m_buffer;
 }
 
 void PacketBuffer::setBuffer(const std::vector<uint8_t>& buffer)
@@ -63,7 +63,7 @@ void PacketBuffer::setBuffer(const std::vector<uint8_t>& buffer)
 
 void PacketBuffer::setBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t& length)
 {
-  m_buffer = std::make_shared<std::vector<uint8_t> const>(buffer.data(), buffer.data()+length);
+  m_buffer = std::make_shared<std::vector<uint8_t> const>(buffer.data(), buffer.data() + length);
 }
 
 size_t PacketBuffer::getLength() const

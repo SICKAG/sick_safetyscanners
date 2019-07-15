@@ -37,9 +37,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseGeneralSystemState::ParseGeneralSystemState()
-{
-}
+ParseGeneralSystemState::ParseGeneralSystemState() {}
 
 datastructure::GeneralSystemState
 ParseGeneralSystemState::parseUDPSequence(const datastructure::PacketBuffer& buffer,
@@ -53,8 +51,8 @@ ParseGeneralSystemState::parseUDPSequence(const datastructure::PacketBuffer& buf
   }
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin() +
-                          data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset();
+  std::vector<uint8_t>::const_iterator data_ptr =
+    vecPtr->begin() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset();
 
   setDataInGeneralSystemState(data_ptr, general_system_state);
   return general_system_state;
@@ -97,7 +95,8 @@ bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(
 
 
 void ParseGeneralSystemState::setDataInGeneralSystemState(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_system_state) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::GeneralSystemState& general_system_state) const
 {
   setStatusBitsInGeneralSystemState(data_ptr, general_system_state);
   setSafeCutOffPathInGeneralSystemState(data_ptr, general_system_state);
@@ -108,7 +107,8 @@ void ParseGeneralSystemState::setDataInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_system_state) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::GeneralSystemState& general_system_state) const
 {
   uint8_t byte = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 0);
 
@@ -122,7 +122,8 @@ void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_system_state) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::GeneralSystemState& general_system_state) const
 {
   std::vector<bool> safe_cut_off_path;
 
@@ -144,7 +145,8 @@ void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_system_state) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::GeneralSystemState& general_system_state) const
 {
   std::vector<bool> non_safe_cut_off_path;
 
@@ -166,7 +168,8 @@ void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_system_state) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::GeneralSystemState& general_system_state) const
 {
   std::vector<bool> reset_required_cutoff_path;
 
@@ -188,7 +191,8 @@ void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_system_state) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::GeneralSystemState& general_system_state) const
 {
   general_system_state.setCurrentMonitoringCaseNoTable_1(
     ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 10));
@@ -201,7 +205,8 @@ void ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
 }
 
 void ParseGeneralSystemState::setErrorsInGeneralSystemState(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::GeneralSystemState& general_system_state) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::GeneralSystemState& general_system_state) const
 {
   uint8_t byte = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 15);
   general_system_state.setApplicationError(static_cast<bool>(byte & (0x01 << 0)));

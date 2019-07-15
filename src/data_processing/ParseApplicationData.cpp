@@ -37,9 +37,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseApplicationData::ParseApplicationData()
-{
-}
+ParseApplicationData::ParseApplicationData() {}
 
 datastructure::ApplicationData
 ParseApplicationData::parseUDPSequence(const datastructure::PacketBuffer& buffer,
@@ -54,8 +52,8 @@ ParseApplicationData::parseUDPSequence(const datastructure::PacketBuffer& buffer
   }
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin() +
-                          data.getDataHeaderPtr()->getApplicationDataBlockOffset();
+  std::vector<uint8_t>::const_iterator data_ptr =
+    vecPtr->begin() + data.getDataHeaderPtr()->getApplicationDataBlockOffset();
 
   setDataInApplicationData(data_ptr, application_data);
   return application_data;
@@ -95,14 +93,16 @@ bool ParseApplicationData::checkIfDataContainsNeededParsedBlocks(
 }
 
 void ParseApplicationData::setDataInApplicationData(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationData& application_data) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::ApplicationData& application_data) const
 {
   setApplicationInputsInApplicationData(data_ptr, application_data);
   setApplicationOutputsInApplicationData(data_ptr, application_data);
 }
 
 void ParseApplicationData::setApplicationInputsInApplicationData(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationData& application_data) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::ApplicationData& application_data) const
 {
   datastructure::ApplicationInputs inputs;
   setDataInApplicationInputs(data_ptr, inputs);
@@ -110,7 +110,8 @@ void ParseApplicationData::setApplicationInputsInApplicationData(
 }
 
 void ParseApplicationData::setApplicationOutputsInApplicationData(
-  std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationData& application_data) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::ApplicationData& application_data) const
 {
   datastructure::ApplicationOutputs outputs;
   setDataInApplicationOutputs(data_ptr, outputs);
@@ -388,7 +389,8 @@ void ParseApplicationData::setResultingVelocityInApplicationOutputs(
   std::vector<int16_t> resulting_velocities;
   for (uint8_t i = 0; i < 20; i++)
   {
-    resulting_velocities.push_back(ReadWriteHelper::readint16_tLittleEndian(data_ptr + 208 + i * 2));
+    resulting_velocities.push_back(
+      ReadWriteHelper::readint16_tLittleEndian(data_ptr + 208 + i * 2));
   }
   outputs.setResultingVelocityVector(resulting_velocities);
 }

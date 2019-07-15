@@ -118,18 +118,20 @@ void Command::setRequestID(const uint16_t& request_id)
   m_request_id = request_id;
 }
 
-std::vector<uint8_t> Command::expandTelegram(const std::vector<uint8_t>& telegram, size_t additional_bytes) const
+std::vector<uint8_t> Command::expandTelegram(const std::vector<uint8_t>& telegram,
+                                             size_t additional_bytes) const
 {
   // Allocate memory to the desired final size
   std::vector<uint8_t> output(telegram.size() + additional_bytes);
-  // Copy the original telegram over second, this prevents potential reallocating if .resize() was used
+  // Copy the original telegram over second, this prevents potential reallocating if .resize() was
+  // used
   std::copy(telegram.begin(), telegram.end(), output.begin());
   return output;
 }
 
 std::vector<uint8_t> Command::addTelegramHeader(const std::vector<uint8_t>& telegram) const
 {
-  std::vector<uint8_t> header = prepareHeader();
+  std::vector<uint8_t> header             = prepareHeader();
   std::vector<uint8_t>::iterator data_ptr = header.begin();
   writeDataToDataPtr(data_ptr, telegram);
   // Add telegram to end of new header, this may resize header
@@ -168,46 +170,46 @@ void Command::writeDataToDataPtr(std::vector<uint8_t>::iterator data_ptr,
 void Command::writeCola2StxToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
   uint32_t cola2_stx = 0x02020202;
-  ReadWriteHelper::writeuint32_tBigEndian(data_ptr+0, cola2_stx);
+  ReadWriteHelper::writeuint32_tBigEndian(data_ptr + 0, cola2_stx);
 }
 
 void Command::writeLengthToDataPtr(std::vector<uint8_t>::iterator data_ptr,
                                    const std::vector<uint8_t>& telegram) const
 {
   uint32_t length = 10 + telegram.size();
-  ReadWriteHelper::writeuint32_tBigEndian(data_ptr+4, length);
+  ReadWriteHelper::writeuint32_tBigEndian(data_ptr + 4, length);
 }
 
 void Command::writeCola2HubCntrToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
   uint8_t cola2_hub_cntr = 0x00;
-  ReadWriteHelper::writeuint8_tBigEndian(data_ptr+8, cola2_hub_cntr);
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr + 8, cola2_hub_cntr);
 }
 
 void Command::writeCola2NoCToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
   uint8_t cola2_noc = 0x00;
-  ReadWriteHelper::writeuint8_tBigEndian(data_ptr+9, cola2_noc);
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr + 9, cola2_noc);
 }
 
 void Command::writeSessionIdToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint32_tBigEndian(data_ptr+10, getSessionID());
+  ReadWriteHelper::writeuint32_tBigEndian(data_ptr + 10, getSessionID());
 }
 
 void Command::writeRequestIdToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint16_tBigEndian(data_ptr+14, getRequestID());
+  ReadWriteHelper::writeuint16_tBigEndian(data_ptr + 14, getRequestID());
 }
 
 void Command::writeCommandTypeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tBigEndian(data_ptr+16, getCommandType());
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr + 16, getCommandType());
 }
 
 void Command::writeCommandModeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tBigEndian(data_ptr+17, getCommandMode());
+  ReadWriteHelper::writeuint8_tBigEndian(data_ptr + 17, getCommandMode());
 }
 
 } // namespace cola2

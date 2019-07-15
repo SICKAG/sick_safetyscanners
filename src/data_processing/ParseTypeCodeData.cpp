@@ -39,9 +39,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseTypeCodeData::ParseTypeCodeData()
-{
-}
+ParseTypeCodeData::ParseTypeCodeData() {}
 
 
 bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
@@ -49,7 +47,7 @@ bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buff
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   type_code.setInterfaceType(readInterfaceType(data_ptr));
   type_code.setMaxRange(readMaxRange(data_ptr));
   return true;

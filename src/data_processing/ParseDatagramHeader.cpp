@@ -37,16 +37,14 @@
 namespace sick {
 namespace data_processing {
 
-ParseDatagramHeader::ParseDatagramHeader()
-{
-}
+ParseDatagramHeader::ParseDatagramHeader() {}
 
 bool ParseDatagramHeader::parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                            datastructure::DatagramHeader& header) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
   setDataInHeader(data_ptr, header);
   return true;
 }

@@ -39,9 +39,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseDeviceName::ParseDeviceName()
-{
-}
+ParseDeviceName::ParseDeviceName() {}
 
 
 bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer& buffer,
@@ -49,8 +47,8 @@ bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer& buffer
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr = vecPtr->begin();
-  device_name = readDeviceName(data_ptr);
+  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
+  device_name                                              = readDeviceName(data_ptr);
   return true;
 }
 

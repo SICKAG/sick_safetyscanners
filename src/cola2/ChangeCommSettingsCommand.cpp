@@ -48,14 +48,15 @@ ChangeCommSettingsCommand::ChangeCommSettingsCommand(
 {
 }
 
-std::vector<uint8_t> ChangeCommSettingsCommand::addTelegramData(const std::vector<uint8_t> & telegram) const
+std::vector<uint8_t>
+ChangeCommSettingsCommand::addTelegramData(const std::vector<uint8_t>& telegram) const
 {
-  auto base_output = base_class::addTelegramData(telegram);
+  auto base_output   = base_class::addTelegramData(telegram);
   size_t base_length = base_output.size();
-  auto output = expandTelegram(base_output, 28);
+  auto output        = expandTelegram(base_output, 28);
 
   // Add new values after telegram
-  const auto new_data_offset_it = output.begin()+base_length+telegram.size();
+  const auto new_data_offset_it = output.begin() + base_length + telegram.size();
 
   writeDataToDataPtr(new_data_offset_it);
 
@@ -91,47 +92,53 @@ bool ChangeCommSettingsCommand::processReply()
 
 void ChangeCommSettingsCommand::writeChannelToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr+0, m_settings.getChannel());
+  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr + 0, m_settings.getChannel());
 }
 
 void ChangeCommSettingsCommand::writeEnabledToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr+4, m_settings.getEnabled());
+  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr + 4, m_settings.getEnabled());
 }
 
-void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
+void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(
+  std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr+5, m_settings.getEInterfaceType());
+  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr + 5, m_settings.getEInterfaceType());
 }
 
-void ChangeCommSettingsCommand::writeIPAddresstoDataPtr(std::vector<uint8_t>::iterator data_ptr) const
+void ChangeCommSettingsCommand::writeIPAddresstoDataPtr(
+  std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr+8, m_settings.getHostIp().to_ulong());
+  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr + 8, m_settings.getHostIp().to_ulong());
 }
 
 void ChangeCommSettingsCommand::writePortToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr+12, m_settings.getHostUdpPort());
+  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr + 12, m_settings.getHostUdpPort());
 }
 
-void ChangeCommSettingsCommand::writeFrequencyToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
+void ChangeCommSettingsCommand::writeFrequencyToDataPtr(
+  std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr+14, m_settings.getPublishingFrequency());
+  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr + 14, m_settings.getPublishingFrequency());
 }
 
-void ChangeCommSettingsCommand::writeStartAngleToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
+void ChangeCommSettingsCommand::writeStartAngleToDataPtr(
+  std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr+16, m_settings.getStartAngle());
+  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr + 16, m_settings.getStartAngle());
 }
 
-void ChangeCommSettingsCommand::writeEndAngleToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
+void ChangeCommSettingsCommand::writeEndAngleToDataPtr(
+  std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr+20, m_settings.getEndAngle());
+  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr + 20, m_settings.getEndAngle());
 }
 
-void ChangeCommSettingsCommand::writeFeaturesToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
+void ChangeCommSettingsCommand::writeFeaturesToDataPtr(
+  std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr+24, m_settings.getFeatures());
+  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr + 24, m_settings.getFeatures());
 }
 
 

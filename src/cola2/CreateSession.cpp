@@ -49,7 +49,7 @@ std::vector<uint8_t> CreateSession::addTelegramData(const std::vector<uint8_t>& 
 {
   auto output = expandTelegram(telegram, 5);
   // Add new values after telegram
-  auto new_data_offset_it = output.begin()+telegram.size();
+  auto new_data_offset_it = output.begin() + telegram.size();
   writeHeartbeatTimeoutToDataPtr(new_data_offset_it);
   writeClientIdToDataPtr(new_data_offset_it);
   return output;
@@ -79,13 +79,13 @@ bool CreateSession::processReply()
 void CreateSession::writeHeartbeatTimeoutToDataPtr(std::vector<uint8_t>::iterator it) const
 {
   uint8_t heartBeatTimeoutSeconds = 60;
-  ReadWriteHelper::writeuint8_tBigEndian(it+0, heartBeatTimeoutSeconds);
+  ReadWriteHelper::writeuint8_tBigEndian(it + 0, heartBeatTimeoutSeconds);
 }
 
 void CreateSession::writeClientIdToDataPtr(std::vector<uint8_t>::iterator it) const
 {
   uint32_t clientID = 1; // can be any random number
-  ReadWriteHelper::writeuint32_tBigEndian(it+1, clientID);
+  ReadWriteHelper::writeuint32_tBigEndian(it + 1, clientID);
 }
 
 } // namespace cola2

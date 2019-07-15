@@ -66,7 +66,6 @@ void Cola2Session::doDisconnect()
 
 bool Cola2Session::executeCommand(const CommandPtr& command)
 {
-
   addCommand(command->getRequestID(), command);
   sendTelegramAndListenForAnswer(command);
   return true;

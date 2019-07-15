@@ -71,11 +71,13 @@ public:
                         sick::datastructure::DatagramHeader& header) const;
 
 private:
-  void setDataInHeader(std::vector<uint8_t>::const_iterator data_ptr, datastructure::DatagramHeader& header) const;
+  void setDataInHeader(std::vector<uint8_t>::const_iterator data_ptr,
+                       datastructure::DatagramHeader& header) const;
 
   void setDatagramMarkerInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                  datastructure::DatagramHeader& header) const;
-  void setProtocolInHeader(std::vector<uint8_t>::const_iterator data_ptr, datastructure::DatagramHeader& header) const;
+  void setProtocolInHeader(std::vector<uint8_t>::const_iterator data_ptr,
+                           datastructure::DatagramHeader& header) const;
   void setMajorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                datastructure::DatagramHeader& header) const;
   void setMinorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,

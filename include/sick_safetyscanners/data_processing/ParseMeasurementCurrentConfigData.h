@@ -69,7 +69,6 @@ public:
                         datastructure::ConfigData& config_data) const;
 
 private:
-
   uint32_t readStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint32_t readAngularBeamResolution(std::vector<uint8_t>::const_iterator data_ptr) const;
 };

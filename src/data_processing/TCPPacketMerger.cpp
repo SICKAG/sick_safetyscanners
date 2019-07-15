@@ -105,9 +105,7 @@ bool TCPPacketMerger::deployPacket()
   {
     // This insert is memory safe because we constructed the vector in this function
     const std::shared_ptr<std::vector<uint8_t> const> vecPtr = parsed_packet_buffer.getBuffer();
-    headerless_packet_buffer.insert(headerless_packet_buffer.end(),
-                                    vecPtr->begin(),
-                                    vecPtr->end());
+    headerless_packet_buffer.insert(headerless_packet_buffer.end(), vecPtr->begin(), vecPtr->end());
   }
   m_deployed_packet_buffer.setBuffer(headerless_packet_buffer);
   m_buffer_vector.clear();
