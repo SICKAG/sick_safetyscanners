@@ -106,6 +106,7 @@ bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader& head
     getSortedParsedPacketBufferForIdentification(header);
   std::vector<uint8_t> headerless_packet_buffer = removeHeaderFromParsedPacketBuffer(vec);
   m_deployed_packet_buffer.setBuffer(headerless_packet_buffer);
+  m_parsed_packet_buffer_map.erase(header.getIdentification());
   return true;
 }
 
