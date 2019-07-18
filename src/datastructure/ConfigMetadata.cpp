@@ -25,28 +25,128 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file SerialNumber.cpp
+ * \file ConfigMetadata.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2019-07-16
  */
 //----------------------------------------------------------------------
 
-#include <sick_safetyscanners/datastructure/SerialNumber.h>
+#include <sick_safetyscanners/datastructure/ConfigMetadata.h>
 
 namespace sick {
 namespace datastructure {
 
-SerialNumber::SerialNumber() {}
+ConfigMetadata::ConfigMetadata() {}
 
-std::string SerialNumber::getSerialNumber() const
+std::string ConfigMetadata::getVersionCVersion() const
 {
-  return m_serial_number;
+  return m_version_c_version;
 }
 
-void SerialNumber::setSerialNumber(std::string serial_number)
+void ConfigMetadata::setVersionCVersion(std::string version_c_version)
 {
-  m_serial_number = serial_number;
+  m_version_c_version = version_c_version;
+}
+
+uint8_t ConfigMetadata::getVersionMajorVersionNumber() const
+{
+  return m_version_major_version_number;
+}
+
+void ConfigMetadata::setVersionMajorVersionNumber(uint8_t version_major_version_number)
+{
+  m_version_major_version_number = version_major_version_number;
+}
+
+uint8_t ConfigMetadata::getVersionMinorVersionNumber() const
+{
+  return m_version_minor_version_number;
+}
+
+void ConfigMetadata::setVersionMinorVersionNumber(uint8_t version_minor_version_number)
+{
+  m_version_minor_version_number = version_minor_version_number;
+}
+
+uint8_t ConfigMetadata::getVersionReleaseNumber() const
+{
+  return m_version_release_number;
+}
+
+void ConfigMetadata::setVersionReleaseNumber(uint8_t version_release_number)
+{
+  m_version_release_number = version_release_number;
+}
+
+uint16_t ConfigMetadata::getModificationTimeDate() const
+{
+  return m_modification_time_date;
+}
+
+void ConfigMetadata::setModificationTimeDate(uint16_t modification_time_date)
+{
+  m_modification_time_date = modification_time_date;
+}
+
+uint32_t ConfigMetadata::getModificationTimeTime() const
+{
+  return m_modification_time_time;
+}
+
+void ConfigMetadata::setModificationTimeTime(uint32_t modification_time_time)
+{
+  m_modification_time_time = modification_time_time;
+}
+
+uint16_t ConfigMetadata::getTransferTimeDate() const
+{
+  return m_transfer_time_date;
+}
+
+void ConfigMetadata::setTransferTimeDate(uint16_t transfer_time_date)
+{
+  m_transfer_time_date = transfer_time_date;
+}
+
+uint32_t ConfigMetadata::getTransferTimeTime() const
+{
+  return m_transfer_time_time;
+}
+
+void ConfigMetadata::setTransferTimeTime(uint32_t transfer_time_time)
+{
+  m_transfer_time_time = transfer_time_time;
+}
+
+uint32_t ConfigMetadata::getAppChecksum() const
+{
+  return m_app_checksum;
+}
+
+void ConfigMetadata::setAppChecksum(uint32_t app_checksum)
+{
+  m_app_checksum = app_checksum;
+}
+
+uint32_t ConfigMetadata::getOverallChecksum() const
+{
+  return m_overall_checksum;
+}
+
+void ConfigMetadata::setOverallChecksum(uint32_t overall_checksum)
+{
+  m_overall_checksum = overall_checksum;
+}
+
+std::vector<uint32_t> ConfigMetadata::getIntegrityHash() const
+{
+  return m_integrity_hash;
+}
+
+void ConfigMetadata::setIntegrityHash(std::vector<uint32_t> integrity_hash)
+{
+  m_integrity_hash = integrity_hash;
 }
 
 

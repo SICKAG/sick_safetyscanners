@@ -142,6 +142,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/ApplicationOutputs.cpp
   src/datastructure/CommSettings.cpp
   src/datastructure/ConfigData.cpp
+  src/datastructure/ConfigMetadata.cpp
   src/datastructure/Data.cpp
   src/datastructure/DatagramHeader.cpp
   src/datastructure/DataHeader.cpp
@@ -149,6 +150,7 @@ add_library(${PROJECT_NAME}_core
   src/datastructure/DeviceName.cpp
   src/datastructure/DeviceStatus.cpp
   src/datastructure/FieldData.cpp
+  src/datastructure/FirmwareVersion.cpp
   src/datastructure/GeneralSystemState.cpp
   src/datastructure/IntrusionData.cpp
   src/datastructure/IntrusionDatum.cpp

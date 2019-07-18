@@ -36,6 +36,7 @@
 #define SICK_SAFETYSCANNERS_DATASTRUCTURE_CONFIGMETADATA_H
 
 #include <iostream>
+#include <vector>
 
 
 namespace sick {
