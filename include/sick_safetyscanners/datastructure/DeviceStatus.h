@@ -53,7 +53,7 @@ enum e_sopas_device_status
   E_RECOVERABLE_ERROR,
   E_FATAL_ERROR
 };
- /*!
+/*!
  * \brief Class containing the device status of a laser scanner.
  */
 class DeviceStatus

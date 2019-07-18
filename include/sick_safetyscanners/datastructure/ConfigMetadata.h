@@ -77,7 +77,7 @@ public:
    * \param version_major_version_number The major version number for the scanner.
    */
   void setVersionMajorVersionNumber(uint8_t version_major_version_number);
-  
+
   /*!
    * \brief Gets the minor version number for the scanner.
    *
@@ -103,7 +103,7 @@ public:
    * \param version_release_number The version release number for the scanner.
    */
   void setVersionReleaseNumber(uint8_t version_release_number);
-  
+
   /*!
    * \brief Gets the modification time date for the scanner.
    *

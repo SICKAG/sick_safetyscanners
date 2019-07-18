@@ -66,7 +66,7 @@ public:
    * \brief Constructor of the type code.
    */
   TypeCode();
-  
+
   /*!
    * \brief Gets the type code for the scanner.
    *
@@ -106,7 +106,7 @@ public:
   void setMaxRange(float max_distance);
 
 private:
- std::string m_type_code;
+  std::string m_type_code;
   uint8_t m_interface_type;
   float m_max_range;
 };

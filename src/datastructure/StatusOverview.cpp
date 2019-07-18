@@ -41,7 +41,7 @@ StatusOverview::StatusOverview() {}
 
 std::string StatusOverview::getVersionCVersion() const
 {
- return m_version_c_version;
+  return m_version_c_version;
 }
 
 void StatusOverview::setVersionCVersion(std::string version_c_version)

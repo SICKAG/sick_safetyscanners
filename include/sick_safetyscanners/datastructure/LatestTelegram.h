@@ -35,8 +35,8 @@
 #ifndef SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
 #define SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
 
-#include <memory>
 #include <iostream>
+#include <memory>
 #include <sick_safetyscanners/datastructure/MeasurementData.h>
 
 
@@ -66,6 +66,7 @@ public:
    * \param measurement_data_ptr The new measurement data.
    */
   void setMeasurementDataPtr(const std::shared_ptr<MeasurementData>& measurement_data_ptr);
+
 private:
   std::shared_ptr<MeasurementData> m_measurement_data_ptr;
 };

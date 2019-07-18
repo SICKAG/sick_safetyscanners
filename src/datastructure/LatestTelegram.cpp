@@ -44,7 +44,8 @@ std::shared_ptr<MeasurementData> LatestTelegram::getMeasurementDataPtr() const
   return m_measurement_data_ptr;
 }
 
-void LatestTelegram::setMeasurementDataPtr(const std::shared_ptr<MeasurementData>& measurement_data_ptr)
+void LatestTelegram::setMeasurementDataPtr(
+  const std::shared_ptr<MeasurementData>& measurement_data_ptr)
 {
   m_measurement_data_ptr = measurement_data_ptr;
 }

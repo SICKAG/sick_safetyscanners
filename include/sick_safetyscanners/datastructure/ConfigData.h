@@ -35,10 +35,10 @@
 #ifndef SICK_SAFETYSCANNERS_DATASTRUCTURE_CONFIGDATA_H
 #define SICK_SAFETYSCANNERS_DATASTRUCTURE_CONFIGDATA_H
 
-#include <iostream>
-#include <vector>
 #include <boost/asio/ip/address_v4.hpp>
+#include <iostream>
 #include <sick_safetyscanners/datastructure/DerivedValues.h>
+#include <vector>
 
 namespace sick {
 namespace datastructure {
@@ -79,7 +79,7 @@ public:
    * \param version_major_version_number The major version number for the scanner.
    */
   void setVersionMajorVersionNumber(uint8_t version_major_version_number);
-  
+
   /*!
    * \brief Gets the minor version number for the scanner.
    *
@@ -208,7 +208,7 @@ public:
    * \param start_angle Start angle of the configuration in degrees.
    */
   void setStartAngleDegrees(const float& start_angle);
-  
+
   /*!
    * \brief Gets the end angle of the scan.
    *
@@ -271,7 +271,7 @@ public:
    * \param angular_beam_resolution The angular resolution between two beams in degrees.
    */
   void setAngularBeamResolutionDegrees(const float& angular_beam_resolution);
-  
+
   /*!
    * \brief Returns the derived values.
    * \return Derived values.
@@ -289,8 +289,8 @@ private:
    * \brief Defined angle resolution to convert sensor input to the right frame
    */
   const double ANGLE_RESOLUTION = 4194304.0;
-  
-  //TODO cleanup and refactor in different subclasses
+
+  // TODO cleanup and refactor in different subclasses
 
   std::string m_version_c_version;
   uint8_t m_version_major_version_number;
@@ -306,9 +306,8 @@ private:
   float m_end_angle;
   uint16_t m_features;
 
-  float m_angular_beam_resolution; //TODO move into derived values
+  float m_angular_beam_resolution; // TODO move into derived values
   DerivedValues m_derived_values;
-
 };
 
 

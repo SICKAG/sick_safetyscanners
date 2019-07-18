@@ -73,4 +73,4 @@ private:
 } // namespace datastructure
 } // namespace sick
 
-#endif //SICKK_SAFETYSCANNERS_DATASTRUCTURE_USERNAME_H
+#endif // SICKK_SAFETYSCANNERS_DATASTRUCTURE_USERNAME_H
