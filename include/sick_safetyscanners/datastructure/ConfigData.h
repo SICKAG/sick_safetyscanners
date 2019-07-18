@@ -52,43 +52,205 @@ public:
    * \brief The constructor of the config data.
    */
   ConfigData();
-
+  /*!
+   * \brief Gets the version indicator for the scanner.
+   *
+   * \returns The version indicator for the scanner.
+   */
+  std::string getVersionCVersion() const;
+  /*!
+   * \brief Sets the version indicator for the scanner.
+   *
+   * \param version_c_version The version indicator for the scanner.
+   */
+  void setVersionCVersion(std::string version_c_version);
 
   /*!
-   * \brief Get the start angle of the configuration.
-   * \return Start angle of the configuration.
+   * \brief Gets the major version number for the scanner.
+   *
+   * \returns The version indicator for the scanner.
    */
-  float getStartAngle() const;
+  uint8_t getVersionMajorVersionNumber() const;
+  /*!
+   * \brief Sets the major version number for the scanner.
+   *
+   * \param version_major_version_number The major version number for the scanner.
+   */
+  void setVersionMajorVersionNumber(uint8_t version_major_version_number);
+  
+  /*!
+   * \brief Gets the minor version number for the scanner.
+   *
+   * \returns The minor version number for the scanner.
+   */
+  uint8_t getVersionMinorVersionNumber() const;
+  /*!
+   * \brief Sets the minor version number for the scanner.
+   *
+   * \param version_minor_version_number The minor version number for the scanner.
+   */
+  void setVersionMinorVersionNumber(uint8_t version_minor_version_number);
 
   /*!
-   * \brief Set the start angle of the configuration.
-   * \param start_angle Start angle of the scan.
+   * \brief Gets the version release number for the scanner.
+   *
+   * \returns The version release number for the scanner.
    */
-  void setStartAngle(const int32_t& start_angle);
+  uint8_t getVersionReleaseNumber() const;
+  /*!
+   * \brief Sets the version release number for the scanner.
+   *
+   * \param version_release_number The version release number for the scanner.
+   */
+  void setVersionReleaseNumber(uint8_t version_release_number);
+
+  /*!
+   * \brief Gets the IP-address of the host.
+   *
+   * \returns The IP-address of the host.
+   */
+  boost::asio::ip::address_v4 getHostIp() const;
+  /*!
+   * \brief Sets the IP-address of the host from an IP-address.
+   *
+   * \param host_ip The new host IP-address.
+   */
+  void setHostIp(const boost::asio::ip::address_v4& host_ip);
+  /*!
+   * \brief Sets the IP-address of the host from a string.
+   *
+   * \param host_ip The new host IP-address.
+   */
+  void setHostIp(const std::string& host_ip);
+
+  /*!
+   * \brief Gets the host udp port.
+   *
+   * \returns The host udp port.
+   */
+  uint16_t getHostUdpPort() const;
+  /*!
+   * \brief Sets the host udp port.
+   *
+   * \param host_udp_port The new host udp port.
+   */
+  void setHostUdpPort(const uint16_t& host_udp_port);
+
+  /*!
+   * \brief Gets the channel of the data.
+   *
+   * \returns The channel of the data.
+   */
+  uint8_t getChannel() const;
+  /*!
+   * \brief Sets the channel of the data.
+   *
+   * \param channel The new channel.
+   */
+  void setChannel(const uint8_t& channel);
+
+  /*!
+   * \brief Gets if the channel is enabled.
+   *
+   * \returns If the channel is enabled.
+   */
+  bool getEnabled() const;
+  /*!
+   * \brief Sets if the channel is enabled.
+   *
+   * \param enabled If the channel is enabled.
+   */
+  void setEnabled(bool enabled);
+
+  /*!
+   * \brief Gets the eInterface type.
+   *
+   * \returns The eInterface type.
+   */
+  uint8_t getEInterfaceType() const;
+  /*!
+   * \brief Sets the eInterface type.
+   *
+   * \param e_interface_type The new eInterface type.
+   */
+  void setEInterfaceType(const uint8_t& e_interface_type);
+
+  /*!
+   * \brief Gets the publishing frequency.
+   *
+   * \returns The publishing frequency.
+   */
+  uint16_t getPublishingFrequency() const;
+  /*!
+   * \brief Sets the publishing frequency.
+   *
+   * \param publishing_frequency The publishing frequency.
+   */
+  void setPublishingFrequency(const uint16_t& publishing_frequency);
+
+  /*!
+   * \brief Gets the start angle of the scan.
+   *
+   * \returns The start angle of the scan.
+   */
+  uint32_t getStartAngle() const;
+  /*!
+   * \brief Sets the start angle of the scan.
+   *
+   * \param start_angle The start angle of the scan.
+   */
+  void setStartAngle(const uint32_t& start_angle);
 
   /*!
    * \brief Set the start angle of the configuration from degrees.
    * \param start_angle Start angle of the configuration in degrees.
    */
   void setStartAngleDegrees(const float& start_angle);
-
+  
   /*!
-   * \brief Get the end angle of the configuration.
-   * \return End angle of the configuration.
+   * \brief Gets the end angle of the scan.
+   *
+   * \returns The end angle of the scan.
    */
-  float getEndAngle() const;
-
+  uint32_t getEndAngle() const;
   /*!
-   * \brief Set the end angle of the configuration.
-   * \param end_angle End angle of the configuration.
+   * \brief Sets the end angle of the scan.
+   *
+   * \param end_angle The end angle of the scan.
    */
-  void setEndAngle(const int32_t& end_angle);
-
+  void setEndAngle(const uint32_t& end_angle);
   /*!
    * \brief Set the end angle of the configuration from degrees.
    * \param end_angle End angle of the configuration in degrees.
    */
   void setEndAngleDegrees(const float& end_angle);
+
+  /*!
+   * \brief Gets the enabled features.
+   *
+   * \returns The enabled features.
+   */
+  uint16_t getFeatures() const;
+  /*!
+   * \brief Set the enabled features.
+   *
+   * \param features The new enabled features.
+   */
+  void setFeatures(const uint16_t& features);
+  /*!
+   * \brief Sets the enabled features.
+   *
+   * \param general_system_state If general system state is enabled.
+   * \param derived_settings If derived settings are enabled.
+   * \param measurement_data If the measurement data is enabled.
+   * \param intrusion_data If intrusion data is enabled.
+   * \param application_data If application data is enabled.
+   */
+  void setFeatures(const bool general_system_state,
+                   const bool derived_settings,
+                   const bool measurement_data,
+                   const bool intrusion_data,
+                   const bool application_data);
 
   /*!
    * \brief Returns the angular resolution between the beams.
@@ -107,16 +269,44 @@ public:
    * \param angular_beam_resolution The angular resolution between two beams in degrees.
    */
   void setAngularBeamResolutionDegrees(const float& angular_beam_resolution);
+  
+  /*!
+   * \brief Returns the derived values.
+   * \return Derived values.
+   */
+  float getDerivedValues() const;
+
+  /*!
+   * \brief Set the derived values.
+   * \param derived_values The derived values.
+   */
+  void setDerivedValues(const DerivedValues& derived_values);
 
 private:
   /*!
    * \brief Defined angle resolution to convert sensor input to the right frame
    */
   const double ANGLE_RESOLUTION = 4194304.0;
+  
+  //TODO cleanup and refactor in different subclasses
 
-  float m_start_angle;
-  float m_end_angle;
-  float m_angular_beam_resolution;
+  std::string m_version_c_version;
+  uint8_t m_version_major_version_number;
+  uint8_t m_version_minor_version_number;
+  uint8_t m_version_release_number;
+  boost::asio::ip::address_v4 m_host_ip;
+  uint16_t m_host_udp_port;
+  uint8_t m_channel;
+  bool m_enabled;
+  uint8_t m_e_interface_type;
+  uint16_t m_publishing_frequency;
+  uint32_t m_start_angle;
+  uint32_t m_end_angle;
+  uint16_t m_features;
+
+  float m_angular_beam_resolution; //TODO move into derived values
+  DerivedValues m_derived_values;
+
 };
 
 
