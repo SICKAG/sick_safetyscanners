@@ -111,7 +111,7 @@ uint32_t CommSettings::getStartAngle() const
 
 void CommSettings::setStartAngle(const uint32_t& start_angle)
 {
-  m_start_angle = start_angle * 4194304.0;
+  m_start_angle = start_angle * 4194304.0; //TODO refactor in constant
 }
 
 uint32_t CommSettings::getEndAngle() const

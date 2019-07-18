@@ -138,23 +138,33 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/UDPPacketMerger.cpp
   src/datastructure/ApplicationData.cpp
   src/datastructure/ApplicationInputs.cpp
+  src/datastructure/ApplicationName.cpp
   src/datastructure/ApplicationOutputs.cpp
   src/datastructure/CommSettings.cpp
   src/datastructure/ConfigData.cpp
   src/datastructure/Data.cpp
-  src/datastructure/DataHeader.cpp
   src/datastructure/DatagramHeader.cpp
+  src/datastructure/DataHeader.cpp
   src/datastructure/DerivedValues.cpp
+  src/datastructure/DeviceName.cpp
+  src/datastructure/DeviceStatus.cpp
   src/datastructure/FieldData.cpp
   src/datastructure/GeneralSystemState.cpp
   src/datastructure/IntrusionData.cpp
   src/datastructure/IntrusionDatum.cpp
+  src/datastructure/LatestTelegram.cpp
   src/datastructure/MeasurementData.cpp
   src/datastructure/MonitoringCaseData.cpp
+  src/datastructure/OrderNumber.cpp
   src/datastructure/PacketBuffer.cpp
   src/datastructure/ParsedPacketBuffer.cpp
+  src/datastructure/ProjectName.cpp
+  src/datastructure/RequiredUserAction.cpp
   src/datastructure/ScanPoint.cpp
+  src/datastructure/SerialNumber.cpp
+  src/datastructure/StatusOverview.cpp
   src/datastructure/TypeCode.cpp
+  src/datastructure/UserName.cpp
 )
 
 ## Declare cpp executables

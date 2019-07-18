@@ -3,8 +3,8 @@
 // -- BEGIN LICENSE BLOCK ----------------------------------------------
 
 /*!
-*  Copyright (C) 2018, SICK AG, Waldkirch
-*  Copyright (C) 2018, FZI Forschungszentrum Informatik, Karlsruhe, Germany
+*  Copyright (C) 2019, SICK AG, Waldkirch
+*  Copyright (C) 2019, FZI Forschungszentrum Informatik, Karlsruhe, Germany
 *
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,47 +25,28 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCode.cpp
+ * \file ProjectName.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2019-07-16
  */
 //----------------------------------------------------------------------
 
-#include <sick_safetyscanners/datastructure/TypeCode.h>
+#include <sick_safetyscanners/datastructure/ProjectName.h>
 
 namespace sick {
 namespace datastructure {
 
-TypeCode::TypeCode() {}
+ProjectName::ProjectName() {}
 
-std::string TypeCode::getTypeCode() const
+std::string ProjectName::getProjectName() const
 {
-  return m_type_code;
+  return m_project_name;
 }
 
-void TypeCode::setTypeCode(std::string type_code)
+void ProjectName::setProjectName(std::string project_name)
 {
-  m_type_code = type_code;
-}
-uint8_t TypeCode::getInterfaceType() const
-{
-  return m_interface_type;
-}
-
-void TypeCode::setInterfaceType(uint8_t interface_type)
-{
-  m_interface_type = interface_type;
-}
-
-float TypeCode::getMaxRange() const
-{
-  return m_max_range;
-}
-
-void TypeCode::setMaxRange(float max_distance)
-{
-  m_max_range = max_distance;
+  m_project_name = project_name;
 }
 
 

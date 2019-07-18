@@ -3,8 +3,8 @@
 // -- BEGIN LICENSE BLOCK ----------------------------------------------
 
 /*!
-*  Copyright (C) 2018, SICK AG, Waldkirch
-*  Copyright (C) 2018, FZI Forschungszentrum Informatik, Karlsruhe, Germany
+*  Copyright (C) 2019, SICK AG, Waldkirch
+*  Copyright (C) 2019, FZI Forschungszentrum Informatik, Karlsruhe, Germany
 *
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,47 +25,28 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCode.cpp
+ * \file SerialNumber.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2019-07-16
  */
 //----------------------------------------------------------------------
 
-#include <sick_safetyscanners/datastructure/TypeCode.h>
+#include <sick_safetyscanners/datastructure/SerialNumber.h>
 
 namespace sick {
 namespace datastructure {
 
-TypeCode::TypeCode() {}
+SerialNumber::SerialNumber() {}
 
-std::string TypeCode::getTypeCode() const
+std::string SerialNumber::getSerialNumber() const
 {
-  return m_type_code;
+  return m_serial_number;
 }
 
-void TypeCode::setTypeCode(std::string type_code)
+void SerialNumber::setSerialNumber(std::string serial_number)
 {
-  m_type_code = type_code;
-}
-uint8_t TypeCode::getInterfaceType() const
-{
-  return m_interface_type;
-}
-
-void TypeCode::setInterfaceType(uint8_t interface_type)
-{
-  m_interface_type = interface_type;
-}
-
-float TypeCode::getMaxRange() const
-{
-  return m_max_range;
-}
-
-void TypeCode::setMaxRange(float max_distance)
-{
-  m_max_range = max_distance;
+  m_serial_number = serial_number;
 }
 
 

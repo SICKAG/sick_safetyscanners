@@ -3,8 +3,8 @@
 // -- BEGIN LICENSE BLOCK ----------------------------------------------
 
 /*!
-*  Copyright (C) 2018, SICK AG, Waldkirch
-*  Copyright (C) 2018, FZI Forschungszentrum Informatik, Karlsruhe, Germany
+*  Copyright (C) 2019, SICK AG, Waldkirch
+*  Copyright (C) 2019, FZI Forschungszentrum Informatik, Karlsruhe, Germany
 *
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,47 +25,28 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file TypeCode.cpp
+ * \file FirmwareVersion.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
- * \date    2018-10-16
+ * \date    2019-07-16
  */
 //----------------------------------------------------------------------
 
-#include <sick_safetyscanners/datastructure/TypeCode.h>
+#include <sick_safetyscanners/datastructure/FirmwareVersion.h>
 
 namespace sick {
 namespace datastructure {
 
-TypeCode::TypeCode() {}
+FirmwareVersion::FirmwareVersion() {}
 
-std::string TypeCode::getTypeCode() const
+std::string FirmwareVersion::getFirmwareVersion() const
 {
-  return m_type_code;
+  return m_firmware_version;
 }
 
-void TypeCode::setTypeCode(std::string type_code)
+void FirmwareVersion::setFirmwareVersion(std::string firmware_version)
 {
-  m_type_code = type_code;
-}
-uint8_t TypeCode::getInterfaceType() const
-{
-  return m_interface_type;
-}
-
-void TypeCode::setInterfaceType(uint8_t interface_type)
-{
-  m_interface_type = interface_type;
-}
-
-float TypeCode::getMaxRange() const
-{
-  return m_max_range;
-}
-
-void TypeCode::setMaxRange(float max_distance)
-{
-  m_max_range = max_distance;
+  m_firmware_version = firmware_version;
 }
 
 
