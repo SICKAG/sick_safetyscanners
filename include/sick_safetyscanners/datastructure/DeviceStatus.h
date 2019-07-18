@@ -25,53 +25,64 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file LatestTelegram.cpp
+ * \file DeviceStatus.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2019-07-16
  */
 //----------------------------------------------------------------------
 
-#ifndef SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
-#define SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
+#ifndef SICK_SAFETYSCANNERS_DATASTRUCTURE_DEVICESTATUS_H
+#define SICK_SAFETYSCANNERS_DATASTRUCTURE_DEVICESTATUS_H
 
-#include <memory>
 #include <iostream>
-#include <sick_safetyscanners/datastructure/MeasurementData.h>
 
 
 namespace sick {
 namespace datastructure {
 
-/*!
- * \brief Class containing the latest telegram of a laser scanner.
+enum e_sopas_device_status
+{
+  E_UNKNOWN,
+  E_START_UP,
+  E_SERVICE_MODE,
+  E_NORMAL_OPERATION,
+  E_SUSPENDED_OPERATION,
+  E_SERVICE_RECOMMENDED,
+  E_SERVICE_REQUIRED,
+  E_RECOVERABLE_ERROR,
+  E_FATAL_ERROR
+};
+ /*!
+ * \brief Class containing the device status of a laser scanner.
  */
-class LatestTelegram
+class DeviceStatus
 {
 public:
   /*!
-   * \brief Constructor of the latest telegram.
+   * \brief Constructor of the device status.
    */
-  LatestTelegram();
+  DeviceStatus();
 
   /*!
-   * \brief Gets the measurement data.
+   * \brief Gets the device status for the scanner.
    *
-   * \returns The measurement data.
+   * \returns The device status for the scanner.
    */
-  std::shared_ptr<MeasurementData> getMeasurementDataPtr() const;
+  uint8_t getDeviceStatus() const;
   /*!
-   * \brief Sets the measurement data.
+   * \brief Sets the device status for the scanner.
    *
-   * \param measurement_data_ptr The new measurement data.
+   * \param device_status The device status for the scanner.
    */
-  void setMeasurementDataPtr(const std::shared_ptr<MeasurementData>& measurement_data_ptr);
+  void setDeviceStatus(uint8_t device_status);
+
 private:
-  std::shared_ptr<MeasurementData> m_measurement_data_ptr;
+  uint8_t m_device_status;
 };
 
 
 } // namespace datastructure
 } // namespace sick
 
-#endif // SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
+#endif // SICK_SAFETYSCANNERS_DATASTRUCTURE_DEVICESTATUS_H

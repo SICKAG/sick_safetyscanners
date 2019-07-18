@@ -102,7 +102,7 @@ public:
    *
    * \param check_application interfaces Whether the application interfaces have to be checked.
    */
-  void setCheckApplicationInterfaces(bool check_application interfaces);
+  void setCheckApplicationInterfaces(bool check_application_interfaces);
 
   /*!
    * \brief Gets if the device has to be checked.

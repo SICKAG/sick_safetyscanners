@@ -25,53 +25,52 @@
 
 //----------------------------------------------------------------------
 /*!
- * \file LatestTelegram.cpp
+ * \file DeviceName.cpp
  *
  * \author  Lennart Puck <puck@fzi.de>
  * \date    2019-07-16
  */
 //----------------------------------------------------------------------
 
-#ifndef SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
-#define SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
+#ifndef SICK_SAFETYSCANNERS_DATASTRUCTURE_DEVICENAME_H
+#define SICK_SAFETYSCANNERS_DATASTRUCTURE_DEVICENAME_H
 
-#include <memory>
 #include <iostream>
-#include <sick_safetyscanners/datastructure/MeasurementData.h>
 
 
 namespace sick {
 namespace datastructure {
 
 /*!
- * \brief Class containing the latest telegram of a laser scanner.
+ * \brief Class containing the device name of a laser scanner.
  */
-class LatestTelegram
+class DeviceName
 {
 public:
   /*!
-   * \brief Constructor of the latest telegram.
+   * \brief Constructor of the device name.
    */
-  LatestTelegram();
+  DeviceName();
 
   /*!
-   * \brief Gets the measurement data.
+   * \brief Gets the device name for the scanner.
    *
-   * \returns The measurement data.
+   * \returns The device name for the scanner.
    */
-  std::shared_ptr<MeasurementData> getMeasurementDataPtr() const;
+  std::string getDeviceName() const;
   /*!
-   * \brief Sets the measurement data.
+   * \brief Sets the device name for the scanner.
    *
-   * \param measurement_data_ptr The new measurement data.
+   * \param device_name The device name for the scanner.
    */
-  void setMeasurementDataPtr(const std::shared_ptr<MeasurementData>& measurement_data_ptr);
+  void setDeviceName(std::string device_name);
+
 private:
-  std::shared_ptr<MeasurementData> m_measurement_data_ptr;
+  std::string m_device_name;
 };
 
 
 } // namespace datastructure
 } // namespace sick
 
-#endif // SICK_SAFETYSCANNERS_DATASTRUCTURE_LATESTTELEGRAM_H
+#endif // SICK_SAFETYSCANNERS_DATASTRUCTURE_DEVICENAME_H

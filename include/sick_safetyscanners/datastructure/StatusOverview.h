@@ -48,7 +48,7 @@ enum e_device_state
   E_INITIALIZATION,
   E_SHUTDOWN,
   E_OPTICS_COVER_CALIBRATION
-}
+};
 
 enum e_config_state
 {
@@ -60,7 +60,7 @@ enum e_config_state
   E_VERIFIED,
   E_INTERNAL_ERROR,
   E_VERIFICATION_IN_PROGRESS
-}
+};
 
 enum e_application_state
 {
@@ -70,7 +70,7 @@ enum e_application_state
   E_WAITING_FOR_INPUTS,
   E_STARTED,
   E_SLEEP_MODE
-}
+};
 
 /*!
  * \brief Class containing the serial number of a laser scanner.

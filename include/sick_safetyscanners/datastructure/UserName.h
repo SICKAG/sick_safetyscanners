@@ -61,16 +61,16 @@ public:
   /*!
    * \brief Sets the user name for the scanner.
    *
-   * \param user_naem The user name for the scanner.
+   * \param user_name The user name for the scanner.
    */
-  void setUserName(std::string user_naem);
+  void setUserName(std::string user_name);
 
 private:
-  std::string m_user_naem;
+  std::string m_user_name;
 };
 
 
 } // namespace datastructure
 } // namespace sick
 
-confirm_configurationK_SAFETYSCANNERS_DATASTRUCTURE_USERNAME_H
+#endif //SICKK_SAFETYSCANNERS_DATASTRUCTURE_USERNAME_H

@@ -37,6 +37,8 @@
 
 #include <iostream>
 #include <vector>
+#include <boost/asio/ip/address_v4.hpp>
+#include <sick_safetyscanners/datastructure/DerivedValues.h>
 
 namespace sick {
 namespace datastructure {
@@ -193,13 +195,13 @@ public:
    *
    * \returns The start angle of the scan.
    */
-  uint32_t getStartAngle() const;
+  float getStartAngle() const;
   /*!
    * \brief Sets the start angle of the scan.
    *
    * \param start_angle The start angle of the scan.
    */
-  void setStartAngle(const uint32_t& start_angle);
+  void setStartAngle(const int32_t& start_angle);
 
   /*!
    * \brief Set the start angle of the configuration from degrees.
@@ -212,13 +214,13 @@ public:
    *
    * \returns The end angle of the scan.
    */
-  uint32_t getEndAngle() const;
+  float getEndAngle() const;
   /*!
    * \brief Sets the end angle of the scan.
    *
    * \param end_angle The end angle of the scan.
    */
-  void setEndAngle(const uint32_t& end_angle);
+  void setEndAngle(const int32_t& end_angle);
   /*!
    * \brief Set the end angle of the configuration from degrees.
    * \param end_angle End angle of the configuration in degrees.
@@ -300,8 +302,8 @@ private:
   bool m_enabled;
   uint8_t m_e_interface_type;
   uint16_t m_publishing_frequency;
-  uint32_t m_start_angle;
-  uint32_t m_end_angle;
+  float m_start_angle;
+  float m_end_angle;
   uint16_t m_features;
 
   float m_angular_beam_resolution; //TODO move into derived values
