@@ -39,6 +39,135 @@ namespace datastructure {
 
 ConfigData::ConfigData() {}
 
+std::string ConfigData::getVersionCVersion() const
+{
+  return m_version_c_version;
+}
+
+void ConfigData::setVersionCVersion(std::string version_c_version)
+{
+  m_version_c_version = version_c_version;
+}
+
+uint8_t ConfigData::getVersionMajorVersionNumber() const
+{
+  return m_version_major_version_number;
+}
+
+void ConfigData::setVersionMajorVersionNumber(uint8_t version_major_version_number)
+{
+  m_version_major_version_number = version_major_version_number;
+}
+
+uint8_t ConfigData::getVersionMinorVersionNumber() const
+{
+  return m_version_minor_version_number;
+}
+
+void ConfigData::setVersionMinorVersionNumber(uint8_t version_minor_version_number)
+{
+  m_version_minor_version_number = version_minor_version_number;
+}
+
+uint8_t ConfigData::getVersionReleaseNumber() const
+{
+  return m_version_release_number;
+}
+
+void ConfigData::setVersionReleaseNumber(uint8_t version_release_number)
+{
+  m_version_release_number = version_release_number;
+}
+
+boost::asio::ip::address_v4 ConfigData::getHostIp() const
+{
+  return m_host_ip;
+}
+
+void ConfigData::setHostIp(const boost::asio::ip::address_v4& host_ip)
+{
+  m_host_ip = host_ip;
+}
+
+void ConfigData::setHostIp(const std::string& host_ip)
+{
+  m_host_ip = boost::asio::ip::address_v4::from_string(host_ip);
+}
+
+uint16_t ConfigData::getHostUdpPort() const
+{
+  return m_host_udp_port;
+}
+
+void ConfigData::setHostUdpPort(const uint16_t& host_udp_port)
+{
+  m_host_udp_port = host_udp_port;
+}
+
+uint8_t ConfigData::getChannel() const
+{
+  return m_channel;
+}
+
+void ConfigData::setChannel(const uint8_t& channel)
+{
+  m_channel = channel;
+}
+
+bool ConfigData::getEnabled() const
+{
+  return m_enabled;
+}
+
+void ConfigData::setEnabled(bool enabled)
+{
+  m_enabled = enabled;
+}
+
+uint8_t ConfigData::getEInterfaceType() const
+{
+  return m_e_interface_type;
+}
+
+void ConfigData::setEInterfaceType(const uint8_t& e_interface_type)
+{
+  m_e_interface_type = e_interface_type;
+}
+
+uint16_t ConfigData::getPublishingFrequency() const
+{
+  return m_publishing_frequency;
+}
+
+void ConfigData::setPublishingFrequency(const uint16_t& publishing_frequency)
+{
+  m_publishing_frequency = publishing_frequency;
+}
+
+uint16_t ConfigData::getFeatures() const
+{
+  return m_features;
+}
+
+void ConfigData::setFeatures(const uint16_t& features)
+{
+  m_features = features;
+}
+
+void ConfigData::setFeatures(const bool general_system_state,
+                               const bool derived_settings,
+                               const bool measurement_data,
+                               const bool intrusion_data,
+                               const bool application_data)
+{
+  m_features = 0;
+  m_features += general_system_state << 0;
+  m_features += derived_settings << 1;
+  m_features += measurement_data << 2;
+  m_features += intrusion_data << 3;
+  m_features += application_data << 4;
+}
+
 float ConfigData::getStartAngle() const
 {
   return m_start_angle;
