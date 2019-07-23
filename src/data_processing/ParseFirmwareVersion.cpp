@@ -56,12 +56,12 @@ bool ParseFirmwareVersion::parseTCPSequence(const datastructure::PacketBuffer& b
 std::string
 ParseFirmwareVersion::readFirmwareVersion(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint16_t string_length = ReadWriteHelper::readUint16LittleEndian(data_ptr + 0);
+  uint16_t string_length = read_write_helper::readUint16LittleEndian(data_ptr + 0);
 
   std::string result;
   for (uint16_t i = 0; i < string_length; i++)
   {
-    result.push_back(ReadWriteHelper::readUint16LittleEndian(data_ptr + 2 + i));
+    result.push_back(read_write_helper::readUint16LittleEndian(data_ptr + 2 + i));
   }
   return result;
 }

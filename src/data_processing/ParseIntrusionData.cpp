@@ -137,7 +137,7 @@ ParseIntrusionData::setSizeInIntrusionDatum(const uint16_t offset,
                                             std::vector<uint8_t>::const_iterator data_ptr,
                                             sick::datastructure::IntrusionDatum& datum) const
 {
-  uint32_t numBytesToRead = ReadWriteHelper::readUint32LittleEndian(data_ptr + offset);
+  uint32_t numBytesToRead = read_write_helper::readUint32LittleEndian(data_ptr + offset);
   datum.setSize(numBytesToRead);
   return offset;
 }
@@ -153,7 +153,7 @@ ParseIntrusionData::setFlagsInIntrusionDatum(const uint16_t offset,
        (num_read_bytes < datum.getSize()) && (num_read_flags < m_num_scan_points);
        num_read_bytes++)
   {
-    uint8_t bitset = ReadWriteHelper::readUint8LittleEndian(data_ptr + offset + num_read_bytes);
+    uint8_t bitset = read_write_helper::readUint8LittleEndian(data_ptr + offset + num_read_bytes);
     for (uint32_t i_bit = 0; (i_bit < 8) && (num_read_flags < m_num_scan_points);
          i_bit++, num_read_flags++)
     {

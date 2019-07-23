@@ -55,12 +55,12 @@ bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer& buffer
 
 std::string ParseDeviceName::readDeviceName(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint16_t string_length = ReadWriteHelper::readUint16LittleEndian(data_ptr + 0);
+  uint16_t string_length = read_write_helper::readUint16LittleEndian(data_ptr + 0);
 
   std::string name;
   for (uint16_t i = 0; i < string_length; i++)
   {
-    name.push_back(ReadWriteHelper::readUint16LittleEndian(data_ptr + 2 + i));
+    name.push_back(read_write_helper::readUint16LittleEndian(data_ptr + 2 + i));
   }
   return name;
 }

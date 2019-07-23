@@ -56,8 +56,8 @@ bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buff
 
 uint8_t ParseTypeCodeData::readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint8_t type_code_interface_1 = ReadWriteHelper::readUint8(data_ptr + 14);
-  uint8_t type_code_interface_2 = ReadWriteHelper::readUint8(data_ptr + 15);
+  uint8_t type_code_interface_1 = read_write_helper::readUint8(data_ptr + 14);
+  uint8_t type_code_interface_2 = read_write_helper::readUint8(data_ptr + 15);
 
   uint8_t res = sick::datastructure::e_interface_type::E_EFIPRO;
 
@@ -85,8 +85,8 @@ uint8_t ParseTypeCodeData::readInterfaceType(std::vector<uint8_t>::const_iterato
 
 float ParseTypeCodeData::readMaxRange(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint8_t type_code_interface_1 = ReadWriteHelper::readUint8(data_ptr + 12);
-  uint8_t type_code_interface_2 = ReadWriteHelper::readUint8(data_ptr + 13);
+  uint8_t type_code_interface_1 = read_write_helper::readUint8(data_ptr + 12);
+  uint8_t type_code_interface_2 = read_write_helper::readUint8(data_ptr + 13);
 
   int res = sick::datastructure::e_ranges::E_NORMAL_RANGE;
 

@@ -149,7 +149,7 @@ void ParseApplicationData::setUnsafeInputsInApplicationInputs(
 void ParseApplicationData::setUnsafeInputsSourcesInApplicationInputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationInputs& inputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 0);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 0);
   std::vector<bool> input_sources;
   for (uint8_t i = 0; i < 32; i++)
   {
@@ -161,7 +161,7 @@ void ParseApplicationData::setUnsafeInputsSourcesInApplicationInputs(
 void ParseApplicationData::setUnsafeInputsFlagsInApplicationInputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationInputs& inputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 4);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 4);
   std::vector<bool> input_flags;
   for (uint8_t i = 0; i < 32; i++)
   {
@@ -183,7 +183,7 @@ void ParseApplicationData::setMonitoringCaseNumbersInApplicationInputs(
   std::vector<uint16_t> monitoring_cases;
   for (uint8_t i = 0; i < 20; i++)
   {
-    monitoring_cases.push_back(ReadWriteHelper::readUint16LittleEndian(data_ptr + 12 + i * 2));
+    monitoring_cases.push_back(read_write_helper::readUint16LittleEndian(data_ptr + 12 + i * 2));
   }
   inputs.setMonitoringCaseVector(monitoring_cases);
 }
@@ -192,7 +192,7 @@ void ParseApplicationData::setMonitoringCaseNumbersInApplicationInputs(
 void ParseApplicationData::setMonitoringCaseFlagsInApplicationInputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationInputs& inputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 52);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 52);
   std::vector<bool> monitoring_flags;
   // 20 for each case one
   for (uint8_t i = 0; i < 20; i++)
@@ -213,19 +213,19 @@ void ParseApplicationData::setLinearVelocityInputsInApplicationInputs(
 void ParseApplicationData::setLinearVelocity0InApplicationInputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationInputs& inputs) const
 {
-  inputs.setVelocity0(ReadWriteHelper::readUint16LittleEndian(data_ptr + 56));
+  inputs.setVelocity0(read_write_helper::readUint16LittleEndian(data_ptr + 56));
 }
 
 void ParseApplicationData::setLinearVelocity1InApplicationInputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationInputs& inputs) const
 {
-  inputs.setVelocity1(ReadWriteHelper::readUint16LittleEndian(data_ptr + 58));
+  inputs.setVelocity1(read_write_helper::readUint16LittleEndian(data_ptr + 58));
 }
 
 void ParseApplicationData::setLinearVelocityFlagsInApplicationInputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationInputs& inputs) const
 {
-  uint8_t word8 = ReadWriteHelper::readUint8LittleEndian(data_ptr + 60);
+  uint8_t word8 = read_write_helper::readUint8LittleEndian(data_ptr + 60);
 
   inputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   inputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
@@ -237,7 +237,7 @@ void ParseApplicationData::setLinearVelocityFlagsInApplicationInputs(
 void ParseApplicationData::setSleepModeInputInApplicationInputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationInputs& inputs) const
 {
-  inputs.setSleepModeInput(ReadWriteHelper::readUint8LittleEndian(data_ptr + 74));
+  inputs.setSleepModeInput(read_write_helper::readUint8LittleEndian(data_ptr + 74));
 }
 
 
@@ -252,7 +252,7 @@ void ParseApplicationData::setEvalutaionPathsOutputsInApplicationOutputs(
 void ParseApplicationData::setEvaluationPathsOutputsEvalOutInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 140);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 140);
 
   std::vector<bool> eval_out;
   for (uint8_t i = 0; i < 20; i++)
@@ -265,7 +265,7 @@ void ParseApplicationData::setEvaluationPathsOutputsEvalOutInApplicationOutputs(
 void ParseApplicationData::setEvaluationPathsOutputsIsSafeInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 144);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 144);
 
   std::vector<bool> eval_out_is_safe;
   for (uint8_t i = 0; i < 20; i++)
@@ -279,7 +279,7 @@ void ParseApplicationData::setEvaluationPathsOutputsIsSafeInApplicationOutputs(
 void ParseApplicationData::setEvaluationPathsOutputsValidFlagsInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 148);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 148);
 
   std::vector<bool> eval_out_is_valid;
   for (uint8_t i = 0; i < 20; i++)
@@ -304,7 +304,7 @@ void ParseApplicationData::setMonitoringCaseNumbersInApplicationOutputs(
   for (uint8_t i = 0; i < 20; i++)
   {
     output_monitoring_cases.push_back(
-      ReadWriteHelper::readUint16LittleEndian(data_ptr + 152 + i * 2));
+      read_write_helper::readUint16LittleEndian(data_ptr + 152 + i * 2));
   }
   outputs.setMonitoringCaseVector(output_monitoring_cases);
 }
@@ -313,7 +313,7 @@ void ParseApplicationData::setMonitoringCaseNumbersInApplicationOutputs(
 void ParseApplicationData::setMonitoringCaseFlagsInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 192);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 192);
 
   std::vector<bool> output_monitoring_flags;
   // 20 for each case one
@@ -327,13 +327,13 @@ void ParseApplicationData::setMonitoringCaseFlagsInApplicationOutputs(
 void ParseApplicationData::setSleepModeOutputInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  outputs.setSleepModeOutput(ReadWriteHelper::readUint8LittleEndian(data_ptr + 193));
+  outputs.setSleepModeOutput(read_write_helper::readUint8LittleEndian(data_ptr + 193));
 }
 
 void ParseApplicationData::setErrorFlagsInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint8_t word8 = ReadWriteHelper::readUint8LittleEndian(data_ptr + 194);
+  uint8_t word8 = read_write_helper::readUint8LittleEndian(data_ptr + 194);
 
   outputs.setHostErrorFlagContaminationWarning(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setHostErrorFlagContaminationError(static_cast<bool>(word8 & (0x01 << 1)));
@@ -354,19 +354,19 @@ void ParseApplicationData::setLinearVelocityOutoutsInApplicationOutputs(
 void ParseApplicationData::setLinearVelocity0InApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  outputs.setVelocity0(ReadWriteHelper::readUint16LittleEndian(data_ptr + 200));
+  outputs.setVelocity0(read_write_helper::readUint16LittleEndian(data_ptr + 200));
 }
 
 void ParseApplicationData::setLinearVelocity1InApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  outputs.setVelocity1(ReadWriteHelper::readUint16LittleEndian(data_ptr + 202));
+  outputs.setVelocity1(read_write_helper::readUint16LittleEndian(data_ptr + 202));
 }
 
 void ParseApplicationData::setLinearVelocityFlagsInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint8_t word8 = ReadWriteHelper::readUint8LittleEndian(data_ptr + 204);
+  uint8_t word8 = read_write_helper::readUint8LittleEndian(data_ptr + 204);
 
   outputs.setVelocity0Valid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setVelocity1Valid(static_cast<bool>(word8 & (0x01 << 1)));
@@ -389,7 +389,7 @@ void ParseApplicationData::setResultingVelocityInApplicationOutputs(
   std::vector<int16_t> resulting_velocities;
   for (uint8_t i = 0; i < 20; i++)
   {
-    resulting_velocities.push_back(ReadWriteHelper::readInt16LittleEndian(data_ptr + 208 + i * 2));
+    resulting_velocities.push_back(read_write_helper::readInt16LittleEndian(data_ptr + 208 + i * 2));
   }
   outputs.setResultingVelocityVector(resulting_velocities);
 }
@@ -397,7 +397,7 @@ void ParseApplicationData::setResultingVelocityInApplicationOutputs(
 void ParseApplicationData::setResultingVelocityFlagsInApplicationOutputs(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint32_t word32 = ReadWriteHelper::readUint32LittleEndian(data_ptr + 248);
+  uint32_t word32 = read_write_helper::readUint32LittleEndian(data_ptr + 248);
 
   std::vector<bool> resulting_velocities_flags;
   // 20 for each case one
@@ -411,7 +411,7 @@ void ParseApplicationData::setResultingVelocityFlagsInApplicationOutputs(
 void ParseApplicationData::setOutputFlagsinApplicationOutput(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::ApplicationOutputs& outputs) const
 {
-  uint8_t word8 = ReadWriteHelper::readUint8LittleEndian(data_ptr + 259);
+  uint8_t word8 = read_write_helper::readUint8LittleEndian(data_ptr + 259);
 
   outputs.setFlagsSleepModeOutputIsValid(static_cast<bool>(word8 & (0x01 << 0)));
   outputs.setFlagsHostErrorFlagsAreValid(static_cast<bool>(word8 & (0x01 << 1)));

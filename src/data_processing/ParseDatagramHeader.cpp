@@ -64,43 +64,43 @@ void ParseDatagramHeader::setDataInHeader(std::vector<uint8_t>::const_iterator d
 void ParseDatagramHeader::setDatagramMarkerInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                     datastructure::DatagramHeader& header) const
 {
-  header.setDatagramMarker(ReadWriteHelper::readUint32BigEndian(data_ptr + 0));
+  header.setDatagramMarker(read_write_helper::readUint32BigEndian(data_ptr + 0));
 }
 
 void ParseDatagramHeader::setProtocolInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                               datastructure::DatagramHeader& header) const
 {
-  header.setProtocol(ReadWriteHelper::readUint16BigEndian(data_ptr + 4));
+  header.setProtocol(read_write_helper::readUint16BigEndian(data_ptr + 4));
 }
 
 void ParseDatagramHeader::setMajorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::DatagramHeader& header) const
 {
-  header.setMajorVersion(ReadWriteHelper::readUint8LittleEndian(data_ptr + 6));
+  header.setMajorVersion(read_write_helper::readUint8LittleEndian(data_ptr + 6));
 }
 
 void ParseDatagramHeader::setMinorVersionInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                   datastructure::DatagramHeader& header) const
 {
-  header.setMinorVersion(ReadWriteHelper::readUint8LittleEndian(data_ptr + 7));
+  header.setMinorVersion(read_write_helper::readUint8LittleEndian(data_ptr + 7));
 }
 
 void ParseDatagramHeader::setTotalLengthInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                  datastructure::DatagramHeader& header) const
 {
-  header.setTotalLength(ReadWriteHelper::readUint32LittleEndian(data_ptr + 8));
+  header.setTotalLength(read_write_helper::readUint32LittleEndian(data_ptr + 8));
 }
 
 void ParseDatagramHeader::setIdentificationInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                     datastructure::DatagramHeader& header) const
 {
-  header.setIdentification(ReadWriteHelper::readUint32LittleEndian(data_ptr + 12));
+  header.setIdentification(read_write_helper::readUint32LittleEndian(data_ptr + 12));
 }
 
 void ParseDatagramHeader::setFragmentOffsetInHeader(std::vector<uint8_t>::const_iterator data_ptr,
                                                     datastructure::DatagramHeader& header) const
 {
-  header.setFragmentOffset(ReadWriteHelper::readUint32LittleEndian(data_ptr + 16));
+  header.setFragmentOffset(read_write_helper::readUint32LittleEndian(data_ptr + 16));
 }
 
 } // namespace data_processing

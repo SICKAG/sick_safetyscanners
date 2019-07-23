@@ -38,7 +38,7 @@
 #include <stdint.h>
 
 namespace sick {
-namespace ReadWriteHelper {
+namespace read_write_helper {
 
 /*!
  * \brief Helper Functions read and write data at a certain place in a buffer.
@@ -355,7 +355,7 @@ inline int32_t readInt32LittleEndian(std::vector<uint8_t>::const_iterator it)
   return readUint32LittleEndian(it);
 }
 
-} // namespace ReadWriteHelper
+} // namespace read_write_helper
 } // namespace sick
 
 #endif // SICK_SAFETYSCANNERS_DATA_PROCESSING_READWRITEHELPER_HPP

@@ -57,11 +57,11 @@ bool ParseApplicationNameData::parseTCPSequence(
 std::string
 ParseApplicationNameData::readApplicationName(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint32_t name_length = ReadWriteHelper::readUint32LittleEndian(data_ptr + 4);
+  uint32_t name_length = read_write_helper::readUint32LittleEndian(data_ptr + 4);
   std::string name;
   for (uint8_t i = 0; i < name_length; i++)
   {
-    name.push_back(ReadWriteHelper::readUint8(data_ptr + 8 + i));
+    name.push_back(read_write_helper::readUint8(data_ptr + 8 + i));
   }
   std::cout << name << std::endl;
   return name;

@@ -108,7 +108,7 @@ void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
   std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::MeasurementData& measurement_data) const
 {
-  measurement_data.setNumberOfBeams(ReadWriteHelper::readUint32LittleEndian(data_ptr + 0));
+  measurement_data.setNumberOfBeams(read_write_helper::readUint32LittleEndian(data_ptr + 0));
 }
 
 void ParseMeasurementData::setStartAngleAndDelta(const datastructure::Data& data)
@@ -132,9 +132,9 @@ void ParseMeasurementData::addScanPointToMeasurementData(
   std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::MeasurementData& measurement_data) const
 {
-  int16_t distance           = ReadWriteHelper::readUint16LittleEndian(data_ptr + (4 + offset * 4));
-  uint8_t reflectivity       = ReadWriteHelper::readUint8LittleEndian(data_ptr + (6 + offset * 4));
-  uint8_t status             = ReadWriteHelper::readUint8LittleEndian(data_ptr + (7 + offset * 4));
+  int16_t distance           = read_write_helper::readUint16LittleEndian(data_ptr + (4 + offset * 4));
+  uint8_t reflectivity       = read_write_helper::readUint8LittleEndian(data_ptr + (6 + offset * 4));
+  uint8_t status             = read_write_helper::readUint8LittleEndian(data_ptr + (7 + offset * 4));
   bool valid                 = status & (0x01 << 0);
   bool infinite              = status & (0x01 << 1);
   bool glare                 = status & (0x01 << 2);

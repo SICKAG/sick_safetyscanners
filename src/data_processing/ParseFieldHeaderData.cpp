@@ -63,7 +63,7 @@ bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& b
 bool ParseFieldHeaderData::isValid(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   bool res     = false;
-  uint8_t byte = ReadWriteHelper::readUint8(data_ptr + 0);
+  uint8_t byte = read_write_helper::readUint8(data_ptr + 0);
   if (byte == 'R' || byte == 'Y')
   {
     res = true;
@@ -91,12 +91,12 @@ void ParseFieldHeaderData::setFieldType(std::vector<uint8_t>::const_iterator dat
 
 uint8_t ParseFieldHeaderData::readFieldType(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readUint8(data_ptr + 73);
+  return read_write_helper::readUint8(data_ptr + 73);
 }
 
 uint16_t ParseFieldHeaderData::readSetIndex(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readUint16LittleEndian(data_ptr + 82);
+  return read_write_helper::readUint16LittleEndian(data_ptr + 82);
 }
 
 
