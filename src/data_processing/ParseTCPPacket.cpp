@@ -83,43 +83,43 @@ void ParseTCPPacket::setCommandValuesFromPacket(const sick::datastructure::Packe
 
 uint32_t ParseTCPPacket::readSTx(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tBigEndian(data_ptr + 0);
+  return ReadWriteHelper::readUint32BigEndian(data_ptr + 0);
 }
 
 uint32_t ParseTCPPacket::readLength(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tBigEndian(data_ptr + 4);
+  return ReadWriteHelper::readUint32BigEndian(data_ptr + 4);
 }
 
 uint8_t ParseTCPPacket::readHubCntr(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint8_tBigEndian(data_ptr + 8);
+  return ReadWriteHelper::readUint8BigEndian(data_ptr + 8);
 }
 uint8_t ParseTCPPacket::readNoC(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint8_tBigEndian(data_ptr + 9);
+  return ReadWriteHelper::readUint8BigEndian(data_ptr + 9);
 }
 uint32_t ParseTCPPacket::readSessionID(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tBigEndian(data_ptr + 10);
+  return ReadWriteHelper::readUint32BigEndian(data_ptr + 10);
 }
 
 uint16_t ParseTCPPacket::readRequestID(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint16_tBigEndian(data_ptr + 14);
+  return ReadWriteHelper::readUint16BigEndian(data_ptr + 14);
 }
 
 uint8_t ParseTCPPacket::readCommandType(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint8_tBigEndian(data_ptr + 16);
+  return ReadWriteHelper::readUint8BigEndian(data_ptr + 16);
 }
 uint8_t ParseTCPPacket::readCommandMode(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint8_tBigEndian(data_ptr + 17);
+  return ReadWriteHelper::readUint8BigEndian(data_ptr + 17);
 }
 uint16_t ParseTCPPacket::readErrorCode(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint16_tBigEndian(data_ptr + 18);
+  return ReadWriteHelper::readUint16BigEndian(data_ptr + 18);
 }
 
 std::vector<uint8_t> ParseTCPPacket::readData(const datastructure::PacketBuffer& buffer) const

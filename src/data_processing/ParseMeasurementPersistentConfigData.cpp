@@ -56,13 +56,13 @@ bool ParseMeasurementPersistentConfigData::parseTCPSequence(
 uint32_t ParseMeasurementPersistentConfigData::readStartAngle(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 16);
+  return ReadWriteHelper::readUint32LittleEndian(data_ptr + 16);
 }
 
 uint32_t ParseMeasurementPersistentConfigData::readEndAngle(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 20);
+  return ReadWriteHelper::readUint32LittleEndian(data_ptr + 20);
 }
 
 } // namespace data_processing

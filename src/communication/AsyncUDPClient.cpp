@@ -94,7 +94,7 @@ void AsyncUDPClient::runService()
   startReceive();
 }
 
-unsigned short AsyncUDPClient::get_local_port()
+unsigned short AsyncUDPClient::getLocalPort()
 {
   if (m_socket_ptr)
   {

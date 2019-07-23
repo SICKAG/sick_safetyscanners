@@ -110,7 +110,7 @@ void ParseGeneralSystemState::setStatusBitsInGeneralSystemState(
   std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::GeneralSystemState& general_system_state) const
 {
-  uint8_t byte = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 0);
+  uint8_t byte = ReadWriteHelper::readUint8LittleEndian(data_ptr + 0);
 
   general_system_state.setRunModeActive(static_cast<bool>(byte & (0x01 << 0)));
   general_system_state.setStandbyModeActive(static_cast<bool>(byte & (0x01 << 1)));
@@ -129,7 +129,7 @@ void ParseGeneralSystemState::setSafeCutOffPathInGeneralSystemState(
 
   for (uint8_t i = 0; i < 3; i++)
   {
-    uint8_t byte = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 1 + i);
+    uint8_t byte = ReadWriteHelper::readUint8LittleEndian(data_ptr + 1 + i);
 
     for (uint8_t j = 0; j < 8; j++)
     {
@@ -152,7 +152,7 @@ void ParseGeneralSystemState::setNonSafeCutOffPathInGeneralSystemState(
 
   for (uint8_t i = 0; i < 3; i++)
   {
-    uint8_t byte = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 4 + i);
+    uint8_t byte = ReadWriteHelper::readUint8LittleEndian(data_ptr + 4 + i);
 
     for (uint8_t j = 0; j < 8; j++)
     {
@@ -175,7 +175,7 @@ void ParseGeneralSystemState::setResetRequiredCutOffPathInGeneralSystemState(
 
   for (uint8_t i = 0; i < 3; i++)
   {
-    uint8_t byte = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 7 + i);
+    uint8_t byte = ReadWriteHelper::readUint8LittleEndian(data_ptr + 7 + i);
 
     for (uint8_t j = 0; j < 8; j++)
     {
@@ -194,21 +194,21 @@ void ParseGeneralSystemState::setCurrentMonitoringCasesInGeneralSystemState(
   std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::GeneralSystemState& general_system_state) const
 {
-  general_system_state.setCurrentMonitoringCaseNoTable_1(
-    ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 10));
-  general_system_state.setCurrentMonitoringCaseNoTable_2(
-    ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 11));
-  general_system_state.setCurrentMonitoringCaseNoTable_3(
-    ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 12));
-  general_system_state.setCurrentMonitoringCaseNoTable_4(
-    ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 13));
+  general_system_state.setCurrentMonitoringCaseNoTable1(
+    ReadWriteHelper::readUint8LittleEndian(data_ptr + 10));
+  general_system_state.setCurrentMonitoringCaseNoTable2(
+    ReadWriteHelper::readUint8LittleEndian(data_ptr + 11));
+  general_system_state.setCurrentMonitoringCaseNoTable3(
+    ReadWriteHelper::readUint8LittleEndian(data_ptr + 12));
+  general_system_state.setCurrentMonitoringCaseNoTable4(
+    ReadWriteHelper::readUint8LittleEndian(data_ptr + 13));
 }
 
 void ParseGeneralSystemState::setErrorsInGeneralSystemState(
   std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::GeneralSystemState& general_system_state) const
 {
-  uint8_t byte = ReadWriteHelper::readuint8_tLittleEndian(data_ptr + 15);
+  uint8_t byte = ReadWriteHelper::readUint8LittleEndian(data_ptr + 15);
   general_system_state.setApplicationError(static_cast<bool>(byte & (0x01 << 0)));
   general_system_state.setDeviceError(static_cast<bool>(byte & (0x01 << 1)));
 }

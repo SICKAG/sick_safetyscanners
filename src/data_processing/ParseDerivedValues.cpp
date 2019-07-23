@@ -107,37 +107,37 @@ void ParseDerivedValues::setDataInDerivedValues(std::vector<uint8_t>::const_iter
 void ParseDerivedValues::setMultiplicationFactorInDerivedValues(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DerivedValues& derived_values) const
 {
-  derived_values.setMultiplicationFactor(ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 0));
+  derived_values.setMultiplicationFactor(ReadWriteHelper::readUint16LittleEndian(data_ptr + 0));
 }
 
 void ParseDerivedValues::setNumberOfBeamsInDerivedValues(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DerivedValues& derived_values) const
 {
-  derived_values.setNumberOfBeams(ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 2));
+  derived_values.setNumberOfBeams(ReadWriteHelper::readUint16LittleEndian(data_ptr + 2));
 }
 
 void ParseDerivedValues::setScanTimeInDerivedValues(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DerivedValues& derived_values) const
 {
-  derived_values.setScanTime(ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 4));
+  derived_values.setScanTime(ReadWriteHelper::readUint16LittleEndian(data_ptr + 4));
 }
 
 void ParseDerivedValues::setStartAngleInDerivedValues(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DerivedValues& derived_values) const
 {
-  derived_values.setStartAngle(ReadWriteHelper::readint32_tLittleEndian(data_ptr + 8));
+  derived_values.setStartAngle(ReadWriteHelper::readInt32LittleEndian(data_ptr + 8));
 }
 
 void ParseDerivedValues::setAngularBeamResolutionInDerivedValues(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DerivedValues& derived_values) const
 {
-  derived_values.setAngularBeamResolution(ReadWriteHelper::readint32_tLittleEndian(data_ptr + 12));
+  derived_values.setAngularBeamResolution(ReadWriteHelper::readInt32LittleEndian(data_ptr + 12));
 }
 
 void ParseDerivedValues::setInterbeamPeriodInDerivedValues(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DerivedValues& derived_values) const
 {
-  derived_values.setInterbeamPeriod(ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 16));
+  derived_values.setInterbeamPeriod(ReadWriteHelper::readUint32LittleEndian(data_ptr + 16));
 }
 
 } // namespace data_processing

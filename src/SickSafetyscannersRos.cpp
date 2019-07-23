@@ -50,7 +50,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
-    boost::bind(&SickSafetyscannersRos::reconfigure_callback, this, _1, _2);
+    boost::bind(&SickSafetyscannersRos::reconfigureCallback, this, _1, _2);
   m_dynamic_reconfiguration_server.setCallback(reconf_callback);
   if (!readParameters())
   {
@@ -102,7 +102,7 @@ void SickSafetyscannersRos::readPersistentConfig()
   m_communication_settings.setEndAngle(config_data.getEndAngle());
 }
 
-void SickSafetyscannersRos::reconfigure_callback(
+void SickSafetyscannersRos::reconfigureCallback(
   const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config, const uint32_t& level)
 {
   if (isInitialised())

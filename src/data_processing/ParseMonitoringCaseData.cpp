@@ -71,7 +71,7 @@ bool ParseMonitoringCaseData::parseTCPSequence(
 bool ParseMonitoringCaseData::isValid(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   bool res     = false;
-  uint8_t byte = ReadWriteHelper::readuint8_t(data_ptr + 0);
+  uint8_t byte = ReadWriteHelper::readUint8(data_ptr + 0);
   if (byte == 'R' || byte == 'Y')
   {
     res = true;
@@ -82,19 +82,19 @@ bool ParseMonitoringCaseData::isValid(std::vector<uint8_t>::const_iterator data_
 uint16_t ParseMonitoringCaseData::readMonitoringCaseNumber(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 6);
+  return ReadWriteHelper::readUint16LittleEndian(data_ptr + 6);
 }
 
 uint16_t ParseMonitoringCaseData::readFieldIndex(std::vector<uint8_t>::const_iterator data_ptr,
                                                  const uint8_t index) const
 {
-  return ReadWriteHelper::readuint16_tLittleEndian(data_ptr + 158 + (index * 4));
+  return ReadWriteHelper::readUint16LittleEndian(data_ptr + 158 + (index * 4));
 }
 
 bool ParseMonitoringCaseData::readFieldValid(std::vector<uint8_t>::const_iterator data_ptr,
                                              const uint8_t index) const
 {
-  uint8_t byte = ReadWriteHelper::readuint8_t(data_ptr + 157 + (index * 4));
+  uint8_t byte = ReadWriteHelper::readUint8(data_ptr + 157 + (index * 4));
 
   return byte & (0x01 << 0);
 }

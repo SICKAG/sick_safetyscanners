@@ -50,7 +50,7 @@ SickSafetyscanners::SickSafetyscanners(
     settings->getHostUdpPort());
   settings->setHostUdpPort(
     m_async_udp_client_ptr
-      ->get_local_port()); // Store which port was used, needed for data request from the laser
+      ->getLocalPort()); // Store which port was used, needed for data request from the laser
   m_packet_merger_ptr = std::make_shared<sick::data_processing::UDPPacketMerger>();
   ROS_INFO("Started SickSafetyscanners");
 }

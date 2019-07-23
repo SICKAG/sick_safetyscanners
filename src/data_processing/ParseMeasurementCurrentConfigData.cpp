@@ -56,13 +56,13 @@ bool ParseMeasurementCurrentConfigData::parseTCPSequence(
 uint32_t ParseMeasurementCurrentConfigData::readStartAngle(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 36);
+  return ReadWriteHelper::readUint32LittleEndian(data_ptr + 36);
 }
 
 uint32_t ParseMeasurementCurrentConfigData::readAngularBeamResolution(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return ReadWriteHelper::readuint32_tLittleEndian(data_ptr + 40);
+  return ReadWriteHelper::readUint32LittleEndian(data_ptr + 40);
 }
 
 } // namespace data_processing

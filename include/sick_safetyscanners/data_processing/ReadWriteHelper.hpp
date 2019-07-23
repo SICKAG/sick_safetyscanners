@@ -180,7 +180,7 @@ inline void writeuint32_tLittleEndian(std::vector<uint8_t>::iterator it, const u
  *
  * \returns The value of the read integer.
  */
-inline uint8_t readuint8_t(std::vector<uint8_t>::const_iterator it)
+inline uint8_t readUint8(std::vector<uint8_t>::const_iterator it)
 {
   return *(it + 0);
 }
@@ -193,9 +193,9 @@ inline uint8_t readuint8_t(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline uint8_t readuint8_tBigEndian(std::vector<uint8_t>::const_iterator it)
+inline uint8_t readUint8BigEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readuint8_t(it);
+  return readUint8(it);
 }
 
 /*!
@@ -206,9 +206,9 @@ inline uint8_t readuint8_tBigEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline uint8_t readuint8_tLittleEndian(std::vector<uint8_t>::const_iterator it)
+inline uint8_t readUint8LittleEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readuint8_t(it);
+  return readUint8(it);
 }
 
 /*!
@@ -219,9 +219,9 @@ inline uint8_t readuint8_tLittleEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline int8_t readint8_t(std::vector<uint8_t>::const_iterator it)
+inline int8_t readInt8(std::vector<uint8_t>::const_iterator it)
 {
-  return readuint8_t(it);
+  return readUint8(it);
 }
 
 /*!
@@ -232,9 +232,9 @@ inline int8_t readint8_t(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline int8_t readint8_tBigEndian(std::vector<uint8_t>::const_iterator it)
+inline int8_t readInt8BigEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readint8_t(it);
+  return readInt8(it);
 }
 
 /*!
@@ -245,9 +245,9 @@ inline int8_t readint8_tBigEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline int8_t readint8_tLittleEndian(std::vector<uint8_t>::const_iterator it)
+inline int8_t readInt8LittleEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readint8_t(it);
+  return readInt8(it);
 }
 
 /*!
@@ -258,7 +258,7 @@ inline int8_t readint8_tLittleEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline uint16_t readuint16_tBigEndian(std::vector<uint8_t>::const_iterator it)
+inline uint16_t readUint16BigEndian(std::vector<uint8_t>::const_iterator it)
 {
   return (*(it + 0) << 8) + *(it + 1);
 }
@@ -271,7 +271,7 @@ inline uint16_t readuint16_tBigEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline uint16_t readuint16_tLittleEndian(std::vector<uint8_t>::const_iterator it)
+inline uint16_t readUint16LittleEndian(std::vector<uint8_t>::const_iterator it)
 {
   return (*(it + 1) << 8) + *(it + 0);
 }
@@ -284,9 +284,9 @@ inline uint16_t readuint16_tLittleEndian(std::vector<uint8_t>::const_iterator it
  *
  * \returns The value of the read integer.
  */
-inline int16_t readint16_tBigEndian(std::vector<uint8_t>::const_iterator it)
+inline int16_t readInt16BigEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readuint16_tBigEndian(it);
+  return readUint16BigEndian(it);
 }
 
 /*!
@@ -297,9 +297,9 @@ inline int16_t readint16_tBigEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline int16_t readint16_tLittleEndian(std::vector<uint8_t>::const_iterator it)
+inline int16_t readInt16LittleEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readuint16_tLittleEndian(it);
+  return readUint16LittleEndian(it);
 }
 
 /*!
@@ -310,7 +310,7 @@ inline int16_t readint16_tLittleEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline uint32_t readuint32_tBigEndian(std::vector<uint8_t>::const_iterator it)
+inline uint32_t readUint32BigEndian(std::vector<uint8_t>::const_iterator it)
 {
   return (*(it + 0) << 24) + (*(it + 1) << 16) + (*(it + 2) << 8) + *(it + 3);
 }
@@ -323,7 +323,7 @@ inline uint32_t readuint32_tBigEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline uint32_t readuint32_tLittleEndian(std::vector<uint8_t>::const_iterator it)
+inline uint32_t readUint32LittleEndian(std::vector<uint8_t>::const_iterator it)
 {
   return (*(it + 3) << 24) + (*(it + 2) << 16) + (*(it + 1) << 8) + *(it + 0);
 }
@@ -336,9 +336,9 @@ inline uint32_t readuint32_tLittleEndian(std::vector<uint8_t>::const_iterator it
  *
  * \returns The value of the read integer.
  */
-inline int32_t readint32_tBigEndian(std::vector<uint8_t>::const_iterator it)
+inline int32_t readInt32BigEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readuint32_tBigEndian(it);
+  return readUint32BigEndian(it);
 }
 
 
@@ -350,9 +350,9 @@ inline int32_t readint32_tBigEndian(std::vector<uint8_t>::const_iterator it)
  *
  * \returns The value of the read integer.
  */
-inline int32_t readint32_tLittleEndian(std::vector<uint8_t>::const_iterator it)
+inline int32_t readInt32LittleEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readuint32_tLittleEndian(it);
+  return readUint32LittleEndian(it);
 }
 
 } // namespace ReadWriteHelper
