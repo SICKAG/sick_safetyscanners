@@ -42,8 +42,9 @@ namespace data_processing {
 ParseApplicationNameData::ParseApplicationNameData() {}
 
 
-bool ParseApplicationNameData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
-                                         sick::datastructure::ApplicationName& application_name) const
+bool ParseApplicationNameData::parseTCPSequence(
+  const datastructure::PacketBuffer& buffer,
+  sick::datastructure::ApplicationName& application_name) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
@@ -53,9 +54,9 @@ bool ParseApplicationNameData::parseTCPSequence(const datastructure::PacketBuffe
 }
 
 
-std::string ParseApplicationNameData::readApplicationName(std::vector<uint8_t>::const_iterator data_ptr) const
+std::string
+ParseApplicationNameData::readApplicationName(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-
   uint32_t name_length = ReadWriteHelper::readUint32LittleEndian(data_ptr + 4);
   std::string name;
   for (uint8_t i = 0; i < name_length; i++)

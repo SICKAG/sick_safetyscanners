@@ -59,13 +59,13 @@
 #include <sick_safetyscanners/cola2/DeviceNameVariableCommand.h>
 #include <sick_safetyscanners/cola2/FieldGeometryVariableCommand.h>
 #include <sick_safetyscanners/cola2/FieldHeaderVariableCommand.h>
+#include <sick_safetyscanners/cola2/FirmwareVersionVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementCurrentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
-#include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
 #include <sick_safetyscanners/cola2/SerialNumberVariableCommand.h>
-#include <sick_safetyscanners/cola2/FirmwareVersionVariableCommand.h>
+#include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
 
 namespace sick {
 
@@ -116,11 +116,11 @@ public:
                        sick::datastructure::TypeCode& type_code);
 
   void requestApplicationName(const sick::datastructure::CommSettings& settings,
-                       sick::datastructure::ApplicationName& application_name);
+                              sick::datastructure::ApplicationName& application_name);
   void requestSerialNumber(const sick::datastructure::CommSettings& settings,
-                       sick::datastructure::SerialNumber& serial_number);
+                           sick::datastructure::SerialNumber& serial_number);
   void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
-                       sick::datastructure::FirmwareVersion& firmware_version);
+                              sick::datastructure::FirmwareVersion& firmware_version);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *

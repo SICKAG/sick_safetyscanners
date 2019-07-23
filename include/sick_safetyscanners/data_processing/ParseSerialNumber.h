@@ -67,7 +67,8 @@ public:
    *
    * \returns If parsing the serial number was successful.
    */
-  bool parseTCPSequence(const datastructure::PacketBuffer& buffer, datastructure::SerialNumber& serial_number) const;
+  bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                        datastructure::SerialNumber& serial_number) const;
 
   std::string readSerialNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
 };

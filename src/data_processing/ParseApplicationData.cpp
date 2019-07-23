@@ -389,8 +389,7 @@ void ParseApplicationData::setResultingVelocityInApplicationOutputs(
   std::vector<int16_t> resulting_velocities;
   for (uint8_t i = 0; i < 20; i++)
   {
-    resulting_velocities.push_back(
-      ReadWriteHelper::readInt16LittleEndian(data_ptr + 208 + i * 2));
+    resulting_velocities.push_back(ReadWriteHelper::readInt16LittleEndian(data_ptr + 208 + i * 2));
   }
   outputs.setResultingVelocityVector(resulting_velocities);
 }

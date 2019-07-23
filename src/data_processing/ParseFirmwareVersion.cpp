@@ -43,7 +43,7 @@ ParseFirmwareVersion::ParseFirmwareVersion() {}
 
 
 bool ParseFirmwareVersion::parseTCPSequence(const datastructure::PacketBuffer& buffer,
-                                       datastructure::FirmwareVersion& firmware_version) const
+                                            datastructure::FirmwareVersion& firmware_version) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
@@ -53,7 +53,8 @@ bool ParseFirmwareVersion::parseTCPSequence(const datastructure::PacketBuffer& b
 }
 
 
-std::string ParseFirmwareVersion::readFirmwareVersion(std::vector<uint8_t>::const_iterator data_ptr) const
+std::string
+ParseFirmwareVersion::readFirmwareVersion(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   uint16_t string_length = ReadWriteHelper::readUint16LittleEndian(data_ptr + 0);
 

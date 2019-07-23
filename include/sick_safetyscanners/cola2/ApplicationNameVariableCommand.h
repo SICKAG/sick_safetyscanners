@@ -58,9 +58,11 @@ public:
    * \brief Constructor of the Command.
    *
    * \param session The current cola2 session.
-   * \param application_name Reference to the application name variable, which will be written on execution.
+   * \param application_name Reference to the application name variable, which will be written on
+   * execution.
    */
-  ApplicationNameVariableCommand(Cola2Session& session, datastructure::ApplicationName& application_name);
+  ApplicationNameVariableCommand(Cola2Session& session,
+                                 datastructure::ApplicationName& application_name);
 
   /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most

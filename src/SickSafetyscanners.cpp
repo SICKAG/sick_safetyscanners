@@ -101,8 +101,9 @@ void SickSafetyscanners::requestTypeCode(const datastructure::CommSettings& sett
   stopTCPConnection();
 }
 
-void SickSafetyscanners::requestApplicationName(const datastructure::CommSettings& settings,
-                                         sick::datastructure::ApplicationName& application_name)
+void SickSafetyscanners::requestApplicationName(
+  const datastructure::CommSettings& settings,
+  sick::datastructure::ApplicationName& application_name)
 {
   startTCPConnection(settings);
   requestApplicationNameInColaSession(application_name);
@@ -134,7 +135,7 @@ void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& se
 }
 
 void SickSafetyscanners::requestSerialNumber(const datastructure::CommSettings& settings,
-                                           datastructure::SerialNumber& serial_number)
+                                             datastructure::SerialNumber& serial_number)
 {
   startTCPConnection(settings);
   requestSerialNumberInColaSession(serial_number);
@@ -142,7 +143,7 @@ void SickSafetyscanners::requestSerialNumber(const datastructure::CommSettings& 
 }
 
 void SickSafetyscanners::requestFirmwareVersion(const datastructure::CommSettings& settings,
-                                           datastructure::FirmwareVersion& firmware_version)
+                                                datastructure::FirmwareVersion& firmware_version)
 {
   startTCPConnection(settings);
   requestFirmwareVersionInColaSession(firmware_version);
@@ -258,29 +259,32 @@ void SickSafetyscanners::requestDeviceNameInColaSession(std::string& device_name
 }
 
 
-void SickSafetyscanners::requestApplicationNameInColaSession(datastructure::ApplicationName& application_name)
+void SickSafetyscanners::requestApplicationNameInColaSession(
+  datastructure::ApplicationName& application_name)
 {
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::ApplicationNameVariableCommand>(boost::ref(*m_session_ptr),
-                                                             application_name);
+                                                                  application_name);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Application name: %s", application_name.getApplicationName().c_str());
 }
 
-void SickSafetyscanners::requestSerialNumberInColaSession(datastructure::SerialNumber& serial_number)
+void SickSafetyscanners::requestSerialNumberInColaSession(
+  datastructure::SerialNumber& serial_number)
 {
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::SerialNumberVariableCommand>(boost::ref(*m_session_ptr),
-                                                             serial_number);
+                                                               serial_number);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Serial Number: %s", serial_number.getSerialNumber().c_str());
 }
 
-void SickSafetyscanners::requestFirmwareVersionInColaSession(datastructure::FirmwareVersion& firmware_version)
+void SickSafetyscanners::requestFirmwareVersionInColaSession(
+  datastructure::FirmwareVersion& firmware_version)
 {
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::FirmwareVersionVariableCommand>(boost::ref(*m_session_ptr),
-                                                             firmware_version);
+                                                                  firmware_version);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Firmware Version: %s", firmware_version.getFirmwareVersion().c_str());
 }

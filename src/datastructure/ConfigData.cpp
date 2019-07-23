@@ -155,10 +155,10 @@ void ConfigData::setFeatures(const uint16_t& features)
 }
 
 void ConfigData::setFeatures(const bool general_system_state,
-                               const bool derived_settings,
-                               const bool measurement_data,
-                               const bool intrusion_data,
-                               const bool application_data)
+                             const bool derived_settings,
+                             const bool measurement_data,
+                             const bool intrusion_data,
+                             const bool application_data)
 {
   m_features = 0;
   m_features += general_system_state << 0;

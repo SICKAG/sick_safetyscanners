@@ -36,8 +36,8 @@
 #define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEFIRMWAREVERSION_H
 
 #include <sick_safetyscanners/datastructure/Data.h>
-#include <sick_safetyscanners/datastructure/PacketBuffer.h>
 #include <sick_safetyscanners/datastructure/FirmwareVersion.h>
+#include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
 #include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
@@ -67,7 +67,8 @@ public:
    *
    * \returns If parsing the firmware version was successful.
    */
-  bool parseTCPSequence(const datastructure::PacketBuffer& buffer, datastructure::FirmwareVersion& firmware_version) const;
+  bool parseTCPSequence(const datastructure::PacketBuffer& buffer,
+                        datastructure::FirmwareVersion& firmware_version) const;
 
   std::string readFirmwareVersion(std::vector<uint8_t>::const_iterator data_ptr) const;
 };

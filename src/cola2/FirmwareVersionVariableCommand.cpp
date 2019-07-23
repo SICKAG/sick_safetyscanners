@@ -40,8 +40,8 @@
 namespace sick {
 namespace cola2 {
 
-FirmwareVersionVariableCommand::FirmwareVersionVariableCommand(Cola2Session& session,
-                                                     datastructure::FirmwareVersion& firmware_version)
+FirmwareVersionVariableCommand::FirmwareVersionVariableCommand(
+  Cola2Session& session, datastructure::FirmwareVersion& firmware_version)
   : VariableCommand(session, 4)
   , m_firmware_version(firmware_version)
 {

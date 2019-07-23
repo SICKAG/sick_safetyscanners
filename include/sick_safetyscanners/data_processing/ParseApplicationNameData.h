@@ -35,9 +35,9 @@
 #ifndef SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEAPPLICATIONNAMEDATA_H
 #define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEAPPLICATIONNAMEDATA_H
 
+#include <sick_safetyscanners/datastructure/ApplicationName.h>
 #include <sick_safetyscanners/datastructure/Data.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
-#include <sick_safetyscanners/datastructure/ApplicationName.h>
 
 #include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 

@@ -40,12 +40,13 @@
 namespace sick {
 namespace cola2 {
 
-ApplicationNameVariableCommand::ApplicationNameVariableCommand(Cola2Session& session,
-                                                 sick::datastructure::ApplicationName& application_name)
+ApplicationNameVariableCommand::ApplicationNameVariableCommand(
+  Cola2Session& session, sick::datastructure::ApplicationName& application_name)
   : VariableCommand(session, 33)
   , m_application_name(application_name)
 {
-  m_application_name_parser_ptr = std::make_shared<sick::data_processing::ParseApplicationNameData>();
+  m_application_name_parser_ptr =
+    std::make_shared<sick::data_processing::ParseApplicationNameData>();
 }
 
 bool ApplicationNameVariableCommand::canBeExecutedWithoutSessionID() const

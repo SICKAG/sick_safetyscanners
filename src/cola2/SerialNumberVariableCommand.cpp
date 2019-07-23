@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 SerialNumberVariableCommand::SerialNumberVariableCommand(Cola2Session& session,
-                                                     datastructure::SerialNumber& serial_number)
+                                                         datastructure::SerialNumber& serial_number)
   : VariableCommand(session, 3)
   , m_serial_number(serial_number)
 {

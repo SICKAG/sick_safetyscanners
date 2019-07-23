@@ -132,14 +132,14 @@ void ParseMeasurementData::addScanPointToMeasurementData(
   std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::MeasurementData& measurement_data) const
 {
-  int16_t distance     = ReadWriteHelper::readUint16LittleEndian(data_ptr + (4 + offset * 4));
-  uint8_t reflectivity = ReadWriteHelper::readUint8LittleEndian(data_ptr + (6 + offset * 4));
-  uint8_t status       = ReadWriteHelper::readUint8LittleEndian(data_ptr + (7 + offset * 4));
-  bool valid           = status & (0x01 << 0);
-  bool infinite        = status & (0x01 << 1);
-  bool glare           = status & (0x01 << 2);
-  bool reflector       = status & (0x01 << 3);
-  bool contamination   = status & (0x01 << 4);
+  int16_t distance           = ReadWriteHelper::readUint16LittleEndian(data_ptr + (4 + offset * 4));
+  uint8_t reflectivity       = ReadWriteHelper::readUint8LittleEndian(data_ptr + (6 + offset * 4));
+  uint8_t status             = ReadWriteHelper::readUint8LittleEndian(data_ptr + (7 + offset * 4));
+  bool valid                 = status & (0x01 << 0);
+  bool infinite              = status & (0x01 << 1);
+  bool glare                 = status & (0x01 << 2);
+  bool reflector             = status & (0x01 << 3);
+  bool contamination         = status & (0x01 << 4);
   bool contamination_warning = status & (0x01 << 5);
   measurement_data.addScanPoint(sick::datastructure::ScanPoint(m_angle,
                                                                distance,

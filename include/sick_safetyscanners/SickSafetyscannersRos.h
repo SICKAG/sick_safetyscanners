@@ -166,9 +166,8 @@ private:
    * \param config The new configuration to set
    * \param level Level of the new configuration
    */
-  void
-  reconfigureCallback(const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config,
-                       const uint32_t& level);
+  void reconfigureCallback(const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config,
+                           const uint32_t& level);
 
   bool isInitialised();
 

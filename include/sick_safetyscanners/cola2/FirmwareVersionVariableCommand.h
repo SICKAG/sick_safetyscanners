@@ -58,9 +58,11 @@ public:
    * name.
    *
    * \param session The current cola2 session.
-   * \param firmware_version The variable to which the firmware version will be written on execution.
+   * \param firmware_version The variable to which the firmware version will be written on
+   * execution.
    */
-  FirmwareVersionVariableCommand(Cola2Session& session, datastructure::FirmwareVersion& firmware_version);
+  FirmwareVersionVariableCommand(Cola2Session& session,
+                                 datastructure::FirmwareVersion& firmware_version);
 
   /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most

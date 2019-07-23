@@ -43,7 +43,7 @@ ParseSerialNumber::ParseSerialNumber() {}
 
 
 bool ParseSerialNumber::parseTCPSequence(const datastructure::PacketBuffer& buffer,
-                                       datastructure::SerialNumber& serial_number) const
+                                         datastructure::SerialNumber& serial_number) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
