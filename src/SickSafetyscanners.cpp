@@ -105,6 +105,15 @@ void SickSafetyscanners::requestTypeCode(const datastructure::CommSettings& sett
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestApplicationName(const datastructure::CommSettings& settings,
+                                         sick::datastructure::ApplicationName& application_name)
+{
+  startTCPConnection(settings);
+
+  requestApplicationNameInColaSession(application_name);
+
+  stopTCPConnection();
+}
 void SickSafetyscanners::requestFieldData(const datastructure::CommSettings& settings,
                                           std::vector<sick::datastructure::FieldData>& field_data)
 {
@@ -244,6 +253,16 @@ void SickSafetyscanners::requestDeviceNameInColaSession(std::string& device_name
                                                              device_name);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Device name: %s", device_name.c_str());
+}
+
+
+void SickSafetyscanners::requestApplicationNameInColaSession(datastructure::ApplicationName& application_name)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::ApplicationNameVariableCommand>(boost::ref(*m_session_ptr),
+                                                             application_name);
+  m_session_ptr->executeCommand(command_ptr);
+  ROS_INFO("Application name: %s", application_name.getApplicationName().c_str());
 }
 
 void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code)

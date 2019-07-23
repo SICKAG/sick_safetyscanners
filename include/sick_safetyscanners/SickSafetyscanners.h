@@ -53,6 +53,7 @@
 #include <sick_safetyscanners/datastructure/ConfigData.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
+#include <sick_safetyscanners/cola2/ApplicationNameVariableCommand.h>
 #include <sick_safetyscanners/cola2/ChangeCommSettingsCommand.h>
 #include <sick_safetyscanners/cola2/Cola2Session.h>
 #include <sick_safetyscanners/cola2/DeviceNameVariableCommand.h>
@@ -112,6 +113,8 @@ public:
   void requestTypeCode(const sick::datastructure::CommSettings& settings,
                        sick::datastructure::TypeCode& type_code);
 
+  void requestApplicationName(const sick::datastructure::CommSettings& settings,
+                       sick::datastructure::ApplicationName& application_name);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
@@ -174,6 +177,7 @@ private:
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
   void requestDeviceNameInColaSession(std::string& device_name);
+  void requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestMonitoringCaseDataInColaSession(
     std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
