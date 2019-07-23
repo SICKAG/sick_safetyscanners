@@ -175,7 +175,7 @@ float ConfigData::getStartAngle() const
 
 void ConfigData::setStartAngle(const int32_t& start_angle)
 {
-  m_start_angle = (float)start_angle / ANGLE_RESOLUTION;
+  m_start_angle = (float)start_angle / m_ANGLE_RESOLUTION;
 }
 
 void ConfigData::setStartAngleDegrees(const float& start_angle)
@@ -190,7 +190,7 @@ float ConfigData::getEndAngle() const
 
 void ConfigData::setEndAngle(const int32_t& end_angle)
 {
-  m_end_angle = (float)end_angle / ANGLE_RESOLUTION;
+  m_end_angle = (float)end_angle / m_ANGLE_RESOLUTION;
 }
 
 void ConfigData::setEndAngleDegrees(const float& end_angle)
@@ -205,7 +205,7 @@ float ConfigData::getAngularBeamResolution() const
 
 void ConfigData::setAngularBeamResolution(const int32_t& angular_beam_resolution)
 {
-  m_angular_beam_resolution = (float)angular_beam_resolution / ANGLE_RESOLUTION;
+  m_angular_beam_resolution = (float)angular_beam_resolution / m_ANGLE_RESOLUTION;
 }
 
 void ConfigData::setAngularBeamResolutionDegrees(const float& angular_beam_resolution)

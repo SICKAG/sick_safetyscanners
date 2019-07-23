@@ -65,13 +65,13 @@ SickSafetyscanners::~SickSafetyscanners()
 bool SickSafetyscanners::run()
 {
   m_udp_client_thread_ptr.reset(
-    new boost::thread(boost::bind(&SickSafetyscanners::UDPClientThread, this)));
+    new boost::thread(boost::bind(&SickSafetyscanners::udpClientThread, this)));
 
   m_async_udp_client_ptr->runService();
   return true;
 }
 
-bool SickSafetyscanners::UDPClientThread()
+bool SickSafetyscanners::udpClientThread()
 {
   ROS_INFO("Enter io thread");
   m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(boost::ref(*m_io_service_ptr));

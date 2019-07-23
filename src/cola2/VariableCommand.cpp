@@ -51,7 +51,7 @@ std::vector<uint8_t> VariableCommand::addTelegramData(const std::vector<uint8_t>
   auto output = expandTelegram(telegram, 2);
   // Add new values after telegram
   auto new_data_offset_it = output.begin() + telegram.size();
-  ReadWriteHelper::writeuint16_tLittleEndian(new_data_offset_it, m_variable_index);
+  ReadWriteHelper::writeUint16LittleEndian(new_data_offset_it, m_variable_index);
   return output;
 }
 

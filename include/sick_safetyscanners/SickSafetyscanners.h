@@ -175,7 +175,7 @@ private:
   int m_active_case_number;
 
   void processUDPPacket(const sick::datastructure::PacketBuffer& buffer);
-  bool UDPClientThread();
+  bool udpClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   void startTCPConnection(const sick::datastructure::CommSettings& settings);
   void changeCommSettingsInColaSession(const datastructure::CommSettings& settings);

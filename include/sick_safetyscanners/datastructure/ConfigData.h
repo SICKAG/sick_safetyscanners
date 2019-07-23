@@ -288,7 +288,7 @@ private:
   /*!
    * \brief Defined angle resolution to convert sensor input to the right frame
    */
-  const double ANGLE_RESOLUTION = 4194304.0;
+  const double m_ANGLE_RESOLUTION = 4194304.0;
 
   // TODO cleanup and refactor in different subclasses
 

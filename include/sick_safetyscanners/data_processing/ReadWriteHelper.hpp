@@ -50,7 +50,7 @@ namespace ReadWriteHelper {
  * \param buf The buffer to write to.
  * \param v Value which will be written.
  */
-inline void writeuint8_t(std::vector<uint8_t>::iterator it, const uint8_t v)
+inline void writeUint8(std::vector<uint8_t>::iterator it, const uint8_t v)
 {
   *(it + 0) = v;
 }
@@ -62,9 +62,9 @@ inline void writeuint8_t(std::vector<uint8_t>::iterator it, const uint8_t v)
  * \param v Value which will be written.
 
  */
-inline void writeuint8_tBigEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
+inline void writeUint8BigEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
 {
-  writeuint8_t(it, v);
+  writeUint8(it, v);
 }
 
 /*!
@@ -74,9 +74,9 @@ inline void writeuint8_tBigEndian(std::vector<uint8_t>::iterator it, const uint8
  * \param v Value which will be written.
 
  */
-inline void writeuint8_tLittleEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
+inline void writeUint8LittleEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
 {
-  writeuint8_t(it, v);
+  writeUint8(it, v);
 }
 
 /*!
@@ -86,9 +86,9 @@ inline void writeuint8_tLittleEndian(std::vector<uint8_t>::iterator it, const ui
  * \param v Value which will be written.
 
  */
-inline void writeint8_t(std::vector<uint8_t>::iterator it, const uint8_t v)
+inline void writeInt8(std::vector<uint8_t>::iterator it, const uint8_t v)
 {
-  writeuint8_t(it, v);
+  writeUint8(it, v);
 }
 
 /*!
@@ -98,9 +98,9 @@ inline void writeint8_t(std::vector<uint8_t>::iterator it, const uint8_t v)
  * \param v Value which will be written.
 
  */
-inline void writeint8_tBigEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
+inline void writeInt8BigEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
 {
-  writeint8_t(it, v);
+  writeInt8(it, v);
 }
 
 /*!
@@ -110,9 +110,9 @@ inline void writeint8_tBigEndian(std::vector<uint8_t>::iterator it, const uint8_
  * \param v Value which will be written.
 
  */
-inline void writeint8_tLittleEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
+inline void writeInt8LittleEndian(std::vector<uint8_t>::iterator it, const uint8_t v)
 {
-  writeint8_t(it, v);
+  writeInt8(it, v);
 }
 
 /*!
@@ -122,7 +122,7 @@ inline void writeint8_tLittleEndian(std::vector<uint8_t>::iterator it, const uin
  * \param v Value which will be written.
 
  */
-inline void writeuint16_tBigEndian(std::vector<uint8_t>::iterator it, const uint16_t v)
+inline void writeUint16BigEndian(std::vector<uint8_t>::iterator it, const uint16_t v)
 {
   *(it + 0) = (v & 0xff00) >> 8;
   *(it + 1) = v & 0xff;
@@ -135,7 +135,7 @@ inline void writeuint16_tBigEndian(std::vector<uint8_t>::iterator it, const uint
  * \param v Value which will be written.
 
  */
-inline void writeuint16_tLittleEndian(std::vector<uint8_t>::iterator it, const uint16_t v)
+inline void writeUint16LittleEndian(std::vector<uint8_t>::iterator it, const uint16_t v)
 {
   *(it + 0) = v & 0xff;
   *(it + 1) = (v & 0xff00) >> 8;
@@ -149,7 +149,7 @@ inline void writeuint16_tLittleEndian(std::vector<uint8_t>::iterator it, const u
  * \param v Value which will be written.
 
  */
-inline void writeuint32_tBigEndian(std::vector<uint8_t>::iterator it, const uint32_t v)
+inline void writeUint32BigEndian(std::vector<uint8_t>::iterator it, const uint32_t v)
 {
   *(it + 0) = (v & 0xff000000) >> 24;
   *(it + 1) = (v & 0xff0000) >> 16;
@@ -164,7 +164,7 @@ inline void writeuint32_tBigEndian(std::vector<uint8_t>::iterator it, const uint
  * \param v Value which will be written.
 
  */
-inline void writeuint32_tLittleEndian(std::vector<uint8_t>::iterator it, const uint32_t v)
+inline void writeUint32LittleEndian(std::vector<uint8_t>::iterator it, const uint32_t v)
 {
   *(it + 3) = (v & 0xff000000) >> 24;
   *(it + 2) = (v & 0xff0000) >> 16;

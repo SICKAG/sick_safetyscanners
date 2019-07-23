@@ -92,53 +92,53 @@ bool ChangeCommSettingsCommand::processReply()
 
 void ChangeCommSettingsCommand::writeChannelToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr + 0, m_settings.getChannel());
+  ReadWriteHelper::writeUint8LittleEndian(data_ptr + 0, m_settings.getChannel());
 }
 
 void ChangeCommSettingsCommand::writeEnabledToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr + 4, m_settings.getEnabled());
+  ReadWriteHelper::writeUint8LittleEndian(data_ptr + 4, m_settings.getEnabled());
 }
 
 void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint8_tLittleEndian(data_ptr + 5, m_settings.getEInterfaceType());
+  ReadWriteHelper::writeUint8LittleEndian(data_ptr + 5, m_settings.getEInterfaceType());
 }
 
 void ChangeCommSettingsCommand::writeIPAddresstoDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr + 8, m_settings.getHostIp().to_ulong());
+  ReadWriteHelper::writeUint32LittleEndian(data_ptr + 8, m_settings.getHostIp().to_ulong());
 }
 
 void ChangeCommSettingsCommand::writePortToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr + 12, m_settings.getHostUdpPort());
+  ReadWriteHelper::writeUint16LittleEndian(data_ptr + 12, m_settings.getHostUdpPort());
 }
 
 void ChangeCommSettingsCommand::writeFrequencyToDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr + 14, m_settings.getPublishingFrequency());
+  ReadWriteHelper::writeUint16LittleEndian(data_ptr + 14, m_settings.getPublishingFrequency());
 }
 
 void ChangeCommSettingsCommand::writeStartAngleToDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr + 16, m_settings.getStartAngle());
+  ReadWriteHelper::writeUint32LittleEndian(data_ptr + 16, m_settings.getStartAngle());
 }
 
 void ChangeCommSettingsCommand::writeEndAngleToDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint32_tLittleEndian(data_ptr + 20, m_settings.getEndAngle());
+  ReadWriteHelper::writeUint32LittleEndian(data_ptr + 20, m_settings.getEndAngle());
 }
 
 void ChangeCommSettingsCommand::writeFeaturesToDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  ReadWriteHelper::writeuint16_tLittleEndian(data_ptr + 24, m_settings.getFeatures());
+  ReadWriteHelper::writeUint16LittleEndian(data_ptr + 24, m_settings.getFeatures());
 }
 
 

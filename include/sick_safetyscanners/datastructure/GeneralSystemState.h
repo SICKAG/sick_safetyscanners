@@ -166,7 +166,7 @@ public:
    * \brief Returns the current monitor case table 1.
    * \return The current monitoring case table 1.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_1() const;
+  uint8_t getCurrentMonitoringCaseNoTable1() const;
 
   /*!
    * \brief Sets the current monitoring case table 1.
@@ -178,7 +178,7 @@ public:
    * \brief Returns the current monitor case table 2.
    * \return The current monitoring case table 2.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_2() const;
+  uint8_t getCurrentMonitoringCaseNoTable2() const;
 
   /*!
    * \brief Sets the current monitoring case table 2.
@@ -190,7 +190,7 @@ public:
    * \brief Returns the current monitor case table 3.
    * \return The current monitoring case table 3.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_3() const;
+  uint8_t getCurrentMonitoringCaseNoTable3() const;
 
   /*!
    * \brief Sets the current monitoring case table 3.
@@ -202,7 +202,7 @@ public:
    * \brief Returns the current monitor case table 4.
    * \return The current monitoring case table 4.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_4() const;
+  uint8_t getCurrentMonitoringCaseNoTable4() const;
 
   /*!
    * \brief Sets the current monitoring case table 4.

@@ -96,7 +96,7 @@ float FieldData::getStartAngle() const
 
 void FieldData::setStartAngle(const int32_t& start_angle)
 {
-  m_start_angle = (float)start_angle / ANGLE_RESOLUTION;
+  m_start_angle = (float)start_angle / m_ANGLE_RESOLUTION;
 }
 
 void FieldData::setStartAngleDegrees(const float& start_angle)
@@ -111,7 +111,7 @@ float FieldData::getEndAngle() const
 
 void FieldData::setEndAngle(const int32_t& end_angle)
 {
-  m_end_angle = (float)end_angle / ANGLE_RESOLUTION;
+  m_end_angle = (float)end_angle / m_ANGLE_RESOLUTION;
 }
 
 void FieldData::setEndAngleDegrees(const float& end_angle)
@@ -126,7 +126,7 @@ float FieldData::getAngularBeamResolution() const
 
 void FieldData::setAngularBeamResolution(const int32_t& angular_beam_resolution)
 {
-  m_angular_beam_resolution = (float)angular_beam_resolution / ANGLE_RESOLUTION;
+  m_angular_beam_resolution = (float)angular_beam_resolution / m_ANGLE_RESOLUTION;
 }
 
 void FieldData::setAngularBeamResolutionDegrees(const float& angular_beam_resolution)

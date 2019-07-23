@@ -79,13 +79,13 @@ bool CreateSession::processReply()
 void CreateSession::writeHeartbeatTimeoutToDataPtr(std::vector<uint8_t>::iterator it) const
 {
   uint8_t heartBeatTimeoutSeconds = 60;
-  ReadWriteHelper::writeuint8_tBigEndian(it + 0, heartBeatTimeoutSeconds);
+  ReadWriteHelper::writeUint8BigEndian(it + 0, heartBeatTimeoutSeconds);
 }
 
 void CreateSession::writeClientIdToDataPtr(std::vector<uint8_t>::iterator it) const
 {
   uint32_t clientID = 1; // can be any random number
-  ReadWriteHelper::writeuint32_tBigEndian(it + 1, clientID);
+  ReadWriteHelper::writeUint32BigEndian(it + 1, clientID);
 }
 
 } // namespace cola2

@@ -470,13 +470,13 @@ SickSafetyscannersRos::createGeneralSystemStateMessage(const sick::datastructure
     }
 
     msg.current_monitoring_case_no_table_1 =
-      general_system_state->getCurrentMonitoringCaseNoTable_1();
+      general_system_state->getCurrentMonitoringCaseNoTable1();
     msg.current_monitoring_case_no_table_2 =
-      general_system_state->getCurrentMonitoringCaseNoTable_2();
+      general_system_state->getCurrentMonitoringCaseNoTable2();
     msg.current_monitoring_case_no_table_3 =
-      general_system_state->getCurrentMonitoringCaseNoTable_3();
+      general_system_state->getCurrentMonitoringCaseNoTable3();
     msg.current_monitoring_case_no_table_4 =
-      general_system_state->getCurrentMonitoringCaseNoTable_4();
+      general_system_state->getCurrentMonitoringCaseNoTable4();
 
     msg.application_error = general_system_state->getApplicationError();
     msg.device_error      = general_system_state->getDeviceError();
