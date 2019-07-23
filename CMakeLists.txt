@@ -101,6 +101,7 @@ include_directories(
 ## Declare a cpp library
 add_library(${PROJECT_NAME}_core
   src/SickSafetyscanners.cpp
+  src/cola2/ApplicationNameVariableCommand.cpp
   src/cola2/ChangeCommSettingsCommand.cpp
   src/cola2/CloseSession.cpp
   src/cola2/Cola2Session.cpp
@@ -109,16 +110,19 @@ add_library(${PROJECT_NAME}_core
   src/cola2/DeviceNameVariableCommand.cpp
   src/cola2/FieldGeometryVariableCommand.cpp
   src/cola2/FieldHeaderVariableCommand.cpp
+  src/cola2/FirmwareVersionVariableCommand.cpp
   src/cola2/MeasurementCurrentConfigVariableCommand.cpp
   src/cola2/MeasurementPersistentConfigVariableCommand.cpp
   src/cola2/MethodCommand.cpp
   src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
   src/cola2/MonitoringCaseVariableCommand.cpp
+  src/cola2/SerialNumberVariableCommand.cpp
   src/cola2/TypeCodeVariableCommand.cpp
   src/cola2/VariableCommand.cpp
   src/communication/AsyncTCPClient.cpp
   src/communication/AsyncUDPClient.cpp
   src/data_processing/ParseApplicationData.cpp
+  src/data_processing/ParseApplicationNameData.cpp
   src/data_processing/ParseData.cpp
   src/data_processing/ParseDataHeader.cpp
   src/data_processing/ParseDatagramHeader.cpp
@@ -126,12 +130,14 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseDeviceName.cpp
   src/data_processing/ParseFieldGeometryData.cpp
   src/data_processing/ParseFieldHeaderData.cpp
+  src/data_processing/ParseFirmwareVersion.cpp
   src/data_processing/ParseGeneralSystemState.cpp
   src/data_processing/ParseIntrusionData.cpp
   src/data_processing/ParseMeasurementCurrentConfigData.cpp
   src/data_processing/ParseMeasurementData.cpp
   src/data_processing/ParseMeasurementPersistentConfigData.cpp
   src/data_processing/ParseMonitoringCaseData.cpp
+  src/data_processing/ParseSerialNumber.cpp
   src/data_processing/ParseTCPPacket.cpp
   src/data_processing/ParseTypeCodeData.cpp
   src/data_processing/TCPPacketMerger.cpp

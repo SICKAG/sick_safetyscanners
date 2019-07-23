@@ -64,6 +64,8 @@
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
+#include <sick_safetyscanners/cola2/SerialNumberVariableCommand.h>
+#include <sick_safetyscanners/cola2/FirmwareVersionVariableCommand.h>
 
 namespace sick {
 
@@ -115,6 +117,10 @@ public:
 
   void requestApplicationName(const sick::datastructure::CommSettings& settings,
                        sick::datastructure::ApplicationName& application_name);
+  void requestSerialNumber(const sick::datastructure::CommSettings& settings,
+                       sick::datastructure::SerialNumber& serial_number);
+  void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
+                       sick::datastructure::FirmwareVersion& firmware_version);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
@@ -178,6 +184,8 @@ private:
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
   void requestDeviceNameInColaSession(std::string& device_name);
   void requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
+  void requestSerialNumberInColaSession(sick::datastructure::SerialNumber& serial_number);
+  void requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestMonitoringCaseDataInColaSession(
     std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
