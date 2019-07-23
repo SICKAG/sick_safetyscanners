@@ -87,7 +87,7 @@ public:
    * called when a new packet is received.
    * \param settings Current settings for the sensor.
    */
-  SickSafetyscanners(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
+  SickSafetyscanners(const packetReceivedCallbackFunction& newPacketReceivedCallbackFunction,
                      sick::datastructure::CommSettings* settings);
 
   /*!

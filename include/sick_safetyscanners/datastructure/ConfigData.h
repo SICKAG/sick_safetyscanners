@@ -248,11 +248,11 @@ public:
    * \param intrusion_data If intrusion data is enabled.
    * \param application_data If application data is enabled.
    */
-  void setFeatures(const bool general_system_state,
-                   const bool derived_settings,
-                   const bool measurement_data,
-                   const bool intrusion_data,
-                   const bool application_data);
+  void setFeatures(bool general_system_state,
+                   bool derived_settings,
+                   bool measurement_data,
+                   bool intrusion_data,
+                   bool application_data);
 
   /*!
    * \brief Returns the angular resolution between the beams.

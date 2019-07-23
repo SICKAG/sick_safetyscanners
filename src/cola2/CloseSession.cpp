@@ -58,18 +58,19 @@ bool CloseSession::canBeExecutedWithoutSessionID() const
 
 bool CloseSession::processReply()
 {
+  bool result = false;
   if ((getCommandType() == 'C' && getCommandMode() == 'A') ||
       (getCommandType() == 0x43 && getCommandMode() == 0x41))
   {
     m_session.setSessionID(getSessionID());
     ROS_INFO("Successfully closed Cola2 session with sessionID: %u", m_session.getSessionID());
-    return true;
+    result = true;
   }
   else
   {
     ROS_WARN("Could not close Cola2 session with sessionID: %u", m_session.getSessionID());
-    return false;
   }
+  return result;
 }
 
 } // namespace cola2

@@ -51,9 +51,9 @@ ParseIntrusionData::parseUDPSequence(const datastructure::PacketBuffer& buffer,
   }
 
   // Keep our own copy of the shared_ptr to keep the iterators valid
-  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
   std::vector<uint8_t>::const_iterator data_ptr =
-    vecPtr->begin() + data.getDataHeaderPtr()->getIntrusionDataBlockOffset();
+    vec_ptr->begin() + data.getDataHeaderPtr()->getIntrusionDataBlockOffset();
   setNumScanPoints(data.getDerivedValuesPtr()->getNumberOfBeams());
   setDataInIntrusionData(data_ptr, intrusion_data);
   return intrusion_data;
@@ -101,7 +101,7 @@ uint16_t ParseIntrusionData::getNumScanPoints() const
   return m_num_scan_points;
 }
 
-void ParseIntrusionData::setNumScanPoints(const uint16_t num_scan_points)
+void ParseIntrusionData::setNumScanPoints(const uint16_t& num_scan_points)
 {
   m_num_scan_points = num_scan_points;
 }
@@ -133,7 +133,7 @@ void ParseIntrusionData::setDataInIntrusionDatums(
 
 
 uint16_t
-ParseIntrusionData::setSizeInIntrusionDatum(const uint16_t offset,
+ParseIntrusionData::setSizeInIntrusionDatum(const uint16_t& offset,
                                             std::vector<uint8_t>::const_iterator data_ptr,
                                             sick::datastructure::IntrusionDatum& datum) const
 {
@@ -143,7 +143,7 @@ ParseIntrusionData::setSizeInIntrusionDatum(const uint16_t offset,
 }
 
 uint16_t
-ParseIntrusionData::setFlagsInIntrusionDatum(const uint16_t offset,
+ParseIntrusionData::setFlagsInIntrusionDatum(const uint16_t& offset,
                                              std::vector<uint8_t>::const_iterator data_ptr,
                                              sick::datastructure::IntrusionDatum& datum) const
 {

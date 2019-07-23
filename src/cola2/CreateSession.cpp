@@ -62,30 +62,31 @@ bool CreateSession::canBeExecutedWithoutSessionID() const
 
 bool CreateSession::processReply()
 {
+  bool result = false;
   if ((getCommandType() == 'O' && getCommandMode() == 'A') ||
       (getCommandType() == 0x4F && getCommandMode() == 0x41))
   {
     m_session.setSessionID(getSessionID());
     ROS_INFO("Successfully opened Cola2 session with sessionID: %u", m_session.getSessionID());
-    return true;
+    result = true;
   }
   else
   {
     ROS_WARN("Could not open Cola2 session");
-    return false;
   }
+  return result;
 }
 
 void CreateSession::writeHeartbeatTimeoutToDataPtr(std::vector<uint8_t>::iterator it) const
 {
-  uint8_t heartBeatTimeoutSeconds = 60;
-  read_write_helper::writeUint8BigEndian(it + 0, heartBeatTimeoutSeconds);
+  uint8_t heart_beat_time_out_seconds = 60;
+  read_write_helper::writeUint8BigEndian(it + 0, heart_beat_time_out_seconds);
 }
 
 void CreateSession::writeClientIdToDataPtr(std::vector<uint8_t>::iterator it) const
 {
-  uint32_t clientID = 1; // can be any random number
-  read_write_helper::writeUint32BigEndian(it + 1, clientID);
+  uint32_t client_id = 1; // can be any random number
+  read_write_helper::writeUint32BigEndian(it + 1, client_id);
 }
 
 } // namespace cola2

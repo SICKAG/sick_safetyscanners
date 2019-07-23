@@ -38,7 +38,7 @@
 namespace sick {
 
 SickSafetyscanners::SickSafetyscanners(
-  packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
+  const packetReceivedCallbackFunction& newPacketReceivedCallbackFunction,
   sick::datastructure::CommSettings* settings)
   : m_newPacketReceivedCallbackFunction(newPacketReceivedCallbackFunction)
 {

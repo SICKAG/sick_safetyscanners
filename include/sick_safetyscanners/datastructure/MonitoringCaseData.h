@@ -65,7 +65,7 @@ public:
    *
    * \param is_valid if the monitoring data is valid.
    */
-  void setIsValid(const bool is_valid);
+  void setIsValid(bool is_valid);
 
 
   /*!
@@ -80,7 +80,7 @@ public:
    *
    * \param monitoring_case_number The monitoring case number.
    */
-  void setMonitoringCaseNumber(const uint16_t monitoring_case_number);
+  void setMonitoringCaseNumber(const uint16_t& monitoring_case_number);
 
   /*!
    * \brief Returns the field indices.

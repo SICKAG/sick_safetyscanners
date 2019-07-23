@@ -96,9 +96,12 @@ void Cola2Session::processPacket(const datastructure::PacketBuffer& packet)
 {
   addPacketToMerger(packet);
   if (!checkIfPacketIsCompleteAndOtherwiseListenForMorePackets())
+  {
     return;
-  sick::datastructure::PacketBuffer deployedPacket = m_packet_merger_ptr->getDeployedPacketBuffer();
-  startProcessingAndRemovePendingCommandAfterwards(deployedPacket);
+  }
+  sick::datastructure::PacketBuffer deployed_packet =
+    m_packet_merger_ptr->getDeployedPacketBuffer();
+  startProcessingAndRemovePendingCommandAfterwards(deployed_packet);
 }
 
 bool Cola2Session::addPacketToMerger(const sick::datastructure::PacketBuffer& packet)
@@ -125,12 +128,12 @@ bool Cola2Session::checkIfPacketIsCompleteAndOtherwiseListenForMorePackets()
 bool Cola2Session::startProcessingAndRemovePendingCommandAfterwards(
   const sick::datastructure::PacketBuffer& packet)
 {
-  uint16_t requestID = m_tcp_parser_ptr->getRequestID(packet);
-  CommandPtr pendingCommand;
-  if (findCommand(requestID, pendingCommand))
+  uint16_t request_id = m_tcp_parser_ptr->getRequestID(packet);
+  CommandPtr pending_command;
+  if (findCommand(request_id, pending_command))
   {
-    pendingCommand->processReplyBase(*packet.getBuffer());
-    removeCommand(requestID);
+    pending_command->processReplyBase(*packet.getBuffer());
+    removeCommand(request_id);
   }
   return true;
 }

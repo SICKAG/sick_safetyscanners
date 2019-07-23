@@ -44,8 +44,8 @@ ParseDataHeader::parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                   datastructure::Data& data) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
-  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
   datastructure::DataHeader data_header;
   setDataInDataHeader(data_ptr, data_header);
   return data_header;
@@ -191,7 +191,8 @@ void ParseDataHeader::setDerivedValuesBlockSizeInDataHeader(
 void ParseDataHeader::setMeasurementDataBlockOffsetInDataHeader(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DataHeader& data_header) const
 {
-  data_header.setMeasurementDataBlockOffset(read_write_helper::readUint16LittleEndian(data_ptr + 40));
+  data_header.setMeasurementDataBlockOffset(
+    read_write_helper::readUint16LittleEndian(data_ptr + 40));
 }
 
 void ParseDataHeader::setMeasurementDataBlockSizeInDataHeader(
@@ -215,7 +216,8 @@ void ParseDataHeader::setIntrusionDataBlockSizeInDataHeader(
 void ParseDataHeader::setApplicationDataBlockOffsetInDataHeader(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::DataHeader& data_header) const
 {
-  data_header.setApplicationDataBlockOffset(read_write_helper::readUint16LittleEndian(data_ptr + 48));
+  data_header.setApplicationDataBlockOffset(
+    read_write_helper::readUint16LittleEndian(data_ptr + 48));
 }
 
 void ParseDataHeader::setApplicationDataBlockSizeInDataHeader(

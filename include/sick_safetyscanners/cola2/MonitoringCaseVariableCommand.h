@@ -65,7 +65,7 @@ public:
    */
   MonitoringCaseVariableCommand(Cola2Session& session,
                                 datastructure::MonitoringCaseData& monitoring_case_data,
-                                const uint16_t index);
+                                const uint16_t& index);
 
   /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most

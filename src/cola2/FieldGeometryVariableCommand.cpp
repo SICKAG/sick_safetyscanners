@@ -42,7 +42,7 @@ namespace cola2 {
 
 FieldGeometryVariableCommand::FieldGeometryVariableCommand(Cola2Session& session,
                                                            datastructure::FieldData& field_data,
-                                                           const uint16_t index)
+                                                           const uint16_t& index)
   : VariableCommand(session, 0x2810 + index)
   , m_field_data(field_data)
 {

@@ -44,7 +44,7 @@ namespace cola2 {
 MonitoringCaseVariableCommand::MonitoringCaseVariableCommand(
   Cola2Session& session,
   datastructure::MonitoringCaseData& monitoring_case_data,
-  const uint16_t index)
+  const uint16_t& index)
   : VariableCommand(session, 2101 + index)
   , m_monitoring_case_data(monitoring_case_data)
 {

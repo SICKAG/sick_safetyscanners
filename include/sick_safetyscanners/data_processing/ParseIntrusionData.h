@@ -68,7 +68,7 @@ public:
   datastructure::IntrusionData parseUDPSequence(const datastructure::PacketBuffer& buffer,
                                                 datastructure::Data& data);
   uint16_t getNumScanPoints() const;
-  void setNumScanPoints(const uint16_t num_scan_points);
+  void setNumScanPoints(const uint16_t& num_scan_points);
 
 private:
   uint16_t m_num_scan_points;
@@ -78,10 +78,10 @@ private:
   void setDataInIntrusionDatums(
     std::vector<uint8_t>::const_iterator data_ptr,
     std::vector<sick::datastructure::IntrusionDatum>& intrusion_datums) const;
-  uint16_t setSizeInIntrusionDatum(const uint16_t offset,
+  uint16_t setSizeInIntrusionDatum(const uint16_t& offset,
                                    std::vector<uint8_t>::const_iterator data_ptr,
                                    sick::datastructure::IntrusionDatum& datum) const;
-  uint16_t setFlagsInIntrusionDatum(const uint16_t offset,
+  uint16_t setFlagsInIntrusionDatum(const uint16_t& offset,
                                     std::vector<uint8_t>::const_iterator data_ptr,
                                     sick::datastructure::IntrusionDatum& datum) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;

@@ -46,9 +46,9 @@ bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer&
                                               sick::datastructure::FieldData& field_data) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
-  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
-  uint32_t array_length                                    = readArrayLength(data_ptr);
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
+  uint32_t array_length                                     = readArrayLength(data_ptr);
   std::vector<uint16_t> geometry_distance_mm;
   for (uint32_t i = 0; i < array_length; i++)
   {

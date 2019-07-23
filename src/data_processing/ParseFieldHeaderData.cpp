@@ -46,9 +46,9 @@ bool ParseFieldHeaderData::parseTCPSequence(const datastructure::PacketBuffer& b
                                             datastructure::FieldData& field_data) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
-  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
-  std::vector<uint8_t>::const_iterator data_ptr            = vecPtr->begin();
-  bool valid                                               = isValid(data_ptr);
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
+  bool valid                                                = isValid(data_ptr);
   field_data.setIsValid(valid);
 
   if (valid)

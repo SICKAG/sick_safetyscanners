@@ -50,9 +50,9 @@ ParseGeneralSystemState::parseUDPSequence(const datastructure::PacketBuffer& buf
     return general_system_state;
   }
   // Keep our own copy of the shared_ptr to keep the iterators valid
-  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
   std::vector<uint8_t>::const_iterator data_ptr =
-    vecPtr->begin() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset();
+    vec_ptr->begin() + data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset();
 
   setDataInGeneralSystemState(data_ptr, general_system_state);
   return general_system_state;

@@ -83,11 +83,7 @@ bool ChangeCommSettingsCommand::canBeExecutedWithoutSessionID() const
 
 bool ChangeCommSettingsCommand::processReply()
 {
-  if (!base_class::processReply())
-  {
-    return false;
-  }
-  return true;
+  return (!base_class::processReply());
 }
 
 void ChangeCommSettingsCommand::writeChannelToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
@@ -97,7 +93,8 @@ void ChangeCommSettingsCommand::writeChannelToDataPtr(std::vector<uint8_t>::iter
 
 void ChangeCommSettingsCommand::writeEnabledToDataPtr(std::vector<uint8_t>::iterator data_ptr) const
 {
-  read_write_helper::writeUint8LittleEndian(data_ptr + 4, m_settings.getEnabled());
+  read_write_helper::writeUint8LittleEndian(data_ptr + 4,
+                                            static_cast<uint8_t>(m_settings.getEnabled()));
 }
 
 void ChangeCommSettingsCommand::writeEInterfaceTypeToDataPtr(

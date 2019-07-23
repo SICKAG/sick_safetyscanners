@@ -73,8 +73,9 @@ public:
 private:
   bool isValid(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint16_t readMonitoringCaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
-  uint16_t readFieldIndex(std::vector<uint8_t>::const_iterator data_ptr, const uint8_t index) const;
-  bool readFieldValid(std::vector<uint8_t>::const_iterator data_ptr, const uint8_t index) const;
+  uint16_t readFieldIndex(std::vector<uint8_t>::const_iterator data_ptr,
+                          const uint8_t& index) const;
+  bool readFieldValid(std::vector<uint8_t>::const_iterator data_ptr, const uint8_t& index) const;
 };
 
 } // namespace data_processing

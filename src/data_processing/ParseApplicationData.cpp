@@ -51,9 +51,9 @@ ParseApplicationData::parseUDPSequence(const datastructure::PacketBuffer& buffer
     return application_data;
   }
   // Keep our own copy of the shared_ptr to keep the iterators valid
-  const std::shared_ptr<std::vector<uint8_t> const> vecPtr = buffer.getBuffer();
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
   std::vector<uint8_t>::const_iterator data_ptr =
-    vecPtr->begin() + data.getDataHeaderPtr()->getApplicationDataBlockOffset();
+    vec_ptr->begin() + data.getDataHeaderPtr()->getApplicationDataBlockOffset();
 
   setDataInApplicationData(data_ptr, application_data);
   return application_data;
@@ -74,22 +74,14 @@ bool ParseApplicationData::checkIfPreconditionsAreMet(const datastructure::Data&
 
 bool ParseApplicationData::checkIfApplicationDataIsPublished(const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->getApplicationDataBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getApplicationDataBlockSize() == 0)
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->getApplicationDataBlockOffset() == 0 &&
+           data.getDataHeaderPtr()->getApplicationDataBlockSize() == 0);
 }
 
 bool ParseApplicationData::checkIfDataContainsNeededParsedBlocks(
   const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->isEmpty())
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->isEmpty());
 }
 
 void ParseApplicationData::setDataInApplicationData(
@@ -389,7 +381,8 @@ void ParseApplicationData::setResultingVelocityInApplicationOutputs(
   std::vector<int16_t> resulting_velocities;
   for (uint8_t i = 0; i < 20; i++)
   {
-    resulting_velocities.push_back(read_write_helper::readInt16LittleEndian(data_ptr + 208 + i * 2));
+    resulting_velocities.push_back(
+      read_write_helper::readInt16LittleEndian(data_ptr + 208 + i * 2));
   }
   outputs.setResultingVelocityVector(resulting_velocities);
 }

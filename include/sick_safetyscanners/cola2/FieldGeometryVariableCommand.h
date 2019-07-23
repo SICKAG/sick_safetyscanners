@@ -67,7 +67,7 @@ public:
    */
   FieldGeometryVariableCommand(Cola2Session& session,
                                datastructure::FieldData& field_data,
-                               const uint16_t index);
+                               const uint16_t& index);
 
   /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most
