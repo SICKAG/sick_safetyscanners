@@ -63,7 +63,6 @@ ParseApplicationNameData::readApplicationName(std::vector<uint8_t>::const_iterat
   {
     name.push_back(read_write_helper::readUint8(data_ptr + 8 + i));
   }
-  std::cout << name << std::endl;
   return name;
 }
 

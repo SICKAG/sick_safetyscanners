@@ -69,6 +69,7 @@ public:
                         datastructure::TypeCode& type_code) const;
 
 private:
+  std::string readTypeCode(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint8_t readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const;
   float readMaxRange(std::vector<uint8_t>::const_iterator data_ptr) const;
 };

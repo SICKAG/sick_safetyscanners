@@ -294,6 +294,7 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::TypeCodeVariableCommand>(boost::ref(*m_session_ptr), type_code);
   m_session_ptr->executeCommand(command_ptr);
+  ROS_INFO("Type Code: %s", type_code.getTypeCode().c_str());
 }
 
 void SickSafetyscanners::requestPersistentConfigInColaSession(

@@ -61,9 +61,9 @@ bool MonitoringCaseTableHeaderVariableCommand::processReply()
   {
     result = false;
   }
-  //else 
+  // else
   //{
-    //m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
+  // m_field_header_parser_ptr->parseTCPSequence(getDataVector(),m_field_data);
   //}
   return result;
 }

@@ -48,11 +48,22 @@ bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buff
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
   std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
+  type_code.setTypeCode(readTypeCode(data_ptr));
   type_code.setInterfaceType(readInterfaceType(data_ptr));
   type_code.setMaxRange(readMaxRange(data_ptr));
   return true;
 }
 
+std::string ParseTypeCodeData::readTypeCode(std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  uint16_t code_length = read_write_helper::readUint16LittleEndian(data_ptr);
+  std::string code;
+  for (uint8_t i = 0; i < code_length; i++)
+  {
+    code.push_back(read_write_helper::readUint8(data_ptr + 2 + i));
+  }
+  return code;
+}
 
 uint8_t ParseTypeCodeData::readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const
 {
