@@ -142,6 +142,14 @@ void SickSafetyscanners::requestSerialNumber(const datastructure::CommSettings& 
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestOrderNumber(const datastructure::CommSettings& settings,
+                                             datastructure::OrderNumber& order_number)
+{
+  startTCPConnection(settings);
+  requestOrderNumberInColaSession(order_number);
+  stopTCPConnection();
+}
+
 void SickSafetyscanners::requestFirmwareVersion(const datastructure::CommSettings& settings,
                                                 datastructure::FirmwareVersion& firmware_version)
 {
@@ -295,6 +303,15 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
     std::make_shared<sick::cola2::TypeCodeVariableCommand>(boost::ref(*m_session_ptr), type_code);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Type Code: %s", type_code.getTypeCode().c_str());
+}
+
+void SickSafetyscanners::requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number)
+{
+
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::OrderNumberVariableCommand>(boost::ref(*m_session_ptr), order_number);
+  m_session_ptr->executeCommand(command_ptr);
+  ROS_INFO("Order Number: %s", order_number.getOrderNumber().c_str());
 }
 
 void SickSafetyscanners::requestPersistentConfigInColaSession(

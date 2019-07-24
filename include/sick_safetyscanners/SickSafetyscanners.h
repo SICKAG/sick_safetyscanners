@@ -64,6 +64,7 @@
 #include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
+#include <sick_safetyscanners/cola2/OrderNumberVariableCommand.h>
 #include <sick_safetyscanners/cola2/SerialNumberVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
 
@@ -121,6 +122,8 @@ public:
                            sick::datastructure::SerialNumber& serial_number);
   void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
                               sick::datastructure::FirmwareVersion& firmware_version);
+  void requestOrderNumber(const datastructure::CommSettings& settings,
+                                             datastructure::OrderNumber& order_number);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
@@ -184,6 +187,7 @@ private:
   void requestDeviceNameInColaSession(std::string& device_name);
   void requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
   void requestSerialNumberInColaSession(sick::datastructure::SerialNumber& serial_number);
+  void requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number);
   void requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestMonitoringCaseDataInColaSession(
