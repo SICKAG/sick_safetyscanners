@@ -172,7 +172,6 @@ private:
   std::shared_ptr<sick::data_processing::UDPPacketMerger> m_packet_merger_ptr;
 
   std::string m_device_name;
-  int m_active_case_number;
 
   void processUDPPacket(const sick::datastructure::PacketBuffer& buffer);
   bool udpClientThread();

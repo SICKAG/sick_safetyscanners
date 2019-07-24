@@ -141,11 +141,11 @@ void CommSettings::setFeatures(bool general_system_state,
                                bool application_data)
 {
   m_features = 0;
-  m_features += static_cast<int>(general_system_state << 0);
-  m_features += static_cast<int>(derived_settings << 1);
-  m_features += static_cast<int>(measurement_data << 2);
-  m_features += static_cast<int>(intrusion_data << 3);
-  m_features += static_cast<int>(application_data << 4);
+  m_features += (static_cast<int>(general_system_state) << 0);
+  m_features += (static_cast<int>(derived_settings) << 1);
+  m_features += (static_cast<int>(measurement_data) << 2);
+  m_features += (static_cast<int>(intrusion_data) << 3);
+  m_features += (static_cast<int>(application_data) << 4);
 }
 
 boost::asio::ip::address_v4 CommSettings::getSensorIp() const

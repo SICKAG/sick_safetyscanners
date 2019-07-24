@@ -136,7 +136,7 @@ void ParseMeasurementData::addScanPointToMeasurementData(
   bool glare           = static_cast<bool>(status & (0x01 << 2));
   bool reflector       = static_cast<bool>(status & (0x01 << 3));
   bool contamination   = static_cast<bool>(status & (0x01 << 4));
-  bool contamination_warning = status & (0x01 << 5);
+  bool contamination_warning = static_cast<bool>(status & (0x01 << 5));
   measurement_data.addScanPoint(sick::datastructure::ScanPoint(m_angle,
                                                                distance,
                                                                reflectivity,
