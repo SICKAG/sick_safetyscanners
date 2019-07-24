@@ -43,12 +43,12 @@ ParseDeviceName::ParseDeviceName() {}
 
 
 bool ParseDeviceName::parseTCPSequence(const datastructure::PacketBuffer& buffer,
-                                       std::string& device_name) const
+                                       datastructure::DeviceName& device_name) const
 {
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
   std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
-  device_name                                               = readDeviceName(data_ptr);
+  device_name.setDeviceName(readDeviceName(data_ptr));
   return true;
 }
 

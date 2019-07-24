@@ -140,7 +140,7 @@ public:
    * \param device_name Returned device name.
    */
   void requestDeviceName(const sick::datastructure::CommSettings& settings,
-                         std::string& device_name);
+                        datastructure::DeviceName& device_name);
 
   /*!
    * \brief Requests the persistent configuration from the sensor.
@@ -174,8 +174,6 @@ private:
 
   std::shared_ptr<sick::data_processing::UDPPacketMerger> m_packet_merger_ptr;
 
-  std::string m_device_name;
-
   void processUDPPacket(const sick::datastructure::PacketBuffer& buffer);
   bool udpClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
@@ -184,7 +182,7 @@ private:
   void stopTCPConnection();
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
-  void requestDeviceNameInColaSession(std::string& device_name);
+  void requestDeviceNameInColaSession(datastructure::DeviceName& device_name);
   void requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
   void requestSerialNumberInColaSession(sick::datastructure::SerialNumber& serial_number);
   void requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number);

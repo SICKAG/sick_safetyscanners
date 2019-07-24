@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 DeviceNameVariableCommand::DeviceNameVariableCommand(Cola2Session& session,
-                                                     std::string& device_name)
+                                                     datastructure::DeviceName& device_name)
   : VariableCommand(session, 17)
   , m_device_name(device_name)
 {

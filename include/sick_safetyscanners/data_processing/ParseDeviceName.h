@@ -37,6 +37,7 @@
 
 #include <sick_safetyscanners/datastructure/Data.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
+#include <sick_safetyscanners/datastructure/DeviceName.h>
 
 #include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
@@ -66,7 +67,7 @@ public:
    *
    * \returns If parsing the device name was successful.
    */
-  bool parseTCPSequence(const datastructure::PacketBuffer& buffer, std::string& device_name) const;
+  bool parseTCPSequence(const datastructure::PacketBuffer& buffer, datastructure::DeviceName& device_name) const;
 
 private:
   std::string readDeviceName(std::vector<uint8_t>::const_iterator data_ptr) const;

@@ -127,7 +127,7 @@ void SickSafetyscanners::requestMonitoringCases(
 }
 
 void SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& settings,
-                                           std::string& device_name)
+                                           datastructure::DeviceName& device_name)
 {
   startTCPConnection(settings);
   requestDeviceNameInColaSession(device_name);
@@ -257,13 +257,13 @@ void SickSafetyscanners::requestMonitoringCaseDataInColaSession(
   }
 }
 
-void SickSafetyscanners::requestDeviceNameInColaSession(std::string& device_name)
+void SickSafetyscanners::requestDeviceNameInColaSession(datastructure::DeviceName& device_name)
 {
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::DeviceNameVariableCommand>(boost::ref(*m_session_ptr),
                                                              device_name);
   m_session_ptr->executeCommand(command_ptr);
-  ROS_INFO("Device name: %s", device_name.c_str());
+  ROS_INFO("Device name: %s", device_name.getDeviceName().c_str());
 }
 
 
