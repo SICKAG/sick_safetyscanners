@@ -75,7 +75,7 @@ bool ParseMeasurementData::checkIfPreconditionsAreMet(const datastructure::Data&
 bool ParseMeasurementData::checkIfMeasurementDataIsPublished(const datastructure::Data& data) const
 {
   return !(data.getDataHeaderPtr()->getMeasurementDataBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0);
+           data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0);
 }
 
 bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(

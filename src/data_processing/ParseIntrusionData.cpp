@@ -75,7 +75,7 @@ bool ParseIntrusionData::checkIfPreconditionsAreMet(const datastructure::Data& d
 bool ParseIntrusionData::checkIfIntrusionDataIsPublished(const datastructure::Data& data) const
 {
   return !(data.getDataHeaderPtr()->getIntrusionDataBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getIntrusionDataBlockSize() == 0);
+           data.getDataHeaderPtr()->getIntrusionDataBlockSize() == 0);
 }
 
 bool ParseIntrusionData::checkIfDataContainsNeededParsedBlocks(

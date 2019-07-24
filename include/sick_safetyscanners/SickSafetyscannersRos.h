@@ -46,9 +46,9 @@
 #include <vector>
 
 // Package
+#include <sick_safetyscanners/ExtendedLaserScanMsg.h>
 #include <sick_safetyscanners/FieldData.h>
 #include <sick_safetyscanners/OutputPathsMsg.h>
-#include <sick_safetyscanners/ExtendedLaserScanMsg.h>
 #include <sick_safetyscanners/RawMicroScanDataMsg.h>
 #include <sick_safetyscanners/SickSafetyscanners.h>
 #include <sick_safetyscanners/SickSafetyscannersConfigurationConfig.h>

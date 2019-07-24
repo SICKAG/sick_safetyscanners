@@ -76,7 +76,7 @@ bool ParseDerivedValues::checkIfPreconditionsAreMet(const datastructure::Data& d
 bool ParseDerivedValues::checkIfDerivedValuesIsPublished(const datastructure::Data& data) const
 {
   return !(data.getDataHeaderPtr()->getDerivedValuesBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0);
+           data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0);
 }
 
 bool ParseDerivedValues::checkIfDataContainsNeededParsedBlocks(

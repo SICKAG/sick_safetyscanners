@@ -76,7 +76,7 @@ bool ParseGeneralSystemState::checkIfGeneralSystemStateIsPublished(
   const datastructure::Data& data) const
 {
   return !(data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getGeneralSystemStateBlockSize() == 0);
+           data.getDataHeaderPtr()->getGeneralSystemStateBlockSize() == 0);
 }
 
 bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(
