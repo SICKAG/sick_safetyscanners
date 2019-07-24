@@ -249,7 +249,7 @@ void ParseApplicationData::setEvaluationPathsOutputsEvalOutInApplicationOutputs(
   std::vector<bool> eval_out;
   for (uint8_t i = 0; i < 20; i++)
   {
-    eval_out.push_back(word32 & (0x01 << i));
+    eval_out.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   outputs.setEvalOutVector(eval_out);
 }
@@ -262,7 +262,7 @@ void ParseApplicationData::setEvaluationPathsOutputsIsSafeInApplicationOutputs(
   std::vector<bool> eval_out_is_safe;
   for (uint8_t i = 0; i < 20; i++)
   {
-    eval_out_is_safe.push_back(word32 & (0x01 << i));
+    eval_out_is_safe.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   outputs.setEvalOutIsSafeVector(eval_out_is_safe);
 }
@@ -276,7 +276,7 @@ void ParseApplicationData::setEvaluationPathsOutputsValidFlagsInApplicationOutpu
   std::vector<bool> eval_out_is_valid;
   for (uint8_t i = 0; i < 20; i++)
   {
-    eval_out_is_valid.push_back(word32 & (0x01 << i));
+    eval_out_is_valid.push_back(static_cast<bool>(word32 & (0x01 << i)));
   }
   outputs.setEvalOutIsValidVector(eval_out_is_valid);
 }
