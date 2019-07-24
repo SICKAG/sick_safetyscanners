@@ -63,7 +63,7 @@ public:
    *
    * \param order_number The order number for the scanner.
    */
-  void setOrderNumber(std::string order_number);
+  void setOrderNumber(const std::string& order_number);
 
 private:
   std::string m_order_number;

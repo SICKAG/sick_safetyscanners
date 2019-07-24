@@ -52,7 +52,7 @@ public:
    * \param session The current cola2 session.
    * \param method_index The index of the variable.
    */
-  VariableCommand(Cola2Session& session, const uint16_t& method_index);
+  VariableCommand(Cola2Session& session, const uint16_t& variable_index);
 
   /*!
    * \brief Adds the data to the telegram.

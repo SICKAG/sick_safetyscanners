@@ -75,22 +75,14 @@ bool ParseGeneralSystemState::checkIfPreconditionsAreMet(const datastructure::Da
 bool ParseGeneralSystemState::checkIfGeneralSystemStateIsPublished(
   const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getGeneralSystemStateBlockSize() == 0)
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->getGeneralSystemStateBlockOffset() == 0 &&
+      data.getDataHeaderPtr()->getGeneralSystemStateBlockSize() == 0);
 }
 
 bool ParseGeneralSystemState::checkIfDataContainsNeededParsedBlocks(
   const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->isEmpty())
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->isEmpty());
 }
 
 

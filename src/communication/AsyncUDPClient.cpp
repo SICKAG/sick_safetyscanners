@@ -37,11 +37,10 @@
 
 namespace sick {
 namespace communication {
-AsyncUDPClient::AsyncUDPClient(PacketHandler packet_handler,
+AsyncUDPClient::AsyncUDPClient(const PacketHandler& packet_handler,
                                boost::asio::io_service& io_service,
                                const uint16_t& local_port)
   : m_packet_handler(packet_handler)
-  , m_io_work_ptr()
   , m_io_service(io_service)
 {
   // Keep io_service busy

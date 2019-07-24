@@ -109,7 +109,7 @@ private:
   std::mutex m_buffer_mutex;
   uint32_t m_targetSize;
 
-  bool addToMap(const sick::datastructure::PacketBuffer& newPacket);
+  bool addToMap(const sick::datastructure::PacketBuffer& new_packet);
   bool deployPacketIfComplete();
 
   uint32_t getCurrentSize();

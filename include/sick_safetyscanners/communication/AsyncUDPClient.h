@@ -69,7 +69,7 @@ public:
    * \param io_service Instance of the boost io_service.
    * \param local_port The local port, where the udp packets will arrive.
    */
-  AsyncUDPClient(PacketHandler packet_handler,
+  AsyncUDPClient(const PacketHandler& packet_handler,
                  boost::asio::io_service& io_service,
                  const uint16_t& local_port = 0);
 

@@ -44,7 +44,7 @@ std::string OrderNumber::getOrderNumber() const
   return m_order_number;
 }
 
-void OrderNumber::setOrderNumber(std::string order_number)
+void OrderNumber::setOrderNumber(const std::string& order_number)
 {
   m_order_number = order_number;
 }

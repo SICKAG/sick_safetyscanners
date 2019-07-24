@@ -44,7 +44,7 @@ std::string TypeCode::getTypeCode() const
   return m_type_code;
 }
 
-void TypeCode::setTypeCode(std::string type_code)
+void TypeCode::setTypeCode(const std::string& type_code)
 {
   m_type_code = type_code;
 }
@@ -53,7 +53,7 @@ uint8_t TypeCode::getInterfaceType() const
   return m_interface_type;
 }
 
-void TypeCode::setInterfaceType(uint8_t interface_type)
+void TypeCode::setInterfaceType(const uint8_t& interface_type)
 {
   m_interface_type = interface_type;
 }
@@ -63,7 +63,7 @@ float TypeCode::getMaxRange() const
   return m_max_range;
 }
 
-void TypeCode::setMaxRange(float max_distance)
+void TypeCode::setMaxRange(const float& max_distance)
 {
   m_max_range = max_distance;
 }

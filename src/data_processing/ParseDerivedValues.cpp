@@ -75,22 +75,14 @@ bool ParseDerivedValues::checkIfPreconditionsAreMet(const datastructure::Data& d
 
 bool ParseDerivedValues::checkIfDerivedValuesIsPublished(const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->getDerivedValuesBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0)
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->getDerivedValuesBlockOffset() == 0 &&
+      data.getDataHeaderPtr()->getDerivedValuesBlockSize() == 0);
 }
 
 bool ParseDerivedValues::checkIfDataContainsNeededParsedBlocks(
   const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->isEmpty())
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->isEmpty());
 }
 
 void ParseDerivedValues::setDataInDerivedValues(std::vector<uint8_t>::const_iterator data_ptr,

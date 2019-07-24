@@ -44,7 +44,7 @@ std::string ApplicationName::getApplicationName() const
   return m_application_name;
 }
 
-void ApplicationName::setApplicationName(std::string application_name)
+void ApplicationName::setApplicationName(const std::string& application_name)
 {
   m_application_name = application_name;
 }

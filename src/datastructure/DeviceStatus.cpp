@@ -44,7 +44,7 @@ uint8_t DeviceStatus::getDeviceStatus() const
   return m_device_status;
 }
 
-void DeviceStatus::setDeviceStatus(uint8_t device_status)
+void DeviceStatus::setDeviceStatus(const uint8_t& device_status)
 {
   m_device_status = device_status;
 }

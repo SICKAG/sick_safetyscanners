@@ -141,11 +141,11 @@ void CommSettings::setFeatures(bool general_system_state,
                                bool application_data)
 {
   m_features = 0;
-  m_features += general_system_state << 0;
-  m_features += derived_settings << 1;
-  m_features += measurement_data << 2;
-  m_features += intrusion_data << 3;
-  m_features += application_data << 4;
+  m_features += static_cast<int>(general_system_state << 0);
+  m_features += static_cast<int>(derived_settings << 1);
+  m_features += static_cast<int>(measurement_data << 2);
+  m_features += static_cast<int>(intrusion_data << 3);
+  m_features += static_cast<int>(application_data << 4);
 }
 
 boost::asio::ip::address_v4 CommSettings::getSensorIp() const
@@ -158,9 +158,9 @@ void CommSettings::setSensorIp(const boost::asio::ip::address_v4& sensor_ip)
   m_sensor_ip = sensor_ip;
 }
 
-void CommSettings::setSensorIp(const std::string& host_ip)
+void CommSettings::setSensorIp(const std::string& sensor_ip)
 {
-  m_sensor_ip = boost::asio::ip::address_v4::from_string(host_ip);
+  m_sensor_ip = boost::asio::ip::address_v4::from_string(sensor_ip);
 }
 
 uint16_t CommSettings::getSensorTcpPort() const

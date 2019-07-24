@@ -63,7 +63,7 @@ public:
    *
    * \param max_distance The firmware version for the scanner.
    */
-  void setFirmwareVersion(std::string firmware_version);
+  void setFirmwareVersion(const std::string& firmware_version);
 
 private:
   std::string m_firmware_version;

@@ -64,7 +64,7 @@ public:
    *
    * \param version_c_version The version indicator for the scanner.
    */
-  void setVersionCVersion(std::string version_c_version);
+  void setVersionCVersion(const std::string& version_c_version);
 
   /*!
    * \brief Gets the major version number for the scanner.
@@ -77,7 +77,7 @@ public:
    *
    * \param version_major_version_number The major version number for the scanner.
    */
-  void setVersionMajorVersionNumber(uint8_t version_major_version_number);
+  void setVersionMajorVersionNumber(const uint8_t& version_major_version_number);
 
   /*!
    * \brief Gets the minor version number for the scanner.
@@ -90,7 +90,7 @@ public:
    *
    * \param version_minor_version_number The minor version number for the scanner.
    */
-  void setVersionMinorVersionNumber(uint8_t version_minor_version_number);
+  void setVersionMinorVersionNumber(const uint8_t& version_minor_version_number);
 
   /*!
    * \brief Gets the version release number for the scanner.
@@ -103,7 +103,7 @@ public:
    *
    * \param version_release_number The version release number for the scanner.
    */
-  void setVersionReleaseNumber(uint8_t version_release_number);
+  void setVersionReleaseNumber(const uint8_t& version_release_number);
 
   /*!
    * \brief Gets the modification time date for the scanner.
@@ -116,7 +116,7 @@ public:
    *
    * \param modification_time_date The modification time date for the scanner.
    */
-  void setModificationTimeDate(uint16_t modification_time_date);
+  void setModificationTimeDate(const uint16_t& modification_time_date);
 
   /*!
    * \brief Gets the modification time time for the scanner.
@@ -129,7 +129,7 @@ public:
    *
    * \param modification_time_time The modification time time for the scanner.
    */
-  void setModificationTimeTime(uint32_t modification_time_time);
+  void setModificationTimeTime(const uint32_t& modification_time_time);
 
   /*!
    * \brief Gets the transfer time date for the scanner.
@@ -142,7 +142,7 @@ public:
    *
    * \param transfer_time_date The transfer time date for the scanner.
    */
-  void setTransferTimeDate(uint16_t transfer_time_date);
+  void setTransferTimeDate(const uint16_t& transfer_time_date);
 
   /*!
    * \brief Gets the transfer time time for the scanner.
@@ -155,7 +155,7 @@ public:
    *
    * \param transfer_time_time The transfer time time for the scanner.
    */
-  void setTransferTimeTime(uint32_t transfer_time_time);
+  void setTransferTimeTime(const uint32_t& transfer_time_time);
 
   /*!
    * \brief Gets the application checksum for the scanner.
@@ -168,7 +168,7 @@ public:
    *
    * \param app_checksum The application checksum for the scanner.
    */
-  void setAppChecksum(uint32_t app_checksum);
+  void setAppChecksum(const uint32_t& app_checksum);
 
   /*!
    * \brief Gets the overall checksum for the scanner.
@@ -181,7 +181,7 @@ public:
    *
    * \param overall_checksum The overall checksum for the scanner.
    */
-  void setOverallChecksum(uint32_t overall_checksum);
+  void setOverallChecksum(const uint32_t& overall_checksum);
 
   /*!
    * \brief Gets the integrity hash for the scanner.
@@ -194,7 +194,7 @@ public:
    *
    * \param integrity_hash The integrity hash for the scanner.
    */
-  void setIntegrityHash(std::vector<uint32_t> integrity_hash);
+  void setIntegrityHash(const std::vector<uint32_t>& integrity_hash);
 
 
 private:

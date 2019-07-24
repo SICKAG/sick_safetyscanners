@@ -74,12 +74,8 @@ bool ParseIntrusionData::checkIfPreconditionsAreMet(const datastructure::Data& d
 
 bool ParseIntrusionData::checkIfIntrusionDataIsPublished(const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->getIntrusionDataBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getIntrusionDataBlockSize() == 0)
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->getIntrusionDataBlockOffset() == 0 &&
+      data.getDataHeaderPtr()->getIntrusionDataBlockSize() == 0);
 }
 
 bool ParseIntrusionData::checkIfDataContainsNeededParsedBlocks(
@@ -137,8 +133,8 @@ ParseIntrusionData::setSizeInIntrusionDatum(const uint16_t& offset,
                                             std::vector<uint8_t>::const_iterator data_ptr,
                                             sick::datastructure::IntrusionDatum& datum) const
 {
-  uint32_t numBytesToRead = read_write_helper::readUint32LittleEndian(data_ptr + offset);
-  datum.setSize(numBytesToRead);
+  uint32_t num_bytes_to_read = read_write_helper::readUint32LittleEndian(data_ptr + offset);
+  datum.setSize(num_bytes_to_read);
   return offset;
 }
 

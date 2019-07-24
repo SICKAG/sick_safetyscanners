@@ -39,7 +39,6 @@ namespace data_processing {
 
 UDPPacketMerger::UDPPacketMerger()
   : m_is_complete(false)
-  , m_deployed_packet_buffer()
 {
 }
 
@@ -100,7 +99,9 @@ bool UDPPacketMerger::deployPacketIfComplete(datastructure::DatagramHeader& head
     return false;
   }
   if (!checkIfComplete(header))
+  {
     return false;
+  }
 
   sick::datastructure::ParsedPacketBuffer::ParsedPacketBufferVector vec =
     getSortedParsedPacketBufferForIdentification(header);

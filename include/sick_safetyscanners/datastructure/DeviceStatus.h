@@ -75,7 +75,7 @@ public:
    *
    * \param device_status The device status for the scanner.
    */
-  void setDeviceStatus(uint8_t device_status);
+  void setDeviceStatus(const uint8_t& device_status);
 
 private:
   uint8_t m_device_status;

@@ -44,7 +44,7 @@ std::string FirmwareVersion::getFirmwareVersion() const
   return m_firmware_version;
 }
 
-void FirmwareVersion::setFirmwareVersion(std::string firmware_version)
+void FirmwareVersion::setFirmwareVersion(const std::string& firmware_version)
 {
   m_firmware_version = firmware_version;
 }

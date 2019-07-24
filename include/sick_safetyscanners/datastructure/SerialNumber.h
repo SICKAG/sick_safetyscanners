@@ -63,7 +63,7 @@ public:
    *
    * \param serial_number The serial number for the scanner.
    */
-  void setSerialNumber(std::string serial_number);
+  void setSerialNumber(const std::string& serial_number);
 
 private:
   std::string m_serial_number;

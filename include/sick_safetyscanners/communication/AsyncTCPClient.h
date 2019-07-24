@@ -76,7 +76,7 @@ public:
    * \param server_ip The IP address of the server to connect to.
    * \param server_port The port on the server to connect to.
    */
-  AsyncTCPClient(PacketHandler packet_handler,
+  AsyncTCPClient(const PacketHandler& packet_handler,
                  boost::asio::io_service& io_service,
                  const boost::asio::ip::address_v4& server_ip,
                  const uint16_t& server_port);

@@ -62,17 +62,19 @@ bool VariableCommand::canBeExecutedWithoutSessionID() const
 
 bool VariableCommand::processReply()
 {
+  bool result = false;
   if ((getCommandType() == 'R' && getCommandMode() == 'A') ||
       (getCommandType() == 0x52 && getCommandMode() == 0x41))
   {
     ROS_INFO("Command Variable Acknowledged.");
-    return true;
+    result = true;
   }
   else
   {
     ROS_WARN("Command Variable Not Accepted.");
-    return false;
+    result = false;
   }
+  return result;
 }
 
 uint16_t VariableCommand::getVariableIndex() const

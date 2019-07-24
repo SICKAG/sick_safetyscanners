@@ -63,7 +63,7 @@ public:
    *
    * \param user_name The user name for the scanner.
    */
-  void setUserName(std::string user_name);
+  void setUserName(const std::string& user_name);
 
 private:
   std::string m_user_name;

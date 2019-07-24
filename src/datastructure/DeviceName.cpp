@@ -44,7 +44,7 @@ std::string DeviceName::getDeviceName() const
   return m_device_name;
 }
 
-void DeviceName::setDeviceName(std::string device_name)
+void DeviceName::setDeviceName(const std::string& device_name)
 {
   m_device_name = device_name;
 }

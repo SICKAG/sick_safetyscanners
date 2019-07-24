@@ -44,7 +44,7 @@ std::string StatusOverview::getVersionCVersion() const
   return m_version_c_version;
 }
 
-void StatusOverview::setVersionCVersion(std::string version_c_version)
+void StatusOverview::setVersionCVersion(const std::string& version_c_version)
 {
   m_version_c_version = version_c_version;
 }
@@ -54,7 +54,7 @@ uint8_t StatusOverview::getVersionMajorVersionNumber() const
   return m_version_major_version_number;
 }
 
-void StatusOverview::setVersionMajorVersionNumber(uint8_t version_major_version_number)
+void StatusOverview::setVersionMajorVersionNumber(const uint8_t& version_major_version_number)
 {
   m_version_major_version_number = version_major_version_number;
 }
@@ -64,7 +64,7 @@ uint8_t StatusOverview::getVersionMinorVersionNumber() const
   return m_version_minor_version_number;
 }
 
-void StatusOverview::setVersionMinorVersionNumber(uint8_t version_minor_version_number)
+void StatusOverview::setVersionMinorVersionNumber(const uint8_t& version_minor_version_number)
 {
   m_version_minor_version_number = version_minor_version_number;
 }
@@ -74,7 +74,7 @@ uint8_t StatusOverview::getVersionReleaseNumber() const
   return m_version_release_number;
 }
 
-void StatusOverview::setVersionReleaseNumber(uint8_t version_release_number)
+void StatusOverview::setVersionReleaseNumber(const uint8_t& version_release_number)
 {
   m_version_release_number = version_release_number;
 }

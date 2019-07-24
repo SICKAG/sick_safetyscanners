@@ -94,7 +94,7 @@ public:
    *
    * \param version_c_version The version indicator for the scanner.
    */
-  void setVersionCVersion(std::string version_c_version);
+  void setVersionCVersion(const std::string& version_c_version);
 
   /*!
    * \brief Gets the major version number for the scanner.
@@ -107,7 +107,7 @@ public:
    *
    * \param version_major_version_number The major version number for the scanner.
    */
-  void setVersionMajorVersionNumber(uint8_t version_major_version_number);
+  void setVersionMajorVersionNumber(const uint8_t& version_major_version_number);
 
   /*!
    * \brief Gets the minor version number for the scanner.
@@ -120,7 +120,7 @@ public:
    *
    * \param version_minor_version_number The minor version number for the scanner.
    */
-  void setVersionMinorVersionNumber(uint8_t version_minor_version_number);
+  void setVersionMinorVersionNumber(const uint8_t& version_minor_version_number);
 
   /*!
    * \brief Gets the version release number for the scanner.
@@ -133,7 +133,7 @@ public:
    *
    * \param version_release_number The version release number for the scanner.
    */
-  void setVersionReleaseNumber(uint8_t version_release_number);
+  void setVersionReleaseNumber(const uint8_t& version_release_number);
 
   /*!
    * \brief Gets the device state for the scanner.

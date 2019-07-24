@@ -84,9 +84,9 @@ std::vector<uint16_t> FieldData::getBeamDistances() const
   return m_beam_distances;
 }
 
-void FieldData::setBeamDistances(const std::vector<uint16_t>& beam_distance)
+void FieldData::setBeamDistances(const std::vector<uint16_t>& beam_distances)
 {
-  m_beam_distances = beam_distance;
+  m_beam_distances = beam_distances;
 }
 
 float FieldData::getStartAngle() const

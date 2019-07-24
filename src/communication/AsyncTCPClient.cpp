@@ -36,12 +36,11 @@
 
 namespace sick {
 namespace communication {
-AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
+AsyncTCPClient::AsyncTCPClient(const PacketHandler& packet_handler,
                                boost::asio::io_service& io_service,
                                const boost::asio::ip::address_v4& server_ip,
                                const uint16_t& server_port)
   : m_packet_handler(packet_handler)
-  , m_io_work_ptr()
   , m_io_service(io_service)
 
 {

@@ -71,24 +71,24 @@ public:
 
 private:
   void setDataInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
-                                   datastructure::GeneralSystemState& general_System_state) const;
+                                   datastructure::GeneralSystemState& general_system_state) const;
   void
   setStatusBitsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
-                                    datastructure::GeneralSystemState& general_System_state) const;
+                                    datastructure::GeneralSystemState& general_system_state) const;
   void setSafeCutOffPathInGeneralSystemState(
     std::vector<uint8_t>::const_iterator data_ptr,
-    datastructure::GeneralSystemState& general_System_state) const;
+    datastructure::GeneralSystemState& general_system_state) const;
   void setNonSafeCutOffPathInGeneralSystemState(
     std::vector<uint8_t>::const_iterator data_ptr,
-    datastructure::GeneralSystemState& general_System_state) const;
+    datastructure::GeneralSystemState& general_system_state) const;
   void setResetRequiredCutOffPathInGeneralSystemState(
     std::vector<uint8_t>::const_iterator data_ptr,
-    datastructure::GeneralSystemState& general_System_state) const;
+    datastructure::GeneralSystemState& general_system_state) const;
   void setCurrentMonitoringCasesInGeneralSystemState(
     std::vector<uint8_t>::const_iterator data_ptr,
-    datastructure::GeneralSystemState& general_System_state) const;
+    datastructure::GeneralSystemState& general_system_state) const;
   void setErrorsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
-                                     datastructure::GeneralSystemState& general_System_state) const;
+                                     datastructure::GeneralSystemState& general_system_state) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfGeneralSystemStateIsPublished(const datastructure::Data& data) const;
   bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;

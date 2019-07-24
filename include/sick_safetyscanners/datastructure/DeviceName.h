@@ -63,7 +63,7 @@ public:
    *
    * \param device_name The device name for the scanner.
    */
-  void setDeviceName(std::string device_name);
+  void setDeviceName(const std::string& device_name);
 
 private:
   std::string m_device_name;

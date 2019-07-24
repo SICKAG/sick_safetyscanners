@@ -44,7 +44,7 @@ std::string SerialNumber::getSerialNumber() const
   return m_serial_number;
 }
 
-void SerialNumber::setSerialNumber(std::string serial_number)
+void SerialNumber::setSerialNumber(const std::string& serial_number)
 {
   m_serial_number = serial_number;
 }

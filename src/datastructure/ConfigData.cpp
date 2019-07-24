@@ -44,7 +44,7 @@ std::string ConfigData::getVersionCVersion() const
   return m_version_c_version;
 }
 
-void ConfigData::setVersionCVersion(std::string version_c_version)
+void ConfigData::setVersionCVersion(const std::string& version_c_version)
 {
   m_version_c_version = version_c_version;
 }
@@ -54,7 +54,7 @@ uint8_t ConfigData::getVersionMajorVersionNumber() const
   return m_version_major_version_number;
 }
 
-void ConfigData::setVersionMajorVersionNumber(uint8_t version_major_version_number)
+void ConfigData::setVersionMajorVersionNumber(const uint8_t& version_major_version_number)
 {
   m_version_major_version_number = version_major_version_number;
 }
@@ -64,7 +64,7 @@ uint8_t ConfigData::getVersionMinorVersionNumber() const
   return m_version_minor_version_number;
 }
 
-void ConfigData::setVersionMinorVersionNumber(uint8_t version_minor_version_number)
+void ConfigData::setVersionMinorVersionNumber(const uint8_t& version_minor_version_number)
 {
   m_version_minor_version_number = version_minor_version_number;
 }
@@ -74,7 +74,7 @@ uint8_t ConfigData::getVersionReleaseNumber() const
   return m_version_release_number;
 }
 
-void ConfigData::setVersionReleaseNumber(uint8_t version_release_number)
+void ConfigData::setVersionReleaseNumber(const uint8_t& version_release_number)
 {
   m_version_release_number = version_release_number;
 }
@@ -161,11 +161,11 @@ void ConfigData::setFeatures(bool general_system_state,
                              bool application_data)
 {
   m_features = 0;
-  m_features += general_system_state << 0;
-  m_features += derived_settings << 1;
-  m_features += measurement_data << 2;
-  m_features += intrusion_data << 3;
-  m_features += application_data << 4;
+  m_features += static_cast<int>(general_system_state << 0);
+  m_features += static_cast<int>(derived_settings << 1);
+  m_features += static_cast<int>(measurement_data << 2);
+  m_features += static_cast<int>(intrusion_data << 3);
+  m_features += static_cast<int>(application_data << 4);
 }
 
 float ConfigData::getStartAngle() const

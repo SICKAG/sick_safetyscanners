@@ -44,7 +44,7 @@ std::string UserName::getUserName() const
   return m_user_name;
 }
 
-void UserName::setUserName(std::string user_name)
+void UserName::setUserName(const std::string& user_name)
 {
   m_user_name = user_name;
 }

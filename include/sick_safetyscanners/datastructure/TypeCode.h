@@ -78,7 +78,7 @@ public:
    *
    * \param type_code The type code for the scanner.
    */
-  void setTypeCode(std::string type_code);
+  void setTypeCode(const std::string& type_code);
   /*!
    * \brief Gets the interface type for the scanner.
    *
@@ -90,7 +90,7 @@ public:
    *
    * \param interface_type The interface type for the scanner.
    */
-  void setInterfaceType(uint8_t interface_type);
+  void setInterfaceType(const uint8_t& interface_type);
 
   /*!
    * \brief Gets the max range for the scanner.
@@ -103,7 +103,7 @@ public:
    *
    * \param max_distance The max range for the scanner.
    */
-  void setMaxRange(float max_distance);
+  void setMaxRange(const float& max_distance);
 
 private:
   std::string m_type_code;

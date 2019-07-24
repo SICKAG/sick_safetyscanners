@@ -63,7 +63,7 @@ public:
    *
    * \param application_name The application name for the scanner.
    */
-  void setApplicationName(std::string application_name);
+  void setApplicationName(const std::string& application_name);
 
 private:
   std::string m_application_name;

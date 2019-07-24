@@ -96,7 +96,7 @@ bool ParseMonitoringCaseData::readFieldValid(std::vector<uint8_t>::const_iterato
 {
   uint8_t byte = read_write_helper::readUint8(data_ptr + 157 + (index * 4));
 
-  return byte & (0x01 << 0);
+  return static_cast<bool>(byte & (0x01 << 0));
 }
 
 } // namespace data_processing

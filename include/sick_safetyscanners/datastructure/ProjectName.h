@@ -63,7 +63,7 @@ public:
    *
    * \param project_name The project name for the scanner.
    */
-  void setProjectName(std::string project_name);
+  void setProjectName(const std::string& project_name);
 
 private:
   std::string m_project_name;

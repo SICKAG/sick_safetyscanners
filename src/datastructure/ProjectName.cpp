@@ -44,7 +44,7 @@ std::string ProjectName::getProjectName() const
   return m_project_name;
 }
 
-void ProjectName::setProjectName(std::string project_name)
+void ProjectName::setProjectName(const std::string& project_name)
 {
   m_project_name = project_name;
 }

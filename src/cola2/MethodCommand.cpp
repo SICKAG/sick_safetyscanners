@@ -62,17 +62,18 @@ bool MethodCommand::canBeExecutedWithoutSessionID() const
 
 bool MethodCommand::processReply()
 {
+  bool result = false;
   if ((getCommandType() == 'A' && getCommandMode() == 'I') ||
       (getCommandType() == 0x41 && getCommandMode() == 0x49))
   {
     ROS_INFO("Command Method Acknowledged.");
-    return true;
+    result = true;
   }
   else
   {
     ROS_WARN("Command Method Not Accepted.");
-    return false;
   }
+  return result;
 }
 
 uint16_t MethodCommand::getMethodIndex() const
