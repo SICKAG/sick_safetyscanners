@@ -120,6 +120,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/ProjectNameVariableCommand.cpp
   src/cola2/SerialNumberVariableCommand.cpp
   src/cola2/TypeCodeVariableCommand.cpp
+  src/cola2/UserNameVariableCommand.cpp
   src/cola2/VariableCommand.cpp
   src/communication/AsyncTCPClient.cpp
   src/communication/AsyncUDPClient.cpp
@@ -144,6 +145,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseSerialNumber.cpp
   src/data_processing/ParseTCPPacket.cpp
   src/data_processing/ParseTypeCodeData.cpp
+  src/data_processing/ParseUserNameData.cpp
   src/data_processing/TCPPacketMerger.cpp
   src/data_processing/UDPPacketMerger.cpp
   src/datastructure/ApplicationData.cpp

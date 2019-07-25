@@ -39,6 +39,56 @@ namespace datastructure {
 
 UserName::UserName() {}
 
+std::string UserName::getVersionCVersion() const
+{
+  return m_version_c_version;
+}
+
+void UserName::setVersionCVersion(const std::string& version_c_version)
+{
+  m_version_c_version = version_c_version;
+}
+
+uint8_t UserName::getVersionMajorVersionNumber() const
+{
+  return m_version_major_version_number;
+}
+
+void UserName::setVersionMajorVersionNumber(const uint8_t& version_major_version_number)
+{
+  m_version_major_version_number = version_major_version_number;
+}
+
+uint8_t UserName::getVersionMinorVersionNumber() const
+{
+  return m_version_minor_version_number;
+}
+
+void UserName::setVersionMinorVersionNumber(const uint8_t& version_minor_version_number)
+{
+  m_version_minor_version_number = version_minor_version_number;
+}
+
+uint8_t UserName::getVersionReleaseNumber() const
+{
+  return m_version_release_number;
+}
+
+void UserName::setVersionReleaseNumber(const uint8_t& version_release_number)
+{
+  m_version_release_number = version_release_number;
+}
+
+uint32_t UserName::getNameLength() const
+{
+  return m_name_length;
+}
+
+void UserName::setNameLength(const uint32_t& name_length)
+{
+  m_name_length = name_length;
+}
+
 std::string UserName::getUserName() const
 {
   return m_user_name;

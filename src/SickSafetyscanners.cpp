@@ -158,6 +158,13 @@ void SickSafetyscanners::requestProjectName(const datastructure::CommSettings& s
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestUserName(const datastructure::CommSettings& settings,
+                                         datastructure::UserName& user_name)
+{
+  startTCPConnection(settings);
+  requestUserNameInColaSession(user_name);
+  stopTCPConnection();
+}
 void SickSafetyscanners::requestFirmwareVersion(const datastructure::CommSettings& settings,
                                                 datastructure::FirmwareVersion& firmware_version)
 {
@@ -331,6 +338,14 @@ void SickSafetyscanners::requestProjectNameInColaSession(
                                                               project_name);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Project Name: %s", project_name.getProjectName().c_str());
+}
+
+void SickSafetyscanners::requestUserNameInColaSession(sick::datastructure::UserName& user_name)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::UserNameVariableCommand>(boost::ref(*m_session_ptr), user_name);
+  m_session_ptr->executeCommand(command_ptr);
+  ROS_INFO("User Name: %s", user_name.getUserName().c_str());
 }
 
 void SickSafetyscanners::requestPersistentConfigInColaSession(
