@@ -36,8 +36,8 @@
 #define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEORDERNUMBER_H
 
 #include <sick_safetyscanners/datastructure/Data.h>
-#include <sick_safetyscanners/datastructure/PacketBuffer.h>
 #include <sick_safetyscanners/datastructure/OrderNumber.h>
+#include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
 #include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 

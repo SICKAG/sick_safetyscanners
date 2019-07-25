@@ -58,29 +58,34 @@ bool ParseApplicationNameData::parseTCPSequence(
   return true;
 }
 
-std::string ParseApplicationNameData::readVersionIndicator(std::vector<uint8_t>::const_iterator data_ptr) const
+std::string
+ParseApplicationNameData::readVersionIndicator(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   std::string result;
   result.push_back(read_write_helper::readUint8(data_ptr + 0));
   return result;
 }
 
-uint8_t ParseApplicationNameData::readMajorNumber(std::vector<uint8_t>::const_iterator data_ptr) const
+uint8_t
+ParseApplicationNameData::readMajorNumber(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   return read_write_helper::readUint8(data_ptr + 1);
 }
 
-uint8_t ParseApplicationNameData::readMinorNumber(std::vector<uint8_t>::const_iterator data_ptr) const
+uint8_t
+ParseApplicationNameData::readMinorNumber(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   return read_write_helper::readUint8(data_ptr + 2);
-} 
+}
 
-uint8_t ParseApplicationNameData::readReleaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const
+uint8_t
+ParseApplicationNameData::readReleaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   return read_write_helper::readUint8(data_ptr + 3);
 }
 
-uint32_t ParseApplicationNameData::readNameLength(std::vector<uint8_t>::const_iterator data_ptr) const
+uint32_t
+ParseApplicationNameData::readNameLength(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   return read_write_helper::readUint32LittleEndian(data_ptr + 4);
 }

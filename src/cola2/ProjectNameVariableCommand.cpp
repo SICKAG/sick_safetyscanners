@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 ProjectNameVariableCommand::ProjectNameVariableCommand(Cola2Session& session,
-                                                         datastructure::ProjectName& project_name)
+                                                       datastructure::ProjectName& project_name)
   : VariableCommand(session, 18)
   , m_project_name(project_name)
 {

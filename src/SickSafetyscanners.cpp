@@ -143,7 +143,7 @@ void SickSafetyscanners::requestSerialNumber(const datastructure::CommSettings& 
 }
 
 void SickSafetyscanners::requestOrderNumber(const datastructure::CommSettings& settings,
-                                             datastructure::OrderNumber& order_number)
+                                            datastructure::OrderNumber& order_number)
 {
   startTCPConnection(settings);
   requestOrderNumberInColaSession(order_number);
@@ -151,7 +151,7 @@ void SickSafetyscanners::requestOrderNumber(const datastructure::CommSettings& s
 }
 
 void SickSafetyscanners::requestProjectName(const datastructure::CommSettings& settings,
-                                             datastructure::ProjectName& project_name)
+                                            datastructure::ProjectName& project_name)
 {
   startTCPConnection(settings);
   requestProjectNameInColaSession(project_name);
@@ -313,18 +313,22 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
   ROS_INFO("Type Code: %s", type_code.getTypeCode().c_str());
 }
 
-void SickSafetyscanners::requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number)
+void SickSafetyscanners::requestOrderNumberInColaSession(
+  sick::datastructure::OrderNumber& order_number)
 {
   sick::cola2::Cola2Session::CommandPtr command_ptr =
-    std::make_shared<sick::cola2::OrderNumberVariableCommand>(boost::ref(*m_session_ptr), order_number);
+    std::make_shared<sick::cola2::OrderNumberVariableCommand>(boost::ref(*m_session_ptr),
+                                                              order_number);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Order Number: %s", order_number.getOrderNumber().c_str());
 }
 
-void SickSafetyscanners::requestProjectNameInColaSession(sick::datastructure::ProjectName& project_name)
+void SickSafetyscanners::requestProjectNameInColaSession(
+  sick::datastructure::ProjectName& project_name)
 {
   sick::cola2::Cola2Session::CommandPtr command_ptr =
-    std::make_shared<sick::cola2::ProjectNameVariableCommand>(boost::ref(*m_session_ptr), project_name);
+    std::make_shared<sick::cola2::ProjectNameVariableCommand>(boost::ref(*m_session_ptr),
+                                                              project_name);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Project Name: %s", project_name.getProjectName().c_str());
 }

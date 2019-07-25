@@ -41,7 +41,7 @@ namespace sick {
 namespace cola2 {
 
 OrderNumberVariableCommand::OrderNumberVariableCommand(Cola2Session& session,
-                                                         datastructure::OrderNumber& order_number)
+                                                       datastructure::OrderNumber& order_number)
   : VariableCommand(session, 14)
   , m_order_number(order_number)
 {
