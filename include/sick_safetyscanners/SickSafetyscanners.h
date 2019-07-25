@@ -67,6 +67,7 @@
 #include <sick_safetyscanners/cola2/OrderNumberVariableCommand.h>
 #include <sick_safetyscanners/cola2/SerialNumberVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
+#include <sick_safetyscanners/cola2/ProjectNameVariableCommand.h>
 
 namespace sick {
 
@@ -124,6 +125,8 @@ public:
                               sick::datastructure::FirmwareVersion& firmware_version);
   void requestOrderNumber(const datastructure::CommSettings& settings,
                                              datastructure::OrderNumber& order_number);
+  void requestProjectName(const datastructure::CommSettings& settings,
+                                             datastructure::ProjectName& project_name);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
@@ -186,6 +189,7 @@ private:
   void requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
   void requestSerialNumberInColaSession(sick::datastructure::SerialNumber& serial_number);
   void requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number);
+  void requestProjectNameInColaSession(sick::datastructure::ProjectName& project_name);
   void requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestMonitoringCaseDataInColaSession(

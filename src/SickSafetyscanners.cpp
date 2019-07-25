@@ -150,6 +150,14 @@ void SickSafetyscanners::requestOrderNumber(const datastructure::CommSettings& s
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestProjectName(const datastructure::CommSettings& settings,
+                                             datastructure::ProjectName& project_name)
+{
+  startTCPConnection(settings);
+  requestProjectNameInColaSession(project_name);
+  stopTCPConnection();
+}
+
 void SickSafetyscanners::requestFirmwareVersion(const datastructure::CommSettings& settings,
                                                 datastructure::FirmwareVersion& firmware_version)
 {
@@ -307,11 +315,18 @@ void SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeC
 
 void SickSafetyscanners::requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number)
 {
-
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::OrderNumberVariableCommand>(boost::ref(*m_session_ptr), order_number);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("Order Number: %s", order_number.getOrderNumber().c_str());
+}
+
+void SickSafetyscanners::requestProjectNameInColaSession(sick::datastructure::ProjectName& project_name)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::ProjectNameVariableCommand>(boost::ref(*m_session_ptr), project_name);
+  m_session_ptr->executeCommand(command_ptr);
+  ROS_INFO("Project Name: %s", project_name.getProjectName().c_str());
 }
 
 void SickSafetyscanners::requestPersistentConfigInColaSession(

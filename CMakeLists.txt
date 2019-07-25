@@ -117,6 +117,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/MonitoringCaseTableHeaderVariableCommand.cpp
   src/cola2/MonitoringCaseVariableCommand.cpp
   src/cola2/OrderNumberVariableCommand.cpp
+  src/cola2/ProjectNameVariableCommand.cpp
   src/cola2/SerialNumberVariableCommand.cpp
   src/cola2/TypeCodeVariableCommand.cpp
   src/cola2/VariableCommand.cpp
@@ -139,6 +140,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseMeasurementPersistentConfigData.cpp
   src/data_processing/ParseMonitoringCaseData.cpp
   src/data_processing/ParseOrderNumber.cpp
+  src/data_processing/ParseProjectName.cpp
   src/data_processing/ParseSerialNumber.cpp
   src/data_processing/ParseTCPPacket.cpp
   src/data_processing/ParseTypeCodeData.cpp
