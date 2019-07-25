@@ -69,6 +69,11 @@ public:
                         datastructure::ApplicationName& application_name) const;
 
 private:
+  std::string readVersionIndicator(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readMajorNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readMinorNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readReleaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readNameLength(std::vector<uint8_t>::const_iterator data_ptr) const;
   std::string readApplicationName(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 

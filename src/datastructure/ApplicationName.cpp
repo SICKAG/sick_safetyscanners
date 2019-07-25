@@ -39,6 +39,56 @@ namespace datastructure {
 
 ApplicationName::ApplicationName() {}
 
+std::string ApplicationName::getVersionCVersion() const
+{
+  return m_version_c_version;
+}
+
+void ApplicationName::setVersionCVersion(const std::string& version_c_version)
+{
+  m_version_c_version = version_c_version;
+}
+
+uint8_t ApplicationName::getVersionMajorVersionNumber() const
+{
+  return m_version_major_version_number;
+}
+
+void ApplicationName::setVersionMajorVersionNumber(const uint8_t& version_major_version_number)
+{
+  m_version_major_version_number = version_major_version_number;
+}
+
+uint8_t ApplicationName::getVersionMinorVersionNumber() const
+{
+  return m_version_minor_version_number;
+}
+
+void ApplicationName::setVersionMinorVersionNumber(const uint8_t& version_minor_version_number)
+{
+  m_version_minor_version_number = version_minor_version_number;
+}
+
+uint8_t ApplicationName::getVersionReleaseNumber() const
+{
+  return m_version_release_number;
+}
+
+void ApplicationName::setVersionReleaseNumber(const uint8_t& version_release_number)
+{
+  m_version_release_number = version_release_number;
+}
+
+uint32_t ApplicationName::getNameLength() const
+{
+  return m_name_length;
+}
+
+void ApplicationName::setNameLength(const uint32_t& name_length)
+{
+  m_name_length = name_length;
+}
+
 std::string ApplicationName::getApplicationName() const
 {
   return m_application_name;

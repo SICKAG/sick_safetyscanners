@@ -53,7 +53,70 @@ public:
   ApplicationName();
 
   /*!
-   * \brief Gets the serial for the scanner.
+   * \brief Gets the version indicator for the scanner.
+   *
+   * \returns The version indicator for the scanner.
+   */
+  std::string getVersionCVersion() const;
+  /*!
+   * \brief Sets the version indicator for the scanner.
+   *
+   * \param version_c_version The version indicator for the scanner.
+   */
+  void setVersionCVersion(const std::string& version_c_version);
+
+  /*!
+   * \brief Gets the major version number for the scanner.
+   *
+   * \returns The version indicator for the scanner.
+   */
+  uint8_t getVersionMajorVersionNumber() const;
+  /*!
+   * \brief Sets the major version number for the scanner.
+   *
+   * \param version_major_version_number The major version number for the scanner.
+   */
+  void setVersionMajorVersionNumber(const uint8_t& version_major_version_number);
+
+  /*!
+   * \brief Gets the minor version number for the scanner.
+   *
+   * \returns The minor version number for the scanner.
+   */
+  uint8_t getVersionMinorVersionNumber() const;
+  /*!
+   * \brief Sets the minor version number for the scanner.
+   *
+   * \param version_minor_version_number The minor version number for the scanner.
+   */
+  void setVersionMinorVersionNumber(const uint8_t& version_minor_version_number);
+
+  /*!
+   * \brief Gets the version release number for the scanner.
+   *
+   * \returns The version release number for the scanner.
+   */
+  uint8_t getVersionReleaseNumber() const;
+  /*!
+   * \brief Sets the version release number for the scanner.
+   *
+   * \param version_release_number The version release number for the scanner.
+   */
+  void setVersionReleaseNumber(const uint8_t& version_release_number);
+  /*!
+   * \brief Gets the length of the application name.
+   *
+   * \returns The length of the application name.
+   */
+  uint32_t getNameLength() const;
+  /*!
+   * \brief Sets the length of the application name.
+   *
+   * \param name_length The length of the application name.
+   */
+  void setNameLength(const uint32_t& name_length);
+  /*!
+   * \brief Gets the application name for the scanner.
    *
    * \returns The application name for the scanner.
    */
@@ -66,6 +129,11 @@ public:
   void setApplicationName(const std::string& application_name);
 
 private:
+  std::string m_version_c_version;
+  uint8_t m_version_major_version_number;
+  uint8_t m_version_minor_version_number;
+  uint8_t m_version_release_number;
+  uint32_t m_name_length;
   std::string m_application_name;
 };
 
