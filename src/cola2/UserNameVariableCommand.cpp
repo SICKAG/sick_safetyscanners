@@ -42,7 +42,7 @@ namespace cola2 {
 
 UserNameVariableCommand::UserNameVariableCommand(Cola2Session& session,
                                                  sick::datastructure::UserName& user_name)
-  : VariableCommand(session, 33)
+  : VariableCommand(session, 35)
   , m_user_name(user_name)
 {
   m_user_name_parser_ptr = std::make_shared<sick::data_processing::ParseUserNameData>();
