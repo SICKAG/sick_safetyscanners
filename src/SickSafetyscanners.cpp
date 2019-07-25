@@ -181,6 +181,14 @@ void SickSafetyscanners::requestPersistentConfig(const datastructure::CommSettin
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestConfigMetadata(const datastructure::CommSettings& settings,
+                                               sick::datastructure::ConfigMetadata& config_metadata)
+{
+  startTCPConnection(settings);
+  requestConfigMetadataInColaSession(config_metadata);
+  stopTCPConnection();
+}
+
 void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSettings& settings)
 {
   std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client =
@@ -346,6 +354,15 @@ void SickSafetyscanners::requestUserNameInColaSession(sick::datastructure::UserN
     std::make_shared<sick::cola2::UserNameVariableCommand>(boost::ref(*m_session_ptr), user_name);
   m_session_ptr->executeCommand(command_ptr);
   ROS_INFO("User Name: %s", user_name.getUserName().c_str());
+}
+
+void SickSafetyscanners::requestConfigMetadataInColaSession(
+  sick::datastructure::ConfigMetadata& config_metadata)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::ConfigMetadataVariableCommand>(boost::ref(*m_session_ptr),
+                                                                 config_metadata);
+  m_session_ptr->executeCommand(command_ptr);
 }
 
 void SickSafetyscanners::requestPersistentConfigInColaSession(

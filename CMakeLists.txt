@@ -106,6 +106,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/CloseSession.cpp
   src/cola2/Cola2Session.cpp
   src/cola2/Command.cpp
+  src/cola2/ConfigMetadataVariableCommand.cpp
   src/cola2/CreateSession.cpp
   src/cola2/DeviceNameVariableCommand.cpp
   src/cola2/FieldGeometryVariableCommand.cpp
@@ -126,6 +127,7 @@ add_library(${PROJECT_NAME}_core
   src/communication/AsyncUDPClient.cpp
   src/data_processing/ParseApplicationData.cpp
   src/data_processing/ParseApplicationNameData.cpp
+  src/data_processing/ParseConfigMetadata.cpp
   src/data_processing/ParseData.cpp
   src/data_processing/ParseDataHeader.cpp
   src/data_processing/ParseDatagramHeader.cpp
