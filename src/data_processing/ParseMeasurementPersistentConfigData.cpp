@@ -48,9 +48,77 @@ bool ParseMeasurementPersistentConfigData::parseTCPSequence(
   // Keep our own copy of the shared_ptr to keep the iterators valid
   const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
   std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
+  config_data.setVersionCVersion(readVersionIndicator(data_ptr));
+  config_data.setVersionMajorVersionNumber(readMajorNumber(data_ptr));
+  config_data.setVersionMinorVersionNumber(readMinorNumber(data_ptr));
+  config_data.setVersionReleaseNumber(readReleaseNumber(data_ptr));
+  config_data.setEnabled(readEnabled(data_ptr));
+  config_data.setEInterfaceType(readInterfaceType(data_ptr));
+  config_data.setHostIp(readHostIp(data_ptr));
+  config_data.setHostUdpPort(readHostPort(data_ptr));
+  config_data.setPublishingFrequency(readPublishingFreq(data_ptr));
   config_data.setStartAngle(readStartAngle(data_ptr));
   config_data.setEndAngle(readEndAngle(data_ptr));
+  config_data.setFeatures(readFeatures(data_ptr)); // TODO
   return true;
+}
+
+std::string ParseMeasurementPersistentConfigData::readVersionIndicator(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  std::string result;
+  result.push_back(read_write_helper::readUint8(data_ptr + 0));
+  return result;
+}
+
+uint8_t ParseMeasurementPersistentConfigData::readMajorNumber(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  return read_write_helper::readUint8(data_ptr + 1);
+}
+
+uint8_t ParseMeasurementPersistentConfigData::readMinorNumber(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  return read_write_helper::readUint8(data_ptr + 2);
+}
+
+uint8_t ParseMeasurementPersistentConfigData::readReleaseNumber(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  return read_write_helper::readUint8(data_ptr + 3);
+}
+
+bool ParseMeasurementPersistentConfigData::readEnabled(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  return read_write_helper::readUint8(data_ptr + 4);
+}
+
+uint8_t ParseMeasurementPersistentConfigData::readInterfaceType(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  return read_write_helper::readUint8(data_ptr + 5);
+}
+
+boost::asio::ip::address_v4 ParseMeasurementPersistentConfigData::readHostIp(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  uint32_t word = read_write_helper::readUint32LittleEndian(data_ptr + 8);
+  boost::asio::ip::address_v4 addr(word);
+  return addr;
+}
+
+uint16_t ParseMeasurementPersistentConfigData::readHostPort(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  return read_write_helper::readUint16LittleEndian(data_ptr + 12);
+}
+
+uint16_t ParseMeasurementPersistentConfigData::readPublishingFreq(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  return read_write_helper::readUint16LittleEndian(data_ptr + 14);
 }
 
 uint32_t ParseMeasurementPersistentConfigData::readStartAngle(
@@ -64,6 +132,14 @@ uint32_t ParseMeasurementPersistentConfigData::readEndAngle(
 {
   return read_write_helper::readUint32LittleEndian(data_ptr + 20);
 }
+
+uint16_t ParseMeasurementPersistentConfigData::readFeatures(
+  std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  // TODO parse Features
+  return read_write_helper::readUint16LittleEndian(data_ptr + 24);
+}
+
 
 } // namespace data_processing
 } // namespace sick

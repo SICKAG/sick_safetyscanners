@@ -35,6 +35,7 @@
 #ifndef SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTPERSISTENTCONFIGDATA_H
 #define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTPERSISTENTCONFIGDATA_H
 
+#include <boost/asio/ip/address_v4.hpp>
 #include <sick_safetyscanners/datastructure/ConfigData.h>
 #include <sick_safetyscanners/datastructure/Data.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
@@ -69,8 +70,18 @@ public:
                         datastructure::ConfigData& config_data) const;
 
 private:
+  std::string readVersionIndicator(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readMajorNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readMinorNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readReleaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  bool readEnabled(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const;
+  boost::asio::ip::address_v4 readHostIp(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readHostPort(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readPublishingFreq(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint32_t readEndAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint32_t readStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readFeatures(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing
