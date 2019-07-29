@@ -109,6 +109,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/ConfigMetadataVariableCommand.cpp
   src/cola2/CreateSession.cpp
   src/cola2/DeviceNameVariableCommand.cpp
+  src/cola2/DeviceStatusVariableCommand.cpp
   src/cola2/FieldGeometryVariableCommand.cpp
   src/cola2/FieldHeaderVariableCommand.cpp
   src/cola2/FirmwareVersionVariableCommand.cpp
@@ -134,6 +135,7 @@ add_library(${PROJECT_NAME}_core
   src/data_processing/ParseDatagramHeader.cpp
   src/data_processing/ParseDerivedValues.cpp
   src/data_processing/ParseDeviceName.cpp
+  src/data_processing/ParseDeviceStatus.cpp
   src/data_processing/ParseFieldGeometryData.cpp
   src/data_processing/ParseFieldHeaderData.cpp
   src/data_processing/ParseFirmwareVersion.cpp
