@@ -68,6 +68,7 @@
 #include <sick_safetyscanners/cola2/OrderNumberVariableCommand.h>
 #include <sick_safetyscanners/cola2/ProjectNameVariableCommand.h>
 #include <sick_safetyscanners/cola2/SerialNumberVariableCommand.h>
+#include <sick_safetyscanners/cola2/StatusOverviewVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
 #include <sick_safetyscanners/cola2/UserNameVariableCommand.h>
 
@@ -133,6 +134,8 @@ public:
                        datastructure::UserName& user_name);
   void requestConfigMetadata(const datastructure::CommSettings& settings,
                              datastructure::ConfigMetadata& config_metadata);
+  void requestStatusOverview(const datastructure::CommSettings& settings,
+                             datastructure::StatusOverview& status_overview);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
@@ -200,6 +203,7 @@ private:
   void requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
   void requestConfigMetadataInColaSession(sick::datastructure::ConfigMetadata& config_metadata);
+  void requestStatusOverviewInColaSession(sick::datastructure::StatusOverview& status_overview);
   void requestMonitoringCaseDataInColaSession(
     std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 };

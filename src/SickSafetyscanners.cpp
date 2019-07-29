@@ -189,6 +189,14 @@ void SickSafetyscanners::requestConfigMetadata(const datastructure::CommSettings
   stopTCPConnection();
 }
 
+void SickSafetyscanners::requestStatusOverview(const datastructure::CommSettings& settings,
+                                               sick::datastructure::StatusOverview& status_overview)
+{
+  startTCPConnection(settings);
+  requestStatusOverviewInColaSession(status_overview);
+  stopTCPConnection();
+}
+
 void SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSettings& settings)
 {
   std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client =
@@ -362,6 +370,15 @@ void SickSafetyscanners::requestConfigMetadataInColaSession(
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::ConfigMetadataVariableCommand>(boost::ref(*m_session_ptr),
                                                                  config_metadata);
+  m_session_ptr->executeCommand(command_ptr);
+}
+
+void SickSafetyscanners::requestStatusOverviewInColaSession(
+  sick::datastructure::StatusOverview& status_overview)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::StatusOverviewVariableCommand>(boost::ref(*m_session_ptr),
+                                                                 status_overview);
   m_session_ptr->executeCommand(command_ptr);
 }
 
