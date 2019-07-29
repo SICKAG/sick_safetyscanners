@@ -41,43 +41,43 @@
 namespace sick {
 namespace datastructure {
 
-enum e_device_state
-{
-  E_NORMAL,
-  E_ERROR,
-  E_INITIALIZATION,
-  E_SHUTDOWN,
-  E_OPTICS_COVER_CALIBRATION
-};
-
-enum e_config_state
-{
-  E_UNKNOWN,
-  E_CONFIG_REQUIRED,
-  E_CONFIG_IN_PROGRESS,
-  E_NOT_VERIFIED,
-  E_REJECTED,
-  E_VERIFIED,
-  E_INTERNAL_ERROR,
-  E_VERIFICATION_IN_PROGRESS
-};
-
-enum e_application_state
-{
-  E_STOPPED,
-  E_STARTING,
-  E_WAITING_FOR_PARTNERS,
-  E_WAITING_FOR_INPUTS,
-  E_STARTED,
-  E_SLEEP_MODE
-};
-
 /*!
  * \brief Class containing the serial number of a laser scanner.
  */
 class StatusOverview
 {
 public:
+  enum e_device_state
+  {
+    E_NORMAL,
+    E_ERROR,
+    E_INITIALIZATION,
+    E_SHUTDOWN,
+    E_OPTICS_COVER_CALIBRATION
+  };
+
+  enum e_config_state
+  {
+    E_UNKNOWN,
+    E_CONFIG_REQUIRED,
+    E_CONFIG_IN_PROGRESS,
+    E_NOT_VERIFIED,
+    E_REJECTED,
+    E_VERIFIED,
+    E_INTERNAL_ERROR,
+    E_VERIFICATION_IN_PROGRESS
+  };
+
+  enum e_application_state
+  {
+    E_STOPPED,
+    E_STARTING,
+    E_WAITING_FOR_PARTNERS,
+    E_WAITING_FOR_INPUTS,
+    E_STARTED,
+    E_SLEEP_MODE
+  };
+
   /*!
    * \brief Constructor of the serial number.
    */

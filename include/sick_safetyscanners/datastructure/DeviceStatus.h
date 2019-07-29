@@ -41,24 +41,24 @@
 namespace sick {
 namespace datastructure {
 
-enum e_sopas_device_status
-{
-  E_UNKNOWN,
-  E_START_UP,
-  E_SERVICE_MODE,
-  E_NORMAL_OPERATION,
-  E_SUSPENDED_OPERATION,
-  E_SERVICE_RECOMMENDED,
-  E_SERVICE_REQUIRED,
-  E_RECOVERABLE_ERROR,
-  E_FATAL_ERROR
-};
 /*!
  * \brief Class containing the device status of a laser scanner.
  */
 class DeviceStatus
 {
 public:
+  enum e_sopas_device_status
+  {
+    E_UNKNOWN,
+    E_START_UP,
+    E_SERVICE_MODE,
+    E_NORMAL_OPERATION,
+    E_SUSPENDED_OPERATION,
+    E_SERVICE_RECOMMENDED,
+    E_SERVICE_REQUIRED,
+    E_RECOVERABLE_ERROR,
+    E_FATAL_ERROR
+  };
   /*!
    * \brief Constructor of the device status.
    */
