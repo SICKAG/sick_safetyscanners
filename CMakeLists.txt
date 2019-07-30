@@ -112,6 +112,7 @@ add_library(${PROJECT_NAME}_core
   src/cola2/DeviceStatusVariableCommand.cpp
   src/cola2/FieldGeometryVariableCommand.cpp
   src/cola2/FieldHeaderVariableCommand.cpp
+  src/cola2/FindMeCommand.cpp
   src/cola2/FirmwareVersionVariableCommand.cpp
   src/cola2/MeasurementCurrentConfigVariableCommand.cpp
   src/cola2/MeasurementPersistentConfigVariableCommand.cpp

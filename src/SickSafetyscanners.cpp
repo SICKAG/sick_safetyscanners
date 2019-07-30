@@ -93,6 +93,13 @@ void SickSafetyscanners::changeSensorSettings(const datastructure::CommSettings&
   stopTCPConnection();
 }
 
+void SickSafetyscanners::FindSensor(const datastructure::CommSettings& settings, uint16_t blink_time)
+{
+  startTCPConnection(settings);
+  FindSensorInColaSession(blink_time);
+  stopTCPConnection();
+}
+
 void SickSafetyscanners::requestTypeCode(const datastructure::CommSettings& settings,
                                          sick::datastructure::TypeCode& type_code)
 {
@@ -303,6 +310,14 @@ void SickSafetyscanners::requestMonitoringCaseDataInColaSession(
       break; // skip other requests after first invalid
     }
   }
+}
+
+void SickSafetyscanners::FindSensorInColaSession(uint16_t blink_time)
+{
+  sick::cola2::Cola2Session::CommandPtr command_ptr =
+    std::make_shared<sick::cola2::FindMeCommand>(boost::ref(*m_session_ptr),
+                                                             blink_time);
+  m_session_ptr->executeCommand(command_ptr);
 }
 
 void SickSafetyscanners::requestDeviceNameInColaSession(datastructure::DeviceName& device_name)
