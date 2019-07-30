@@ -198,7 +198,7 @@ void ConfigData::setEndAngleDegrees(const float& end_angle)
   m_end_angle = end_angle;
 }
 
-float ConfigData::getAngularBeamResolution() const
+/*float ConfigData::getAngularBeamResolution() const
 {
   return m_angular_beam_resolution;
 }
@@ -211,6 +211,73 @@ void ConfigData::setAngularBeamResolution(const int32_t& angular_beam_resolution
 void ConfigData::setAngularBeamResolutionDegrees(const float& angular_beam_resolution)
 {
   m_angular_beam_resolution = angular_beam_resolution;
+}*/
+
+
+uint16_t ConfigData::getDerivedMultiplicationFactor() const
+{
+  return m_derived_multiplication_factor;
+}
+
+void ConfigData::setDerivedMultiplicationFactor(const uint16_t& multiplication_factor)
+{
+  m_derived_multiplication_factor = multiplication_factor;
+}
+
+uint16_t ConfigData::getDerivedNumberOfBeams() const
+{
+  return m_derived_number_of_beams;
+}
+
+void ConfigData::setDerivedNumberOfBeams(const uint16_t& number_of_beams)
+{
+  m_derived_number_of_beams = number_of_beams;
+}
+
+uint16_t ConfigData::getDerivedScanTime() const
+{
+  return m_derived_scan_time;
+}
+
+void ConfigData::setDerivedScanTime(const uint16_t& scan_time)
+{
+  m_derived_scan_time = scan_time;
+}
+
+
+float ConfigData::getDerivedStartAngle() const
+{
+  return m_derived_start_angle;
+}
+
+void ConfigData::setDerivedStartAngle(const int32_t& start_angle)
+{
+  m_derived_start_angle = (float)start_angle / m_ANGLE_RESOLUTION;
+}
+
+float ConfigData::getDerivedAngularBeamResolution() const
+{
+  return m_derived_angular_beam_resolution;
+}
+
+void ConfigData::setDerivedAngularBeamResolution(const int32_t& angular_beam_resolution)
+{
+  m_derived_angular_beam_resolution = (float)angular_beam_resolution / m_ANGLE_RESOLUTION;
+}
+
+void ConfigData::setDerivedAngularBeamResolutionDegrees(const float& angular_beam_resolution)
+{
+  m_derived_angular_beam_resolution = angular_beam_resolution;
+}
+
+uint32_t ConfigData::getDerivedInterbeamPeriod() const
+{
+  return m_derived_interbeam_period;
+}
+
+void ConfigData::setDerivedInterbeamPeriod(const uint32_t& interbeam_period)
+{
+  m_derived_interbeam_period = interbeam_period;
 }
 
 } // namespace datastructure

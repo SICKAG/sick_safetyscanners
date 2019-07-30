@@ -271,8 +271,8 @@ void SickSafetyscanners::requestFieldDataInColaSession(
         boost::ref(*m_session_ptr), field_data, i);
       m_session_ptr->executeCommand(command_ptr);
 
-      field_data.setStartAngleDegrees(config_data.getStartAngle());
-      field_data.setAngularBeamResolutionDegrees(config_data.getAngularBeamResolution());
+      field_data.setStartAngleDegrees(config_data.getDerivedStartAngle());
+      field_data.setAngularBeamResolutionDegrees(config_data.getDerivedAngularBeamResolution());
 
       fields.push_back(field_data);
     }

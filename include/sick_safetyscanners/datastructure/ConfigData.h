@@ -255,34 +255,84 @@ public:
                    bool application_data);
 
   /*!
+   * \brief Return the multiplication factor.
+   *  Multiplication factor to be applied to the beam distance values to
+   *  get the distance in millimeter.
+   * \return The multiplication factor.
+   */
+  uint16_t getDerivedMultiplicationFactor() const;
+
+  /*!
+   * \brief Sets the multiplication factor.
+   * \param multiplication_factor The new multiplication factor.
+   */
+  void setDerivedMultiplicationFactor(const uint16_t& multiplication_factor);
+
+  /*!
+   * \brief Returns the number of beams of the current scan.
+   * \return Number of beams.
+   */
+  uint16_t getDerivedNumberOfBeams() const;
+
+  /*!
+   * \brief Sets the number of beams for the current scan
+   * \param number_of_beams Number of beams for the scan.
+   */
+  void setDerivedNumberOfBeams(const uint16_t& number_of_beams);
+
+  /*!
+   * \brief Return the time of the scan.
+   * \return  Time of the scan.
+   */
+  uint16_t getDerivedScanTime() const;
+
+  /*!
+   * \brief Sets the time of the scan
+   * \param scan_time Time of the scan.
+   */
+  void setDerivedScanTime(const uint16_t& scan_time);
+
+  /*!
+   * \brief Get the start angle of the scan.
+   * \return Start angle of the scan.
+   */
+  float getDerivedStartAngle() const;
+
+  /*!
+   * \brief Set the start angle of the scan.
+   * \param start_angle Start angle of the scan.
+   */
+  void setDerivedStartAngle(const int32_t& start_angle);
+
+  /*!
    * \brief Returns the angular resolution between the beams.
    * \return Angular resolution between beams.
    */
-  float getAngularBeamResolution() const;
+  float getDerivedAngularBeamResolution() const;
 
   /*!
    * \brief Set the angular resolution between beams.
    * \param angular_beam_resolution The angular resolution between two beams.
    */
-  void setAngularBeamResolution(const int32_t& angular_beam_resolution);
+  void setDerivedAngularBeamResolution(const int32_t& angular_beam_resolution);
 
   /*!
    * \brief Set the angular resolution between beams from degrees.
    * \param angular_beam_resolution The angular resolution between two beams in degrees.
    */
-  void setAngularBeamResolutionDegrees(const float& angular_beam_resolution);
+  void setDerivedAngularBeamResolutionDegrees(const float& angular_beam_resolution);
 
   /*!
-   * \brief Returns the derived values.
-   * \return Derived values.
+   * \brief Return the time between consecutive beams.
+   * \return  Time between consecutive beams.
    */
-  float getDerivedValues() const;
+  uint32_t getDerivedInterbeamPeriod() const;
 
   /*!
-   * \brief Set the derived values.
-   * \param derived_values The derived values.
+   * \brief Set the time between two consecutive beams.
+   * \param interbeam_period Time between two consecutive beams.
    */
-  void setDerivedValues(const DerivedValues& derived_values);
+  void setDerivedInterbeamPeriod(const uint32_t& interbeam_period);
 
 private:
   /*!
@@ -305,9 +355,12 @@ private:
   float m_start_angle;
   float m_end_angle;
   uint16_t m_features;
-
-  float m_angular_beam_resolution; // TODO move into derived values
-  DerivedValues m_derived_values;
+  uint16_t m_derived_multiplication_factor;
+  uint16_t m_derived_number_of_beams;
+  uint16_t m_derived_scan_time;
+  float m_derived_start_angle;
+  float m_derived_angular_beam_resolution; // TODO move into derived values
+  uint16_t m_derived_interbeam_period;
 };
 
 
