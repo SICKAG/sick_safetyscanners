@@ -61,6 +61,7 @@
 #include <sick_safetyscanners/cola2/DeviceStatusVariableCommand.h>
 #include <sick_safetyscanners/cola2/FieldGeometryVariableCommand.h>
 #include <sick_safetyscanners/cola2/FieldHeaderVariableCommand.h>
+#include <sick_safetyscanners/cola2/FindMeCommand.h>
 #include <sick_safetyscanners/cola2/FirmwareVersionVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementCurrentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
@@ -73,7 +74,6 @@
 #include <sick_safetyscanners/cola2/StatusOverviewVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
 #include <sick_safetyscanners/cola2/UserNameVariableCommand.h>
-#include <sick_safetyscanners/cola2/FindMeCommand.h>
 
 namespace sick {
 
@@ -143,8 +143,7 @@ public:
                            datastructure::DeviceStatus& device_status);
   void requestRequiredUserAction(const datastructure::CommSettings& settings,
                                  datastructure::RequiredUserAction& required_user_action);
-  void FindSensor(const datastructure::CommSettings& settings,
-                                 uint16_t blink_time);
+  void FindSensor(const datastructure::CommSettings& settings, uint16_t blink_time);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
