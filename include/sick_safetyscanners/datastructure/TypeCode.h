@@ -45,8 +45,8 @@ enum e_interface_type
 {
   E_EFIPRO,
   E_ETHERNET_IP,
-  E_PROFINET,
-  E_NONSAFE_ETHERNET
+  E_PROFINET = 3,
+  E_NONSAFE_ETHERNET = 4
 };
 
 enum e_ranges
