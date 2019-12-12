@@ -11,32 +11,11 @@ A ROS Driver which reads the raw data from the SICK Safety Scanners and publishe
 
 ## Supported Hardware
 
-![ ](docs/images/mS3-ROS-logo.PNG  "Sick microScan3")
+Supported are all microScan3, nanoScan3 and outdoorScan3 variants with Ethernet connection.
 
-| Product Family  | Product Type | Description |
-| ---------------------- | -------------------- | ------------- |
-| microScan3 Core | MICS3-ACAZ40PZ1 | Safety Laser Scanner, PROFINET PROFIsafe, Protective Field Range: 4 m |
-|  | MICS3-ACAZ55PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 5.5 m |
-|  | MICS3-ACAZ90PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 9 m |
-|  | MICS3-ABAZ40IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety,  Protective Field Range: 4 m |
-|  | MICS3-ABAZ55IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 5.5 m |
-|  | MICS3-ABAZ90IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 9 m |
-|  | MICS3-ABAZ40ZA1 | Safety Laser Scanner, EFI-pro,  Protective Field Range: 4 m |
-|  | MICS3-ABAZ55ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 5.5 m |
-|  | MICS3-ABAZ90ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 9 m |
-|  |  |  |
-| microScan3 Pro | MICS3-CBAZ40PZ1 | Safety Laser Scanner, PROFINET PROFIsafe, Protective Field Range: 4 m |
-|  | MICS3-CBAZ55PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 5.5 m |
-|  | MICS3-CBAZ90PZ1 | Safety Laser Scanner, PROFINET PROFIsafe,  Protective Field Range: 9 m |
-|  | MICS3-CBAZ40IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety,  Protective Field Range: 4 m |
-|  | MICS3-CBAZ55IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 5.5 m |
-|  | MICS3-CBAZ90IZ1 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 9 m |
-|  | MICS3-CBAZ40ZA1 | Safety Laser Scanner, EFI-pro,  Protective Field Range: 4 m |
-|  | MICS3-CBAZ55ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 5.5 m |
-|  | MICS3-CBAZ90ZA1 | Safety Laser Scanner, EFI-pro, Protective Field Range: 9 m |
-|  |  |  |
-| outdoorScan3 Pro | MICS3-CBUZ40IZ1P01 | Safety Laser Scanner, EtherNet/IP CIP Safety, Protective Field Range: 4 m |
-|  |  |  |
+![ ](docs/images/safetyscanners.jpeg  "Sick Safetyscanner Family")
+
+
 
 ## Getting started
 
