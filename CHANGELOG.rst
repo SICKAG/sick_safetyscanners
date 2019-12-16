@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.4 (2019-12-16)
+------------------
 * Fixed Bug with enum for interface type
 * Eoved enums in class
   Enums are not in the class scope where they are used.
