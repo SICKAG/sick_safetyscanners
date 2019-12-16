@@ -2,6 +2,17 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* Fixed Bug with enum for interface type
+* Eoved enums in class
+  Enums are not in the class scope where they are used.
+  Prevents redefinitions and pollution of namespace.
+* Correctet variable index for username command
+* Typecode read and parsed from variable
+* Used static casts instead of implicit conversion
+* Contributors: Lennart Puck
+
 1.0.3 (2019-07-15)
 ------------------
 * erasing completed frames from map. 
