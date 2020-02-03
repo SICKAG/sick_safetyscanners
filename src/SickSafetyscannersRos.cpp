@@ -141,10 +141,7 @@ void SickSafetyscannersRos::reconfigureCallback(
 
     m_time_offset = config.time_offset;
 
-    m_frequency_tolerance = config.frequency_tolerance;
-    m_expected_frequency = static_cast<double>(m_communication_settings.getPublishingFrequency());
-    m_timestamp_min_acceptable = config.timestamp_min_acceptable;
-    m_timestamp_max_acceptable = config.timestamp_max_acceptable;
+    m_expected_frequency = config.expected_frequency;
   }
 }
 
@@ -196,7 +193,6 @@ bool SickSafetyscannersRos::readParameters()
   int skip;
   m_private_nh.getParam("skip", skip);
   m_communication_settings.setPublishingFrequency(skipToPublishFrequency(skip));
-  m_expected_frequency = static_cast<double>(m_communication_settings.getPublishingFrequency());
 
   float angle_start;
   m_private_nh.getParam("angle_start", angle_start);
@@ -204,18 +200,10 @@ bool SickSafetyscannersRos::readParameters()
   float angle_end;
   m_private_nh.getParam("angle_end", angle_end);
 
-  double frequency_tolerance;
-  m_private_nh.getParam("frequency_tolerance", frequency_tolerance);
-
-  double expected_frequency;
-  m_private_nh.getParam("expected_frequency", expected_frequency);
-
-  double timestamp_min_acceptable;
-  m_private_nh.getParam("timestamp_min_acceptable", timestamp_min_acceptable);
-
-  double timestamp_max_acceptable;
-  m_private_nh.getParam("timestamp_max_acceptable", timestamp_max_acceptable);
-
+  m_private_nh.getParam("frequency_tolerance", m_frequency_tolerance);
+  m_private_nh.getParam("expected_frequency", m_expected_frequency);
+  m_private_nh.getParam("timestamp_min_acceptable", m_timestamp_min_acceptable);
+  m_private_nh.getParam("timestamp_max_acceptable", m_timestamp_max_acceptable);
 
   // Included check before calculations to prevent rounding errors while calculating
   if (angle_start == angle_end)
