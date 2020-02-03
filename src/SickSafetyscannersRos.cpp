@@ -67,6 +67,18 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_field_service_server =
     m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
+  // Diagnostics for frequency
+  m_diagnostic_updater.setHardwareID(m_communication_settings.getSensorIp().to_string());
+
+  diagnostic_updater::FrequencyStatusParam frequency_param(&m_expected_frequency,
+                                                           &m_expected_frequency,
+                                                           m_frequency_tolerance);
+  diagnostic_updater::TimeStampStatusParam timestamp_param(m_timestamp_min_acceptable,
+                                                           m_timestamp_max_acceptable);
+  m_diagnosed_laser_scan_publisher.reset(
+              new DiagnosedLaserScanPublisher(m_laser_scan_publisher, m_diagnostic_updater,
+                                              frequency_param, timestamp_param));
+
   m_device = std::make_shared<sick::SickSafetyscanners>(
     boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), &m_communication_settings);
   m_device->run();
@@ -128,6 +140,11 @@ void SickSafetyscannersRos::reconfigureCallback(
     m_frame_id = config.frame_id;
 
     m_time_offset = config.time_offset;
+
+    m_frequency_tolerance = config.frequency_tolerance;
+    m_expected_frequency = static_cast<double>(m_communication_settings.getPublishingFrequency());
+    m_timestamp_min_acceptable = config.timestamp_min_acceptable;
+    m_timestamp_max_acceptable = config.timestamp_max_acceptable;
   }
 }
 
@@ -179,12 +196,26 @@ bool SickSafetyscannersRos::readParameters()
   int skip;
   m_private_nh.getParam("skip", skip);
   m_communication_settings.setPublishingFrequency(skipToPublishFrequency(skip));
+  m_expected_frequency = static_cast<double>(m_communication_settings.getPublishingFrequency());
 
   float angle_start;
   m_private_nh.getParam("angle_start", angle_start);
 
   float angle_end;
   m_private_nh.getParam("angle_end", angle_end);
+
+  double frequency_tolerance;
+  m_private_nh.getParam("frequency_tolerance", frequency_tolerance);
+
+  double expected_frequency;
+  m_private_nh.getParam("expected_frequency", expected_frequency);
+
+  double timestamp_min_acceptable;
+  m_private_nh.getParam("timestamp_min_acceptable", timestamp_min_acceptable);
+
+  double timestamp_max_acceptable;
+  m_private_nh.getParam("timestamp_max_acceptable", timestamp_max_acceptable);
+
 
   // Included check before calculations to prevent rounding errors while calculating
   if (angle_start == angle_end)
@@ -229,7 +260,8 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
   {
     sensor_msgs::LaserScan scan = createLaserScanMessage(data);
 
-    m_laser_scan_publisher.publish(scan);
+    m_diagnosed_laser_scan_publisher->publish(scan);
+    m_diagnostic_updater.update();
   }
 
 
