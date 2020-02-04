@@ -81,34 +81,40 @@ rosrun rviz rviz
 
 
 `
-~/laser_scan (type: sensor_msgs/LaserScan)
+laser_scan (type: sensor_msgs/LaserScan)
 `
 
 Publishes a scan from the laserscanner
 
 `
-~/extended_laser_scan (type: sick_safetyscanners/ExtendedLaserScanMsg)
+extended_laser_scan (type: sick_safetyscanners/ExtendedLaserScanMsg)
 `
 
 Extends the basic laser scan message by reflector data and intrusion data.
 
 `
-~/output_paths (type: sick_safetyscanners/OutputPathMsg)
+output_paths (type: sick_safetyscanners/OutputPathMsg)
 `
 
 Gives feedback of the current status of the output paths.
 
 
 `
-~/raw_data (type: sick_safetyscanners/RawMicroScanDataMsg)
+raw_data (type: sick_safetyscanners/RawMicroScanDataMsg)
 `
 
 Publishes the raw data from the sensor as a ROS message.
 
+`
+diagnostics (type: diagnostic_msgs/DiagnosticArray)
+`
+
+Frequency and timestamp diagnostics information.
+
 ### Advertised ROS Services
 
 `
-~/field_data
+field_data
 `
 
 Returns all configured protective and warning fields for the sensor
