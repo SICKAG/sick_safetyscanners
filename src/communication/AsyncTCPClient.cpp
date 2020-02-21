@@ -50,7 +50,7 @@ AsyncTCPClient::AsyncTCPClient(const PacketHandler& packet_handler,
   {
     m_socket_ptr = std::make_shared<boost::asio::ip::tcp::socket>(boost::ref(m_io_service));
   }
-  catch (std::exception& e)
+  catch (const std::exception& e)
   {
     ROS_ERROR("Exception while creating socket: %s", e.what());
   }

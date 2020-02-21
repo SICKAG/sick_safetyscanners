@@ -51,7 +51,7 @@ AsyncUDPClient::AsyncUDPClient(const PacketHandler& packet_handler,
       boost::ref(m_io_service),
       boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port));
   }
-  catch (std::exception& e)
+  catch (const std::exception& e)
   {
     ROS_ERROR("Exception while creating socket: %s", e.what());
   }
