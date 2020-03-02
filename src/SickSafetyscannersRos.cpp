@@ -70,14 +70,12 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   // Diagnostics for frequency
   m_diagnostic_updater.setHardwareID(m_communication_settings.getSensorIp().to_string());
 
-  diagnostic_updater::FrequencyStatusParam frequency_param(&m_expected_frequency,
-                                                           &m_expected_frequency,
-                                                           m_frequency_tolerance);
+  diagnostic_updater::FrequencyStatusParam frequency_param(
+    &m_expected_frequency, &m_expected_frequency, m_frequency_tolerance);
   diagnostic_updater::TimeStampStatusParam timestamp_param(m_timestamp_min_acceptable,
                                                            m_timestamp_max_acceptable);
-  m_diagnosed_laser_scan_publisher.reset(
-              new DiagnosedLaserScanPublisher(m_laser_scan_publisher, m_diagnostic_updater,
-                                              frequency_param, timestamp_param));
+  m_diagnosed_laser_scan_publisher.reset(new DiagnosedLaserScanPublisher(
+    m_laser_scan_publisher, m_diagnostic_updater, frequency_param, timestamp_param));
 
   m_device = std::make_shared<sick::SickSafetyscanners>(
     boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), &m_communication_settings);
