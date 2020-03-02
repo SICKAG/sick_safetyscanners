@@ -13,7 +13,7 @@ A ROS Driver which reads the raw data from the SICK Safety Scanners and publishe
 
 Supported are all microScan3, nanoScan3 and outdoorScan3 variants with Ethernet connection.
 
-![ ](docs/images/safetyscanners.jpeg  "Sick Safetyscanner Family")
+![ ](docs/images/safetyscanners.png  "Sick Safetyscanner Family")
 
 
 
