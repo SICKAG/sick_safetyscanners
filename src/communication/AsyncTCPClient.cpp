@@ -50,7 +50,7 @@ AsyncTCPClient::AsyncTCPClient(const PacketHandler& packet_handler,
   {
     m_socket_ptr = std::make_shared<boost::asio::ip::tcp::socket>(boost::ref(m_io_service));
   }
-  catch (std::exception& e)
+  catch (const std::exception& e)
   {
     ROS_ERROR("Exception while creating socket: %s", e.what());
   }
@@ -65,7 +65,7 @@ void AsyncTCPClient::doDisconnect()
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::system::error_code ec;
   m_socket_ptr->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-  if (ec != 0)
+  if (ec != boost::system::errc::success)
   {
     ROS_ERROR("Error shutting socket down: %i", ec.value());
   }
@@ -75,7 +75,7 @@ void AsyncTCPClient::doDisconnect()
   }
 
   m_socket_ptr->close(ec);
-  if (ec != 0)
+  if (ec != boost::system::errc::success)
   {
     ROS_ERROR("Error closing Socket: %i", ec.value());
   }
@@ -90,7 +90,7 @@ void AsyncTCPClient::doConnect()
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::mutex::scoped_lock lock_connect(m_connect_mutex);
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec) {
-    if (ec != 0)
+    if (ec != boost::system::errc::success)
     {
       ROS_ERROR("TCP error code: %i", ec.value());
     }
