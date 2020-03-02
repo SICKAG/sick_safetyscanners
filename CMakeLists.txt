@@ -11,6 +11,7 @@ add_definitions(-std=c++11 -Wall)
 ## Find catkin macros and libraries
 find_package(catkin REQUIRED
   COMPONENTS
+    diagnostic_updater
     dynamic_reconfigure
     message_generation
     roscpp

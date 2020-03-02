@@ -45,7 +45,7 @@ enum e_interface_type
 {
   E_EFIPRO,
   E_ETHERNET_IP,
-  E_PROFINET = 3,
+  E_PROFINET         = 3,
   E_NONSAFE_ETHERNET = 4
 };
 
