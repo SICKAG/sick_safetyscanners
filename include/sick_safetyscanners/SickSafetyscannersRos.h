@@ -153,7 +153,7 @@ private:
   double m_range_min;
   double m_range_max;
   double m_frequency_tolerance = 0.1;
-  double m_expected_frequency = 34.0;
+  double m_expected_frequency = 20.0;
   double m_timestamp_min_acceptable = -1.0;
   double m_timestamp_max_acceptable = 1.0;
 
