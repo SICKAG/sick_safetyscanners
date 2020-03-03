@@ -273,15 +273,16 @@ SickSafetyscannersRos::createExtendedLaserScanMessage(const sick::datastructure:
   sick_safetyscanners::ExtendedLaserScanMsg msg;
   msg.laser_scan = scan;
 
-  uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
+  uint32_t num_scan_points = data.getMeasurementDataPtr()->getNumberOfBeams();
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
+
 
   msg.reflektor_status.resize(num_scan_points);
   msg.intrusion.resize(num_scan_points);
   msg.reflektor_median.resize(num_scan_points);
   std::vector<bool> medians = getMedianReflectors(scan_points);
-  for (uint16_t i = 0; i < num_scan_points; ++i)
+  for (uint32_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     msg.reflektor_status[i]                         = scan_point.getReflectorBit();
@@ -324,7 +325,13 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.header.stamp    = ros::Time::now();
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
-  uint16_t num_scan_points = data.getDerivedValuesPtr()->getNumberOfBeams();
+  uint16_t num_points_derived = data.getDerivedValuesPtr()->getNumberOfBeams();
+  uint32_t num_scan_points    = data.getMeasurementDataPtr()->getNumberOfBeams();
+
+  if (num_points_derived != num_scan_points)
+  {
+    ROS_WARN("Points do not match: %i, %i", num_points_derived, num_scan_points);
+  }
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle() + m_angle_offset);
   double angle_max =
@@ -349,7 +356,7 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
 
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
-  for (uint16_t i = 0; i < num_scan_points; ++i)
+  for (uint32_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     scan.ranges[i]                                  = static_cast<float>(scan_point.getDistance()) *
@@ -522,8 +529,8 @@ SickSafetyscannersRos::createScanPointMessageVector(const sick::datastructure::D
   std::shared_ptr<sick::datastructure::MeasurementData> measurement_data =
     data.getMeasurementDataPtr();
   std::vector<sick::datastructure::ScanPoint> scan_points = measurement_data->getScanPointsVector();
-  uint16_t num_points                                     = measurement_data->getNumberOfBeams();
-  for (uint16_t i = 0; i < num_points; i++)
+  uint32_t num_points                                     = measurement_data->getNumberOfBeams();
+  for (uint32_t i = 0; i < num_points; i++)
   {
     sick::datastructure::ScanPoint scan_point = scan_points.at(i);
     sick_safetyscanners::ScanPointMsg msg;
