@@ -44,12 +44,11 @@ AsyncUDPClient::AsyncUDPClient(const PacketHandler& packet_handler,
   , m_io_service(io_service)
 {
   // Keep io_service busy
-  m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
+  m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(m_io_service);
   try
   {
-    m_socket_ptr = std::make_shared<boost::asio::ip::udp::socket>(
-      boost::ref(m_io_service),
-      boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port));
+    auto endpoint = boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port);
+    m_socket_ptr = std::make_shared<boost::asio::ip::udp::socket>(m_io_service, endpoint);
   }
   catch (const std::exception& e)
   {
