@@ -215,6 +215,8 @@ bool SickSafetyscannersRos::readParameters()
     m_communication_settings.setEndAngle(sick::radToDeg(angle_end) - m_angle_offset);
   }
 
+  m_private_nh.getParam("time_offset", m_time_offset);
+
   bool general_system_state;
   m_private_nh.getParam("general_system_state", general_system_state);
 
