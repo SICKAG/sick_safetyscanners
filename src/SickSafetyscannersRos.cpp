@@ -272,7 +272,7 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
 void SickSafetyscannersRos::sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status)
 {
   const sick_safetyscanners::DataHeaderMsg& header = m_last_raw_data.header;
-  if (header.timestamp_time == 0 && header.timestamp_time == 0)
+  if (header.timestamp_time == 0 && header.timestamp_date == 0)
   {
     diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::STALE, "Could not get sensor state");
     return;
