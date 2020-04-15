@@ -136,6 +136,8 @@ private:
   // Diagnostics
   diagnostic_updater::Updater m_diagnostic_updater;
   std::shared_ptr<DiagnosedLaserScanPublisher> m_diagnosed_laser_scan_publisher;
+  sick_safetyscanners::RawMicroScanDataMsg m_last_raw_data;
+  void sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status);
 
   ros::ServiceServer m_field_service_server;
 

@@ -76,6 +76,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
                                                            m_timestamp_max_acceptable);
   m_diagnosed_laser_scan_publisher.reset(new DiagnosedLaserScanPublisher(
     m_laser_scan_publisher, m_diagnostic_updater, frequency_param, timestamp_param));
+  m_diagnostic_updater.add("State", this, &SickSafetyscannersRos::sensorDiagnostics);
 
   m_device = std::make_shared<sick::SickSafetyscanners>(
     boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), &m_communication_settings);
@@ -249,7 +250,6 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
     sensor_msgs::LaserScan scan = createLaserScanMessage(data);
 
     m_diagnosed_laser_scan_publisher->publish(scan);
-    m_diagnostic_updater.update();
   }
 
 
@@ -263,9 +263,55 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
     m_output_path_publisher.publish(output_paths);
   }
 
-  sick_safetyscanners::RawMicroScanDataMsg raw_data = createRawDataMessage(data);
+  m_last_raw_data = createRawDataMessage(data);
+  m_raw_data_publisher.publish(m_last_raw_data);
 
-  m_raw_data_publisher.publish(raw_data);
+  m_diagnostic_updater.update();
+}
+
+void SickSafetyscannersRos::sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status)
+{
+  const sick_safetyscanners::DataHeaderMsg& header = m_last_raw_data.header;
+  if (header.timestamp_time == 0 && header.timestamp_time == 0)
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::STALE, "Could not get sensor state");
+    return;
+  }
+
+  diagnostic_status.add("Version version", header.version_version);
+  diagnostic_status.add("Version major version", header.version_major_version);
+  diagnostic_status.add("Version minor version", header.version_minor_version);
+  diagnostic_status.add("Version release", header.version_release);
+  diagnostic_status.add("Serial number of device", header.serial_number_of_device);
+  diagnostic_status.add("Serial number of channel plug", header.serial_number_of_channel_plug);
+  diagnostic_status.add("Channel number", header.channel_number);
+  diagnostic_status.add("Sequence number", header.sequence_number);
+  diagnostic_status.add("Scan number", header.scan_number);
+  diagnostic_status.add("Timestamp date", header.timestamp_date);
+  diagnostic_status.add("Timestamp time", header.timestamp_time);
+
+  const sick_safetyscanners::GeneralSystemStateMsg& state = m_last_raw_data.general_system_state;
+  diagnostic_status.add("Run mode active", state.run_mode_active);
+  diagnostic_status.add("Standby mode active", state.standby_mode_active);
+  diagnostic_status.add("Contamination warning", state.contamination_warning);
+  diagnostic_status.add("Contamination error", state.contamination_error);
+  diagnostic_status.add("Reference contour status", state.reference_contour_status);
+  diagnostic_status.add("Manipulation status", state.manipulation_status);
+  diagnostic_status.add("Current monitoring case no table 1", state.current_monitoring_case_no_table_1);
+  diagnostic_status.add("Current monitoring case no table 2", state.current_monitoring_case_no_table_2);
+  diagnostic_status.add("Current monitoring case no table 3", state.current_monitoring_case_no_table_3);
+  diagnostic_status.add("Current monitoring case no table 4", state.current_monitoring_case_no_table_4);
+  diagnostic_status.add("Application error", state.application_error);
+  diagnostic_status.add("Device error", state.device_error);
+
+  if (state.device_error)
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::ERROR, "Device error");
+  }
+  else
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::OK, "OK");
+  }
 }
 
 sick_safetyscanners::ExtendedLaserScanMsg
