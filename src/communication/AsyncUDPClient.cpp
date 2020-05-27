@@ -48,7 +48,7 @@ AsyncUDPClient::AsyncUDPClient(const PacketHandler& packet_handler,
   try
   {
     auto endpoint = boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port);
-    m_socket_ptr = std::make_shared<boost::asio::ip::udp::socket>(m_io_service, endpoint);
+    m_socket_ptr  = std::make_shared<boost::asio::ip::udp::socket>(m_io_service, endpoint);
   }
   catch (const std::exception& e)
   {

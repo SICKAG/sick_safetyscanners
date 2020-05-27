@@ -274,12 +274,14 @@ std::string boolToString(bool b)
   return b ? "true" : "false";
 }
 
-void SickSafetyscannersRos::sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status)
+void SickSafetyscannersRos::sensorDiagnostics(
+  diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status)
 {
   const sick_safetyscanners::DataHeaderMsg& header = m_last_raw_data.header;
   if (header.timestamp_time == 0 && header.timestamp_date == 0)
   {
-    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::STALE, "Could not get sensor state");
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::STALE,
+                              "Could not get sensor state");
     return;
   }
 
@@ -288,7 +290,8 @@ void SickSafetyscannersRos::sensorDiagnostics(diagnostic_updater::DiagnosticStat
   diagnostic_status.addf("Version minor version", "%u", header.version_minor_version);
   diagnostic_status.addf("Version release", "%u", header.version_release);
   diagnostic_status.addf("Serial number of device", "%u", header.serial_number_of_device);
-  diagnostic_status.addf("Serial number of channel plug", "%u", header.serial_number_of_channel_plug);
+  diagnostic_status.addf(
+    "Serial number of channel plug", "%u", header.serial_number_of_channel_plug);
   diagnostic_status.addf("Channel number", "%u", header.channel_number);
   diagnostic_status.addf("Sequence number", "%u", header.sequence_number);
   diagnostic_status.addf("Scan number", "%u", header.scan_number);
@@ -302,10 +305,14 @@ void SickSafetyscannersRos::sensorDiagnostics(diagnostic_updater::DiagnosticStat
   diagnostic_status.add("Contamination error", boolToString(state.contamination_error));
   diagnostic_status.add("Reference contour status", boolToString(state.reference_contour_status));
   diagnostic_status.add("Manipulation status", boolToString(state.manipulation_status));
-  diagnostic_status.addf("Current monitoring case no table 1", "%u", state.current_monitoring_case_no_table_1);
-  diagnostic_status.addf("Current monitoring case no table 2", "%u", state.current_monitoring_case_no_table_2);
-  diagnostic_status.addf("Current monitoring case no table 3", "%u", state.current_monitoring_case_no_table_3);
-  diagnostic_status.addf("Current monitoring case no table 4", "%u", state.current_monitoring_case_no_table_4);
+  diagnostic_status.addf(
+    "Current monitoring case no table 1", "%u", state.current_monitoring_case_no_table_1);
+  diagnostic_status.addf(
+    "Current monitoring case no table 2", "%u", state.current_monitoring_case_no_table_2);
+  diagnostic_status.addf(
+    "Current monitoring case no table 3", "%u", state.current_monitoring_case_no_table_3);
+  diagnostic_status.addf(
+    "Current monitoring case no table 4", "%u", state.current_monitoring_case_no_table_4);
   diagnostic_status.add("Application error", boolToString(state.application_error));
   diagnostic_status.add("Device error", boolToString(state.device_error));
 
@@ -378,10 +385,10 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.header.stamp    = ros::Time::now();
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
-  //TODO check why returned number of beams is misaligned to size of vector
+  // TODO check why returned number of beams is misaligned to size of vector
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
-  uint32_t num_scan_points    = scan_points.size();
+  uint32_t num_scan_points = scan_points.size();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle() + m_angle_offset);
   double angle_max =
@@ -583,8 +590,8 @@ SickSafetyscannersRos::createScanPointMessageVector(const sick::datastructure::D
   std::shared_ptr<sick::datastructure::MeasurementData> measurement_data =
     data.getMeasurementDataPtr();
   std::vector<sick::datastructure::ScanPoint> scan_points = measurement_data->getScanPointsVector();
-  //uint32_t num_points                                     = measurement_data->getNumberOfBeams();
-  uint32_t num_points                                     = scan_points.size();
+  // uint32_t num_points                                     = measurement_data->getNumberOfBeams();
+  uint32_t num_points = scan_points.size();
   for (uint32_t i = 0; i < num_points; i++)
   {
     sick::datastructure::ScanPoint scan_point = scan_points.at(i);
