@@ -269,6 +269,11 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
   m_diagnostic_updater.update();
 }
 
+std::string boolToString(bool b)
+{
+  return b ? "true" : "false";
+}
+
 void SickSafetyscannersRos::sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status)
 {
   const sick_safetyscanners::DataHeaderMsg& header = m_last_raw_data.header;
@@ -278,31 +283,31 @@ void SickSafetyscannersRos::sensorDiagnostics(diagnostic_updater::DiagnosticStat
     return;
   }
 
-  diagnostic_status.add("Version version", header.version_version);
-  diagnostic_status.add("Version major version", header.version_major_version);
-  diagnostic_status.add("Version minor version", header.version_minor_version);
-  diagnostic_status.add("Version release", header.version_release);
-  diagnostic_status.add("Serial number of device", header.serial_number_of_device);
-  diagnostic_status.add("Serial number of channel plug", header.serial_number_of_channel_plug);
-  diagnostic_status.add("Channel number", header.channel_number);
-  diagnostic_status.add("Sequence number", header.sequence_number);
-  diagnostic_status.add("Scan number", header.scan_number);
-  diagnostic_status.add("Timestamp date", header.timestamp_date);
-  diagnostic_status.add("Timestamp time", header.timestamp_time);
+  diagnostic_status.addf("Version version", "%u", header.version_version);
+  diagnostic_status.addf("Version major version", "%u", header.version_major_version);
+  diagnostic_status.addf("Version minor version", "%u", header.version_minor_version);
+  diagnostic_status.addf("Version release", "%u", header.version_release);
+  diagnostic_status.addf("Serial number of device", "%u", header.serial_number_of_device);
+  diagnostic_status.addf("Serial number of channel plug", "%u", header.serial_number_of_channel_plug);
+  diagnostic_status.addf("Channel number", "%u", header.channel_number);
+  diagnostic_status.addf("Sequence number", "%u", header.sequence_number);
+  diagnostic_status.addf("Scan number", "%u", header.scan_number);
+  diagnostic_status.addf("Timestamp date", "%u", header.timestamp_date);
+  diagnostic_status.addf("Timestamp time", "%u", header.timestamp_time);
 
   const sick_safetyscanners::GeneralSystemStateMsg& state = m_last_raw_data.general_system_state;
-  diagnostic_status.add("Run mode active", state.run_mode_active);
-  diagnostic_status.add("Standby mode active", state.standby_mode_active);
-  diagnostic_status.add("Contamination warning", state.contamination_warning);
-  diagnostic_status.add("Contamination error", state.contamination_error);
-  diagnostic_status.add("Reference contour status", state.reference_contour_status);
-  diagnostic_status.add("Manipulation status", state.manipulation_status);
-  diagnostic_status.add("Current monitoring case no table 1", state.current_monitoring_case_no_table_1);
-  diagnostic_status.add("Current monitoring case no table 2", state.current_monitoring_case_no_table_2);
-  diagnostic_status.add("Current monitoring case no table 3", state.current_monitoring_case_no_table_3);
-  diagnostic_status.add("Current monitoring case no table 4", state.current_monitoring_case_no_table_4);
-  diagnostic_status.add("Application error", state.application_error);
-  diagnostic_status.add("Device error", state.device_error);
+  diagnostic_status.add("Run mode active", boolToString(state.run_mode_active));
+  diagnostic_status.add("Standby mode active", boolToString(state.standby_mode_active));
+  diagnostic_status.add("Contamination warning", boolToString(state.contamination_warning));
+  diagnostic_status.add("Contamination error", boolToString(state.contamination_error));
+  diagnostic_status.add("Reference contour status", boolToString(state.reference_contour_status));
+  diagnostic_status.add("Manipulation status", boolToString(state.manipulation_status));
+  diagnostic_status.addf("Current monitoring case no table 1", "%u", state.current_monitoring_case_no_table_1);
+  diagnostic_status.addf("Current monitoring case no table 2", "%u", state.current_monitoring_case_no_table_2);
+  diagnostic_status.addf("Current monitoring case no table 3", "%u", state.current_monitoring_case_no_table_3);
+  diagnostic_status.addf("Current monitoring case no table 4", "%u", state.current_monitoring_case_no_table_4);
+  diagnostic_status.add("Application error", boolToString(state.application_error));
+  diagnostic_status.add("Device error", boolToString(state.device_error));
 
   if (state.device_error)
   {
