@@ -76,6 +76,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
                                                            m_timestamp_max_acceptable);
   m_diagnosed_laser_scan_publisher.reset(new DiagnosedLaserScanPublisher(
     m_laser_scan_publisher, m_diagnostic_updater, frequency_param, timestamp_param));
+  m_diagnostic_updater.add("State", this, &SickSafetyscannersRos::sensorDiagnostics);
 
   m_device = std::make_shared<sick::SickSafetyscanners>(
     boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), &m_communication_settings);
@@ -249,7 +250,6 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
     sensor_msgs::LaserScan scan = createLaserScanMessage(data);
 
     m_diagnosed_laser_scan_publisher->publish(scan);
-    m_diagnostic_updater.update();
   }
 
 
@@ -263,9 +263,67 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
     m_output_path_publisher.publish(output_paths);
   }
 
-  sick_safetyscanners::RawMicroScanDataMsg raw_data = createRawDataMessage(data);
+  m_last_raw_data = createRawDataMessage(data);
+  m_raw_data_publisher.publish(m_last_raw_data);
 
-  m_raw_data_publisher.publish(raw_data);
+  m_diagnostic_updater.update();
+}
+
+std::string boolToString(bool b)
+{
+  return b ? "true" : "false";
+}
+
+void SickSafetyscannersRos::sensorDiagnostics(
+  diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status)
+{
+  const sick_safetyscanners::DataHeaderMsg& header = m_last_raw_data.header;
+  if (header.timestamp_time == 0 && header.timestamp_date == 0)
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::STALE,
+                              "Could not get sensor state");
+    return;
+  }
+
+  diagnostic_status.addf("Version version", "%c", header.version_version);
+  diagnostic_status.addf("Version major version", "%u", header.version_major_version);
+  diagnostic_status.addf("Version minor version", "%u", header.version_minor_version);
+  diagnostic_status.addf("Version release", "%u", header.version_release);
+  diagnostic_status.addf("Serial number of device", "%u", header.serial_number_of_device);
+  diagnostic_status.addf(
+    "Serial number of channel plug", "%u", header.serial_number_of_channel_plug);
+  diagnostic_status.addf("Channel number", "%u", header.channel_number);
+  diagnostic_status.addf("Sequence number", "%u", header.sequence_number);
+  diagnostic_status.addf("Scan number", "%u", header.scan_number);
+  diagnostic_status.addf("Timestamp date", "%u", header.timestamp_date);
+  diagnostic_status.addf("Timestamp time", "%u", header.timestamp_time);
+
+  const sick_safetyscanners::GeneralSystemStateMsg& state = m_last_raw_data.general_system_state;
+  diagnostic_status.add("Run mode active", boolToString(state.run_mode_active));
+  diagnostic_status.add("Standby mode active", boolToString(state.standby_mode_active));
+  diagnostic_status.add("Contamination warning", boolToString(state.contamination_warning));
+  diagnostic_status.add("Contamination error", boolToString(state.contamination_error));
+  diagnostic_status.add("Reference contour status", boolToString(state.reference_contour_status));
+  diagnostic_status.add("Manipulation status", boolToString(state.manipulation_status));
+  diagnostic_status.addf(
+    "Current monitoring case no table 1", "%u", state.current_monitoring_case_no_table_1);
+  diagnostic_status.addf(
+    "Current monitoring case no table 2", "%u", state.current_monitoring_case_no_table_2);
+  diagnostic_status.addf(
+    "Current monitoring case no table 3", "%u", state.current_monitoring_case_no_table_3);
+  diagnostic_status.addf(
+    "Current monitoring case no table 4", "%u", state.current_monitoring_case_no_table_4);
+  diagnostic_status.add("Application error", boolToString(state.application_error));
+  diagnostic_status.add("Device error", boolToString(state.device_error));
+
+  if (state.device_error)
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::ERROR, "Device error");
+  }
+  else
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::OK, "OK");
+  }
 }
 
 sick_safetyscanners::ExtendedLaserScanMsg
@@ -327,10 +385,10 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.header.stamp    = ros::Time::now();
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
-  //TODO check why returned number of beams is misaligned to size of vector
+  // TODO check why returned number of beams is misaligned to size of vector
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
-  uint32_t num_scan_points    = scan_points.size();
+  uint32_t num_scan_points = scan_points.size();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle() + m_angle_offset);
   double angle_max =
@@ -532,8 +590,8 @@ SickSafetyscannersRos::createScanPointMessageVector(const sick::datastructure::D
   std::shared_ptr<sick::datastructure::MeasurementData> measurement_data =
     data.getMeasurementDataPtr();
   std::vector<sick::datastructure::ScanPoint> scan_points = measurement_data->getScanPointsVector();
-  //uint32_t num_points                                     = measurement_data->getNumberOfBeams();
-  uint32_t num_points                                     = scan_points.size();
+  // uint32_t num_points                                     = measurement_data->getNumberOfBeams();
+  uint32_t num_points = scan_points.size();
   for (uint32_t i = 0; i < num_points; i++)
   {
     sick::datastructure::ScanPoint scan_point = scan_points.at(i);
