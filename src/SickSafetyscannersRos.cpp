@@ -326,9 +326,9 @@ SickSafetyscannersRos::createExtendedLaserScanMessage(const sick::datastructure:
   sick_safetyscanners::ExtendedLaserScanMsg msg;
   msg.laser_scan = scan;
 
-  uint32_t num_scan_points = data.getMeasurementDataPtr()->getNumberOfBeams();
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
+  uint32_t num_scan_points = scan_points.size();
 
 
   msg.reflektor_status.resize(num_scan_points);
@@ -378,13 +378,10 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.header.stamp    = ros::Time::now();
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
-  uint16_t num_points_derived = data.getDerivedValuesPtr()->getNumberOfBeams();
-  uint32_t num_scan_points    = data.getMeasurementDataPtr()->getNumberOfBeams();
-
-  if (num_points_derived != num_scan_points)
-  {
-    ROS_WARN("Points do not match: %i, %i", num_points_derived, num_scan_points);
-  }
+  //TODO check why returned number of beams is misaligned to size of vector
+  std::vector<sick::datastructure::ScanPoint> scan_points =
+    data.getMeasurementDataPtr()->getScanPointsVector();
+  uint32_t num_scan_points    = scan_points.size();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle() + m_angle_offset);
   double angle_max =
@@ -407,8 +404,6 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.intensities.resize(num_scan_points);
 
 
-  std::vector<sick::datastructure::ScanPoint> scan_points =
-    data.getMeasurementDataPtr()->getScanPointsVector();
   for (uint32_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
@@ -588,7 +583,8 @@ SickSafetyscannersRos::createScanPointMessageVector(const sick::datastructure::D
   std::shared_ptr<sick::datastructure::MeasurementData> measurement_data =
     data.getMeasurementDataPtr();
   std::vector<sick::datastructure::ScanPoint> scan_points = measurement_data->getScanPointsVector();
-  uint32_t num_points                                     = measurement_data->getNumberOfBeams();
+  //uint32_t num_points                                     = measurement_data->getNumberOfBeams();
+  uint32_t num_points                                     = scan_points.size();
   for (uint32_t i = 0; i < num_points; i++)
   {
     sick::datastructure::ScanPoint scan_point = scan_points.at(i);
