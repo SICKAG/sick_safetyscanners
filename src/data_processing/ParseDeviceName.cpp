@@ -60,7 +60,7 @@ std::string ParseDeviceName::readDeviceName(std::vector<uint8_t>::const_iterator
   std::string name;
   for (uint16_t i = 0; i < string_length; i++)
   {
-    name.push_back(read_write_helper::readUint16LittleEndian(data_ptr + 2 + i));
+    name.push_back(read_write_helper::readUint8LittleEndian(data_ptr + 2 + i));
   }
   return name;
 }
