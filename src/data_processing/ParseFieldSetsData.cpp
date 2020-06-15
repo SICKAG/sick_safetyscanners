@@ -95,11 +95,11 @@ ParseFieldSetsData::readFieldName(std::vector<uint8_t>::const_iterator data_ptr,
   std::vector<std::string> result;
   for (uint32_t i = 0; i < array_length; i++)
   {
-    uint32_t name_length = read_write_helper::readUint32LittleEndian(data_ptr + 8 + i * 112);
+    uint32_t name_length = read_write_helper::readUint32LittleEndian(data_ptr + 8 + i * 104);
     std::string name;
     for (uint8_t j = 0; j < name_length; j++)
     {
-      name.push_back(read_write_helper::readUint8(data_ptr + 12 + i * 112 + j));
+      name.push_back(read_write_helper::readUint8(data_ptr + 12 + i * 104 + j));
     }
     result.push_back(name);
   }
@@ -113,7 +113,7 @@ ParseFieldSetsData::readNameLength(std::vector<uint8_t>::const_iterator data_ptr
   std::vector<uint32_t> result;
   for (uint32_t i = 0; i < array_length; i++)
   {
-    result.push_back(read_write_helper::readUint32LittleEndian(data_ptr + 8 + i * 112));
+    result.push_back(read_write_helper::readUint32LittleEndian(data_ptr + 8 + i * 104));
   }
   return result;
 }
@@ -123,7 +123,7 @@ std::vector<bool> ParseFieldSetsData::readIsDefined(std::vector<uint8_t>::const_
   std::vector<bool> result;
   for (uint32_t i = 0; i < array_length; i++)
   {
-    uint8_t byte = read_write_helper::readUint8LittleEndian(data_ptr + 44 + i * 112);
+    uint8_t byte = read_write_helper::readUint8LittleEndian(data_ptr + 44 + i * 104);
 
     result.push_back(static_cast<bool>(byte & (0x01 << 0)));
   }
