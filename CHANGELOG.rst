@@ -2,6 +2,19 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fixing correct offset in field geometries
+* Fixed error in reading chars for device name and project name
+* feat(diagnostics): Sensor state diagnostics
+  Exposes sensor hardware information and sensor state.
+* Filter out max range values to INF according to REP 117
+* Correct first initialization of m_time_offset
+* boost::asio API changes in 1.70+
+* Catch exceptions by const ref.
+* Fix error_code comparison to int.
+* Contributors: Chad Rockey, Jad Haj Mustafa, Lennart Puck, Mike Purvis, Rein Appeldoorn
+
 1.0.4 (2019-12-16)
 ------------------
 * Fixed Bug with enum for interface type
