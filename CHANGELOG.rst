@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.5 (2020-06-15)
+------------------
 * fixing correct offset in field geometries
 * Fixed error in reading chars for device name and project name
 * feat(diagnostics): Sensor state diagnostics
