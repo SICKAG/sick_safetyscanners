@@ -41,6 +41,7 @@
 
 #include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
+#include <ros/ros.h>
 #include <string>
 #include <vector>
 

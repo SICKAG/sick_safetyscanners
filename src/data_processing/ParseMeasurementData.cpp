@@ -54,6 +54,21 @@ ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer& buffer
   std::vector<uint8_t>::const_iterator data_ptr =
     vec_ptr->begin() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset();
 
+  uint32_t actual_size = distance(data_ptr, vec_ptr->cend()) -
+                         data.getDataHeaderPtr()->getIntrusionDataBlockSize() -
+                         data.getDataHeaderPtr()->getApplicationDataBlockSize();
+  uint32_t expected_size = data.getDataHeaderPtr()->getMeasurementDataBlockSize();
+  if (actual_size < expected_size)
+  {
+    ROS_WARN("Skipping measurement data, sizes do not match, actual size is smaller then expected "
+             "size! If this occurs please report with a stacktrace if the driver crashes at some "
+             "other place.");
+    ROS_WARN("Expected size: %i", expected_size);
+    ROS_WARN("Actual size: %i", actual_size);
+    measurement_data.setIsEmpty(true);
+    return measurement_data;
+  }
+
   setStartAngleAndDelta(data);
   setDataInMeasurementData(data_ptr, measurement_data);
   return measurement_data;
@@ -116,7 +131,8 @@ void ParseMeasurementData::setStartAngleAndDelta(const datastructure::Data& data
 void ParseMeasurementData::setScanPointsInMeasurementData(
   std::vector<uint8_t>::const_iterator data_ptr, datastructure::MeasurementData& measurement_data)
 {
-  for (size_t i = 0; i < measurement_data.getNumberOfBeams(); i++)
+  uint32_t numBeams = measurement_data.getNumberOfBeams();
+  for (uint32_t i = 0; i < numBeams; i++)
   {
     addScanPointToMeasurementData(i, data_ptr, measurement_data);
     m_angle += m_angle_delta;
