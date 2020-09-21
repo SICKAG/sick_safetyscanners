@@ -2,6 +2,14 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* checking if number beams is correct
+* checking if if all data is present after parsing the header
+* fix for seg fault in measurementdata
+* Remove rqt_reconfigure dep
+* Contributors: Lennart Puck, Rein Appeldoorn
+
 1.0.5 (2020-06-15)
 ------------------
 * fixing correct offset in field geometries
