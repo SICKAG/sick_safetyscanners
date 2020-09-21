@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.6 (2020-09-21)
+------------------
 * checking if number beams is correct
 * checking if if all data is present after parsing the header
 * fix for seg fault in measurementdata
