@@ -37,10 +37,7 @@
 namespace sick {
 namespace data_processing {
 
-ParseMeasurementData::ParseMeasurementData()
-{
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-}
+ParseMeasurementData::ParseMeasurementData() {}
 
 datastructure::MeasurementData
 ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer& buffer,
@@ -52,8 +49,11 @@ ParseMeasurementData::parseUDPSequence(const datastructure::PacketBuffer& buffer
     measurement_data.setIsEmpty(true);
     return measurement_data;
   }
-  const uint8_t* data_ptr(buffer.getBuffer().data() +
-                          data.getDataHeaderPtr()->getMeasurementDataBlockOffset());
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr =
+    vec_ptr->begin() + data.getDataHeaderPtr()->getMeasurementDataBlockOffset();
+
 
   setStartAngleAndDelta(data);
   setDataInMeasurementData(data_ptr, measurement_data);
@@ -75,12 +75,8 @@ bool ParseMeasurementData::checkIfPreconditionsAreMet(const datastructure::Data&
 
 bool ParseMeasurementData::checkIfMeasurementDataIsPublished(const datastructure::Data& data) const
 {
-  if (data.getDataHeaderPtr()->getMeasurementDataBlockOffset() == 0 &&
-      data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0)
-  {
-    return false;
-  }
-  return true;
+  return !(data.getDataHeaderPtr()->getMeasurementDataBlockOffset() == 0 &&
+           data.getDataHeaderPtr()->getMeasurementDataBlockSize() == 0);
 }
 
 bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(
@@ -99,16 +95,17 @@ bool ParseMeasurementData::checkIfDataContainsNeededParsedBlocks(
 
 
 void ParseMeasurementData::setDataInMeasurementData(
-  const uint8_t*& data_ptr, datastructure::MeasurementData& measurement_data)
+  std::vector<uint8_t>::const_iterator data_ptr, datastructure::MeasurementData& measurement_data)
 {
   setNumberOfBeamsInMeasurementData(data_ptr, measurement_data);
   setScanPointsInMeasurementData(data_ptr, measurement_data);
 }
 
 void ParseMeasurementData::setNumberOfBeamsInMeasurementData(
-  const uint8_t*& data_ptr, datastructure::MeasurementData& measurement_data) const
+  std::vector<uint8_t>::const_iterator data_ptr,
+  datastructure::MeasurementData& measurement_data) const
 {
-  measurement_data.setNumberOfBeams(m_reader_ptr->readuint32_tLittleEndian(data_ptr, 0));
+  measurement_data.setNumberOfBeams(read_write_helper::readUint32LittleEndian(data_ptr + 0));
 }
 
 void ParseMeasurementData::setStartAngleAndDelta(const datastructure::Data& data)
@@ -118,9 +115,23 @@ void ParseMeasurementData::setStartAngleAndDelta(const datastructure::Data& data
 }
 
 void ParseMeasurementData::setScanPointsInMeasurementData(
-  const uint8_t*& data_ptr, datastructure::MeasurementData& measurement_data)
+  std::vector<uint8_t>::const_iterator data_ptr, datastructure::MeasurementData& measurement_data)
 {
-  for (size_t i = 0; i < measurement_data.getNumberOfBeams(); i++)
+  uint32_t numBeams = measurement_data.getNumberOfBeams();
+
+  uint32_t maxexpectedbeams = 2751;
+  if (numBeams > maxexpectedbeams)
+  {
+    ROS_WARN("Field Number Beams has a value larger then the expected Number of Beams for the "
+             "laserscanners. Skipping this measurement.");
+    ROS_WARN("Max expected beams: %i", maxexpectedbeams);
+    ROS_WARN("Number beams according to the datafield: %i", numBeams);
+    measurement_data.setNumberOfBeams(0);
+    measurement_data.setIsEmpty(true);
+    return;
+  }
+
+  for (uint32_t i = 0; i < numBeams; i++)
   {
     addScanPointToMeasurementData(i, data_ptr, measurement_data);
     m_angle += m_angle_delta;
@@ -129,18 +140,18 @@ void ParseMeasurementData::setScanPointsInMeasurementData(
 
 void ParseMeasurementData::addScanPointToMeasurementData(
   const uint16_t offset,
-  const uint8_t*& data_ptr,
+  std::vector<uint8_t>::const_iterator data_ptr,
   datastructure::MeasurementData& measurement_data) const
 {
-  int16_t distance           = m_reader_ptr->readuint16_tLittleEndian(data_ptr, (4 + offset * 4));
-  uint8_t reflectivity       = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (6 + offset * 4));
-  uint8_t status             = m_reader_ptr->readuint8_tLittleEndian(data_ptr, (7 + offset * 4));
-  bool valid                 = status & (0x01 << 0);
-  bool infinite              = status & (0x01 << 1);
-  bool glare                 = status & (0x01 << 2);
-  bool reflector             = status & (0x01 << 3);
-  bool contamination         = status & (0x01 << 4);
-  bool contamination_warning = status & (0x01 << 5);
+  int16_t distance     = read_write_helper::readUint16LittleEndian(data_ptr + (4 + offset * 4));
+  uint8_t reflectivity = read_write_helper::readUint8LittleEndian(data_ptr + (6 + offset * 4));
+  uint8_t status       = read_write_helper::readUint8LittleEndian(data_ptr + (7 + offset * 4));
+  bool valid           = static_cast<bool>(status & (0x01 << 0));
+  bool infinite        = static_cast<bool>(status & (0x01 << 1));
+  bool glare           = static_cast<bool>(status & (0x01 << 2));
+  bool reflector       = static_cast<bool>(status & (0x01 << 3));
+  bool contamination   = static_cast<bool>(status & (0x01 << 4));
+  bool contamination_warning = static_cast<bool>(status & (0x01 << 5));
   measurement_data.addScanPoint(sick::datastructure::ScanPoint(m_angle,
                                                                distance,
                                                                reflectivity,

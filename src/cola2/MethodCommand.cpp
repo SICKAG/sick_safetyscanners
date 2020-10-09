@@ -44,15 +44,15 @@ MethodCommand::MethodCommand(Cola2Session& session, const uint16_t& method_index
   : Command(session, 0x4D, 0x49) // see cola2 manual 0x4D = 'M' and  0x49 = 'I'
   , m_method_index(method_index)
 {
-  m_writer_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
 }
 
-void MethodCommand::addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
+std::vector<uint8_t> MethodCommand::addTelegramData(const std::vector<uint8_t>& telegram) const
 {
-  uint16_t prevSize = telegram.size();
-  telegram.resize(prevSize + 2);
-  uint8_t* data_ptr = telegram.data() + prevSize;
-  m_writer_ptr->writeuint16_tLittleEndian(data_ptr, m_method_index, 0);
+  auto output = expandTelegram(telegram, 2);
+  // Add new values after telegram
+  auto new_data_offset_it = output.begin() + telegram.size();
+  read_write_helper::writeUint16LittleEndian(new_data_offset_it, m_method_index);
+  return output;
 }
 
 bool MethodCommand::canBeExecutedWithoutSessionID() const
@@ -62,17 +62,18 @@ bool MethodCommand::canBeExecutedWithoutSessionID() const
 
 bool MethodCommand::processReply()
 {
+  bool result = false;
   if ((getCommandType() == 'A' && getCommandMode() == 'I') ||
       (getCommandType() == 0x41 && getCommandMode() == 0x49))
   {
     ROS_INFO("Command Method Acknowledged.");
-    return true;
+    result = true;
   }
   else
   {
     ROS_WARN("Command Method Not Accepted.");
-    return false;
   }
+  return result;
 }
 
 uint16_t MethodCommand::getMethodIndex() const

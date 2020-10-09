@@ -37,6 +37,8 @@
 
 
 // ROS
+#include <diagnostic_updater/diagnostic_updater.h>
+#include <diagnostic_updater/publisher.h>
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/LaserScan.h>
@@ -93,6 +95,8 @@ inline uint16_t skipToPublishFrequency(int skip)
   return skip + 1;
 }
 
+typedef diagnostic_updater::DiagnosedPublisher<sensor_msgs::LaserScan> DiagnosedLaserScanPublisher;
+
 /*!
  * \brief The SickSafetyscannersRos class
  *
@@ -129,6 +133,12 @@ private:
   ros::Publisher m_raw_data_publisher;
   ros::Publisher m_output_path_publisher;
 
+  // Diagnostics
+  diagnostic_updater::Updater m_diagnostic_updater;
+  std::shared_ptr<DiagnosedLaserScanPublisher> m_diagnosed_laser_scan_publisher;
+  sick_safetyscanners::RawMicroScanDataMsg m_last_raw_data;
+  void sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status);
+
   ros::ServiceServer m_field_service_server;
 
   bool m_initialised;
@@ -144,6 +154,10 @@ private:
   double m_time_offset;
   double m_range_min;
   double m_range_max;
+  double m_frequency_tolerance      = 0.1;
+  double m_expected_frequency       = 20.0;
+  double m_timestamp_min_acceptable = -1.0;
+  double m_timestamp_max_acceptable = 1.0;
 
   bool m_use_sick_angles;
   float m_angle_offset;
@@ -166,9 +180,8 @@ private:
    * \param config The new configuration to set
    * \param level Level of the new configuration
    */
-  void
-  reconfigure_callback(const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config,
-                       const uint32_t& level);
+  void reconfigureCallback(const sick_safetyscanners::SickSafetyscannersConfigurationConfig& config,
+                           const uint32_t& level);
 
   bool isInitialised();
 

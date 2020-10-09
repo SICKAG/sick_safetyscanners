@@ -134,45 +134,45 @@ void GeneralSystemState::setResetRequiredCutOffPathVector(
   m_reset_required_cut_off_path_vector = reset_required_cut_off_path_vector;
 }
 
-uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable_1() const
+uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable1() const
 {
   return m_current_monitoring_case_no_table_1;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_1(
+void GeneralSystemState::setCurrentMonitoringCaseNoTable1(
   const uint8_t& current_monitoring_case_no_table_1)
 {
   m_current_monitoring_case_no_table_1 = current_monitoring_case_no_table_1;
 }
 
-uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable_2() const
+uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable2() const
 {
   return m_current_monitoring_case_no_table_2;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_2(
+void GeneralSystemState::setCurrentMonitoringCaseNoTable2(
   const uint8_t& current_monitoring_case_no_table_2)
 {
   m_current_monitoring_case_no_table_2 = current_monitoring_case_no_table_2;
 }
 
-uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable_3() const
+uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable3() const
 {
   return m_current_monitoring_case_no_table_3;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_3(
+void GeneralSystemState::setCurrentMonitoringCaseNoTable3(
   const uint8_t& current_monitoring_case_no_table_3)
 {
   m_current_monitoring_case_no_table_3 = current_monitoring_case_no_table_3;
 }
 
-uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable_4() const
+uint8_t GeneralSystemState::getCurrentMonitoringCaseNoTable4() const
 {
   return m_current_monitoring_case_no_table_4;
 }
 
-void GeneralSystemState::setCurrentMonitoringCaseNoTable_4(
+void GeneralSystemState::setCurrentMonitoringCaseNoTable4(
   const uint8_t& current_monitoring_case_no_table_4)
 {
   m_current_monitoring_case_no_table_4 = current_monitoring_case_no_table_4;

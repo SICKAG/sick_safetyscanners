@@ -42,18 +42,11 @@ namespace cola2 {
 
 FieldHeaderVariableCommand::FieldHeaderVariableCommand(Cola2Session& session,
                                                        datastructure::FieldData& field_data,
-                                                       const uint16_t index)
+                                                       const uint16_t& index)
   : VariableCommand(session, 0x2710 + index)
   , m_field_data(field_data)
 {
-  m_writer_ptr              = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_field_header_parser_ptr = std::make_shared<sick::data_processing::ParseFieldHeaderData>();
-}
-
-void FieldHeaderVariableCommand::addTelegramData(
-  sick::datastructure::PacketBuffer::VectorBuffer& telegram) const
-{
-  base_class::addTelegramData(telegram);
 }
 
 bool FieldHeaderVariableCommand::canBeExecutedWithoutSessionID() const

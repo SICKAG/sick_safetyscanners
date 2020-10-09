@@ -35,11 +35,12 @@
 #ifndef SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTCURRENTCONFIGDATA_H
 #define SICK_SAFETYSCANNERS_DATA_PROCESSING_PARSEMEASUREMENTCURRENTCONFIGDATA_H
 
+#include <boost/asio/ip/address_v4.hpp>
 #include <sick_safetyscanners/datastructure/ConfigData.h>
 #include <sick_safetyscanners/datastructure/Data.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 
@@ -47,7 +48,7 @@ namespace data_processing {
 
 
 /*!
- * \brief Parser to read the field header for protective and warning fields.
+ * \brief Parser to read the current configuration of the sensor.
  */
 class ParseMeasurementCurrentConfigData
 {
@@ -58,10 +59,10 @@ public:
   ParseMeasurementCurrentConfigData();
 
   /*!
-   * \brief Parses a tcp sequence to read the header for a warning or protective field.
+   * \brief Parses a tcp sequence to read the current configuration of the sensor.
    *
    * \param buffer The incoming tcp sequence.
-   * \param config_data Reference to the configuration data where the information will be set.
+   * \param config_data Reference to the config data where the current configuration will be set.
    *
    * \returns If parsing was successful.
    */
@@ -69,10 +70,24 @@ public:
                         datastructure::ConfigData& config_data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
-  uint32_t readStartAngle(const uint8_t* data_ptr) const;
-  uint32_t readAngularBeamResolution(const uint8_t* data_ptr) const;
+  std::string readVersionIndicator(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readMajorNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readMinorNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readReleaseNumber(std::vector<uint8_t>::const_iterator data_ptr) const;
+  bool readEnabled(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const;
+  boost::asio::ip::address_v4 readHostIp(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readHostPort(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readPublishingFreq(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readEndAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readFeatures(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readDerivedMultiplicationFactor(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readDerivedNumBeams(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint16_t readDerivedScanTime(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readDerivedStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readDerivedAngularBeamResolution(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint32_t readDerivedInterbeamPeriod(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

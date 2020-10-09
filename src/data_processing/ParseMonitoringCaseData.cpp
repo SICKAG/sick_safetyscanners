@@ -39,18 +39,17 @@
 namespace sick {
 namespace data_processing {
 
-ParseMonitoringCaseData::ParseMonitoringCaseData()
-{
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-}
+ParseMonitoringCaseData::ParseMonitoringCaseData() {}
 
 
 bool ParseMonitoringCaseData::parseTCPSequence(
   const datastructure::PacketBuffer& buffer,
   sick::datastructure::MonitoringCaseData& monitoring_case_data) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
-  bool valid = isValid(data_ptr);
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
+  bool valid                                                = isValid(data_ptr);
   monitoring_case_data.setIsValid(valid);
   if (valid)
   {
@@ -69,10 +68,10 @@ bool ParseMonitoringCaseData::parseTCPSequence(
   return true;
 }
 
-bool ParseMonitoringCaseData::isValid(const uint8_t*& data_ptr) const
+bool ParseMonitoringCaseData::isValid(std::vector<uint8_t>::const_iterator data_ptr) const
 {
   bool res     = false;
-  uint8_t byte = m_reader_ptr->readuint8_t(data_ptr, 0);
+  uint8_t byte = read_write_helper::readUint8(data_ptr + 0);
   if (byte == 'R' || byte == 'Y')
   {
     res = true;
@@ -80,22 +79,24 @@ bool ParseMonitoringCaseData::isValid(const uint8_t*& data_ptr) const
   return res;
 }
 
-uint16_t ParseMonitoringCaseData::readMonitoringCaseNumber(const uint8_t*& data_ptr) const
+uint16_t ParseMonitoringCaseData::readMonitoringCaseNumber(
+  std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 6);
+  return read_write_helper::readUint16LittleEndian(data_ptr + 6);
 }
 
-uint16_t ParseMonitoringCaseData::readFieldIndex(const uint8_t*& data_ptr,
-                                                 const uint8_t index) const
+uint16_t ParseMonitoringCaseData::readFieldIndex(std::vector<uint8_t>::const_iterator data_ptr,
+                                                 const uint8_t& index) const
 {
-  return m_reader_ptr->readuint16_tLittleEndian(data_ptr, 158 + (index * 4));
+  return read_write_helper::readUint16LittleEndian(data_ptr + 158 + (index * 4));
 }
 
-bool ParseMonitoringCaseData::readFieldValid(const uint8_t*& data_ptr, const uint8_t index) const
+bool ParseMonitoringCaseData::readFieldValid(std::vector<uint8_t>::const_iterator data_ptr,
+                                             const uint8_t& index) const
 {
-  uint8_t byte = m_reader_ptr->readuint8_t(data_ptr, 157 + (index * 4));
+  uint8_t byte = read_write_helper::readUint8(data_ptr + 157 + (index * 4));
 
-  return byte & (0x01 << 0);
+  return static_cast<bool>(byte & (0x01 << 0));
 }
 
 } // namespace data_processing

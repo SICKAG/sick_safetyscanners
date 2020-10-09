@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 #include <sick_safetyscanners/datastructure/TypeCode.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 namespace sick {
 
@@ -69,9 +69,9 @@ public:
                         datastructure::TypeCode& type_code) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-  uint8_t readInterfaceType(const uint8_t*& data_ptr) const;
-  float readMaxRange(const uint8_t*& data_ptr) const;
+  std::string readTypeCode(std::vector<uint8_t>::const_iterator data_ptr) const;
+  uint8_t readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const;
+  float readMaxRange(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 
 } // namespace data_processing

@@ -45,8 +45,8 @@ enum e_interface_type
 {
   E_EFIPRO,
   E_ETHERNET_IP,
-  E_PROFINET,
-  E_NONSAFE_ETHERNET
+  E_PROFINET         = 3,
+  E_NONSAFE_ETHERNET = 4
 };
 
 enum e_ranges
@@ -66,6 +66,19 @@ public:
    * \brief Constructor of the type code.
    */
   TypeCode();
+
+  /*!
+   * \brief Gets the type code for the scanner.
+   *
+   * \returns The type code for the scanner.
+   */
+  std::string getTypeCode() const;
+  /*!
+   * \brief Sets the type code for the scanner.
+   *
+   * \param type_code The type code for the scanner.
+   */
+  void setTypeCode(const std::string& type_code);
   /*!
    * \brief Gets the interface type for the scanner.
    *
@@ -77,7 +90,7 @@ public:
    *
    * \param interface_type The interface type for the scanner.
    */
-  void setInterfaceType(uint8_t interface_type);
+  void setInterfaceType(const uint8_t& interface_type);
 
   /*!
    * \brief Gets the max range for the scanner.
@@ -90,9 +103,10 @@ public:
    *
    * \param max_distance The max range for the scanner.
    */
-  void setMaxRange(float max_distance);
+  void setMaxRange(const float& max_distance);
 
 private:
+  std::string m_type_code;
   uint8_t m_interface_type;
   float m_max_range;
 };

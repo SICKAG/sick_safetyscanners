@@ -40,7 +40,7 @@ namespace datastructure {
 
 PacketBuffer::PacketBuffer() {}
 
-PacketBuffer::PacketBuffer(const PacketBuffer::VectorBuffer& buffer)
+PacketBuffer::PacketBuffer(const std::vector<uint8_t>& buffer)
 {
   setBuffer(buffer);
 }
@@ -50,26 +50,25 @@ PacketBuffer::PacketBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t
   setBuffer(buffer, length);
 }
 
-const PacketBuffer::VectorBuffer& PacketBuffer::getBuffer() const
+std::shared_ptr<std::vector<uint8_t> const> PacketBuffer::getBuffer() const
 {
+  // Okay to share since it's a shared_ptr<vector const>
   return m_buffer;
 }
 
-void PacketBuffer::setBuffer(const PacketBuffer::VectorBuffer& buffer)
+void PacketBuffer::setBuffer(const std::vector<uint8_t>& buffer)
 {
-  m_buffer.clear();
-  m_buffer.insert(m_buffer.begin(), buffer.begin(), buffer.end());
+  m_buffer = std::make_shared<std::vector<uint8_t> const>(buffer);
 }
 
 void PacketBuffer::setBuffer(const PacketBuffer::ArrayBuffer& buffer, const size_t& length)
 {
-  m_buffer.clear();
-  m_buffer.insert(m_buffer.begin(), buffer.data(), buffer.data() + length);
+  m_buffer = std::make_shared<std::vector<uint8_t> const>(buffer.data(), buffer.data() + length);
 }
 
 size_t PacketBuffer::getLength() const
 {
-  return m_buffer.size();
+  return m_buffer->size();
 }
 
 } // namespace datastructure

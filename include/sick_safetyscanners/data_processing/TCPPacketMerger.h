@@ -39,6 +39,7 @@
 
 #include <sick_safetyscanners/data_processing/ParseDatagramHeader.h>
 
+#include <mutex>
 #include <vector>
 
 namespace sick {
@@ -105,12 +106,13 @@ private:
   sick::datastructure::PacketBuffer m_deployed_packet_buffer;
 
   std::vector<sick::datastructure::PacketBuffer> m_buffer_vector;
+  std::mutex m_buffer_mutex;
   uint32_t m_targetSize;
 
-  bool addToMap(const sick::datastructure::PacketBuffer& newPacket);
+  bool addToMap(const sick::datastructure::PacketBuffer& new_packet);
   bool deployPacketIfComplete();
 
-  uint32_t getCurrentSize() const;
+  uint32_t getCurrentSize();
   bool deployPacket();
 };
 

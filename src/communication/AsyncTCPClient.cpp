@@ -36,22 +36,21 @@
 
 namespace sick {
 namespace communication {
-AsyncTCPClient::AsyncTCPClient(PacketHandler packet_handler,
+AsyncTCPClient::AsyncTCPClient(const PacketHandler& packet_handler,
                                boost::asio::io_service& io_service,
                                const boost::asio::ip::address_v4& server_ip,
                                const uint16_t& server_port)
   : m_packet_handler(packet_handler)
-  , m_io_work_ptr()
   , m_io_service(io_service)
 
 {
   // Keep io_service busy
-  m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(boost::ref(m_io_service));
+  m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(m_io_service);
   try
   {
-    m_socket_ptr = std::make_shared<boost::asio::ip::tcp::socket>(boost::ref(m_io_service));
+    m_socket_ptr = std::make_shared<boost::asio::ip::tcp::socket>(m_io_service);
   }
-  catch (std::exception& e)
+  catch (const std::exception& e)
   {
     ROS_ERROR("Exception while creating socket: %s", e.what());
   }
@@ -66,7 +65,7 @@ void AsyncTCPClient::doDisconnect()
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::system::error_code ec;
   m_socket_ptr->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
-  if (ec != 0)
+  if (ec != boost::system::errc::success)
   {
     ROS_ERROR("Error shutting socket down: %i", ec.value());
   }
@@ -76,7 +75,7 @@ void AsyncTCPClient::doDisconnect()
   }
 
   m_socket_ptr->close(ec);
-  if (ec != 0)
+  if (ec != boost::system::errc::success)
   {
     ROS_ERROR("Error closing Socket: %i", ec.value());
   }
@@ -91,7 +90,7 @@ void AsyncTCPClient::doConnect()
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::mutex::scoped_lock lock_connect(m_connect_mutex);
   m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec) {
-    if (ec != 0)
+    if (ec != boost::system::errc::success)
     {
       ROS_ERROR("TCP error code: %i", ec.value());
     }
@@ -106,8 +105,7 @@ void AsyncTCPClient::doConnect()
 }
 
 
-void AsyncTCPClient::doSendAndReceive(
-  const sick::datastructure::PacketBuffer::VectorBuffer& sendBuffer)
+void AsyncTCPClient::doSendAndReceive(const std::vector<uint8_t>& sendBuffer)
 {
   boost::mutex::scoped_lock lock(m_socket_mutex);
   if (!m_socket_ptr)

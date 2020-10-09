@@ -54,7 +54,7 @@ uint16_t MonitoringCaseData::getMonitoringCaseNumber() const
   return m_monitoring_case_number;
 }
 
-void MonitoringCaseData::setMonitoringCaseNumber(const uint16_t monitoring_case_number)
+void MonitoringCaseData::setMonitoringCaseNumber(const uint16_t& monitoring_case_number)
 {
   m_monitoring_case_number = monitoring_case_number;
 }

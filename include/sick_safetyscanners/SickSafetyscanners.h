@@ -53,16 +53,27 @@
 #include <sick_safetyscanners/datastructure/ConfigData.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
+#include <sick_safetyscanners/cola2/ApplicationNameVariableCommand.h>
 #include <sick_safetyscanners/cola2/ChangeCommSettingsCommand.h>
 #include <sick_safetyscanners/cola2/Cola2Session.h>
+#include <sick_safetyscanners/cola2/ConfigMetadataVariableCommand.h>
 #include <sick_safetyscanners/cola2/DeviceNameVariableCommand.h>
+#include <sick_safetyscanners/cola2/DeviceStatusVariableCommand.h>
 #include <sick_safetyscanners/cola2/FieldGeometryVariableCommand.h>
 #include <sick_safetyscanners/cola2/FieldHeaderVariableCommand.h>
+#include <sick_safetyscanners/cola2/FindMeCommand.h>
+#include <sick_safetyscanners/cola2/FirmwareVersionVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementCurrentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MeasurementPersistentConfigVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseTableHeaderVariableCommand.h>
 #include <sick_safetyscanners/cola2/MonitoringCaseVariableCommand.h>
+#include <sick_safetyscanners/cola2/OrderNumberVariableCommand.h>
+#include <sick_safetyscanners/cola2/ProjectNameVariableCommand.h>
+#include <sick_safetyscanners/cola2/RequiredUserActionVariableCommand.h>
+#include <sick_safetyscanners/cola2/SerialNumberVariableCommand.h>
+#include <sick_safetyscanners/cola2/StatusOverviewVariableCommand.h>
 #include <sick_safetyscanners/cola2/TypeCodeVariableCommand.h>
+#include <sick_safetyscanners/cola2/UserNameVariableCommand.h>
 
 namespace sick {
 
@@ -84,7 +95,7 @@ public:
    * called when a new packet is received.
    * \param settings Current settings for the sensor.
    */
-  SickSafetyscanners(packetReceivedCallbackFunction newPacketReceivedCallbackFunction,
+  SickSafetyscanners(const packetReceivedCallbackFunction& newPacketReceivedCallbackFunction,
                      sick::datastructure::CommSettings* settings);
 
   /*!
@@ -112,6 +123,27 @@ public:
   void requestTypeCode(const sick::datastructure::CommSettings& settings,
                        sick::datastructure::TypeCode& type_code);
 
+  void requestApplicationName(const sick::datastructure::CommSettings& settings,
+                              sick::datastructure::ApplicationName& application_name);
+  void requestSerialNumber(const sick::datastructure::CommSettings& settings,
+                           sick::datastructure::SerialNumber& serial_number);
+  void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
+                              sick::datastructure::FirmwareVersion& firmware_version);
+  void requestOrderNumber(const datastructure::CommSettings& settings,
+                          datastructure::OrderNumber& order_number);
+  void requestProjectName(const datastructure::CommSettings& settings,
+                          datastructure::ProjectName& project_name);
+  void requestUserName(const datastructure::CommSettings& settings,
+                       datastructure::UserName& user_name);
+  void requestConfigMetadata(const datastructure::CommSettings& settings,
+                             datastructure::ConfigMetadata& config_metadata);
+  void requestStatusOverview(const datastructure::CommSettings& settings,
+                             datastructure::StatusOverview& status_overview);
+  void requestDeviceStatus(const datastructure::CommSettings& settings,
+                           datastructure::DeviceStatus& device_status);
+  void requestRequiredUserAction(const datastructure::CommSettings& settings,
+                                 datastructure::RequiredUserAction& required_user_action);
+  void FindSensor(const datastructure::CommSettings& settings, uint16_t blink_time);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
@@ -128,7 +160,7 @@ public:
    * \param device_name Returned device name.
    */
   void requestDeviceName(const sick::datastructure::CommSettings& settings,
-                         std::string& device_name);
+                         datastructure::DeviceName& device_name);
 
   /*!
    * \brief Requests the persistent configuration from the sensor.
@@ -162,21 +194,30 @@ private:
 
   std::shared_ptr<sick::data_processing::UDPPacketMerger> m_packet_merger_ptr;
 
-  std::string m_device_name;
-  int m_active_case_number;
-
-  void processUDPPacket(const datastructure::PacketBuffer& buffer);
-  bool UDPClientThread();
+  void processUDPPacket(const sick::datastructure::PacketBuffer& buffer);
+  bool udpClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   void startTCPConnection(const sick::datastructure::CommSettings& settings);
   void changeCommSettingsInColaSession(const datastructure::CommSettings& settings);
   void stopTCPConnection();
   void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
-  void requestDeviceNameInColaSession(std::string& device_name);
+  void requestDeviceNameInColaSession(datastructure::DeviceName& device_name);
+  void requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
+  void requestSerialNumberInColaSession(sick::datastructure::SerialNumber& serial_number);
+  void requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number);
+  void requestProjectNameInColaSession(sick::datastructure::ProjectName& project_name);
+  void requestUserNameInColaSession(sick::datastructure::UserName& user_name);
+  void requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
   void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
+  void requestConfigMetadataInColaSession(sick::datastructure::ConfigMetadata& config_metadata);
+  void requestStatusOverviewInColaSession(sick::datastructure::StatusOverview& status_overview);
+  void requestDeviceStatusInColaSession(sick::datastructure::DeviceStatus& device_status);
+  void requestRequiredUserActionInColaSession(
+    sick::datastructure::RequiredUserAction& required_user_action);
   void requestMonitoringCaseDataInColaSession(
     std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
+  void FindSensorInColaSession(uint16_t blink_time);
 };
 
 } // namespace sick

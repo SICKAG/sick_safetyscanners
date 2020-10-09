@@ -39,26 +39,36 @@
 namespace sick {
 namespace data_processing {
 
-ParseTypeCodeData::ParseTypeCodeData()
-{
-  m_reader_ptr = std::make_shared<sick::data_processing::ReadWriteHelper>();
-}
+ParseTypeCodeData::ParseTypeCodeData() {}
 
 
 bool ParseTypeCodeData::parseTCPSequence(const datastructure::PacketBuffer& buffer,
                                          sick::datastructure::TypeCode& type_code) const
 {
-  const uint8_t* data_ptr(buffer.getBuffer().data());
+  // Keep our own copy of the shared_ptr to keep the iterators valid
+  const std::shared_ptr<std::vector<uint8_t> const> vec_ptr = buffer.getBuffer();
+  std::vector<uint8_t>::const_iterator data_ptr             = vec_ptr->begin();
+  type_code.setTypeCode(readTypeCode(data_ptr));
   type_code.setInterfaceType(readInterfaceType(data_ptr));
   type_code.setMaxRange(readMaxRange(data_ptr));
   return true;
 }
 
-
-uint8_t ParseTypeCodeData::readInterfaceType(const uint8_t*& data_ptr) const
+std::string ParseTypeCodeData::readTypeCode(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 14);
-  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 15);
+  uint16_t code_length = read_write_helper::readUint16LittleEndian(data_ptr);
+  std::string code;
+  for (uint8_t i = 0; i < code_length; i++)
+  {
+    code.push_back(read_write_helper::readUint8(data_ptr + 2 + i));
+  }
+  return code;
+}
+
+uint8_t ParseTypeCodeData::readInterfaceType(std::vector<uint8_t>::const_iterator data_ptr) const
+{
+  uint8_t type_code_interface_1 = read_write_helper::readUint8(data_ptr + 14);
+  uint8_t type_code_interface_2 = read_write_helper::readUint8(data_ptr + 15);
 
   uint8_t res = sick::datastructure::e_interface_type::E_EFIPRO;
 
@@ -84,10 +94,10 @@ uint8_t ParseTypeCodeData::readInterfaceType(const uint8_t*& data_ptr) const
   return res;
 }
 
-float ParseTypeCodeData::readMaxRange(const uint8_t*& data_ptr) const
+float ParseTypeCodeData::readMaxRange(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  uint8_t type_code_interface_1 = m_reader_ptr->readuint8_t(data_ptr, 12);
-  uint8_t type_code_interface_2 = m_reader_ptr->readuint8_t(data_ptr, 13);
+  uint8_t type_code_interface_1 = read_write_helper::readUint8(data_ptr + 12);
+  uint8_t type_code_interface_2 = read_write_helper::readUint8(data_ptr + 13);
 
   int res = sick::datastructure::e_ranges::E_NORMAL_RANGE;
 

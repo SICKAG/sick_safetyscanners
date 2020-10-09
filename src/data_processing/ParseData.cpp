@@ -39,7 +39,6 @@ namespace data_processing {
 
 ParseData::ParseData()
 {
-  m_reader_ptr                  = std::make_shared<sick::data_processing::ReadWriteHelper>();
   m_data_header_parser_ptr      = std::make_shared<sick::data_processing::ParseDataHeader>();
   m_derived_values_parser_ptr   = std::make_shared<sick::data_processing::ParseDerivedValues>();
   m_measurement_data_parser_ptr = std::make_shared<sick::data_processing::ParseMeasurementData>();
@@ -49,17 +48,46 @@ ParseData::ParseData()
   m_application_data_parser_ptr = std::make_shared<sick::data_processing::ParseApplicationData>();
 }
 
-bool ParseData::parseUDPSequence(const datastructure::PacketBuffer buffer,
-                                 datastructure::Data& data) const
+sick::datastructure::Data
+ParseData::parseUDPSequence(const datastructure::PacketBuffer& buffer) const
 {
+  sick::datastructure::Data data;
   setDataBlocksInData(buffer, data);
-  return true;
+  return data;
 }
 
 void ParseData::setDataBlocksInData(const datastructure::PacketBuffer& buffer,
                                     datastructure::Data& data) const
 {
   setDataHeaderInData(buffer, data);
+
+  auto dataHeadPtr = data.getDataHeaderPtr();
+  uint32_t expected_size =
+    dataHeadPtr->getDerivedValuesBlockSize() + dataHeadPtr->getMeasurementDataBlockSize() +
+    dataHeadPtr->getGeneralSystemStateBlockSize() + dataHeadPtr->getIntrusionDataBlockSize() +
+    dataHeadPtr->getApplicationDataBlockSize();
+  uint32_t actual_size = buffer.getLength();
+  if (actual_size < expected_size)
+  {
+    ROS_WARN("Skipping data, sizes do not match, actual size is smaller then expected "
+             "size! If this occurs please report with a stacktrace if the driver crashes at some "
+             "other place. ");
+    ROS_WARN("Expected minimum size: %i", expected_size);
+    ROS_WARN("Actual size: %i", actual_size);
+    ROS_WARN("Skipping all data for this message.");
+
+    dataHeadPtr->setDerivedValuesBlockSize(0);
+    dataHeadPtr->setDerivedValuesBlockOffset(0);
+    dataHeadPtr->setMeasurementDataBlockSize(0);
+    dataHeadPtr->setMeasurementDataBlockOffset(0);
+    dataHeadPtr->setGeneralSystemStateBlockSize(0);
+    dataHeadPtr->setGeneralSystemStateBlockOffset(0);
+    dataHeadPtr->setIntrusionDataBlockSize(0);
+    dataHeadPtr->setIntrusionDataBlockOffset(0);
+    dataHeadPtr->setApplicationDataBlockSize(0);
+    dataHeadPtr->setApplicationDataBlockOffset(0);
+  }
+
   setDerivedValuesInData(buffer, data);
   setMeasurementDataInData(buffer, data);
   setGeneralSystemStateInData(buffer, data);

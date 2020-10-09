@@ -111,7 +111,7 @@ uint32_t CommSettings::getStartAngle() const
 
 void CommSettings::setStartAngle(const uint32_t& start_angle)
 {
-  m_start_angle = start_angle * 4194304.0;
+  m_start_angle = start_angle * 4194304.0; // TODO refactor in constant
 }
 
 uint32_t CommSettings::getEndAngle() const
@@ -134,18 +134,18 @@ void CommSettings::setFeatures(const uint16_t& features)
   m_features = features;
 }
 
-void CommSettings::setFeatures(const bool general_system_state,
-                               const bool derived_settings,
-                               const bool measurement_data,
-                               const bool intrusion_data,
-                               const bool application_data)
+void CommSettings::setFeatures(bool general_system_state,
+                               bool derived_settings,
+                               bool measurement_data,
+                               bool intrusion_data,
+                               bool application_data)
 {
   m_features = 0;
-  m_features += general_system_state << 0;
-  m_features += derived_settings << 1;
-  m_features += measurement_data << 2;
-  m_features += intrusion_data << 3;
-  m_features += application_data << 4;
+  m_features += (static_cast<int>(general_system_state) << 0);
+  m_features += (static_cast<int>(derived_settings) << 1);
+  m_features += (static_cast<int>(measurement_data) << 2);
+  m_features += (static_cast<int>(intrusion_data) << 3);
+  m_features += (static_cast<int>(application_data) << 4);
 }
 
 boost::asio::ip::address_v4 CommSettings::getSensorIp() const
@@ -158,9 +158,9 @@ void CommSettings::setSensorIp(const boost::asio::ip::address_v4& sensor_ip)
   m_sensor_ip = sensor_ip;
 }
 
-void CommSettings::setSensorIp(const std::string& host_ip)
+void CommSettings::setSensorIp(const std::string& sensor_ip)
 {
-  m_sensor_ip = boost::asio::ip::address_v4::from_string(host_ip);
+  m_sensor_ip = boost::asio::ip::address_v4::from_string(sensor_ip);
 }
 
 uint16_t CommSettings::getSensorTcpPort() const

@@ -65,14 +65,7 @@ public:
    */
   MonitoringCaseVariableCommand(Cola2Session& session,
                                 datastructure::MonitoringCaseData& monitoring_case_data,
-                                const uint16_t index);
-
-  /*!
-   * \brief Adds the data to the telegram.
-   *
-   * \param telegram The telegram which will be modified by the data.
-   */
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+                                const uint16_t& index);
 
   /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most
@@ -91,7 +84,6 @@ public:
 
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
   std::shared_ptr<sick::data_processing::ParseMonitoringCaseData> m_monitoring_case_parser_ptr;
 
   sick::datastructure::MonitoringCaseData& m_monitoring_case_data;

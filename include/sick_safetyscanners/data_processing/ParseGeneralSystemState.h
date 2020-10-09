@@ -39,7 +39,7 @@
 #include <sick_safetyscanners/datastructure/DerivedValues.h>
 #include <sick_safetyscanners/datastructure/PacketBuffer.h>
 
-#include <sick_safetyscanners/data_processing/ReadWriteHelper.h>
+#include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <vector>
 
@@ -70,23 +70,25 @@ public:
                    datastructure::Data& data) const;
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_reader_ptr;
-
-  void setDataInGeneralSystemState(const uint8_t*& data_ptr,
-                                   datastructure::GeneralSystemState& general_System_state) const;
+  void setDataInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
+                                   datastructure::GeneralSystemState& general_system_state) const;
   void
-  setStatusBitsInGeneralSystemState(const uint8_t*& data_ptr,
-                                    datastructure::GeneralSystemState& general_System_state) const;
+  setStatusBitsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
+                                    datastructure::GeneralSystemState& general_system_state) const;
   void setSafeCutOffPathInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_system_state) const;
   void setNonSafeCutOffPathInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_system_state) const;
   void setResetRequiredCutOffPathInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_system_state) const;
   void setCurrentMonitoringCasesInGeneralSystemState(
-    const uint8_t*& data_ptr, datastructure::GeneralSystemState& general_System_state) const;
-  void setErrorsInGeneralSystemState(const uint8_t*& data_ptr,
-                                     datastructure::GeneralSystemState& general_System_state) const;
+    std::vector<uint8_t>::const_iterator data_ptr,
+    datastructure::GeneralSystemState& general_system_state) const;
+  void setErrorsInGeneralSystemState(std::vector<uint8_t>::const_iterator data_ptr,
+                                     datastructure::GeneralSystemState& general_system_state) const;
   bool checkIfPreconditionsAreMet(const datastructure::Data& data) const;
   bool checkIfGeneralSystemStateIsPublished(const datastructure::Data& data) const;
   bool checkIfDataContainsNeededParsedBlocks(const datastructure::Data& data) const;

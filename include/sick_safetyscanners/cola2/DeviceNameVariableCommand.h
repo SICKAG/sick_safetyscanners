@@ -59,14 +59,7 @@ public:
    * \param session The current cola2 session.
    * \param device_name The variable to which the device name will be written on execution.
    */
-  DeviceNameVariableCommand(Cola2Session& session, std::string& device_name);
-
-  /*!
-   * \brief Adds the data to the telegram.
-   *
-   * \param telegram The telegram which will be modified by the data.
-   */
-  void addTelegramData(sick::datastructure::PacketBuffer::VectorBuffer& telegram) const;
+  DeviceNameVariableCommand(Cola2Session& session, datastructure::DeviceName& device_name);
 
   /*!
    * \brief Returns if the command can be executed without a session ID. Will return false for most
@@ -85,10 +78,9 @@ public:
 
 
 private:
-  std::shared_ptr<sick::data_processing::ReadWriteHelper> m_writer_ptr;
   std::shared_ptr<sick::data_processing::ParseDeviceName> m_device_name_parser_ptr;
 
-  std::string& m_device_name;
+  datastructure::DeviceName& m_device_name;
 };
 
 } // namespace cola2

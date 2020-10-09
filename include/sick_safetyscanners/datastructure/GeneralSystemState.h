@@ -166,49 +166,49 @@ public:
    * \brief Returns the current monitor case table 1.
    * \return The current monitoring case table 1.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_1() const;
+  uint8_t getCurrentMonitoringCaseNoTable1() const;
 
   /*!
    * \brief Sets the current monitoring case table 1.
    * \param current_monitoring_case_no_table_1 The current monitoring case table 1.
    */
-  void setCurrentMonitoringCaseNoTable_1(const uint8_t& current_monitoring_case_no_table_1);
+  void setCurrentMonitoringCaseNoTable1(const uint8_t& current_monitoring_case_no_table_1);
 
   /*!
    * \brief Returns the current monitor case table 2.
    * \return The current monitoring case table 2.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_2() const;
+  uint8_t getCurrentMonitoringCaseNoTable2() const;
 
   /*!
    * \brief Sets the current monitoring case table 2.
    * \param current_monitoring_case_no_table_2 The current monitoring case table 2.
    */
-  void setCurrentMonitoringCaseNoTable_2(const uint8_t& current_monitoring_case_no_table_2);
+  void setCurrentMonitoringCaseNoTable2(const uint8_t& current_monitoring_case_no_table_2);
 
   /*!
    * \brief Returns the current monitor case table 3.
    * \return The current monitoring case table 3.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_3() const;
+  uint8_t getCurrentMonitoringCaseNoTable3() const;
 
   /*!
    * \brief Sets the current monitoring case table 3.
    * \param current_monitoring_case_no_table_3 The current monitoring case table 3.
    */
-  void setCurrentMonitoringCaseNoTable_3(const uint8_t& current_monitoring_case_no_table_3);
+  void setCurrentMonitoringCaseNoTable3(const uint8_t& current_monitoring_case_no_table_3);
 
   /*!
    * \brief Returns the current monitor case table 4.
    * \return The current monitoring case table 4.
    */
-  uint8_t getCurrentMonitoringCaseNoTable_4() const;
+  uint8_t getCurrentMonitoringCaseNoTable4() const;
 
   /*!
    * \brief Sets the current monitoring case table 4.
    * \param current_monitoring_case_no_table_4 The current monitoring case table 4 .
    */
-  void setCurrentMonitoringCaseNoTable_4(const uint8_t& current_monitoring_case_no_table_4);
+  void setCurrentMonitoringCaseNoTable4(const uint8_t& current_monitoring_case_no_table_4);
 
   /*!
    * \brief Return if an application error exists.
