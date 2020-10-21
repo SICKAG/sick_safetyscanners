@@ -442,9 +442,15 @@ SickSafetyscannersRos::createOutputPathsMessage(const sick::datastructure::Data&
 
   std::vector<uint16_t> monitoring_case_numbers  = outputs.getMonitoringCaseVector();
   std::vector<bool> monitoring_case_number_flags = outputs.getMonitoringCaseFlagsVector();
-  if (monitoring_case_number_flags.at(0))
+
+  // Fix according to issue #46, however why this appears is not clear
+  if (monitoring_case_number_flags.size() > 0)
   {
     msg.active_monitoring_case = monitoring_case_numbers.at(0);
+  }
+  else
+  {
+    msg.active_monitoring_case = 0;
   }
 
   for (size_t i = 0; i < eval_out.size(); i++)
