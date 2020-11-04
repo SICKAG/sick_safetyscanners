@@ -240,6 +240,8 @@ bool SickSafetyscannersRos::readParameters()
 
   m_private_nh.getParam("use_persistent_config", m_use_pers_conf);
 
+  m_private_nh.getParam("min_intensities", m_min_intensities);
+
   return true;
 }
 
@@ -414,15 +416,18 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   for (uint32_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
-    scan.ranges[i]                                  = static_cast<float>(scan_point.getDistance()) *
-                     data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
-    // Set values close to/greater than max range to infinity according to REP 117
-    // https://www.ros.org/reps/rep-0117.html
-    if (scan.ranges[i] >= (0.999 * m_range_max))
+    if(m_min_intensities < static_cast<double>(scan_point.getReflectivity()))
     {
-      scan.ranges[i] = std::numeric_limits<double>::infinity();
+      scan.ranges[i]                                  = static_cast<float>(scan_point.getDistance()) *
+                      data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
+      // Set values close to/greater than max range to infinity according to REP 117
+      // https://www.ros.org/reps/rep-0117.html
+      if (scan.ranges[i] >= (0.999 * m_range_max))
+      {
+        scan.ranges[i] = std::numeric_limits<double>::infinity();
+      }
+      scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
     }
-    scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
   }
 
   return scan;
