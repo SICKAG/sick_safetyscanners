@@ -426,10 +426,13 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
       {
         scan.ranges[i] = std::numeric_limits<double>::infinity();
       }
-      scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
     }
+    else
+    {
+      scan.ranges[i] = std::numeric_limits<double>::quiet_NaN();
+    }
+    scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
   }
-
   return scan;
 }
 
