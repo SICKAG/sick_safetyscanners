@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <package format="2">
   <name>sick_safetyscanners</name>
-  <version>1.0.7</version>
+  <version>1.0.6</version>
   <description>Provides an Interface to read the sensor output of a SICK
   Safety Scanner</description>
 
