@@ -158,6 +158,7 @@ private:
   double m_expected_frequency       = 20.0;
   double m_timestamp_min_acceptable = -1.0;
   double m_timestamp_max_acceptable = 1.0;
+  double m_min_intensities = 0.0; /*!< min intensities for laser points */
 
   bool m_use_sick_angles;
   float m_angle_offset;
