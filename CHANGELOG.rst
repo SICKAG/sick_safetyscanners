@@ -2,6 +2,13 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* fixed parsing error in current config data
+* added intensity filter
+* fix for out of range while creating output path message
+* Contributors: Heiko, Lennart Puck
+
 1.0.6 (2020-09-21)
 ------------------
 * checking if number beams is correct
