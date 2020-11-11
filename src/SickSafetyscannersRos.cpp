@@ -141,6 +141,8 @@ void SickSafetyscannersRos::reconfigureCallback(
     m_time_offset = config.time_offset;
 
     m_expected_frequency = config.expected_frequency;
+
+    m_min_intensities = config.min_intensities;
   }
 }
 
@@ -416,6 +418,7 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   for (uint32_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
+    // Filter for intensities
     if (m_min_intensities < static_cast<double>(scan_point.getReflectivity()))
     {
       scan.ranges[i] = static_cast<float>(scan_point.getDistance()) *
