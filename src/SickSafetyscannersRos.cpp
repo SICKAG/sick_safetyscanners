@@ -416,10 +416,10 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   for (uint32_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
-    if(m_min_intensities < static_cast<double>(scan_point.getReflectivity()))
+    if (m_min_intensities < static_cast<double>(scan_point.getReflectivity()))
     {
-      scan.ranges[i]                                  = static_cast<float>(scan_point.getDistance()) *
-                      data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
+      scan.ranges[i] = static_cast<float>(scan_point.getDistance()) *
+                       data.getDerivedValuesPtr()->getMultiplicationFactor() * 1e-3; // mm -> m
       // Set values close to/greater than max range to infinity according to REP 117
       // https://www.ros.org/reps/rep-0117.html
       if (scan.ranges[i] >= (0.999 * m_range_max))
