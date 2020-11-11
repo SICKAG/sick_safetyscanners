@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.7 (2020-11-11)
+------------------
 * fixed parsing error in current config data
 * added intensity filter
 * fix for out of range while creating output path message
