@@ -15,9 +15,10 @@
   <arg name="intrusion_data"        default="True" />
   <arg name="application_io_data"   default="True" />
   <arg name="use_persistent_config"   default="False" />
+  <arg name="respawn"               default="False"/>
 
   <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
-  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners">
+  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners" respawn="$(arg respawn)" respawn_delay="1">
      <param name="sensor_ip"              type="string" value="$(arg sensor_ip)" />
      <param name="host_ip"                type="string" value="$(arg host_ip)" />
      <param name="host_udp_port"          type="int"    value="$(arg host_udp_port)" />
