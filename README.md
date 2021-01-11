@@ -1,5 +1,9 @@
 # Sick_Safetyscanners ROS Driver
 
+A ROS Driver which reads the raw data from the SICK Safety Scanners and publishes the data as a laser_scan msg.
+
+The ROS2 Driver can be found here: https://github.com/SICKAG/sick_safetyscanners2
+
 ## Table of contents
 
 - [Supported Hardware](#supported-hardware)
@@ -7,7 +11,6 @@
 - [ROS API](#ros-api)
 - [Creators](#creators)
 
-A ROS Driver which reads the raw data from the SICK Safety Scanners and publishes the data as a laser_scan msg.
 
 ## Supported Hardware
 
