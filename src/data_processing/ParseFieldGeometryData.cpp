@@ -56,6 +56,11 @@ bool ParseFieldGeometryData::parseTCPSequence(const datastructure::PacketBuffer&
   }
   field_data.setBeamDistances(geometry_distance_mm);
 
+  // Values are persistent for all scanners
+  field_data.setStartAngleDegrees(-47.5); // defined start angle in degrees in sick coordinates
+  float res = 275.0 / array_length;       // 275 is the defined field of view
+  field_data.setAngularBeamResolutionDegrees(res);
+
   return true;
 }
 

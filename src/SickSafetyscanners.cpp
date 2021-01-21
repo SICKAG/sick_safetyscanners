@@ -249,22 +249,8 @@ void SickSafetyscanners::changeCommSettingsInColaSession(
 void SickSafetyscanners::requestFieldDataInColaSession(
   std::vector<sick::datastructure::FieldData>& fields)
 {
-  sick::datastructure::ConfigData config_data;
+  sick::cola2::Cola2Session::CommandPtr command_ptr;
 
-  /*sick::cola2::Cola2Session::CommandPtr command_ptr =
-    std::make_shared<sick::cola2::MeasurementPersistentConfigVariableCommand>(
-      boost::ref(*m_session_ptr), pers_config_data);
-  m_session_ptr->executeCommand(command_ptr);
-*/
-  sick::cola2::Cola2Session::CommandPtr command_ptr =
-    std::make_shared<sick::cola2::MeasurementCurrentConfigVariableCommand>(
-      boost::ref(*m_session_ptr), config_data);
-  m_session_ptr->executeCommand(command_ptr);
-  /*
-    command_ptr = std::make_shared<sick::cola2::MonitoringCaseTableHeaderVariableCommand>(
-      boost::ref(*m_session_ptr), common_field_data);
-    m_session_ptr->executeCommand(command_ptr);
-  */
   for (int i = 0; i < 128; i++)
   {
     sick::datastructure::FieldData field_data;
@@ -278,9 +264,6 @@ void SickSafetyscanners::requestFieldDataInColaSession(
       command_ptr = std::make_shared<sick::cola2::FieldGeometryVariableCommand>(
         boost::ref(*m_session_ptr), field_data, i);
       m_session_ptr->executeCommand(command_ptr);
-
-      field_data.setStartAngleDegrees(config_data.getDerivedStartAngle());
-      field_data.setAngularBeamResolutionDegrees(config_data.getDerivedAngularBeamResolution());
 
       fields.push_back(field_data);
     }
