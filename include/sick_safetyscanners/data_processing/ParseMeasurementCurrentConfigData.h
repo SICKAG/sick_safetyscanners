@@ -79,14 +79,14 @@ private:
   boost::asio::ip::address_v4 readHostIp(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint16_t readHostPort(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint16_t readPublishingFreq(std::vector<uint8_t>::const_iterator data_ptr) const;
-  uint32_t readEndAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
-  uint32_t readStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  int32_t readEndAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  int32_t readStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint16_t readFeatures(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint16_t readDerivedMultiplicationFactor(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint16_t readDerivedNumBeams(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint16_t readDerivedScanTime(std::vector<uint8_t>::const_iterator data_ptr) const;
-  uint32_t readDerivedStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
-  uint32_t readDerivedAngularBeamResolution(std::vector<uint8_t>::const_iterator data_ptr) const;
+  int32_t readDerivedStartAngle(std::vector<uint8_t>::const_iterator data_ptr) const;
+  int32_t readDerivedAngularBeamResolution(std::vector<uint8_t>::const_iterator data_ptr) const;
   uint32_t readDerivedInterbeamPeriod(std::vector<uint8_t>::const_iterator data_ptr) const;
 };
 

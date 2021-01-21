@@ -127,16 +127,16 @@ uint16_t ParseMeasurementCurrentConfigData::readPublishingFreq(
   return read_write_helper::readUint16LittleEndian(data_ptr + 14);
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readStartAngle(
+int32_t ParseMeasurementCurrentConfigData::readStartAngle(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return read_write_helper::readUint32LittleEndian(data_ptr + 16);
+  return read_write_helper::readInt32LittleEndian(data_ptr + 16);
 }
 
-uint32_t
+int32_t
 ParseMeasurementCurrentConfigData::readEndAngle(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return read_write_helper::readUint32LittleEndian(data_ptr + 20);
+  return read_write_helper::readInt32LittleEndian(data_ptr + 20);
 }
 
 uint16_t
@@ -164,16 +164,16 @@ uint16_t ParseMeasurementCurrentConfigData::readDerivedScanTime(
   return read_write_helper::readUint16LittleEndian(data_ptr + 32);
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readDerivedStartAngle(
+int32_t ParseMeasurementCurrentConfigData::readDerivedStartAngle(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return read_write_helper::readUint32LittleEndian(data_ptr + 36);
+  return read_write_helper::readInt32LittleEndian(data_ptr + 36);
 }
 
-uint32_t ParseMeasurementCurrentConfigData::readDerivedAngularBeamResolution(
+int32_t ParseMeasurementCurrentConfigData::readDerivedAngularBeamResolution(
   std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return read_write_helper::readUint32LittleEndian(data_ptr + 40);
+  return read_write_helper::readInt32LittleEndian(data_ptr + 40);
 }
 
 uint32_t ParseMeasurementCurrentConfigData::readDerivedInterbeamPeriod(

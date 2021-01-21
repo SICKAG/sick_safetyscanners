@@ -338,7 +338,7 @@ inline uint32_t readUint32LittleEndian(std::vector<uint8_t>::const_iterator it)
  */
 inline int32_t readInt32BigEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readUint32BigEndian(it);
+  return (*(it + 0) << 24) + (*(it + 1) << 16) + (*(it + 2) << 8) + *(it + 3);
 }
 
 
@@ -352,7 +352,7 @@ inline int32_t readInt32BigEndian(std::vector<uint8_t>::const_iterator it)
  */
 inline int32_t readInt32LittleEndian(std::vector<uint8_t>::const_iterator it)
 {
-  return readUint32LittleEndian(it);
+  return (*(it + 3) << 24) + (*(it + 2) << 16) + (*(it + 1) << 8) + *(it + 0);
 }
 
 } // namespace read_write_helper
