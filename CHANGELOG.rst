@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.8 (2021-02-02)
+------------------
 * changed to constant values for the field data
 * changed uint to int for current config data
 * Contributors: Lennart Puck
