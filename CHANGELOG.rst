@@ -2,6 +2,12 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* changed to constant values for the field data
+* changed uint to int for current config data
+* Contributors: Lennart Puck
+
 1.0.7 (2020-11-11)
 ------------------
 * fixed parsing error in current config data
