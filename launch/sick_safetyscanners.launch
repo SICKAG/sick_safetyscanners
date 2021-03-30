@@ -8,6 +8,7 @@
   <arg name="angle_end"             default="0" />
   <arg name="time_offset"           default="0.0" />
   <arg name="min_intensities"       default="0.0" doc="minimal intensity for a laserscan point" />
+  <arg name="channel"               default="0" />
   <arg name="channel_enabled"       default="True" />
   <arg name="general_system_state"  default="True" />
   <arg name="derived_settings"      default="True" />
@@ -27,6 +28,7 @@
      <param name="angle_end"              type="double" value="$(arg angle_end)" />
      <param name="time_offset"            type="double" value="$(arg time_offset)" />
      <param name="min_intensities"        type="double" value="$(arg min_intensities)" />
+     <param name="channel"                type="int"    value="$(arg channel)" />
      <param name="channel_enabled"        type="bool"   value="$(arg channel_enabled)" />
      <param name="general_system_state"   type="bool"   value="$(arg general_system_state)" />
      <param name="derived_settings"       type="bool"   value="$(arg derived_settings)" />
