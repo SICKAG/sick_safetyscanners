@@ -39,15 +39,30 @@ namespace sick {
 
 SickSafetyscanners::SickSafetyscanners(
   const packetReceivedCallbackFunction& newPacketReceivedCallbackFunction,
-  sick::datastructure::CommSettings* settings)
+  sick::datastructure::CommSettings* settings,
+  boost::asio::ip::address_v4 interface_ip)
   : m_newPacketReceivedCallbackFunction(newPacketReceivedCallbackFunction)
 {
   ROS_INFO("Starting SickSafetyscanners");
-  m_io_service_ptr       = std::make_shared<boost::asio::io_service>();
-  m_async_udp_client_ptr = std::make_shared<sick::communication::AsyncUDPClient>(
-    boost::bind(&SickSafetyscanners::processUDPPacket, this, _1),
-    boost::ref(*m_io_service_ptr),
-    settings->getHostUdpPort());
+  m_io_service_ptr = std::make_shared<boost::asio::io_service>();
+  if (settings->getHostIp().is_multicast())
+  {
+    ROS_INFO("Multicast Host Ip configured");
+    m_async_udp_client_ptr = std::make_shared<sick::communication::AsyncUDPClient>(
+      boost::bind(&SickSafetyscanners::processUDPPacket, this, _1),
+      boost::ref(*m_io_service_ptr),
+      settings->getHostIp(),
+      // boost::asio::ip::address_v4::from_string("192.168.1.9"),
+      interface_ip,
+      settings->getHostUdpPort());
+  }
+  else
+  {
+    m_async_udp_client_ptr = std::make_shared<sick::communication::AsyncUDPClient>(
+      boost::bind(&SickSafetyscanners::processUDPPacket, this, _1),
+      boost::ref(*m_io_service_ptr),
+      settings->getHostUdpPort());
+  }
   settings->setHostUdpPort(
     m_async_udp_client_ptr
       ->getLocalPort()); // Store which port was used, needed for data request from the laser

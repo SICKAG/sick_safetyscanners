@@ -79,7 +79,9 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_diagnostic_updater.add("State", this, &SickSafetyscannersRos::sensorDiagnostics);
 
   m_device = std::make_shared<sick::SickSafetyscanners>(
-    boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1), &m_communication_settings);
+    boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1),
+    &m_communication_settings,
+    m_interface_ip);
   m_device->run();
   readTypeCodeSettings();
 
@@ -171,6 +173,13 @@ bool SickSafetyscannersRos::readParameters()
     ROS_WARN("Using default host IP: %s", host_ip_adress.c_str());
   }
   m_communication_settings.setHostIp(host_ip_adress);
+
+  std::string interface_ip_adress = "0.0.0.0";
+  if (!m_private_nh.getParam("interface_ip", interface_ip_adress))
+  {
+    ROS_WARN("Using default interface IP: %s", interface_ip_adress.c_str());
+  }
+  m_interface_ip = boost::asio::ip::address_v4::from_string(interface_ip_adress);
 
   int host_udp_port = 0;
   if (!m_private_nh.getParam("host_udp_port", host_udp_port))
