@@ -74,6 +74,19 @@ public:
                  const uint16_t& local_port = 0);
 
   /*!
+   * \brief Constructor of the asynchronous udp client.
+   *
+   * \param packet_handler Function to handle incoming packets.
+   * \param io_service Instance of the boost io_service.
+   * \param local_port The local port, where the udp packets will arrive.
+   */
+  AsyncUDPClient(const PacketHandler& packet_handler,
+                 boost::asio::io_service& io_service,
+                 const boost::asio::ip::address_v4 host_ip,
+                 const boost::asio::ip::address_v4 multi_ip,
+                 const uint16_t& local_port = 0);
+
+  /*!
    * \brief The destructor of the asynchronous udp client.
    */
   virtual ~AsyncUDPClient();

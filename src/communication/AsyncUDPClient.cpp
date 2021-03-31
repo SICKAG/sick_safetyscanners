@@ -57,6 +57,42 @@ AsyncUDPClient::AsyncUDPClient(const PacketHandler& packet_handler,
   ROS_INFO("UDP client is setup");
 }
 
+AsyncUDPClient::AsyncUDPClient(const PacketHandler& packet_handler,
+                               boost::asio::io_service& io_service,
+                               const boost::asio::ip::address_v4 host_ip,
+                               const boost::asio::ip::address_v4 interface_ip,
+                               const uint16_t& local_port)
+  : m_packet_handler(packet_handler)
+  , m_io_service(io_service)
+{
+  if (!host_ip.is_multicast())
+  {
+    ROS_ERROR("Provided Host IP is not in the Multicast range!");
+    exit(-1);
+  }
+  if (interface_ip.is_unspecified())
+  {
+    // TODO better error handling
+    ROS_ERROR("Provided Interface IP is unspecified! Set it to the Interface IP which receives the "
+              "multicast packages.");
+    ROS_ERROR("Shutting down node");
+    exit(-1);
+  }
+  // Keep io_service busy
+  m_io_work_ptr = std::make_shared<boost::asio::io_service::work>(m_io_service);
+  try
+  {
+    auto endpoint = boost::asio::ip::udp::endpoint(boost::asio::ip::udp::v4(), local_port);
+    m_socket_ptr  = std::make_shared<boost::asio::ip::udp::socket>(m_io_service, endpoint);
+    m_socket_ptr->set_option(boost::asio::ip::multicast::join_group(host_ip, interface_ip));
+  }
+  catch (const std::exception& e)
+  {
+    ROS_ERROR("Exception while creating socket: %s", e.what());
+  }
+  ROS_INFO("UDP client is setup");
+}
+
 AsyncUDPClient::~AsyncUDPClient()
 {
   m_io_service.stop();
