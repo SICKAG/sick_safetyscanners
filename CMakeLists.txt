@@ -260,14 +260,8 @@ install(
 ## Testing ##
 #############
 
-#if(CATKIN_ENABLE_TESTING)
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -pthread")
-## Add gtest based cpp test target and link libraries
-#catkin_add_gtest(${PROJECT_NAME}-test
-#  test/test_ros_package_template.cpp
-#  test/AlgorithmTest.cpp)
-#endif()
-
-#if(TARGET ${PROJECT_NAME}-test)
-#  target_link_libraries(${PROJECT_NAME}-test ${PROJECT_NAME}_core)
-#  endif()
+if (CATKIN_ENABLE_TESTING)
+  find_package(rosunit REQUIRED)
+  catkin_add_gtest(${PROJECT_NAME}_timestamp_conversion_test test/timestamp_conversions_test.cpp)
+  target_link_libraries(${PROJECT_NAME}_timestamp_conversion_test ${catkin_LIBRARIES} gtest_main)
+endif()

@@ -46,6 +46,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   , m_range_max(0.0)
   , m_angle_offset(-90.0)
   , m_use_pers_conf(false)
+  , m_use_sensor_timestamp(false)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
@@ -145,6 +146,8 @@ void SickSafetyscannersRos::reconfigureCallback(
     m_expected_frequency = config.expected_frequency;
 
     m_min_intensities = config.min_intensities;
+
+    m_use_sensor_timestamp = config.use_sensor_timestamp;
   }
 }
 
@@ -252,6 +255,8 @@ bool SickSafetyscannersRos::readParameters()
   m_private_nh.getParam("use_persistent_config", m_use_pers_conf);
 
   m_private_nh.getParam("min_intensities", m_min_intensities);
+
+  m_private_nh.getParam("use_sensor_timestamp", m_use_sensor_timestamp);
 
   return true;
 }
@@ -395,7 +400,21 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
 {
   sensor_msgs::LaserScan scan;
   scan.header.frame_id = m_frame_id;
-  scan.header.stamp    = ros::Time::now();
+
+  if (m_use_sensor_timestamp)
+  {
+    const std::shared_ptr<sick::datastructure::DataHeader> data_header = data.getDataHeaderPtr();
+    double timestamp_seconds = sick::timestampToSeconds(data_header->getTimestampDate(), data_header->getTimestampTime());
+    if (sick::isRealTimeClockAvailable(data_header->getTimestampDate()))
+    {
+      timestamp_seconds = sick::toSecondsSinceEpoch(timestamp_seconds);
+    }
+    scan.header.stamp = ros::Time(timestamp_seconds);
+  }
+  else
+  {
+    scan.header.stamp = ros::Time::now();
+  }
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
   // TODO check why returned number of beams is misaligned to size of vector

@@ -95,6 +95,42 @@ inline uint16_t skipToPublishFrequency(int skip)
   return skip + 1;
 }
 
+/*!
+ * \brief Guesses if the sensor is using a real time clock. If not the date counts only uptime days
+ * \param timestamp_date The timestamp_date provided by the sensor.
+ * \return True if the timestamp_date would is more than 10 years (would be a ver long uptime)
+ */
+inline bool isRealTimeClockAvailable(uint16_t timestamp_date)
+{
+  return timestamp_date > (365u * 10u);
+}
+
+/*!
+ * \brief Converts the header timestamp (days + miliseconds) to seconds.
+ *        The timestamp might indicate sensor uptime or time since 1.1.1972.
+ *        depending on wether a real time clock is available for the sensor to use.
+ * \param timestamp_date The timestamp_date provided by the sensor.
+ * \param timestamp_time The timestap_time provided by the sensor.
+ * \return seconds that the timestamp represent.
+ */
+inline double timestampToSeconds(uint16_t timestamp_date, uint32_t timestamp_time)
+{
+  return (timestamp_date * 86400.0) + (timestamp_time * 1e-3);
+}
+
+/*!
+ * \brief Adds two years to the header timestamp in seconds.
+*         Since EPOCH is 1.1.1970 and the sensor reports from 1.1.1972.
+ * \param timestamp_seconds seconds indicated by the sensor (see timestampToSeconds)
+ * \param timestamp_time The timestap_time provided by the sensor.
+ * \return seconds since unix epoch
+ */
+inline double toSecondsSinceEpoch(double seconds)
+{
+  return seconds + (730u*86400.0);
+}
+
+
 typedef diagnostic_updater::DiagnosedPublisher<sensor_msgs::LaserScan> DiagnosedLaserScanPublisher;
 
 /*!
@@ -164,6 +200,7 @@ private:
   bool m_use_sick_angles;
   float m_angle_offset;
   bool m_use_pers_conf;
+  bool m_use_sensor_timestamp;
 
   /*!
    * @brief Reads and verifies the ROS parameters.

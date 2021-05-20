@@ -234,6 +234,7 @@ private:
   uint32_t m_start_angle;
   uint32_t m_end_angle;
   uint16_t m_features;
+  bool m_use_sensor_timestamp;
 };
 
 
