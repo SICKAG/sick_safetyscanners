@@ -225,6 +225,9 @@ private:
 
   bool getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request& req,
                          sick_safetyscanners::ConfigMetadata::Response& res);
+
+  std::string getCheckSumString(uint32_t checksum);
+  std::string getDateString(uint32_t days_since_1972, uint32_t milli_seconds);
 };
 
 } // namespace sick
