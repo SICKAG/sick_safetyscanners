@@ -856,7 +856,8 @@ bool SickSafetyscannersRos::getConfigMetadata(sick_safetyscanners::ConfigMetadat
     static_cast<void>(req);
     sick::datastructure::ConfigMetadata config_metadata;
     m_device->requestConfigMetadata(m_communication_settings, config_metadata);
-    res.app_checksum = config_metadata.getAppChecksum();
+
+    res.app_checksum = getCheckSumString(config_metadata.getAppChecksum());
     res.integrity_hash.clear();
     std::vector<uint32_t> integrity_hash = config_metadata.getIntegrityHash();
     for(const auto& hash : integrity_hash)
@@ -865,10 +866,35 @@ bool SickSafetyscannersRos::getConfigMetadata(sick_safetyscanners::ConfigMetadat
     }
     res.modification_time_date = config_metadata.getModificationTimeDate();
     res.modification_time_time = config_metadata.getModificationTimeTime();
-    res.overall_checksum = config_metadata.getOverallChecksum();
+    res.modification_time = getDateString(res.modification_time_date, res.modification_time_time);
+    res.overall_checksum = getCheckSumString(config_metadata.getOverallChecksum());
     res.transfer_time_date = config_metadata.getModificationTimeDate();
     res.transfer_time_time = config_metadata.getModificationTimeTime();
+    res.transfer_time = getDateString(res.transfer_time_date, res.transfer_time_time);
+    res.version_c_version = config_metadata.getVersionCVersion();
+    res.version_major_version_number = config_metadata.getVersionMajorVersionNumber();
+    res.version_minor_version_number = config_metadata.getVersionMinorVersionNumber();
+    res.version_release_number = config_metadata.getVersionReleaseNumber();
+
     return true;
+}
+
+std::string SickSafetyscannersRos::getCheckSumString(uint32_t checksum)
+{
+    std::stringstream ss;
+    ss << "0x" << std::hex << (checksum & 0xFF) << ((checksum & 0xFF00)>>8) << ((checksum & 0xFF0000)>>16) << ((checksum & 0xFF000000)>>24);
+    return ss.str();
+}
+
+std::string SickSafetyscannersRos::getDateString(uint32_t days_since_1972, uint32_t milli_seconds)
+{
+    std::time_t t = static_cast<std::time_t>((730/* = days from Jan 1 1970 to Jan 1 1972*/
+                                              + days_since_1972) * 24 * 3600 + milli_seconds * 0.001);
+    char buffer[80];
+    std::string retval;
+    strftime(buffer, 80, "%F %X",gmtime(&t));
+    retval = buffer;
+    return retval;
 }
 
 
