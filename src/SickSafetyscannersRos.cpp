@@ -871,9 +871,9 @@ std::string SickSafetyscannersRos::getDateString(uint32_t days_since_1972, uint3
 {
     std::time_t t = static_cast<std::time_t>((730/* = days from Jan 1 1970 to Jan 1 1972*/
                                               + days_since_1972) * 24 * 3600 + milli_seconds * 0.001);
-    char buffer[80];
+    char buffer[40];
     std::string retval;
-    strftime(buffer, 80, "%F %X",gmtime(&t));
+    strftime(buffer, 40, "%F %X",gmtime(&t));
     retval = buffer;
     return retval;
 }
