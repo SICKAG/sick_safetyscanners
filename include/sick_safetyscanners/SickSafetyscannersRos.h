@@ -50,6 +50,7 @@
 // Package
 #include <sick_safetyscanners/ExtendedLaserScanMsg.h>
 #include <sick_safetyscanners/FieldData.h>
+#include <sick_safetyscanners/ConfigMetadata.h>
 #include <sick_safetyscanners/OutputPathsMsg.h>
 #include <sick_safetyscanners/RawMicroScanDataMsg.h>
 #include <sick_safetyscanners/SickSafetyscanners.h>
@@ -140,6 +141,7 @@ private:
   void sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status);
 
   ros::ServiceServer m_field_service_server;
+  ros::ServiceServer m_config_metadata_server;
 
   bool m_initialised;
 
@@ -220,6 +222,9 @@ private:
 
   bool getFieldData(sick_safetyscanners::FieldData::Request& req,
                     sick_safetyscanners::FieldData::Response& res);
+
+  bool getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request& req,
+                         sick_safetyscanners::ConfigMetadata::Response& res);
 };
 
 } // namespace sick

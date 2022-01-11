@@ -50,6 +50,7 @@ add_message_files(
 add_service_files(
   FILES
   FieldData.srv
+  ConfigMetadata.srv
 )
 
 generate_messages(

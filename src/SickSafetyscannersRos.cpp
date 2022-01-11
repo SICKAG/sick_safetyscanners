@@ -67,6 +67,9 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_field_service_server =
     m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
+  m_config_metadata_server =
+    m_nh.advertiseService("config_metadata", &SickSafetyscannersRos::getConfigMetadata, this);
+
   // Diagnostics for frequency
   m_diagnostic_updater.setHardwareID(m_communication_settings.getSensorIp().to_string());
 
@@ -827,6 +830,26 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
   }
 
   return true;
+}
+
+bool SickSafetyscannersRos::getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request &req, sick_safetyscanners::ConfigMetadata::Response &res)
+{
+    static_cast<void>(req);
+    sick::datastructure::ConfigMetadata config_metadata;
+    m_device->requestConfigMetadata(m_communication_settings, config_metadata);
+    res.app_checksum = config_metadata.getAppChecksum();
+    res.integrity_hash.clear();
+    std::vector<uint32_t> integrity_hash = config_metadata.getIntegrityHash();
+    for(const auto& hash : integrity_hash)
+    {
+        res.integrity_hash.push_back(hash);
+    }
+    res.modification_time_date = config_metadata.getModificationTimeDate();
+    res.modification_time_time = config_metadata.getModificationTimeTime();
+    res.overall_checksum = config_metadata.getOverallChecksum();
+    res.transfer_time_date = config_metadata.getModificationTimeDate();
+    res.transfer_time_time = config_metadata.getModificationTimeTime();
+    return true;
 }
 
 
