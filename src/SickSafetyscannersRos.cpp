@@ -69,6 +69,8 @@ SickSafetyscannersRos::SickSafetyscannersRos()
 
   m_config_metadata_server =
     m_nh.advertiseService("config_metadata", &SickSafetyscannersRos::getConfigMetadata, this);
+  m_status_overview_server =
+    m_nh.advertiseService("status_overview", &SickSafetyscannersRos::getStatusOverview, this);
 
   // Diagnostics for frequency
   m_diagnostic_updater.setHardwareID(m_communication_settings.getSensorIp().to_string());
@@ -875,6 +877,36 @@ bool SickSafetyscannersRos::getConfigMetadata(sick_safetyscanners::ConfigMetadat
     res.version_major_version_number = config_metadata.getVersionMajorVersionNumber();
     res.version_minor_version_number = config_metadata.getVersionMinorVersionNumber();
     res.version_release_number = config_metadata.getVersionReleaseNumber();
+
+    return true;
+}
+
+bool SickSafetyscannersRos::getStatusOverview(sick_safetyscanners::StatusOverview::Request &req, sick_safetyscanners::StatusOverview::Response &res)
+{
+    static_cast<void>(req);
+
+    sick::datastructure::StatusOverview status_overview;
+    m_device->requestStatusOverview(m_communication_settings, status_overview);
+
+    res.version_c_version = status_overview.getVersionCVersion();
+    res.version_major_version_number = status_overview.getVersionMajorVersionNumber();
+    res.version_minor_version_number = status_overview.getVersionMinorVersionNumber();
+    res.version_release_number = status_overview.getVersionReleaseNumber();
+
+    res.device_state = status_overview.getDeviceState();
+    res.config_state = status_overview.getConfigState();
+    res.application_state = status_overview.getApplicationState();
+    res.current_time_power_on_count = status_overview.getCurrentTimePowerOnCount();
+
+    res.current_time_date = status_overview.getCurrentTimeDate();
+    res.current_time_time = status_overview.getCurrentTimeTime();
+    res.current_time = getDateString(res.current_time_date, res.current_time_time);
+
+    res.error_info_code = status_overview.getErrorInfoCode();
+
+    res.error_info_time_date = status_overview.getErrorInfoDate();
+    res.error_info_time_time = status_overview.getErrorInfoTime();
+    res.error_info_time = getDateString(res.error_info_time_date, res.error_info_time_time);
 
     return true;
 }
