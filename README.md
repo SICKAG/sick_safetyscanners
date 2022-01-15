@@ -128,6 +128,12 @@ Returns all configured protective and warning fields for the sensor
 
 Returns the meta data of the current configuration of the sensor
 
+`
+~/status_overview
+`
+
+Returns the status overview of the sensor
+
 
 ### ROS parameters
 

@@ -53,6 +53,7 @@
 #include <sick_safetyscanners/ConfigMetadata.h>
 #include <sick_safetyscanners/OutputPathsMsg.h>
 #include <sick_safetyscanners/RawMicroScanDataMsg.h>
+#include <sick_safetyscanners/StatusOverview.h>
 #include <sick_safetyscanners/SickSafetyscanners.h>
 #include <sick_safetyscanners/SickSafetyscannersConfigurationConfig.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
@@ -142,6 +143,7 @@ private:
 
   ros::ServiceServer m_field_service_server;
   ros::ServiceServer m_config_metadata_server;
+  ros::ServiceServer m_status_overview_server;
 
   bool m_initialised;
 
@@ -225,6 +227,9 @@ private:
 
   bool getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request& req,
                          sick_safetyscanners::ConfigMetadata::Response& res);
+
+  bool getStatusOverview(sick_safetyscanners::StatusOverview::Request& req,
+                         sick_safetyscanners::StatusOverview::Response& res);
 
   /**
    * @brief getCheckSumString converts the uint32 value received as checksum such that the hexadecimal
