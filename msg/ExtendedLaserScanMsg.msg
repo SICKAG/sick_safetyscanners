@@ -1,5 +1,5 @@
 sensor_msgs/LaserScan laser_scan
-bool[] reflektor_status
-bool[] reflektor_median
+bool[] reflector_status
+bool[] reflector_median
 bool[] intrusion
 

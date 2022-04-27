@@ -165,6 +165,9 @@ private:
   float m_angle_offset;
   bool m_use_pers_conf;
 
+  double m_reflector_intensity = 255.0;
+  int m_intensity_mode = 0;
+
   /*!
    * @brief Reads and verifies the ROS parameters.
    * @return True if successful.

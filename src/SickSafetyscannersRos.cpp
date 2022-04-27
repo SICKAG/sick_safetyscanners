@@ -145,6 +145,10 @@ void SickSafetyscannersRos::reconfigureCallback(
     m_expected_frequency = config.expected_frequency;
 
     m_min_intensities = config.min_intensities;
+
+    m_reflector_intensity = config.reflector_intensity;
+
+    m_intensity_mode = config.intensity_mode;
   }
 }
 
@@ -253,19 +257,15 @@ bool SickSafetyscannersRos::readParameters()
 
   m_private_nh.getParam("min_intensities", m_min_intensities);
 
+  m_private_nh.getParam("reflector_intensity", m_reflector_intensity);
+
+  m_private_nh.getParam("intensity_mode", m_intensity_mode);
+
   return true;
 }
 
 void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& data)
 {
-  if (!data.getMeasurementDataPtr()->isEmpty() && !data.getDerivedValuesPtr()->isEmpty())
-  {
-    sensor_msgs::LaserScan scan = createLaserScanMessage(data);
-
-    m_diagnosed_laser_scan_publisher->publish(scan);
-  }
-
-
   if (!data.getMeasurementDataPtr()->isEmpty() && !data.getDerivedValuesPtr()->isEmpty())
   {
     sick_safetyscanners::ExtendedLaserScanMsg extended_scan = createExtendedLaserScanMessage(data);
@@ -274,6 +274,8 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
 
     sick_safetyscanners::OutputPathsMsg output_paths = createOutputPathsMessage(data);
     m_output_path_publisher.publish(output_paths);
+
+    m_diagnosed_laser_scan_publisher->publish(extended_scan.laser_scan);
   }
 
   m_last_raw_data = createRawDataMessage(data);
@@ -351,16 +353,16 @@ SickSafetyscannersRos::createExtendedLaserScanMessage(const sick::datastructure:
   uint32_t num_scan_points = scan_points.size();
 
 
-  msg.reflektor_status.resize(num_scan_points);
+  msg.reflector_status.resize(num_scan_points);
   msg.intrusion.resize(num_scan_points);
-  msg.reflektor_median.resize(num_scan_points);
+  msg.reflector_median.resize(num_scan_points);
   std::vector<bool> medians = getMedianReflectors(scan_points);
   for (uint32_t i = 0; i < num_scan_points; ++i)
   {
     const sick::datastructure::ScanPoint scan_point = scan_points.at(i);
-    msg.reflektor_status[i]                         = scan_point.getReflectorBit();
+    msg.reflector_status[i]                         = scan_point.getReflectorBit();
     msg.intrusion[i]                                = scan_point.getContaminationBit();
-    msg.reflektor_median[i]                         = medians.at(i);
+    msg.reflector_median[i]                         = medians.at(i);
   }
   return msg;
 }
@@ -423,6 +425,7 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.ranges.resize(num_scan_points);
   scan.intensities.resize(num_scan_points);
 
+  std::vector<bool> medians = getMedianReflectors(scan_points);
 
   for (uint32_t i = 0; i < num_scan_points; ++i)
   {
@@ -444,6 +447,29 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
       scan.ranges[i] = std::numeric_limits<double>::infinity();
     }
     scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
+
+    switch (m_intensity_mode)
+    {
+    case 0:
+      scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
+      break;
+    case 1:
+      if(scan_point.getReflectorBit())
+      {
+        scan.intensities[i] = static_cast<float>(m_reflector_intensity);
+      }
+      break;
+    case 2:
+      if(medians.at(i))
+      {
+        scan.intensities[i] = static_cast<float>(m_reflector_intensity);
+      }
+      break;
+
+    default:
+      scan.intensities[i] = static_cast<float>(scan_point.getReflectivity());
+      break;
+    }
   }
   return scan;
 }
