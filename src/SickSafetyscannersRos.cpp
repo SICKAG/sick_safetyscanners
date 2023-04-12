@@ -350,7 +350,7 @@ void SickSafetyscannersRos::sensorDiagnostics(
   }
   else if (state.contamination_warning)
   {
-    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::WARN, "Device error");
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::WARN, "Contamination warning");
   }
   else
   {
