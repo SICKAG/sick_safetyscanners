@@ -340,6 +340,18 @@ void SickSafetyscannersRos::sensorDiagnostics(
   {
     diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::ERROR, "Device error");
   }
+  else if (state.application_error)
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::ERROR, "Application error");
+  }
+  else if (state.contamination_error)
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::ERROR, "Contamination error");
+  }
+  else if (state.contamination_warning)
+  {
+    diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::WARN, "Device error");
+  }
   else
   {
     diagnostic_status.summary(diagnostic_msgs::DiagnosticStatus::OK, "OK");
