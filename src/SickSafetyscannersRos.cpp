@@ -91,6 +91,8 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   }
 
   m_device->changeSensorSettings(m_communication_settings);
+  m_device->requestConfigMetadata(m_communication_settings, config_meta_data);
+
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
 }
@@ -305,6 +307,9 @@ void SickSafetyscannersRos::sensorDiagnostics(
   diagnostic_status.addf("Serial number of device", "%u", header.serial_number_of_device);
   diagnostic_status.addf(
     "Serial number of channel plug", "%u", header.serial_number_of_channel_plug);
+  diagnostic_status.addf("App checksum","%X", config_meta_data.getAppChecksum());
+  diagnostic_status.addf("Overall checksum","%X", config_meta_data.getOverallChecksum());
+
   diagnostic_status.addf("Channel number", "%u", header.channel_number);
   diagnostic_status.addf("Sequence number", "%u", header.sequence_number);
   diagnostic_status.addf("Scan number", "%u", header.scan_number);
