@@ -125,12 +125,21 @@ public:
                        sick::datastructure::TypeCode& type_code);
 
   /*!
+   * \brief Requests the config meta data of the sensor.
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param config_metadata Returned config meta data.
+   */
+  void requestConfigMetadata(const datastructure::CommSettings& settings,
+                             datastructure::ConfigMetadata& config_metadata);
+
+/*!
    * \brief Requests the firmware version of the sensor.
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param firmware_version Returned firmware version.
    */
   void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
                               sick::datastructure::FirmwareVersion& firmware_version);
+
 
   void requestApplicationName(const sick::datastructure::CommSettings& settings,
                               sick::datastructure::ApplicationName& application_name);
@@ -142,8 +151,6 @@ public:
                           datastructure::ProjectName& project_name);
   void requestUserName(const datastructure::CommSettings& settings,
                        datastructure::UserName& user_name);
-  void requestConfigMetadata(const datastructure::CommSettings& settings,
-                             datastructure::ConfigMetadata& config_metadata);
   void requestStatusOverview(const datastructure::CommSettings& settings,
                              datastructure::StatusOverview& status_overview);
   void requestDeviceStatus(const datastructure::CommSettings& settings,

@@ -137,6 +137,7 @@ private:
   diagnostic_updater::Updater m_diagnostic_updater;
   std::shared_ptr<DiagnosedLaserScanPublisher> m_diagnosed_laser_scan_publisher;
   sick_safetyscanners::RawMicroScanDataMsg m_last_raw_data;
+  sick::datastructure::ConfigMetadata config_meta_data;
   sick::datastructure::FirmwareVersion firmware_version;
   void sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status);
 
