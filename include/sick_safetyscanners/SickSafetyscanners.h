@@ -124,12 +124,18 @@ public:
   void requestTypeCode(const sick::datastructure::CommSettings& settings,
                        sick::datastructure::TypeCode& type_code);
 
+  /*!
+   * \brief Requests the firmware version of the sensor.
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param firmware_version Returned firmware version.
+   */
+  void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
+                              sick::datastructure::FirmwareVersion& firmware_version);
+
   void requestApplicationName(const sick::datastructure::CommSettings& settings,
                               sick::datastructure::ApplicationName& application_name);
   void requestSerialNumber(const sick::datastructure::CommSettings& settings,
                            sick::datastructure::SerialNumber& serial_number);
-  void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
-                              sick::datastructure::FirmwareVersion& firmware_version);
   void requestOrderNumber(const datastructure::CommSettings& settings,
                           datastructure::OrderNumber& order_number);
   void requestProjectName(const datastructure::CommSettings& settings,
