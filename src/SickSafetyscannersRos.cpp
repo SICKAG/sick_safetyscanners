@@ -91,6 +91,8 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   }
 
   m_device->changeSensorSettings(m_communication_settings);
+  m_device->requestFirmwareVersion(m_communication_settings, firmware_version);
+
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
 }
@@ -302,6 +304,7 @@ void SickSafetyscannersRos::sensorDiagnostics(
   diagnostic_status.addf("Version major version", "%u", header.version_major_version);
   diagnostic_status.addf("Version minor version", "%u", header.version_minor_version);
   diagnostic_status.addf("Version release", "%u", header.version_release);
+  diagnostic_status.addf("Firmware version", "%s", firmware_version.getFirmwareVersion().c_str());
   diagnostic_status.addf("Serial number of device", "%u", header.serial_number_of_device);
   diagnostic_status.addf(
     "Serial number of channel plug", "%u", header.serial_number_of_channel_plug);
