@@ -91,6 +91,16 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   }
 
   m_device->changeSensorSettings(m_communication_settings);
+  
+  if (m_udp_connection_monitor)
+  {
+    m_udp_connection_monitor_timer = m_nh.createTimer(ros::Duration((m_connection_monitor_watchdog_timeout_ms/1000)),
+                                          std::bind(&SickSafetyscannersRos::udpConnectionMonitorHandler, this));
+
+    /* Initialization */
+    m_last_udp_pkt_received = ros::Time::now().toSec();
+  }
+  
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
 }
@@ -246,6 +256,32 @@ bool SickSafetyscannersRos::readParameters()
 
   m_communication_settings.setFeatures(
     general_system_state, derived_settings, measurement_data, intrusion_data, application_io_data);
+  
+  
+  m_udp_connection_monitor = false;
+  if (!m_private_nh.getParam("udp_connection_monitor", m_udp_connection_monitor))
+  {
+    ROS_WARN("Using default setting for udp connection monitoring : %s", m_udp_connection_monitor ? "true" : "false");
+  }
+  else
+  {
+    ROS_INFO("Udp connection monitoring : %s", m_udp_connection_monitor ? "true" : "false");
+  }
+
+  if (m_udp_connection_monitor)
+  {
+    int udp_connection_timeout = 5000;
+    if (!m_private_nh.getParam("udp_connection_monitor_watchdog_timeout_ms", udp_connection_timeout))
+    {
+      ROS_WARN("Using default udp monitor watchdog time: %d ms", udp_connection_timeout);
+    }
+    else
+    {
+      ROS_INFO("udp connection monitor watchdog timeour : %d ms", udp_connection_timeout);
+    }
+
+    m_connection_monitor_watchdog_timeout_ms = udp_connection_timeout;
+  }
 
   m_private_nh.getParam("frame_id", m_frame_id);
 
@@ -280,6 +316,7 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
   m_raw_data_publisher.publish(m_last_raw_data);
 
   m_diagnostic_updater.update();
+  m_last_udp_pkt_received = ros::Time::now().toSec();
 }
 
 std::string boolToString(bool b)
@@ -829,5 +866,13 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
   return true;
 }
 
+void SickSafetyscannersRos::udpConnectionMonitorHandler()
+{
+  double time_now = ros::Time::now().toSec();
+  if ((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000))
+  {
+    ROS_WARN("No udp packet received for %f , Shutting down the node", time_now - m_last_udp_pkt_received);
+  }
+}
 
 } // namespace sick

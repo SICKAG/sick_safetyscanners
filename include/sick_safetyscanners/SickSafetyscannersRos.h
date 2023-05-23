@@ -133,6 +133,9 @@ private:
   ros::Publisher m_raw_data_publisher;
   ros::Publisher m_output_path_publisher;
 
+  // ROS Timer
+  ros::Timer m_udp_connection_monitor_timer;
+
   // Diagnostics
   diagnostic_updater::Updater m_diagnostic_updater;
   std::shared_ptr<DiagnosedLaserScanPublisher> m_diagnosed_laser_scan_publisher;
@@ -164,6 +167,10 @@ private:
   bool m_use_sick_angles;
   float m_angle_offset;
   bool m_use_pers_conf;
+
+  bool m_udp_connection_monitor;
+  uint32_t m_connection_monitor_watchdog_timeout_ms;
+  double m_last_udp_pkt_received;
 
   /*!
    * @brief Reads and verifies the ROS parameters.
@@ -220,6 +227,8 @@ private:
 
   bool getFieldData(sick_safetyscanners::FieldData::Request& req,
                     sick_safetyscanners::FieldData::Response& res);
+  
+  void udpConnectionMonitorHandler();
 };
 
 } // namespace sick
