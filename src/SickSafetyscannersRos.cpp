@@ -872,6 +872,7 @@ void SickSafetyscannersRos::udpConnectionMonitorHandler()
   if ((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000))
   {
     ROS_WARN("No udp packet received for %f , Shutting down the node", time_now - m_last_udp_pkt_received);
+    ros::requestShutdown();
   }
 }
 

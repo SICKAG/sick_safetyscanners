@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="rear_lidar" respawn="false">
+  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="rear_lidar" respawn="true">
     <rosparam file="$(find sick_safetyscanners)config/rear_lidar.yaml" command="load"/>
   </node>
 </launch>
