@@ -1,0 +1,20 @@
+sensor_ip: "192.168.1.11"
+host_ip: "192.168.1.9"
+interface_ip: "0.0.0.0"
+host_udp_port: 0
+frame_id: scan
+skip: 0
+angle_start: 0
+angle_end: 0
+time_offset: 0.0
+min_intensities: 0.0
+channel: 0 
+channel_enabled: True
+general_system_state: True
+derived_settings: True
+measurement_data: True
+intrusion_data: True
+application_io_data: True
+use_persistent_config: False
+udp_connection_monitor : True
+udp_connection_monitor_watchdog_timeout_ms : 5000

@@ -1,46 +1,5 @@
 <launch>
-  <arg name="sensor_ip"             default="192.168.1.11" />
-  <arg name="host_ip"               default="192.168.1.9" />
-  <arg name="interface_ip"          default="0.0.0.0" />
-  <arg name="host_udp_port"         default="0" />
-  <arg name="frame_id"              default="scan" />
-  <arg name="skip"                  default="0" />
-  <arg name="angle_start"           default="0" />
-  <arg name="angle_end"             default="0" />
-  <arg name="time_offset"           default="0.0" />
-  <arg name="min_intensities"       default="0.0" doc="minimal intensity for a laserscan point" />
-  <arg name="channel"               default="0" />
-  <arg name="channel_enabled"       default="True" />
-  <arg name="general_system_state"  default="True" />
-  <arg name="derived_settings"      default="True" />
-  <arg name="measurement_data"      default="True" />
-  <arg name="intrusion_data"        default="True" />
-  <arg name="application_io_data"   default="True" />
-  <arg name="use_persistent_config"   default="False" />
-
-  <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
-  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners">
-     <param name="sensor_ip"              type="string" value="$(arg sensor_ip)" />
-     <param name="host_ip"                type="string" value="$(arg host_ip)" />
-     <param name="interface_ip"           type="string" value="$(arg interface_ip)" />
-     <param name="host_udp_port"          type="int"    value="$(arg host_udp_port)" />
-     <param name="frame_id"               type="string" value="$(arg frame_id)" />
-     <param name="skip"                   type="int"    value="$(arg skip)" />
-     <param name="angle_start"            type="double" value="$(arg angle_start)" />
-     <param name="angle_end"              type="double" value="$(arg angle_end)" />
-     <param name="time_offset"            type="double" value="$(arg time_offset)" />
-     <param name="min_intensities"        type="double" value="$(arg min_intensities)" />
-     <param name="channel"                type="int"    value="$(arg channel)" />
-     <param name="channel_enabled"        type="bool"   value="$(arg channel_enabled)" />
-     <param name="general_system_state"   type="bool"   value="$(arg general_system_state)" />
-     <param name="derived_settings"       type="bool"   value="$(arg derived_settings)" />
-     <param name="measurement_data"       type="bool"   value="$(arg measurement_data)" />
-     <param name="intrusion_data"         type="bool"   value="$(arg intrusion_data)" />
-     <param name="application_io_data"    type="bool"   value="$(arg application_io_data)" />
-     <param name="use_persistent_config"  type="bool"   value="$(arg use_persistent_config)" />
+  <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners" respawn="true">
+    <rosparam file="$(find sick_safetyscanners)config/sick_safety_scanner.yaml" command="load"/>
   </node>
-
-
-  <!-- node name="rqt_reconfigure" pkg="rqt_reconfigure" type="rqt_reconfigure" /-->
 </launch>
-
