@@ -89,7 +89,7 @@ public:
   /*!
    * \brief Triggers the disconnection of the tcp socket.
    */
-  void doDisconnect();
+  bool doDisconnect();
 
   /*!
    * \brief Executes the command passed to the function.

@@ -105,23 +105,35 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   ROS_INFO("Successfully launched node.");
 }
 
-void SickSafetyscannersRos::readTypeCodeSettings()
+bool SickSafetyscannersRos::readTypeCodeSettings()
 {
+  bool status = false;
   ROS_INFO("Reading Type code settings");
   sick::datastructure::TypeCode type_code;
-  m_device->requestTypeCode(m_communication_settings, type_code);
-  m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
-  m_range_min = 0.1;
-  m_range_max = type_code.getMaxRange();
-}
+  status = m_device->requestTypeCode(m_communication_settings, type_code);
+  if (true == status)
+  {
+    m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
+    m_range_min = 0.1;
+    m_range_max = type_code.getMaxRange();
+  }
+  
+  return status;
+} 
 
-void SickSafetyscannersRos::readPersistentConfig()
+bool SickSafetyscannersRos::readPersistentConfig()
 {
+  bool status = false;
   ROS_INFO("Reading Persistent Configuration");
   sick::datastructure::ConfigData config_data;
-  m_device->requestPersistentConfig(m_communication_settings, config_data);
-  m_communication_settings.setStartAngle(config_data.getStartAngle());
-  m_communication_settings.setEndAngle(config_data.getEndAngle());
+  status = m_device->requestPersistentConfig(m_communication_settings, config_data);
+  if (true == status)
+  {
+    m_communication_settings.setStartAngle(config_data.getStartAngle());
+    m_communication_settings.setEndAngle(config_data.getEndAngle());
+  }
+
+  return status;
 }
 
 void SickSafetyscannersRos::reconfigureCallback(

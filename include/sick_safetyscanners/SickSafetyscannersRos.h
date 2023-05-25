@@ -222,8 +222,8 @@ private:
   createApplicationInputsMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::ApplicationOutputsMsg
   createApplicationOutputsMessage(const sick::datastructure::Data& data);
-  void readTypeCodeSettings();
-  void readPersistentConfig();
+  bool readTypeCodeSettings();
+  bool readPersistentConfig();
 
   bool getFieldData(sick_safetyscanners::FieldData::Request& req,
                     sick_safetyscanners::FieldData::Response& res);
