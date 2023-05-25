@@ -34,7 +34,8 @@
 
 
 #include "sick_safetyscanners/SickSafetyscannersRos.h"
-
+#include <thread>
+#include <chrono>
 
 namespace sick {
 
@@ -78,20 +79,34 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     m_laser_scan_publisher, m_diagnostic_updater, frequency_param, timestamp_param));
   m_diagnostic_updater.add("State", this, &SickSafetyscannersRos::sensorDiagnostics);
 
+  bool status = false;
+  while (!status)
+  {
+    status = readTypeCodeSettings();
+    if (m_use_pers_conf && status)
+    {
+      status = readPersistentConfig();
+    }
+
+    if (status)
+    {
+      status = m_device->changeSensorSettings(m_communication_settings);
+    }
+
+    if (!status)
+    {
+      int retry_after = 1000;
+      ROS_WARN("Retry tcp request after %d ms", retry_after);
+      std::this_thread::sleep_for (std::chrono::milliseconds(retry_after));
+    }
+  }
+  
   m_device = std::make_shared<sick::SickSafetyscanners>(
     boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1),
     &m_communication_settings,
     m_interface_ip);
   m_device->run();
-  readTypeCodeSettings();
 
-  if (m_use_pers_conf)
-  {
-    readPersistentConfig();
-  }
-
-  m_device->changeSensorSettings(m_communication_settings);
-  
   if (m_udp_connection_monitor)
   {
     m_udp_connection_monitor_timer = m_nh.createTimer(ros::Duration((m_connection_monitor_watchdog_timeout_ms/1000)),
