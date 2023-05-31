@@ -14,5 +14,6 @@ uint8 current_monitoring_case_no_table_2
 uint8 current_monitoring_case_no_table_3
 uint8 current_monitoring_case_no_table_4
 
+bool connection_status
 bool application_error
 bool device_error

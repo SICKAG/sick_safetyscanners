@@ -167,7 +167,8 @@ private:
   bool m_use_sick_angles;
   float m_angle_offset;
   bool m_use_pers_conf;
-
+  bool m_connection_status;
+  
   uint32_t m_tcp_request_retry_ms;
   int m_tcp_max_request_retries;
 

@@ -47,6 +47,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   , m_range_max(0.0)
   , m_angle_offset(-90.0)
   , m_use_pers_conf(false)
+  , m_connection_status(false)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
@@ -97,6 +98,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   }
   
   m_initialised = true;
+  m_connection_status = true;
   ROS_INFO("Successfully launched node.");
 }
 
@@ -391,6 +393,7 @@ void SickSafetyscannersRos::sensorDiagnostics(
     "Current monitoring case no table 3", "%u", state.current_monitoring_case_no_table_3);
   diagnostic_status.addf(
     "Current monitoring case no table 4", "%u", state.current_monitoring_case_no_table_4);
+  diagnostic_status.add("Connection Status", boolToString(state.connection_status));
   diagnostic_status.add("Application error", boolToString(state.application_error));
   diagnostic_status.add("Device error", boolToString(state.device_error));
 
@@ -654,6 +657,7 @@ SickSafetyscannersRos::createGeneralSystemStateMessage(const sick::datastructure
     msg.current_monitoring_case_no_table_4 =
       general_system_state->getCurrentMonitoringCaseNoTable4();
 
+    msg.connection_status = m_connection_status;
     msg.application_error = general_system_state->getApplicationError();
     msg.device_error      = general_system_state->getDeviceError();
   }
@@ -900,6 +904,7 @@ void SickSafetyscannersRos::udpConnectionMonitorHandler()
   if ((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000))
   {
     ROS_WARN("No udp packet received for %f , Trying to re-establish connection", time_now - m_last_udp_pkt_received);
+    m_connection_status = false; 
     setCommunicationSettingScanner();
   }
 }
@@ -934,6 +939,10 @@ void SickSafetyscannersRos::setCommunicationSettingScanner()
   {
     ROS_WARN("Could not establish connection, max retries exhausted : %d, Shutting down the node", m_tcp_max_request_retries);
     ros::requestShutdown();
+  }
+  else
+  {
+    m_connection_status = true;
   }
 }
 
