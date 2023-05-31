@@ -168,6 +168,9 @@ private:
   float m_angle_offset;
   bool m_use_pers_conf;
 
+  uint32_t m_tcp_request_retry_ms;
+  int m_tcp_max_request_retries;
+
   bool m_udp_connection_monitor;
   uint32_t m_connection_monitor_watchdog_timeout_ms;
   double m_last_udp_pkt_received;
@@ -229,6 +232,7 @@ private:
                     sick_safetyscanners::FieldData::Response& res);
   
   void udpConnectionMonitorHandler();
+  void setCommunicationSettingScanner();
 };
 
 } // namespace sick

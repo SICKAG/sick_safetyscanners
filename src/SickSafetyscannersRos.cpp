@@ -85,27 +85,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     m_interface_ip);
   m_device->run();
   
-  bool status = false;
-  while (!status)
-  {
-    status = readTypeCodeSettings();
-    if (m_use_pers_conf && status)
-    {
-      status = readPersistentConfig();
-    }
-
-    if (status)
-    {
-      status = m_device->changeSensorSettings(m_communication_settings);
-    }
-
-    if (!status)
-    {
-      int retry_after = 1000;
-      ROS_WARN("Retry tcp request after %d ms", retry_after);
-      std::this_thread::sleep_for (std::chrono::milliseconds(retry_after));
-    }
-  }
+  setCommunicationSettingScanner();
 
   if (m_udp_connection_monitor)
   {
@@ -284,6 +264,27 @@ bool SickSafetyscannersRos::readParameters()
   m_communication_settings.setFeatures(
     general_system_state, derived_settings, measurement_data, intrusion_data, application_io_data);
   
+  int tcp_request_retry_ms = 1000;
+  if (!m_private_nh.getParam("tcp_request_retry_ms", tcp_request_retry_ms))
+  {
+    ROS_WARN("Using default tcp request retry time: %d ms", tcp_request_retry_ms);
+  }
+  else
+  {
+    ROS_INFO("tcp request retry time : %d ms", tcp_request_retry_ms);
+  }
+  m_tcp_request_retry_ms = tcp_request_retry_ms;
+
+  int tcp_max_request_retries = 10;
+  if (!m_private_nh.getParam("tcp_max_request_retries", tcp_max_request_retries))
+  {
+    ROS_WARN("Using default tcp max request retries: %d", tcp_max_request_retries);
+  }
+  else
+  {
+    ROS_INFO("max tcp request retries : %d", tcp_max_request_retries);
+  }
+  m_tcp_max_request_retries = tcp_max_request_retries;
   
   m_udp_connection_monitor = false;
   if (!m_private_nh.getParam("udp_connection_monitor", m_udp_connection_monitor))
@@ -304,7 +305,7 @@ bool SickSafetyscannersRos::readParameters()
     }
     else
     {
-      ROS_INFO("udp connection monitor watchdog timeour : %d ms", udp_connection_timeout);
+      ROS_INFO("udp connection monitor watchdog timeout : %d ms", udp_connection_timeout);
     }
 
     m_connection_monitor_watchdog_timeout_ms = udp_connection_timeout;
@@ -899,28 +900,40 @@ void SickSafetyscannersRos::udpConnectionMonitorHandler()
   if ((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000))
   {
     ROS_WARN("No udp packet received for %f , Trying to re-establish connection", time_now - m_last_udp_pkt_received);
-    
-    bool status = false;
-    while (!status)
+    setCommunicationSettingScanner();
+  }
+}
+
+void SickSafetyscannersRos::setCommunicationSettingScanner()
+{
+  bool status = false;
+  int retries = 0;
+
+  while (!status && retries < m_tcp_max_request_retries)
+  {
+    status = readTypeCodeSettings();
+    if (m_use_pers_conf && status)
     {
-      status = readTypeCodeSettings();
-      if (m_use_pers_conf && status)
-      {
-        status = readPersistentConfig();
-      }
-
-      if (status)
-      {
-        status = m_device->changeSensorSettings(m_communication_settings);
-      }
-
-      if (!status)
-      {
-        int retry_after = 1000;
-        ROS_WARN("Retry tcp request after %d ms", retry_after);
-        std::this_thread::sleep_for (std::chrono::milliseconds(retry_after));
-      }
+      status = readPersistentConfig();
     }
+
+    if (status)
+    {
+      status = m_device->changeSensorSettings(m_communication_settings);
+    }
+
+    if (!status)
+    {
+      ROS_WARN("Retry tcp request after %d ms", m_tcp_request_retry_ms);
+      std::this_thread::sleep_for (std::chrono::milliseconds(m_tcp_request_retry_ms));
+    }
+    retries++;
+  }
+
+  if (false == status && retries >= m_tcp_max_request_retries)
+  {
+    ROS_WARN("Could not establish connection, max retries exhausted : %d, Shutting down the node", m_tcp_max_request_retries);
+    ros::requestShutdown();
   }
 }
 

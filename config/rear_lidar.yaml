@@ -13,5 +13,7 @@ measurement_data: True
 intrusion_data: True
 application_io_data: True
 use_persistent_config: False
+tcp_request_retry_ms : 1000
+tcp_max_request_retries : 65535
 udp_connection_monitor : True
 udp_connection_monitor_watchdog_timeout_ms : 5000
