@@ -79,6 +79,12 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     m_laser_scan_publisher, m_diagnostic_updater, frequency_param, timestamp_param));
   m_diagnostic_updater.add("State", this, &SickSafetyscannersRos::sensorDiagnostics);
 
+  m_device = std::make_shared<sick::SickSafetyscanners>(
+    boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1),
+    &m_communication_settings,
+    m_interface_ip);
+  m_device->run();
+  
   bool status = false;
   while (!status)
   {
@@ -100,12 +106,6 @@ SickSafetyscannersRos::SickSafetyscannersRos()
       std::this_thread::sleep_for (std::chrono::milliseconds(retry_after));
     }
   }
-  
-  m_device = std::make_shared<sick::SickSafetyscanners>(
-    boost::bind(&SickSafetyscannersRos::receivedUDPPacket, this, _1),
-    &m_communication_settings,
-    m_interface_ip);
-  m_device->run();
 
   if (m_udp_connection_monitor)
   {
@@ -898,8 +898,29 @@ void SickSafetyscannersRos::udpConnectionMonitorHandler()
   double time_now = ros::Time::now().toSec();
   if ((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000))
   {
-    ROS_WARN("No udp packet received for %f , Shutting down the node", time_now - m_last_udp_pkt_received);
-    ros::requestShutdown();
+    ROS_WARN("No udp packet received for %f , Trying to re-establish connection", time_now - m_last_udp_pkt_received);
+    
+    bool status = false;
+    while (!status)
+    {
+      status = readTypeCodeSettings();
+      if (m_use_pers_conf && status)
+      {
+        status = readPersistentConfig();
+      }
+
+      if (status)
+      {
+        status = m_device->changeSensorSettings(m_communication_settings);
+      }
+
+      if (!status)
+      {
+        int retry_after = 1000;
+        ROS_WARN("Retry tcp request after %d ms", retry_after);
+        std::this_thread::sleep_for (std::chrono::milliseconds(retry_after));
+      }
+    }
   }
 }
 
