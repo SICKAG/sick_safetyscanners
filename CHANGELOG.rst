@@ -2,6 +2,20 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+Forthcoming
+-----------
+* added StatusOverview service
+* added ConfigMetadata service
+* add application and contamination errors to diagnostics
+* add checksums to diagnostics
+* add firmware version to diagnostics
+* Add missing map include.
+* adjusted readme for multicast and interface IP
+* adjusted launch file for interface IP
+* allowing to define multicast IPs from ROS
+* added .hpp to install directive in CMakeList
+* Contributors: Christian Wurm, Ivor Wanders, Lennart Puck, Rein Appeldoorn, Tom de Winter, Yannick de Hoop
+
 1.0.8 (2021-02-02)
 ------------------
 * changed to constant values for the field data
