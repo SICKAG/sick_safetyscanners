@@ -2,8 +2,8 @@
 Changelog for package sick_safetyscanners
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Forthcoming
------------
+1.0.9 (2023-06-01)
+------------------
 * added StatusOverview service
 * added ConfigMetadata service
 * add application and contamination errors to diagnostics
