@@ -132,7 +132,7 @@ public:
   void requestConfigMetadata(const datastructure::CommSettings& settings,
                              datastructure::ConfigMetadata& config_metadata);
 
-/*!
+  /*!
    * \brief Requests the firmware version of the sensor.
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param firmware_version Returned firmware version.
