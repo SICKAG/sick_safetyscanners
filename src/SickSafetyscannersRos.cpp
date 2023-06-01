@@ -904,7 +904,10 @@ void SickSafetyscannersRos::udpConnectionMonitorHandler()
   if ((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000))
   {
     ROS_WARN("No udp packet received for %f , Trying to re-establish connection", time_now - m_last_udp_pkt_received);
-    m_connection_status = false; 
+    m_connection_status = false;
+    m_last_raw_data.general_system_state.connection_status =  m_connection_status;
+    m_raw_data_publisher.publish(m_last_raw_data);
+    m_diagnostic_updater.update();
     setCommunicationSettingScanner();
   }
 }
