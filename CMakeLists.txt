@@ -49,7 +49,9 @@ add_message_files(
 
 add_service_files(
   FILES
+  ConfigMetadata.srv
   FieldData.srv
+  StatusOverview.srv
 )
 
 generate_messages(

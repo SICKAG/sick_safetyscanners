@@ -125,19 +125,33 @@ public:
                        sick::datastructure::TypeCode& type_code);
 
   bool requestApplicationName(const sick::datastructure::CommSettings& settings,
-                              sick::datastructure::ApplicationName& application_name);
-  bool requestSerialNumber(const sick::datastructure::CommSettings& settings,
-                           sick::datastructure::SerialNumber& serial_number);
+                                sick::datastructure::ApplicationName& application_name);
+
+  /*!
+   * \brief Requests the config meta data of the sensor.
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param config_metadata Returned config meta data.
+   */
+  bool requestConfigMetadata(const datastructure::CommSettings& settings,
+                             datastructure::ConfigMetadata& config_metadata);
+
+  /*!
+   * \brief Requests the firmware version of the sensor.
+   * \param settings Settings containing information to establish a connection to the sensor.
+   * \param firmware_version Returned firmware version.
+   */
   bool requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
                               sick::datastructure::FirmwareVersion& firmware_version);
+  bool requestSerialNumber(const sick::datastructure::CommSettings& settings,
+                           sick::datastructure::SerialNumber& serial_number);
+
   bool requestOrderNumber(const datastructure::CommSettings& settings,
                           datastructure::OrderNumber& order_number);
   bool requestProjectName(const datastructure::CommSettings& settings,
                           datastructure::ProjectName& project_name);
   bool requestUserName(const datastructure::CommSettings& settings,
                        datastructure::UserName& user_name);
-  bool requestConfigMetadata(const datastructure::CommSettings& settings,
-                             datastructure::ConfigMetadata& config_metadata);
+
   bool requestStatusOverview(const datastructure::CommSettings& settings,
                              datastructure::StatusOverview& status_overview);
   bool requestDeviceStatus(const datastructure::CommSettings& settings,

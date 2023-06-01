@@ -83,7 +83,7 @@ public:
   AsyncUDPClient(const PacketHandler& packet_handler,
                  boost::asio::io_service& io_service,
                  const boost::asio::ip::address_v4 host_ip,
-                 const boost::asio::ip::address_v4 multi_ip,
+                 const boost::asio::ip::address_v4 interface_ip,
                  const uint16_t& local_port = 0);
 
   /*!

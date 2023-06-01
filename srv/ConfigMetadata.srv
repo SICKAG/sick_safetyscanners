@@ -1,0 +1,21 @@
+
+---
+string app_checksum
+string overall_checksum 
+ 
+uint32[] integrity_hash
+
+string modification_time
+# for devices without real time clock, also provide the raw time information
+uint16 modification_time_date
+uint32 modification_time_time
+
+string transfer_time
+# for devices without real time clock, also provide the raw time information
+uint16 transfer_time_date
+uint32 transfer_time_time
+
+string version_c_version
+uint8 version_major_version_number
+uint8 version_minor_version_number
+uint8 version_release_number

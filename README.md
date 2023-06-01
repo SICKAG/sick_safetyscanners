@@ -122,6 +122,18 @@ Frequency and timestamp diagnostics information.
 
 Returns all configured protective and warning fields for the sensor
 
+`
+~/config_metadata
+`
+
+Returns the meta data of the current configuration of the sensor
+
+`
+~/status_overview
+`
+
+Returns the status overview of the sensor
+
 
 ### ROS parameters
 
@@ -162,7 +174,6 @@ FZI Forschungszentrum Informatik
 on behalf of SICK AG 
 
 - <http://www.sick.com>
-
 
 
 
