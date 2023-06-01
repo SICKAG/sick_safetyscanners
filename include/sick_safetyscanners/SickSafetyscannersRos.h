@@ -221,6 +221,8 @@ private:
 
   bool getFieldData(sick_safetyscanners::FieldData::Request& req,
                     sick_safetyscanners::FieldData::Response& res);
+  std::function<void(void)> watchdog();
+  void run(const int duration);
 };
 
 } // namespace sick
