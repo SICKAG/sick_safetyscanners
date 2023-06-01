@@ -48,14 +48,14 @@
 #include <vector>
 
 // Package
+#include <sick_safetyscanners/ConfigMetadata.h>
 #include <sick_safetyscanners/ExtendedLaserScanMsg.h>
 #include <sick_safetyscanners/FieldData.h>
-#include <sick_safetyscanners/ConfigMetadata.h>
 #include <sick_safetyscanners/OutputPathsMsg.h>
 #include <sick_safetyscanners/RawMicroScanDataMsg.h>
-#include <sick_safetyscanners/StatusOverview.h>
 #include <sick_safetyscanners/SickSafetyscanners.h>
 #include <sick_safetyscanners/SickSafetyscannersConfigurationConfig.h>
+#include <sick_safetyscanners/StatusOverview.h>
 #include <sick_safetyscanners/datastructure/CommSettings.h>
 #include <sick_safetyscanners/datastructure/FieldData.h>
 
@@ -234,17 +234,17 @@ private:
                          sick_safetyscanners::StatusOverview::Response& res);
 
   /**
-   * @brief getCheckSumString converts the uint32 value received as checksum such that the hexadecimal
-   * representation matches the value in the SafetyDesigner. To do this, we must invert the order of
-   * the bytes
+   * @brief getCheckSumString converts the uint32 value received as checksum such that the
+   * hexadecimal representation matches the value in the SafetyDesigner. To do this, we must invert
+   * the order of the bytes
    * @param checksum as returned from API
    * @return hex string representing uint32 from reverted byte order
    */
   std::string getCheckSumString(uint32_t checksum);
 
   /**
-   * @brief getDateString converts the date representation received as days since 1972-01-01 and milliseconds since the start of
-   * that day to the form as given in the Cola2 documentation
+   * @brief getDateString converts the date representation received as days since 1972-01-01 and
+   * milliseconds since the start of that day to the form as given in the Cola2 documentation
    * @param days_since_1972 days from Jan 1, 1972 until day of transfer/modification
    * @param milli_seconds milliseconds since 0:00 on that day of transfer/modification
    * @return date string in the format YYYY-mm-DD HH:MM:SS

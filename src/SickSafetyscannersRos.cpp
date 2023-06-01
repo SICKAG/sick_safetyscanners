@@ -853,80 +853,85 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
   return true;
 }
 
-bool SickSafetyscannersRos::getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request &req, sick_safetyscanners::ConfigMetadata::Response &res)
+bool SickSafetyscannersRos::getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request& req,
+                                              sick_safetyscanners::ConfigMetadata::Response& res)
 {
-    static_cast<void>(req);
-    sick::datastructure::ConfigMetadata config_metadata;
-    m_device->requestConfigMetadata(m_communication_settings, config_metadata);
+  static_cast<void>(req);
+  sick::datastructure::ConfigMetadata config_metadata;
+  m_device->requestConfigMetadata(m_communication_settings, config_metadata);
 
-    res.app_checksum = getCheckSumString(config_metadata.getAppChecksum());
-    res.integrity_hash.clear();
-    std::vector<uint32_t> integrity_hash = config_metadata.getIntegrityHash();
-    for(const auto& hash : integrity_hash)
-    {
-        res.integrity_hash.push_back(hash);
-    }
-    res.modification_time_date = config_metadata.getModificationTimeDate();
-    res.modification_time_time = config_metadata.getModificationTimeTime();
-    res.modification_time = getDateString(res.modification_time_date, res.modification_time_time);
-    res.overall_checksum = getCheckSumString(config_metadata.getOverallChecksum());
-    res.transfer_time_date = config_metadata.getModificationTimeDate();
-    res.transfer_time_time = config_metadata.getModificationTimeTime();
-    res.transfer_time = getDateString(res.transfer_time_date, res.transfer_time_time);
-    res.version_c_version = config_metadata.getVersionCVersion();
-    res.version_major_version_number = config_metadata.getVersionMajorVersionNumber();
-    res.version_minor_version_number = config_metadata.getVersionMinorVersionNumber();
-    res.version_release_number = config_metadata.getVersionReleaseNumber();
+  res.app_checksum = getCheckSumString(config_metadata.getAppChecksum());
+  res.integrity_hash.clear();
+  std::vector<uint32_t> integrity_hash = config_metadata.getIntegrityHash();
+  for (const auto& hash : integrity_hash)
+  {
+    res.integrity_hash.push_back(hash);
+  }
+  res.modification_time_date = config_metadata.getModificationTimeDate();
+  res.modification_time_time = config_metadata.getModificationTimeTime();
+  res.modification_time  = getDateString(res.modification_time_date, res.modification_time_time);
+  res.overall_checksum   = getCheckSumString(config_metadata.getOverallChecksum());
+  res.transfer_time_date = config_metadata.getModificationTimeDate();
+  res.transfer_time_time = config_metadata.getModificationTimeTime();
+  res.transfer_time      = getDateString(res.transfer_time_date, res.transfer_time_time);
+  res.version_c_version  = config_metadata.getVersionCVersion();
+  res.version_major_version_number = config_metadata.getVersionMajorVersionNumber();
+  res.version_minor_version_number = config_metadata.getVersionMinorVersionNumber();
+  res.version_release_number       = config_metadata.getVersionReleaseNumber();
 
-    return true;
+  return true;
 }
 
-bool SickSafetyscannersRos::getStatusOverview(sick_safetyscanners::StatusOverview::Request &req, sick_safetyscanners::StatusOverview::Response &res)
+bool SickSafetyscannersRos::getStatusOverview(sick_safetyscanners::StatusOverview::Request& req,
+                                              sick_safetyscanners::StatusOverview::Response& res)
 {
-    static_cast<void>(req);
+  static_cast<void>(req);
 
-    sick::datastructure::StatusOverview status_overview;
-    m_device->requestStatusOverview(m_communication_settings, status_overview);
+  sick::datastructure::StatusOverview status_overview;
+  m_device->requestStatusOverview(m_communication_settings, status_overview);
 
-    res.version_c_version = status_overview.getVersionCVersion();
-    res.version_major_version_number = status_overview.getVersionMajorVersionNumber();
-    res.version_minor_version_number = status_overview.getVersionMinorVersionNumber();
-    res.version_release_number = status_overview.getVersionReleaseNumber();
+  res.version_c_version            = status_overview.getVersionCVersion();
+  res.version_major_version_number = status_overview.getVersionMajorVersionNumber();
+  res.version_minor_version_number = status_overview.getVersionMinorVersionNumber();
+  res.version_release_number       = status_overview.getVersionReleaseNumber();
 
-    res.device_state = status_overview.getDeviceState();
-    res.config_state = status_overview.getConfigState();
-    res.application_state = status_overview.getApplicationState();
-    res.current_time_power_on_count = status_overview.getCurrentTimePowerOnCount();
+  res.device_state                = status_overview.getDeviceState();
+  res.config_state                = status_overview.getConfigState();
+  res.application_state           = status_overview.getApplicationState();
+  res.current_time_power_on_count = status_overview.getCurrentTimePowerOnCount();
 
-    res.current_time_date = status_overview.getCurrentTimeDate();
-    res.current_time_time = status_overview.getCurrentTimeTime();
-    res.current_time = getDateString(res.current_time_date, res.current_time_time);
+  res.current_time_date = status_overview.getCurrentTimeDate();
+  res.current_time_time = status_overview.getCurrentTimeTime();
+  res.current_time      = getDateString(res.current_time_date, res.current_time_time);
 
-    res.error_info_code = status_overview.getErrorInfoCode();
+  res.error_info_code = status_overview.getErrorInfoCode();
 
-    res.error_info_time_date = status_overview.getErrorInfoDate();
-    res.error_info_time_time = status_overview.getErrorInfoTime();
-    res.error_info_time = getDateString(res.error_info_time_date, res.error_info_time_time);
+  res.error_info_time_date = status_overview.getErrorInfoDate();
+  res.error_info_time_time = status_overview.getErrorInfoTime();
+  res.error_info_time      = getDateString(res.error_info_time_date, res.error_info_time_time);
 
-    return true;
+  return true;
 }
 
 std::string SickSafetyscannersRos::getCheckSumString(uint32_t checksum)
 {
-    std::stringstream ss;
-    ss << "0x" << std::hex << (checksum & 0xFF) << ((checksum & 0xFF00)>>8) << ((checksum & 0xFF0000)>>16) << ((checksum & 0xFF000000)>>24);
-    return ss.str();
+  std::stringstream ss;
+  ss << "0x" << std::hex << (checksum & 0xFF) << ((checksum & 0xFF00) >> 8)
+     << ((checksum & 0xFF0000) >> 16) << ((checksum & 0xFF000000) >> 24);
+  return ss.str();
 }
 
 std::string SickSafetyscannersRos::getDateString(uint32_t days_since_1972, uint32_t milli_seconds)
 {
-    std::time_t t = static_cast<std::time_t>((730/* = days from Jan 1 1970 to Jan 1 1972*/
-                                              + days_since_1972) * 24 * 3600 + milli_seconds * 0.001);
-    char buffer[40];
-    std::string retval;
-    strftime(buffer, 40, "%F %X",gmtime(&t));
-    retval = buffer;
-    return retval;
+  std::time_t t = static_cast<std::time_t>((730 /* = days from Jan 1 1970 to Jan 1 1972*/
+                                            + days_since_1972) *
+                                             24 * 3600 +
+                                           milli_seconds * 0.001);
+  char buffer[40];
+  std::string retval;
+  strftime(buffer, 40, "%F %X", gmtime(&t));
+  retval = buffer;
+  return retval;
 }
 
 
