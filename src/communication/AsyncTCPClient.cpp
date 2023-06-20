@@ -69,7 +69,7 @@ bool AsyncTCPClient::doDisconnect()
   if (ec != boost::system::errc::success)
   {
     ROS_ERROR("Error shutting socket down: %i", ec.value());
-    status = false;
+    return false; /* early return, as if socket shutdown fails, close will fail too */
   }
   else
   {

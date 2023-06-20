@@ -66,15 +66,10 @@ bool Cola2Session::doDisconnect()
 
 bool Cola2Session::executeCommand(const CommandPtr& command)
 {
-  bool status = false;
-  status = addCommand(command->getRequestID(), command);
+  if (!addCommand(command->getRequestID(), command))
+    return false;
   
-  if (true == status)
-  {
-    status = sendTelegramAndListenForAnswer(command);
-  }
-  
-  return status;
+  return sendTelegramAndListenForAnswer(command);
 }
 
 bool Cola2Session::sendTelegramAndListenForAnswer(const CommandPtr& command)

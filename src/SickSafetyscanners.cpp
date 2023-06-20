@@ -103,265 +103,212 @@ void SickSafetyscanners::processTCPPacket(const sick::datastructure::PacketBuffe
 
 bool SickSafetyscanners::changeSensorSettings(const datastructure::CommSettings& settings)
 {
-  bool status = false;
+  if (!startTCPConnection(settings))
+    return false;
 
-  status = startTCPConnection(settings);
-  if (true == status)
-  {
-    changeCommSettingsInColaSession(settings);
-    stopTCPConnection();
-  }
+  if (!changeCommSettingsInColaSession(settings))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::FindSensor(const datastructure::CommSettings& settings,
                                     uint16_t blink_time)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    FindSensorInColaSession(blink_time);
-    stopTCPConnection();
-  }
+  if (!FindSensorInColaSession(blink_time))
+    return false;
   
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestTypeCode(const datastructure::CommSettings& settings,
                                          sick::datastructure::TypeCode& type_code)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestTypeCodeInColaSession(type_code);
-    stopTCPConnection();
-  }
+  if (!requestTypeCodeInColaSession(type_code))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestApplicationName(
   const datastructure::CommSettings& settings,
   sick::datastructure::ApplicationName& application_name)
 {
+  if (!startTCPConnection(settings))
+    return false;
 
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!requestApplicationNameInColaSession(application_name))
+    return false;
 
-  if (true == status)
-  {
-    requestApplicationNameInColaSession(application_name);
-    stopTCPConnection();
-  }
-
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestFieldData(const datastructure::CommSettings& settings,
                                           std::vector<sick::datastructure::FieldData>& field_data)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestFieldDataInColaSession(field_data);
-    stopTCPConnection();
-  }
+  if (!requestFieldDataInColaSession(field_data))
+    return false;
   
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestMonitoringCases(
   const datastructure::CommSettings& settings,
   std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestMonitoringCaseDataInColaSession(monitoring_cases);
-    stopTCPConnection();
-  }
+  if (!requestMonitoringCaseDataInColaSession(monitoring_cases))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestDeviceName(const datastructure::CommSettings& settings,
                                            datastructure::DeviceName& device_name)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestDeviceNameInColaSession(device_name);
-    stopTCPConnection();
-  }
+  if (!requestDeviceNameInColaSession(device_name))
+    return false;
   
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestSerialNumber(const datastructure::CommSettings& settings,
                                              datastructure::SerialNumber& serial_number)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestSerialNumberInColaSession(serial_number);
-    stopTCPConnection();
-  }
+  if (!requestSerialNumberInColaSession(serial_number))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestOrderNumber(const datastructure::CommSettings& settings,
                                             datastructure::OrderNumber& order_number)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestOrderNumberInColaSession(order_number);
-    stopTCPConnection();
-  }
+  if (!requestOrderNumberInColaSession(order_number))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestProjectName(const datastructure::CommSettings& settings,
                                             datastructure::ProjectName& project_name)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestProjectNameInColaSession(project_name);
-    stopTCPConnection();
-  }
+  if (!requestProjectNameInColaSession(project_name))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestUserName(const datastructure::CommSettings& settings,
                                          datastructure::UserName& user_name)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestUserNameInColaSession(user_name);
-    stopTCPConnection();
-  }
+  if (!requestUserNameInColaSession(user_name))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestFirmwareVersion(const datastructure::CommSettings& settings,
                                                 datastructure::FirmwareVersion& firmware_version)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestFirmwareVersionInColaSession(firmware_version);
-    stopTCPConnection();
-  }
+  if (!requestFirmwareVersionInColaSession(firmware_version))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestPersistentConfig(const datastructure::CommSettings& settings,
                                                  sick::datastructure::ConfigData& config_data)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-   requestPersistentConfigInColaSession(config_data);
-    stopTCPConnection();
-  }
+  if (!requestPersistentConfigInColaSession(config_data))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestConfigMetadata(const datastructure::CommSettings& settings,
                                                sick::datastructure::ConfigMetadata& config_metadata)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestConfigMetadataInColaSession(config_metadata);
-    stopTCPConnection();
-  }
+  if (!requestConfigMetadataInColaSession(config_metadata))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestStatusOverview(const datastructure::CommSettings& settings,
                                                sick::datastructure::StatusOverview& status_overview)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestStatusOverviewInColaSession(status_overview);
-    stopTCPConnection();
-  }
+  if (!requestStatusOverviewInColaSession(status_overview))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestDeviceStatus(const datastructure::CommSettings& settings,
                                              sick::datastructure::DeviceStatus& device_status)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
 
-  if (true == status)
-  {
-    requestDeviceStatusInColaSession(device_status);
-    stopTCPConnection();
-  }
+  if (!requestDeviceStatusInColaSession(device_status))
+    return false;
 
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::requestRequiredUserAction(
   const datastructure::CommSettings& settings,
   sick::datastructure::RequiredUserAction& required_user_action)
 {
-  bool status = false;
-  status = startTCPConnection(settings);
+  if (!startTCPConnection(settings))
+    return false;
   
-  if (true == status)
-  {
-    requestRequiredUserActionInColaSession(required_user_action);
-    stopTCPConnection();
-  }
+  if (!requestRequiredUserActionInColaSession(required_user_action))
+    return false;
   
-  return status;
+  return stopTCPConnection();
 }
 
 bool SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSettings& settings)
 {
-  bool status = false;
   std::shared_ptr<sick::communication::AsyncTCPClient> async_tcp_client =
     std::make_shared<sick::communication::AsyncTCPClient>(
       boost::bind(&SickSafetyscanners::processTCPPacket, this, _1),
@@ -369,17 +316,14 @@ bool SickSafetyscanners::startTCPConnection(const sick::datastructure::CommSetti
       settings.getSensorIp(),
       settings.getSensorTcpPort());
   
-  status = async_tcp_client->doConnect();
-
-  if (true == status)
+  if(!async_tcp_client->doConnect())
   {
-    m_session_ptr.reset();
-    m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
-    
-    status = m_session_ptr->open();
+    return false;
   }
 
-  return status;
+    m_session_ptr.reset();
+    m_session_ptr = std::make_shared<sick::cola2::Cola2Session>(async_tcp_client);
+  return m_session_ptr->open();
 }
 
 bool SickSafetyscanners::changeCommSettingsInColaSession(
@@ -393,8 +337,6 @@ bool SickSafetyscanners::changeCommSettingsInColaSession(
 bool SickSafetyscanners::requestFieldDataInColaSession(
   std::vector<sick::datastructure::FieldData>& fields)
 {
-  bool status = false;
-
   sick::cola2::Cola2Session::CommandPtr command_ptr;
 
   for (int i = 0; i < 128; i++)
@@ -404,13 +346,18 @@ bool SickSafetyscanners::requestFieldDataInColaSession(
     command_ptr = std::make_shared<sick::cola2::FieldHeaderVariableCommand>(
       boost::ref(*m_session_ptr), field_data, i);
     
-    status = m_session_ptr->executeCommand(command_ptr);
+    /* return early if fails to execute */
+    if (!m_session_ptr->executeCommand(command_ptr))
+      return false;
 
     if (field_data.getIsValid())
     {
       command_ptr = std::make_shared<sick::cola2::FieldGeometryVariableCommand>(
         boost::ref(*m_session_ptr), field_data, i);
-      status = m_session_ptr->executeCommand(command_ptr);
+      
+      /* return early if fails to execute */
+      if (!m_session_ptr->executeCommand(command_ptr))
+        return false;
 
       fields.push_back(field_data);
     }
@@ -420,14 +367,12 @@ bool SickSafetyscanners::requestFieldDataInColaSession(
     }
   }
 
-  return status;
+  return true;
 }
 
 bool SickSafetyscanners::requestMonitoringCaseDataInColaSession(
   std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases)
 {
-  bool status = false;
-
   sick::cola2::Cola2Session::CommandPtr command_ptr;
   for (int i = 0; i < 254; i++)
   {
@@ -435,7 +380,11 @@ bool SickSafetyscanners::requestMonitoringCaseDataInColaSession(
 
     command_ptr = std::make_shared<sick::cola2::MonitoringCaseVariableCommand>(
       boost::ref(*m_session_ptr), monitoring_case_data, i);
-    status = m_session_ptr->executeCommand(command_ptr);
+
+    /* Early return on failure */
+    if(!m_session_ptr->executeCommand(command_ptr))
+      return false;
+
     if (monitoring_case_data.getIsValid())
     {
       monitoring_cases.push_back(monitoring_case_data);
@@ -446,7 +395,7 @@ bool SickSafetyscanners::requestMonitoringCaseDataInColaSession(
     }
   }
 
-  return status;
+  return true;
 }
 
 bool SickSafetyscanners::FindSensorInColaSession(uint16_t blink_time)
@@ -458,100 +407,105 @@ bool SickSafetyscanners::FindSensorInColaSession(uint16_t blink_time)
 
 bool SickSafetyscanners::requestDeviceNameInColaSession(datastructure::DeviceName& device_name)
 {
-  bool status = false;
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::DeviceNameVariableCommand>(boost::ref(*m_session_ptr),
                                                              device_name);
-  status = m_session_ptr->executeCommand(command_ptr);
-  ROS_INFO("Device name: %s", device_name.getDeviceName().c_str());
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
 
-  return status;
+  ROS_INFO("Device name: %s", device_name.getDeviceName().c_str());
+  return true;
 }
 
 
 bool SickSafetyscanners::requestApplicationNameInColaSession(
   datastructure::ApplicationName& application_name)
 {
-  bool status = false;
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::ApplicationNameVariableCommand>(boost::ref(*m_session_ptr),
                                                                   application_name);
-  status = m_session_ptr->executeCommand(command_ptr);
-  ROS_INFO("Application name: %s", application_name.getApplicationName().c_str());
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
   
-  return status;
+  ROS_INFO("Application name: %s", application_name.getApplicationName().c_str());
+  return true;
 }
 
 bool SickSafetyscanners::requestSerialNumberInColaSession(
   datastructure::SerialNumber& serial_number)
 {
-  bool status = false;
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::SerialNumberVariableCommand>(boost::ref(*m_session_ptr),
                                                                serial_number);
-  status = m_session_ptr->executeCommand(command_ptr);
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
+
   ROS_INFO("Serial Number: %s", serial_number.getSerialNumber().c_str());
   
-  return status;
+  return true;
 }
 
 bool SickSafetyscanners::requestFirmwareVersionInColaSession(
   datastructure::FirmwareVersion& firmware_version)
 {
-  bool status = false;
-
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::FirmwareVersionVariableCommand>(boost::ref(*m_session_ptr),
                                                                   firmware_version);
-  status = m_session_ptr->executeCommand(command_ptr);
-  ROS_INFO("Firmware Version: %s", firmware_version.getFirmwareVersion().c_str());
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
 
-  return status;
+  ROS_INFO("Firmware Version: %s", firmware_version.getFirmwareVersion().c_str());
+  return true;
 }
 
 bool SickSafetyscanners::requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code)
 {
-  bool status = false;
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::TypeCodeVariableCommand>(boost::ref(*m_session_ptr), type_code);
-  status = m_session_ptr->executeCommand(command_ptr);
-  ROS_INFO("Type Code: %s", type_code.getTypeCode().c_str());
   
-  return status;
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
+
+  ROS_INFO("Type Code: %s", type_code.getTypeCode().c_str());
+  return true;
 }
 
 bool SickSafetyscanners::requestOrderNumberInColaSession(
   sick::datastructure::OrderNumber& order_number)
 {
-  bool status = false;
+
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::OrderNumberVariableCommand>(boost::ref(*m_session_ptr),
                                                               order_number);
-  status = m_session_ptr->executeCommand(command_ptr);
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
+
   ROS_INFO("Order Number: %s", order_number.getOrderNumber().c_str());
-  return status;
+  return true;
 }
 
 bool SickSafetyscanners::requestProjectNameInColaSession(
   sick::datastructure::ProjectName& project_name)
 {
-  bool status = false;
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::ProjectNameVariableCommand>(boost::ref(*m_session_ptr),
                                                               project_name);
-  status = m_session_ptr->executeCommand(command_ptr);
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
+
   ROS_INFO("Project Name: %s", project_name.getProjectName().c_str());
-  return status;
+  return true;
 }
 
 bool SickSafetyscanners::requestUserNameInColaSession(sick::datastructure::UserName& user_name)
 {
-  bool status = false;
   sick::cola2::Cola2Session::CommandPtr command_ptr =
     std::make_shared<sick::cola2::UserNameVariableCommand>(boost::ref(*m_session_ptr), user_name);
-  status = m_session_ptr->executeCommand(command_ptr);
+  if (!m_session_ptr->executeCommand(command_ptr))
+    return false;
+
   ROS_INFO("User Name: %s", user_name.getUserName().c_str());
-  return status;
+  return true;
 }
 
 bool SickSafetyscanners::requestConfigMetadataInColaSession(
@@ -599,10 +553,12 @@ bool SickSafetyscanners::requestPersistentConfigInColaSession(
   return m_session_ptr->executeCommand(command_ptr);
 }
 
-void SickSafetyscanners::stopTCPConnection()
+bool SickSafetyscanners::stopTCPConnection()
 {
-  m_session_ptr->close();
-  m_session_ptr->doDisconnect();
+  if (!m_session_ptr->close())
+    return false;
+
+  return m_session_ptr->doDisconnect();
 }
 
 

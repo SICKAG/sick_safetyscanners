@@ -42,6 +42,7 @@
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/LaserScan.h>
+#include <std_msgs/Bool.h>
 
 // STD
 #include <string>
@@ -134,6 +135,7 @@ private:
   ros::Publisher m_extended_laser_scan_publisher;
   ros::Publisher m_raw_data_publisher;
   ros::Publisher m_output_path_publisher;
+  ros::Publisher m_connection_status_publisher;
 
   // ROS Timer
   ros::Timer m_udp_connection_monitor_timer;
@@ -173,10 +175,7 @@ private:
   bool m_use_sick_angles;
   float m_angle_offset;
   bool m_use_pers_conf;
-  bool m_connection_status;
-  
-  uint32_t m_tcp_request_retry_ms;
-  int m_tcp_max_request_retries;
+  bool m_connected;
 
   bool m_udp_connection_monitor;
   uint32_t m_connection_monitor_watchdog_timeout_ms;
@@ -239,7 +238,7 @@ private:
                     sick_safetyscanners::FieldData::Response& res);
   
   void udpConnectionMonitorHandler();
-  void setCommunicationSettingScanner();
+  bool setCommunicationSettingScanner();
 
   bool getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request& req,
                          sick_safetyscanners::ConfigMetadata::Response& res);

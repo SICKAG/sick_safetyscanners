@@ -47,7 +47,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   , m_range_max(0.0)
   , m_angle_offset(-90.0)
   , m_use_pers_conf(false)
-  , m_connection_status(false)
+  , m_connected(false)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
@@ -66,6 +66,9 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_raw_data_publisher = m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
   m_output_path_publisher =
     m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
+
+  m_connection_status_publisher = m_nh.advertise<std_msgs::Bool>("connection_status", 1, true); // latched
+
   m_field_service_server =
     m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
@@ -91,7 +94,11 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     m_interface_ip);
   m_device->run();
   
-  setCommunicationSettingScanner();
+  if(!setCommunicationSettingScanner())
+  {
+    ROS_WARN("Couldn't establish TCP connection");
+  }
+
 
   if (m_udp_connection_monitor)
   {
@@ -104,39 +111,36 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   }
 
   m_initialised = true;
-  m_connection_status = true;
   ROS_INFO("Successfully launched node.");
 }
 
 bool SickSafetyscannersRos::readTypeCodeSettings()
 {
-  bool status = false;
   ROS_INFO("Reading Type code settings");
   sick::datastructure::TypeCode type_code;
-  status = m_device->requestTypeCode(m_communication_settings, type_code);
-  if (true == status)
-  {
-    m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
-    m_range_min = 0.1;
-    m_range_max = type_code.getMaxRange();
-  }
+
+  if (!m_device->requestTypeCode(m_communication_settings, type_code))
+    return false;
+
+  m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
+  m_range_min = 0.1;
+  m_range_max = type_code.getMaxRange();
   
-  return status;
+  return true;
 } 
 
 bool SickSafetyscannersRos::readPersistentConfig()
 {
-  bool status = false;
   ROS_INFO("Reading Persistent Configuration");
   sick::datastructure::ConfigData config_data;
-  status = m_device->requestPersistentConfig(m_communication_settings, config_data);
-  if (true == status)
-  {
-    m_communication_settings.setStartAngle(config_data.getStartAngle());
-    m_communication_settings.setEndAngle(config_data.getEndAngle());
-  }
 
-  return status;
+  if (!m_device->requestPersistentConfig(m_communication_settings, config_data))
+    return false;
+  
+  m_communication_settings.setStartAngle(config_data.getStartAngle());
+  m_communication_settings.setEndAngle(config_data.getEndAngle());
+
+  return true;
 }
 
 void SickSafetyscannersRos::reconfigureCallback(
@@ -271,28 +275,6 @@ bool SickSafetyscannersRos::readParameters()
 
   m_communication_settings.setFeatures(
     general_system_state, derived_settings, measurement_data, intrusion_data, application_io_data);
-  
-  int tcp_request_retry_ms = 1000;
-  if (!m_private_nh.getParam("tcp_request_retry_ms", tcp_request_retry_ms))
-  {
-    ROS_WARN("Using default tcp request retry time: %d ms", tcp_request_retry_ms);
-  }
-  else
-  {
-    ROS_INFO("tcp request retry time : %d ms", tcp_request_retry_ms);
-  }
-  m_tcp_request_retry_ms = tcp_request_retry_ms;
-
-  int tcp_max_request_retries = 10;
-  if (!m_private_nh.getParam("tcp_max_request_retries", tcp_max_request_retries))
-  {
-    ROS_WARN("Using default tcp max request retries: %d", tcp_max_request_retries);
-  }
-  else
-  {
-    ROS_INFO("max tcp request retries : %d", tcp_max_request_retries);
-  }
-  m_tcp_max_request_retries = tcp_max_request_retries;
   
   m_udp_connection_monitor = false;
   if (!m_private_nh.getParam("udp_connection_monitor", m_udp_connection_monitor))
@@ -679,7 +661,7 @@ SickSafetyscannersRos::createGeneralSystemStateMessage(const sick::datastructure
     msg.current_monitoring_case_no_table_4 =
       general_system_state->getCurrentMonitoringCaseNoTable4();
 
-    msg.connection_status = m_connection_status;
+    msg.connection_status = m_connected;
     msg.application_error = general_system_state->getApplicationError();
     msg.device_error      = general_system_state->getDeviceError();
   }
@@ -923,54 +905,48 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
 void SickSafetyscannersRos::udpConnectionMonitorHandler()
 {
   double time_now = ros::Time::now().toSec();
-  if ((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000))
+  /* Re-establish connection only when scanner was previously connected */
+  if (((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000)) && m_connected)
   {
     ROS_WARN("No udp packet received for %f , Trying to re-establish connection", time_now - m_last_udp_pkt_received);
-    m_connection_status = false;
-    m_last_raw_data.general_system_state.connection_status =  m_connection_status;
+
+    m_connected = false;
+    m_last_raw_data.general_system_state.connection_status =  m_connected;
     m_raw_data_publisher.publish(m_last_raw_data);
     m_diagnostic_updater.update();
+    
+    std_msgs::Bool connection_status;
+    connection_status.data = m_connected;
+    m_connection_status_publisher.publish(connection_status);
+    setCommunicationSettingScanner();
+  }
+  else if (!m_connected) /* Timer-CB and scanner still not connected, so try again */
+  {
     setCommunicationSettingScanner();
   }
 }
 
-void SickSafetyscannersRos::setCommunicationSettingScanner()
+bool SickSafetyscannersRos::setCommunicationSettingScanner()
 {
-  bool status = false;
-  int retries = 0;
+  /* If tcp request fails return early */
+  if (!readTypeCodeSettings())
+    return false;
 
-  while (!status && retries < m_tcp_max_request_retries)
+  if (m_use_pers_conf)
   {
-    status = readTypeCodeSettings();
-    if (m_use_pers_conf && status)
-    {
-      status = readPersistentConfig();
+    readPersistentConfig();
     }
 
-    if (status)
-    {
-      status = m_device->changeSensorSettings(m_communication_settings);
-      status = m_device->requestConfigMetadata(m_communication_settings, m_config_meta_data);
-      status = m_device->requestFirmwareVersion(m_communication_settings, m_firmware_version);
-    }
+  m_device->changeSensorSettings(m_communication_settings);
+  m_device->requestConfigMetadata(m_communication_settings, m_config_meta_data);
+  m_device->requestFirmwareVersion(m_communication_settings, m_firmware_version);
 
-    if (!status)
-    {
-      ROS_WARN("Retry tcp request after %d ms", m_tcp_request_retry_ms);
-      std::this_thread::sleep_for (std::chrono::milliseconds(m_tcp_request_retry_ms));
-    }
-    retries++;
-  }
+  m_connected = true;
+  std_msgs::Bool connection_status;
+  connection_status.data = m_connected;
+  m_connection_status_publisher.publish(connection_status);
 
-  if (false == status && retries >= m_tcp_max_request_retries)
-  {
-    ROS_WARN("Could not establish connection, max retries exhausted : %d, Shutting down the node", m_tcp_max_request_retries);
-    ros::requestShutdown();
-  }
-  else
-  {
-    m_connection_status = true;
-  }
+  return true;
 }
 
 bool SickSafetyscannersRos::getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request& req,

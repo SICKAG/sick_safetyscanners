@@ -214,7 +214,7 @@ private:
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
   bool startTCPConnection(const sick::datastructure::CommSettings& settings);
   bool changeCommSettingsInColaSession(const datastructure::CommSettings& settings);
-  void stopTCPConnection();
+  bool stopTCPConnection();
   bool requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
   bool requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
   bool requestDeviceNameInColaSession(datastructure::DeviceName& device_name);
