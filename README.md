@@ -39,7 +39,7 @@ In the following instructions, replace `<rosdistro>` with the name of your ROS d
 
 The driver is released at longer intervals as a binary package. 
 
-`sudo apt-get install ros-<rosdistro>-sick_safetyscanners`
+`sudo apt-get install ros-<rosdistro>-sick-safetyscanners`
 
 
 #### From Source
