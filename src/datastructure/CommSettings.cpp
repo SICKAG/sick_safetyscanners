@@ -104,22 +104,22 @@ void CommSettings::setPublishingFrequency(const uint16_t& publishing_frequency)
   m_publishing_frequency = publishing_frequency;
 }
 
-uint32_t CommSettings::getStartAngle() const
+int32_t CommSettings::getStartAngle() const
 {
   return m_start_angle;
 }
 
-void CommSettings::setStartAngle(const uint32_t& start_angle)
+void CommSettings::setStartAngle(const int32_t& start_angle)
 {
   m_start_angle = start_angle * 4194304.0; // TODO refactor in constant
 }
 
-uint32_t CommSettings::getEndAngle() const
+int32_t CommSettings::getEndAngle() const
 {
   return m_end_angle;
 }
 
-void CommSettings::setEndAngle(const uint32_t& end_angle)
+void CommSettings::setEndAngle(const int32_t& end_angle)
 {
   m_end_angle = end_angle * 4194304.0;
 }

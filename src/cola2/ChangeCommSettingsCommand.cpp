@@ -123,13 +123,13 @@ void ChangeCommSettingsCommand::writeFrequencyToDataPtr(
 void ChangeCommSettingsCommand::writeStartAngleToDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  read_write_helper::writeUint32LittleEndian(data_ptr + 16, m_settings.getStartAngle());
+  read_write_helper::writeInt32LittleEndian(data_ptr + 16, m_settings.getStartAngle());
 }
 
 void ChangeCommSettingsCommand::writeEndAngleToDataPtr(
   std::vector<uint8_t>::iterator data_ptr) const
 {
-  read_write_helper::writeUint32LittleEndian(data_ptr + 20, m_settings.getEndAngle());
+  read_write_helper::writeInt32LittleEndian(data_ptr + 20, m_settings.getEndAngle());
 }
 
 void ChangeCommSettingsCommand::writeFeaturesToDataPtr(

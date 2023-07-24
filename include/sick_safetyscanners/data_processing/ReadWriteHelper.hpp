@@ -173,6 +173,21 @@ inline void writeUint32LittleEndian(std::vector<uint8_t>::iterator it, const uin
 }
 
 /*!
+ * \brief Writes an unsigned 32-bit integer to a buffer at offset in little endian encoding.
+ *
+ * \param buf The buffer to write to.
+ * \param v Value which will be written.
+
+ */
+inline void writeInt32LittleEndian(std::vector<uint8_t>::iterator it, const int32_t v)
+{
+  *(it + 3) = (v & 0xff000000) >> 24;
+  *(it + 2) = (v & 0xff0000) >> 16;
+  *(it + 1) = (v & 0xff00) >> 8;
+  *(it + 0) = v & 0xff;
+}
+
+/*!
  * \brief Read an unsigned 8-bit integer at offset.
  *
  * \param buf Buffer to read from.

@@ -142,26 +142,26 @@ public:
    *
    * \returns The start angle of the scan.
    */
-  uint32_t getStartAngle() const;
+  int32_t getStartAngle() const;
   /*!
    * \brief Sets the start angle of the scan.
    *
    * \param start_angle The start angle of the scan.
    */
-  void setStartAngle(const uint32_t& start_angle);
+  void setStartAngle(const int32_t& start_angle);
 
   /*!
    * \brief Gets the end angle of the scan.
    *
    * \returns The end angle of the scan.
    */
-  uint32_t getEndAngle() const;
+  int32_t getEndAngle() const;
   /*!
    * \brief Sets the end angle of the scan.
    *
    * \param end_angle The end angle of the scan.
    */
-  void setEndAngle(const uint32_t& end_angle);
+  void setEndAngle(const int32_t& end_angle);
 
   /*!
    * \brief Gets the enabled features.
@@ -231,8 +231,8 @@ private:
   bool m_enabled;
   uint8_t m_e_interface_type;
   uint16_t m_publishing_frequency;
-  uint32_t m_start_angle;
-  uint32_t m_end_angle;
+  int32_t m_start_angle;
+  int32_t m_end_angle;
   uint16_t m_features;
 };
 
