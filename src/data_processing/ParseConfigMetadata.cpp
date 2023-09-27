@@ -112,13 +112,13 @@ ParseConfigMetadata::readTransferTimeTime(std::vector<uint8_t>::const_iterator d
 
 uint32_t ParseConfigMetadata::readAppChecksum(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return read_write_helper::readUint32BigEndian(data_ptr + 36);
+  return read_write_helper::readUint32LittleEndian(data_ptr + 36);
 }
 
 uint32_t
 ParseConfigMetadata::readOverallChecksum(std::vector<uint8_t>::const_iterator data_ptr) const
 {
-  return read_write_helper::readUint32BigEndian(data_ptr + 52);
+  return read_write_helper::readUint32LittleEndian(data_ptr + 52);
 }
 
 std::vector<uint32_t>
