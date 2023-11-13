@@ -422,19 +422,15 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
   scan.header.stamp    = ros::Time::now();
   // Add time offset (to account for network latency etc.)
   scan.header.stamp += ros::Duration().fromSec(m_time_offset);
-  // TODO check why returned number of beams is misaligned to size of vector
+
   std::vector<sick::datastructure::ScanPoint> scan_points =
     data.getMeasurementDataPtr()->getScanPointsVector();
   uint32_t num_scan_points = scan_points.size();
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle() + m_angle_offset);
-  double angle_max =
-    sick::degToRad(data.getMeasurementDataPtr()
-                     ->getScanPointsVector()
-                     .at(data.getMeasurementDataPtr()->getScanPointsVector().size() - 1)
-                     .getAngle() +
-                   m_angle_offset);
-  scan.angle_max       = angle_max;
+  // if the scan points vector is empty, the angle max is set to the angle min
+  scan.angle_max = scan_points.empty() ? scan.angle_min
+                                       : sick::degToRad(scan_points.back().getAngle() + m_angle_offset);
   scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
   boost::posix_time::microseconds time_increment =
     boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
