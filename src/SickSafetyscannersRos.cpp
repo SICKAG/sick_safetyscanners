@@ -62,8 +62,16 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_extended_laser_scan_publisher =
     m_nh.advertise<sick_safetyscanners::ExtendedLaserScanMsg>("extended_laser_scan", 100);
   m_raw_data_publisher = m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
-  m_output_path_publisher =
-    m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
+  if (m_output_paths_header)
+  {
+    m_output_path_publisher = 
+      m_nh.advertise<sick_safetyscanners::OutputPathsStampedMsg>("output_paths", 100);
+  }
+  else
+  {
+    m_output_path_publisher =
+      m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
+  }
   m_field_service_server =
     m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
@@ -196,6 +204,12 @@ bool SickSafetyscannersRos::readParameters()
   }
   m_communication_settings.setHostUdpPort(host_udp_port);
 
+  m_output_paths_header = false;
+  if (!m_private_nh.getParam("output_paths_header", m_output_paths_header))
+  {
+    ROS_WARN("Using default OutputPathsMsg (without header).");
+  }
+
   ROS_WARN("If not further specified the default values for the dynamic reconfigurable parameters "
            "will be loaded.");
 
@@ -281,7 +295,19 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
     m_extended_laser_scan_publisher.publish(extended_scan);
 
     sick_safetyscanners::OutputPathsMsg output_paths = createOutputPathsMessage(data);
-    m_output_path_publisher.publish(output_paths);
+    if (m_output_paths_header)
+    {
+      sick_safetyscanners::OutputPathsStampedMsg stamped_output_paths;
+      stamped_output_paths.header.seq = extended_scan.laser_scan.header.seq;
+      stamped_output_paths.header.stamp = extended_scan.laser_scan.header.stamp;
+      stamped_output_paths.header.frame_id = extended_scan.laser_scan.header.frame_id;
+      stamped_output_paths.output_paths = output_paths;
+      m_output_path_publisher.publish(stamped_output_paths);
+    }
+    else
+    {
+      m_output_path_publisher.publish(output_paths);
+    }
   }
 
   m_last_raw_data = createRawDataMessage(data);

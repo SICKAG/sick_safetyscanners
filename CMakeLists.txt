@@ -43,6 +43,7 @@ add_message_files(
   MeasurementDataMsg.msg
   MonitoringCaseMsg.msg
   OutputPathsMsg.msg
+  OutputPathsStampedMsg.msg
   RawMicroScanDataMsg.msg
   ScanPointMsg.msg
 )

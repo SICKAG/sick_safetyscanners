@@ -52,6 +52,7 @@
 #include <sick_safetyscanners/ExtendedLaserScanMsg.h>
 #include <sick_safetyscanners/FieldData.h>
 #include <sick_safetyscanners/OutputPathsMsg.h>
+#include <sick_safetyscanners/OutputPathsStampedMsg.h>
 #include <sick_safetyscanners/RawMicroScanDataMsg.h>
 #include <sick_safetyscanners/SickSafetyscanners.h>
 #include <sick_safetyscanners/SickSafetyscannersConfigurationConfig.h>
@@ -157,6 +158,8 @@ private:
   dynamic_reconfigure::Server<sick_safetyscanners::SickSafetyscannersConfigurationConfig>
     m_dynamic_reconfiguration_server;
 
+  bool m_output_paths_header;
+  
   std::string m_frame_id;
   double m_time_offset;
   double m_range_min;

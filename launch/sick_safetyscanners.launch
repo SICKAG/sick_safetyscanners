@@ -16,7 +16,8 @@
   <arg name="measurement_data"      default="True" />
   <arg name="intrusion_data"        default="True" />
   <arg name="application_io_data"   default="True" />
-  <arg name="use_persistent_config"   default="False" />
+  <arg name="use_persistent_config" default="False" />
+  <arg name="output_paths_header"   default="False" />
 
   <!-- Launch Sick SickSafetyscanners Ros Driver Node -->
   <node pkg="sick_safetyscanners" type="sick_safetyscanners_node" name="sick_safetyscanners" output="screen" ns="sick_safetyscanners">
@@ -38,6 +39,7 @@
      <param name="intrusion_data"         type="bool"   value="$(arg intrusion_data)" />
      <param name="application_io_data"    type="bool"   value="$(arg application_io_data)" />
      <param name="use_persistent_config"  type="bool"   value="$(arg use_persistent_config)" />
+     <param name="output_paths_header"    type="bool"   value="$(arg output_paths_header)" />
   </node>
 
 
