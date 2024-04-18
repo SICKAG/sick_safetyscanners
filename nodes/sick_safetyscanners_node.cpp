@@ -44,9 +44,16 @@
 int main(int argc, char** argv)
 {
   ros::init(argc, argv, "sick_safetyscanners");
+  ros::NodeHandle nh("~");
 
-  sick::SickSafetyscannersRos microscan3_ros;
+  bool get_crc = false; // Default value
+  nh.getParam("get_crc", get_crc);
+  if(get_crc) {
+    sick::SickSafetyscannersRos microscan3_ros(get_crc);
+  } else {
+    sick::SickSafetyscannersRos microscan3_ros;
+    ros::spin();
+  }
 
-  ros::spin();
   return 0;
 }

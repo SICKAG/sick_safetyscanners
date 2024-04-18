@@ -115,6 +115,8 @@ public:
    * the different laserscan outputs.
    */
   SickSafetyscannersRos();
+  SickSafetyscannersRos(bool getCheck);
+
 
   /*!
    * \brief ~SickSafetyscannersRos
