@@ -429,8 +429,9 @@ SickSafetyscannersRos::createLaserScanMessage(const sick::datastructure::Data& d
 
   scan.angle_min = sick::degToRad(data.getDerivedValuesPtr()->getStartAngle() + m_angle_offset);
   // if the scan points vector is empty, the angle max is set to the angle min
-  scan.angle_max = scan_points.empty() ? scan.angle_min
-                                       : sick::degToRad(scan_points.back().getAngle() + m_angle_offset);
+  scan.angle_max = scan_points.empty()
+                     ? scan.angle_min
+                     : sick::degToRad(scan_points.back().getAngle() + m_angle_offset);
   scan.angle_increment = sick::degToRad(data.getDerivedValuesPtr()->getAngularBeamResolution());
   boost::posix_time::microseconds time_increment =
     boost::posix_time::microseconds(data.getDerivedValuesPtr()->getInterbeamPeriod());
