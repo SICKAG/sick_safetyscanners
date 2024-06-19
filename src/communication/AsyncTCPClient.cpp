@@ -60,48 +60,60 @@ AsyncTCPClient::AsyncTCPClient(const PacketHandler& packet_handler,
 
 AsyncTCPClient::~AsyncTCPClient() {}
 
-void AsyncTCPClient::doDisconnect()
+bool AsyncTCPClient::doDisconnect()
 {
+  bool status = false;
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::system::error_code ec;
   m_socket_ptr->shutdown(boost::asio::ip::tcp::socket::shutdown_both, ec);
   if (ec != boost::system::errc::success)
   {
     ROS_ERROR("Error shutting socket down: %i", ec.value());
+    return false; /* early return, as if socket shutdown fails, close will fail too */
   }
   else
   {
     ROS_INFO("TCP Connection successfully shutdown");
+    status = true;
   }
 
   m_socket_ptr->close(ec);
   if (ec != boost::system::errc::success)
   {
     ROS_ERROR("Error closing Socket: %i", ec.value());
+    status = false;
   }
   else
   {
     ROS_INFO("TCP Socket successfully closed.");
+    status = true;
   }
+
+  return status;
 }
 
-void AsyncTCPClient::doConnect()
+bool AsyncTCPClient::doConnect()
 {
+  bool status = false;
   boost::mutex::scoped_lock lock(m_socket_mutex);
   boost::mutex::scoped_lock lock_connect(m_connect_mutex);
-  m_socket_ptr->async_connect(m_remote_endpoint, [this](boost::system::error_code ec) {
+  m_socket_ptr->async_connect(m_remote_endpoint, [this, &status](boost::system::error_code ec) {
     if (ec != boost::system::errc::success)
     {
       ROS_ERROR("TCP error code: %i", ec.value());
+      status = false;
     }
     else
     {
       ROS_INFO("TCP connection successfully established.");
+      status = true;
     }
     m_connect_condition.notify_all();
   });
 
   m_connect_condition.wait(lock_connect);
+
+  return status;
 }
 
 

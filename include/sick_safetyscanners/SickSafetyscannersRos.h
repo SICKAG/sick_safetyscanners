@@ -42,6 +42,7 @@
 #include <ros/ros.h>
 #include <sensor_msgs/JointState.h>
 #include <sensor_msgs/LaserScan.h>
+#include <std_msgs/Bool.h>
 
 // STD
 #include <string>
@@ -134,13 +135,17 @@ private:
   ros::Publisher m_extended_laser_scan_publisher;
   ros::Publisher m_raw_data_publisher;
   ros::Publisher m_output_path_publisher;
+  ros::Publisher m_connection_status_publisher;
+
+  // ROS Timer
+  ros::Timer m_udp_connection_monitor_timer;
 
   // Diagnostics
   diagnostic_updater::Updater m_diagnostic_updater;
   std::shared_ptr<DiagnosedLaserScanPublisher> m_diagnosed_laser_scan_publisher;
   sick_safetyscanners::RawMicroScanDataMsg m_last_raw_data;
-  sick::datastructure::ConfigMetadata config_meta_data;
-  sick::datastructure::FirmwareVersion firmware_version;
+  sick::datastructure::ConfigMetadata m_config_meta_data;
+  sick::datastructure::FirmwareVersion m_firmware_version;
   void sensorDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& diagnostic_status);
 
   ros::ServiceServer m_field_service_server;
@@ -170,6 +175,11 @@ private:
   bool m_use_sick_angles;
   float m_angle_offset;
   bool m_use_pers_conf;
+  bool m_connected;
+
+  bool m_udp_connection_monitor;
+  uint32_t m_connection_monitor_watchdog_timeout_ms;
+  double m_last_udp_pkt_received;
 
   /*!
    * @brief Reads and verifies the ROS parameters.
@@ -221,11 +231,14 @@ private:
   createApplicationInputsMessage(const sick::datastructure::Data& data);
   sick_safetyscanners::ApplicationOutputsMsg
   createApplicationOutputsMessage(const sick::datastructure::Data& data);
-  void readTypeCodeSettings();
-  void readPersistentConfig();
+  bool readTypeCodeSettings();
+  bool readPersistentConfig();
 
   bool getFieldData(sick_safetyscanners::FieldData::Request& req,
                     sick_safetyscanners::FieldData::Response& res);
+  
+  void udpConnectionMonitorHandler();
+  bool setCommunicationSettingScanner();
 
   bool getConfigMetadata(sick_safetyscanners::ConfigMetadata::Request& req,
                          sick_safetyscanners::ConfigMetadata::Response& res);

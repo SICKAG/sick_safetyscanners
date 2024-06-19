@@ -59,16 +59,17 @@ bool Cola2Session::close()
   return executeCommand(command_ptr);
 }
 
-void Cola2Session::doDisconnect()
+bool Cola2Session::doDisconnect()
 {
-  m_async_tcp_client_ptr->doDisconnect();
+  return m_async_tcp_client_ptr->doDisconnect();
 }
 
 bool Cola2Session::executeCommand(const CommandPtr& command)
 {
-  addCommand(command->getRequestID(), command);
-  sendTelegramAndListenForAnswer(command);
-  return true;
+  if (!addCommand(command->getRequestID(), command))
+    return false;
+  
+  return sendTelegramAndListenForAnswer(command);
 }
 
 bool Cola2Session::sendTelegramAndListenForAnswer(const CommandPtr& command)

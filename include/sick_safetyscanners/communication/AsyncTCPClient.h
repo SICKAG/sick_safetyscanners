@@ -89,12 +89,12 @@ public:
   /*!
    * \brief Establishes a connection from the host to the sensor.
    */
-  void doConnect();
+  bool doConnect();
 
   /*!
    * \brief Disconnects the host from the sensor
    */
-  void doDisconnect();
+  bool doDisconnect();
 
   /*!
    * \brief Start a cycle of sensing a command and waiting got the return.

@@ -114,22 +114,25 @@ public:
    * \brief Changes the internal settings of the sensor.
    * \param settings New set of settings to pass to the sensor.
    */
-  void changeSensorSettings(const sick::datastructure::CommSettings& settings);
+  bool changeSensorSettings(const sick::datastructure::CommSettings& settings);
 
   /*!
    * \brief Requests the typecode of the sensor.
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param type_code Returned typecode.
    */
-  void requestTypeCode(const sick::datastructure::CommSettings& settings,
+  bool requestTypeCode(const sick::datastructure::CommSettings& settings,
                        sick::datastructure::TypeCode& type_code);
+
+  bool requestApplicationName(const sick::datastructure::CommSettings& settings,
+                                sick::datastructure::ApplicationName& application_name);
 
   /*!
    * \brief Requests the config meta data of the sensor.
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param config_metadata Returned config meta data.
    */
-  void requestConfigMetadata(const datastructure::CommSettings& settings,
+  bool requestConfigMetadata(const datastructure::CommSettings& settings,
                              datastructure::ConfigMetadata& config_metadata);
 
   /*!
@@ -137,34 +140,32 @@ public:
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param firmware_version Returned firmware version.
    */
-  void requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
+  bool requestFirmwareVersion(const sick::datastructure::CommSettings& settings,
                               sick::datastructure::FirmwareVersion& firmware_version);
-
-
-  void requestApplicationName(const sick::datastructure::CommSettings& settings,
-                              sick::datastructure::ApplicationName& application_name);
-  void requestSerialNumber(const sick::datastructure::CommSettings& settings,
+  bool requestSerialNumber(const sick::datastructure::CommSettings& settings,
                            sick::datastructure::SerialNumber& serial_number);
-  void requestOrderNumber(const datastructure::CommSettings& settings,
+
+  bool requestOrderNumber(const datastructure::CommSettings& settings,
                           datastructure::OrderNumber& order_number);
-  void requestProjectName(const datastructure::CommSettings& settings,
+  bool requestProjectName(const datastructure::CommSettings& settings,
                           datastructure::ProjectName& project_name);
-  void requestUserName(const datastructure::CommSettings& settings,
+  bool requestUserName(const datastructure::CommSettings& settings,
                        datastructure::UserName& user_name);
-  void requestStatusOverview(const datastructure::CommSettings& settings,
+
+  bool requestStatusOverview(const datastructure::CommSettings& settings,
                              datastructure::StatusOverview& status_overview);
-  void requestDeviceStatus(const datastructure::CommSettings& settings,
+  bool requestDeviceStatus(const datastructure::CommSettings& settings,
                            datastructure::DeviceStatus& device_status);
-  void requestRequiredUserAction(const datastructure::CommSettings& settings,
+  bool requestRequiredUserAction(const datastructure::CommSettings& settings,
                                  datastructure::RequiredUserAction& required_user_action);
-  void FindSensor(const datastructure::CommSettings& settings, uint16_t blink_time);
+  bool FindSensor(const datastructure::CommSettings& settings, uint16_t blink_time);
   /*!
    * \brief Requests data of the protective and warning fields from the sensor.
    *
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param field_data Returned field data.
    */
-  void requestFieldData(const sick::datastructure::CommSettings& settings,
+  bool requestFieldData(const sick::datastructure::CommSettings& settings,
                         std::vector<sick::datastructure::FieldData>& field_data);
 
   /*!
@@ -173,7 +174,7 @@ public:
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param device_name Returned device name.
    */
-  void requestDeviceName(const sick::datastructure::CommSettings& settings,
+  bool requestDeviceName(const sick::datastructure::CommSettings& settings,
                          datastructure::DeviceName& device_name);
 
   /*!
@@ -182,7 +183,7 @@ public:
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param config_data Returned persistent configuration data.
    */
-  void requestPersistentConfig(const datastructure::CommSettings& settings,
+  bool requestPersistentConfig(const datastructure::CommSettings& settings,
                                sick::datastructure::ConfigData& config_data);
   /*!
    * \brief Requests the monitoring cases from the sensor.
@@ -190,7 +191,7 @@ public:
    * \param settings Settings containing information to establish a connection to the sensor.
    * \param monitoring_cases Returned monitoring cases.
    */
-  void
+  bool
   requestMonitoringCases(const sick::datastructure::CommSettings& settings,
                          std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
 
@@ -211,27 +212,27 @@ private:
   void processUDPPacket(const sick::datastructure::PacketBuffer& buffer);
   bool udpClientThread();
   void processTCPPacket(const sick::datastructure::PacketBuffer& buffer);
-  void startTCPConnection(const sick::datastructure::CommSettings& settings);
-  void changeCommSettingsInColaSession(const datastructure::CommSettings& settings);
-  void stopTCPConnection();
-  void requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
-  void requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
-  void requestDeviceNameInColaSession(datastructure::DeviceName& device_name);
-  void requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
-  void requestSerialNumberInColaSession(sick::datastructure::SerialNumber& serial_number);
-  void requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number);
-  void requestProjectNameInColaSession(sick::datastructure::ProjectName& project_name);
-  void requestUserNameInColaSession(sick::datastructure::UserName& user_name);
-  void requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
-  void requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
-  void requestConfigMetadataInColaSession(sick::datastructure::ConfigMetadata& config_metadata);
-  void requestStatusOverviewInColaSession(sick::datastructure::StatusOverview& status_overview);
-  void requestDeviceStatusInColaSession(sick::datastructure::DeviceStatus& device_status);
-  void requestRequiredUserActionInColaSession(
+  bool startTCPConnection(const sick::datastructure::CommSettings& settings);
+  bool changeCommSettingsInColaSession(const datastructure::CommSettings& settings);
+  bool stopTCPConnection();
+  bool requestTypeCodeInColaSession(sick::datastructure::TypeCode& type_code);
+  bool requestFieldDataInColaSession(std::vector<sick::datastructure::FieldData>& fields);
+  bool requestDeviceNameInColaSession(datastructure::DeviceName& device_name);
+  bool requestApplicationNameInColaSession(sick::datastructure::ApplicationName& application_name);
+  bool requestSerialNumberInColaSession(sick::datastructure::SerialNumber& serial_number);
+  bool requestOrderNumberInColaSession(sick::datastructure::OrderNumber& order_number);
+  bool requestProjectNameInColaSession(sick::datastructure::ProjectName& project_name);
+  bool requestUserNameInColaSession(sick::datastructure::UserName& user_name);
+  bool requestFirmwareVersionInColaSession(sick::datastructure::FirmwareVersion& firmware_version);
+  bool requestPersistentConfigInColaSession(sick::datastructure::ConfigData& config_data);
+  bool requestConfigMetadataInColaSession(sick::datastructure::ConfigMetadata& config_metadata);
+  bool requestStatusOverviewInColaSession(sick::datastructure::StatusOverview& status_overview);
+  bool requestDeviceStatusInColaSession(sick::datastructure::DeviceStatus& device_status);
+  bool requestRequiredUserActionInColaSession(
     sick::datastructure::RequiredUserAction& required_user_action);
-  void requestMonitoringCaseDataInColaSession(
+  bool requestMonitoringCaseDataInColaSession(
     std::vector<sick::datastructure::MonitoringCaseData>& monitoring_cases);
-  void FindSensorInColaSession(uint16_t blink_time);
+  bool FindSensorInColaSession(uint16_t blink_time);
 };
 
 } // namespace sick

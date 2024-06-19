@@ -34,7 +34,8 @@
 
 
 #include "sick_safetyscanners/SickSafetyscannersRos.h"
-
+#include <thread>
+#include <chrono>
 
 namespace sick {
 
@@ -46,6 +47,7 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   , m_range_max(0.0)
   , m_angle_offset(-90.0)
   , m_use_pers_conf(false)
+  , m_connected(false)
 {
   dynamic_reconfigure::Server<
     sick_safetyscanners::SickSafetyscannersConfigurationConfig>::CallbackType reconf_callback =
@@ -64,6 +66,9 @@ SickSafetyscannersRos::SickSafetyscannersRos()
   m_raw_data_publisher = m_nh.advertise<sick_safetyscanners::RawMicroScanDataMsg>("raw_data", 100);
   m_output_path_publisher =
     m_nh.advertise<sick_safetyscanners::OutputPathsMsg>("output_paths", 100);
+
+  m_connection_status_publisher = m_nh.advertise<std_msgs::Bool>("connection_status", 1, true); // latched
+
   m_field_service_server =
     m_nh.advertiseService("field_data", &SickSafetyscannersRos::getFieldData, this);
 
@@ -88,38 +93,54 @@ SickSafetyscannersRos::SickSafetyscannersRos()
     &m_communication_settings,
     m_interface_ip);
   m_device->run();
-  readTypeCodeSettings();
-
-  if (m_use_pers_conf)
+  
+  if(!setCommunicationSettingScanner())
   {
-    readPersistentConfig();
+    ROS_WARN("Couldn't establish TCP connection");
   }
 
-  m_device->changeSensorSettings(m_communication_settings);
-  m_device->requestConfigMetadata(m_communication_settings, config_meta_data);
-  m_device->requestFirmwareVersion(m_communication_settings, firmware_version);
+
+  if (m_udp_connection_monitor)
+  {
+    m_udp_connection_monitor_timer = m_nh.createTimer(ros::Duration((m_connection_monitor_watchdog_timeout_ms/1000)),
+                                          std::bind(&SickSafetyscannersRos::udpConnectionMonitorHandler, this));
+
+
+    /* Initialization */
+    m_last_udp_pkt_received = ros::Time::now().toSec();
+  }
 
   m_initialised = true;
   ROS_INFO("Successfully launched node.");
 }
 
-void SickSafetyscannersRos::readTypeCodeSettings()
+bool SickSafetyscannersRos::readTypeCodeSettings()
 {
   ROS_INFO("Reading Type code settings");
   sick::datastructure::TypeCode type_code;
-  m_device->requestTypeCode(m_communication_settings, type_code);
+
+  if (!m_device->requestTypeCode(m_communication_settings, type_code))
+    return false;
+
   m_communication_settings.setEInterfaceType(type_code.getInterfaceType());
   m_range_min = 0.1;
   m_range_max = type_code.getMaxRange();
-}
+  
+  return true;
+} 
 
-void SickSafetyscannersRos::readPersistentConfig()
+bool SickSafetyscannersRos::readPersistentConfig()
 {
   ROS_INFO("Reading Persistent Configuration");
   sick::datastructure::ConfigData config_data;
-  m_device->requestPersistentConfig(m_communication_settings, config_data);
+
+  if (!m_device->requestPersistentConfig(m_communication_settings, config_data))
+    return false;
+  
   m_communication_settings.setStartAngle(config_data.getStartAngle());
   m_communication_settings.setEndAngle(config_data.getEndAngle());
+
+  return true;
 }
 
 void SickSafetyscannersRos::reconfigureCallback(
@@ -254,6 +275,31 @@ bool SickSafetyscannersRos::readParameters()
 
   m_communication_settings.setFeatures(
     general_system_state, derived_settings, measurement_data, intrusion_data, application_io_data);
+  
+  m_udp_connection_monitor = false;
+  if (!m_private_nh.getParam("udp_connection_monitor", m_udp_connection_monitor))
+  {
+    ROS_WARN("Using default setting for udp connection monitoring : %s", m_udp_connection_monitor ? "true" : "false");
+  }
+  else
+  {
+    ROS_INFO("Udp connection monitoring : %s", m_udp_connection_monitor ? "true" : "false");
+  }
+
+  if (m_udp_connection_monitor)
+  {
+    int udp_connection_timeout = 5000;
+    if (!m_private_nh.getParam("udp_connection_monitor_watchdog_timeout_ms", udp_connection_timeout))
+    {
+      ROS_WARN("Using default udp monitor watchdog time: %d ms", udp_connection_timeout);
+    }
+    else
+    {
+      ROS_INFO("udp connection monitor watchdog timeout : %d ms", udp_connection_timeout);
+    }
+
+    m_connection_monitor_watchdog_timeout_ms = udp_connection_timeout;
+  }
 
   m_private_nh.getParam("frame_id", m_frame_id);
 
@@ -288,6 +334,7 @@ void SickSafetyscannersRos::receivedUDPPacket(const sick::datastructure::Data& d
   m_raw_data_publisher.publish(m_last_raw_data);
 
   m_diagnostic_updater.update();
+  m_last_udp_pkt_received = ros::Time::now().toSec();
 }
 
 std::string boolToString(bool b)
@@ -310,12 +357,12 @@ void SickSafetyscannersRos::sensorDiagnostics(
   diagnostic_status.addf("Version major version", "%u", header.version_major_version);
   diagnostic_status.addf("Version minor version", "%u", header.version_minor_version);
   diagnostic_status.addf("Version release", "%u", header.version_release);
-  diagnostic_status.addf("Firmware version", "%s", firmware_version.getFirmwareVersion().c_str());
+  diagnostic_status.addf("Firmware version", "%s", m_firmware_version.getFirmwareVersion().c_str());
   diagnostic_status.addf("Serial number of device", "%u", header.serial_number_of_device);
   diagnostic_status.addf(
     "Serial number of channel plug", "%u", header.serial_number_of_channel_plug);
-  diagnostic_status.addf("App checksum", "%X", config_meta_data.getAppChecksum());
-  diagnostic_status.addf("Overall checksum", "%X", config_meta_data.getOverallChecksum());
+  diagnostic_status.addf("App checksum", "%X", m_config_meta_data.getAppChecksum());
+  diagnostic_status.addf("Overall checksum", "%X", m_config_meta_data.getOverallChecksum());
 
   diagnostic_status.addf("Channel number", "%u", header.channel_number);
   diagnostic_status.addf("Sequence number", "%u", header.sequence_number);
@@ -338,6 +385,7 @@ void SickSafetyscannersRos::sensorDiagnostics(
     "Current monitoring case no table 3", "%u", state.current_monitoring_case_no_table_3);
   diagnostic_status.addf(
     "Current monitoring case no table 4", "%u", state.current_monitoring_case_no_table_4);
+  diagnostic_status.add("Connection Status", boolToString(state.connection_status));
   diagnostic_status.add("Application error", boolToString(state.application_error));
   diagnostic_status.add("Device error", boolToString(state.device_error));
 
@@ -610,6 +658,7 @@ SickSafetyscannersRos::createGeneralSystemStateMessage(const sick::datastructure
     msg.current_monitoring_case_no_table_4 =
       general_system_state->getCurrentMonitoringCaseNoTable4();
 
+    msg.connection_status = m_connected;
     msg.application_error = general_system_state->getApplicationError();
     msg.device_error      = general_system_state->getDeviceError();
   }
@@ -846,6 +895,53 @@ bool SickSafetyscannersRos::getFieldData(sick_safetyscanners::FieldData::Request
     }
     res.monitoring_cases.push_back(monitoring_case_msg);
   }
+
+  return true;
+}
+
+void SickSafetyscannersRos::udpConnectionMonitorHandler()
+{
+  double time_now = ros::Time::now().toSec();
+  /* Re-establish connection only when scanner was previously connected */
+  if (((time_now - m_last_udp_pkt_received) > (m_connection_monitor_watchdog_timeout_ms/1000)) && m_connected)
+  {
+    ROS_WARN("No udp packet received for %f , Trying to re-establish connection", time_now - m_last_udp_pkt_received);
+
+    m_connected = false;
+    m_last_raw_data.general_system_state.connection_status =  m_connected;
+    m_raw_data_publisher.publish(m_last_raw_data);
+    m_diagnostic_updater.update();
+    
+    std_msgs::Bool connection_status;
+    connection_status.data = m_connected;
+    m_connection_status_publisher.publish(connection_status);
+    setCommunicationSettingScanner();
+  }
+  else if (!m_connected) /* Timer-CB and scanner still not connected, so try again */
+  {
+    setCommunicationSettingScanner();
+  }
+}
+
+bool SickSafetyscannersRos::setCommunicationSettingScanner()
+{
+  /* If tcp request fails return early */
+  if (!readTypeCodeSettings())
+    return false;
+
+  if (m_use_pers_conf)
+  {
+    readPersistentConfig();
+    }
+
+  m_device->changeSensorSettings(m_communication_settings);
+  m_device->requestConfigMetadata(m_communication_settings, m_config_meta_data);
+  m_device->requestFirmwareVersion(m_communication_settings, m_firmware_version);
+
+  m_connected = true;
+  std_msgs::Bool connection_status;
+  connection_status.data = m_connected;
+  m_connection_status_publisher.publish(connection_status);
 
   return true;
 }
