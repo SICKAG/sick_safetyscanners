@@ -45,6 +45,7 @@
 #include <sick_safetyscanners/data_processing/ReadWriteHelper.hpp>
 
 #include <boost/thread/mutex.hpp>
+#include <boost/thread/condition_variable.hpp>
 
 namespace sick {
 namespace cola2 {
@@ -197,7 +198,9 @@ protected:
 private:
   std::shared_ptr<sick::data_processing::ParseTCPPacket> m_tcp_parser_ptr;
 
+  boost::condition_variable m_execute_finished_cond_var;
   boost::mutex m_execution_mutex;
+  bool m_is_executing;
 
   bool m_was_successful;
 

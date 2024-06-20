@@ -42,6 +42,7 @@ namespace cola2 {
 
 Command::Command(Cola2Session& session, const uint16_t& command_type, const uint16_t& command_mode)
   : m_session(session)
+  , m_is_executing(false)
   , m_command_mode(command_mode)
   , m_command_type(command_type)
 {
@@ -52,7 +53,8 @@ Command::Command(Cola2Session& session, const uint16_t& command_type, const uint
 
 void Command::lockExecutionMutex()
 {
-  m_execution_mutex.lock();
+  boost::mutex::scoped_lock lock(m_execution_mutex);
+  m_is_executing = true;
 }
 
 std::vector<uint8_t> Command::constructTelegram(const std::vector<uint8_t>& telegram) const
@@ -65,12 +67,17 @@ void Command::processReplyBase(const std::vector<uint8_t>& packet)
 {
   m_tcp_parser_ptr->parseTCPSequence(packet, *this);
   m_was_successful = processReply();
-  m_execution_mutex.unlock();
-}
 
+  boost::mutex::scoped_lock lock(m_execution_mutex);
+  m_is_executing = false;
+  m_execute_finished_cond_var.notify_one();
+}
+ 
 void Command::waitForCompletion()
 {
   boost::mutex::scoped_lock lock(m_execution_mutex);
+  while(m_is_executing)
+    m_execute_finished_cond_var.wait(lock);
 }
 
 bool Command::wasSuccessful() const
